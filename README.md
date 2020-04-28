@@ -35,3 +35,13 @@ npm run test
 ```
 npm run lint
 ```
+
+### Vue references
+
+Full demos code
+
+```https://github.com/algolia/vue-instantsearch```
+
+Working demos
+
+```https://www.algolia.com/doc/guides/building-search-ui/resources/demos/vue```
