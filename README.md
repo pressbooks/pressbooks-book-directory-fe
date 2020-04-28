@@ -1,7 +1,7 @@
 # pressbooks-book-directory-fe
 Book directory Vue.JS frontend starter
 
-## Environment variables setup
+## Env. variables setup
 
 ```
 Create an .env file and add the following keys with it's respective values:
