@@ -66,7 +66,17 @@ body {
     text-align: center;
 }
 
-/* Results v2 */
+/* Results - Items */
+
+.book {
+    display: flex;
+    margin: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    color: black;
+}
+
 .media-object {
     height: 200px;
     width: 150px;
@@ -77,18 +87,41 @@ body {
     margin: 12px;
 }
 
-.book {
-    display: flex;
-    margin: 25px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    color: black;
-}
 .media-title {
     text-decoration: underline;
+    font-size: 1.5em;
+    margin: 0.4em 0 0.4em 0;
+}
+
+.media-data {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
 }
 
 .media-detail {
     font-size: 0.8em;
+    margin-bottom: 1.7em;
+}
+
+.media-icons {
+    margin-left: auto;
+    padding: 12px;
+    display: flex;
+    justify-content: space-around;
+    /*flex-wrap: wrap;*/
+}
+
+.media-lang {
+    flex: 1 calc(50% - 20px);
+    margin-right: 20px;
+}
+
+.media-license {
+    flex: 1 calc(50% - 20px);
+    margin-right: 15px;
+}
+
+.media-clone {
+    flex: 2 calc(50% - 20px);
 }
