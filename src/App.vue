@@ -27,7 +27,7 @@
                   <template slot-scope="{ query, hits }">
                     <p class="books-no-results" v-if="hits.length === 0">
                       No results found matching <strong>{{ query }}</strong
-                    >.
+                      >.
                     </p>
                   </template>
                 </ais-state-results>
@@ -41,18 +41,30 @@
                     :style="`background-image: url('${item.image}');`"
                   ></div>
                   <div class="media-data">
-                    <div class="media-icons" v-if="item.inLanguage">
-                      <div class="media-lang">
+                    <div class="media-icons media-data-row">
+                      <div
+                        class="media-lang book-details"
+                        v-if="item.inLanguage"
+                      >
                         {{ item.inLanguage }}
                       </div>
-                      <div class="media-license">
-                        <img :src="item.license" height="22" v-if="item.license" />
+                      <div class="media-license book-details">
+                        <img
+                          :src="item.licenseIcon"
+                          :title="item.licenseAlt"
+                          class="img-icons"
+                          v-if="item.licenseIcon"
+                        />
                       </div>
-                      <div class="media-clone">
-                        <img :src="baseIcon(item.has_isBasedOn)" height="22" />
+                      <div class="media-clone book-details">
+                        <img
+                          :src="baseIcon(item.isBasedOn).img"
+                          :title="baseIcon(item.isBasedOn).alt"
+                          class="img-icons"
+                        />
                       </div>
                     </div>
-                    <div class="media">
+                    <div class="media media-data-row">
                       <div class="media-title">
                         {{ item.name }}
                       </div>
@@ -97,20 +109,38 @@ import "./App.css";
 
 export default {
   methods: {
-    baseIcon(isChild) {
-      return isChild ? this.imagesPath + 'is-child.png' : this.imagesPath + 'is-base.png';
+    baseIcon(isBasedOn) {
+      return {
+        img: isBasedOn
+          ? this.imagesPath + "is-child.png"
+          : this.imagesPath + "is-base.png",
+        alt: isBasedOn ? "Based on other book" : "Is not based on another book"
+      };
     },
     getLicenseIcon(license) {
-      var lic = license.toLowerCase().split(' ').join('-');
+      var img = {
+        image:
+          this.imagesPath +
+          "licenses/" +
+          this.licenseIcons["public-domain"].image,
+        alt: this.licenseIcons["public-domain"].alt
+      };
+      var lic = license
+        .toLowerCase()
+        .split(" ")
+        .join("-");
       for (const key in this.licenseIcons) {
         if (lic.includes(key)) {
-          return this.imagesPath + 'licenses/' + this.licenseIcons[key];
+          img = {
+            image: this.imagesPath + "licenses/" + this.licenseIcons[key].image,
+            alt: this.licenseIcons[key].alt
+          };
         }
       }
-      return this.imagesPath + 'licenses/' + this.licenseIcons['public-domain'];
+      return img;
     },
     removeXMLTags(string) {
-      return string.replace(/<[^>]*>/g, '');
+      return string.replace(/<[^>]*>/g, "");
     },
     transformItems(items) {
       let vm = this;
@@ -120,8 +150,16 @@ export default {
         editor: item.editor ? item.editor.join(", ") : false,
         publisher_name: item.publisher_name ? item.publisher_name.value : false,
         inLanguage: item.inLanguage ? item.inLanguage.toUpperCase() : false,
-        description: item.description ? vm.removeXMLTags(item.description) : false,
-        license: item.license_name ? vm.getLicenseIcon(item.license_name) : false
+        description: item.description
+          ? vm.removeXMLTags(item.description)
+          : false,
+        licenseIcon: item.license_name
+          ? vm.getLicenseIcon(item.license_name).image
+          : false,
+        licenseAlt: item.license_name
+          ? vm.getLicenseIcon(item.license_name).alt
+          : false,
+        isBasedOn: item.isBasedOn !== undefined ? true : false
       }));
     }
   },
@@ -132,17 +170,44 @@ export default {
         process.env.VUE_APP_ALGOLIA_API_READ_KEY
       ),
       indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-      imagesPath: 'assets/images/',
+      imagesPath: "assets/images/",
       licenseIcons: {
-        'by-sa': 'by-sa.png',
-        'by-nd': 'by-nd.png',
-        'by-nc-sa': 'by-nc-sa.png',
-        'by-nc-nd': 'by-nc-nd.png',
-        'by-nc': 'by-nc.png',
-        'by': 'by.png',
-        'allrights': 'allrights.png',
-        '0': '0.png',
-        'public-domain': 'public-domain.png'
+        "by-sa": {
+          image: "by-sa.png",
+          alt: "Attribution - ShareAlike (SA)"
+        },
+        "by-nd": {
+          image: "by-nd.png",
+          alt: "Attribution - No Derivative Work (ND)"
+        },
+        "by-nc-sa": {
+          image: "by-nc-sa.png",
+          alt: "Attribution - Non Commercial - ShareAlike"
+        },
+        "by-nc-nd": {
+          image: "by-nc-nd.png",
+          alt: "Attribution - Noncommercial - NoDerivatives"
+        },
+        "by-nc": {
+          image: "by-nc.png",
+          alt: "Attribution - Non Commercial (NC)"
+        },
+        by: {
+          image: "by.png",
+          alt: "Attribution Alone (BY)"
+        },
+        allrights: {
+          image: "allrights.png",
+          alt: "All Rights Reserved"
+        },
+        cc0: {
+          image: "0.png",
+          alt: "Zero - Public Domain"
+        },
+        "public-domain": {
+          image: "public-domain.png",
+          alt: "Public Domain"
+        }
       }
     };
   }
