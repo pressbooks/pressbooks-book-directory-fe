@@ -84,13 +84,13 @@ body {
 }
 
 .media-object {
-    height: 200px;
+    height: 160px;
     width: 150px;
     overflow: hidden;
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center center;
-    margin: 5px 12px 8px 12px;
+    background-position: top center;
+    margin: 14px 12px 14px 12px;
 }
 
 .media-data {
@@ -106,7 +106,7 @@ body {
 
 .media-icons {
     margin-left: auto;
-    padding: 12px;
+    padding: 14px;
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
@@ -133,6 +133,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    cursor: pointer;
 }
 
 .media-license.book-details {
@@ -147,4 +148,8 @@ body {
     list-style: none;
     flex: 0 0 30%;
     margin-bottom: 10px;
+}
+
+.media-lang {
+    cursor: pointer;
 }

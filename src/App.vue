@@ -14,15 +14,33 @@
       <ais-instant-search
         :search-client="searchClient"
         index-name="test_Pressbooks_directory"
+        :search-function="searchFunction"
       >
+<!--        <ais-configure-->
+<!--          :filters="getStringQuery"-->
+<!--        >-->
+        <ais-configure
+          v-bind="searchParameters"
+        >
+        </ais-configure>
         <div class="search-panel">
           <div class="search-panel__filters">
-            <ais-refinement-list attribute="categories" searchable />
+            <ais-current-refinements />
+            <h3>Authors</h3>
+            <ais-refinement-list
+              attribute="inLanguage"
+              :searchable="false"
+            />
+            <h3>Licenses</h3>
+            <ais-refinement-list
+              attribute="license_name"
+              :searchable="false"
+            />
           </div>
           <div class="search-panel__results">
             <ais-search-box placeholder="Search here…" class="searchbox" />
             <ais-hits :transform-items="transformItems">
-              <div class="books" slot-scope="{ items }">
+              <div class="books" slot-scope="{ query, items }">
                 <ais-state-results>
                   <template slot-scope="{ query, hits }">
                     <p class="books-no-results" v-if="hits.length === 0">
@@ -44,9 +62,10 @@
                     <div class="media-icons media-data-row">
                       <div
                         class="media-lang book-details"
-                        v-if="item.inLanguage"
+                        v-if="item.lang"
+                        @click="applyFilters(item, 'inLanguage')"
                       >
-                        {{ item.inLanguage }}
+                        {{ item.lang }}
                       </div>
                       <div class="media-license book-details">
                         <img
@@ -54,6 +73,7 @@
                           :title="item.licenseAlt"
                           class="img-icons"
                           v-if="item.licenseIcon"
+                          @click="applyFilters(item, 'license_name')"
                         />
                       </div>
                       <div class="media-clone book-details">
@@ -70,19 +90,19 @@
                       </div>
                       <div class="media-detail">
                         <div class="media-row">
-                          <strong>Author(s): </strong>{{ item.author }}
+                          <strong>Author(s): </strong>{{ item.authorNames }}
                         </div>
-                        <div class="media-row" v-if="item.editor">
-                          <strong>Editor(s): </strong>
+                        <div class="media-row" v-if="item.editor && item.editor.length > 0">
+                          <strong>Editor(s): </strong> {{ item.editorNames }}
                         </div>
-                        <div class="media-row">
-                          <strong>Subject(s): </strong>
+                        <div class="media-row" v-if="item.subject">
+                          <strong>Subject(s): </strong> {{ item.subject }}
                         </div>
                         <div class="media-row" v-if="item.publisher_name">
-                          <strong>Publisher: </strong>{{ item.publisher_name }}
+                          <strong>Publisher: </strong>{{ item.publisherName }}
                         </div>
-                        <div class="media-row">
-                          <strong>Word Count: </strong>
+                        <div class="media-row" v-if="item.word_count">
+                          <strong>Word Count: </strong> {{ item.word_count }}
                         </div>
                         <div class="media-row" v-if="item.description">
                           <strong>Description: </strong> {{ item.description }}
@@ -108,7 +128,34 @@ import "instantsearch.css/themes/algolia-min.css";
 import "./App.css";
 
 export default {
+  computed: {
+    getStringQuery() {
+      if (this.stringQuery.length > 0) {
+        return this.stringQuery;
+      }
+    }
+  },
   methods: {
+    searchFunction(helper) {
+      this.filters.forEach((f) => {
+        helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
+      })
+      helper.search();
+      this.searchParameters.filters = '';
+      this.filters = [];
+    },
+    applyFilters(item, attribute) {
+      var toString = attribute + ':"' + item[attribute] + '"';
+      if (this.searchParameters.filters.length == 0) {
+        this.searchParameters.filters = toString ;
+      } else {
+        this.searchParameters.filters += ' AND ' + toString;
+      }
+      this.filters.push({
+        attribute: attribute,
+        value: item[attribute]
+      });
+    },
     baseIcon(isBasedOn) {
       return {
         img: isBasedOn
@@ -130,7 +177,7 @@ export default {
         .split(" ")
         .join("-");
       for (const key in this.licenseIcons) {
-        if (lic.includes(key)) {
+        if (lic == key) {
           img = {
             image: this.imagesPath + "licenses/" + this.licenseIcons[key].image,
             alt: this.licenseIcons[key].alt
@@ -146,11 +193,11 @@ export default {
       let vm = this;
       return items.map(item => ({
         ...item,
-        author: typeof(item.author) === "object" ? item.author.join(", ") : item.author,
-        editor: typeof(item.editor) === "object" ? item.editor.join(", ") : item.editor,
+        authorNames: typeof(item.author) === "object" ? item.author.join(", ") : item.author,
+        editorNames: typeof(item.editor) === "object" ? item.editor.join(", ") : item.editor,
         image: item.image ? item.image : vm.imagesPath + 'no-image-available.png',
-        publisher_name: item.publisher_name ? item.publisher_name.value : false,
-        inLanguage: item.inLanguage ? item.inLanguage.toUpperCase() : false,
+        publisherNname: item.publisher_name ? item.publisher_name.value : false,
+        lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
         description: item.description
           ? vm.removeXMLTags(item.description)
           : false,
@@ -160,7 +207,9 @@ export default {
         licenseAlt: item.license_name
           ? vm.getLicenseIcon(item.license_name).alt
           : false,
-        isBasedOn: item.isBasedOn !== undefined ? true : false
+        isBasedOn: item.isBasedOn !== undefined ? true : false,
+        subject: item.subject !== undefined ? item.subject : false,
+        word_count: item.word_count !== undefined ? item.word_count : false
       }));
     }
   },
@@ -173,35 +222,35 @@ export default {
       indexName: process.env.VUE_APP_ALGOLIA_INDEX,
       imagesPath: "assets/images/",
       licenseIcons: {
-        "by-sa": {
+        "cc-by-sa-(attribution-sharealike)": {
           image: "by-sa.png",
           alt: "Attribution - ShareAlike (SA)"
         },
-        "by-nd": {
+        "cc-by-nd-(attribution-noderivatives)": {
           image: "by-nd.png",
           alt: "Attribution - No Derivative Work (ND)"
         },
-        "by-nc-sa": {
+        "cc-by-nc-sa-(attribution-noncommercial-sharealike)": {
           image: "by-nc-sa.png",
           alt: "Attribution - Non Commercial - ShareAlike"
         },
-        "by-nc-nd": {
+        "cc-by-nc-nd-(attribution-noncommercial-noderivatives)": {
           image: "by-nc-nd.png",
           alt: "Attribution - Noncommercial - NoDerivatives"
         },
-        "by-nc": {
+        "cc-by-nc-(attribution-noncommercial)": {
           image: "by-nc.png",
           alt: "Attribution - Non Commercial (NC)"
         },
-        by: {
+        'cc-by-(attribution)': {
           image: "by.png",
           alt: "Attribution Alone (BY)"
         },
-        allrights: {
+        'all-rights-reserved': {
           image: "allrights.png",
           alt: "All Rights Reserved"
         },
-        cc0: {
+        'cc0-(creative-commons-zero)': {
           image: "0.png",
           alt: "Zero - Public Domain"
         },
@@ -209,6 +258,12 @@ export default {
           image: "public-domain.png",
           alt: "Public Domain"
         }
+      },
+      stringQuery: '',
+      filters: [],
+      searchParameters: {
+        hitsPerPage: 10,
+        filters: ''
       }
     };
   }
