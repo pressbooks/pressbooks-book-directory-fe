@@ -16,9 +16,6 @@
         index-name="test_Pressbooks_directory"
         :search-function="searchFunction"
       >
-<!--        <ais-configure-->
-<!--          :filters="getStringQuery"-->
-<!--        >-->
         <ais-configure
           v-bind="searchParameters"
         >
@@ -128,13 +125,6 @@ import "instantsearch.css/themes/algolia-min.css";
 import "./App.css";
 
 export default {
-  computed: {
-    getStringQuery() {
-      if (this.stringQuery.length > 0) {
-        return this.stringQuery;
-      }
-    }
-  },
   methods: {
     searchFunction(helper) {
       this.filters.forEach((f) => {
