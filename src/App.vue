@@ -146,8 +146,9 @@ export default {
       let vm = this;
       return items.map(item => ({
         ...item,
-        author: item.author.join(", "),
-        editor: item.editor ? item.editor.join(", ") : false,
+        author: typeof(item.author) === "object" ? item.author.join(", ") : item.author,
+        editor: typeof(item.editor) === "object" ? item.editor.join(", ") : item.editor,
+        image: item.image ? item.image : vm.imagesPath + 'no-image-available.png',
         publisher_name: item.publisher_name ? item.publisher_name.value : false,
         inLanguage: item.inLanguage ? item.inLanguage.toUpperCase() : false,
         description: item.description
