@@ -16,23 +16,14 @@
         index-name="test_Pressbooks_directory"
         :search-function="searchFunction"
       >
-        <ais-configure
-          v-bind="searchParameters"
-        >
-        </ais-configure>
+        <ais-configure v-bind="searchParameters"> </ais-configure>
         <div class="search-panel">
           <div class="search-panel__filters">
             <ais-current-refinements />
             <h3>Authors</h3>
-            <ais-refinement-list
-              attribute="inLanguage"
-              :searchable="false"
-            />
+            <ais-refinement-list attribute="inLanguage" :searchable="false" />
             <h3>Licenses</h3>
-            <ais-refinement-list
-              attribute="license_name"
-              :searchable="false"
-            />
+            <ais-refinement-list attribute="license_name" :searchable="false" />
           </div>
           <div class="search-panel__results">
             <ais-search-box placeholder="Search here…" class="searchbox" />
@@ -78,6 +69,7 @@
                           :src="baseIcon(item.isBasedOn).img"
                           :title="baseIcon(item.isBasedOn).alt"
                           class="img-icons"
+                          @click="applyFilters(item, 'isBasedOn')"
                         />
                       </div>
                     </div>
@@ -87,16 +79,49 @@
                       </div>
                       <div class="media-detail">
                         <div class="media-row">
-                          <strong>Author(s): </strong>{{ item.authorNames }}
+                          <strong>Author(s): </strong>
+                          <span
+                            v-for="(author, index) in item.author"
+                            v-bind:key="index"
+                          >
+                            <span v-if="index != 0">, </span>
+                            <span
+                              class="cursor-pointer"
+                              @click="applyFilters(item, 'author', index)"
+                            >
+                              {{ author }}
+                            </span>
+                          </span>
                         </div>
-                        <div class="media-row" v-if="item.editor && item.editor.length > 0">
-                          <strong>Editor(s): </strong> {{ item.editorNames }}
+                        <div
+                          class="media-row"
+                          v-if="item.editor && item.editor.length > 0"
+                        >
+                          <strong>Editor(s): </strong>
+                          <span
+                            v-for="(editor, index) in item.editor"
+                            v-bind:key="index"
+                          >
+                            <span v-if="index != 0">, </span>
+                            <span
+                              class="cursor-pointer"
+                              @click="applyFilters(item, 'editor', index)"
+                            >
+                              {{ editor }}
+                            </span>
+                          </span>
                         </div>
                         <div class="media-row" v-if="item.subject">
                           <strong>Subject(s): </strong> {{ item.subject }}
                         </div>
-                        <div class="media-row" v-if="item.publisher_name">
-                          <strong>Publisher: </strong>{{ item.publisherName }}
+                        <div
+                          v-if="item.publisher_name"
+                          @click="applyFilters(item, 'publisher_name')"
+                        >
+                          <strong>Publisher: </strong>
+                          <span class="media-row cursor-pointer">{{
+                            item.publisherName
+                          }}</span>
                         </div>
                         <div class="media-row" v-if="item.word_count">
                           <strong>Word Count: </strong> {{ item.word_count }}
@@ -127,23 +152,61 @@ import "./App.css";
 export default {
   methods: {
     searchFunction(helper) {
-      this.filters.forEach((f) => {
-        helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
-      })
+      this.filters.forEach(f => {
+        if (this.filtersAllowed[f.attribute].type == "boolean") {
+          if (f.value) {
+            helper.addFacetExclusion("isBasedOn", false);
+            helper.addFacetExclusion("has_isBasedOn", false);
+          } else {
+            helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
+          }
+        } else {
+          helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
+        }
+      });
       helper.search();
-      this.searchParameters.filters = '';
+      this.searchParameters.filters = "";
       this.filters = [];
     },
-    applyFilters(item, attribute) {
-      var toString = attribute + ':"' + item[attribute] + '"';
-      if (this.searchParameters.filters.length == 0) {
-        this.searchParameters.filters = toString ;
+    applyFilters(item, attribute, index = null) {
+      if (this.filtersAllowed[attribute] === undefined) {
+        return;
+      }
+      var toString = "";
+      var typeVar = this.filtersAllowed[attribute].type;
+      var attr = attribute,
+        value;
+
+      if (index !== null) {
+        value = item[attr][index];
       } else {
-        this.searchParameters.filters += ' AND ' + toString;
+        value = item[attr];
+      }
+
+      switch (typeVar) {
+        case "boolean":
+          if (item[attribute]) {
+            toString = this.filtersAllowed[attr].trueValue;
+            attr = this.filtersAllowed[attr].trueAttribute;
+            value = true;
+          } else {
+            toString = this.filtersAllowed[attr].falseValue;
+            attribute = this.filtersAllowed[attr].falseAttribute;
+            value = false;
+          }
+          break;
+        default:
+          toString = attr + ':"' + value + '"';
+          break;
+      }
+      if (this.searchParameters.filters.length == 0) {
+        this.searchParameters.filters = toString;
+      } else {
+        this.searchParameters.filters += " AND " + toString;
       }
       this.filters.push({
-        attribute: attribute,
-        value: item[attribute]
+        attribute: attr,
+        value: value
       });
     },
     baseIcon(isBasedOn) {
@@ -183,10 +246,18 @@ export default {
       let vm = this;
       return items.map(item => ({
         ...item,
-        authorNames: typeof(item.author) === "object" ? item.author.join(", ") : item.author,
-        editorNames: typeof(item.editor) === "object" ? item.editor.join(", ") : item.editor,
-        image: item.image ? item.image : vm.imagesPath + 'no-image-available.png',
-        publisherNname: item.publisher_name ? item.publisher_name.value : false,
+        authorNames:
+          typeof item.author === "object"
+            ? item.author.join(", ")
+            : item.author,
+        editorNames:
+          typeof item.editor === "object"
+            ? item.editor.join(", ")
+            : item.editor,
+        image: item.image
+          ? item.image
+          : vm.imagesPath + "no-image-available.png",
+        publisherName: item.publisher_name ? item.publisher_name : false,
         lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
         description: item.description
           ? vm.removeXMLTags(item.description)
@@ -232,15 +303,15 @@ export default {
           image: "by-nc.png",
           alt: "Attribution - Non Commercial (NC)"
         },
-        'cc-by-(attribution)': {
+        "cc-by-(attribution)": {
           image: "by.png",
           alt: "Attribution Alone (BY)"
         },
-        'all-rights-reserved': {
+        "all-rights-reserved": {
           image: "allrights.png",
           alt: "All Rights Reserved"
         },
-        'cc0-(creative-commons-zero)': {
+        "cc0-(creative-commons-zero)": {
           image: "0.png",
           alt: "Zero - Public Domain"
         },
@@ -249,11 +320,56 @@ export default {
           alt: "Public Domain"
         }
       },
-      stringQuery: '',
+      stringQuery: "",
+      filtersAllowed: {
+        license_name: {
+          type: "string"
+        },
+        inLanguage: {
+          type: "string"
+        },
+        has_isBasedOn: {
+          type: "boolean"
+        },
+        publisher_name: {
+          type: "string"
+        },
+        editor: {
+          type: "string"
+        },
+        isBasedOn: {
+          type: "boolean",
+          trueValue: "NOT isBasedOn:false AND NOT has_isBasedOn:false",
+          falseValue: "has_isBasedOn:false",
+          trueAttribute: "isBasedOn",
+          falseAttribute: "has_isBasedOn"
+        },
+        author: {
+          type: "string"
+        }
+      },
       filters: [],
       searchParameters: {
         hitsPerPage: 10,
-        filters: ''
+        filters: "",
+        facets: [
+          "isBasedOn",
+          "has_isBasedOn",
+          "license_name",
+          "inLanguage",
+          "publisher_name",
+          "author",
+          "editor"
+        ],
+        disjunctiveFacets: [
+          "isBasedOn",
+          "has_isBasedOn",
+          "license_name",
+          "inLanguage",
+          "publisher_name",
+          "author",
+          "editor"
+        ]
       }
     };
   }
