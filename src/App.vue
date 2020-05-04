@@ -13,7 +13,7 @@
     <div class="container">
       <ais-instant-search
         :search-client="searchClient"
-        index-name="test_Pressbooks_directory"
+        :index-name="indexName"
         :search-function="searchFunction"
       >
         <ais-configure v-bind="searchParameters"> </ais-configure>
