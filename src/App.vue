@@ -20,7 +20,7 @@
         <div class="search-panel">
           <div class="search-panel__filters">
             <ais-current-refinements />
-            <h3>Authors</h3>
+            <h3>Languages</h3>
             <ais-refinement-list attribute="inLanguage" :searchable="false" />
             <h3>Licenses</h3>
             <ais-refinement-list attribute="license_name" :searchable="false" />
@@ -40,45 +40,45 @@
                 <article
                   v-for="item in items"
                   :key="item.objectID"
-                  class="book"
+                  class="book-card"
                 >
                   <div
-                    class="media-object"
+                    class="book-image"
                     :style="`background-image: url('${item.image}');`"
                   ></div>
-                  <div class="media-data">
-                    <div class="media-icons media-data-row">
+                  <div class="book-data">
+                    <div class="book-icons book-data-row">
                       <div
-                        class="media-lang book-details"
+                        class="book-language book-icons-row"
                         v-if="item.lang"
                         @click="applyFilters(item, 'inLanguage')"
                       >
                         {{ item.lang }}
                       </div>
-                      <div class="media-license book-details">
+                      <div class="book-license book-icons-row">
                         <img
                           :src="item.licenseIcon"
                           :title="item.licenseAlt"
-                          class="img-icons"
+                          class="book-img-icons"
                           v-if="item.licenseIcon"
                           @click="applyFilters(item, 'license_name')"
                         />
                       </div>
-                      <div class="media-clone book-details">
+                      <div class="book-isclone book-img-icons">
                         <img
                           :src="baseIcon(item.isBasedOn).img"
                           :title="baseIcon(item.isBasedOn).alt"
-                          class="img-icons"
+                          class="book-img-icons"
                           @click="applyFilters(item, 'isBasedOn')"
                         />
                       </div>
                     </div>
-                    <div class="media media-data-row">
-                      <div class="media-title">
+                    <div class="book-data-row">
+                      <div class="book-title">
                         {{ item.name }}
                       </div>
-                      <div class="media-detail">
-                        <div class="media-row">
+                      <div class="book-details">
+                        <div class="book-data-details-row">
                           <strong>Author(s): </strong>
                           <span
                             v-for="(author, index) in item.author"
@@ -94,13 +94,15 @@
                           </span>
                         </div>
                         <div
-                          class="media-row"
+                          class="book-data-row"
                           v-if="item.editor && item.editor.length > 0"
                         >
                           <strong>Editor(s): </strong>
                           <span
                             v-for="(editor, index) in item.editor"
                             v-bind:key="index"
+                            s
+                            a
                           >
                             <span v-if="index != 0">, </span>
                             <span
@@ -111,7 +113,7 @@
                             </span>
                           </span>
                         </div>
-                        <div class="media-row" v-if="item.subject">
+                        <div class="book-details-row" v-if="item.subject">
                           <strong>Subject(s): </strong> {{ item.subject }}
                         </div>
                         <div
@@ -119,14 +121,14 @@
                           @click="applyFilters(item, 'publisher_name')"
                         >
                           <strong>Publisher: </strong>
-                          <span class="media-row cursor-pointer">{{
+                          <span class="book-details-row cursor-pointer">{{
                             item.publisherName
                           }}</span>
                         </div>
-                        <div class="media-row" v-if="item.word_count">
+                        <div class="book-details-row" v-if="item.word_count">
                           <strong>Word Count: </strong> {{ item.word_count }}
                         </div>
-                        <div class="media-row" v-if="item.description">
+                        <div class="book-details-row" v-if="item.description">
                           <strong>Description: </strong> {{ item.description }}
                         </div>
                       </div>
@@ -231,7 +233,7 @@ export default {
         .join("-");
       for (const key in this.licenseIcons) {
         if (lic == key) {
-          img = {
+          return {
             image: this.imagesPath + "licenses/" + this.licenseIcons[key].image,
             alt: this.licenseIcons[key].alt
           };
@@ -268,7 +270,7 @@ export default {
         licenseAlt: item.license_name
           ? vm.getLicenseIcon(item.license_name).alt
           : false,
-        isBasedOn: item.isBasedOn !== undefined ? true : false,
+        isBasedOn: item.isBasedOn !== undefined,
         subject: item.subject !== undefined ? item.subject : false,
         word_count: item.word_count !== undefined ? item.word_count : false
       }));

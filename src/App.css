@@ -74,7 +74,7 @@ body {
     flex-flow: column;
 }
 
-.book {
+.book-card {
     display: flex;
     margin: 6px;
     border-style: solid;
@@ -83,7 +83,7 @@ body {
     color: black;
 }
 
-.media-object {
+.book-image {
     height: 160px;
     width: 150px;
     overflow: hidden;
@@ -93,18 +93,18 @@ body {
     margin: 14px 12px 14px 12px;
 }
 
-.media-data {
+.book-data {
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
 }
 
-.media-data-row {
+.book-data-row {
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.media-icons {
+.book-icons {
     margin-left: auto;
     padding: 14px;
     display: flex;
@@ -116,19 +116,19 @@ body {
     height: 40px;
 }
 
-.media-title {
+.book-title {
     text-decoration: underline;
     font-size: 1.5em;
     margin: 0.4em 0 0.4em 0;
 }
 
-.media-detail {
+.book-details {
     font-size: 0.8em;
     margin-bottom: 1.7em;
 }
 
 
-.img-icons {
+.book-img-icons {
     height: 22px;
     margin-left: auto;
     margin-right: auto;
@@ -136,21 +136,21 @@ body {
     cursor: pointer;
 }
 
-.media-license.book-details {
+.book-license.book-icons-row {
     min-width: 64px;
 }
 
-.media-clone.book-details {
+.book-isclone.book-icons-row {
     min-width: 64px;
 }
 
-.book-details {
+.book-icons-row {
     list-style: none;
     flex: 0 0 30%;
     margin-bottom: 10px;
 }
 
-.media-lang {
+.book-language {
     cursor: pointer;
 }
 
