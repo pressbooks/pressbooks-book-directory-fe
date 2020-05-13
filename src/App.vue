@@ -12,19 +12,13 @@
 
     <div class="container">
       <ais-instant-search
-        :search-client="searchClient"
-        :index-name="indexName"
+        :search-client="$store.state.SClient.searchClient"
+        :index-name="$store.state.SClient.indexName"
         :search-function="searchFunction"
       >
-        <ais-configure v-bind="searchParameters"> </ais-configure>
+        <ais-configure v-bind="$store.state.SClient.searchParameters"> </ais-configure>
         <div class="search-panel">
-          <div class="search-panel__filters">
-            <ais-current-refinements />
-            <h3>Languages</h3>
-            <ais-refinement-list attribute="inLanguage" :searchable="false" />
-            <h3>Licenses</h3>
-            <ais-refinement-list attribute="license_name" :searchable="false" />
-          </div>
+          <filters></filters>
           <div class="search-panel__results">
             <ais-search-box placeholder="Search here…" class="searchbox" />
             <ais-hits :transform-items="transformItems">
@@ -40,100 +34,8 @@
                 <article
                   v-for="item in items"
                   :key="item.objectID"
-                  class="book-card"
                 >
-                  <div
-                    class="book-image"
-                    :style="`background-image: url('${item.image}');`"
-                  ></div>
-                  <div class="book-data">
-                    <div class="book-icons book-data-row">
-                      <div
-                        class="book-language book-icons-row"
-                        v-if="item.lang"
-                        @click="applyFilters(item, 'inLanguage')"
-                      >
-                        {{ item.lang }}
-                      </div>
-                      <div class="book-license book-icons-row">
-                        <img
-                          :src="item.licenseIcon"
-                          :title="item.licenseAlt"
-                          class="book-img-icons"
-                          v-if="item.licenseIcon"
-                          @click="applyFilters(item, 'license_name')"
-                        />
-                      </div>
-                      <div class="book-isclone book-img-icons">
-                        <img
-                          :src="baseIcon(item.isBasedOn).img"
-                          :title="baseIcon(item.isBasedOn).alt"
-                          class="book-img-icons"
-                          @click="applyFilters(item, 'isBasedOn')"
-                        />
-                      </div>
-                    </div>
-                    <div class="book-data-row">
-                      <div class="book-title">
-                        {{ item.name }}
-                      </div>
-                      <div class="book-details">
-                        <div class="book-data-details-row">
-                          <strong>Author(s): </strong>
-                          <span
-                            v-for="(author, index) in item.author"
-                            v-bind:key="index"
-                          >
-                            <span v-if="index != 0">, </span>
-                            <span
-                              class="cursor-pointer"
-                              @click="applyFilters(item, 'author', index)"
-                            >
-                              {{ author }}
-                            </span>
-                          </span>
-                        </div>
-                        <div
-                          class="book-data-row"
-                          v-if="item.editor && item.editor.length > 0"
-                        >
-                          <strong>Editor(s): </strong>
-                          <span
-                            v-for="(editor, index) in item.editor"
-                            v-bind:key="index"
-                            s
-                            a
-                          >
-                            <span v-if="index != 0">, </span>
-                            <span
-                              class="cursor-pointer"
-                              @click="applyFilters(item, 'editor', index)"
-                            >
-                              {{ editor }}
-                            </span>
-                          </span>
-                        </div>
-                        <div class="book-details-row" v-if="item.subject">
-                          <strong>Subject(s): </strong> {{ item.subject }}
-                        </div>
-                        <div
-                          v-if="item.publisher_name"
-                          @click="applyFilters(item, 'publisher_name')"
-                        >
-                          <strong>Publisher: </strong>
-                          <span class="book-details-row cursor-pointer">{{
-                            item.publisherName
-                          }}</span>
-                        </div>
-                        <div class="book-details-row" v-if="item.word_count">
-                          <strong>Word Count: </strong> {{ item.word_count }}
-                        </div>
-                        <div class="book-details-row" v-if="item.description">
-                          <strong>Description: </strong> {{ item.description }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <book-card class="book-card" :item="item"></book-card>
                 </article>
               </div>
             </ais-hits>
@@ -146,16 +48,21 @@
 </template>
 
 <script>
-import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/algolia-min.css";
 
 import "./App.css";
+import BookCard from './components/BookCard';
+import Filters from './components/Filters';
 
 export default {
+  components: {
+    BookCard,
+    Filters
+  },
   methods: {
     searchFunction(helper) {
-      this.filters.forEach(f => {
-        if (this.filtersAllowed[f.attribute].type == "boolean") {
+      this.$store.state.SClient.filters.forEach(f => {
+        if (this.$store.state.SClient.filtersAllowed[f.attribute].type == "boolean") {
           if (f.value) {
             helper.addFacetExclusion("isBasedOn", false);
             helper.addFacetExclusion("has_isBasedOn", false);
@@ -167,75 +74,26 @@ export default {
         }
       });
       helper.search();
-      this.searchParameters.filters = "";
-      this.filters = [];
-    },
-    applyFilters(item, attribute, index = null) {
-      if (this.filtersAllowed[attribute] === undefined) {
-        return;
-      }
-      var toString = "";
-      var typeVar = this.filtersAllowed[attribute].type;
-      var attr = attribute,
-        value;
-
-      if (index !== null) {
-        value = item[attr][index];
-      } else {
-        value = item[attr];
-      }
-
-      switch (typeVar) {
-        case "boolean":
-          if (item[attribute]) {
-            toString = this.filtersAllowed[attr].trueValue;
-            attr = this.filtersAllowed[attr].trueAttribute;
-            value = true;
-          } else {
-            toString = this.filtersAllowed[attr].falseValue;
-            attribute = this.filtersAllowed[attr].falseAttribute;
-            value = false;
-          }
-          break;
-        default:
-          toString = attr + ':"' + value + '"';
-          break;
-      }
-      if (this.searchParameters.filters.length == 0) {
-        this.searchParameters.filters = toString;
-      } else {
-        this.searchParameters.filters += " AND " + toString;
-      }
-      this.filters.push({
-        attribute: attr,
-        value: value
-      });
-    },
-    baseIcon(isBasedOn) {
-      return {
-        img: isBasedOn
-          ? this.imagesPath + "is-child.png"
-          : this.imagesPath + "is-base.png",
-        alt: isBasedOn ? "Based on other book" : "Is not based on another book"
-      };
+      this.$store.state.SClient.searchParameters.filters = "";
+      this.$store.state.SClient.filters = [];
     },
     getLicenseIcon(license) {
       var img = {
         image:
-          this.imagesPath +
+          this.$store.state.config.imagesPath +
           "licenses/" +
-          this.licenseIcons["public-domain"].image,
-        alt: this.licenseIcons["public-domain"].alt
+          this.$store.state.config.licenseIcons["public-domain"].image,
+        alt: this.$store.state.config.licenseIcons["public-domain"].alt
       };
       var lic = license
         .toLowerCase()
         .split(" ")
         .join("-");
-      for (const key in this.licenseIcons) {
+      for (const key in this.$store.state.config.licenseIcons) {
         if (lic == key) {
           return {
-            image: this.imagesPath + "licenses/" + this.licenseIcons[key].image,
-            alt: this.licenseIcons[key].alt
+            image: this.$store.state.config.imagesPath + "licenses/" + this.$store.state.config.licenseIcons[key].image,
+            alt: this.$store.state.config.licenseIcons[key].alt
           };
         }
       }
@@ -278,100 +136,15 @@ export default {
   },
   data() {
     return {
-      searchClient: algoliasearch(
-        process.env.VUE_APP_ALGOLIA_APP_ID,
-        process.env.VUE_APP_ALGOLIA_API_READ_KEY
-      ),
-      indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-      imagesPath: "assets/images/",
-      licenseIcons: {
-        "cc-by-sa-(attribution-sharealike)": {
-          image: "by-sa.png",
-          alt: "Attribution - ShareAlike (SA)"
-        },
-        "cc-by-nd-(attribution-noderivatives)": {
-          image: "by-nd.png",
-          alt: "Attribution - No Derivative Work (ND)"
-        },
-        "cc-by-nc-sa-(attribution-noncommercial-sharealike)": {
-          image: "by-nc-sa.png",
-          alt: "Attribution - Non Commercial - ShareAlike"
-        },
-        "cc-by-nc-nd-(attribution-noncommercial-noderivatives)": {
-          image: "by-nc-nd.png",
-          alt: "Attribution - Noncommercial - NoDerivatives"
-        },
-        "cc-by-nc-(attribution-noncommercial)": {
-          image: "by-nc.png",
-          alt: "Attribution - Non Commercial (NC)"
-        },
-        "cc-by-(attribution)": {
-          image: "by.png",
-          alt: "Attribution Alone (BY)"
-        },
-        "all-rights-reserved": {
-          image: "allrights.png",
-          alt: "All Rights Reserved"
-        },
-        "cc0-(creative-commons-zero)": {
-          image: "0.png",
-          alt: "Zero - Public Domain"
-        },
-        "public-domain": {
-          image: "public-domain.png",
-          alt: "Public Domain"
-        }
+      isBasedOn: {
+        type: "boolean",
+        trueValue: "NOT isBasedOn:false AND NOT has_isBasedOn:false",
+        falseValue: "has_isBasedOn:false",
+        trueAttribute: "isBasedOn",
+        falseAttribute: "has_isBasedOn"
       },
-      stringQuery: "",
-      filtersAllowed: {
-        license_name: {
-          type: "string"
-        },
-        inLanguage: {
-          type: "string"
-        },
-        has_isBasedOn: {
-          type: "boolean"
-        },
-        publisher_name: {
-          type: "string"
-        },
-        editor: {
-          type: "string"
-        },
-        isBasedOn: {
-          type: "boolean",
-          trueValue: "NOT isBasedOn:false AND NOT has_isBasedOn:false",
-          falseValue: "has_isBasedOn:false",
-          trueAttribute: "isBasedOn",
-          falseAttribute: "has_isBasedOn"
-        },
-        author: {
-          type: "string"
-        }
-      },
-      filters: [],
-      searchParameters: {
-        hitsPerPage: 10,
-        filters: "",
-        facets: [
-          "isBasedOn",
-          "has_isBasedOn",
-          "license_name",
-          "inLanguage",
-          "publisher_name",
-          "author",
-          "editor"
-        ],
-        disjunctiveFacets: [
-          "isBasedOn",
-          "has_isBasedOn",
-          "license_name",
-          "inLanguage",
-          "publisher_name",
-          "author",
-          "editor"
-        ]
+      author: {
+        type: "string"
       }
     };
   }
