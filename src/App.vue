@@ -16,11 +16,11 @@
         :index-name="$store.state.SClient.indexName"
         :search-function="searchFunction"
       >
-        <ais-configure v-bind="$store.state.SClient.searchParameters"> </ais-configure>
+        <ais-configure v-bind="$store.state.SClient.searchParameters">
+        </ais-configure>
         <div class="search-panel">
           <filters></filters>
           <div class="search-panel__results">
-            <ais-search-box placeholder="Search here…" class="searchbox" />
             <ais-hits :transform-items="transformItems">
               <div class="books" slot-scope="{ query, items }">
                 <ais-state-results>
@@ -31,10 +31,7 @@
                     </p>
                   </template>
                 </ais-state-results>
-                <article
-                  v-for="item in items"
-                  :key="item.objectID"
-                >
+                <article v-for="item in items" :key="item.objectID">
                   <book-card class="book-card" :item="item"></book-card>
                 </article>
               </div>
@@ -51,8 +48,8 @@
 import "instantsearch.css/themes/algolia-min.css";
 
 import "./App.css";
-import BookCard from './components/BookCard';
-import Filters from './components/Filters';
+import BookCard from "./components/BookCard";
+import Filters from "./components/Filters";
 
 export default {
   components: {
@@ -62,7 +59,10 @@ export default {
   methods: {
     searchFunction(helper) {
       this.$store.state.SClient.filters.forEach(f => {
-        if (this.$store.state.SClient.filtersAllowed[f.attribute].type == "boolean") {
+        if (
+          this.$store.state.SClient.filtersAllowed[f.attribute].type ==
+          "boolean"
+        ) {
           if (f.value) {
             helper.addFacetExclusion("isBasedOn", false);
             helper.addFacetExclusion("has_isBasedOn", false);
@@ -92,7 +92,10 @@ export default {
       for (const key in this.$store.state.config.licenseIcons) {
         if (lic == key) {
           return {
-            image: this.$store.state.config.imagesPath + "licenses/" + this.$store.state.config.licenseIcons[key].image,
+            image:
+              this.$store.state.config.imagesPath +
+              "licenses/" +
+              this.$store.state.config.licenseIcons[key].image,
             alt: this.$store.state.config.licenseIcons[key].alt
           };
         }

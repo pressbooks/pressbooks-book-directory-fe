@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import InstantSearch from "vue-instantsearch";
-import {store} from './store/index';
+import { store } from "./store/index";
 
 Vue.use(InstantSearch);
 
