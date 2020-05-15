@@ -22,16 +22,6 @@ export default {
     BookDetails,
     IconsFilter
   },
-  props: ["item"],
-  methods: {
-    applyFilters(item, attribute, index = null) {
-      let params = {
-        item: item,
-        attribute: attribute,
-        index: index
-      };
-      this.$store.dispatch('applyFilters', [params]);
-    }
-  }
+  props: ["item"]
 };
 </script>

@@ -58,9 +58,16 @@ export default {
     name: "book-details",
     props: ["item"],
     methods: {
-        applyFilters(item, attribute, index = null) {
-            this.$store.dispatch('applyBulkFilters');
-        }
+        applyFilters(item, attribute, comparator = ':') {
+            let filters = [];
+            item[attribute] = (item[attribute] !== undefined) ? item[attribute] : false;
+            filters.push({
+                attribute: attribute,
+                item: item
+            });
+            this.$store.commit('setFiltersApplied', {value: item[attribute], attribute: attribute, comparator: comparator});
+            this.$store.dispatch('applyFilters', filters);
+        },
     }
 }
 </script>

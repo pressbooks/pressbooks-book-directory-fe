@@ -11,16 +11,18 @@
                     <div
                         slot-scope="{ items, refine }"
                     >
-                        <select multiple class="custom-select" v-model="licenses">
-                            <option
-                                v-for="item in items"
-                                :key="item.value"
-                                @click="checkLicenses()"
-                                :value="item.value"
-                            >
-                                {{ item.value }} - {{ item.count.toLocaleString() }}
-                            </option>
-                        </select>
+                        <div class="form-group">
+                            <select multiple class="form-control" v-model="licenses">
+                                <option
+                                    v-for="item in items"
+                                    :key="item.value"
+                                    @click="setLicenses()"
+                                    :value="item.value"
+                                >
+                                    {{ item.value }} - {{ item.count.toLocaleString() }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </ais-refinement-list>
             </div>
@@ -69,6 +71,27 @@
                     </label>
                 </div>
             </div>
+            <div class="properties-number-filters">
+                <h6>Word Count</h6>
+                <div class="form-group">
+                    <label for="wcfrom">From</label>
+                    <input
+                        type="number"
+                        name="fromwc"
+                        class="form-control"
+                        id="wcfrom"
+                        v-model="wordCount.from"
+                    />
+                    <label for="wcto">To</label>
+                    <input
+                        type="number"
+                        name="towc"
+                        v-model="wordCount.to"
+                        class="form-control"
+                        id="wcto"
+                    />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -77,7 +100,7 @@
 export default {
     name: "book-properties",
     methods: {
-        applyFilters(value, attribute, option = null) {
+        applyFilters(value, attribute, option = null, comparator = ':') {
             if (option !== null) {
                 this.isBasedOn = option;
             }
@@ -90,26 +113,28 @@ export default {
                 ) {
                     delete this.$store.state.SClient.filtersApplied.has_isBasedOn;
                 }
-                this.$store.commit('setFiltersApplied', {value: value, attribute: attribute});
+                this.$store.commit('setFiltersApplied', {value: value, attribute: attribute, comparator: comparator});
             }
         },
-        checkLicenses() {
-            console.log(this.licenses)
-            if (
-                this.$store.state.SClient.filtersApplied.license_name !== undefined
-            ) {
-                delete this.$store.state.SClient.filtersApplied.license_name;
-            }
+        setLicenses() {
+            delete this.$store.state.SClient.filtersApplied.license_name;
             this.licenses.forEach(l => {
-                this.$store.commit('setFiltersApplied', {value: l, attribute: 'license_name'});
+                this.$store.commit('setFiltersApplied', {value: l, attribute: 'license_name', comparator: ':'});
             })
         }
     },
     data() {
         return {
             isBasedOn: 3,
-            licenses: []
+            licenses: [],
+            wordCount: {
+                from: 1000,
+                to: null
+            }
         };
+    },
+    watch: {
+
     }
 };
 </script>

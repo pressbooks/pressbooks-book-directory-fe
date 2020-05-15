@@ -54,6 +54,15 @@ let sClient = {
     },
     author: {
       type: "string"
+    },
+    wordCount: {
+      type: "integer"
+    },
+    storageSize: {
+      type: "integer"
+    },
+    h5pActivities: {
+      type: "integer"
     }
   }
 };
@@ -87,14 +96,16 @@ export default {
         case "boolean":
           value = filter.value;
           break;
+        case "integer":
+          value = filter.value;
         default:
           value = '"' + filter.value + '"';
           break;
       }
       if (state.stringFilters.length > 0) {
-        state.stringFilters += condition + ' ' + filter.attribute + ':' + value + ' ';
+        state.stringFilters += condition + ' ' + filter.attribute + filter.comparator + value + ' ';
       } else {
-        state.stringFilters = filter.attribute + ':' + value + ' ';
+        state.stringFilters = filter.attribute + filter.comparator + value + ' ';
       }
     },
     setSearchParametersFilters: (state) => {
@@ -109,11 +120,7 @@ export default {
         console.log(context.state.filtersApplied)
         for (let attribute in context.state.filtersApplied) {
           context.state.filtersApplied[attribute].forEach(f => {
-            // helper.addFacetRefinement(attribute, f.value);
             helper.addDisjunctiveFacetRefinement(attribute, f.value);
-            // if (f.condition === 'OR') {
-            //   helper.addDisjunctiveFacetRefinement(attribute, f.value);
-            // }
           });
         }
         context.commit('setHelper', helper);

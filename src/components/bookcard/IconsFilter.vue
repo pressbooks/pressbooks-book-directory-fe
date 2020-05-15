@@ -33,16 +33,15 @@ export default {
     name: "icons-filter",
     props: ['item'],
     methods: {
-        applyFilters(item, attribute, index = null) {
-            if (item[attribute] === undefined) {
-                item[attribute] = false;
-            }
-            let params = {
-                item: item,
+        applyFilters(item, attribute, comparator = ':') {
+            let filters = [];
+            item[attribute] = (item[attribute] !== undefined) ? item[attribute] : false;
+            filters.push({
                 attribute: attribute,
-                index: index
-            };
-            this.$store.dispatch('applyFilters', params);
+                item: item
+            });
+            this.$store.commit('setFiltersApplied', {value: item[attribute], attribute: attribute, comparator: comparator});
+            this.$store.dispatch('applyFilters', filters);
         },
         baseIcon(isBasedOn) {
             return {
