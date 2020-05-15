@@ -46,8 +46,17 @@ body {
 
 /** Filters **/
 
-.search-panel {
+.properties-filter {
+    display: flex;
+    margin: 10px;
+}
 
+.license-filter {
+    flex: 0 0 50%;
+}
+
+.properties-input-filters {
+    flex: 0 0 50%;
 }
 
 .search-panel__filters {
@@ -149,7 +158,7 @@ body {
 
 .book-icons {
     margin-left: auto;
-    padding: 14px;
+    padding: 14px 8px 14px 8px;
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
@@ -183,13 +192,12 @@ body {
     min-width: 64px;
 }
 
-.book-isclone.book-icons-row {
+.book-isclone .book-icons-row {
     min-width: 64px;
 }
 
 .book-icons-row {
     list-style: none;
-    flex: 0 0 30%;
     margin-bottom: 10px;
 }
 

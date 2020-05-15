@@ -16,7 +16,7 @@
         :index-name="$store.state.SClient.indexName"
         :search-function="searchFunction"
       >
-        <ais-configure v-bind="$store.state.SClient.searchParameters">
+        <ais-configure v-bind="$store.state.SClient.searchParameters" >
         </ais-configure>
         <div class="search-panel">
           <filters></filters>
@@ -48,8 +48,8 @@
 import "instantsearch.css/themes/algolia-min.css";
 
 import "./App.css";
-import BookCard from "./components/BookCard";
-import Filters from "./components/Filters";
+import BookCard from "./components/bookcard/BookCard";
+import Filters from "./components/filters/Filters";
 
 export default {
   components: {
@@ -58,24 +58,7 @@ export default {
   },
   methods: {
     searchFunction(helper) {
-      this.$store.state.SClient.filters.forEach(f => {
-        if (
-          this.$store.state.SClient.filtersAllowed[f.attribute].type ==
-          "boolean"
-        ) {
-          if (f.value) {
-            helper.addFacetExclusion("isBasedOn", false);
-            helper.addFacetExclusion("has_isBasedOn", false);
-          } else {
-            helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
-          }
-        } else {
-          helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
-        }
-      });
-      helper.search();
-      this.$store.state.SClient.searchParameters.filters = "";
-      this.$store.state.SClient.filters = [];
+      this.$store.dispatch('searchFunction', helper);
     },
     getLicenseIcon(license) {
       var img = {
@@ -136,20 +119,6 @@ export default {
         word_count: item.word_count !== undefined ? item.word_count : false
       }));
     }
-  },
-  data() {
-    return {
-      isBasedOn: {
-        type: "boolean",
-        trueValue: "NOT isBasedOn:false AND NOT has_isBasedOn:false",
-        falseValue: "has_isBasedOn:false",
-        trueAttribute: "isBasedOn",
-        falseAttribute: "has_isBasedOn"
-      },
-      author: {
-        type: "string"
-      }
-    };
   }
 };
 </script>
