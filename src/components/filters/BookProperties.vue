@@ -73,7 +73,51 @@
             </div>
             <div class="properties-number-filters">
                 <h6>Word Count</h6>
-
+                <div class="wc-inputs">
+                    <div class="wc-input form-group">
+                        <label for="min-wc">From</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="min-wc"
+                            v-model="wordCount.min"
+                            @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
+                        />
+                    </div>
+                    <div class="wc-input form-group">
+                        <label for="max-wc">To</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="max-wc"
+                            v-model="wordCount.max"
+                            @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
+                        />
+                    </div>
+                </div>
+                <h6>Storage Size</h6>
+                <div class="wc-inputs">
+                    <div class="wc-input form-group">
+                        <label for="min-wc">From</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="min-wc"
+                            v-model="storageSize.min"
+                            @input="updateRangeInput('storageSize', storageSize.min, storageSize.max)"
+                        />
+                    </div>
+                    <div class="wc-input form-group">
+                        <label for="max-wc">To</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="max-wc"
+                            v-model="storageSize.max"
+                            @input="updateRangeInput('storageSize', storageSize.min, storageSize.max)"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -83,7 +127,7 @@
 export default {
     name: "book-properties",
     methods: {
-        applyFilters(value, attribute, option = null, comparator = ':') {
+        applyFilters(value, attribute, option = null, operator = ':') {
             if (option !== null) {
                 this.isBasedOn = option;
             }
@@ -96,23 +140,31 @@ export default {
                 ) {
                     delete this.$store.state.SClient.filtersApplied.has_isBasedOn;
                 }
-                this.$store.commit('setFiltersApplied', {value: value, attribute: attribute, comparator: comparator});
+                this.$store.commit('setFiltersApplied', {value: value, attribute: attribute, operator: operator});
             }
         },
         setLicenses() {
             delete this.$store.state.SClient.filtersApplied.license_name;
             this.licenses.forEach(l => {
-                this.$store.commit('setFiltersApplied', {value: l, attribute: 'license_name', comparator: ':'});
+                this.$store.commit('setFiltersApplied', {value: l, attribute: 'license_name', operator: ':'});
             });
         },
-        formatMinValue(minValue, minRange) {
-            return minValue !== null && minValue !== minRange ? minValue : '';
-        },
-        formatMaxValue(maxValue, maxRange) {
-            return maxValue !== null && maxValue !== maxRange ? maxValue : '';
-        },
-        applyWordCountFilter(range) {
-            delete this.$store.state.SClient.filtersApplied.wordCount;
+        updateRangeInput(attribute, min, max) {
+            delete this.$store.state.SClient.filtersApplied[attribute];
+            if (min !== '' && parseInt(min) > 0) {
+                this.$store.commit('setFiltersApplied', {
+                    value: min,
+                    attribute: attribute,
+                    operator: '>'
+                });
+            }
+            if (max !== '' && parseInt(max) > 0) {
+                this.$store.commit('setFiltersApplied', {
+                    value: max,
+                    attribute: attribute,
+                    operator: '<='
+                });
+            }
         }
     },
     data() {
@@ -120,8 +172,12 @@ export default {
             isBasedOn: 3,
             licenses: [],
             wordCount: {
-                from: 1000,
-                to: null
+                min: null,
+                max: null
+            },
+            storageSize: {
+                min:null,
+                max: null
             }
         };
     }

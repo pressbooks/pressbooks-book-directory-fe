@@ -43,8 +43,11 @@
               item.publisherName
             }}</span>
             </div>
-            <div class="book-details-row" v-if="item.word_count">
-                <strong>Word Count: </strong> {{ item.word_count }}
+            <div class="book-details-row" v-if="item.wordCount">
+                <strong>Word Count: </strong> {{ item.wordCount }}
+            </div>
+            <div class="book-details-row" v-if="item.storageSize">
+                <strong>Storage Size: </strong> {{ item.storageSize }}
             </div>
             <div class="book-details-row" v-if="item.description">
                 <strong>Description: </strong> {{ item.description }}
@@ -58,14 +61,14 @@ export default {
     name: "book-details",
     props: ["item"],
     methods: {
-        applyFilters(item, attribute, comparator = ':') {
+        applyFilters(item, attribute, operator = ':') {
             let filters = [];
             item[attribute] = (item[attribute] !== undefined) ? item[attribute] : false;
             filters.push({
                 attribute: attribute,
                 item: item
             });
-            this.$store.commit('setFiltersApplied', {value: item[attribute], attribute: attribute, comparator: comparator});
+            this.$store.commit('setFiltersApplied', {value: item[attribute], attribute: attribute, operator: operator});
             this.$store.dispatch('applyFilters', filters);
         },
     }

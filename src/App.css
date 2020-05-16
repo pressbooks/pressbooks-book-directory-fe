@@ -57,10 +57,16 @@ body {
 
 .properties-input-filters {
     flex: 0 0 33%;
+    margin-left: 1em;
 }
 
 .properties-number-filters {
     flex: 0 0 33%;
+    margin-left: 1em;
+}
+
+.btn-current-filters {
+    margin: 0 1em 2em 0;
 }
 
 .search-panel__filters {
@@ -121,6 +127,14 @@ body {
 .pagination {
     margin: 2rem auto;
     text-align: center;
+}
+
+.wc-inputs {
+    display: flex;
+}
+
+.wc-input {
+    flex: 0 0 50%;
 }
 
 /* Results - Items */

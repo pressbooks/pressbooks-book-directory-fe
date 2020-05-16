@@ -118,19 +118,39 @@ export default {
           stringFilter = filter.attribute + ':"' + filter.value + '"';
           break;
       }
-      state.filtersApplied[filter.attribute].push({value: filter.value, condition: condition, stringFilter: stringFilter});
+      state.filtersApplied[filter.attribute].push({
+        type: typeVar,
+        value: filter.value,
+        condition: condition,
+        stringFilter: stringFilter,
+        operator: filter.operator
+      });
     }
   },
   actions: {
     searchFunction(context, helper) {
+      helper.clearRefinements();
+      console.log(context.state.searchParameters.facetFilters)
+      console.log(context.state.filtersApplied)
       if (context.state.searchParameters.facetFilters.length > 0) {
-        helper.clearRefinements();
         for (let attribute in context.state.filtersApplied) {
           if (context.state.filtersApplied[attribute].length === 1) {
-            helper.addDisjunctiveFacetRefinement(attribute, context.state.filtersApplied[attribute][0].value);
+            if (context.state.filtersApplied[attribute][0].type === 'integer') {
+              helper.addNumericRefinement(
+                  attribute,
+                  context.state.filtersApplied[attribute][0].operator,
+                  context.state.filtersApplied[attribute][0].value
+              );
+            } else {
+              helper.addDisjunctiveFacetRefinement(attribute, context.state.filtersApplied[attribute][0].value);
+            }
           } else {
             context.state.filtersApplied[attribute].forEach(f => {
-              helper.addFacetRefinement(attribute, f.value);
+              if (f.type === 'integer') {
+                helper.addNumericRefinement(attribute, f.operator, f.value);
+              } else {
+                helper.addDisjunctiveFacetRefinement(attribute, f.value);
+              }
             });
           }
         }
@@ -139,6 +159,7 @@ export default {
         // context.commit( 'setFilters', [] );
       } else {
         // context.state.filtersApplied = {};
+        // context.commit('setFiltersApplied', {});
       }
       helper.search();
     },
