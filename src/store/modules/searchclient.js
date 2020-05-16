@@ -21,7 +21,8 @@ let sClient = {
       "inLanguage",
       "publisher_name",
       "author",
-      "editor"
+      "editor",
+      "wordCount"
     ],
     disjunctiveFacets: [
       "isBasedOn",
@@ -30,7 +31,8 @@ let sClient = {
       "inLanguage",
       "publisher_name",
       "author",
-      "editor"
+      "editor",
+      "wordCount"
     ]
   },
   filtersAllowed: {

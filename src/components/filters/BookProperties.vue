@@ -73,24 +73,36 @@
             </div>
             <div class="properties-number-filters">
                 <h6>Word Count</h6>
-                <div class="form-group">
-                    <label for="wcfrom">From</label>
-                    <input
-                        type="number"
-                        name="fromwc"
-                        class="form-control"
-                        id="wcfrom"
-                        v-model="wordCount.from"
-                    />
-                    <label for="wcto">To</label>
-                    <input
-                        type="number"
-                        name="towc"
-                        v-model="wordCount.to"
-                        class="form-control"
-                        id="wcto"
-                    />
-                </div>
+                <ais-range-input attribute="wordCount" :min="1000">
+                    <form
+                        slot-scope="{range, currentRefinement}"
+                    >
+                        From
+                        <input
+                            type="number"
+                            :min="range.min"
+                            :max="range.max"
+                            :placeholder="range.min"
+                            :value="formatMinValue(currentRefinement.min, range.min)"
+                            @input="applyWordCountFilter({
+                              min:$event.currentTarget.value,
+                              max: formatMaxValue(currentRefinement.max, range.max),
+                            })"
+                        >
+                        To
+                        <input
+                            type="number"
+                            :min="range.min"
+                            :max="range.max"
+                            :placeholder="range.max"
+                            :value="formatMaxValue(currentRefinement.max,range.max)"
+                            @input="applyWordCountFilter({
+                              min:formatMinValue(currentRefinement.min, range.min),
+                              max: $event.currentTarget.value,
+                            })"
+                        >
+                    </form>
+                </ais-range-input>
             </div>
         </div>
     </div>
@@ -120,7 +132,16 @@ export default {
             delete this.$store.state.SClient.filtersApplied.license_name;
             this.licenses.forEach(l => {
                 this.$store.commit('setFiltersApplied', {value: l, attribute: 'license_name', comparator: ':'});
-            })
+            });
+        },
+        formatMinValue(minValue, minRange) {
+            return minValue !== null && minValue !== minRange ? minValue : '';
+        },
+        formatMaxValue(maxValue, maxRange) {
+            return maxValue !== null && maxValue !== maxRange ? maxValue : '';
+        },
+        applyWordCountFilter(range) {
+            delete this.$store.state.SClient.filtersApplied.wordCount;
         }
     },
     data() {
@@ -132,9 +153,6 @@ export default {
                 to: null
             }
         };
-    },
-    watch: {
-
     }
 };
 </script>
