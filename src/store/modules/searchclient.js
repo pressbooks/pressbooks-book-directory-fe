@@ -7,13 +7,13 @@ let sClient = {
       { _useRequestCache: true }
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-  filters: [],
-  stringFilters: '',
+  facetAux: [],
   helper: {},
   filtersApplied: {},
   searchParameters: {
     hitsPerPage: 10,
-    filters: "",
+    facetFilters: [],
+    // filters: '',
     facets: [
       "isBasedOn",
       "has_isBasedOn",
@@ -72,16 +72,29 @@ let sClient = {
 export default {
   state: sClient,
   mutations: {
-    setFilters: (state, filters) => {
-      state.filters = filters;
+    setFacetFilters: (state) => {
+      let stringFilter = '';
+      for (let attribute in state.filtersApplied) {
+        if (state.filtersApplied[attribute].length === 1) {
+          stringFilter += state.filtersApplied[attribute][0].stringFilter + ' AND ';
+          state.searchParameters.facetFilters.push(state.filtersApplied[attribute][0].stringFilter);
+        } else {
+          let toPush = [];
+          state.filtersApplied[attribute].forEach(f => {
+            toPush.push(f.stringToFilter);
+            stringFilter += ' OR ';
+          });
+          state.searchParameters.facetFilters.push(toPush)
+        }
+      }
+      // stringFilter = stringFilter.split(" ");
+      // state.searchParameters.filters = stringFilter.slice(0, -2).join(" ");
     },
     setHelper: (state, helper) => {
       state.helper = helper;
     },
     setFiltersApplied: (state, filter) => {
       if (Object.keys(filter).length === 0) {
-        state.searchParameters.filters = '';
-        state.stringFilters = '';
         state.filtersApplied = {};
         return;
       }
@@ -91,61 +104,43 @@ export default {
       } else {
         state.filtersApplied[filter.attribute] = [];
       }
-      state.filtersApplied[filter.attribute].push({value: filter.value, condition: condition});
+
       let typeVar = state.filtersAllowed[filter.attribute].type;
-      let value = '';
+      let stringFilter = ';'
+
       switch (typeVar) {
         case "boolean":
-          value = filter.value;
+          stringFilter = filter.attribute + ':' + filter.value;
           break;
         case "integer":
-          value = filter.value;
+          stringFilter = filter.attribute + filter.operator + filter.value;
         default:
-          value = '"' + filter.value + '"';
+          stringFilter = filter.attribute + ':"' + filter.value + '"';
           break;
       }
-      if (state.stringFilters.length > 0) {
-        state.stringFilters += condition + ' ' + filter.attribute + filter.comparator + value + ' ';
-      } else {
-        state.stringFilters = filter.attribute + filter.comparator + value + ' ';
-      }
-    },
-    setSearchParametersFilters: (state) => {
-      state.searchParameters.filters = state.stringFilters;
-      console.log(state.searchParameters.filters)
+      state.filtersApplied[filter.attribute].push({value: filter.value, condition: condition, stringFilter: stringFilter});
     }
   },
   actions: {
     searchFunction(context, helper) {
-      if (context.state.filters.length > 0) {
+      if (context.state.searchParameters.facetFilters.length > 0) {
         helper.clearRefinements();
-        console.log(context.state.filtersApplied)
         for (let attribute in context.state.filtersApplied) {
-          context.state.filtersApplied[attribute].forEach(f => {
-            helper.addDisjunctiveFacetRefinement(attribute, f.value);
-          });
+          if (context.state.filtersApplied[attribute].length === 1) {
+            helper.addDisjunctiveFacetRefinement(attribute, context.state.filtersApplied[attribute][0].value);
+          } else {
+            context.state.filtersApplied[attribute].forEach(f => {
+              helper.addFacetRefinement(attribute, f.value);
+            });
+          }
         }
-        context.commit('setHelper', helper);
-        context.commit('setFiltersApplied', {});
-        context.commit( 'setFilters', [] );
+        // context.commit('setHelper', helper);
+        // context.commit('setFiltersApplied', {});
+        // context.commit( 'setFilters', [] );
       } else {
-        context.state.filtersApplied = {};
+        // context.state.filtersApplied = {};
       }
       helper.search();
-    },
-    applyBulkFilters(context) {
-      let filters = [], item = {};
-      for (let attribute in context.state.filtersApplied) {
-        context.state.filtersApplied[attribute].forEach(f => {
-          item = {};
-          item[attribute] = f.value;
-          filters.push({
-            attribute: attribute,
-            item: item
-          });
-        });
-      }
-      context.dispatch('applyFilters', filters);
     },
     applyFilters(context, params) {
       let filters = [];
@@ -160,8 +155,7 @@ export default {
         let newFilter = {attribute: attr, value: value};
         filters.push(newFilter);
       });
-      context.state.filters = context.state.filters.concat(filters)
-      context.commit('setSearchParametersFilters');
+      context.commit('setFacetFilters');
     }
   }
 };

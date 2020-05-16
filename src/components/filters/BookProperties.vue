@@ -73,36 +73,7 @@
             </div>
             <div class="properties-number-filters">
                 <h6>Word Count</h6>
-                <ais-range-input attribute="wordCount" :min="1000">
-                    <form
-                        slot-scope="{range, currentRefinement}"
-                    >
-                        From
-                        <input
-                            type="number"
-                            :min="range.min"
-                            :max="range.max"
-                            :placeholder="range.min"
-                            :value="formatMinValue(currentRefinement.min, range.min)"
-                            @input="applyWordCountFilter({
-                              min:$event.currentTarget.value,
-                              max: formatMaxValue(currentRefinement.max, range.max),
-                            })"
-                        >
-                        To
-                        <input
-                            type="number"
-                            :min="range.min"
-                            :max="range.max"
-                            :placeholder="range.max"
-                            :value="formatMaxValue(currentRefinement.max,range.max)"
-                            @input="applyWordCountFilter({
-                              min:formatMinValue(currentRefinement.min, range.min),
-                              max: $event.currentTarget.value,
-                            })"
-                        >
-                    </form>
-                </ais-range-input>
+
             </div>
         </div>
     </div>
