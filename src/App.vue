@@ -16,11 +16,14 @@
         :index-name="$store.state.SClient.indexName"
         :search-function="searchFunction"
       >
-        <ais-configure v-bind="$store.state.SClient.searchParameters" >
+        <ais-configure v-bind="$store.state.SClient.searchParameters">
         </ais-configure>
         <div class="search-panel">
           <filters></filters>
-          <div class="search-panel__results">
+          <div
+            class="search-panel__results"
+            v-if="$store.state.config.canFilter"
+          >
             <ais-hits :transform-items="transformItems">
               <div class="books" slot-scope="{ query, items }">
                 <ais-state-results>
@@ -36,7 +39,7 @@
                 </article>
               </div>
             </ais-hits>
-            <div class="pagination"><ais-pagination /></div>
+            <pagination></pagination>
           </div>
         </div>
       </ais-instant-search>
@@ -50,15 +53,17 @@ import "instantsearch.css/themes/algolia-min.css";
 import "./App.css";
 import BookCard from "./components/bookcard/BookCard";
 import Filters from "./components/filters/Filters";
+import Pagination from "./components/commons/Pagination";
 
 export default {
   components: {
     BookCard,
-    Filters
+    Filters,
+    Pagination
   },
   methods: {
     searchFunction(helper) {
-      this.$store.dispatch('searchFunction', helper);
+      this.$store.dispatch("searchFunction", helper);
     },
     getLicenseIcon(license) {
       var img = {

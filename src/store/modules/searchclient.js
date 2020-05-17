@@ -2,9 +2,9 @@ import algoliasearch from "algoliasearch/lite";
 
 let sClient = {
   searchClient: algoliasearch(
-      process.env.VUE_APP_ALGOLIA_APP_ID,
-      process.env.VUE_APP_ALGOLIA_API_READ_KEY,
-      { _useRequestCache: true }
+    process.env.VUE_APP_ALGOLIA_APP_ID,
+    process.env.VUE_APP_ALGOLIA_API_READ_KEY,
+    { _useRequestCache: true }
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
   facetAux: [],
@@ -13,7 +13,7 @@ let sClient = {
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
-    // filters: '',
+    page: 0,
     facets: [
       "isBasedOn",
       "has_isBasedOn",
@@ -72,48 +72,45 @@ let sClient = {
 export default {
   state: sClient,
   mutations: {
-    setFacetFilters: (state) => {
-      let stringFilter = '';
+    setFacetFilters: state => {
+      state.searchParameters.facetFilters = [];
       for (let attribute in state.filtersApplied) {
         if (state.filtersApplied[attribute].length === 1) {
-          stringFilter += state.filtersApplied[attribute][0].stringFilter + ' AND ';
-          state.searchParameters.facetFilters.push(state.filtersApplied[attribute][0].stringFilter);
+          state.filtersApplied[attribute][0].stringFilter + " AND ";
+          state.searchParameters.facetFilters.push(
+            state.filtersApplied[attribute][0].stringFilter
+          );
         } else {
           let toPush = [];
           state.filtersApplied[attribute].forEach(f => {
             toPush.push(f.stringToFilter);
-            stringFilter += ' OR ';
           });
-          state.searchParameters.facetFilters.push(toPush)
+          state.searchParameters.facetFilters.push(toPush);
         }
       }
-      // stringFilter = stringFilter.split(" ");
-      // state.searchParameters.filters = stringFilter.slice(0, -2).join(" ");
-    },
-    setHelper: (state, helper) => {
-      state.helper = helper;
     },
     setFiltersApplied: (state, filter) => {
       if (Object.keys(filter).length === 0) {
         state.filtersApplied = {};
         return;
       }
-      let condition = 'AND'
+      let condition = "AND";
       if (filter.attribute in state.filtersApplied) {
-        condition = 'OR';
+        condition = "OR";
       } else {
         state.filtersApplied[filter.attribute] = [];
       }
 
       let typeVar = state.filtersAllowed[filter.attribute].type;
-      let stringFilter = ';'
+      let stringFilter = ";";
 
       switch (typeVar) {
         case "boolean":
-          stringFilter = filter.attribute + ':' + filter.value;
+          stringFilter = filter.attribute + ":" + filter.value;
           break;
         case "integer":
           stringFilter = filter.attribute + filter.operator + filter.value;
+          break;
         default:
           stringFilter = filter.attribute + ':"' + filter.value + '"';
           break;
@@ -130,23 +127,24 @@ export default {
   actions: {
     searchFunction(context, helper) {
       helper.clearRefinements();
-      console.log(context.state.searchParameters.facetFilters)
-      console.log(context.state.filtersApplied)
       if (context.state.searchParameters.facetFilters.length > 0) {
         for (let attribute in context.state.filtersApplied) {
           if (context.state.filtersApplied[attribute].length === 1) {
-            if (context.state.filtersApplied[attribute][0].type === 'integer') {
+            if (context.state.filtersApplied[attribute][0].type === "integer") {
               helper.addNumericRefinement(
-                  attribute,
-                  context.state.filtersApplied[attribute][0].operator,
-                  context.state.filtersApplied[attribute][0].value
+                attribute,
+                context.state.filtersApplied[attribute][0].operator,
+                context.state.filtersApplied[attribute][0].value
               );
             } else {
-              helper.addDisjunctiveFacetRefinement(attribute, context.state.filtersApplied[attribute][0].value);
+              helper.addDisjunctiveFacetRefinement(
+                attribute,
+                context.state.filtersApplied[attribute][0].value
+              );
             }
           } else {
             context.state.filtersApplied[attribute].forEach(f => {
-              if (f.type === 'integer') {
+              if (f.type === "integer") {
                 helper.addNumericRefinement(attribute, f.operator, f.value);
               } else {
                 helper.addDisjunctiveFacetRefinement(attribute, f.value);
@@ -154,29 +152,38 @@ export default {
             });
           }
         }
-        // context.commit('setHelper', helper);
-        // context.commit('setFiltersApplied', {});
-        // context.commit( 'setFilters', [] );
-      } else {
-        // context.state.filtersApplied = {};
-        // context.commit('setFiltersApplied', {});
       }
+      helper.setPage(context.state.searchParameters.page);
       helper.search();
     },
     applyFilters(context, params) {
       let filters = [];
       params.forEach(param => {
-        let item = param.item, attribute = param.attribute;
+        let item = param.item,
+          attribute = param.attribute;
         if (context.state.filtersAllowed[attribute] === undefined) {
           return;
         }
         let attr = attribute,
-            value;
+          value;
         value = item[attr].value;
-        let newFilter = {attribute: attr, value: value};
+        let newFilter = { attribute: attr, value: value };
         filters.push(newFilter);
       });
-      context.commit('setFacetFilters');
+      context.commit("setFacetFilters");
+    },
+    refreshFilters(context) {
+      let filters = [],
+        item = {};
+      for (let attribute in context.state.filtersApplied) {
+        item = {};
+        item[attribute] = context.state.filtersApplied[attribute];
+        filters.push({
+          attribute: attribute,
+          item: item
+        });
+      }
+      context.dispatch("applyFilters", filters);
     }
   }
 };

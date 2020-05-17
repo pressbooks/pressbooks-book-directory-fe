@@ -37,7 +37,8 @@ let config = {
       image: "public-domain.png",
       alt: "Public Domain"
     }
-  }
+  },
+  canFilter: false
 };
 
 export default {
