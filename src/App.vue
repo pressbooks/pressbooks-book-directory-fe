@@ -18,6 +18,42 @@
       >
         <ais-configure v-bind="$store.state.SClient.searchParameters">
         </ais-configure>
+        <h5>Find a book</h5>
+        <ais-search-box
+          placeholder="Search here…"
+          submit-title="Search"
+          class="searchbox"
+        >
+          <div slot-scope="{ currentRefinement, refine }">
+            <form
+              @submit.prevent="enableFilters(refine, currentRefinement)"
+              class="ais-SearchBox-form"
+            >
+              <input
+                type="search"
+                class="ais-SearchBox-input"
+                v-model="currentRefinement"
+              />
+              <div slot="submit-icon">
+                <button type="submit" class="btn submit-btn">Search</button>
+              </div>
+            </form>
+          </div>
+        </ais-search-box>
+        <ais-current-refinements>
+          <template slot="item" slot-scope="{ item }">
+            <button
+              type="button"
+              class="btn btn-info btn-sm btn-current-filters"
+              @click.prevent="deleteFilter(item)"
+            >
+              {{ item.attribute }} : {{ item.label }} &nbsp;&nbsp;<span
+                class="badge badge-light"
+                >x</span
+              >
+            </button>
+          </template>
+        </ais-current-refinements>
         <div class="search-panel">
           <filters></filters>
           <div
@@ -64,6 +100,31 @@ export default {
   methods: {
     searchFunction(helper) {
       this.$store.dispatch("searchFunction", helper);
+    },
+    enableFilters(refine, currentRefinement) {
+      refine(currentRefinement);
+      this.$store.state.config.canFilter = currentRefinement.length > 1;
+    },
+    deleteFilter(item) {
+      let keyToDelete = 0;
+      if (
+        this.$store.state.SClient.filtersApplied[item.attribute].length === 1
+      ) {
+        delete this.$store.state.SClient.filtersApplied[item.attribute];
+      } else {
+        this.$store.state.SClient.filtersApplied[item.attribute].forEach(
+          (f, k) => {
+            if (f.value == item.label) {
+              keyToDelete = k;
+            }
+          }
+        );
+        this.$store.state.SClient.filtersApplied[item.attribute].splice(
+          keyToDelete,
+          1
+        );
+      }
+      this.$store.dispatch("refreshFilters");
     },
     getLicenseIcon(license) {
       var img = {

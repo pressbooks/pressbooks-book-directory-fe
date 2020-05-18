@@ -57,12 +57,10 @@ body {
 
 .properties-input-filters {
     flex: 0 0 33%;
-    margin-left: 1em;
 }
 
 .properties-number-filters {
     flex: 0 0 33%;
-    margin-left: 1em;
 }
 
 .btn-current-filters {
@@ -72,6 +70,10 @@ body {
 .filter-card {
     min-height: 27.5em;
     margin-bottom: 2em;
+}
+
+.search-panel {
+    display: flex;
 }
 
 .search-panel__filters {
@@ -229,6 +231,12 @@ body {
 }
 
 .cursor-pointer {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.link-filter {
+    display: block;
     cursor: pointer;
     text-decoration: underline;
 }
