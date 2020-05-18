@@ -36,83 +36,88 @@
         </button>
       </template>
     </ais-current-refinements>
-    <div v-if="$store.state.config.canFilter">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            id="home-tab"
-            data-toggle="tab"
-            href="#network"
-            role="tab"
-            aria-controls="home"
-            aria-selected="true"
-          >
-            Network filters
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            id="profile-tab"
-            data-toggle="tab"
-            href="#properties"
-            role="tab"
-            aria-controls="profile"
-            aria-selected="false"
-          >
-            Book Properties
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            id="contact-tab"
-            data-toggle="tab"
-            href="#language"
-            role="tab"
-            aria-controls="contact"
-            aria-selected="false"
-          >
-            Language and Subject
-          </a>
-        </li>
-      </ul>
-      <form>
-        <div class="tab-content" id="myTabContent">
-          <div
-            class="tab-pane fade show active network-tab"
-            id="network"
-            role="tabpanel"
-            aria-labelledby="home-tab"
-          ></div>
-          <div
-            class="tab-pane fade"
-            id="properties"
-            role="tabpanel"
-            aria-labelledby="profile-tab"
-          >
-            <book-properties></book-properties>
-          </div>
-          <div
-            class="tab-pane fade"
-            id="language"
-            role="tabpanel"
-            aria-labelledby="contact-tab"
-          >
-            <language-subject></language-subject>
-          </div>
+    <div v-if="$store.state.config.canFilter" >
+      <div class="card filter-card">
+        <div class="card-body">
+          <h5 class="card-title">Filters</h5>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="home-tab"
+                data-toggle="tab"
+                href="#network"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+              >
+                Network filters
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="profile-tab"
+                data-toggle="tab"
+                href="#properties"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false"
+              >
+                Book Properties
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="contact-tab"
+                data-toggle="tab"
+                href="#language"
+                role="tab"
+                aria-controls="contact"
+                aria-selected="false"
+              >
+                Language and Subject
+              </a>
+            </li>
+          </ul>
+          <form>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="network"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              ></div>
+              <div
+                class="tab-pane fade"
+                id="properties"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <book-properties></book-properties>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="language"
+                role="tabpanel"
+                aria-labelledby="contact-tab"
+              >
+                <language-subject></language-subject>
+              </div>
+            </div>
+            <div class="d-flex flex-row-reverse">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary p-2"
+                @click.prevent="applyFilters"
+              >
+                Apply Filter
+              </button>
+            </div>
+          </form>
         </div>
-        <div class="d-flex flex-row-reverse">
-          <button
-            type="button"
-            class="btn btn-sm btn-primary p-2"
-            @click.prevent="applyFilters"
-          >
-            Apply Filter
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
