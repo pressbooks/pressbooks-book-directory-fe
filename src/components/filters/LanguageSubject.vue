@@ -1,20 +1,20 @@
 <template>
-  <ais-refinement-list attribute="inLanguage" :searchable="false" operator="or">
-    <div slot-scope="{ items }">
-      <div class="form-group">
-        <h6>Languages</h6>
-        <a
-          class="link-filter"
+  <div>
+    <v-subheader>LANGUAGES</v-subheader>
+    <ais-refinement-list attribute="inLanguage" :searchable="false" operator="or">
+      <div slot-scope="{ items }">
+        <v-list-item
           v-for="item in items"
           :key="item.value"
           @click="setLanguageFilter(item)"
-          :value="item.value"
         >
-          {{ item.value }}
-        </a>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.value"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </div>
-    </div>
-  </ais-refinement-list>
+    </ais-refinement-list>
+  </div>
 </template>
 
 <script>

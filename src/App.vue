@@ -1,16 +1,7 @@
 <template>
-  <div>
-    <header class="header">
-      <h1 class="header-title"><a href="/">Vue InstantSearch v2 starter</a></h1>
-      <p class="header-subtitle">
-        using
-        <a href="https://github.com/algolia/vue-instantsearch">
-          Vue InstantSearch
-        </a>
-      </p>
-    </header>
-
-    <div class="container">
+  <div class="mx-auto" >
+    <header-bar></header-bar>
+    <v-container fluid>
       <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"
@@ -18,68 +9,62 @@
       >
         <ais-configure v-bind="$store.state.SClient.searchParameters">
         </ais-configure>
-        <h5>Find a book</h5>
         <ais-search-box
           placeholder="Search here…"
           submit-title="Search"
           class="searchbox"
         >
           <div slot-scope="{ currentRefinement, refine }">
-            <form
-              @submit.prevent="enableFilters(refine, currentRefinement)"
-              class="ais-SearchBox-form"
+            <v-text-field
+              type="search"
+              v-model="currentRefinement"
+              label="Find a book"
+              @input="enableFilters(refine, currentRefinement)"
             >
-              <input
-                type="search"
-                class="ais-SearchBox-input"
-                v-model="currentRefinement"
-              />
-              <div slot="submit-icon">
-                <button type="submit" class="btn submit-btn">Search</button>
-              </div>
-            </form>
+              <v-icon slot="append" color="red">mdi-magnify</v-icon>
+            </v-text-field>
           </div>
         </ais-search-box>
         <ais-current-refinements>
           <template slot="item" slot-scope="{ item }">
-            <button
-              type="button"
-              class="btn btn-info btn-sm btn-current-filters"
+            <v-chip
+              class="ma-2"
+              color="#42A5F5"
+              text-color="white"
               @click.prevent="deleteFilter(item)"
             >
-              {{ item.attribute }} : {{ item.label }} &nbsp;&nbsp;<span
-                class="badge badge-light"
-                >x</span
-              >
-            </button>
+              {{ item.attribute }} : {{ item.label }}
+              <v-icon right>mdi-close-circle-outline</v-icon>
+            </v-chip>
           </template>
         </ais-current-refinements>
-        <div class="search-panel">
-          <filters></filters>
-          <div
-            class="search-panel__results"
-            v-if="$store.state.config.canFilter"
-          >
-            <ais-hits :transform-items="transformItems">
-              <div class="books" slot-scope="{ query, items }">
-                <ais-state-results>
-                  <template slot-scope="{ query, hits }">
-                    <p class="books-no-results" v-if="hits.length === 0">
-                      No results found matching <strong>{{ query }}</strong
-                      >.
-                    </p>
-                  </template>
-                </ais-state-results>
-                <article v-for="item in items" :key="item.objectID">
-                  <book-card class="book-card" :item="item"></book-card>
-                </article>
-              </div>
-            </ais-hits>
-            <pagination></pagination>
-          </div>
-        </div>
+        <v-row no-gutters>
+          <v-col cols="6" md="2">
+            <filters></filters>
+          </v-col>
+          <v-col cols="12" md="10">
+            <div
+              v-if="$store.state.config.canFilter"
+            >
+              <ais-hits :transform-items="transformItems">
+                <div class="books" slot-scope="{ query, items }">
+                  <p class="books-no-results" v-if="items.length === 0">
+                    No results found matching <strong>{{ query }}</strong
+                  >.
+                  </p>
+                  <v-row dense>
+                    <v-col v-for="item in items" :key="item.objectID" cols="12">
+                      <book-card :item="item"></book-card>
+                    </v-col>
+                  </v-row>
+                </div>
+              </ais-hits>
+              <pagination></pagination>
+            </div>
+          </v-col>
+        </v-row>
       </ais-instant-search>
-    </div>
+    </v-container>
   </div>
 </template>
 
@@ -90,20 +75,24 @@ import "./App.css";
 import BookCard from "./components/bookcard/BookCard";
 import Filters from "./components/filters/Filters";
 import Pagination from "./components/commons/Pagination";
+import HeaderBar from "./components/commons/HeaderBar"
 
 export default {
   components: {
     BookCard,
     Filters,
-    Pagination
+    Pagination,
+    HeaderBar
   },
   methods: {
     searchFunction(helper) {
       this.$store.dispatch("searchFunction", helper);
     },
     enableFilters(refine, currentRefinement) {
-      refine(currentRefinement);
-      this.$store.state.config.canFilter = currentRefinement.length > 1;
+      if (currentRefinement.length > 3) {
+        refine(currentRefinement);
+        this.$store.state.config.canFilter = currentRefinement.length > 3;
+      }
     },
     deleteFilter(item) {
       let keyToDelete = 0;

@@ -1,138 +1,108 @@
 <template>
   <div>
-    <div class="license-filter">
-      <h6>Licenses</h6>
-      <ais-refinement-list
-        attribute="license_name"
-        :searchable="false"
-        operator="or"
-      >
-        <div slot-scope="{ items }">
-          <div class="form-group">
-            <a
-              class="link-filter"
-              v-for="item in items"
-              :key="item.value"
-              @click.prevent="applyFilters(item.value, 'license_name')"
-              :value="item.value"
-            >
-              {{ item.value }}
-            </a>
-          </div>
-        </div>
-      </ais-refinement-list>
-    </div>
-    <div class="properties-input-filters">
-      <h6>Based on</h6>
-      <div class="form-check">
-        <input
-          type="radio"
-          name="isbased"
-          @click.prevent="applyFilters(true, 'has_isBasedOn', 1)"
-          class="form-check-input"
-          id="is-basedon"
-          value="true"
-          :checked="isBasedOn == 1"
-        />
-        <label
-          class="form-check-label"
-          for="is-basedon"
-          @click.prevent="applyFilters(true, 'has_isBasedOn', 1)"
+    <v-subheader>LICENSES</v-subheader>
+    <ais-refinement-list
+      attribute="license_name"
+      :searchable="false"
+      operator="or"
+    >
+      <div slot-scope="{ items }">
+        <v-list-item
+          v-for="item in items"
+          :key="item.value"
+          @click.prevent="applyFilters(item.value, 'license_name')"
         >
-          Based on another book
-        </label>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.value"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </div>
-      <div class="form-check">
-        <input
-          type="radio"
-          name="isbased"
-          @click.prevent="applyFilters(false, 'has_isBasedOn', 2)"
-          class="form-check-input"
-          id="no-basedon"
-          value="false"
-          :checked="isBasedOn == 2"
-        />
-        <label
-          class="form-check-label"
-          for="no-basedon"
-          @click.prevent="applyFilters(false, 'has_isBasedOn', 2)"
-        >
-          Original
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          type="radio"
-          name="isbased"
-          @click.prevent="applyFilters(null, 'has_isBasedOn', 3)"
-          class="form-check-input"
-          id="no-basedon"
-          value="false"
-          :checked="isBasedOn == 3"
-        />
-        <label
-          class="form-check-label"
-          for="no-basedon"
-          @click.prevent="applyFilters(null, 'has_isBasedOn', 3)"
-        >
-          Any
-        </label>
-      </div>
-    </div>
-    <div class="properties-number-filters">
-      <h6>Word Count</h6>
-      <div class="form-group row">
-        <div class="col-sm-5">
-          <input
-            type="number"
-            class="form-control"
-            id="min-wc"
-            min="1"
-            v-model="wordCount.min"
-            @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
-          />
-        </div>
-        <label for="max-wc" class="col-sm-1 col-form-label">-</label>
-        <div class="col-sm-5">
-          <input
-            type="number"
-            class="form-control"
-            id="max-wc"
-            min="1"
-            v-model="wordCount.max"
-            @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
-          />
-        </div>
-      </div>
-      <h6>Storage Size</h6>
-      <div class="form-group row">
-        <div class="col-sm-5">
-          <input
-            type="number"
-            class="form-control"
-            id="min-wc"
-            min="1"
-            v-model="storageSize.min"
-            @input="
-              updateRangeInput('storageSize', storageSize.min, storageSize.max)
-            "
-          />
-        </div>
-        <label for="max-wc" class="col-sm-1 col-form-label">-</label>
-        <div class="col-sm-5">
-          <input
-            type="number"
-            class="form-control"
-            id="max-wc"
-            min="1"
-            v-model="storageSize.max"
-            @input="
-              updateRangeInput('storageSize', storageSize.min, storageSize.max)
-            "
-          />
-        </div>
-      </div>
-    </div>
+    </ais-refinement-list>
+
+    <v-subheader>BASED ON</v-subheader>
+    <v-list-item
+      @click.prevent="applyFilters(true, 'has_isBasedOn', 1)"
+    >
+      <v-list-item-content>
+        <v-list-item-title>Based on another book</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item
+      @click.prevent="applyFilters(false, 'has_isBasedOn', 2)"
+    >
+      <v-list-item-content>
+        <v-list-item-title>Original</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-list-item
+      @click.prevent="applyFilters(null, 'has_isBasedOn', 3)"
+    >
+      <v-list-item-content>
+        <v-list-item-title>Any</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-subheader>WORDS</v-subheader>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                type="number"
+                id="min-wc"
+                min="1"
+                v-model="wordCount.min"
+                @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
+                label="Min"
+              />
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                type="number"
+                id="max-wc"
+                min="1"
+                v-model="wordCount.max"
+                @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
+                label="Max"
+              />
+            </v-col>
+          </v-row>
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+    <v-subheader>STORAGE SIZE</v-subheader>
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-title>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                type="number"
+                id="min-wc"
+                min="1"
+                v-model="storageSize.min"
+                @input="
+                  updateRangeInput('storageSize', storageSize.min, storageSize.max)
+                "
+                label="Min"
+              />
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                type="number"
+                id="max-wc"
+                min="1"
+                v-model="storageSize.max"
+                @input="
+                  updateRangeInput('storageSize', storageSize.min, storageSize.max)
+                "
+                label="Max"
+              />
+            </v-col>
+          </v-row>
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
   </div>
 </template>
 

@@ -79,7 +79,6 @@ body {
 .search-panel__filters {
     flex: 1;
     margin-right: 1em;
-    max-width: 74%;
 }
 
 .search-panel__results {
@@ -92,7 +91,7 @@ body {
 }
 
 .searchbox {
-    margin-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 .ais-SearchBox-form {

@@ -1,16 +1,17 @@
 <template>
   <div class="search-panel__filters">
     <div v-if="$store.state.config.canFilter">
-      <div class="card filter-card">
-        <div class="card-body">
-          <form>
-            <div class="tab-content" id="myTabContent">
-              <book-properties></book-properties>
-              <language-subject></language-subject>
-            </div>
-          </form>
-        </div>
-      </div>
+      <v-card
+        class="mx-auto"
+        tile
+      >
+        <v-list dense>
+            <v-list-item-group color="primary">
+                <book-properties></book-properties>
+                <language-subject></language-subject>
+            </v-list-item-group>
+        </v-list>
+      </v-card>
     </div>
   </div>
 </template>

@@ -11,7 +11,7 @@ let sClient = {
   helper: {},
   filtersApplied: {},
   searchParameters: {
-    hitsPerPage: 10,
+    hitsPerPage: 5,
     facetFilters: [],
     page: 0,
     facets: [
