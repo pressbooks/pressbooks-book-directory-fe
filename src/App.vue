@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto" >
+  <div class="mx-auto">
     <header-bar></header-bar>
     <v-container fluid>
       <ais-instant-search
@@ -14,12 +14,12 @@
           submit-title="Search"
           class="searchbox"
         >
-          <div slot-scope="{ currentRefinement, refine }">
+          <div slot-scope="{ refine }">
             <v-text-field
               type="search"
-              v-model="currentRefinement"
+              v-model="stringSearch"
               label="Find a book"
-              @input="enableFilters(refine, currentRefinement)"
+              @input="enableFilters(refine, stringSearch)"
             >
               <v-icon slot="append" color="red">mdi-magnify</v-icon>
             </v-text-field>
@@ -43,14 +43,12 @@
             <filters></filters>
           </v-col>
           <v-col cols="12" md="10">
-            <div
-              v-if="$store.state.config.canFilter"
-            >
+            <div v-if="$store.state.config.canFilter">
               <ais-hits :transform-items="transformItems">
                 <div class="books" slot-scope="{ query, items }">
                   <p class="books-no-results" v-if="items.length === 0">
                     No results found matching <strong>{{ query }}</strong
-                  >.
+                    >.
                   </p>
                   <v-row dense>
                     <v-col v-for="item in items" :key="item.objectID" cols="12">
@@ -75,7 +73,7 @@ import "./App.css";
 import BookCard from "./components/bookcard/BookCard";
 import Filters from "./components/filters/Filters";
 import Pagination from "./components/commons/Pagination";
-import HeaderBar from "./components/commons/HeaderBar"
+import HeaderBar from "./components/commons/HeaderBar";
 
 export default {
   components: {
@@ -83,6 +81,11 @@ export default {
     Filters,
     Pagination,
     HeaderBar
+  },
+  data() {
+    return {
+      stringSearch: ""
+    };
   },
   methods: {
     searchFunction(helper) {

@@ -20,23 +20,17 @@
     </ais-refinement-list>
 
     <v-subheader>BASED ON</v-subheader>
-    <v-list-item
-      @click.prevent="applyFilters(true, 'has_isBasedOn', 1)"
-    >
+    <v-list-item @click.prevent="applyFilters(true, 'has_isBasedOn', 1)">
       <v-list-item-content>
         <v-list-item-title>Based on another book</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item
-      @click.prevent="applyFilters(false, 'has_isBasedOn', 2)"
-    >
+    <v-list-item @click.prevent="applyFilters(false, 'has_isBasedOn', 2)">
       <v-list-item-content>
         <v-list-item-title>Original</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item
-      @click.prevent="applyFilters(null, 'has_isBasedOn', 3)"
-    >
+    <v-list-item @click.prevent="applyFilters(null, 'has_isBasedOn', 3)">
       <v-list-item-content>
         <v-list-item-title>Any</v-list-item-title>
       </v-list-item-content>
@@ -52,7 +46,9 @@
                 id="min-wc"
                 min="1"
                 v-model="wordCount.min"
-                @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
+                @input="
+                  updateRangeInput('wordCount', wordCount.min, wordCount.max)
+                "
                 label="Min"
               />
             </v-col>
@@ -62,7 +58,9 @@
                 id="max-wc"
                 min="1"
                 v-model="wordCount.max"
-                @input="updateRangeInput('wordCount', wordCount.min, wordCount.max)"
+                @input="
+                  updateRangeInput('wordCount', wordCount.min, wordCount.max)
+                "
                 label="Max"
               />
             </v-col>
@@ -82,7 +80,11 @@
                 min="1"
                 v-model="storageSize.min"
                 @input="
-                  updateRangeInput('storageSize', storageSize.min, storageSize.max)
+                  updateRangeInput(
+                    'storageSize',
+                    storageSize.min,
+                    storageSize.max
+                  )
                 "
                 label="Min"
               />
@@ -94,7 +96,11 @@
                 min="1"
                 v-model="storageSize.max"
                 @input="
-                  updateRangeInput('storageSize', storageSize.min, storageSize.max)
+                  updateRangeInput(
+                    'storageSize',
+                    storageSize.min,
+                    storageSize.max
+                  )
                 "
                 label="Max"
               />

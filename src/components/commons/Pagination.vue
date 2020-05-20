@@ -1,17 +1,7 @@
 <template>
   <div class="text-center">
     <ais-pagination :class-names="{ 'ais-Pagination': 'nav' }">
-      <div
-        slot-scope="{
-          currentRefinement,
-          nbPages,
-          pages,
-          isFirstPage,
-          isLastPage,
-          refine,
-          createURL
-        }"
-      >
+      <div slot-scope="{ currentRefinement, nbPages }">
         <v-pagination
           :length="nbPages"
           :page="currentRefinement"

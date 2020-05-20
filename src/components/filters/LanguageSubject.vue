@@ -1,7 +1,11 @@
 <template>
   <div>
     <v-subheader>LANGUAGES</v-subheader>
-    <ais-refinement-list attribute="inLanguage" :searchable="false" operator="or">
+    <ais-refinement-list
+      attribute="inLanguage"
+      :searchable="false"
+      operator="or"
+    >
       <div slot-scope="{ items }">
         <v-list-item
           v-for="item in items"
