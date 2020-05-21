@@ -1,241 +1,143 @@
 <template>
-  <div>
-    <header class="header">
-      <h1 class="header-title"><a href="/">Vue InstantSearch v2 starter</a></h1>
-      <p class="header-subtitle">
-        using
-        <a href="https://github.com/algolia/vue-instantsearch">
-          Vue InstantSearch
-        </a>
-      </p>
-    </header>
-
-    <div class="container">
+  <div class="mx-auto">
+    <header-bar></header-bar>
+    <v-container fluid>
       <ais-instant-search
-        :search-client="searchClient"
-        :index-name="indexName"
+        :search-client="$store.state.SClient.searchClient"
+        :index-name="$store.state.SClient.indexName"
         :search-function="searchFunction"
       >
-        <ais-configure v-bind="searchParameters"> </ais-configure>
-        <div class="search-panel">
-          <div class="search-panel__filters">
-            <ais-current-refinements />
-            <h3>Languages</h3>
-            <ais-refinement-list attribute="inLanguage" :searchable="false" />
-            <h3>Licenses</h3>
-            <ais-refinement-list attribute="license_name" :searchable="false" />
+        <ais-configure v-bind="$store.state.SClient.searchParameters">
+        </ais-configure>
+        <ais-search-box
+          placeholder="Search here…"
+          submit-title="Search"
+          class="searchbox"
+        >
+          <div slot-scope="{ refine }">
+            <v-text-field
+              type="search"
+              v-model="stringSearch"
+              label="Find a book"
+              @input="enableFilters(refine, stringSearch)"
+            >
+              <v-icon slot="append" color="red">mdi-magnify</v-icon>
+            </v-text-field>
           </div>
-          <div class="search-panel__results">
-            <ais-search-box placeholder="Search here…" class="searchbox" />
-            <ais-hits :transform-items="transformItems">
-              <div class="books" slot-scope="{ query, items }">
-                <ais-state-results>
-                  <template slot-scope="{ query, hits }">
-                    <p class="books-no-results" v-if="hits.length === 0">
-                      No results found matching <strong>{{ query }}</strong
-                      >.
-                    </p>
-                  </template>
-                </ais-state-results>
-                <article
-                  v-for="item in items"
-                  :key="item.objectID"
-                  class="book-card"
-                >
-                  <div
-                    class="book-image"
-                    :style="`background-image: url('${item.image}');`"
-                  ></div>
-                  <div class="book-data">
-                    <div class="book-icons book-data-row">
-                      <div
-                        class="book-language book-icons-row"
-                        v-if="item.lang"
-                        @click="applyFilters(item, 'inLanguage')"
-                      >
-                        {{ item.lang }}
-                      </div>
-                      <div class="book-license book-icons-row">
-                        <img
-                          :src="item.licenseIcon"
-                          :title="item.licenseAlt"
-                          class="book-img-icons"
-                          v-if="item.licenseIcon"
-                          @click="applyFilters(item, 'license_name')"
-                        />
-                      </div>
-                      <div class="book-isclone book-img-icons">
-                        <img
-                          :src="baseIcon(item.isBasedOn).img"
-                          :title="baseIcon(item.isBasedOn).alt"
-                          class="book-img-icons"
-                          @click="applyFilters(item, 'isBasedOn')"
-                        />
-                      </div>
-                    </div>
-                    <div class="book-data-row">
-                      <div class="book-title">
-                        {{ item.name }}
-                      </div>
-                      <div class="book-details">
-                        <div class="book-data-details-row">
-                          <strong>Author(s): </strong>
-                          <span
-                            v-for="(author, index) in item.author"
-                            v-bind:key="index"
-                          >
-                            <span v-if="index != 0">, </span>
-                            <span
-                              class="cursor-pointer"
-                              @click="applyFilters(item, 'author', index)"
-                            >
-                              {{ author }}
-                            </span>
-                          </span>
-                        </div>
-                        <div
-                          class="book-data-row"
-                          v-if="item.editor && item.editor.length > 0"
-                        >
-                          <strong>Editor(s): </strong>
-                          <span
-                            v-for="(editor, index) in item.editor"
-                            v-bind:key="index"
-                            s
-                            a
-                          >
-                            <span v-if="index != 0">, </span>
-                            <span
-                              class="cursor-pointer"
-                              @click="applyFilters(item, 'editor', index)"
-                            >
-                              {{ editor }}
-                            </span>
-                          </span>
-                        </div>
-                        <div class="book-details-row" v-if="item.subject">
-                          <strong>Subject(s): </strong> {{ item.subject }}
-                        </div>
-                        <div
-                          v-if="item.publisher_name"
-                          @click="applyFilters(item, 'publisher_name')"
-                        >
-                          <strong>Publisher: </strong>
-                          <span class="book-details-row cursor-pointer">{{
-                            item.publisherName
-                          }}</span>
-                        </div>
-                        <div class="book-details-row" v-if="item.word_count">
-                          <strong>Word Count: </strong> {{ item.word_count }}
-                        </div>
-                        <div class="book-details-row" v-if="item.description">
-                          <strong>Description: </strong> {{ item.description }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </ais-hits>
-            <div class="pagination"><ais-pagination /></div>
-          </div>
-        </div>
+        </ais-search-box>
+        <ais-current-refinements>
+          <template slot="item" slot-scope="{ item }">
+            <v-chip
+              class="ma-2"
+              color="#42A5F5"
+              text-color="white"
+              @click.prevent="deleteFilter(item)"
+            >
+              {{ item.attribute }} : {{ item.label }}
+              <v-icon right>mdi-close-circle-outline</v-icon>
+            </v-chip>
+          </template>
+        </ais-current-refinements>
+        <v-row no-gutters>
+          <v-col cols="6" md="2">
+            <filters></filters>
+          </v-col>
+          <v-col cols="12" md="10">
+            <div v-if="$store.state.config.canFilter">
+              <ais-hits :transform-items="transformItems">
+                <div class="books" slot-scope="{ query, items }">
+                  <p class="books-no-results" v-if="items.length === 0">
+                    No results found matching <strong>{{ query }}</strong
+                    >.
+                  </p>
+                  <v-row dense>
+                    <v-col v-for="item in items" :key="item.objectID" cols="12">
+                      <book-card :item="item"></book-card>
+                    </v-col>
+                  </v-row>
+                </div>
+              </ais-hits>
+              <pagination></pagination>
+            </div>
+          </v-col>
+        </v-row>
       </ais-instant-search>
-    </div>
+    </v-container>
   </div>
 </template>
 
 <script>
-import algoliasearch from "algoliasearch/lite";
 import "instantsearch.css/themes/algolia-min.css";
 
 import "./App.css";
+import BookCard from "./components/bookcard/BookCard";
+import Filters from "./components/filters/Filters";
+import Pagination from "./components/commons/Pagination";
+import HeaderBar from "./components/commons/HeaderBar";
 
 export default {
+  components: {
+    BookCard,
+    Filters,
+    Pagination,
+    HeaderBar
+  },
+  data() {
+    return {
+      stringSearch: ""
+    };
+  },
   methods: {
     searchFunction(helper) {
-      this.filters.forEach(f => {
-        if (this.filtersAllowed[f.attribute].type == "boolean") {
-          if (f.value) {
-            helper.addFacetExclusion("isBasedOn", false);
-            helper.addFacetExclusion("has_isBasedOn", false);
-          } else {
-            helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
-          }
-        } else {
-          helper.addDisjunctiveFacetRefinement(f.attribute, f.value);
-        }
-      });
-      helper.search();
-      this.searchParameters.filters = "";
-      this.filters = [];
+      this.$store.dispatch("searchFunction", helper);
     },
-    applyFilters(item, attribute, index = null) {
-      if (this.filtersAllowed[attribute] === undefined) {
-        return;
+    enableFilters(refine, currentRefinement) {
+      if (currentRefinement.length > 3) {
+        refine(currentRefinement);
+        this.$store.state.config.canFilter = currentRefinement.length > 3;
       }
-      var toString = "";
-      var typeVar = this.filtersAllowed[attribute].type;
-      var attr = attribute,
-        value;
-
-      if (index !== null) {
-        value = item[attr][index];
-      } else {
-        value = item[attr];
-      }
-
-      switch (typeVar) {
-        case "boolean":
-          if (item[attribute]) {
-            toString = this.filtersAllowed[attr].trueValue;
-            attr = this.filtersAllowed[attr].trueAttribute;
-            value = true;
-          } else {
-            toString = this.filtersAllowed[attr].falseValue;
-            attribute = this.filtersAllowed[attr].falseAttribute;
-            value = false;
-          }
-          break;
-        default:
-          toString = attr + ':"' + value + '"';
-          break;
-      }
-      if (this.searchParameters.filters.length == 0) {
-        this.searchParameters.filters = toString;
-      } else {
-        this.searchParameters.filters += " AND " + toString;
-      }
-      this.filters.push({
-        attribute: attr,
-        value: value
-      });
     },
-    baseIcon(isBasedOn) {
-      return {
-        img: isBasedOn
-          ? this.imagesPath + "is-child.png"
-          : this.imagesPath + "is-base.png",
-        alt: isBasedOn ? "Based on other book" : "Is not based on another book"
-      };
+    deleteFilter(item) {
+      let keyToDelete = 0;
+      if (
+        this.$store.state.SClient.filtersApplied[item.attribute].length === 1
+      ) {
+        delete this.$store.state.SClient.filtersApplied[item.attribute];
+      } else {
+        this.$store.state.SClient.filtersApplied[item.attribute].forEach(
+          (f, k) => {
+            if (f.value == item.label) {
+              keyToDelete = k;
+            }
+          }
+        );
+        this.$store.state.SClient.filtersApplied[item.attribute].splice(
+          keyToDelete,
+          1
+        );
+      }
+      this.$store.dispatch("refreshFilters");
     },
     getLicenseIcon(license) {
       var img = {
         image:
-          this.imagesPath +
+          this.$store.state.config.imagesPath +
           "licenses/" +
-          this.licenseIcons["public-domain"].image,
-        alt: this.licenseIcons["public-domain"].alt
+          this.$store.state.config.licenseIcons["public-domain"].image,
+        alt: this.$store.state.config.licenseIcons["public-domain"].alt
       };
       var lic = license
         .toLowerCase()
         .split(" ")
         .join("-");
-      for (const key in this.licenseIcons) {
+      for (const key in this.$store.state.config.licenseIcons) {
         if (lic == key) {
           return {
-            image: this.imagesPath + "licenses/" + this.licenseIcons[key].image,
-            alt: this.licenseIcons[key].alt
+            image:
+              this.$store.state.config.imagesPath +
+              "licenses/" +
+              this.$store.state.config.licenseIcons[key].image,
+            alt: this.$store.state.config.licenseIcons[key].alt
           };
         }
       }
@@ -275,105 +177,6 @@ export default {
         word_count: item.word_count !== undefined ? item.word_count : false
       }));
     }
-  },
-  data() {
-    return {
-      searchClient: algoliasearch(
-        process.env.VUE_APP_ALGOLIA_APP_ID,
-        process.env.VUE_APP_ALGOLIA_API_READ_KEY
-      ),
-      indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-      imagesPath: "assets/images/",
-      licenseIcons: {
-        "cc-by-sa-(attribution-sharealike)": {
-          image: "by-sa.png",
-          alt: "Attribution - ShareAlike (SA)"
-        },
-        "cc-by-nd-(attribution-noderivatives)": {
-          image: "by-nd.png",
-          alt: "Attribution - No Derivative Work (ND)"
-        },
-        "cc-by-nc-sa-(attribution-noncommercial-sharealike)": {
-          image: "by-nc-sa.png",
-          alt: "Attribution - Non Commercial - ShareAlike"
-        },
-        "cc-by-nc-nd-(attribution-noncommercial-noderivatives)": {
-          image: "by-nc-nd.png",
-          alt: "Attribution - Noncommercial - NoDerivatives"
-        },
-        "cc-by-nc-(attribution-noncommercial)": {
-          image: "by-nc.png",
-          alt: "Attribution - Non Commercial (NC)"
-        },
-        "cc-by-(attribution)": {
-          image: "by.png",
-          alt: "Attribution Alone (BY)"
-        },
-        "all-rights-reserved": {
-          image: "allrights.png",
-          alt: "All Rights Reserved"
-        },
-        "cc0-(creative-commons-zero)": {
-          image: "0.png",
-          alt: "Zero - Public Domain"
-        },
-        "public-domain": {
-          image: "public-domain.png",
-          alt: "Public Domain"
-        }
-      },
-      stringQuery: "",
-      filtersAllowed: {
-        license_name: {
-          type: "string"
-        },
-        inLanguage: {
-          type: "string"
-        },
-        has_isBasedOn: {
-          type: "boolean"
-        },
-        publisher_name: {
-          type: "string"
-        },
-        editor: {
-          type: "string"
-        },
-        isBasedOn: {
-          type: "boolean",
-          trueValue: "NOT isBasedOn:false AND NOT has_isBasedOn:false",
-          falseValue: "has_isBasedOn:false",
-          trueAttribute: "isBasedOn",
-          falseAttribute: "has_isBasedOn"
-        },
-        author: {
-          type: "string"
-        }
-      },
-      filters: [],
-      searchParameters: {
-        hitsPerPage: 10,
-        filters: "",
-        facets: [
-          "isBasedOn",
-          "has_isBasedOn",
-          "license_name",
-          "inLanguage",
-          "publisher_name",
-          "author",
-          "editor"
-        ],
-        disjunctiveFacets: [
-          "isBasedOn",
-          "has_isBasedOn",
-          "license_name",
-          "inLanguage",
-          "publisher_name",
-          "author",
-          "editor"
-        ]
-      }
-    };
   }
 };
 </script>
