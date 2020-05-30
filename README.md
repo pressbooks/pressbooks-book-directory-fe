@@ -36,6 +36,17 @@ npm run test
 npm run lint
 ```
 
+### Deployment
+Deployment of this application is automatic once the dev or master branch is updated.
+The pipeline uses AWS's CodePipeline to check periodically for changes, 
+build assets using `npm run build`, 
+and puts the content in the 'dist' folder to the S3 bucket where it is hosted as a static website.
+
+### SSL Certificates
+SSL certificates uses AWS's Certification Manager along with CloudFront
+to ensure the application uses https. The certification is renewed automatically by AWS.
+
+
 ### Vue references
 
 Full demos code
