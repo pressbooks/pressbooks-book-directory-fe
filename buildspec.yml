@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+	pre_build:
+		commands:
+			- npm install
+			- npm run lint
+	build:
+		commands:
+			- VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} npm run build
+artifacts:
+	files:
+		- '**/*'
+	base-directory: 'dist'
