@@ -1,20 +1,14 @@
-import Vue from "vue";
-import App from "./App.vue";
+import Vue from 'vue'
+import App from './App.vue'
+import vuetify from './plugins/vuetify';
 import InstantSearch from "vue-instantsearch";
-import Vuetify from "vuetify";
-
 import { store } from "./store/index";
-import "vuetify/dist/vuetify.min.css";
 
 Vue.use(InstantSearch);
-Vue.use(Vuetify);
+Vue.config.productionTip = false
 
-const vuetifyOptions = {};
-
-// eslint-disable-next-line no-new
 new Vue({
-  el: "#app",
+  vuetify,
   render: h => h(App),
-  store: store,
-  vuetify: new Vuetify(vuetifyOptions)
-});
+  store: store
+}).$mount('#app')

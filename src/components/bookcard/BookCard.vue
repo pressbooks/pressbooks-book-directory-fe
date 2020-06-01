@@ -1,5 +1,5 @@
 <template>
-  <v-card color="rgb(168, 190, 218)" class="ma-1">
+  <v-card color="rgb(168, 190, 218)" class="v-card__ma-1">
     <div class="d-flex flex-no-wrap justify-space-between">
       <v-row justify="space-between">
         <v-col cols="10">
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import "../../App.css";
 import BookDetails from "./BookDetails";
 
 export default {
