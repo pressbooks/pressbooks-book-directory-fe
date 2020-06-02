@@ -12,7 +12,7 @@
       <span v-for="(editor, index) in item.editor" v-bind:key="index">
         <span v-if="index != 0">, </span>
         <span
-          class="cursor-pointer"
+          class="v-card__subtitle--cursor-pointer"
           @click="applyFilters(item, 'editor', index)"
         >
           {{ editor }}
@@ -24,15 +24,16 @@
     </div>
     <div
       v-if="item.publisher_name"
+      class="v-card__subtitle--cursor-pointer"
       @click="applyFilters(item, 'publisher_name')"
     >
       <strong>Publisher: </strong>
-      <span class="cursor-pointer">{{ item.publisherName }}</span>
+      <span class="v-card__subtitle--cursor-pointer">{{ item.publisherName }}</span>
     </div>
     <div
       v-if="item.inLanguage"
       @click="applyFilters(item, 'inLanguage')"
-      class="cursor-pointer"
+      class="v-card__subtitle--cursor-pointer"
     >
       <strong>Language: </strong> {{ item.inLanguage | upperCase }}
     </div>

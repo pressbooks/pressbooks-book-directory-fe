@@ -1,17 +1,17 @@
-# pressbooks-book-directory-fe
-Book directory Vue.JS frontend starter
+# Pressbook Directory (Front End)
 
 ## Environment variables setup
-
-```
 Create an .env.local file and add the following keys with it's respective values:
-
-VUE_APP_ALGOLIA_APP_ID=
-VUE_APP_ALGOLIA_API_READ_KEY=
-VUE_APP_ALGOLIA_INDEX=
-```
+VUE_APP_ALGOLIA_APP_ID=  
+VUE_APP_ALGOLIA_API_READ_KEY=  
+VUE_APP_ALGOLIA_INDEX=  
 
 ## Project setup
+### Requirements
+- node v.10.16.3 or higher
+- npm v6.9.0 or higher
+
+### Install dependences
 ```
 npm install
 ```
@@ -20,6 +20,7 @@ npm install
 ```
 npm run serve
 ```
+app will run in port 8080
 
 ### Compiles and minifies for production
 ```
@@ -36,6 +37,8 @@ npm run test
 npm run lint
 ```
 
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Deployment
 Deployment of this application is automatic once the dev or master branch is updated.
 The pipeline uses AWS's CodePipeline to check periodically for changes in the github repository, 
@@ -64,3 +67,4 @@ Full demos code
 Working demos
 
 ```https://www.algolia.com/doc/guides/building-search-ui/resources/demos/vue```
+
