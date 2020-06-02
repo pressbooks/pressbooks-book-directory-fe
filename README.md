@@ -1,5 +1,10 @@
 # Pressbook Directory (Front End)
 
+## Environment variables setup
+Create an .env.local file and add the following keys with it's respective values:
+VUE_APP_ALGOLIA_APP_ID=  
+VUE_APP_ALGOLIA_API_READ_KEY=  
+VUE_APP_ALGOLIA_INDEX=  
 
 ## Project setup
 ### Requirements
