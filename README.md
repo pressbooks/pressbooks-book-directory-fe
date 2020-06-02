@@ -1,4 +1,4 @@
-# Pressbook Directory (Fron End)
+# Pressbook Directory (Front End)
 
 
 ## Project setup
