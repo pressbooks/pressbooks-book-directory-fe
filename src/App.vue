@@ -3,23 +3,23 @@
     <header-bar></header-bar>
     <v-container fluid>
       <ais-instant-search
-              :search-client="$store.state.SClient.searchClient"
-              :index-name="$store.state.SClient.indexName"
-              :search-function="searchFunction"
+        :search-client="$store.state.SClient.searchClient"
+        :index-name="$store.state.SClient.indexName"
+        :search-function="searchFunction"
       >
         <ais-configure v-bind="$store.state.SClient.searchParameters">
         </ais-configure>
         <ais-search-box
-                placeholder="Search here…"
-                submit-title="Search"
-                class="searchbox"
+          placeholder="Search here…"
+          submit-title="Search"
+          class="searchbox"
         >
           <div slot-scope="{ refine }">
             <v-text-field
-                    type="search"
-                    v-model="stringSearch"
-                    label="Find a book"
-                    @input="enableFilters(refine, stringSearch)"
+              type="search"
+              v-model="stringSearch"
+              label="Find a book"
+              @input="enableFilters(refine, stringSearch)"
             >
               <v-icon slot="append" color="red">mdi-magnify</v-icon>
             </v-text-field>
@@ -28,10 +28,10 @@
         <ais-current-refinements>
           <template slot="item" slot-scope="{ item }">
             <v-chip
-                    class="ma-2"
-                    color="#42A5F5"
-                    text-color="white"
-                    @click.prevent="deleteFilter(item)"
+              class="ma-2"
+              color="#42A5F5"
+              text-color="white"
+              @click.prevent="deleteFilter(item)"
             >
               {{ item.attribute }} : {{ item.label }}
               <v-icon right>mdi-close-circle-outline</v-icon>
