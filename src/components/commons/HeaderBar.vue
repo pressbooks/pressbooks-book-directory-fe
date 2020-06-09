@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="indigo" dark>
+  <v-toolbar color="red darken-5" dense max-height="50px">
     <v-toolbar-title>Pressbook Directory</v-toolbar-title>
     <v-spacer></v-spacer>
   </v-toolbar>

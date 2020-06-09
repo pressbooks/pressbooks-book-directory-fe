@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto">
+  <v-app class="mx-auto">
     <header-bar></header-bar>
     <v-container fluid>
       <ais-instant-search
@@ -63,7 +63,7 @@
         </v-row>
       </ais-instant-search>
     </v-container>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -180,5 +180,6 @@
   };
 </script>
 <style lang="sass">
-  @import './styles/styles.sass'
+  /*$color-pack: false*/
+  @import 'styles/styles'
 </style>
