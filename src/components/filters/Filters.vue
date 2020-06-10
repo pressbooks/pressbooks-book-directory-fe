@@ -3,10 +3,14 @@
     <div v-if="$store.state.config.canFilter">
       <v-card class="mx-auto ma-1" tile>
         <v-list dense>
-          <v-list-item-group color="primary">
-            <book-properties></book-properties>
-            <language-subject></language-subject>
-          </v-list-item-group>
+          <licenses></licenses>
+          <subjects></subjects>
+          <based-on></based-on>
+          <word-count></word-count>
+          <h5-p-activities></h5-p-activities>
+          <languages></languages>
+          <publishers></publishers>
+          <storage-size></storage-size>
         </v-list>
       </v-card>
     </div>
@@ -14,13 +18,25 @@
 </template>
 
 <script>
-import BookProperties from "./BookProperties";
-import LanguageSubject from "./LanguageSubject";
+import Languages from "./Languages";
+import Licenses from "./Licenses";
+import Subjects from "./Subjects";
+import BasedOn from "./BasedOn";
+import WordCount from "./WordCount";
+import H5PActivities from "./H5PActivities";
+import Publishers from "./Publishers";
+import StorageSize from "./StorageSize";
 
 export default {
   components: {
-    BookProperties,
-    LanguageSubject
+    StorageSize,
+    Publishers,
+    H5PActivities,
+    WordCount,
+    BasedOn,
+    Subjects,
+    Licenses,
+    Languages
   },
   methods: {
     applyFilters() {

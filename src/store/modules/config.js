@@ -1,5 +1,7 @@
 let config = {
   imagesPath: "assets/images/",
+  logo: 'pressbooks-logo.jpeg',
+  twitterUrl: 'https://twitter.com/intent/follow?screen_name=pressbooks',
   licenseIcons: {
     "cc-by-sa-(attribution-sharealike)": {
       image: "by-sa.png",

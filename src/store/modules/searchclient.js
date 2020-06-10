@@ -18,28 +18,30 @@ let sClient = {
       "isBasedOn",
       "has_isBasedOn",
       "license_name",
-      "inLanguage",
+      "languageName",
       "publisher_name",
       "author",
       "editor",
-      "wordCount"
+      "wordCount",
+      "about"
     ],
     disjunctiveFacets: [
       "isBasedOn",
       "has_isBasedOn",
       "license_name",
-      "inLanguage",
+      "languageName",
       "publisher_name",
       "author",
       "editor",
-      "wordCount"
+      "wordCount",
+      "about"
     ]
   },
   filtersAllowed: {
     license_name: {
       type: "string"
     },
-    inLanguage: {
+    languageName: {
       type: "string"
     },
     has_isBasedOn: {
@@ -65,6 +67,9 @@ let sClient = {
     },
     h5pActivities: {
       type: "integer"
+    },
+    about: {
+      type: "string"
     }
   }
 };
