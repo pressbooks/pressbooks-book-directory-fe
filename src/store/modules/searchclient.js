@@ -81,7 +81,7 @@ export default {
       state.searchParameters.facetFilters = [];
       for (let attribute in state.filtersApplied) {
         if (state.filtersApplied[attribute].length === 1) {
-          state.filtersApplied[attribute][0].stringFilter + " AND ";
+          state.filtersApplied[attribute][0].stringFilter += " AND ";
           state.searchParameters.facetFilters.push(
             state.filtersApplied[attribute][0].stringFilter
           );

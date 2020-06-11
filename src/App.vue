@@ -5,10 +5,7 @@
       <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"
-        :search-function="searchFunction"
       >
-        <ais-configure v-bind="$store.state.SClient.searchParameters">
-        </ais-configure>
         <welcome-header></welcome-header>
         <current-filters></current-filters>
         <v-row no-gutters>
@@ -29,7 +26,6 @@
 
 <script>
   import "instantsearch.css/themes/algolia-min.css";
-
   import Filters from "./components/filters/Filters";
   import Pagination from "./components/commons/Pagination";
   import HeaderBar from "./components/commons/HeaderBar";

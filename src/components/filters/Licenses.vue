@@ -10,19 +10,19 @@
             :searchable="false"
             operator="or"
         >
-            <div slot-scope="{ items }">
-                <v-list-item
-                    v-for="item in items"
-                    :key="item.value"
-                    @click.prevent="applyFilters(item.value, 'license_name')"
-                >
-                    <v-list-item-content>
-                        <v-list-item-title>
-                            {{ cleanLicense(item) }}
-                        </v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </div>
+            <v-list-item
+                slot="item"
+                slot-scope="{ item, refine }"
+                :class="item.isRefined ? 'red lighten-1' : ''"
+            >
+                <v-list-item-action @click.prevent="refine(item.value)">
+                    <v-checkbox
+                        color="white"
+                        v-model="item.isRefined"
+                        :label="cleanLicense(item)"
+                    ></v-checkbox>
+                </v-list-item-action>
+            </v-list-item>
         </ais-refinement-list>
     </v-list-group>
 </template>
@@ -30,21 +30,21 @@
 <script>
     export default {
         name: "Licenses",
+        data() {
+            return {
+                selected: []
+            };
+        },
         methods: {
+            check(isRefined) {
+                return isRefined;
+            },
             cleanLicense(item) {
                 let parts = item.value.split(' (');
                 if(parts.length > 1) {
                     return parts[0] + ' (' + item.count + ')';
                 }
                 return item.value + ' (' + item.count + ')';
-            },
-            applyFilters(value, attribute, operator = ":") {
-                this.$store.commit("setFiltersApplied", {
-                    value: value,
-                    attribute: attribute,
-                    operator: operator
-                });
-                this.$store.dispatch("refreshFilters");
             }
         }
     }

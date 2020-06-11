@@ -6,32 +6,38 @@
         <v-list-item>
             <v-list-item-content>
                 <v-list-item-title>
-                    <v-row>
-                        <v-col cols="6">
-                            <v-text-field
-                                type="number"
-                                id="min-wc"
-                                min="1"
-                                v-model="wordCount.min"
-                                @input="
-                                  updateRangeInput('wordCount', wordCount.min, wordCount.max)
-                                "
-                                label="Min"
-                            />
-                        </v-col>
-                        <v-col cols="6">
-                            <v-text-field
-                                type="number"
-                                id="max-wc"
-                                min="1"
-                                v-model="wordCount.max"
-                                @input="
-                                  updateRangeInput('wordCount', wordCount.min, wordCount.max)
-                                "
-                                label="Max"
-                            />
-                        </v-col>
-                    </v-row>
+                    <ais-range-input attribute="wordCount">
+                        <v-row
+                            slot-scope="{
+                                currentRefinement,
+                                range,
+                                refine,
+                            }"
+                        >
+                            <v-col cols="6">
+                                <v-text-field
+                                    type="number"
+                                    id="min-wc"
+                                    v-model="wordCount.min"
+                                    :min="0"
+                                    :max="wordCount.max"
+                                    @input="applyFilter(refine, range)"
+                                    label="Min"
+                                />
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    type="number"
+                                    id="max-wc"
+                                    v-model="wordCount.max"
+                                    :min="wordCount.min"
+                                    :max="range.max"
+                                    @input="applyFilter(refine, range)"
+                                    label="Max"
+                                />
+                            </v-col>
+                        </v-row>
+                    </ais-range-input>
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
@@ -44,29 +50,21 @@
         data() {
             return {
                 wordCount: {
-                    min: null,
-                    max: null
+                    min: 0,
+                    max: 0
                 }
             };
         },
         methods: {
-            updateRangeInput(attribute, min, max) {
-                delete this.$store.state.SClient.filtersApplied[attribute];
-                if (min !== "" && parseInt(min) > 0) {
-                    this.$store.commit("setFiltersApplied", {
-                        value: min,
-                        attribute: attribute,
-                        operator: ">"
-                    });
+            applyFilter(refine, range) {
+                if (this.wordCount.min > this.wordCount.max) {
+                    if (this.wordCount.max == 0) {
+                        refine({min: this.wordCount.min, max: range.max});
+                        return;
+                    }
+                    this.wordCount.max = this.wordCount.min + 1;
                 }
-                if (max !== "" && parseInt(max) > 0) {
-                    this.$store.commit("setFiltersApplied", {
-                        value: max,
-                        attribute: attribute,
-                        operator: "<="
-                    });
-                }
-                this.$store.dispatch("refreshFilters");
+                refine({min: this.wordCount.min, max: this.wordCount.max});
             }
         }
     }

@@ -8,22 +8,26 @@
             :searchable="false"
             operator="or"
         >
-            <div slot-scope="{ items }">
-                <v-list-item
-                    v-for="item in items"
-                    :key="item.value"
-                    @click.prevent="applyFilters(item.value, 'has_isBasedOn')"
-                >
-                    <v-list-item-content>
-                        <v-list-item-title v-if="item.value == 'true'">
-                            Based on another book ({{ item.count }})
-                        </v-list-item-title>
-                        <v-list-item-title v-if="item.value == 'false'">
-                            Original ({{ item.count }})
-                        </v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </div>
+            <v-list-item
+                slot="item"
+                slot-scope="{ item, refine }"
+                :class="item.isRefined ? 'red darken-1' : ''"
+            >
+                <v-list-item-action @click.prevent="refine(item.value)">
+                    <v-checkbox
+                        v-if="item.value == 'true'"
+                        color="white"
+                        v-model="item.isRefined"
+                        :label="'Based on another book (' + item.count + ')'"
+                    ></v-checkbox>
+                    <v-checkbox
+                        v-if="item.value == 'false'"
+                        color="white"
+                        v-model="item.isRefined"
+                        :label="'Original (' + item.count + ')'"
+                    ></v-checkbox>
+                </v-list-item-action>
+            </v-list-item>
         </ais-refinement-list>
     </v-list-group>
 </template>

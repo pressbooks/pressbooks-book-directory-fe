@@ -40,7 +40,7 @@ let config = {
       alt: "Public Domain"
     }
   },
-  canFilter: false
+  canFilter: true
 };
 
 export default {
