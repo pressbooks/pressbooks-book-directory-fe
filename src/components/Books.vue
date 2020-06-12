@@ -1,15 +1,17 @@
 <template>
     <ais-hits :transform-items="transformItems">
-        <div class="books" slot-scope="{ query, items }">
+        <div class="ais-Hits__books" slot-scope="{ query, items }">
             <p class="books-no-results" v-if="items.length === 0">
                 No results found matching <strong>{{ query }}</strong
             >.
             </p>
-            <v-row dense>
-                <v-col v-for="item in items" :key="item.objectID" cols="12">
-                    <book-card :item="item"></book-card>
-                </v-col>
-            </v-row>
+            <v-container>
+                <v-row dense>
+                    <v-col v-for="item in items" :key="item.objectID" cols="12">
+                        <book-card :item="item"></book-card>
+                    </v-col>
+                </v-row>
+            </v-container>
         </div>
     </ais-hits>
 </template>

@@ -1,25 +1,34 @@
 <template>
-  <v-card color="indigo lighten-3" class="v-card__ma-1">
+  <v-card
+  >
     <div class="d-flex flex-no-wrap justify-space-between">
-      <v-row justify="space-between">
-        <v-col cols="10">
-          <v-card-title class="headline">{{ item.name }}</v-card-title>
-          <v-card-subtitle>
-            <book-details :item="item"></book-details>
-          </v-card-subtitle>
-        </v-col>
-        <v-col cols="2">
-          <v-avatar
-            class="ma-3"
-            height="100%"
-            max-height="350"
-            width="186"
-            tile
-          >
-            <v-img :src="item.image"></v-img>
-          </v-avatar>
-        </v-col>
-      </v-row>
+      <div>
+        <v-card-title
+          class="headline"
+          v-text="item.name"
+        ></v-card-title>
+
+        <v-card-text>
+          <book-details :item="item"></book-details>
+        </v-card-text>
+      </div>
+      <v-avatar
+        class="d-flex flex-no-wrap justify-space-between ma-3"
+        height="80%"
+        max-height="350"
+        width="186"
+        tile
+      >
+        <v-row>
+          <v-col cols="12">
+            <v-img max-width="86" max-height="150" class="d-inline-block" :src="item.image"></v-img>
+          </v-col>
+          <v-col cols="12" class="v-avatar__details">
+            <span class="v-avatar__details--language">{{item.languageCode}}</span>
+          </v-col>
+        </v-row>
+      </v-avatar>
+
     </div>
   </v-card>
 </template>

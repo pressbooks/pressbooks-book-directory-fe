@@ -3,7 +3,7 @@
     <strong>Author(s): </strong>
     <span v-for="(author, index) in item.author" v-bind:key="index">
       <span v-if="index != 0">, </span>
-      <span class="cursor-pointer" @click="applyFilters(item, 'author', index)">
+      <span class="v-card__subtitle--item">
         {{ author }}
       </span>
     </span>
@@ -12,42 +12,32 @@
       <span v-for="(editor, index) in item.editor" v-bind:key="index">
         <span v-if="index != 0">, </span>
         <span
-          class="v-card__subtitle--cursor-pointer"
-          @click="applyFilters(item, 'editor', index)"
+          class="v-card__subtitle--item"
         >
           {{ editor }}
         </span>
       </span>
     </div>
     <div v-if="item.subject">
-      <strong>Subject(s): </strong> {{ item.subject }}
+      <strong>Subject(s): </strong>
+      <span v-for="(about, index) in item.about" v-bind:key="index">
+        <span v-if="index != 0">, </span>
+        <span
+          class="v-card__subtitle--item"
+        >
+          {{ about }}
+        </span>
+      </span>
     </div>
     <div
       v-if="item.publisher_name"
-      class="v-card__subtitle--cursor-pointer"
-      @click="applyFilters(item, 'publisher_name')"
+      class="v-card__subtitle--item"
     >
       <strong>Publisher: </strong>
-      <span class="v-card__subtitle--cursor-pointer">{{ item.publisherName }}</span>
-    </div>
-    <div
-      v-if="item.inLanguage"
-      @click="applyFilters(item, 'inLanguage')"
-      class="v-card__subtitle--cursor-pointer"
-    >
-      <strong>Language: </strong> {{ item.inLanguage | upperCase }}
-    </div>
-    <div v-if="item.h5pActivities">
-      <strong>H5P Activities: </strong> {{ item.h5pActivities }}
-    </div>
-    <div v-if="item.has_isBasedOn">
-      <strong>Based On: </strong> {{ item.isBasedOn }}
+      <span class="v-card__subtitle--item">{{ item.publisherName }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Word Count: </strong> {{ item.wordCount }}
-    </div>
-    <div v-if="item.storageSize">
-      <strong>Storage Size: </strong> {{ item.storageSize }}
+      <strong>Word Count: </strong>{{ item.wordCount }}
     </div>
     <div v-if="item.description">
       <strong>Description: </strong> {{ item.description }}
