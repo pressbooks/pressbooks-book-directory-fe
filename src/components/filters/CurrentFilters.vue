@@ -1,7 +1,7 @@
 <template>
     <v-container class="mt-2 ml-5">
         <v-row>
-            <v-col cols="11">
+            <v-col cols="10">
                 <div class="float-left headerwelcome_red-font-pressbooks font-weight-bold">
                     Active Filters:
                 </div>
@@ -21,11 +21,11 @@
                     </template>
                 </ais-current-refinements>
             </v-col>
-            <v-col cols="1">
+            <v-col cols="2">
                 <ais-stats>
                     <p slot-scope="{ nbHits }">
                         <span class="container__results">RESULTS: </span>
-                        <span class="container__results_hits">{{ nbHits }}</span>
+                        <span class="container__results_hits" > {{ nbHits }} / {{ totalBooks }} shown</span>
                     </p>
                 </ais-stats>
             </v-col>
@@ -36,6 +36,19 @@
 <script>
     export default {
         name: "CurrentFilters",
+        mounted() {
+            this.index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName)
+            let vm = this;
+            this.index.search('').then(function (response) {
+                vm.totalBooks = response.nbHits;
+            })
+        },
+        data() {
+            return {
+                totalBooks: null,
+                index: null
+            };
+        },
         methods: {
             getLabel(item) {
                 let label;
