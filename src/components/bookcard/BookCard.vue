@@ -21,10 +21,17 @@
       >
         <v-row>
           <v-col cols="12">
-            <v-img max-width="86" max-height="150" class="d-inline-block" :src="item.image"></v-img>
+            <v-img max-width="126" max-height="180" class="d-inline-block" :src="item.image"></v-img>
           </v-col>
           <v-col cols="12" class="v-avatar__details">
             <span class="v-avatar__details--language">{{item.languageCode}}</span>
+            <v-img
+              max-height="18"
+              max-width="50"
+              class="ml-2"
+              :alt="licenseIcon(item).alt"
+              :src="licenseIcon(item).image"
+            ></v-img>
           </v-col>
         </v-row>
       </v-avatar>
@@ -41,6 +48,33 @@ export default {
   components: {
     BookDetails
   },
-  props: ["item"]
+  props: ["item"],
+  methods: {
+    licenseIcon(item) {
+      if (item.license_name !== undefined) {
+        let license = item.license_name;
+        let img = {
+          image:
+            this.$store.state.config.imagesPath +
+            "licenses/" +
+              this.$store.state.config.licenseIcons["public-domain"].image,
+          alt: this.$store.state.config.licenseIcons["public-domain"].alt
+        };
+        let lic = license
+          .toLowerCase()
+          .split(" ")
+          .join("-");
+        for (const key in this.$store.state.config.licenseIcons) {
+          if (lic == key) {
+            img = {
+              image: this.$store.state.config.imagesPath + "licenses/" + this.$store.state.config.licenseIcons[key].image,
+              alt: this.$store.state.config.licenseIcons[key].alt
+            };
+          }
+        }
+        return img;
+      }
+    }
+  }
 };
 </script>
