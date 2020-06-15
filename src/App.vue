@@ -6,6 +6,7 @@
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"
       >
+        <ais-configure :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"></ais-configure>
         <welcome-header></welcome-header>
         <current-filters></current-filters>
         <v-row no-gutters>

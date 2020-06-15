@@ -2,6 +2,9 @@ let config = {
   imagesPath: "assets/images/",
   logo: 'pressbooks-logo.jpeg',
   twitterUrl: 'https://twitter.com/intent/follow?screen_name=pressbooks',
+  h5pLogo: 'h5p.png',
+  basedOnImg: 'is-child.png',
+  originalImg: 'is-base.png',
   licenseIcons: {
     "cc-by-sa-(attribution-sharealike)": {
       image: "by-sa.png",
