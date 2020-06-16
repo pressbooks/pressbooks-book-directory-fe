@@ -24,6 +24,20 @@
                 </v-list-item-action>
             </v-list-item>
         </ais-refinement-list>
+        <v-list-item>
+        <ais-clear-refinements  :included-attributes="['license_name']">
+            <div slot-scope="{ canRefine, refine }">
+                <v-btn
+                    color="white"
+                    width="150"
+                    tile
+                    @click.prevent="refine()"
+                >
+                    CLEAR
+                </v-btn>
+            </div>
+        </ais-clear-refinements>
+        </v-list-item>
     </v-list-group>
 </template>
 
@@ -36,9 +50,6 @@
             };
         },
         methods: {
-            check(isRefined) {
-                return isRefined;
-            },
             cleanLicense(item) {
                 let parts = item.value.split(' (');
                 if(parts.length > 1) {

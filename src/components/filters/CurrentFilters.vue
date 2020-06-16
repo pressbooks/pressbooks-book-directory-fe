@@ -8,14 +8,16 @@
                 <ais-current-refinements>
                     <template slot="item" slot-scope="{ item, refine }">
                         <v-chip
+                            v-for="iref in item.refinements"
+                            :key="iref.attribute + iref.value"
                             class="ma-2"
                             color="#169db3"
                             text-color="white"
                             :label="true"
-                            @click.prevent="refine(item.value)"
+                            @click.prevent="refine(iref)"
                             small
                         >
-                            {{ getLabel(item) }}
+                            {{ getLabel(item, iref) }}
                             <v-icon right>mdi-close-circle</v-icon>
                         </v-chip>
                     </template>
@@ -25,7 +27,7 @@
                 <ais-stats>
                     <p slot-scope="{ nbHits }">
                         <span class="container__results">RESULTS: </span>
-                        <span class="container__results_hits" > {{ nbHits }} / {{ totalBooks }} shown</span>
+                        <span class="container__results_hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
                     </p>
                 </ais-stats>
             </v-col>
@@ -39,7 +41,7 @@
         mounted() {
             this.index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName)
             let vm = this;
-            this.index.search('').then(function (response) {
+            this.index.search('', {facets: 'networkName'}).then(function (response) {
                 vm.totalBooks = response.nbHits;
             })
         },
@@ -50,23 +52,24 @@
             };
         },
         methods: {
-            getLabel(item) {
+            getLabel(item, iref) {
                 let label;
+                console.log(item)
                 switch (item.attribute) {
                     case 'has_isBasedOn':
                         label = (item.label === 'true') ? 'Based on another book' : 'Original';
                         break;
                     case 'wordCount':
-                        label = 'Words ' + item.label;
+                        label = 'Words ' + iref.value;
                         break;
                     case 'storageSize':
-                        label = 'Storage ' + item.label;
+                        label = 'Storage ' + iref.value;
                         break;
                     case 'h5pActivities':
-                        label = 'H5P Activities ' + item.label;
+                        label = 'H5P Activities ' + iref.value;
                         break;
                     default:
-                        label = item.label;
+                        label = iref.value;
                 }
                 return label;
             }

@@ -1,9 +1,10 @@
 <template>
   <v-card
-    :class="(item.has_inCatalog && item.inCatalog) ? 'ais-Hits__books--redborder' : 'ais-Hits__books--border'"
+    :class="addClasses(item)"
   >
     <div class="d-flex flex-no-wrap justify-space-between">
-      <div>
+      <div class="v-card__content--w80">
+        <div class="">{{ item.networkHost }}</div>
         <v-card-title
           class="headline"
           v-text="item.name"
@@ -29,16 +30,26 @@
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-img
+                  v-if="item.license_name.indexOf('All Rights Reserved') >= 0"
+                  max-height="18"
+                  max-width="18"
+                  contain
+                  class="ml-2 v-avatar__details--t2"
+                  v-bind="attrs"
+                  v-on="on"
+                  :src="item.licenseIcon"
+                ></v-img>
+                <v-img
+                  v-if="item.license_name.indexOf('All Rights Reserved') < 0"
                   max-height="18"
                   max-width="50"
                   class="ml-2 v-avatar__details--t2"
                   v-bind="attrs"
                   v-on="on"
-                  :alt="licenseIcon(item).alt"
-                  :src="licenseIcon(item).image"
+                  :src="item.licenseIcon"
                 ></v-img>
               </template>
-              <span>{{ licenseIcon(item).alt }}</span>
+              <span>{{ item.licenseAlt }}</span>
             </v-tooltip>
           </v-col>
           <v-col cols="12" class="v-avatar__details">
@@ -114,30 +125,17 @@ export default {
     };
   },
   methods: {
-    licenseIcon(item) {
-      if (item.license_name !== undefined) {
-        let license = item.license_name;
-        let img = {
-          image:
-            this.$store.state.config.imagesPath +
-            "licenses/" +
-              this.$store.state.config.licenseIcons["public-domain"].image,
-          alt: this.$store.state.config.licenseIcons["public-domain"].alt
-        };
-        let lic = license
-          .toLowerCase()
-          .split(" ")
-          .join("-");
-        for (const key in this.$store.state.config.licenseIcons) {
-          if (lic == key) {
-            img = {
-              image: this.$store.state.config.imagesPath + "licenses/" + this.$store.state.config.licenseIcons[key].image,
-              alt: this.$store.state.config.licenseIcons[key].alt
-            };
-          }
-        }
-        return img;
+    addClasses(item) {
+      let classes = '';
+      if(item.has_inCatalog && item.inCatalog) {
+        classes += 'ais-Hits__books--redborder';
+      } else {
+        classes += 'ais-Hits__books--border';
       }
+      if(item.license_name.indexOf('All Rights Reserved') >= 0) {
+        classes += ' ais-Hits__books--redbackground';
+      }
+      return classes;
     }
   }
 };

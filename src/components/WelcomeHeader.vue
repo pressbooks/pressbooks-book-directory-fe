@@ -3,7 +3,9 @@
         <v-container align="center" class="headerwelcome_content">
             <p class="display-3 font-weight-bold headerwelcome_red-font-pressbooks">Welcome to Pressbooks Directory</p>
             <p class="headerwelcome_spectral-front font-italic">
-                This site presents a searchable, filterable directory of [###] public books published across [##] Pressbooks
+                This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
+                public books published across
+                <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks
                 networks (see full list [link]).
                 You can find books of interest by searching the full text of all metadata, applying one or more filters,
                 or simply browsing the book cards below. [More details about using the site.]

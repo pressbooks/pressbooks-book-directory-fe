@@ -43,10 +43,9 @@
       HeaderBar,
       Books
     },
-    methods: {
-      searchFunction(helper) {
-        this.$store.dispatch("searchFunction", helper);
-      }
+    mounted() {
+      let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
+      this.$store.dispatch('getStats', index);
     }
   };
 </script>

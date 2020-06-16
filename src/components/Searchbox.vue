@@ -1,7 +1,5 @@
 <template>
     <ais-search-box
-        placeholder="Search here…"
-        submit-title="Search"
         class="searchbox"
     >
         <div slot-scope="{ refine }">
@@ -36,9 +34,8 @@
         },
         methods: {
             enableFilters(refine, currentRefinement) {
-                if (currentRefinement.length > 3) {
+                if (currentRefinement.length > 3 || currentRefinement.length === 0) {
                     refine(currentRefinement);
-                    this.$store.state.config.canFilter = currentRefinement.length > 3;
                 }
             },
         }

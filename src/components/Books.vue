@@ -29,7 +29,7 @@
                 return items.map(item => ({
                     ...item,
                     authorNames:
-                        typeof item.author === "object"
+                        typeof item.author === "object" && item.author !== null
                             ? item.author.join(", ")
                             : item.author,
                     editorNames:
@@ -45,40 +45,41 @@
                         ? vm.removeXMLTags(item.description)
                         : false,
                     licenseIcon: item.license_name
-                        ? vm.getLicenseIcon(item.license_name).image
+                        ? vm.getLicenseIcon(item).image
                         : false,
                     licenseAlt: item.license_name
-                        ? vm.getLicenseIcon(item.license_name).alt
+                        ? vm.getLicenseIcon(item).alt
                         : false,
                     isBasedOn: item.isBasedOn !== undefined,
                     subject: item.subject !== undefined ? item.subject : false,
                     word_count: item.word_count !== undefined ? item.word_count : false
                 }));
             },
-            getLicenseIcon(license) {
-                var img = {
-                    image:
-                        this.$store.state.config.imagesPath +
-                        "licenses/" +
-                        this.$store.state.config.licenseIcons["public-domain"].image,
-                    alt: this.$store.state.config.licenseIcons["public-domain"].alt
-                };
-                var lic = license
-                    .toLowerCase()
-                    .split(" ")
-                    .join("-");
-                for (const key in this.$store.state.config.licenseIcons) {
-                    if (lic == key) {
-                        return {
-                            image:
-                                this.$store.state.config.imagesPath +
-                                "licenses/" +
-                                this.$store.state.config.licenseIcons[key].image,
-                            alt: this.$store.state.config.licenseIcons[key].alt
-                        };
+            getLicenseIcon(item) {
+                if (item.license_name !== undefined) {
+                    let license = item.license_name;
+                    let img = {
+                        image:
+                            this.$store.state.config.imagesPath +
+                            "licenses/" +
+                            this.$store.state.config.licenseIcons["public-domain"].image,
+                        alt: this.$store.state.config.licenseIcons["public-domain"].alt
+                    };
+                    let lic = license
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-");
+                    for (const key in this.$store.state.config.licenseIcons) {
+                        if (lic == key) {
+                            img = {
+                                image: this.$store.state.config.imagesPath + "licenses/" + this.$store.state.config.licenseIcons[key].image,
+                                alt: this.$store.state.config.licenseIcons[key].alt
+                            };
+                        }
                     }
+                    return img;
                 }
-                return img;
+                return {image: false, alt: false};
             },
             removeXMLTags(string) {
                 return string.replace(/<[^>]*>/g, "");
