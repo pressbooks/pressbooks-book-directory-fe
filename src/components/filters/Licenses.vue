@@ -9,6 +9,8 @@
             attribute="license_name"
             :searchable="false"
             operator="or"
+            :limit="5"
+            show-more
         >
             <v-list-item
                 slot="item"
@@ -44,11 +46,6 @@
 <script>
     export default {
         name: "Licenses",
-        data() {
-            return {
-                selected: []
-            };
-        },
         methods: {
             cleanLicense(item) {
                 let parts = item.value.split(' (');

@@ -8,6 +8,7 @@
           <based-on></based-on>
           <word-count></word-count>
           <h5-p-activities></h5-p-activities>
+          <networks></networks>
           <languages></languages>
           <publishers></publishers>
           <storage-size></storage-size>
@@ -26,9 +27,11 @@ import WordCount from "./WordCount";
 import H5PActivities from "./H5PActivities";
 import Publishers from "./Publishers";
 import StorageSize from "./StorageSize";
+import Networks from "./Networks";
 
 export default {
   components: {
+    Networks,
     StorageSize,
     Publishers,
     H5PActivities,

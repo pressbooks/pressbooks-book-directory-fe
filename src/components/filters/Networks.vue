@@ -1,10 +1,12 @@
 <template>
-    <v-list-group value="true">
+    <v-list-group
+            value="true"
+    >
         <template v-slot:activator>
-            <v-list-item-title>PUBLISHER</v-list-item-title>
+            <v-list-item-title>NETWORK</v-list-item-title>
         </template>
         <ais-refinement-list
-            attribute="publisher_name"
+            attribute="networkHost"
             :searchable="false"
             operator="or"
             :limit="5"
@@ -24,24 +26,26 @@
                 </v-list-item-action>
             </v-list-item>
         </ais-refinement-list>
-        <ais-clear-refinements  :included-attributes="['publisher_name']">
-            <div slot-scope="{ canRefine, refine }">
-                <v-btn
-                    color="white"
-                    width="150"
-                    tile
-                    @click.prevent="refine()"
-                >
-                    CLEAR
-                </v-btn>
-            </div>
-        </ais-clear-refinements>
+        <v-list-item>
+            <ais-clear-refinements  :included-attributes="['networkHost']">
+                <div slot-scope="{ canRefine, refine }">
+                    <v-btn
+                        color="white"
+                        width="150"
+                        tile
+                        @click.prevent="refine()"
+                    >
+                        CLEAR
+                    </v-btn>
+                </div>
+            </ais-clear-refinements>
+        </v-list-item>
     </v-list-group>
 </template>
 
 <script>
     export default {
-        name: "Publishers"
+        name: "Networks"
     }
 </script>
 

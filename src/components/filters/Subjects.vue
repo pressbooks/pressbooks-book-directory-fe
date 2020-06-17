@@ -7,6 +7,8 @@
             attribute="about"
             :searchable="false"
             operator="or"
+            :limit="5"
+            show-more
         >
             <v-list-item
                 slot="item"

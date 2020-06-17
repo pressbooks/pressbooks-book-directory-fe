@@ -4,7 +4,7 @@
   >
     <div class="d-flex flex-no-wrap justify-space-between">
       <div class="v-card__content--w80">
-        <div class="">{{ item.networkHost }}</div>
+        <div class="v-card__content--network">{{ item.networkHost }}</div>
         <v-card-title
           class="headline"
           v-text="item.name"
@@ -26,7 +26,7 @@
             <v-img max-width="126" max-height="180" class="d-inline-block" :src="item.image"></v-img>
           </v-col>
           <v-col cols="12" class="v-avatar__details">
-            <span v-bind="attrs" v-on="on" class="v-avatar__details--language">{{item.languageCode}}</span>
+            <span class="v-avatar__details--language">{{item.languageCode}}</span>
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-img

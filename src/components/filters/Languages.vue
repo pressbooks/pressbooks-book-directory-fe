@@ -4,9 +4,11 @@
       <v-list-item-title>LANGUAGE</v-list-item-title>
     </template>
     <ais-refinement-list
-          attribute="languageName"
-          :searchable="false"
-          operator="or"
+        attribute="languageName"
+        :searchable="false"
+        operator="or"
+        :limit="5"
+        show-more
     >
       <v-list-item
           slot="item"
