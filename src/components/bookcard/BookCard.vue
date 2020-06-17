@@ -23,7 +23,23 @@
       >
         <v-row>
           <v-col cols="12">
-            <v-img max-width="126" max-height="180" class="d-inline-block" :src="item.image"></v-img>
+            <v-img
+                max-width="126"
+                max-height="180"
+                class="d-inline-block"
+                :src="item.image"
+                :lazy-src="defaultImage"
+            >
+              <template v-slot:placeholder>
+                <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                >
+                  <v-progress-circular indeterminate color="red darken-3"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
           </v-col>
           <v-col cols="12" class="v-avatar__details">
             <span class="v-avatar__details--language">{{item.languageCode}}</span>
@@ -121,7 +137,8 @@ export default {
       basedOnImg: this.$store.state.config.imagesPath + this.$store.state.config.basedOnImg,
       originalImg: this.$store.state.config.imagesPath + this.$store.state.config.originalImg,
       inCatalogColor: 'red lighten-4',
-      normalColor: 'white'
+      normalColor: 'white',
+      defaultImage: this.$store.state.config.imagesPath + this.$store.state.config.defaultBookCover
     };
   },
   methods: {

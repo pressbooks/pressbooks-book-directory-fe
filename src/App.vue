@@ -10,10 +10,10 @@
         <welcome-header></welcome-header>
         <current-filters></current-filters>
         <v-row no-gutters>
-          <v-col cols="6" md="2">
+          <v-col cols="6" md="3">
             <filters></filters>
           </v-col>
-          <v-col cols="12" md="10">
+          <v-col cols="12" md="9">
             <div v-if="$store.state.config.canFilter">
               <books></books>
               <pagination></pagination>
@@ -50,6 +50,5 @@
   };
 </script>
 <style lang="sass">
-  /*$color-pack: false*/
   @import 'styles/styles'
 </style>

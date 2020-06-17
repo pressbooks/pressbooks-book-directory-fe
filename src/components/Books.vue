@@ -5,7 +5,7 @@
                 No results found matching <strong>{{ query }}</strong
             >.
             </p>
-            <v-container>
+            <v-container class="ais-Hits__books__container">
                 <v-row dense>
                     <v-col v-for="item in items" :key="item.objectID" cols="12">
                         <book-card :item="item"></book-card>
@@ -38,7 +38,7 @@
                             : item.editor,
                     image: item.image
                         ? item.image
-                        : vm.imagesPath + "no-image-available.png",
+                        : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
                     publisherName: item.publisher_name ? item.publisher_name : false,
                     lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
                     description: item.description

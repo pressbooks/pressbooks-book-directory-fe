@@ -21,7 +21,7 @@
                                     v-model="activities.min"
                                     :min="0"
                                     :max="activities.max"
-                                    @input="applyFilter(refine, range)"
+                                    @input="applyFilter(refine)"
                                     label="Min"
                                 />
                             </v-col>
@@ -32,7 +32,7 @@
                                     v-model="activities.max"
                                     :min="activities.min"
                                     :max="range.max"
-                                    @input="applyFilter(refine, range)"
+                                    @input="applyFilter(refine)"
                                     label="Max"
                                 />
                             </v-col>
@@ -56,15 +56,35 @@
             };
         },
         methods: {
-            applyFilter(refine, range) {
+            applyFilter(refine) {
                 if (this.activities.min > this.activities.max) {
                     if (this.activities.max == 0) {
-                        refine({min: this.activities.min, max: range.max});
+                        refine({min: this.activities.min});
                         return;
                     }
                     this.activities.max = this.activities.min + 1;
                 }
                 refine({min: this.activities.min, max: this.activities.max});
+            }
+        },
+        watch: {
+            '$store.state.SClient': {
+                deep: true,
+                handler(newClient) {
+                    if (typeof(newClient.filtersClosed.h5pActivities) !== 'undefined') {
+                        newClient.filtersClosed.h5pActivities.forEach((filter, index) => {
+                            if(filter.operator === '>=') {
+                                this.activities.min = 0;
+                            } else {
+                                this.activities.max = 0;
+                            }
+                            this.$store.state.SClient.filtersClosed.h5pActivities.splice(index, 1);
+                            if (this.$store.state.SClient.filtersClosed.h5pActivities.length === 0) {
+                                delete this.$store.state.SClient.filtersClosed.h5pActivities;
+                            }
+                        });
+                    }
+                }
             }
         }
     }

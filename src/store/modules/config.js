@@ -5,6 +5,7 @@ let config = {
   h5pLogo: 'h5p.png',
   basedOnImg: 'is-child.png',
   originalImg: 'is-base.png',
+  defaultBookCover: 'default-book-cover.jpg',
   licenseIcons: {
     "cc-by-sa-(attribution-sharealike)": {
       image: "by-sa.png",

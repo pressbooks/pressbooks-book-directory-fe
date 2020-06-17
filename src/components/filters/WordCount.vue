@@ -21,7 +21,7 @@
                                     v-model="wordCount.min"
                                     :min="0"
                                     :max="wordCount.max"
-                                    @input="applyFilter(refine, range)"
+                                    @input="applyFilter(refine)"
                                     label="Min"
                                 />
                             </v-col>
@@ -32,7 +32,7 @@
                                     v-model="wordCount.max"
                                     :min="wordCount.min"
                                     :max="range.max"
-                                    @input="applyFilter(refine, range)"
+                                    @input="applyFilter(refine)"
                                     label="Max"
                                 />
                             </v-col>
@@ -56,15 +56,35 @@
             };
         },
         methods: {
-            applyFilter(refine, range) {
+            applyFilter(refine) {
                 if (this.wordCount.min > this.wordCount.max) {
                     if (this.wordCount.max == 0) {
-                        refine({min: this.wordCount.min, max: range.max});
+                        refine({min: this.wordCount.min});
                         return;
                     }
                     this.wordCount.max = this.wordCount.min + 1;
                 }
                 refine({min: this.wordCount.min, max: this.wordCount.max});
+            }
+        },
+        watch: {
+            '$store.state.SClient': {
+                deep: true,
+                handler(newClient) {
+                    if (typeof(newClient.filtersClosed.wordCount) !== 'undefined') {
+                        newClient.filtersClosed.wordCount.forEach((filter, index) => {
+                            if(filter.operator === '>=') {
+                                this.wordCount.min = 0;
+                            } else {
+                                this.wordCount.max = 0;
+                            }
+                            this.$store.state.SClient.filtersClosed.wordCount.splice(index, 1);
+                            if (this.$store.state.SClient.filtersClosed.wordCount.length === 0) {
+                                delete this.$store.state.SClient.filtersClosed.wordCount;
+                            }
+                        });
+                    }
+                }
             }
         }
     }

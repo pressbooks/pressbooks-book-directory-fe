@@ -21,7 +21,7 @@
                                     v-model="storage.min"
                                     :min="0"
                                     :max="storage.max"
-                                    @input="applyFilter(refine, range)"
+                                    @input="applyFilter(refine)"
                                     label="Min"
                                 />
                             </v-col>
@@ -32,7 +32,7 @@
                                     v-model="storage.max"
                                     :min="storage.min"
                                     :max="range.max"
-                                    @input="applyFilter(refine, range)"
+                                    @input="applyFilter(refine)"
                                     label="Max"
                                 />
                             </v-col>
@@ -56,15 +56,33 @@
             };
         },
         methods: {
-            applyFilter(refine, range) {
+            applyFilter(refine) {
                 if (this.storage.min > this.storage.max) {
                     if (this.storage.max == 0) {
-                        refine({min: this.storage.min, max: range.max});
+                        refine({min: this.storage.min});
                         return;
                     }
                     this.storage.max = this.storage.min + 1;
                 }
                 refine({min: this.storage.min, max: this.storage.max});
+            }
+        },
+        '$store.state.SClient': {
+            deep: true,
+            handler(newClient) {
+                if (typeof(newClient.filtersClosed.storageSize) !== 'undefined') {
+                    newClient.filtersClosed.storageSize.forEach((filter, index) => {
+                        if(filter.operator === '>=') {
+                            this.storage.min = 0;
+                        } else {
+                            this.storage.max = 0;
+                        }
+                        this.$store.state.SClient.filtersClosed.storageSize.splice(index, 1);
+                        if (this.$store.state.SClient.filtersClosed.storageSize.length === 0) {
+                            delete this.$store.state.SClient.filtersClosed.storageSize;
+                        }
+                    });
+                }
             }
         }
     }

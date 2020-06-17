@@ -14,7 +14,7 @@
                             color="#169db3"
                             text-color="white"
                             :label="true"
-                            @click.prevent="refine(iref)"
+                            @click.prevent="closeFilter(iref, refine)"
                             small
                         >
                             {{ getLabel(item, iref) }}
@@ -52,21 +52,28 @@
             };
         },
         methods: {
+            closeFilter(iref, refine) {
+                let filter = {attribute: iref.attribute, value: iref.label};
+                if (typeof(iref.operator) !== 'undefined') {
+                    filter.operator = iref.operator;
+                }
+                this.$store.commit('setFiltersClosed', filter);
+                refine(iref);
+            },
             getLabel(item, iref) {
                 let label;
-                console.log(item)
                 switch (item.attribute) {
                     case 'has_isBasedOn':
                         label = (item.label === 'true') ? 'Based on another book' : 'Original';
                         break;
                     case 'wordCount':
-                        label = 'Words ' + iref.value;
+                        label = 'Words ' + iref.label;
                         break;
                     case 'storageSize':
-                        label = 'Storage ' + iref.value;
+                        label = 'Storage ' + iref.label;
                         break;
                     case 'h5pActivities':
-                        label = 'H5P Activities ' + iref.value;
+                        label = 'H5P Activities ' + iref.label;
                         break;
                     default:
                         label = iref.value;
