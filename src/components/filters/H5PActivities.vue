@@ -1,5 +1,8 @@
 <template>
-    <v-list-group value="true">
+    <v-list-group
+        sub-group
+        value="true"
+    >
         <template v-slot:activator>
             <v-list-item-title>H5P ACTIVITIES</v-list-item-title>
         </template>

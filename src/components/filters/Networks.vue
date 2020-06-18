@@ -1,6 +1,7 @@
 <template>
     <v-list-group
-            value="true"
+        sub-group
+        value="true"
     >
         <template v-slot:activator>
             <v-list-item-title>NETWORK</v-list-item-title>

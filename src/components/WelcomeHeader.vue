@@ -1,7 +1,7 @@
 <template>
     <div class="headerwelcome grey lighten-3">
         <v-container align="center" class="headerwelcome_content">
-            <p class="display-3 font-weight-bold headerwelcome_red-font-pressbooks">Welcome to Pressbooks Directory</p>
+            <p class="font-weight-bold headerwelcome__red-font--pressbooks--header">Welcome to Pressbooks Directory</p>
             <p class="headerwelcome_spectral-front font-italic">
                 This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
                 public books published across

@@ -2,7 +2,7 @@
     <v-container class="mt-2 ml-5">
         <v-row>
             <v-col cols="10">
-                <div class="float-left headerwelcome_red-font-pressbooks font-weight-bold">
+                <div class="float-left headerwelcome__red-font--pressbooks font-weight-bold">
                     Active Filters:
                 </div>
                 <ais-current-refinements>
@@ -62,6 +62,8 @@
             },
             getLabel(item, iref) {
                 let label;
+                let mb = parseInt(iref.value) / 1024 / 1024;
+                console.log(iref)
                 switch (item.attribute) {
                     case 'has_isBasedOn':
                         label = (item.label === 'true') ? 'Based on another book' : 'Original';
@@ -70,7 +72,7 @@
                         label = 'Words ' + iref.label;
                         break;
                     case 'storageSize':
-                        label = 'Storage ' + iref.label;
+                        label = 'Storage ' + iref.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
                         break;
                     case 'h5pActivities':
                         label = 'H5P Activities ' + iref.label;

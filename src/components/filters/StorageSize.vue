@@ -1,5 +1,8 @@
 <template>
-    <v-list-group value="true">
+    <v-list-group
+        sub-group
+        value="true"
+    >
         <template v-slot:activator>
             <v-list-item-title>STORAGE SIZE</v-list-item-title>
         </template>
@@ -57,14 +60,16 @@
         },
         methods: {
             applyFilter(refine) {
+                let min = this.storage.min * 1024 * 1024;
+                let max = this.storage.max * 1024 * 1024;
                 if (this.storage.min > this.storage.max) {
                     if (this.storage.max == 0) {
-                        refine({min: this.storage.min});
+                        refine({min: min});
                         return;
                     }
                     this.storage.max = this.storage.min + 1;
                 }
-                refine({min: this.storage.min, max: this.storage.max});
+                refine({min: min, max: max});
             }
         },
         '$store.state.SClient': {

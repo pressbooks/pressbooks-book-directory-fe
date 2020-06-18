@@ -1,5 +1,6 @@
 <template>
     <v-list-group
+        sub-group
         value="true"
     >
         <template v-slot:activator>

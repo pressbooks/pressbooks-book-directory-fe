@@ -39,6 +39,9 @@
     <div v-if="item.wordCount">
       <strong>Word Count: </strong>{{ item.wordCount }}
     </div>
+    <div v-if="item.wordCount">
+      <strong>Storage Size: </strong>{{ item.storageSize | toMB }}
+    </div>
     <div v-if="item.description">
       <strong>Description: </strong> {{ item.description }}
     </div>
@@ -54,6 +57,10 @@ export default {
       if (!value) return "";
       value = value.toString();
       return value.toUpperCase();
+    },
+    toMB: function(value) {
+      let v = (parseInt(value) / 1024) / 1024;
+      return parseFloat(v).toFixed(2) + ' MB';
     }
   },
   methods: {

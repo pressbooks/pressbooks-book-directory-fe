@@ -4,12 +4,12 @@
     >
         <div slot-scope="{ refine }">
             <v-row align="center">
-                <v-col cols="3">
-                    <p class="headerwelcome_red-font-pressbooks display-1 font-weight-bold">
+                <v-col cols="12" md="3" sm="12">
+                    <p class="ais-SearchBox__text font-weight-bold text-center">
                         FIND A BOOK
                     </p>
                 </v-col>
-                <v-col cols="9">
+                <v-col cols="12"  md="9" sm="12">
                     <v-text-field
                         type="search"
                         v-model="stringSearch"

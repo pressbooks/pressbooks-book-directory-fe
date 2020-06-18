@@ -19,10 +19,13 @@ export default {
   state: sClient,
   mutations: {
     setFiltersClosed: (state, filter) => {
-      if(typeof(state.filtersClosed[filter.attribute]) === 'undefined') {
-        state.filtersClosed[filter.attribute] = [];
+      // array push function doesn't work for watching variable in components. We need to ASSIGN to dispatch the event.
+      let oldFilters = Object.assign({}, state.filtersClosed);
+      if(typeof(oldFilters[filter.attribute]) === 'undefined') {
+        oldFilters[filter.attribute] = [];
       }
-      state.filtersClosed[filter.attribute].push(filter);
+      oldFilters[filter.attribute].push(filter);
+      state.filtersClosed = oldFilters;
     }
   }
 };
