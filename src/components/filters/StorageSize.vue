@@ -63,30 +63,36 @@
                 let min = this.storage.min * 1024 * 1024;
                 let max = this.storage.max * 1024 * 1024;
                 if (this.storage.min > this.storage.max) {
-                    if (this.storage.max == 0) {
-                        refine({min: min});
-                        return;
-                    }
-                    this.storage.max = this.storage.min + 1;
+                    refine({min: min});
+                    return;
                 }
-                refine({min: min, max: max});
+                let range= {};
+                if (min > 0) {
+                    range.min = min;
+                }
+                if (max > 0) {
+                    range.max = max;
+                }
+                refine(range);
             }
         },
-        '$store.state.SClient': {
-            deep: true,
-            handler(newClient) {
-                if (typeof(newClient.filtersClosed.storageSize) !== 'undefined') {
-                    newClient.filtersClosed.storageSize.forEach((filter, index) => {
-                        if(filter.operator === '>=') {
-                            this.storage.min = 0;
-                        } else {
-                            this.storage.max = 0;
-                        }
-                        this.$store.state.SClient.filtersClosed.storageSize.splice(index, 1);
-                        if (this.$store.state.SClient.filtersClosed.storageSize.length === 0) {
-                            delete this.$store.state.SClient.filtersClosed.storageSize;
-                        }
-                    });
+        watch: {
+            '$store.state.SClient': {
+                deep: true,
+                handler(newClient) {
+                    if (typeof(newClient.filtersClosed.storageSize) !== 'undefined') {
+                        newClient.filtersClosed.storageSize.forEach((filter, index) => {
+                            if(filter.operator === '>=') {
+                                this.storage.min = 0;
+                            } else {
+                                this.storage.max = 0;
+                            }
+                            this.$store.state.SClient.filtersClosed.storageSize.splice(index, 1);
+                            if (this.$store.state.SClient.filtersClosed.storageSize.length === 0) {
+                                delete this.$store.state.SClient.filtersClosed.storageSize;
+                            }
+                        });
+                    }
                 }
             }
         }

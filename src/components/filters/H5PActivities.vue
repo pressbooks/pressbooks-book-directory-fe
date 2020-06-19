@@ -60,14 +60,20 @@
         },
         methods: {
             applyFilter(refine) {
+                let min = this.activities.min;
+                let max = this.activities.max;
                 if (this.activities.min > this.activities.max) {
-                    if (this.activities.max == 0) {
-                        refine({min: this.activities.min});
-                        return;
-                    }
-                    this.activities.max = this.activities.min + 1;
+                    refine({min: min});
+                    return;
                 }
-                refine({min: this.activities.min, max: this.activities.max});
+                let range= {};
+                if (min > 0) {
+                    range.min = min;
+                }
+                if (max > 0) {
+                    range.max = max;
+                }
+                refine(range);
             }
         },
         watch: {

@@ -60,14 +60,20 @@
         },
         methods: {
             applyFilter(refine) {
+                let min = this.wordCount.min;
+                let max = this.wordCount.max;
                 if (this.wordCount.min > this.wordCount.max) {
-                    if (this.wordCount.max == 0) {
-                        refine({min: this.wordCount.min});
-                        return;
-                    }
-                    this.wordCount.max = this.wordCount.min + 1;
+                    refine({min: min});
+                    return;
                 }
-                refine({min: this.wordCount.min, max: this.wordCount.max});
+                let range= {};
+                if (min > 0) {
+                    range.min = min;
+                }
+                if (max > 0) {
+                    range.max = max;
+                }
+                refine(range);
             }
         },
         watch: {
