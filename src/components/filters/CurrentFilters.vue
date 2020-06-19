@@ -1,7 +1,7 @@
 <template>
     <v-container class="mt-2 ml-5">
-        <v-row>
-            <v-col cols="10">
+        <v-row no-gutters>
+            <v-col :md="9">
                 <div class="float-left headerwelcome__red-font--pressbooks font-weight-bold">
                     Active Filters:
                 </div>
@@ -23,7 +23,7 @@
                     </template>
                 </ais-current-refinements>
             </v-col>
-            <v-col cols="2">
+            <v-col :md="auto" align="right" >
                 <ais-stats>
                     <p slot-scope="{ nbHits }">
                         <span class="container__results">RESULTS: </span>

@@ -1,7 +1,7 @@
 <template>
   <div class="search-panel__filters">
     <div v-if="$store.state.config.canFilter">
-      <v-card class="mx-auto ma-1" tile>
+      <v-card class="mx-auto ma-1 search-panel__filters__card" tile>
         <v-list dense>
           <licenses></licenses>
           <subjects></subjects>
