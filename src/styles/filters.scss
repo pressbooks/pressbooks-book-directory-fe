@@ -9,7 +9,7 @@
     color: #b01109;
     font-weight: bold;
 
-    &_hits {
+    &-hits {
       color: #015d75;
       font-style: italic;
       font-family: "Spectral";
@@ -51,22 +51,22 @@
 
   &-RefinementList {
     &-showMore {
-      background-color: white;
+      background-color: #ffffff;
       color: #015d75;
       margin: 0 0 10px 50px;
 
       &:hover {
-        background-color: white;
+        background-color: #ffffff;
         color: #015d75;
       }
 
       &:active {
-        background-color: white;
+        background-color: #ffffff;
         color: #015d75;
       }
 
       &:focus {
-        background-color: white;
+        background-color: #ffffff;
         color: #015d75
       }
     }

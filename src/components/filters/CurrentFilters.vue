@@ -27,7 +27,7 @@
                 <ais-stats>
                     <p slot-scope="{ nbHits }">
                         <span class="container__results">RESULTS: </span>
-                        <span class="container__results_hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
+                        <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
                     </p>
                 </ais-stats>
             </v-col>

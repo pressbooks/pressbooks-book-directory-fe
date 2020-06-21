@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
 @import 'variables';
 @import 'bookscards';
 @import 'filters';
@@ -16,9 +17,9 @@
 
   &__content {
     max-width: 85vw;
-    font-family: "sans-serif";
 
     &--bold-red {
+      font-family: "Karla";
       font-size: 3rem;
       font-weight: bold;
       color: #b01109;
