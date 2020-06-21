@@ -1,0 +1,61 @@
+@import 'variables';
+@import 'bookscards';
+@import 'filters';
+
+.container--fluid {
+  background: #f1f1f1;
+}
+
+.header-welcome {
+  border-radius: 5px;
+  background: #ffffff;
+
+  &__content {
+    max-width: 80vw;
+    font-size: 3rem;
+    text-align: center;
+    color: #b01109;
+
+    &--red {
+      color: #b01109;
+    }
+  }
+
+  &__intro {
+    font-family: "Spectral";
+    color: rgba(16, 16, 16, 0.93);
+    font-size: 1.1rem;
+  }
+}
+
+.ais {
+  &-SearchBox__text {
+    font-size: 1.8rem;
+    color: #b01109;
+    margin: 15px 0 0 10px;
+  }
+
+  &-Stats .container__results {
+    color: #b01109;
+    font-weight: bold;
+
+    &_hits {
+      color: #015d75;
+      font-style: italic;
+      font-family: "Spectral";
+    }
+  }
+}
+
+.theme--light.v-label {
+  font-size: small;
+  color: black;
+  margin-left: 7px;
+}
+
+.search-panel__filters .v-list-item__title {
+  color: #015d75;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+

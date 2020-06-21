@@ -2,7 +2,7 @@
     <v-container class="mt-2 ml-5">
         <v-row>
             <v-col cols="10">
-                <div class="float-left headerwelcome__red-font--pressbooks font-weight-bold">
+                <div class="float-left header-welcome--red font-weight-bold">
                     Active Filters:
                 </div>
                 <ais-current-refinements>
