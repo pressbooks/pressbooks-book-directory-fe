@@ -31,18 +31,22 @@
   }
 
   &-ClearRefinements {
-    &.v-btn__content {
+    .v-btn__content {
       font-family: "Karla";
       color: #b01109;
     }
 
-    &.v-btn.v-btn--contained {
+    .v-btn.v-btn--contained {
       border-width: 2px;
       border-style: solid;
       border-color: #b01109 !important;
       font-weight: bold;
       margin-left: 40px;
     }
+  }
+
+  &-CurrentRefinements-item {
+    background: transparent;
   }
 
   &-RefinementList {
