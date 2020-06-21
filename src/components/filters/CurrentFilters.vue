@@ -1,8 +1,8 @@
 <template>
     <v-container class="mt-2 ml-5 filters">
         <v-row>
-            <v-col cols="10">
-                <div class="filters__header filters__header--red">
+            <v-col cols="8">
+                <div class="filters__head filters__head--red">
                     Active Filters:
                 </div>
                 <ais-current-refinements>
@@ -23,10 +23,10 @@
                     </template>
                 </ais-current-refinements>
             </v-col>
-            <v-col cols="2">
+            <v-col cols="4">
                 <ais-stats>
                     <p slot-scope="{ nbHits }">
-                        <span class="container__results">RESULTS: </span>
+                        <span class="container__results">Results: </span>
                         <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
                     </p>
                 </ais-stats>

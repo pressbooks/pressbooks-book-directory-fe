@@ -1,48 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Karla');
+@import 'fonts';
 @import 'variables';
+@import 'header';
 @import 'bookscards';
 @import 'filters';
 
-.container--fluid {
-  background: #f1f1f1;
-}
-
-.welcome-header {
-  border-radius: 5px;
-  background: #ffffff;
-  font-weight: normal;
-  text-align: center;
-  font-size: 1rem;
-  color: #335a7a;
-
-  &__content {
-    max-width: 85vw;
-
-    &--bold-red {
-      font-family: "Karla";
-      font-size: 3rem;
-      font-weight: bold;
-      color: #b01109;
-    }
-  }
-
-  &__intro {
-    text-align: left;
-
-    &--italic {
-      font-style: italic;
-    }
-  }
-}
-
-.filters {
-  &__header {
-    font-weight: bold;
-
-    &--red {
-      color: #b01109;
-    }
-  }
-}
 
 
