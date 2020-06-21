@@ -2,7 +2,7 @@
     <div class="welcome-header">
         <v-container class="welcome-header welcome-header__content">
             <p class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</p>
-            <p class="welcome-header welcome-header__intro">
+            <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
                 This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
                 public books published across
                 <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks
