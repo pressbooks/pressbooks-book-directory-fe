@@ -5,14 +5,16 @@
     margin: 15px 0 0 10px;
   }
 
-  &-Stats .container__results {
-    color: #b01109;
-    font-weight: bold;
+  &-Stats {
+    .container__results {
+      color: #b01109;
+      font-weight: bold;
 
-    &-hits {
-      color: #015d75;
-      font-style: italic;
-      font-family: "Spectral";
+      &-hits {
+        color: #015d75;
+        font-style: italic;
+        font-family: "Spectral";
+      }
     }
   }
 
@@ -21,8 +23,6 @@
     padding: 0;
 
     .v-list-item {
-      padding: 0;
-
       &--selected {
         background-color: white;
         font-weight: bold;
@@ -31,17 +31,19 @@
   }
 
   &-ClearRefinements {
-    .v-btn__content {
-      font-family: "Karla";
-      color: #b01109;
-    }
+    .v-btn {
+      &__content {
+        font-family: "Karla";
+        color: #b01109;
+      }
 
-    .v-btn.v-btn--contained {
-      border-width: 2px;
-      border-style: solid;
-      border-color: #b01109 !important;
-      font-weight: bold;
-      margin-left: 40px;
+      &.v-btn--contained {
+        border-width: 2px;
+        border-style: solid;
+        border-color: #b01109 !important;
+        font-weight: bold;
+        margin-left: 40px;
+      }
     }
   }
 
