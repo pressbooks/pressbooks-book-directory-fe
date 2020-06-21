@@ -1,8 +1,8 @@
 <template>
-    <v-container class="mt-2 ml-5">
+    <v-container class="mt-2 ml-5 filters">
         <v-row>
             <v-col cols="10">
-                <div class="float-left header-welcome--red font-weight-bold">
+                <div class="filters__header filters__header--red">
                     Active Filters:
                 </div>
                 <ais-current-refinements>

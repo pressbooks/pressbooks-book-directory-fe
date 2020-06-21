@@ -1,8 +1,8 @@
 <template>
-    <div class="header-welcome">
-        <v-container align="center" class="header-welcome__content">
-            <p class="font-weight-bold header-welcome__content--red">Welcome to Pressbooks Directory</p>
-            <p class="header-welcome__intro font-italic">
+    <div class="welcome-header">
+        <v-container class="welcome-header welcome-header__content">
+            <p class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</p>
+            <p class="welcome-header welcome-header__intro">
                 This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
                 public books published across
                 <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks
