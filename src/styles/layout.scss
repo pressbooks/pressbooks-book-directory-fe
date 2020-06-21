@@ -1,5 +1,15 @@
-.v-application--wrap {
-  background: #f1f1f1;
+.v-application {
+  &--wrap {
+    background: #e6e6e6;
+  }
+
+  .ml-5 {
+    margin-right: 20px;
+  }
+
+  ul, ol {
+    flex-wrap: wrap-reverse;
+  }
 }
 
 .container {
@@ -15,7 +25,7 @@
   color: #335a7a;
 
   &__content {
-    max-width: 85vw;
+    max-width: 70%;
 
     &--bold-red {
       font-family: "Karla";

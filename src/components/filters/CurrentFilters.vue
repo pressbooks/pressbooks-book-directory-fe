@@ -1,38 +1,36 @@
 <template>
-    <v-container class="mt-2 ml-5 filters">
-        <v-row>
-            <v-col cols="8">
+    <div class="mt-2 ml-5 filters">
+            <div>
                 <div class="filters__head filters__head--red">
                     Active Filters:
                 </div>
-                <ais-current-refinements>
-                    <template slot="item" slot-scope="{ item, refine }">
-                        <v-chip
-                            v-for="iref in item.refinements"
-                            :key="iref.attribute + iref.value"
-                            class="ma-2"
-                            color="#169db3"
-                            text-color="white"
-                            :label="true"
-                            @click.prevent="closeFilter(iref, refine)"
-                            small
-                        >
-                            {{ getLabel(item, iref) }}
-                            <v-icon right>mdi-close-circle</v-icon>
-                        </v-chip>
-                    </template>
-                </ais-current-refinements>
-            </v-col>
-            <v-col cols="4">
                 <ais-stats>
                     <p slot-scope="{ nbHits }">
                         <span class="container__results">Results: </span>
                         <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
                     </p>
                 </ais-stats>
-            </v-col>
-        </v-row>
-    </v-container>
+                <div class="filters__wrapper filters__wrapper--active">
+                    <ais-current-refinements>
+                        <template slot="item" slot-scope="{ item, refine }">
+                            <v-chip
+                                    v-for="iref in item.refinements"
+                                    :key="iref.attribute + iref.value"
+                                    class="ma-2"
+                                    color="#169db3"
+                                    text-color="white"
+                                    :label="true"
+                                    @click.prevent="closeFilter(iref, refine)"
+                                    small
+                            >
+                                {{ getLabel(item, iref) }}
+                                <v-icon right>mdi-close-circle</v-icon>
+                            </v-chip>
+                        </template>
+                    </ais-current-refinements>
+                </div>
+            </div>
+    </div>
 </template>
 
 <script>

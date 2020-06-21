@@ -6,7 +6,9 @@
   }
 
   &-Stats {
+    float: right;
     text-align: right;
+    display: inline-block;
 
     .container__results {
       color: #b01109;
@@ -38,12 +40,13 @@
   }
 
   &-CurrentRefinements {
-    min-height: 2.5rem;
+    min-height: 2rem;
 
     &-item{
       margin: 0;
       padding: 0;
       background: transparent;
+      display: inline-block;
     }
 
     &-list {
@@ -55,6 +58,7 @@
     &-item {
       margin: 0;
       padding: 0;
+      flex-wrap: wrap-reverse;
 
       .v-list-item {
         &--selected {
@@ -104,9 +108,15 @@
 }
 
 .filters {
+  &__chips {
+
+  }
+
+
   &__head {
     font-weight: bold;
     padding-left: .5rem;
+    display: inline-block;
 
     &--red {
       color: #b01109;

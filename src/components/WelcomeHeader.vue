@@ -5,8 +5,9 @@
             <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
                 This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
                 public books published across
-                <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks
-                networks (see full list [link]).
+                <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks (see full list [link]).
+            </p>
+            <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
                 You can find books of interest by searching the full text of all metadata, applying one or more filters,
                 or simply browsing the book cards below. [More details about using the site.]
             </p>
