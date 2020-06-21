@@ -1,0 +1,72 @@
+.v-card {
+  &__ma-1 {
+    margin: 1em;
+  }
+
+  &__content {
+    &--network {
+      font-family: 'Karla';
+      text-transform: uppercase;
+      color: #015d75;
+      margin: 13px 0 5px 15px;
+      font-size: 0.9rem;
+    }
+
+    &--w80 {
+      width: 80%;
+    }
+  }
+
+  &__subtitle--item {
+    color: #b01109;
+    font-family: "Spectral";
+  }
+}
+
+.v-application .ais-Hits__books .ais-Hits__books {
+  &--redborder {
+    border-color: #aaaaaa #aaaaaa #aaaaaa #b01109 !important;
+    border-width: 1px 1px 1px 15px;
+    border-style: solid;
+  }
+
+  &--redbackground {
+    background-color: #FFCDD2;
+  }
+
+  &--border {
+    border-color: #aaaaaa #aaaaaa #aaaaaa #aaaaaa !important;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+  }
+}
+
+.ais-Hits__books {
+  &__container {
+    padding: 0 0 15px 20px;
+  }
+
+  .v-avatar__details {
+    font-family: "Karla";
+
+    &--b4 {
+      bottom: 4px;
+    }
+
+    &--t2 {
+      top: 2px;
+    }
+
+    &--language {
+      text-transform: uppercase;
+      font-size: 1.1em;
+      top: 2px;
+    }
+  }
+
+  .v-card__title {
+    color: #b01109;
+    text-decoration: underline;
+    padding-top: 0;
+  }
+}
