@@ -1,16 +1,16 @@
 <template>
   <div class="search-panel__filters" v-if="$store.state.config.canFilter">
-        <v-list dense>
-          <licenses></licenses>
-          <subjects></subjects>
-          <based-on></based-on>
-          <word-count></word-count>
-          <h5-p-activities></h5-p-activities>
-          <networks></networks>
-          <languages></languages>
-          <publishers></publishers>
-          <storage-size></storage-size>
-        </v-list>
+    <v-list dense>
+      <licenses></licenses>
+      <subjects></subjects>
+      <based-on></based-on>
+      <word-count></word-count>
+      <h5-p-activities></h5-p-activities>
+      <networks></networks>
+      <languages></languages>
+      <publishers></publishers>
+      <storage-size></storage-size>
+    </v-list>
   </div>
 </template>
 

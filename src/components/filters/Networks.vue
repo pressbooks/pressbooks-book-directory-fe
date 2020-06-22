@@ -7,7 +7,7 @@
             <v-list-item-title>NETWORK</v-list-item-title>
         </template>
         <ais-refinement-list
-            attribute="networkHost"
+            attribute="networkName"
             :searchable="false"
             operator="or"
             :limit="5"
@@ -28,7 +28,7 @@
             </v-list-item>
         </ais-refinement-list>
         <v-list-item>
-            <ais-clear-refinements  :included-attributes="['networkHost']">
+            <ais-clear-refinements  :included-attributes="['networkName']">
                 <div slot-scope="{ canRefine, refine }">
                     <v-btn
                         color="white"

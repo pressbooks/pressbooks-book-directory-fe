@@ -59,7 +59,6 @@
             getLabel(item, iref) {
                 let label;
                 let mb = parseInt(iref.value) / 1024 / 1024;
-                console.log(iref)
                 switch (item.attribute) {
                     case 'has_isBasedOn':
                         label = (item.label === 'true') ? 'Based on another book' : 'Original';
