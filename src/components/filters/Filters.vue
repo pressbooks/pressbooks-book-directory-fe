@@ -1,5 +1,6 @@
 <template>
   <div class="search-panel__filters" v-if="$store.state.config.canFilter">
+
         <v-list dense>
           <licenses></licenses>
           <subjects></subjects>
