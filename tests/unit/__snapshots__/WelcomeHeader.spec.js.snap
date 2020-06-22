@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeHeader.vue should have the "Welcome to Pressbooks Directory title" 1`] = `
+<div class="welcome-header">
+  <v-container-stub tag="div" class="welcome-header welcome-header__content">
+    <p class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</p>
+    <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
+      This site presents a searchable, filterable directory of <strong>0 </strong>
+      public books published across
+      <strong>0</strong> Pressbooks networks (see full list [link]).
+    </p>
+    <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
+      You can find books of interest by searching the full text of all metadata, applying one or more filters,
+      or simply browsing the book cards below. [More details about using the site.]
+    </p>
+    <searchbox-stub></searchbox-stub>
+  </v-container-stub>
+</div>
+`;
+
+exports[`WelcomeHeader.vue should have the Searchbox component 1`] = `
+<div class="welcome-header">
+  <v-container-stub tag="div" class="welcome-header welcome-header__content">
+    <p class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</p>
+    <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
+      This site presents a searchable, filterable directory of <strong>0 </strong>
+      public books published across
+      <strong>0</strong> Pressbooks networks (see full list [link]).
+    </p>
+    <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
+      You can find books of interest by searching the full text of all metadata, applying one or more filters,
+      or simply browsing the book cards below. [More details about using the site.]
+    </p>
+    <searchbox-stub></searchbox-stub>
+  </v-container-stub>
+</div>
+`;
