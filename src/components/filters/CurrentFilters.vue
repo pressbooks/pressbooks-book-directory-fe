@@ -1,35 +1,33 @@
 <template>
-    <div class="mt-2 ml-5 filters">
-            <div>
-                <div class="filters__head filters__head--red">
-                    Active Filters:
-                </div>
-                <ais-stats>
-                    <p slot-scope="{ nbHits }">
-                        <span class="container__results">Results: </span>
-                        <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
-                    </p>
-                </ais-stats>
-                <div class="filters__wrapper filters__wrapper--active">
-                    <ais-current-refinements>
-                        <template slot="item" slot-scope="{ item, refine }">
-                            <v-chip
-                                    v-for="iref in item.refinements"
-                                    :key="iref.attribute + iref.value"
-                                    class="ma-2"
-                                    color="#169db3"
-                                    text-color="white"
-                                    :label="true"
-                                    @click.prevent="closeFilter(iref, refine)"
-                                    small
-                            >
-                                {{ getLabel(item, iref) }}
-                                <v-icon right>mdi-close-circle</v-icon>
-                            </v-chip>
-                        </template>
-                    </ais-current-refinements>
-                </div>
-            </div>
+    <div class="filters">
+        <div class="filters__head filters__head--red">
+            Active Filters:
+        </div>
+        <ais-stats>
+            <p slot-scope="{ nbHits }">
+                <span class="container__results">Results: </span>
+                <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
+            </p>
+        </ais-stats>
+        <div class="filters__wrapper filters__wrapper--active">
+            <ais-current-refinements>
+                <template slot="item" slot-scope="{ item, refine }">
+                    <v-chip
+                            v-for="iref in item.refinements"
+                            :key="iref.attribute + iref.value"
+                            class="ma-2"
+                            color="#169db3"
+                            text-color="white"
+                            :label="true"
+                            @click.prevent="closeFilter(iref, refine)"
+                            small
+                    >
+                        {{ getLabel(item, iref) }}
+                        <v-icon right>mdi-close-circle</v-icon>
+                    </v-chip>
+                </template>
+            </ais-current-refinements>
+        </div>
     </div>
 </template>
 
