@@ -1,4 +1,4 @@
-<template>
+<template>const title = wrapper.find('.v-card__title > span')
   <v-app class="mx-auto">
     <header-bar></header-bar>
     <v-container class="v-application__main_content" fluid>
