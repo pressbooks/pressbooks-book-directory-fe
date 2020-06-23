@@ -8,7 +8,7 @@
     ></v-img>
     <v-spacer></v-spacer>
     <v-btn class="mt-5" icon :href="twitterUrl">
-      <v-icon color="#015d75">mdi-twitter</v-icon>
+      <v-icon color="$pb-blue">mdi-twitter</v-icon>
     </v-btn>
   </v-toolbar>
 </template>

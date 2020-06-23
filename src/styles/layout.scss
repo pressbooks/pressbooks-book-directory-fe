@@ -18,7 +18,7 @@
 
 .welcome-header {
   border-radius: 5px;
-  background: #ffffff;
+  background: $pb-light;
   font-weight: normal;
   text-align: center;
   font-size: 1rem;
@@ -28,10 +28,10 @@
     max-width: 70%;
 
     &--bold-red {
-      font-family: "Karla";
+      font-family: $font-primary;
       font-size: 3rem;
       font-weight: bold;
-      color: #b01109;
+      color: $pb-red;
     }
   }
 

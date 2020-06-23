@@ -7,7 +7,7 @@
     &--network {
       font-family: 'Karla';
       text-transform: uppercase;
-      color: #015d75;
+      color: $pb-blue;
       margin: 13px 0 5px 15px;
       font-size: 0.9rem;
     }
@@ -18,14 +18,14 @@
   }
 
   &__subtitle--item {
-    color: #b01109;
-    font-family: "Spectral";
+    color: $pb-red;
+    font-family: $font-secondary;
   }
 }
 
 .v-application .ais-Hits__books .ais-Hits__books {
   &--redborder {
-    border-color: #aaaaaa #aaaaaa #aaaaaa #b01109 !important;
+    border-color: #aaaaaa #aaaaaa #aaaaaa $pb-red !important;
     border-width: 1px 1px 1px 15px;
     border-style: solid;
   }
@@ -47,7 +47,7 @@
   }
 
   .v-avatar__details {
-    font-family: "Karla";
+    font-family: $font-primary;
 
     &--b4 {
       bottom: 4px;
@@ -65,7 +65,7 @@
   }
 
   .v-card__title {
-    color: #b01109;
+    color: $pb-red;
     text-decoration: underline;
     padding-top: 0;
   }
