@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import InstantSearch from "vue-instantsearch";
 import { store } from "@/store/index";
 import WelcomeHeader from '@/components/WelcomeHeader';
 import Searchbox from '@/components/Searchbox';
@@ -8,23 +7,15 @@ import Searchbox from '@/components/Searchbox';
 Vue.use(Vuetify);
 
 import {
-  shallowMount,
-  createLocalVue
+  shallowMount
 } from '@vue/test-utils';
 
-const localVue = createLocalVue();
-localVue.use(Vuetify);
-localVue.use(InstantSearch);
 
 describe('WelcomeHeader.vue', () => {
-  let vuetify;
-
-  beforeEach(() => {
-    vuetify = new Vuetify();
-  });
+  let vuetify = new Vuetify();
 
   const wrapper = shallowMount(WelcomeHeader, {
-    localVue,
+    Vue,
     vuetify,
     store: store
   });
