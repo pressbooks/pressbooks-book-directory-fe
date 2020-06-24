@@ -1,12 +1,12 @@
 .ais {
   &-RangeInput {
-    padding-left: 30px;
+    padding-left: 1.875rem;
   }
 
   &-SearchBox__text {
     font-size: 1.6rem;
     color: $pb-red;
-    margin: 15px 0 0 10px;
+    margin: 1rem 0 0 .625rem;
   }
 
   &-Stats {
@@ -41,7 +41,7 @@
         border-style: solid;
         border-color: $pb-red !important;
         font-weight: bold;
-        margin-left: 30px;
+        margin-left: 1.875rem;
         box-shadow: none;
       }
     }
