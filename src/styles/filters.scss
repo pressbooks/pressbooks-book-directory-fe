@@ -1,4 +1,8 @@
 .ais {
+  &-RangeInput {
+    padding-left: 30px;
+  }
+
   &-SearchBox__text {
     font-size: 1.6rem;
     color: $pb-red;
@@ -76,7 +80,7 @@
     &-showMore {
       background-color: $pb-light;
       color: $pb-blue;
-      margin: 0 0 10px 38px;
+      margin: 0 0 .625rem 2.375rem;
 
       &:hover {
         background-color: $pb-light;
@@ -160,24 +164,4 @@
 
 .v-icon.v-icon {
   color: $pb-red !important;
-}
-
-.v-application--is-ltr .v-list--dense .v-list-group--sub-group .v-list-group__header, .v-application--is-ltr .v-list-group--sub-group .v-list-group__items .v-list-item {
-  padding-left: 15px;
-}
-
-.ais-RangeInput {
-  padding-left: 30px;
-}
-
-.v-application--is-ltr .v-list-group--sub-group .v-list-item__icon:first-child {
-  margin-right: 6px;
-}
-
-.v-list-group::after {
-  display: inline-block;
-  content: "";
-  border-top: 1px solid #e6e6e6;
-  width: 100%;
-  margin: 1rem 1rem;
 }
