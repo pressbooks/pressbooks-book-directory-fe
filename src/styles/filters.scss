@@ -134,13 +134,13 @@
   &__stats {
     display: block;
 
-    &__algolia_logo {
+    &-algolia-logo {
       background-image: url($algolia-logo);
       display: block;
       background-size: contain;
       background-repeat: no-repeat;
-      height: 1vw;
-      margin-top: 5px;
+      height: 1rem;
+      margin-top: .5rem;
       background-position: right;
     }
   }

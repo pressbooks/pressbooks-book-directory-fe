@@ -9,7 +9,7 @@
                     <span class="container__results">Results: </span>
                     <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
                 </div>
-                <div class="filters__stats__algolia_logo"></div>
+                <div class="filters__stats-algolia-logo"></div>
             </div>
         </ais-stats>
         <ais-current-refinements>
