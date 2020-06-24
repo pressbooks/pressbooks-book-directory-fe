@@ -37,7 +37,8 @@
         border-style: solid;
         border-color: $pb-red !important;
         font-weight: bold;
-        margin-left: 40px;
+        margin-left: 30px;
+        box-shadow: none;
       }
     }
   }
@@ -67,18 +68,15 @@
       padding: 0;
       flex-wrap: wrap-reverse;
 
-      .v-list-item {
-        &--selected {
-          background-color: white;
+      &--selected .v-input {
           font-weight: bold;
         }
       }
-    }
 
     &-showMore {
       background-color: $pb-light;
       color: $pb-blue;
-      margin: 0 0 10px 50px;
+      margin: 0 0 10px 38px;
 
       &:hover {
         background-color: $pb-light;
@@ -101,7 +99,7 @@
 .theme--light.v-label {
   font-size: small;
   color: $pb-dark;
-  margin-left: 7px;
+  margin: .3rem 0 .3rem .45rem;
 }
 
 .search-panel__filters {
@@ -162,4 +160,24 @@
 
 .v-icon.v-icon {
   color: $pb-red !important;
+}
+
+.v-application--is-ltr .v-list--dense .v-list-group--sub-group .v-list-group__header, .v-application--is-ltr .v-list-group--sub-group .v-list-group__items .v-list-item {
+  padding-left: 15px;
+}
+
+.ais-RangeInput {
+  padding-left: 30px;
+}
+
+.v-application--is-ltr .v-list-group--sub-group .v-list-item__icon:first-child {
+  margin-right: 6px;
+}
+
+.v-list-group::after {
+  display: inline-block;
+  content: "";
+  border-top: 1px solid #e6e6e6;
+  width: 100%;
+  margin: 1rem 1rem;
 }
