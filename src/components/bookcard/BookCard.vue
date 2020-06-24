@@ -15,10 +15,7 @@
         </v-card-text>
       </div>
       <v-avatar
-        class="d-flex flex-no-wrap justify-space-between ma-3"
-        height="80%"
-        max-height="350"
-        width="186"
+        class="v-card__book"
         tile
       >
         <v-row>
