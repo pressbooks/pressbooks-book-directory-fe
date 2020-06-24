@@ -4,10 +4,13 @@
             Active Filters:
         </div>
         <ais-stats>
-            <p slot-scope="{ nbHits }">
-                <span class="container__results">Results: </span>
-                <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
-            </p>
+            <div slot-scope="{ nbHits }" class="filters__stats">
+                <div class="filters__stats__results">
+                    <span class="container__results">Results: </span>
+                    <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
+                </div>
+                <div class="filters__stats__algolia_logo"></div>
+            </div>
         </ais-stats>
         <ais-current-refinements>
             <template slot="item" slot-scope="{ item, refine }">

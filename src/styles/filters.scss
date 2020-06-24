@@ -131,6 +131,20 @@
     }
   }
 
+  &__stats {
+    display: block;
+
+    &__algolia_logo {
+      background-image: url($algolia-logo);
+      display: block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 1vw;
+      margin-top: 5px;
+      background-position: right;
+    }
+  }
+
   .v-chip {
     margin: .7rem .5rem .2rem .5rem;
     background: #169db3 !important;
