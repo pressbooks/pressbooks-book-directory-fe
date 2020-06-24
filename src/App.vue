@@ -1,7 +1,7 @@
 <template>
-  <v-app class="mx-auto">
+  <v-app>
     <header-bar></header-bar>
-    <v-container class="v-application__main_content" fluid>
+    <v-container class="v-application__main_content">
       <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"

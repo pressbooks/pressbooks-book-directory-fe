@@ -14,7 +14,6 @@
             <v-list-item
                 slot="item"
                 slot-scope="{ item, refine }"
-                :class="item.isRefined ? 'red darken-4' : ''"
             >
                 <v-list-item-action @click.prevent="refine(item.value)">
                     <v-checkbox

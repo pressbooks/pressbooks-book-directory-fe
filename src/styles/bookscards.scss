@@ -17,6 +17,11 @@
     }
   }
 
+  .v-avatar.v-card__book {
+    height: 20rem !important;
+    width: 186px !important;
+  }
+
   &__subtitle--item {
     color: $pb-red;
     font-family: $font-secondary;
