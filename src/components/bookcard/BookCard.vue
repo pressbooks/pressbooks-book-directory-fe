@@ -7,8 +7,9 @@
         <div class="v-card__content--network">{{ item.networkHost }}</div>
         <v-card-title
           class="headline"
-          v-text="item.name"
-        ></v-card-title>
+        >
+          <a class="v-card__title--link" :href="item.url" target="_blank">{{ item.name }}</a>
+        </v-card-title>
 
         <v-card-text>
           <book-details :item="item"></book-details>

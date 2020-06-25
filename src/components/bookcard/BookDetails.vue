@@ -31,7 +31,6 @@
     </div>
     <div
       v-if="item.publisher_name"
-      class="v-card__subtitle--item"
     >
       <strong>Publisher: </strong>
       <span class="v-card__subtitle--item">{{ item.publisherName }}</span>

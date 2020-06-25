@@ -26,6 +26,12 @@
     color: $pb-red;
     font-family: $font-secondary;
   }
+
+  &__title {
+    &--link {
+      color: $pb-red;
+    }
+  }
 }
 
 .v-application .ais-Hits__books .ais-Hits__books {
