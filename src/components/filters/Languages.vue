@@ -12,6 +12,7 @@
         operator="or"
         :limit="5"
         show-more
+        :sort-by="['name:asc']"
     >
       <v-list-item
           slot="item"

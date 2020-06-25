@@ -10,6 +10,7 @@
             attribute="has_isBasedOn"
             :searchable="false"
             operator="or"
+            :sort-by="['name:asc']"
         >
             <v-list-item
                 slot="item"
