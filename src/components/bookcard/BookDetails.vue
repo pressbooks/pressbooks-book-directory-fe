@@ -18,7 +18,7 @@
         </span>
       </span>
     </div>
-    <div v-if="item.subject">
+    <div v-if="item.about">
       <strong>Subject(s): </strong>
       <span v-for="(about, index) in item.about" v-bind:key="index">
         <span v-if="index != 0">, </span>
