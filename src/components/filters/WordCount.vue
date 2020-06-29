@@ -2,6 +2,7 @@
     <v-list-group
         sub-group
         value="true"
+        id="filter-wordcount"
     >
         <template v-slot:activator>
             <v-list-item-title>WORDS</v-list-item-title>
@@ -20,7 +21,7 @@
                             <v-col cols="6">
                                 <v-text-field
                                     type="number"
-                                    id="min-wc"
+                                    id="min-wordcount"
                                     v-model="wordCount.min"
                                     :min="0"
                                     :max="wordCount.max"
@@ -31,7 +32,7 @@
                             <v-col cols="6">
                                 <v-text-field
                                     type="number"
-                                    id="max-wc"
+                                    id="max-wordcount"
                                     v-model="wordCount.max"
                                     :min="wordCount.min"
                                     :max="range.max"

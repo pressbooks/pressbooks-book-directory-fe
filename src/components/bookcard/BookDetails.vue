@@ -1,12 +1,14 @@
 <template>
   <div>
-    <strong>Author(s): </strong>
-    <span v-for="(author, index) in item.author" v-bind:key="index">
-      <span v-if="index != 0">, </span>
-      <span class="v-card__subtitle--item">
-        {{ author }}
+    <div v-if="item.author && item.author.length > 0">
+      <strong>Author(s): </strong>
+      <span v-for="(author, index) in item.author" v-bind:key="index">
+        <span v-if="index != 0">, </span>
+        <span class="v-card__subtitle--item">
+          {{ author }}
+        </span>
       </span>
-    </span>
+    </div>
     <div v-if="item.editor && item.editor.length > 0">
       <strong>Editor(s): </strong>
       <span v-for="(editor, index) in item.editor" v-bind:key="index">
@@ -36,10 +38,10 @@
       <span class="v-card__subtitle--item">{{ item.publisherName }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Word Count: </strong>{{ item.wordCount }}
+      <strong>Word Count: </strong><span class="ais-Hits__books__book__wordcount">{{ item.wordCount }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Storage Size: </strong>{{ item.storageSize | toMB }}
+      <strong>Storage Size: </strong><span class="ais-Hits__books__book__storagesize">{{ item.storageSize | toMB }}</span>
     </div>
     <div v-if="item.description">
       <strong>Description: </strong> {{ item.description }}
