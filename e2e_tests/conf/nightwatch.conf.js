@@ -9,7 +9,8 @@ module.exports = {
         cli_args: {
             'webdriver.gecko.driver': require('geckodriver').path,
             'webdriver.chrome.driver': require('chromedriver').path
-        }
+        },
+        log_path: './e2e_tests/log'
     },
     test_settings: {
         default: {
