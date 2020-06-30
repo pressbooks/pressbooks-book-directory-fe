@@ -26,7 +26,8 @@ nightwatch_config = {
                 'browser_version': (process.env.CHROME_W10_VERSION) ? process.env.CHROME_W10_VERSION : '83.0',
                 'resolution': '1280x960',
                 log_path: './e2e_tests/log'
-            }
+            },
+            output_folder: "./e2e_tests/output"
         },
         chrome_catalina: {
             desiredCapabilities: {
@@ -38,7 +39,8 @@ nightwatch_config = {
                 'browser_version': (process.env.CHROME_CATALINA_VERSION) ? process.env.CHROME_CATALINA_VERSION :  '83.0',
                 'resolution': '1280x960',
                 log_path: './e2e_tests/log'
-            }
+            },
+            output_folder: "./e2e_tests/output"
         },
         firefox_win10: {
             desiredCapabilities : {
@@ -50,7 +52,8 @@ nightwatch_config = {
                 'browser_version': (process.env.FIREFOX_W10_VERSION) ? process.env.FIREFOX_W10_VERSION : '77.0',
                 'resolution': '1280x960',
                 log_path: './e2e_tests/log'
-            }
+            },
+            output_folder: "./e2e_tests/output"
         },
         firefox_catalina: {
             desiredCapabilities : {
@@ -62,7 +65,8 @@ nightwatch_config = {
                 'browser_version': (process.env.FIREFOX_CATALINA_VERSION) ? process.env.FIREFOX_CATALINA_VERSION : '77.0',
                 'resolution': '1280x960',
                 log_path: './e2e_tests/log'
-            }
+            },
+            output_folder: "./e2e_tests/output"
         },
         safari_catalina: {
             desiredCapabilities: {
@@ -74,7 +78,8 @@ nightwatch_config = {
                 'browser_version': (process.env.SAFARI_CATALINA_VERSION) ? process.env.SAFARI_CATALINA_VERSION : '13.0',
                 'resolution': '1280x960',
                 log_path: './e2e_tests/log'
-            }
+            },
+            output_folder: "./e2e_tests/output"
         }
     }
 };
