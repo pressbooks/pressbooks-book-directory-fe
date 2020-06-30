@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>
     <strong>Author(s): </strong>
     <span v-for="(author, index) in item.author" v-bind:key="index">
       <span v-if="index != 0">, </span>
@@ -7,6 +8,7 @@
         {{ author }}
       </span>
     </span>
+    </div>
     <div v-if="item.editor && item.editor.length > 0">
       <strong>Editor(s): </strong>
       <span v-for="(editor, index) in item.editor" v-bind:key="index">
