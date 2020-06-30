@@ -38,10 +38,10 @@
       <span class="v-card__subtitle--item">{{ item.publisherName }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Word Count: </strong><span class="ais-Hits__books__book__wordcount">{{ item.wordCount }}</span>
+      <strong>Word Count: </strong><span class="ais-Hits__books-book-wordcount">{{ item.wordCount }}</span>
     </div>
-    <div v-if="item.wordCount">
-      <strong>Storage Size: </strong><span class="ais-Hits__books__book__storagesize">{{ item.storageSize | toMB }}</span>
+    <div v-if="item.storageSize">
+      <strong>Storage Size: </strong><span class="ais-Hits__books-book-storagesize">{{ item.storageSize | toMB }}</span>
     </div>
     <div v-if="item.description">
       <strong>Description: </strong> {{ item.description }}

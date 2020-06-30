@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     addClasses(item) {
-      let classes = 'ais-Hits__books__book ';
+      let classes = 'ais-Hits__books-book ';
       if(item.has_inCatalog && item.inCatalog) {
         classes += 'ais-Hits__books--redborder';
       } else {

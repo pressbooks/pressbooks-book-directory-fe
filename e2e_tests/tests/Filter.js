@@ -18,9 +18,17 @@ module.exports = {
             .assert.visible('#max-wordcount')
             .setValue('#max-wordcount', '1200')
             .waitForElementVisible('.v-chip--clickable');
-        browser.elements('css selector', '.ais-Hits__books__book', function(bookElement) {
+        browser.elements('css selector', '.ais-Hits__books-book', function(bookElement) {
+            browser.waitForElementVisible('.v-chip--clickable');
             bookElement.value.forEach((v) => {
-                browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books__book__wordcount', function (elem) {
+                // Firefox - Safari exception
+                if (!v.hasOwnProperty('ELEMENT')) {
+                    v.ELEMENT = Object.values(v)[0];
+                }
+                browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books-book-wordcount', function (elem) {
+                    if (!elem.value.hasOwnProperty('ELEMENT')) {
+                        elem.value.ELEMENT = Object.values(elem.value)[0];
+                    }
                     browser.elementIdText(elem.value.ELEMENT, function(words) {
                         browser.assert.ok(parseInt(words.value) <= 1200, "Card with " + words.value + " words. It is <= 1200");
                     })
@@ -36,9 +44,17 @@ module.exports = {
             .assert.visible('#min-storagesize')
             .setValue('#min-storagesize', '350')
             .waitForElementVisible('.v-chip--clickable');
-        browser.elements('css selector', '.ais-Hits__books__book', function(bookElement) {
+        browser.elements('css selector', '.ais-Hits__books-book', function(bookElement) {
+            browser.waitForElementVisible('.v-chip--clickable');
             bookElement.value.forEach((v) => {
-                browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books__book__storagesize', function (elem) {
+                // Firefox - Safari exception
+                if (!v.hasOwnProperty('ELEMENT')) {
+                    v.ELEMENT = Object.values(v)[0];
+                }
+                browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books-book-storagesize', function (elem) {
+                    if (!elem.value.hasOwnProperty('ELEMENT')) {
+                        elem.value.ELEMENT = Object.values(elem.value)[0];
+                    }
                     browser.elementIdText(elem.value.ELEMENT, function(size) {
                         let storage = size.value.split(' ');
                         if (storage.length > 0) {
