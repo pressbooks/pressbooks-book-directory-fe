@@ -1,9 +1,13 @@
+require('dotenv').config({path: '.env.local'});
+process.env.HOST_TEST = process.env.BROWSERSTACK_URL;
 nightwatch_config = {
     src_folders: ["e2e_tests/tests"],
-    selenium : {
-        "start_process" : false,
-        "host" : "hub-cloud.browserstack.com",
-        "port" : 80
+    selenium: {
+        start_process: false,
+        host: "hub-cloud.browserstack.com",
+        port: 80,
+        log_path: './e2e_tests/log',
+        output_folder: "./e2e_tests/output"
     },
     test_settings: {
         default: {
@@ -14,6 +18,7 @@ nightwatch_config = {
                 on_error : false,
                 path : "./e2e_tests/screenshots"
             },
+            log_path: './e2e_tests/log',
             output_folder: "./e2e_tests/output"
         },
         chrome_win10: {
@@ -24,9 +29,12 @@ nightwatch_config = {
                 'os_version': '10',
                 'browser': 'Chrome',
                 'browser_version': (process.env.CHROME_W10_VERSION) ? process.env.CHROME_W10_VERSION : '83.0',
-                'resolution': '1280x960',
+                'resolution': '1280x800'
+            },
+            webdriver: {
                 log_path: './e2e_tests/log'
             },
+            log_path: './e2e_tests/log',
             output_folder: "./e2e_tests/output"
         },
         chrome_catalina: {
@@ -37,9 +45,12 @@ nightwatch_config = {
                 'os_version': 'Catalina',
                 'browser': 'Chrome',
                 'browser_version': (process.env.CHROME_CATALINA_VERSION) ? process.env.CHROME_CATALINA_VERSION :  '83.0',
-                'resolution': '1280x960',
+                'resolution': '1280x800'
+            },
+            webdriver: {
                 log_path: './e2e_tests/log'
             },
+            log_path: './e2e_tests/log',
             output_folder: "./e2e_tests/output"
         },
         firefox_win10: {
@@ -50,9 +61,12 @@ nightwatch_config = {
                 'os_version': '10',
                 'browser': 'Firefox',
                 'browser_version': (process.env.FIREFOX_W10_VERSION) ? process.env.FIREFOX_W10_VERSION : '77.0',
-                'resolution': '1280x960',
+                'resolution': '1280x800'
+            },
+            webdriver: {
                 log_path: './e2e_tests/log'
             },
+            log_path: './e2e_tests/log',
             output_folder: "./e2e_tests/output"
         },
         firefox_catalina: {
@@ -63,9 +77,12 @@ nightwatch_config = {
                 'os_version': 'Catalina',
                 'browser': 'Firefox',
                 'browser_version': (process.env.FIREFOX_CATALINA_VERSION) ? process.env.FIREFOX_CATALINA_VERSION : '77.0',
-                'resolution': '1280x960',
+                'resolution': '1280x800'
+            },
+            webdriver: {
                 log_path: './e2e_tests/log'
             },
+            log_path: './e2e_tests/log',
             output_folder: "./e2e_tests/output"
         },
         safari_catalina: {
@@ -76,9 +93,12 @@ nightwatch_config = {
                 'os_version': 'Catalina',
                 'browser': 'Safari',
                 'browser_version': (process.env.SAFARI_CATALINA_VERSION) ? process.env.SAFARI_CATALINA_VERSION : '13.0',
-                'resolution': '1280x960',
+                'resolution': '1280x800'
+            },
+            webdriver: {
                 log_path: './e2e_tests/log'
             },
+            log_path: './e2e_tests/log',
             output_folder: "./e2e_tests/output"
         }
     }

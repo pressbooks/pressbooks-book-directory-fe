@@ -12,7 +12,9 @@ try {
     // Code to start browserstack local before start of test
     console.log("Connecting local");
     Nightwatch.bs_local = bs_local = new browserstack.Local();
-    bs_local.start({'key': process.env.BROWSERSTACK_ACCESS_KEY }, function(error) {
+    bs_local.start(
+{'key': process.env.BROWSERSTACK_ACCESS_KEY, logFile: './e2e_tests/log/browserstack.log' },
+function(error) {
         if (error) {
             bs_local.stop(function() {
                 console.log("Stopped BrowserStackLocal");
