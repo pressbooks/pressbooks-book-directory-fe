@@ -77,8 +77,6 @@ Or you could run in multiple browsers with a single command with environments se
 In order to add more Browsers you can add it in `e2e_tests/conf/nightwatch.conf.js` file. Before add a new browser you should install
 its corresponding driver: https://nightwatchjs.org/gettingstarted/installation/#install-webdriver.
 
-
- 
 #### Run E2E tests on BrowserStack
 Be sure you have **BROWSERSTACK_URL** and **BROWSERSTACK_ACCESS_KEY** environment variables correctly. Ask to your team mates for BrowserStack access if you don't have it.  
 In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.  
@@ -103,6 +101,11 @@ Optionally, you can specify / overwrite the current browsers version using the f
 - FIREFOX_W10_VERSION
 - FIREFOX_CATALINA_VERSION
 - SAFARI_CATALINA_VERSION
+
+#### See tests reports locally
+If you run your tests on BrowserStack, you can see reports in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/). 
+In case you want to see reports locally, you can use [xunit-viewer](https://github.com/lukejpreston/xunit-viewer). After you ran your tests locally, 
+just run: `npm run nightwatch:output`, and a `e2e_tests/output/output.html` report file will be generated. You can open that file in any browser to see the report. 
 
 ### Vue references
 
