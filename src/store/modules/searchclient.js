@@ -9,7 +9,7 @@ let sClient = {
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
   filtersClosed: {},
   searchParameters: {
-    hitsPerPage: 6,
+    hitsPerPage: 10,
     facetFilters: [],
     page: 0
   }
