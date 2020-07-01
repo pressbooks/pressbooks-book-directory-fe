@@ -20,7 +20,7 @@
                             <v-col cols="6">
                                 <v-text-field
                                     type="number"
-                                    id="min-wc"
+                                    id="min-storagesize"
                                     v-model="storage.min"
                                     :min="0"
                                     :max="storage.max"
@@ -31,7 +31,7 @@
                             <v-col cols="6">
                                 <v-text-field
                                     type="number"
-                                    id="max-wc"
+                                    id="max-storagesize"
                                     v-model="storage.max"
                                     :min="storage.min"
                                     :max="range.max"

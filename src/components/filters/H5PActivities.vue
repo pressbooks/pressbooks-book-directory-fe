@@ -20,7 +20,7 @@
                             <v-col cols="6">
                                 <v-text-field
                                     type="number"
-                                    id="min-wc"
+                                    id="min-h5pactivities"
                                     v-model="activities.min"
                                     :min="0"
                                     :max="activities.max"
@@ -31,7 +31,7 @@
                             <v-col cols="6">
                                 <v-text-field
                                     type="number"
-                                    id="max-wc"
+                                    id="max-h5pactivities"
                                     v-model="activities.max"
                                     :min="activities.min"
                                     :max="range.max"

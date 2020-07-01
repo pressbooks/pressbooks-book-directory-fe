@@ -2,6 +2,7 @@
     <v-list-group
         sub-group
         value="true"
+        id="filter-licenses"
     >
         <template v-slot:activator>
             <v-list-item-title>LICENSE</v-list-item-title>
@@ -19,7 +20,10 @@
                 slot="item"
                 slot-scope="{ item, refine }"
             >
-                <v-list-item-action @click.prevent="refine(item.value)">
+                <v-list-item-action
+                    @click.prevent="refine(item.value)"
+                    :id="item.value.split(' ').join('-').toLowerCase()"
+                >
                     <v-checkbox
                         v-model="item.isRefined"
                         :label="cleanLicense(item)"
