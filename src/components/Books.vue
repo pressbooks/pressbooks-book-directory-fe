@@ -5,12 +5,8 @@
                 No results found matching <strong>{{ query }}</strong
             >.
             </p>
-            <div class="ais-Hits__books__container">
-                <v-row dense>
-                    <v-col v-for="item in items" :key="item.objectID" cols="12">
-                        <book-card :item="item"></book-card>
-                    </v-col>
-                </v-row>
+            <div class="ais-Hits__books__container" v-for="item in items" :key="item.objectID">
+                <book-card :item="item"></book-card>
             </div>
         </div>
     </ais-hits>

@@ -11,7 +11,6 @@
       <publishers></publishers>
       <storage-size></storage-size>
     </v-list>
-
   </div>
 </template>
 
