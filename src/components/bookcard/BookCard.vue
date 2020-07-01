@@ -39,8 +39,10 @@
               </template>
             </v-img>
           </v-col>
-          <v-col cols="12" class="v-avatar__details">
-            <span class="v-avatar__details--language">{{item.languageCode}}</span>
+          <v-col cols="6" class="v-avatar__details">
+            <div class="v-avatar__details--language">{{item.languageCode}}</div>
+          </v-col>
+          <v-col cols="6" class="v-avatar__details">
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-img
@@ -66,33 +68,35 @@
               <span>{{ item.licenseAlt }}</span>
             </v-tooltip>
           </v-col>
-          <v-col cols="12" class="v-avatar__details">
+          <v-col cols="6" class="v-avatar__details">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-img
+                      v-if="item.has_h5pActivities && item.h5pActivities > 0"
+                      max-height="18"
+                      max-width="50"
+                      class="ml-2"
+                      v-bind="attrs"
+                      v-on="on"
+                      :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
+                      :src="h5pActivitiesImage"
+              ></v-img>
+            </template>
+            <span>This book has {{ item.h5pActivities }} H5P Activities </span>
+          </v-tooltip>
+          </v-col>
+          <v-col cols="6" class="v-avatar__details">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-img
-                  v-if="item.has_h5pActivities && item.h5pActivities > 0"
-                  max-height="18"
-                  max-width="50"
-                  class="ml-2"
-                  v-bind="attrs"
-                  v-on="on"
-                  :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
-                  :src="h5pActivitiesImage"
-                ></v-img>
-              </template>
-              <span>This book has {{ item.h5pActivities }} H5P Activities </span>
-            </v-tooltip>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-img
-                  v-if="item.has_isBasedOn"
-                  max-height="22"
-                  max-width="25"
-                  class="ml-2 v-avatar__details--b4"
-                  v-bind="attrs"
-                  v-on="on"
-                  alt="Book based on another book"
-                  :src="basedOnImg"
+                        v-if="item.has_isBasedOn"
+                        max-height="22"
+                        max-width="25"
+                        class="ml-2 v-avatar__details--b4"
+                        v-bind="attrs"
+                        v-on="on"
+                        alt="Book based on another book"
+                        :src="basedOnImg"
                 ></v-img>
               </template>
               <span>This book is based on another book </span>
@@ -100,14 +104,14 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-img
-                  v-if="!item.has_isBasedOn"
-                  max-height="22"
-                  max-width="25"
-                  class="ml-2 v-avatar__details--b4"
-                  v-bind="attrs"
-                  v-on="on"
-                  alt="This book is not based on another book"
-                  :src="originalImg"
+                        v-if="!item.has_isBasedOn"
+                        max-height="22"
+                        max-width="25"
+                        class="ml-2 v-avatar__details--b4"
+                        v-bind="attrs"
+                        v-on="on"
+                        alt="This book is not based on another book"
+                        :src="originalImg"
                 ></v-img>
               </template>
               <span>This book is not based on another book </span>

@@ -1,7 +1,7 @@
 <template>
     <div class="welcome-header">
         <v-container class="welcome-header welcome-header__content">
-            <p class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</p>
+            <h1 class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</h1>
             <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
                 This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
                 public books published across
