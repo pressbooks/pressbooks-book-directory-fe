@@ -4,47 +4,35 @@
       <strong>Author(s): </strong>
       <span v-for="(author, index) in item.author" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span class="v-card__subtitle--item">
-          {{ author }}
-        </span>
+        <span class="author">{{ author }}</span>
       </span>
     </div>
     <div v-if="item.editor && item.editor.length > 0">
       <strong>Editor(s): </strong>
       <span v-for="(editor, index) in item.editor" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span
-          class="v-card__subtitle--item"
-        >
-          {{ editor }}
-        </span>
+        <span class="editor">{{ editor }}</span>
       </span>
     </div>
     <div v-if="item.about">
       <strong>Subject(s): </strong>
       <span v-for="(about, index) in item.about" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span
-          class="v-card__subtitle--item"
-        >
-          {{ about }}
-        </span>
+        <span class="subject">{{ about }}</span>
       </span>
     </div>
-    <div
-      v-if="item.publisher_name"
-    >
+    <div v-if="item.publisher_name">
       <strong>Publisher: </strong>
-      <span class="v-card__subtitle--item">{{ item.publisherName }}</span>
+      <span class="publisher">{{ item.publisherName }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Word Count: </strong><span class="ais-Hits__books-book-wordcount">{{ item.wordCount }}</span>
+      <strong>Word Count: </strong><span class="wordcount">{{ item.wordCount }}</span>
     </div>
     <div v-if="item.storageSize">
-      <strong>Storage Size: </strong><span class="ais-Hits__books-book-storagesize">{{ item.storageSize | toMB }}</span>
+      <strong>Storage Size: </strong><span class="storagesize">{{ item.storageSize | toMB }}</span>
     </div>
     <div v-if="item.description">
-      <strong>Description: </strong> {{ item.description }}
+      <strong>Description: </strong><span class="description">{{ item.description }}</span>
     </div>
   </div>
 </template>
