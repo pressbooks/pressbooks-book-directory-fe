@@ -43,19 +43,14 @@
     background-color: #FFCDD2;
   }
 
-  .book-cover, {
+  .book-cover, .copyright, .isBasedOn {
     margin-right: 1rem;
   }
 
-  .copyright {
-    max-height: 1rem;
-
-    img {
+  img {
       max-height: 1.75rem;
       margin-right: 2rem;
     }
-  }
-
 }
 
 .ais-Hits__books {
@@ -66,7 +61,7 @@
    .language {
      font-family: $font-primary;
      text-transform: uppercase;
-     font-size: 1.25rem;
+     font-size: 1.5rem;
     }
 
   .v-card__title {

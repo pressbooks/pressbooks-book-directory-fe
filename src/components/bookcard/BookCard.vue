@@ -19,39 +19,50 @@
                 </v-img>
               </v-col>
               <v-col cols="6">
-                <div class="language">{{item.languageCode}}</div>
+                <div class="language">{{ item.languageCode }}</div>
               </v-col>
               <v-col cols="6">
                 <v-tooltip top>
-                  <v-img class="copyright" :src="item.licenseIcon"></v-img>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-img
+                          max-height="35"
+                          contain
+                          class="copyright"
+                          v-bind="attrs"
+                          v-on="on"
+                          :src="item.licenseIcon"
+                          :alt="item.licenseAlt"
+                  ></v-img>
+                  </template>
                   <span>{{ item.licenseAlt }}</span>
                 </v-tooltip>
               </v-col>
-              <v-col cols="6" class="h5p">
+              <v-col cols="6">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-img
+                    <a :href="item.url + 'h5p-listing'" target="_blank">
+                      <v-img
                             v-if="item.has_h5pActivities && item.h5pActivities > 0"
-                            max-height="18"
-                            max-width="50"
-                            class="ml-2"
+                            max-height="35"
+                            contain
                             v-bind="attrs"
                             v-on="on"
                             :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
                             :src="h5pActivitiesImage"
                     ></v-img>
+                    </a>
                   </template>
                   <span>This book has {{ item.h5pActivities }} H5P Activities </span>
                 </v-tooltip>
               </v-col>
-              <v-col cols="6" class="isBasedOn">
+              <v-col cols="6">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-img
                             v-if="item.has_isBasedOn"
-                            max-height="22"
-                            max-width="25"
-                            class="ml-2 v-avatar__details--b4"
+                            max-height="35"
+                            contain
+                            class="isBasedOn"
                             v-bind="attrs"
                             v-on="on"
                             alt="Book based on another book"
@@ -64,9 +75,9 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-img
                             v-if="!item.has_isBasedOn"
-                            max-height="22"
-                            max-width="25"
-                            class="ml-2 v-avatar__details--b4"
+                            max-height="35"
+                            contain
+                            class="isBasedOn"
                             v-bind="attrs"
                             v-on="on"
                             alt="This book is not based on another book"
