@@ -46,6 +46,9 @@
   .book-cover, .copyright, .isBasedOn {
     margin-right: 1rem;
   }
+  .book-cover {
+    margin-top: -.5rem;
+  }
 
   img {
       max-height: 1.75rem;
