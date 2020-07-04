@@ -4,35 +4,35 @@
       <strong>Author(s): </strong>
       <span v-for="(author, index) in item.author" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span class="author">{{ author }}</span>
+        <span class="v-card--item author">{{ author }}</span>
       </span>
     </div>
     <div v-if="item.editor && item.editor.length > 0">
       <strong>Editor(s): </strong>
       <span v-for="(editor, index) in item.editor" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span class="editor">{{ editor }}</span>
+        <span class="v-card--item editor">{{ editor }}</span>
       </span>
     </div>
     <div v-if="item.about">
       <strong>Subject(s): </strong>
       <span v-for="(about, index) in item.about" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span class="subject">{{ about }}</span>
+        <span class="v-card--item subject">{{ about }}</span>
       </span>
     </div>
     <div v-if="item.publisher_name">
       <strong>Publisher: </strong>
-      <span class="publisher">{{ item.publisherName }}</span>
+      <span class="v-card--item publisher">{{ item.publisherName }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Word Count: </strong><span class="wordcount">{{ item.wordCount }}</span>
+      <strong>Word Count: </strong><span class="v-card--item wordcount">{{ item.wordCount }}</span>
     </div>
     <div v-if="item.storageSize">
-      <strong>Storage Size: </strong><span class="storagesize">{{ item.storageSize | toMB }}</span>
+      <strong>Storage Size: </strong><span class="v-card--item storagesize">{{ item.storageSize | toMB }}</span>
     </div>
     <div v-if="item.description">
-      <strong>Description: </strong><span class="description">{{ item.description }}</span>
+      <strong>Description: </strong><span class="v-card--item description">{{ item.description }}</span>
     </div>
   </div>
 </template>
