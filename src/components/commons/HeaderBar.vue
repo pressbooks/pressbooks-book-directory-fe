@@ -1,10 +1,10 @@
 <template>
   <v-toolbar class="toolbar">
       <a href="https://pressbooks.com" target="_blank">
-      <v-img
-            :src="logo"
-            class="logo"
-      ></v-img>
+          <v-img
+                :src="logo"
+                class="logo"
+          ></v-img>
       </a>
       <v-btn icon :href="twitterUrl">
         <v-icon>mdi-twitter</v-icon>

@@ -6,27 +6,55 @@
         <template v-slot:activator>
             <v-list-item-title>PUBLISHER</v-list-item-title>
         </template>
-        <ais-refinement-list
-            attribute="publisher_name"
-            :searchable="false"
-            operator="or"
-            :limit="5"
-            show-more
-            :show-more-limit="500"
-            :sort-by="['name:asc']"
-        >
-            <v-list-item
-                slot="item"
-                slot-scope="{ item, refine }"
+        <template>
+            <ais-refinement-list
+                attribute="publisher_name"
+                :searchable="true"
+                operator="or"
+                :limit="5"
+                show-more
+                :sort-by="['name:asc']"
             >
-                <v-list-item-action @click.prevent="refine(item.value)">
-                    <v-checkbox
-                        v-model="item.isRefined"
-                        :label="item.value + ' (' + item.count + ')'"
-                    ></v-checkbox>
-                </v-list-item-action>
-            </v-list-item>
-        </ais-refinement-list>
+                <div
+                    slot-scope="{
+                        items,
+                        refine,
+                        searchForItems,
+                        toggleShowMore,
+                        canToggleShowMore,
+                        isShowingMore
+                    }"
+                >
+                    <v-list-item>
+                        <v-text-field
+                            type="search"
+                            v-model="stringSearch"
+                            label="Search subject"
+                            @input="searchForItems(stringSearch)"
+                        >
+                            <v-icon slot="append">mdi-magnify</v-icon>
+                        </v-text-field>
+                    </v-list-item>
+                    <v-list-item
+                        v-for="item in items" :key="item.value"
+                    >
+                        <v-list-item-action @click.prevent="refine(item.value)">
+                            <v-checkbox
+                                v-model="item.isRefined"
+                                :label="item.value + ' (' + item.count + ')'"
+                            ></v-checkbox>
+                        </v-list-item-action>
+                    </v-list-item>
+                    <button
+                        @click="toggleShowMore"
+                        v-show="canToggleShowMore"
+                        class="ais-RefinementList-showMore"
+                    >
+                        {{ !isShowingMore ? 'Show more' : 'Show less'}}
+                    </button>
+                </div>
+            </ais-refinement-list>
+        </template>
         <v-list-item>
             <ais-clear-refinements  :included-attributes="['publisher_name']">
                 <div slot-scope="{ canRefine, refine }">
@@ -44,6 +72,11 @@
 
 <script>
     export default {
-        name: "Publishers"
+        name: "Publishers",
+        data() {
+            return {
+                stringSearch: ''
+            };
+        }
     }
 </script>
