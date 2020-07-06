@@ -1,19 +1,13 @@
 <template>
-    <div class="welcome-header">
-        <v-container class="welcome-header welcome-header__content">
-            <h1 class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</h1>
-            <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
-                This site presents a searchable, filterable directory of <strong>{{ $store.state.stats.totalBooks }} </strong>
-                public books published across
-                <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks (see full list [link]).
-            </p>
-            <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
-                You can find books of interest by searching the full text of all metadata, applying one or more filters,
-                or simply browsing the book cards below. [More details about using the site.]
-            </p>
-            <searchbox></searchbox>
-        </v-container>
-    </div>
+    <v-container class="welcome-header">
+        <h1>Welcome to Pressbooks Directory</h1>
+        <p>
+            This directory provides an index of <strong>{{ $store.state.stats.totalBooks }}</strong> public books
+            published across <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks. Find books
+            of interest by searching, applying filters, or simply browsing the book cards below. [How to use the site.]
+        </p>
+        <searchbox></searchbox>
+    </v-container>
 </template>
 
 <script>

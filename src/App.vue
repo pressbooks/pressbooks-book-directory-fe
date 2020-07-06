@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <header-bar></header-bar>
-    <v-container class="v-application__main_content">
+    <v-container id="v-application__main_content">
       <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"
@@ -9,11 +9,11 @@
         <ais-configure :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"></ais-configure>
         <welcome-header></welcome-header>
         <current-filters></current-filters>
-        <v-row no-gutters>
-          <v-col cols="6" md="3">
+        <v-row>
+          <v-col cols="12" md="4" lg="3" id="filters">
             <filters></filters>
           </v-col>
-          <v-col cols="12" md="9">
+          <v-col cols="12" md="8" lg="9" id="book-list">
             <div v-if="$store.state.config.canFilter">
               <books></books>
               <pagination></pagination>

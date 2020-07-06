@@ -1,0 +1,80 @@
+.v-card {
+  &__text div {
+    font-family: $font-secondary;
+    margin-bottom: .2rem;
+    font-size: 1rem;
+  }
+
+  &__ma-1 {
+    margin: 1em;
+  }
+
+  &__content {
+    .network {
+      font-family: $font-primary;
+      text-transform: uppercase;
+      color: $pb-blue;
+      margin: .25rem 0 .625rem 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  &__title {
+    a {
+      color: $pb-red;
+    }
+  }
+}
+
+.v-application .ais-Hits__books {
+
+  &-book {
+    border-color: #aaaaaa !important;
+    border-width: .0625rem;
+    border-style: solid;
+  }
+
+  &--redborder {
+    border-left-color: $pb-red !important;
+    border-left-width: 1rem;
+  }
+
+  &--redbackground {
+    background-color: #FFCDD2;
+  }
+
+  .book-cover, .copyright, .isBasedOn {
+    margin-right: 1rem;
+  }
+  .book-cover {
+    margin-top: -.5rem;
+  }
+
+  img {
+      max-height: 1.75rem;
+      margin-right: 2rem;
+    }
+}
+
+.ais-Hits__books {
+    &__container {
+      margin-bottom: .625rem;
+    }
+
+   .language {
+     font-family: $font-primary;
+     text-transform: uppercase;
+     font-size: 1.5rem;
+    }
+
+  .v-card__title {
+    font-size: 2rem;
+    color: $pb-red;
+    text-decoration: underline;
+    padding-top: 0;
+  }
+
+  .v-card__text {
+    line-height: 1.5;
+  }
+}
