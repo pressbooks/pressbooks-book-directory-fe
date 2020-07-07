@@ -21,10 +21,10 @@ module.exports = {
         browser.elements('css selector', '.ais-Hits__books-book', function(bookElement) {
             browser.waitForElementVisible('.v-chip--clickable');
             bookElement.value.forEach((v) => {
-                // Firefox - Safari exception
                 if (!v.hasOwnProperty('ELEMENT')) {
                     v.ELEMENT = Object.values(v)[0];
                 }
+                // Firefox - Safari exception
                 browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books-book-wordcount', function (elem) {
                     if (!elem.value.hasOwnProperty('ELEMENT')) {
                         elem.value.ELEMENT = Object.values(elem.value)[0];
