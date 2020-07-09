@@ -5,7 +5,7 @@ nightwatch_config = {
     selenium: {
         start_process: false,
         host: "hub-cloud.browserstack.com",
-        port: 80,
+        port: 443,
         log_path: './e2e_tests/log',
         output_folder: "./e2e_tests/output"
     },
@@ -77,7 +77,7 @@ nightwatch_config = {
                 'os_version': 'Catalina',
                 'browser': 'Firefox',
                 'browser_version': (process.env.FIREFOX_CATALINA_VERSION) ? process.env.FIREFOX_CATALINA_VERSION : '77.0',
-                'resolution': '1280x800'
+                'resolution': '1280x960'
             },
             webdriver: {
                 log_path: './e2e_tests/log'

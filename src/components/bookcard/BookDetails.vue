@@ -26,10 +26,10 @@
       <span class="v-card--item publisher">{{ item.publisherName }}</span>
     </div>
     <div v-if="item.wordCount">
-      <strong>Word Count: </strong><span class="v-card--item wordcount">{{ item.wordCount }}</span>
+      <strong>Word Count: </strong><span class="v-card--item ais-Hits__books-book-wordcount">{{ item.wordCount }}</span>
     </div>
     <div v-if="item.storageSize">
-      <strong>Storage Size: </strong><span class="v-card--item storagesize">{{ item.storageSize | toMB }}</span>
+      <strong>Storage Size: </strong><span class="v-card--item ais-Hits__books-book-storagesize">{{ item.storageSize | toMB }}</span>
     </div>
     <div v-if="item.description">
       <strong>Description: </strong><span class="v-card--item description">{{ item.description }}</span>
