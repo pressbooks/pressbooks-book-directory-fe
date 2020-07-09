@@ -10,7 +10,8 @@
             <ais-refinement-list
                 :attribute="field"
                 operator="or"
-                :limit="showing"
+                show-more
+                :show-more-limit="500"
                 :sort-by="sortBy"
             >
                 <div
@@ -18,6 +19,7 @@
                         items,
                         refine,
                         toggleShowMore,
+                        canToggleShowMore,
                         isShowingMore,
                         searchForItems
                     }"
@@ -42,6 +44,13 @@
                             ></v-checkbox>
                         </v-list-item-action>
                     </v-list-item>
+                    <button
+                            @click="toggleShowMore"
+                            v-show="canToggleShowMore"
+                            class="ais-RefinementList-showMore"
+                    >
+                        {{ !isShowingMore ? 'Show more' : 'Show less'}}
+                    </button>
                 </div>
             </ais-refinement-list>
         </template>
@@ -72,7 +81,7 @@
         data() {
             return {
                 stringSearch: '',
-                showing: 6,
+                showing: 10,
                 max: 1001,
                 sortBy: ['isRefined', 'name:asc']
             };
