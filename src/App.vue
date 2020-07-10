@@ -1,27 +1,29 @@
 <template>
   <v-app>
     <header-bar></header-bar>
-    <v-container id="v-application__main_content" role="main">
-      <ais-instant-search
+    <main role="main">
+      <v-container id="v-application__main_content" role="main">
+        <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"
       >
-        <ais-configure :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"></ais-configure>
-        <welcome-header></welcome-header>
-        <current-filters></current-filters>
-        <v-row>
-          <v-col cols="12" md="4" lg="3" id="filters">
-            <filters></filters>
+          <ais-configure :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"></ais-configure>
+          <welcome-header></welcome-header>
+          <current-filters></current-filters>
+          <v-row>
+            <v-col cols="12" md="4" lg="3" id="filters">
+              <filters></filters>
           </v-col>
-          <v-col cols="12" md="8" lg="9" id="book-list">
-            <div v-if="$store.state.config.canFilter">
-              <books></books>
-              <pagination></pagination>
-            </div>
-          </v-col>
-        </v-row>
-      </ais-instant-search>
-    </v-container>
+            <v-col cols="12" md="8" lg="9" id="book-list">
+              <div v-if="$store.state.config.canFilter">
+                <books></books>
+                <pagination></pagination>
+              </div>
+            </v-col>
+          </v-row>
+        </ais-instant-search>
+      </v-container>
+    </main>
   </v-app>
 </template>
 
