@@ -34,13 +34,13 @@
     border-style: solid;
   }
 
-  &--redborder {
+  &--notcatalogue {
     border-left-color: $pb-red !important;
     border-left-width: 1rem;
   }
 
-  &--redbackground {
-    background-color: #FFCDD2;
+  &--allrights {
+    background-color: $pb-light-background;
   }
 
   .book-cover, .copyright, .isBasedOn {

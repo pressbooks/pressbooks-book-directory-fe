@@ -40,7 +40,7 @@
               <v-col cols="6">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <a :href="item.url + 'h5p-listing'" target="_blank">
+                    <a :href="item.url + 'h5p-listing'" aria-label="See a list of this book's H5P activities" target="_blank">
                       <v-img
                             v-if="item.has_h5pActivities && item.h5pActivities > 0"
                             max-height="35"
@@ -118,10 +118,10 @@ export default {
       if(item.has_inCatalog && item.inCatalog) {
         classes += 'ais-Hits__books--border';
       } else {
-        classes += 'ais-Hits__books--redborder';
+        classes += 'ais-Hits__books--notcatalog';
       }
       if(item.license_name.indexOf('All Rights Reserved') >= 0) {
-        classes += ' ais-Hits__books--redbackground';
+        classes += ' ais-Hits__books--allrights';
       }
       return classes;
     }
