@@ -11,8 +11,7 @@
                 :attribute="field"
                 operator="or"
                 show-more
-                :show-more-limit="500"
-                :sort-by="sortBy"
+                :show-more-limit="25"
             >
                 <div
                     slot-scope="{
@@ -81,9 +80,6 @@
         data() {
             return {
                 stringSearch: '',
-                showing: 10,
-                max: 1001,
-                sortBy: ['isRefined', 'name:asc']
             };
         },
         methods: {

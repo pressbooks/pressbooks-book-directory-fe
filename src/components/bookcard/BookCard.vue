@@ -116,9 +116,9 @@ export default {
     addClasses(item) {
       let classes = 'ais-Hits__books-book ';
       if(item.has_inCatalog && item.inCatalog) {
-        classes += 'ais-Hits__books--redborder';
-      } else {
         classes += 'ais-Hits__books--border';
+      } else {
+        classes += 'ais-Hits__books--redborder';
       }
       if(item.license_name.indexOf('All Rights Reserved') >= 0) {
         classes += ' ais-Hits__books--redbackground';

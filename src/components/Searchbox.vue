@@ -1,5 +1,8 @@
 <template>
-    <ais-search-box class="searchbox" v-slot="{ refine }">
+    <ais-search-box
+            class="searchbox"
+            v-slot="{ refine }"
+    >
         <h2 class="ais-SearchBox__text">Find a book:</h2>
         <v-text-field
                 type="search"
