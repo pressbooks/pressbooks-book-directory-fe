@@ -86,10 +86,9 @@ Nightwatch / BrowserStack configurations are located in `e2e_tests/conf/browsers
 
 You can run tests with the following command:  `npm run e2e:browserstack -- --env [Browser_OS]`. The *Browser_OS* args available are:  
 - chrome_win10: It runs Google Chrome on Windows 10 OS
-- chrome_catalina: It runs Google Chrome on OS X Catalina.
+- chrome_mojave: It runs Google Chrome on OS X Mojave.
 - firefox_win10: It runs Firefox on Windows 10 OS.
-- firefox_catalina: It runs Firefox on OS X Catalina.
-- safari_catalina: It runs Safari on OS X Catalina.  
+- firefox_mojave: It runs Firefox on OS X Mojave.  
 
 Example: `npm run e2e:browserstack -- --env chrome_catalina`.  
 Or you could run in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env chrome_catalina,firefox_win10,chrome_win10`.  
@@ -97,10 +96,9 @@ Or you could run in multiple browsers with a single command with environments se
 You can add more Browsers / OS in `e2e_tests/conf/browserstack.nightwatch.conf.js` file in test_settings object using [this generator](https://www.browserstack.com/automate/capabilities).  
 Optionally, you can specify / overwrite the current browsers version using the following environment variables:  
 - CHROME_W10_VERSION
-- CHROME_CATALINA_VERSION
+- CHROME_MOJAVE_VERSION
 - FIREFOX_W10_VERSION
-- FIREFOX_CATALINA_VERSION
-- SAFARI_CATALINA_VERSION
+- FIREFOX_MOJAVE_VERSION
 
 #### See tests reports locally
 If you run your tests on BrowserStack, you can see reports in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/). 
