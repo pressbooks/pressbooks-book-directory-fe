@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <header-bar></header-bar>
-    <div role="main">
+    <main role="main">
       <v-container id="v-application__main_content" role="main">
         <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
@@ -23,7 +23,7 @@
           </v-row>
         </ais-instant-search>
       </v-container>
-    </div>
+    </main>
   </v-app>
 </template>
 
