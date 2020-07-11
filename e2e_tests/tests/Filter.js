@@ -7,7 +7,7 @@ module.exports = {
             .assert.visible('#all-rights-reserved')
             .click('#all-rights-reserved')
             .waitForElementVisible('.v-chip--clickable')
-            .assert.cssClassPresent(".ais-Hits__books--border", "ais-Hits__books--redbackground")
+            .assert.cssClassPresent(".ais-Hits__books--border", "ais-Hits__books--allrights")
             .expect.element('.ais-Hits__books--border').to.not.have.css('background-color').which.contains("#FFFFFF")
     },
     'Filtering books by Word Count <= 1200 words' : function (browser) {
