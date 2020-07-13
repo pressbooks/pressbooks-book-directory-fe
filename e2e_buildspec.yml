@@ -1,0 +1,54 @@
+version: 0.2
+
+  #env:
+  #variables:
+  # key: "value"
+  # key: "value"
+  #parameter-store:
+  # key: "value"
+  # key: "value"
+  #secrets-manager:
+  # key: secret-id:json-key:version-stage:version-id
+  # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+  # - variable
+# - variable
+#git-credential-helper: yes
+
+phases:
+  #install:
+  #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+  #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+  #runtime-versions:
+  # name: version
+  # name: version
+  #commands:
+  # - command
+  # - command
+  #pre_build:
+    #commands:
+      #- command
+      #- command
+  build:
+    commands:
+      - mkdir -p ./e2e_tests/log
+      - touch ./e2e_tests/log/browserstack.log
+      - HOST_TEST=${HOST_TEST} BROWSERSTACK_USER=${BROWSERSTACK_USER} BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY} BROWSERSTACK_URL=${BROWSERSTACK_URL} npm run e2e:browserstack -- -e chrome_win10,chrome_mojave,firefox_win10,firefox_mojave
+      #post_build:
+      #commands:
+      # - command
+      # - command
+reports:
+  browserstack-reports:
+    files:
+      - '**/*'
+    base-directory: ./e2e_tests/output
+    #discard-paths: yes
+    file-format: JunitXml
+#artifacts:
+  #files:
+    #- '**/*'
+  #base-directory: dist
+    #cache:
+  #paths:
+  # - paths
