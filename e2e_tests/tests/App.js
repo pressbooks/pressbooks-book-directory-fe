@@ -3,7 +3,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.titleContains('Pressbooks Directory')
+            .assert.titleContains('Press3books Di2rectory')
             .end();
     }
 };
