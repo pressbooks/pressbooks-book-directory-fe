@@ -8,6 +8,8 @@ let sClient = {
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
   filtersClosed: {},
+  filtersByExcluded: [],
+  filtersExcluded: [],
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
@@ -26,6 +28,32 @@ export default {
       }
       oldFilters[filter.attribute].push(filter);
       state.filtersClosed = oldFilters;
-    }
+    },
+    setFiltersByExcluded: (state, filter) => {
+      let oldFilters = [...state.filtersByExcluded];
+      oldFilters.push(filter);
+      state.filtersByExcluded = oldFilters;
+    },
+    setFiltersExcluded: (state, filter) => {
+      let oldFilters = Object.assign({}, state.filtersExcluded);
+      if(typeof(oldFilters[filter.attribute]) === 'undefined') {
+        oldFilters[filter.attribute] = [];
+      }
+      oldFilters[filter.attribute].push(filter);
+      state.filtersExcluded = oldFilters;
+    },
+    deleteFiltersByExcluded: (state, filter) => {
+      let oldFilters = [...state.filtersByExcluded];
+      const index = oldFilters.indexOf(filter);
+      if (index > -1) {
+        oldFilters.splice(index, 1);
+      }
+      state.filtersByExcluded = oldFilters;
+    },
+    deleteFiltersExcluded: (state, filter) => {
+      let oldFilters = Object.assign({}, state.filtersExcluded);
+      delete oldFilters[filter];
+      state.filtersExcluded = oldFilters;
+    },
   }
 };

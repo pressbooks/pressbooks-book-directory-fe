@@ -15,15 +15,32 @@
         <ais-current-refinements>
             <template slot="item" slot-scope="{ item, refine }">
                 <v-chip
-                        v-for="iref in item.refinements"
-                        :key="iref.attribute + iref.value"
-                        :label="true"
-                        @click.prevent="closeFilter(iref, refine)"
-                        small
+                    v-for="iref in item.refinements"
+                    :key="iref.attribute + iref.value"
+                    :label="true"
+                    @click.prevent="closeFilter(iref, refine, false, {})"
+                    small
+                    v-show="$store.state.SClient.filtersByExcluded.indexOf(iref.value) < 0"
                 >
                     {{ getLabel(item, iref) }}
                     <v-icon right>mdi-close-circle</v-icon>
                 </v-chip>
+                <span
+                    v-for="iv in $store.state.SClient.filtersExcluded"
+                    :key="iv.join('-')"
+                >
+                    <v-chip
+                        v-for="value in iv"
+                        :key="value.value"
+                        :label="true"
+                        @click.prevent="closeFilter(value, refine, true, item.refinements)"
+                        small
+                        color="red"
+                    >
+                        NOT {{ value.value }}
+                        <v-icon right>mdi-close-circle</v-icon>
+                    </v-chip>
+                </span>
             </template>
         </ais-current-refinements>
     </div>
@@ -46,13 +63,24 @@
             };
         },
         methods: {
-            closeFilter(iref, refine) {
-                let filter = {attribute: iref.attribute, value: iref.label};
-                if (typeof(iref.operator) !== 'undefined') {
-                    filter.operator = iref.operator;
+            closeFilter(iref, refine, closingExclude, refinements) {
+                if (!closingExclude) {
+                    let filter = {attribute: iref.attribute, value: iref.label};
+                    if (typeof(iref.operator) !== 'undefined') {
+                        filter.operator = iref.operator;
+                    }
+                    this.$store.commit('setFiltersClosed', filter);
+                    return refine(iref);
                 }
-                this.$store.commit('setFiltersClosed', filter);
-                refine(iref);
+                refinements.forEach((ir) => {
+                    if (ir.attribute === iref.attribute) {
+                        if (ir.attribute === iref.attribute) {
+                            refine(ir);
+                            this.$store.commit('deleteFiltersByExcluded', ir.value);
+                        }
+                        this.$store.commit('deleteFiltersExcluded', iref.attribute);
+                    }
+                });
             },
             getLabel(item, iref) {
                 let label;

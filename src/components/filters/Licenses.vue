@@ -64,9 +64,12 @@
         methods: {
             applyFilter(refine, items, itemValue, exclude) {
                 if (exclude) {
+                    let vm = this;
+                    vm.$store.commit('setFiltersExcluded', {attribute: 'license_name', value: itemValue});
                     items.forEach((i) => {
                         if (i.value !== itemValue) {
                             refine(i.value);
+                            vm.$store.commit('setFiltersByExcluded', i.value);
                         }
                     })
                     return true;
