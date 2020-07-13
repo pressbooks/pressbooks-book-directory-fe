@@ -25,9 +25,9 @@ phases:
   #commands:
   # - command
   # - command
-  #pre_build:
-    #commands:
-      #- command
+  pre_build:
+    commands:
+      - npm install
       #- command
   build:
     commands:
