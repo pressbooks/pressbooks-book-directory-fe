@@ -5,6 +5,8 @@ module.exports = {
             .waitForElementVisible('body')
             .assert.visible('input[type=search]')
             .setValue('input[type=search]', 'test')
+            .click('button[id=search-button]')
+            .waitForElementVisible('.ais-Hits__books')
             .assert.containsText('.ais-Hits__books', 'test')
             .end();
     }
