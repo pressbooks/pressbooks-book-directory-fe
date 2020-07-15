@@ -42,7 +42,20 @@
                         </v-row>
                     </ais-range-input>
                 </v-list-item-title>
+
             </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+            <ais-clear-refinements :included-attributes="['h5pActivities']">
+                <div slot-scope="{ canRefine, refine }">
+                    <v-btn
+                            tile
+                            @click.prevent="refine()"
+                    >
+                        CLEAR
+                    </v-btn>
+                </div>
+            </ais-clear-refinements>
         </v-list-item>
     </v-list-group>
 </template>

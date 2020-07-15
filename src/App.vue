@@ -2,7 +2,7 @@
   <v-app>
     <header-bar></header-bar>
     <main role="main">
-      <v-container id="v-application__main_content" role="main">
+      <v-container id="v-application__main_content">
         <ais-instant-search
         :search-client="$store.state.SClient.searchClient"
         :index-name="$store.state.SClient.indexName"

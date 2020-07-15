@@ -48,9 +48,13 @@
       h2 {
         display: inline-block;
         float: left;
-        padding-right: 1rem;
         text-transform: uppercase;
       }
+
+      .v-input__prepend-outer {
+        margin: .625rem .125rem 0 .5rem ;
+      }
+
     }
   }
 
@@ -75,5 +79,3 @@
   width: 100%;
   margin: .25rem 1rem;
 }
-
-
