@@ -28,6 +28,7 @@
 
   &-HitsPerPage, &-SortBy {
     float: right;
+    clear: right;
     margin-top: .25rem;
 
     &-select {
