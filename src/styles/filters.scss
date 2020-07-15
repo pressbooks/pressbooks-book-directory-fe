@@ -26,7 +26,25 @@
     }
   }
 
+  &-HitsPerPage, &-SortBy {
+    float: right;
+    margin-top: .25rem;
+
+    &-select {
+      color: $pb-blue;
+    }
+  }
+
   &-ClearRefinements {
+    &.all-filters {
+      display: inline-block;
+      margin-left: .5rem;
+
+      button {
+        background: $pb-red;
+      }
+    }
+
     .v-btn {
       background: $pb-light !important;
 
@@ -117,7 +135,7 @@
   }
 
 .filters {
-  padding: 1rem 1rem .5rem .5rem;
+  padding: .5rem;
 
   &__head {
     font-weight: bold;

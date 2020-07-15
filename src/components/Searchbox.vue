@@ -10,8 +10,9 @@
                 label="Search all book metadata"
                 @input="enableFilters(refine, stringSearch)"
         >
-            <v-icon slot="append">mdi-magnify</v-icon>
+            <v-icon slot="prepend">mdi-magnify</v-icon>
         </v-text-field>
+        <a href="https://www.algolia.com/" aria-label="Search by Algolia" target="_blank" class="filters__stats-algolia-logo"> </a>
     </ais-search-box>
 </template>
 

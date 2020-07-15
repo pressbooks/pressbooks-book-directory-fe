@@ -31,7 +31,7 @@
             </v-list-item>
         </ais-refinement-list>
         <v-list-item>
-            <ais-clear-refinements  :included-attributes="['has_isBasedOn']">
+            <ais-clear-refinements :included-attributes="['has_isBasedOn']">
                 <div slot-scope="{ canRefine, refine }">
                     <v-btn
                         tile

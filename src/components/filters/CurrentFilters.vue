@@ -1,32 +1,41 @@
 <template>
-    <div class="filters">
-        <div class="filters__head filters__head--red">
+    <v-row class="filters">
+        <v-col class="filters__head filters__head--red" cols="12" md="9">
             Active Filters:
-        </div>
-        <ais-stats>
-            <div slot-scope="{ nbHits }" class="filters__stats">
-                <div class="filters__stats__results">
-                    <span class="container__results">Results: </span>
-                    <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
+            <ais-clear-refinements class="all-filters"/>
+            <ais-current-refinements>
+                <template slot="item" slot-scope="{ item, refine }">
+                    <v-chip
+                            v-for="iref in item.refinements"
+                            :key="iref.attribute + iref.value"
+                            :label="true"
+                            @click.prevent="closeFilter(iref, refine)"
+                            small
+                    >
+                        {{ getLabel(item, iref) }}
+                        <v-icon right>mdi-close-circle</v-icon>
+                    </v-chip>
+                </template>
+            </ais-current-refinements>
+        </v-col>
+        <v-col cols="12" md="3">
+            <ais-stats>
+                <div slot-scope="{ nbHits }" class="filters__stats">
+                    <div class="filters__stats__results">
+                        <span class="container__results">Results: </span>
+                        <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
+                    </div>
                 </div>
-                <a href="https://www.algolia.com/" aria-label="Search by Algolia" target="_blank" class="filters__stats-algolia-logo"> </a>
-            </div>
-        </ais-stats>
-        <ais-current-refinements>
-            <template slot="item" slot-scope="{ item, refine }">
-                <v-chip
-                        v-for="iref in item.refinements"
-                        :key="iref.attribute + iref.value"
-                        :label="true"
-                        @click.prevent="closeFilter(iref, refine)"
-                        small
-                >
-                    {{ getLabel(item, iref) }}
-                    <v-icon right>mdi-close-circle</v-icon>
-                </v-chip>
-            </template>
-        </ais-current-refinements>
-    </div>
+            </ais-stats>
+            <ais-hits-per-page
+                    :items="[
+                    { label: '10 books per page', value: 10, default: true },
+                    { label: '20 books per page', value: 20 },
+                    { label: '50 books per page', value: 50 },
+                ]"
+            />
+        </v-col>
+    </v-row>
 </template>
 
 <script>
