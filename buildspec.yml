@@ -1,53 +1,52 @@
 version: 0.2
 
-	#env:
-	#variables:
-	# key: "value"
-	# key: "value"
-	#parameter-store:
-	# key: "value"
-	# key: "value"
-	#secrets-manager:
-	# key: secret-id:json-key:version-stage:version-id
-	# key: secret-id:json-key:version-stage:version-id
-	#exported-variables:
-	# - variable
-	# - variable
-#git-credential-helper: yes
+  #env:
+  #variables:
+  # key: "value"
+  # key: "value"
+  #parameter-store:
+  # key: "value"
+  # key: "value"
+  #secrets-manager:
+  # key: secret-id:json-key:version-stage:version-id
+  # key: secret-id:json-key:version-stage:version-id
+  #exported-variables:
+  # - variable
+  # - variable
+  #git-credential-helper: yes
 
 phases:
-	#install:
-	#If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
-	#If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
-	#runtime-versions:
-	# name: version
-	# name: version
-	#commands:
-	# - command
-	# - command
-	pre_build:
-		commands:
-			- npm install
-			- npm run lint
-	build:
-		commands:
-			- VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} npm run build
-		#post_build:
-		#commands:
-		# - command
-		# - command
-		#reports:
-		#report-name-or-arn:
+  #install:
+  #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+  #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+  #runtime-versions:
+  # name: version
+  # name: version
+  #commands:
+  # - command
+  # - command
+  pre_build:
+     commands:
+       - npm install
+	   - npm run lint
+  build:
+    commands:
+      - VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} npm run build
+			#post_build:
+			#commands:
+			# - command
+			# - command
+#reports:
+	#browserstack-reports:
 		#files:
-		# - location
-		# - location
-	#base-directory: location
-	#discard-paths: yes
-	#file-format: JunitXml | CucumberJson
+			#- '**/*'
+		#base-directory: ./e2e_tests/output
+		#discard-paths: yes
+		#file-format: JunitXml
 artifacts:
-	files:
-		- '**/*'
-	base-directory: dist
+  files:
+    - '**/*'
+  base-directory: dist
 		#cache:
 		#paths:
 	# - paths
