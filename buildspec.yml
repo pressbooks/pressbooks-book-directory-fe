@@ -32,21 +32,18 @@ phases:
   build:
     commands:
       - VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} npm run build
-			#post_build:
-			#commands:
-			# - command
-			# - command
+  #post_build:
+    #commands:
+      # - command
+      # - command
 #reports:
-	#browserstack-reports:
-		#files:
-			#- '**/*'
-		#base-directory: ./e2e_tests/output
-		#discard-paths: yes
-		#file-format: JunitXml
+  #browserstack-reports:
+    #files:
+      #- '**/*'
+    #base-directory: ./e2e_tests/output
+    #discard-paths: yes
+    #file-format: JunitXml
 artifacts:
   files:
     - '**/*'
   base-directory: dist
-		#cache:
-		#paths:
-	# - paths
