@@ -13,7 +13,7 @@ version: 0.2
 	#exported-variables:
 	# - variable
 	# - variable
-	#git-credential-helper: yes
+#git-credential-helper: yes
 
 phases:
 	#install:
@@ -31,22 +31,23 @@ phases:
 			- npm run lint
 	build:
 		commands:
-	  	- VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} npm run build
-			#post_build:
-			#commands:
-			# - command
-			# - command
-#reports:
-	#browserstack-reports:
+			- VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} npm run build
+		#post_build:
+		#commands:
+		# - command
+		# - command
+		#reports:
+		#report-name-or-arn:
 		#files:
-			#- '**/*'
-		#base-directory: ./e2e_tests/output
-		#discard-paths: yes
-		#file-format: JunitXml
+		# - location
+		# - location
+	#base-directory: location
+	#discard-paths: yes
+	#file-format: JunitXml | CucumberJson
 artifacts:
 	files:
-    	- '**/*'
-  	base-directory: dist
+		- '**/*'
+	base-directory: dist
 		#cache:
 		#paths:
 	# - paths
