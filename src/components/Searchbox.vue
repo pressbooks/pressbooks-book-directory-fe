@@ -9,10 +9,14 @@
             >
                 <v-col
                     cols="12"
-                    md="11"
-                    sm="12"
+                    md="2"
                 >
                     <h2 class="ais-SearchBox__text">Find a book:</h2>
+                </v-col>
+                <v-col
+                    md="9"
+                    cols="12"
+                >
                     <v-text-field
                             type="search"
                             v-model="stringSearch"
@@ -22,9 +26,9 @@
                     </v-text-field>
                 </v-col>
                 <v-col
-                    cols="12"
                     md="1"
-                    sm="12"
+                    cols="12"
+                    align="center"
                 >
                     <v-btn type="submit" id="search-button">Search</v-btn>
                 </v-col>
