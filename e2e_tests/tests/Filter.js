@@ -3,12 +3,11 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-licenses')
-            .assert.visible('#all-rights-reserved')
-            .click('#all-rights-reserved')
+            .assert.visible('#filter-license_name')
+            .click('#btn-include-license_name-All-Rights-Reserved')
             .waitForElementVisible('.v-chip--clickable')
-            .assert.cssClassPresent(".ais-Hits__books--border", "ais-Hits__books--allrights")
-            .expect.element('.ais-Hits__books--border').to.not.have.css('background-color').which.contains("#FFFFFF")
+            .assert.cssClassPresent(".ais-Hits__books-book", "ais-Hits__books--allrights")
+            .expect.element('.ais-Hits__books-book').to.not.have.css('background-color').which.contains("#FFFFFF")
     },
     'Filtering books by Word Count <= 1200 words' : function (browser) {
         browser
@@ -16,7 +15,7 @@ module.exports = {
             .waitForElementVisible('body')
             .assert.visible('#filter-wordcount')
             .assert.visible('#max-wordcount')
-            .setValue('#max-wordcount', '1200')
+            .setValue('5125249718#max-wordcount', '1200')
             .waitForElementVisible('.v-chip--clickable');
         browser.elements('css selector', '.ais-Hits__books-book', function(bookElement) {
             browser.waitForElementVisible('.v-chip--clickable');

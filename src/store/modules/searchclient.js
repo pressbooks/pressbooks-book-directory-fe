@@ -8,6 +8,10 @@ let sClient = {
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
   filtersClosed: {},
+  filtersByExcluded: [],
+  filtersExcluded: [],
+  refineFunctions: {},
+  notFilters: [],
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
@@ -18,14 +22,17 @@ let sClient = {
 export default {
   state: sClient,
   mutations: {
-    setFiltersClosed: (state, filter) => {
-      // array push function doesn't work for watching variable in components. We need to ASSIGN to dispatch the event.
-      let oldFilters = Object.assign({}, state.filtersClosed);
+    setRefineFunctions: (state, atref) => {
+      state.refineFunctions[atref.attribute] = atref.refine;
+    },
+    setFiltersExcluded: (state, filter) => {
+      let oldFilters = Object.assign({}, state.filtersExcluded);
       if(typeof(oldFilters[filter.attribute]) === 'undefined') {
         oldFilters[filter.attribute] = [];
       }
       oldFilters[filter.attribute].push(filter);
-      state.filtersClosed = oldFilters;
+      state.filtersExcluded = oldFilters;
+      state.notFilters.push(filter.attribute + ':-' + filter.value);
     }
   }
 };
