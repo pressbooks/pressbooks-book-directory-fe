@@ -25,7 +25,9 @@
             </v-col>
           </v-row>
         </ais-instant-search>
+          <a href="https://www.algolia.com/" aria-label="Search by Algolia" target="_blank" class="filters__stats-algolia-logo"> </a>
       </v-container>
+
     </main>
   </v-app>
 </template>

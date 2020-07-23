@@ -34,7 +34,6 @@
                 </v-col>
             </v-row>
         </v-form>
-        <a href="https://www.algolia.com/" aria-label="Search by Algolia" target="_blank" class="filters__stats-algolia-logo"> </a>
     </ais-search-box>
 </template>
 
