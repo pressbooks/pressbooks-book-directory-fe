@@ -7,85 +7,72 @@
         <template v-slot:activator>
             <v-list-item-title>{{ title | uppercase }}</v-list-item-title>
         </template>
-        <template>
-            <ais-refinement-list
-                :attribute="field"
-                operator="or"
-                :limit="15"
-                show-more
-                :show-more-limit="25"
-                :sort-by="['name:asc']"
-                :transformItems="transformItems"
+        <v-list-item v-if="searchable">
+            <v-text-field
+                type="search"
+                v-model="stringSearch"
+                :label="'Search ' + title"
+                @input="searchForItems()"
             >
-                <div
-                    slot-scope="{
-                        items,
-                        refine,
-                        toggleShowMore,
-                        canToggleShowMore,
-                        isShowingMore,
-                        searchForItems
-                    }"
+                <v-icon slot="append">mdi-magnify</v-icon>
+            </v-text-field>
+        </v-list-item>
+        <template v-if="$store.state.stats.filters[field] !== undefined">
+            <v-list-item
+                v-for="(item, k) in $store.state.stats.filters[field].slice(0, limited)" :key="k"
+            >
+                <v-list-item-content
+                    :class="(wasFiltered(item.facet, false) || wasFiltered(item.facet, true)) ? 'v-list-item__content--filtered' : ''"
                 >
-                    <v-list-item v-if="searchable">
-                        <v-text-field
-                            type="search"
-                            v-model="stringSearch"
-                            :label="'Search ' + title"
-                            @input="searchForItems(stringSearch)"
+                    {{ showItem(item) }}
+                </v-list-item-content>
+                <v-list-item-action
+                    :id="item.facet.split(' ').join('-').toLowerCase()"
+                >
+                    <div>
+                        <v-btn
+                            icon
+                            :id="'btn-include-' + field + '-' + item.facet.split(' ').join('-')"
+                            @click="applyFilter(item.facet, false)"
+                            :disabled="wasFiltered(item.facet, false)"
                         >
-                            <v-icon slot="append">mdi-magnify</v-icon>
-                        </v-text-field>
-                    </v-list-item>
-                    <v-list-item
-                        v-for="item in items" :key="item.value"
-                    >
-                        <v-list-item-content>
-                            {{ showItem(item) }}
-                        </v-list-item-content>
-                        <v-list-item-action
-                            :id="item.value.split(' ').join('-').toLowerCase()"
+                            <v-icon color="green">mdi-check</v-icon>
+                        </v-btn>
+                        <v-btn
+                            :id="'btn-exclude-' + field + '-' + item.facet.split(' ').join('-')"
+                            icon
+                            @click="applyFilter(item.facet, true)"
+                            :disabled="wasFiltered(item.facet, true)"
                         >
-                            <div>
-                                <v-btn
-                                    icon
-                                    :id="'btn-include-' + field + '-' + item.value.split(' ').join('-')"
-                                    @click="applyFilter(refine, items, item.value, false)"
-                                    :disabled="item.isRefined && typeof($store.state.SClient.filtersExcluded[field]) === 'undefined'"
-                                >
-                                    <v-icon color="green">mdi-check</v-icon>
-                                </v-btn>
-                                <v-btn
-                                    icon
-                                    @click="applyFilter(refine, items, item.value, true)"
-                                    :disabled="wasExcluded(item.value)"
-                                >
-                                    <v-icon>mdi-close</v-icon>
-                                </v-btn>
-                            </div>
-                        </v-list-item-action>
-                    </v-list-item>
-                    <button
-                        @click="toggleShowMore"
-                        v-show="canToggleShowMore"
-                        class="ais-RefinementList-showMore"
-                    >
-                        {{ !isShowingMore ? 'Show more' : 'Show less'}}
-                    </button>
-                </div>
-            </ais-refinement-list>
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                    </div>
+                </v-list-item-action>
+            </v-list-item>
+            <button
+                @click="showMore"
+                v-show="limited < $store.state.stats.filters[field].length"
+                class="ais-RefinementList-showMore"
+            >
+                Show more
+            </button>
+            <button
+                @click="showLess"
+                v-show="limited === $store.state.stats.filters[field].length"
+                class="ais-RefinementList-showMore"
+            >
+                Show less
+            </button>
         </template>
         <v-list-item>
-            <ais-clear-refinements  :included-attributes="[field]">
-                <div slot-scope="{ canRefine, refine }">
-                    <v-btn
-                        tile
-                        @click.prevent="refine()"
-                    >
-                        CLEAR
-                    </v-btn>
-                </div>
-            </ais-clear-refinements>
+            <div class="ais-ClearRefinements">
+                <v-btn
+                    tile
+                    @click.prevent="clearFilters()"
+                >
+                    CLEAR
+                </v-btn>
+            </div>
         </v-list-item>
     </v-list-group>
 </template>
@@ -93,12 +80,18 @@
 <script>
     export default {
         name: "excluded-filters",
-        props: ["field", "title", "searchable"],
+        props: ["field", "title", "searchable", "limit"],
+        mounted() {
+            this.limited = this.limit;
+        },
         data() {
             return {
-                included: false,
                 excluded: false,
-                stringSearch: ''
+                stringSearch: '',
+                steps: 5,
+                limited: 100,
+                max: 5000,
+                auxItems: []
             };
         },
         filters: {
@@ -107,61 +100,63 @@
             }
         },
         methods: {
-            transformItems(items) {
-                let it = items[0];
-                if (Object.keys(this.$store.state.SClient.filtersExcluded).length > 0) {
-                    for (const attribute in this.$store.state.SClient.filtersExcluded) {
-                        for (let i=0; i<this.$store.state.SClient.filtersExcluded[attribute].length;  i++) {
-                            it.value = this.$store.state.SClient.filtersExcluded[attribute][i].value;
-                            if (items.find(v => v.value === it.value) === undefined) {
-                                it.count = 100;
-                                it.isRefined = true;
-                                items.unshift(it);
-                            }
-                        }
-                    }
+            searchForItems() {
+                if (this.auxItems.length === 0) {
+                    this.auxItems = [...this.$store.state.stats.filters[this.field]];
                 }
-                return items;
+                if (this.stringSearch.length > 0 && this.$store.state.stats.filters[this.field] !== undefined) {
+                    if (this.auxItems.length > 0) {
+                        this.$store.state.stats.filters[this.field] = [...this.auxItems];
+                    }
+                    let str = this.stringSearch;
+                    let find = this.$store.state.stats.filters[this.field].filter(
+                        v => v.facet.toLowerCase().search(str.toLowerCase()) >= 0
+                    );
+                    this.$store.state.stats.filters[this.field] = find;
+                } else if (this.auxItems.length > 0 && this.stringSearch.length === 0) {
+                    this.$store.state.stats.filters[this.field] = [...this.auxItems];
+                }
             },
-            wasExcluded(value) {
+            showMore() {
+                this.max = this.$store.state.stats.filters[this.field].length;
+                let l = this.limited + this.steps;
+                this.limited = (l < this.max) ? l : this.max;
+            },
+            showLess() {
+                let l = this.limited - this.steps;
+                this.limited = (l > 0) ? l : 1;
+            },
+            wasFiltered(value, exc) {
                 return typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' &&
-                        this.$store.state.SClient.filtersExcluded[this.field].find(v => v.value === value) !== undefined;
+                    this.$store.state.SClient.filtersExcluded[this.field].find(v => v.value === value && v.exclude === exc) !== undefined;
             },
-            cleanFilters(items, refine) {
-                items.forEach((i) => {
-                    if (i.isRefined) {
-                        refine(i.value);
-                    }
-                });
+            clearFilters() {
+                this.$store.commit('deleteExcluded', this.field);
             },
-            applyFilter(refine, items, itemValue, exclude) {
-                if (exclude) {
-                    if (this.included) {
-                        // Remove all filters
-                        this.cleanFilters(items, refine);
-                    }
-                    this.$store.commit('setFiltersExcluded', { attribute: this.field, value: itemValue });
-                    this.$store.commit('setRefineFunctions', { attribute: this.field, refine: refine });
-                    this.excluded = exclude;
-                    this.included = !exclude;
-                    this.stringSearch = '';
-                    return true;
+            applyFilter(itemValue, exclude) {
+                if (this.excluded !== exclude) {
+                    this.$store.commit('deleteExcluded', this.field);
                 }
-                if (this.excluded) {
-                    this.$store.state.SClient.filtersExcluded = {};
-                    this.$store.state.SClient.notFilters = [];
-                }
-                this.stringSearch = '';
                 this.excluded = exclude;
-                this.included = !exclude;
-                refine(itemValue);
+                this.$store.commit(
+                    'setFiltersExcluded',
+                    {
+                        attribute: this.field,
+                        value: itemValue,
+                        exclude: exclude
+                    }
+                );
+                let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
+                this.$store.commit("setFacetFilters", this.$store.state.SClient.notFilters);
+                this.$store.commit("setKeepFacets", Object.keys(this.$store.state.SClient.filtersExcluded));
+                this.$store.dispatch('getStats', index);
             },
             showItem(item) {
-                let parts = item.value.split(' (');
+                let parts = item.facet.split(' (');
                 if(parts.length > 1) {
                     return parts[0] + ' (' + item.count + ')';
                 }
-                return item.value + ' (' + item.count + ')';
+                return item.facet + ' (' + item.count + ')';
             }
         }
     }

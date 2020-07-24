@@ -6,41 +6,32 @@
         <template v-slot:activator>
             <v-list-item-title>BASED ON</v-list-item-title>
         </template>
-        <ais-refinement-list
-            attribute="has_isBasedOn"
-            :searchable="false"
-            operator="or"
-            :sort-by="['name:asc']"
-        >
-            <v-list-item
-                slot="item"
-                slot-scope="{ item, refine }"
-            >
-                <v-list-item-action @click.prevent="refine(item.value)">
-                    <v-checkbox
-                        v-if="item.value == 'true'"
-                        v-model="item.isRefined"
-                        :label="'Based on another book (' + item.count + ')'"
-                    ></v-checkbox>
-                    <v-checkbox
-                        v-if="item.value == 'false'"
-                        v-model="item.isRefined"
-                        :label="'Original (' + item.count + ')'"
-                    ></v-checkbox>
-                </v-list-item-action>
-            </v-list-item>
-        </ais-refinement-list>
         <v-list-item>
-            <ais-clear-refinements :included-attributes="['has_isBasedOn']">
-                <div slot-scope="{ canRefine, refine }">
+            <v-list-item-content
+                :class="(wasFiltered('has_isBasedOn', false, false) || wasFiltered('has_isBasedOn', true, false)) ? 'v-list-item__content--filtered' : ''"
+            >
+                Based on another book
+            </v-list-item-content>
+            <v-list-item-action id="isBasedOn-another">
+                <div>
                     <v-btn
-                        tile
-                        @click.prevent="refine()"
+                        icon
+                        :id="'btn-include-based-another'"
+                        @click="applyFilter(true, false)"
+                        :disabled="wasFiltered(true, false)"
                     >
-                        CLEAR
+                        <v-icon color="green">mdi-check</v-icon>
+                    </v-btn>
+                    <v-btn
+                        icon
+                        :id="'btn-exclude-based-another'"
+                        @click="applyFilter(true, true)"
+                        :disabled="wasFiltered(true, true)"
+                    >
+                        <v-icon>mdi-close</v-icon>
                     </v-btn>
                 </div>
-            </ais-clear-refinements>
+            </v-list-item-action>
         </v-list-item>
     </v-list-group>
 </template>
@@ -48,14 +39,34 @@
 <script>
     export default {
         name: "BasedOn",
+        data() {
+            return {
+                excluded: false,
+                field: 'has_isBasedOn'
+            };
+        },
         methods: {
-            applyFilters(value, attribute, operator = ":") {
-                this.$store.commit("setFiltersApplied", {
-                    value: value,
-                    attribute: attribute,
-                    operator: operator
-                });
-                this.$store.dispatch("refreshFilters");
+            applyFilter(itemValue, exclude) {
+                if (this.excluded !== exclude) {
+                    this.$store.commit('deleteExcluded', this.field);
+                }
+                this.excluded = exclude;
+                this.$store.commit(
+                    'setFiltersExcluded',
+                    {
+                        attribute: this.field,
+                        value: itemValue,
+                        exclude: exclude
+                    }
+                );
+                let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
+                this.$store.commit("setFacetFilters", this.$store.state.SClient.notFilters);
+                this.$store.commit("setKeepFacets", Object.keys(this.$store.state.SClient.filtersExcluded));
+                this.$store.dispatch('getStats', index);
+            },
+            wasFiltered(value, exc) {
+                return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
+                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'].find(v => v.value === value && v.exclude === exc) !== undefined;
             }
         }
     }

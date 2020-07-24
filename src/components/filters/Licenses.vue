@@ -1,5 +1,10 @@
 <template>
-    <excluded-filters field="license_name" :searchable="false" title="license"></excluded-filters>
+    <excluded-filters
+        field="license_code"
+        :searchable="false"
+        title="license"
+        :limit="20"
+    ></excluded-filters>
 </template>
 
 <script>
