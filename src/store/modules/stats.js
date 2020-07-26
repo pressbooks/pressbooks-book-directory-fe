@@ -31,7 +31,7 @@ export default {
         },
         setFilters: (state, response) => {
             let fs = {};
-            for (const facet in response.facets) {
+            for (let facet in response.facets) {
                 if (state.keepFacets.indexOf(facet) < 0) {
                     fs[facet] = [];
                     for (const f in response.facets[facet]) {

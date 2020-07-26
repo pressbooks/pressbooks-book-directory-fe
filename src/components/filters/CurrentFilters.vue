@@ -7,7 +7,9 @@
                 @click.prevent="removeFilters()"
                 :class="Object.keys($store.state.SClient.filtersExcluded).length > 0 ? 'ais-ClearRefinements-button ais-ClearRefinements-button' : 'ais-ClearRefinements-button ais-ClearRefinements-button--disabled'"
                 :disabled="Object.keys($store.state.SClient.filtersExcluded).length === 0"
-            >Clear refinements</button>
+            >
+                Clear refinements
+            </button>
             <ul
                 v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0"
                 class="ais-CurrentRefinements-list"
@@ -15,7 +17,7 @@
                 <li
                     class="ais-CurrentRefinements-item"
                     v-for="iv in $store.state.SClient.filtersExcluded"
-                    :key="iv.join('-')"
+                    :key="iv.toString()"
                 >
                     <v-chip
                         v-for="value in iv"
