@@ -18,9 +18,10 @@
                     cols="12"
                 >
                     <v-text-field
-                            type="search"
-                            v-model="stringSearch"
-                            label="Search all book metadata"
+                        type="search"
+                        v-model="stringSearch"
+                        label="Search all book metadata"
+                        id="search-book"
                     >
                         <v-icon slot="prepend">mdi-magnify</v-icon>
                     </v-text-field>

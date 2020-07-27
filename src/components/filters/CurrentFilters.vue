@@ -2,33 +2,52 @@
     <v-row class="filters">
         <v-col class="filters__head filters__head--red" cols="12" md="9">
             Active Filters:
-            <ais-clear-refinements class="all-filters"/>
-            <ais-current-refinements>
-                <template slot="item" slot-scope="{ item, refine }">
+            <button
+                type="reset"
+                @click.prevent="removeFilters()"
+                :class="Object.keys($store.state.SClient.filtersExcluded).length > 0 ? 'ais-ClearRefinements-button ais-ClearRefinements-button' : 'ais-ClearRefinements-button ais-ClearRefinements-button--disabled'"
+                :disabled="Object.keys($store.state.SClient.filtersExcluded).length === 0"
+            >
+                Clear refinements
+            </button>
+            <ul
+                v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0"
+                class="ais-CurrentRefinements-list"
+            >
+                <li
+                    class="ais-CurrentRefinements-item"
+                    v-for="iv in $store.state.SClient.filtersExcluded"
+                    :key="iv[0].attribute+iv[0].value"
+                >
                     <v-chip
-                            v-for="iref in item.refinements"
-                            :key="iref.attribute + iref.value"
-                            :label="true"
-                            @click.prevent="closeFilter(iref, refine)"
-                            small
+                        v-for="value in iv"
+                        :key="value.value"
+                        :label="true"
+                        @click.prevent="closeExcludeFilter(value)"
+                        small
+                        :class="value.exclude ? 'v-chip--not' : ''"
                     >
-                        {{ getLabel(item, iref) }}
+                        <span v-if="value.exclude">NOT {{ getLabel(value) }}</span>
+                        <span v-else>{{ getLabel(value) }}</span>
+
                         <v-icon right>mdi-close-circle</v-icon>
                     </v-chip>
-                </template>
-            </ais-current-refinements>
+                </li>
+            </ul>
         </v-col>
         <v-col cols="12" md="3">
             <ais-stats>
                 <div slot-scope="{ nbHits }" class="filters__stats">
                     <div class="filters__stats__results">
                         <span class="container__results">Results: </span>
-                        <span class="container__results-hits" > {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown</span>
+                        <span class="container__results-hits" >
+                            {{ nbHits }} / {{ $store.state.stats.totalBooks }} shown
+                        </span>
                     </div>
                 </div>
             </ais-stats>
             <ais-hits-per-page
-                    :items="[
+                :items="[
                     { label: '10 books per page', value: 10, default: true },
                     { label: '20 books per page', value: 20 },
                     { label: '50 books per page', value: 50 },
@@ -41,46 +60,37 @@
 <script>
     export default {
         name: "CurrentFilters",
-        mounted() {
-            this.index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName)
-            let vm = this;
-            this.index.search('', {facets: 'networkName'}).then(function (response) {
-                vm.totalBooks = response.nbHits;
-            })
-        },
-        data() {
-            return {
-                totalBooks: null,
-                index: null
-            };
-        },
         methods: {
-            closeFilter(iref, refine) {
-                let filter = {attribute: iref.attribute, value: iref.label};
-                if (typeof(iref.operator) !== 'undefined') {
-                    filter.operator = iref.operator;
-                }
-                this.$store.commit('setFiltersClosed', filter);
-                refine(iref);
+            removeFilters() {
+                this.$store.state.SClient.filtersExcluded = {};
+                this.$store.state.SClient.notFilters = [];
+                this.$store.state.SClient.numericFilters = [];
             },
-            getLabel(item, iref) {
+            closeExcludeFilter(f) {
+                this.$store.commit('deleteItemExcluded', f);
+                let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
+                this.$store.commit("setFacetFilters", this.$store.state.SClient.notFilters);
+                this.$store.commit("setKeepFacets", Object.keys(this.$store.state.SClient.filtersExcluded));
+                this.$store.dispatch('getStats', index);
+            },
+            getLabel(value) {
                 let label;
-                let mb = parseInt(iref.value) / 1024 / 1024;
-                switch (item.attribute) {
+                let mb = (value.attribute === 'storageSize') ? parseInt(value.value) : 0;
+                switch (value.attribute) {
                     case 'has_isBasedOn':
-                        label = (item.label === 'true') ? 'Based on another book' : 'Original';
+                        label = (value.value) ? 'Based on another book' : 'Original';
                         break;
                     case 'wordCount':
-                        label = 'Words ' + iref.label;
+                        label = 'Words ' + value.operator + ' ' + value.value;
                         break;
                     case 'storageSize':
-                        label = 'Storage ' + iref.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
+                        label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
                         break;
                     case 'h5pActivities':
-                        label = 'H5P Activities ' + iref.label;
+                        label = 'H5P Activities ' + value.operator + ' ' + value.value;
                         break;
                     default:
-                        label = iref.value;
+                        label = value.value;
                 }
                 return label;
             }

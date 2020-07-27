@@ -1,11 +1,16 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-    <searchable-filter field="publisher_name" title="publisher"></searchable-filter>
+<template>
+    <excluded-filters
+        field="publisher_name"
+        :searchable="true"
+        title="publisher"
+        :limit="10"
+    ></excluded-filters>
 </template>
 
 <script>
-    import SearchableFilter from "./commons/SearchableFilter";
+    import ExcludedFilters from "./commons/ExcludedFilters";
     export default {
         name: "Publishers",
-        components: {SearchableFilter},
+        components: {ExcludedFilters}
     }
 </script>

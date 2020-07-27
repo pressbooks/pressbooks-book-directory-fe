@@ -1,4 +1,5 @@
 import algoliasearch from "algoliasearch/lite";
+import helpers from "../helpers";
 
 let sClient = {
   searchClient: algoliasearch(
@@ -7,7 +8,9 @@ let sClient = {
     { _useRequestCache: true }
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-  filtersClosed: {},
+  filtersExcluded: [],
+  notFilters: [],
+  numericFilters: [],
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
@@ -18,14 +21,42 @@ let sClient = {
 export default {
   state: sClient,
   mutations: {
-    setFiltersClosed: (state, filter) => {
-      // array push function doesn't work for watching variable in components. We need to ASSIGN to dispatch the event.
-      let oldFilters = Object.assign({}, state.filtersClosed);
+    setFiltersExcluded: (state, filter) => {
+      let oldFilters = { ...state.filtersExcluded };
       if(typeof(oldFilters[filter.attribute]) === 'undefined') {
         oldFilters[filter.attribute] = [];
       }
       oldFilters[filter.attribute].push(filter);
-      state.filtersClosed = oldFilters;
+      state.filtersExcluded = { ...oldFilters  };
+      let nf = helpers.functions.setFilters(oldFilters);
+      state.notFilters = nf[0];
+      state.numericFilters = nf[1];
+    },
+    deleteExcluded: (state, field) => {
+      let fe = { ...state.filtersExcluded };
+      delete fe[field];
+      let nf = helpers.functions.setFilters(fe)
+      state.notFilters = nf[0];
+      state.numericFilters = nf[1];
+      state.filtersExcluded = fe;
+    },
+    deleteItemExcluded: (state, f) => {
+      let fe = { ...state.filtersExcluded };
+      if (fe[f.attribute] !== undefined) {
+        for (let i = 0; i < fe[f.attribute].length; i++) {
+          if (fe[f.attribute][i].value === f.value) {
+            fe[f.attribute].splice(i, 1);
+            if (fe[f.attribute].length === 0) {
+              delete fe[f.attribute];
+              break;
+            }
+          }
+        }
+        state.filtersExcluded = fe;
+        let nf = helpers.functions.setFilters(fe)
+        state.notFilters = nf[0];
+        state.numericFilters = nf[1];
+      }
     }
   }
 };

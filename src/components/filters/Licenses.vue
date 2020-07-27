@@ -1,62 +1,16 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-    <v-list-group
-        sub-group
-        value="true"
-        id="filter-licenses"
-    >
-        <template v-slot:activator>
-            <v-list-item-title>LICENSE</v-list-item-title>
-        </template>
-        <ais-refinement-list
-            attribute="license_name"
-            :searchable="false"
-            operator="or"
-            :limit="5"
-            show-more
-            :show-more-limit="500"
-            :sort-by="['name:asc']"
-        >
-            <v-list-item
-                slot="item"
-                slot-scope="{ item, refine }"
-            >
-                <v-list-item-action
-                    @click.prevent="refine(item.value)"
-                    :id="item.value.split(' ').join('-').toLowerCase()"
-                >
-                    <v-checkbox
-                        v-model="item.isRefined"
-                        :label="cleanLicense(item)"
-                    ></v-checkbox>
-                </v-list-item-action>
-            </v-list-item>
-        </ais-refinement-list>
-        <v-list-item>
-            <ais-clear-refinements  :included-attributes="['license_name']">
-                <div slot-scope="{ canRefine, refine }">
-                    <v-btn
-                        tile
-                        @click.prevent="refine()"
-                    >
-                        CLEAR
-                    </v-btn>
-                </div>
-            </ais-clear-refinements>
-        </v-list-item>
-    </v-list-group>
+<template>
+    <excluded-filters
+        field="license_code"
+        :searchable="false"
+        title="license"
+        :limit="20"
+    ></excluded-filters>
 </template>
 
 <script>
+    import ExcludedFilters from "./commons/ExcludedFilters";
     export default {
         name: "Licenses",
-        methods: {
-            cleanLicense(item) {
-                let parts = item.value.split(' (');
-                if(parts.length > 1) {
-                    return parts[0] + ' (' + item.count + ')';
-                }
-                return item.value + ' (' + item.count + ')';
-            }
-        }
+        components: {ExcludedFilters}
     }
 </script>

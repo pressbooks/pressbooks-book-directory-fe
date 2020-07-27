@@ -1,11 +1,16 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <searchable-filter field="languageName" title="language"></searchable-filter>
+<template>
+  <excluded-filters
+      field="languageName"
+      :searchable="true"
+      title="language"
+      :limit="10"
+  ></excluded-filters>
 </template>
 
 <script>
-    import SearchableFilter from "./commons/SearchableFilter";
-    export default {
-      name: "language-subject",
-      components: {SearchableFilter},
-    };
+  import ExcludedFilters from "./commons/ExcludedFilters";
+  export default {
+    name: "language-subject",
+    components: {ExcludedFilters}
+  }
 </script>
