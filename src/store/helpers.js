@@ -1,13 +1,13 @@
 function setFilters(oldFilters) {
     let fs = [], ns = [], strQuery = '', f = {};
-    let query = [], numerics = {};
+    let query = [], queryExcluded = [], numerics = {};
     for (let attribute in oldFilters) {
         for (let i =0; i < oldFilters[attribute].length; i++) {
             f = oldFilters[attribute][i];
             strQuery = ':';
             if (f.exclude) {
                 strQuery = ':-';
-                fs.push(f.attribute + strQuery + f.value);
+                queryExcluded.push(f.attribute + strQuery + f.value);
             } else {
                 if (f.operator !== undefined && f.value > 0) {
                     if (numerics[f.attribute] === undefined) {
@@ -22,6 +22,9 @@ function setFilters(oldFilters) {
     }
     if (query.length > 0) {
         fs.push(query);
+    }
+    if (queryExcluded.length > 0) {
+        fs = fs.concat(queryExcluded);
     }
     for (let attr in numerics) {
         if (numerics[attr].length > 1) {
