@@ -4,7 +4,7 @@ module.exports = {
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
             .assert.visible('input[type=search]')
-            .setValue('input[type=search]', 'chemistry')
+            .setValue('#search-book', 'chemistry')
             .click('button[id=search-button]')
             .waitForElementVisible('.ais-Hits__books')
             .assert.containsText('.ais-Hits__books', 'chemistry')
