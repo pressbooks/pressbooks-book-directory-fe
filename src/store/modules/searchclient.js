@@ -8,10 +8,7 @@ let sClient = {
     { _useRequestCache: true }
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-  filtersClosed: {},
-  filtersByExcluded: [],
   filtersExcluded: [],
-  refineFunctions: {},
   notFilters: [],
   numericFilters: [],
   searchParameters: {
@@ -25,18 +22,18 @@ export default {
   state: sClient,
   mutations: {
     setFiltersExcluded: (state, filter) => {
-      let oldFilters = Object.assign({}, state.filtersExcluded);
+      let oldFilters = { ...state.filtersExcluded };
       if(typeof(oldFilters[filter.attribute]) === 'undefined') {
         oldFilters[filter.attribute] = [];
       }
       oldFilters[filter.attribute].push(filter);
+      state.filtersExcluded = { ...oldFilters  };
       let nf = helpers.functions.setFilters(oldFilters);
       state.notFilters = nf[0];
       state.numericFilters = nf[1];
-      state.filtersExcluded = oldFilters;
     },
     deleteExcluded: (state, field) => {
-      let fe = Object.assign({}, state.filtersExcluded);
+      let fe = { ...state.filtersExcluded };
       delete fe[field];
       let nf = helpers.functions.setFilters(fe)
       state.notFilters = nf[0];
@@ -44,7 +41,7 @@ export default {
       state.filtersExcluded = fe;
     },
     deleteItemExcluded: (state, f) => {
-      let fe = Object.assign({}, state.filtersExcluded);
+      let fe = { ...state.filtersExcluded };
       if (fe[f.attribute] !== undefined) {
         for (let i = 0; i < fe[f.attribute].length; i++) {
           if (fe[f.attribute][i].value === f.value) {

@@ -17,7 +17,7 @@
                 <li
                     class="ais-CurrentRefinements-item"
                     v-for="iv in $store.state.SClient.filtersExcluded"
-                    :key="iv.toString()"
+                    :key="iv[0].attribute+iv[0].value"
                 >
                     <v-chip
                         v-for="value in iv"
