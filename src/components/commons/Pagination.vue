@@ -6,11 +6,6 @@
 
 <script>
 export default {
-  name: "pagination",
-  methods: {
-    updatePage(page) {
-      console.log(page)
-    }
-  }
+  name: "pagination"
 };
 </script>

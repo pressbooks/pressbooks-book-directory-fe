@@ -26,7 +26,6 @@ module.exports = {
                 if (!v.hasOwnProperty('ELEMENT')) {
                     v.ELEMENT = Object.values(v)[0];
                 }
-                console.log(v.ELEMENT);
                 browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books-book-wordcount', function (elem) {
                     if (!elem.value.hasOwnProperty('ELEMENT')) {
                         elem.value.ELEMENT = Object.values(elem.value)[0];
