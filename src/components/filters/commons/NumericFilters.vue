@@ -38,6 +38,17 @@
                 </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
+        <v-list-item>
+            <div class="ais-ClearRefinements">
+                <v-btn
+                    tile
+                    @click="clearFilters()"
+                    :id="'btn-clear-' + field"
+                >
+                    CLEAR
+                </v-btn>
+            </div>
+        </v-list-item>
     </v-list-group>
 </template>
 
@@ -59,6 +70,11 @@
             };
         },
         methods: {
+            clearFilters() {
+                this.number.min = 0;
+                this.number.max = 0;
+                this.$store.commit('deleteExcluded', this.field);
+            },
             applyFilter() {
                 this.$store.commit('deleteExcluded', this.field);
                 let min = this.number.min;
