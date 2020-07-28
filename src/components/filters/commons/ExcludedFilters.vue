@@ -69,7 +69,7 @@
             <div class="ais-ClearRefinements">
                 <v-btn
                     tile
-                    @click.prevent="clearFilters()"
+                    @click="clearFilters()"
                 >
                     CLEAR
                 </v-btn>
