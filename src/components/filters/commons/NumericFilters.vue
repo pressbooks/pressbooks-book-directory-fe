@@ -77,9 +77,9 @@
             },
             applyFilter() {
                 this.$store.commit('deleteExcluded', this.field);
-                let min = this.number.min;
-                let max = this.number.max;
-                if (this.number.min > this.number.max) {
+                let min = parseInt(this.number.min);
+                let max = parseInt(this.number.max);
+                if (min > max) {
                     this.$store.commit(
                         'setFiltersExcluded',
                         {
