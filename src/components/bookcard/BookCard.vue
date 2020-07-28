@@ -25,13 +25,14 @@
                 <v-tooltip top>
                   <template v-slot:activator="{ on, attrs }">
                     <v-img
-                          max-height="35"
-                          contain
-                          class="copyright"
-                          v-bind="attrs"
-                          v-on="on"
-                          :src="item.licenseIcon"
-                          :alt="item.licenseAlt"
+                      max-height="35"
+                      contain
+                      class="copyright"
+                      v-bind="attrs"
+                      v-on="on"
+                      :eager="true"
+                      :src="item.licenseIcon"
+                      :alt="item.licenseAlt"
                   ></v-img>
                   </template>
                   <span>{{ item.licenseAlt }}</span>
@@ -42,13 +43,14 @@
                   <template v-slot:activator="{ on, attrs }">
                     <a :href="item.url + 'h5p-listing'" aria-label="See a list of this book's H5P activities" target="_blank">
                       <v-img
-                            v-if="item.has_h5pActivities && item.h5pActivities > 0"
-                            max-height="35"
-                            contain
-                            v-bind="attrs"
-                            v-on="on"
-                            :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
-                            :src="h5pActivitiesImage"
+                        v-if="item.has_h5pActivities && item.h5pActivities > 0"
+                        max-height="35"
+                        contain
+                        :eager="true"
+                        v-bind="attrs"
+                        v-on="on"
+                        :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
+                        :src="h5pActivitiesImage"
                     ></v-img>
                     </a>
                   </template>
@@ -59,14 +61,14 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-img
-                            v-if="item.has_isBasedOn"
-                            max-height="35"
-                            contain
-                            class="isBasedOn"
-                            v-bind="attrs"
-                            v-on="on"
-                            alt="Book based on another book"
-                            :src="basedOnImg"
+                      v-if="item.has_isBasedOn"
+                      max-height="35"
+                      contain
+                      class="isBasedOn"
+                      v-bind="attrs"
+                      v-on="on"
+                      alt="Book based on another book"
+                      :src="basedOnImg"
                     ></v-img>
                   </template>
                   <span>This book is based on another book </span>
@@ -74,14 +76,14 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-img
-                            v-if="!item.has_isBasedOn"
-                            max-height="35"
-                            contain
-                            class="isBasedOn"
-                            v-bind="attrs"
-                            v-on="on"
-                            alt="This book is not based on another book"
-                            :src="originalImg"
+                      v-if="!item.has_isBasedOn"
+                      max-height="35"
+                      contain
+                      class="isBasedOn"
+                      v-bind="attrs"
+                      v-on="on"
+                      alt="This book is not based on another book"
+                      :src="originalImg"
                     ></v-img>
                   </template>
                   <span>This book is not based on another book </span>

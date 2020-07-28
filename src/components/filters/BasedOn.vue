@@ -2,6 +2,7 @@
     <v-list-group
         sub-group
         value="true"
+        id="filter-basedOn"
     >
         <template v-slot:activator>
             <v-list-item-title>BASED ON</v-list-item-title>

@@ -12,6 +12,7 @@
                 type="search"
                 v-model="stringSearch"
                 :label="'Search ' + title"
+                :id="'search-filter-' + field"
                 @input="searchForItems()"
             >
                 <v-icon slot="append">mdi-magnify</v-icon>
