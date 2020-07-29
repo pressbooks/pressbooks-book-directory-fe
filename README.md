@@ -103,7 +103,8 @@ Optionally, you can specify / overwrite the current browsers version using the f
 #### See tests reports locally
 If you run your tests on BrowserStack, you can see reports in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/). 
 In case you want to see reports locally, you can use [xunit-viewer](https://github.com/lukejpreston/xunit-viewer). After you ran your tests locally, 
-just run: `npm run nightwatch:output`, and a `e2e_tests/output/output.html` report file will be generated. You can open that file in any browser to see the report. 
+just run: `npm run nightwatch:output`, and a `e2e_tests/output/output.html` report file will be generated. You can open that file in any browser to see the report.  
+When a test fails, you can see screenshots about the fail in `e2e_tests/screenshots/` folder.
 
 ### Vue references
 
