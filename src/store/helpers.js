@@ -1,7 +1,9 @@
 function setFilters(oldFilters) {
     let fs = [], ns = [], strQuery = '', f = {};
-    let query = [], queryExcluded = [], numerics = {};
+    let query = [], queryExcluded = [], numerics = {}, q =[];
+    let qtyAttr = Object.keys(oldFilters).length;
     for (let attribute in oldFilters) {
+        q = [];
         for (let i =0; i < oldFilters[attribute].length; i++) {
             f = oldFilters[attribute][i];
             strQuery = ':';
@@ -9,21 +11,32 @@ function setFilters(oldFilters) {
                 strQuery = ':-';
                 queryExcluded.push(f.attribute + strQuery + f.value);
             } else {
-                if (f.operator !== undefined && f.value > 0) {
+                if (f.operator !== undefined) {
                     if (numerics[f.attribute] === undefined) {
                         numerics[f.attribute] = [];
                     }
                     numerics[f.attribute].push(f);
                 } else {
-                    query.push(f.attribute + strQuery + f.value);
+                    q.push(f.attribute + strQuery + f.value);
                 }
             }
         }
+        if (q.length > 0) {
+            query.push(q)
+        }
     }
-    if (query.length > 0) {
-        fs.push(query);
+    if (queryExcluded.length > 0 && query.length > 0) {
+        if (qtyAttr === 1) {
+            fs.push(query);
+        } else {
+            fs = query;
+        }
+        fs = fs.concat(queryExcluded);
     }
-    if (queryExcluded.length > 0) {
+    if (query.length > 0 && queryExcluded.length === 0) {
+        fs = fs.concat(query);
+    }
+    if (query.length === 0 && queryExcluded.length > 0) {
         fs = fs.concat(queryExcluded);
     }
     for (let attr in numerics) {

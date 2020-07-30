@@ -12,6 +12,7 @@
                 type="search"
                 v-model="stringSearch"
                 :label="'Search ' + title"
+                :id="'search-filter-' + field"
                 @input="searchForItems()"
             >
                 <v-icon slot="append">mdi-magnify</v-icon>
@@ -23,6 +24,7 @@
             >
                 <v-list-item-content
                     :class="(wasFiltered(item.facet, false) || wasFiltered(item.facet, true)) ? 'v-list-item__content--filtered' : ''"
+                    :id="'filter-item-name-' + item.facet.split(' ').join('-')"
                 >
                     {{ showItem(item) }}
                 </v-list-item-content>
@@ -152,10 +154,6 @@
                 this.$store.dispatch('getStats', index);
             },
             showItem(item) {
-                let parts = item.facet.split(' (');
-                if(parts.length > 1) {
-                    return parts[0] + ' (' + item.count + ')';
-                }
                 return item.facet + ' (' + item.count + ')';
             }
         }

@@ -31,7 +31,11 @@
                                 />
                             </v-col>
                             <v-col cols="4">
-                                <v-btn :id="'btn-' + field" type="submit">Go</v-btn>
+                                <v-btn
+                                    :id="'btn-' + field"
+                                    type="submit"
+                                    :disabled="number.min === 0 && number.max === 0"
+                                >Go</v-btn>
                             </v-col>
                         </v-row>
                     </v-form>
@@ -89,14 +93,8 @@
                             exclude: false
                         }
                     );
+                    this.number.max = 0;
                     return;
-                }
-                let range= {};
-                if (min > 0) {
-                    range.min = min;
-                }
-                if (max > 0) {
-                    range.max = max;
                 }
                 this.$store.commit(
                     'setFiltersExcluded',
