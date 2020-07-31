@@ -4,7 +4,7 @@
   >
     <v-row class="v-card__content">
         <v-col cols="9">
-            <div class="network">{{ item.networkHost }}</div>
+            <div class="network">{{ item.networkHost }} | {{ item.networkName }}</div>
         <v-card-title>
           <a :href="item.url" target="_blank">{{ item.name }}</a>
         </v-card-title>
