@@ -22,10 +22,10 @@ module.exports = {
         });
         browser
             .pause(2000)
-            .getValue('#min-wordCount', function(v) {
+            .getAttribute('#min-wordCount', 'value', function(v) {
                 browser.assert.ok(parseInt(v.value) === 0, "Min value input is 0");
             })
-            .getValue('#max-wordCount', function(v) {
+            .getAttribute('#min-wordCount', 'value', function(v) {
                 browser.assert.ok(parseInt(v.value) === 0, "Max value input is 0");
             });
     },
