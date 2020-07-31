@@ -14,11 +14,11 @@
         <span class="v-card--item editor">{{ editor }}</span>
       </span>
     </div>
-    <div v-if="item.about">
+    <div class="subject" v-if="item.about">
       <strong>Subject(s): </strong>
       <span v-for="(about, index) in item.about" v-bind:key="index">
         <span v-if="index != 0">, </span>
-        <span class="v-card--item subject">{{ about }}</span>
+        <span class="v-card--item">{{ about }}</span>
       </span>
     </div>
     <div v-if="item.publisher_name">
