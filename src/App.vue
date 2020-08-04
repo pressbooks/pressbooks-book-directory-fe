@@ -4,9 +4,10 @@
     <main role="main">
       <v-container id="v-application__main_content">
         <ais-instant-search
-        :search-client="$store.state.SClient.searchClient"
-        :index-name="$store.state.SClient.indexName"
-      >
+          :search-client="$store.state.SClient.searchClient"
+          :index-name="$store.state.SClient.indexName"
+          :stalled-search-delay="200"
+        >
           <ais-configure
               :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"
               :facet-filters.camel="$store.state.SClient.notFilters"
