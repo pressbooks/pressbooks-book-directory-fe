@@ -1,7 +1,5 @@
 import algoliasearch from "algoliasearch/lite";
 import helpers from "../helpers";
-import { history as historyRouter } from 'instantsearch.js/es/lib/routers';
-import { singleIndex as singleIndexMapping } from 'instantsearch.js/es/lib/stateMappings';
 
 let sClient = {
   searchClient: algoliasearch(
@@ -10,10 +8,6 @@ let sClient = {
     { _useRequestCache: true }
   ),
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
-  routing: {
-    router: historyRouter(),
-    stateMapping: singleIndexMapping(process.env.VUE_APP_ALGOLIA_INDEX),
-  },
   filtersExcluded: [],
   notFilters: [],
   numericFilters: [],
