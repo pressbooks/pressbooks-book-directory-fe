@@ -34,7 +34,7 @@ module.exports = {
                                                 browser.assert.ok(
                                                     tx.toLowerCase().search(networkName.toLowerCase()) >= 0,
                                                     "Book contains the network: " + networkName
-                                                );
+                                                ).assert.urlContains('?net=' + encodeURIComponent(networkName));
                                             })
                                         });
                                 });
