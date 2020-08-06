@@ -58,42 +58,69 @@
 </template>
 
 <script>
-    export default {
-        name: "CurrentFilters",
-        methods: {
-            removeFilters() {
-                this.$store.state.SClient.filtersExcluded = {};
-                this.$store.state.SClient.notFilters = [];
-                this.$store.state.SClient.numericFilters = [];
-            },
-            closeExcludeFilter(f) {
-                this.$store.commit('deleteItemExcluded', f);
-                let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
-                this.$store.commit("setFacetFilters", this.$store.state.SClient.notFilters);
-                this.$store.commit("setKeepFacets", Object.keys(this.$store.state.SClient.filtersExcluded));
-                this.$store.dispatch('getStats', index);
-            },
-            getLabel(value) {
-                let label;
-                let mb = (value.attribute === 'storageSize') ? parseInt(value.value) : 0;
-                switch (value.attribute) {
-                    case 'has_isBasedOn':
-                        label = (value.value) ? 'Based on another book' : 'Original';
-                        break;
-                    case 'wordCount':
-                        label = 'Words ' + value.operator + ' ' + value.value;
-                        break;
-                    case 'storageSize':
-                        label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
-                        break;
-                    case 'h5pActivities':
-                        label = 'H5P Activities ' + value.operator + ' ' + value.value;
-                        break;
-                    default:
-                        label = value.value;
-                }
-                return label;
+  export default {
+      name: "CurrentFilters",
+      methods: {
+          removeFilters() {
+            this.$router.replace({ query: {} });
+          },
+          getAliasType(f) {
+            for (let attribute in this.$store.state.SClient.allowedFilters) {
+              if (f.attribute === attribute) {
+                return {
+                  alias: this.$store.state.SClient.allowedFilters[attribute].alias,
+                  type: this.$store.state.SClient.allowedFilters[attribute].type
+                };
+              }
             }
-        }
-    }
+            return false;
+          },
+          closeExcludeFilter(f) {
+            let currentQuery = {...this.$route.query};
+            let attrAllowed = Object.keys(this.$store.state.SClient.allowedFilters);
+            let aliasType = this.getAliasType(f);
+            if (attrAllowed.indexOf(f.attribute) < 0 || !aliasType) {
+                return false;
+            }
+            for (let attr in currentQuery) {
+                if (attr === aliasType.alias) {
+                    currentQuery[attr] = currentQuery[attr].split('&&');
+                    for (let i = 0; i < currentQuery[attr].length; i++) {
+                        let value = (aliasType.type === 'numeric') ? currentQuery[attr][i].substr(2) : currentQuery[attr][i];
+                        if (f.value === value) {
+                           currentQuery[attr].splice(i, 1);
+                           if (currentQuery[attr].length === 0) {
+                              delete currentQuery[attr];
+                           } else {
+                              currentQuery[attr] = currentQuery[attr].join('&&');
+                           }
+                           return this.$router.replace({ query: currentQuery });
+                        }
+                    }
+                }
+            }
+          },
+          getLabel(value) {
+              let label;
+              let mb = (value.attribute === 'storageSize') ? parseInt(value.value) : 0;
+              switch (value.attribute) {
+                  case 'has_isBasedOn':
+                      label = (value.value) ? 'Based on another book' : 'Original';
+                      break;
+                  case 'wordCount':
+                      label = 'Words ' + value.operator + ' ' + value.value;
+                      break;
+                  case 'storageSize':
+                      label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
+                      break;
+                  case 'h5pActivities':
+                      label = 'H5P Activities ' + value.operator + ' ' + value.value;
+                      break;
+                  default:
+                      label = value.value;
+              }
+              return label;
+          }
+      }
+  }
 </script>

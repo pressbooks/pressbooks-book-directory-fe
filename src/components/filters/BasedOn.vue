@@ -48,22 +48,11 @@
         },
         methods: {
             applyFilter(itemValue, exclude) {
-                if (this.excluded !== exclude) {
-                    this.$store.commit('deleteExcluded', this.field);
-                }
-                this.excluded = exclude;
-                this.$store.commit(
-                    'setFiltersExcluded',
-                    {
-                        attribute: this.field,
-                        value: itemValue,
-                        exclude: exclude
-                    }
-                );
-                let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
-                this.$store.commit("setFacetFilters", this.$store.state.SClient.notFilters);
-                this.$store.commit("setKeepFacets", Object.keys(this.$store.state.SClient.filtersExcluded));
-                this.$store.dispatch('getStats', index);
+                let query = {...this.$route.query}, value;
+                let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
+                value = exclude ? '-' + itemValue : itemValue;
+                query[attribute] = value;
+                this.$router.replace({ query });
             },
             wasFiltered(value, exc) {
                 return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&

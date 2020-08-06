@@ -69,7 +69,7 @@ module.exports = {
                                                 );
                                             })
                                         });
-                                    });
+                                    }).assert.urlContains('?pub=' + encodeURIComponent(publisher));
                             });
                         });
                     });

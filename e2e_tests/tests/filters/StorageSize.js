@@ -8,7 +8,6 @@ module.exports = {
             .setValue('#min-storageSize', '100')
             .setValue('#max-storageSize', '350')
             .click('#btn-storageSize')
-            .waitForElementVisible('.v-chip--clickable')
             .pause(2000);
         browser.elements('css selector', '.ais-Hits__books-book', function(bookElement) {
             browser.waitForElementVisible('.v-chip--clickable');

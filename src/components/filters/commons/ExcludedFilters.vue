@@ -93,7 +93,8 @@
                 steps: 5,
                 limited: 100,
                 max: 5000,
-                auxItems: []
+                auxItems: [],
+                alias: this.$store.state.SClient.allowedFilters[this.field].alias
             };
         },
         filters: {
@@ -133,25 +134,29 @@
                     this.$store.state.SClient.filtersExcluded[this.field].find(v => v.value === value && v.exclude === exc) !== undefined;
             },
             clearFilters() {
-                this.$store.commit('deleteExcluded', this.field);
+                let query = {...this.$route.query};
+                delete query[this.alias];
+                this.$router.replace({ query });
             },
             applyFilter(itemValue, exclude) {
-                if (this.excluded !== exclude) {
-                    this.$store.commit('deleteExcluded', this.field);
-                }
-                this.excluded = exclude;
-                this.$store.commit(
-                    'setFiltersExcluded',
-                    {
-                        attribute: this.field,
-                        value: itemValue,
-                        exclude: exclude
+                let query = {...this.$route.query}, value;
+                value = exclude ? '-' + itemValue : itemValue;
+                if (typeof(query[this.alias]) === 'undefined') {
+                  query[this.alias] = value.toString();
+                } else {
+                  let filters = query[this.alias].split('&&');
+                  for (let i = 0; i < filters.length; i++) {
+                    if (
+                        (exclude && filters[i][0] !== '-') ||
+                        (!exclude && filters[i][0] === '-')
+                    ) {
+                      query[this.alias] = value.toString();
+                      return this.$router.replace({ query });
                     }
-                );
-                let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
-                this.$store.commit("setFacetFilters", this.$store.state.SClient.notFilters);
-                this.$store.commit("setKeepFacets", Object.keys(this.$store.state.SClient.filtersExcluded));
-                this.$store.dispatch('getStats', index);
+                  }
+                  query[this.alias] += '&&' + value.toString();
+                }
+                this.$router.replace({ query });
             },
             showItem(item) {
                 return item.facet + ' (' + item.count + ')';
