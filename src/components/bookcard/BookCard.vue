@@ -41,8 +41,7 @@
               <v-col cols="6">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <a :href="item.url + 'h5p-listing'" aria-label="See a list of this book's H5P activities" target="_blank">
-                      <v-img
+                    <v-img
                         v-if="item.has_h5pActivities && item.h5pActivities > 0"
                         max-height="35"
                         contain
@@ -52,7 +51,6 @@
                         :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
                         :src="h5pActivitiesImage"
                     ></v-img>
-                    </a>
                   </template>
                   <span>This book has {{ item.h5pActivities }} H5P Activities </span>
                 </v-tooltip>
