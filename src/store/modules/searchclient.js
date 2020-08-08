@@ -90,7 +90,7 @@ export default {
         }
       }
       state.filtersExcluded = { ...filters  };
-      let nf = helpers.functions.setFilters(filters);
+      let nf = helpers.functions.setFilters(filters, state.allowedFilters);
       state.notFilters = nf[0];
       state.numericFilters = nf[1];
     },
@@ -101,14 +101,14 @@ export default {
       }
       oldFilters[filter.attribute].push(filter);
       state.filtersExcluded = { ...oldFilters  };
-      let nf = helpers.functions.setFilters(oldFilters);
+      let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
       state.notFilters = nf[0];
       state.numericFilters = nf[1];
     },
     deleteExcluded: (state, field) => {
       let fe = { ...state.filtersExcluded };
       delete fe[field];
-      let nf = helpers.functions.setFilters(fe)
+      let nf = helpers.functions.setFilters(fe, state.allowedFilters)
       state.notFilters = nf[0];
       state.numericFilters = nf[1];
       state.filtersExcluded = fe;
@@ -126,7 +126,7 @@ export default {
           }
         }
         state.filtersExcluded = fe;
-        let nf = helpers.functions.setFilters(fe)
+        let nf = helpers.functions.setFilters(fe, state.allowedFilters)
         state.notFilters = nf[0];
         state.numericFilters = nf[1];
       }

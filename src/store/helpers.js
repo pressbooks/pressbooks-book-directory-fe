@@ -1,4 +1,4 @@
-function setFilters(oldFilters) {
+function setFilters(oldFilters, allowedFilters) {
     let fs = [], ns = [], strQuery = '', f = {};
     let query = [], queryExcluded = [], numerics = {}, q =[];
     let qtyAttr = Object.keys(oldFilters).length;
@@ -8,7 +8,9 @@ function setFilters(oldFilters) {
             f = oldFilters[attribute][i];
             strQuery = ':';
             if (f.exclude) {
-                strQuery = ':-';
+                if (allowedFilters[attribute].type !== 'boolean') {
+                    strQuery = ':-';
+                }
                 queryExcluded.push(f.attribute + strQuery + f.value);
             } else {
                 if (f.operator !== undefined) {

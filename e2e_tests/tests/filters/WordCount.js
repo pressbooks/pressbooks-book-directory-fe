@@ -7,8 +7,10 @@ module.exports = {
             .assert.visible('#max-wordCount')
             .setValue('#min-wordCount', '1000')
             .setValue('#max-wordCount', '2000')
+            .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .click('#btn-wordCount')
             .pause(3000)
+            .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .elements('css selector', '.ais-Hits__books-book', function(bookElement) {
                 bookElement.value.forEach((v) => {
                     if (!v.hasOwnProperty('ELEMENT')) {
@@ -34,8 +36,10 @@ module.exports = {
             .assert.visible('#filter-wordCount')
             .assert.visible('#max-wordCount')
             .setValue('#max-wordCount', '2')
+            .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .click('#btn-wordCount')
             .pause(3000)
+            .waitForElementVisible('.ais-Hits__books-book')
             .elements('css selector', '.ais-Hits__books-book', function(bookElement) {
                 bookElement.value.forEach((v) => {
                     if (!v.hasOwnProperty('ELEMENT')) {
@@ -64,8 +68,10 @@ module.exports = {
             .assert.visible('#max-wordCount')
             .setValue('#min-wordCount', '3000')
             .setValue('#max-wordCount', '200')
+            .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .click('#btn-wordCount')
             .pause(3000)
+            .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .elements('css selector', '.ais-Hits__books-book', function(bookElement) {
                 bookElement.value.forEach((v) => {
                     if (!v.hasOwnProperty('ELEMENT')) {
