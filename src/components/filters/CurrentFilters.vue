@@ -86,7 +86,13 @@
                 if (attr === aliasType.alias) {
                     currentQuery[attr] = currentQuery[attr].split('&&');
                     for (let i = 0; i < currentQuery[attr].length; i++) {
-                        let value = (aliasType.type === 'numeric') ? currentQuery[attr][i].substr(2) : currentQuery[attr][i];
+                        let value = (aliasType.type === 'numeric') ?
+                            currentQuery[attr][i].substr(2) : currentQuery[attr][i];
+                        if (aliasType.type === 'boolean') {
+                            value = (currentQuery[attr][i] === 'true').toString();
+                        } else if(f.exclude) {
+                            value = currentQuery[attr][i].substr(1);
+                        }
                         if (f.value === value) {
                            currentQuery[attr].splice(i, 1);
                            if (currentQuery[attr].length === 0) {

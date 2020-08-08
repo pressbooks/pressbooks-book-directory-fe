@@ -74,6 +74,9 @@ export default {
             exclude = true;
             query[attribute][i] = query[attribute][i].substr(1);
           }
+          if (state.allowedFilters[attribute].type === 'boolean' && query[attribute][i] === 'false') {
+            exclude = true;
+          }
           toInsert = {
             attribute: attribute,
             exclude: exclude,

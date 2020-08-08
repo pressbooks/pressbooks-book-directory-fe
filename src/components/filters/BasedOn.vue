@@ -9,7 +9,7 @@
         </template>
         <v-list-item>
             <v-list-item-content
-                :class="(wasFiltered('has_isBasedOn', false, false) || wasFiltered('has_isBasedOn', true, false)) ? 'v-list-item__content--filtered' : ''"
+                :class="(wasFiltered('false', false) || wasFiltered('true', false)) ? 'v-list-item__content--filtered' : ''"
             >
                 Based on another book
             </v-list-item-content>
@@ -19,7 +19,7 @@
                         icon
                         :id="'btn-include-based-another'"
                         @click="applyFilter(true, false)"
-                        :disabled="wasFiltered(true, false)"
+                        :disabled="wasFiltered('true', false)"
                     >
                         <v-icon color="green">mdi-check</v-icon>
                     </v-btn>
@@ -27,7 +27,7 @@
                         icon
                         :id="'btn-exclude-based-another'"
                         @click="applyFilter(true, true)"
-                        :disabled="wasFiltered(true, true)"
+                        :disabled="wasFiltered('false', true)"
                     >
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
@@ -50,13 +50,14 @@
             applyFilter(itemValue, exclude) {
                 let query = {...this.$route.query}, value;
                 let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-                value = exclude ? '-' + itemValue : itemValue;
+                value = !exclude;
                 query[attribute] = value;
                 this.$router.replace({ query });
             },
             wasFiltered(value, exc) {
                 return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
-                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'].find(v => v.value === value && v.exclude === exc) !== undefined;
+                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].value === value &&
+                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].exclude === exc;
             }
         }
     }
