@@ -24,7 +24,7 @@ function setFilters(oldFilters, allowedFilters) {
             }
         }
         if (q.length > 0) {
-            query.push(q)
+            query.push(q);
         }
     }
     if (queryExcluded.length > 0 && query.length > 0) {
@@ -64,6 +64,6 @@ function setFilters(oldFilters, allowedFilters) {
 
 export default {
     functions: {
-        setFilters: setFilters
+        setFilters
     }
 };

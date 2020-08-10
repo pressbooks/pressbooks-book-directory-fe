@@ -1,5 +1,5 @@
 module.exports = {
-    'Checking title must contains Pressbooks Directory string' : function (browser) {
+    'Checking title must contains Pressbooks Directory string' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
