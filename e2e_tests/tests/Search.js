@@ -3,7 +3,8 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#search-book');
+            .assert.visible('#search-book')
+            .pause(3000);
         browser.element('css selector', '.network', function (elem) {
             if (!elem.value.hasOwnProperty('ELEMENT')) {
                 elem.value.ELEMENT = Object.values(elem.value)[0];

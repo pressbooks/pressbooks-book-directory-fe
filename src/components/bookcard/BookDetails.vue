@@ -21,6 +21,10 @@
         <span class="v-card--item">{{ about }}</span>
       </span>
     </div>
+    <div v-if="item.has_lastUpdated">
+      <strong>Updated: </strong>
+      <span class="v-card--item publisher">{{ item.lastUpdated }}</span>
+    </div>
     <div v-if="item.publisher_name">
       <strong>Publisher: </strong>
       <span class="v-card--item publisher">{{ item.publisherName }}</span>

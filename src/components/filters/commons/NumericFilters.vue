@@ -69,51 +69,35 @@
             return {
                 number: {
                     min: 0,
-                    max: 0
+                    max: 0,
+                    alias: ''
                 }
             };
+        },
+        mounted() {
+            this.alias = this.$store.state.SClient.allowedFilters[this.field].alias
         },
         methods: {
             clearFilters() {
                 this.number.min = 0;
                 this.number.max = 0;
-                this.$store.commit('deleteExcluded', this.field);
+                let query = {...this.$route.query};
+                delete query[this.alias];
+                this.$router.replace({ query });
             },
             applyFilter() {
-                this.$store.commit('deleteExcluded', this.field);
+                let query = {...this.$route.query};
+                let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
                 let min = parseInt(this.number.min);
                 let max = parseInt(this.number.max);
                 if (min > max) {
-                    this.$store.commit(
-                        'setFiltersExcluded',
-                        {
-                            attribute: this.field,
-                            value: min,
-                            operator: '>=',
-                            exclude: false
-                        }
-                    );
                     this.number.max = 0;
+                    query[attribute] = '>=' + min;
+                    this.$router.replace({ query });
                     return;
                 }
-                this.$store.commit(
-                    'setFiltersExcluded',
-                    {
-                        attribute: this.field,
-                        value: min,
-                        operator: '>=',
-                        exclude: false
-                    }
-                );
-                this.$store.commit(
-                    'setFiltersExcluded',
-                    {
-                        attribute: this.field,
-                        value: max,
-                        operator: '<=',
-                        exclude: false
-                    }
-                );
+                query[attribute] = '>=' + min + '&&' + '<=' + max;
+                this.$router.replace({ query });
             }
         }
     }

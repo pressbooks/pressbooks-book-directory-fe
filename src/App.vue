@@ -12,6 +12,7 @@
               :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"
               :facet-filters.camel="$store.state.SClient.notFilters"
               :filters.camel="($store.state.SClient.numericFilters.length > 0) ? $store.state.SClient.numericFilters : ''"
+              :query="$store.state.SClient.searchParameters.searchQuery"
           ></ais-configure>
           <welcome-header></welcome-header>
           <current-filters></current-filters>
