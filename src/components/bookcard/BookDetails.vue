@@ -21,9 +21,9 @@
         <span class="v-card--item">{{ about }}</span>
       </span>
     </div>
-    <div v-if="item.has_lastUpdated">
+    <div v-if="item.has_lastUpdated" class="">
       <strong>Updated: </strong>
-      <span class="v-card--item publisher">{{ unixDateToStandard(item.lastUpdated) }}</span>
+      <span class="v-card--item updated">{{ unixDateToStandard(item.lastUpdated) }}</span>
     </div>
     <div v-if="item.publisher_name">
       <strong>Publisher: </strong>
@@ -59,7 +59,10 @@ export default {
   methods: {
     unixDateToStandard(unixDate) {
       let date = new Date(unixDate * 1000);
-      return date.toDateString();
+      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDay()) + 1;
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      return month + '-' + day + '-' + date.getUTCFullYear();
     },
     applyFilters(item, attribute, index = null, operator = ":") {
       let filters = [];
