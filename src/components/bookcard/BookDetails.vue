@@ -23,7 +23,7 @@
     </div>
     <div v-if="item.has_lastUpdated">
       <strong>Updated: </strong>
-      <span class="v-card--item publisher">{{ item.lastUpdated }}</span>
+      <span class="v-card--item publisher">{{ unixDateToStandard(item.lastUpdated) }}</span>
     </div>
     <div v-if="item.publisher_name">
       <strong>Publisher: </strong>
@@ -57,6 +57,10 @@ export default {
     }
   },
   methods: {
+    unixDateToStandard(unixDate) {
+      let date = new Date(unixDate * 1000);
+      return date.toDateString();
+    },
     applyFilters(item, attribute, index = null, operator = ":") {
       let filters = [];
       item[attribute] = item[attribute] !== undefined ? item[attribute] : false;
