@@ -34,6 +34,11 @@
     &-select {
       color: $pb-blue;
     }
+
+    &--input {
+      margin: 0;
+      width: 11rem;
+    }
   }
 
   &-ClearRefinements {
@@ -121,6 +126,7 @@
   font-size: small;
   color: $pb-dark;
   margin: .3rem 0 .3rem .45rem;
+  line-height: 0.6rem;
 }
 
 .v-list-item {

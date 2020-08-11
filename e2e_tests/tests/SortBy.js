@@ -3,9 +3,11 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .waitForElementVisible('.ais-SortBy-select')
-            .click('.ais-SortBy-select option[value=test_Pressbooks_directory_sort_by_wordCount]')
-            .pause(2000)
+            .waitForElementVisible('.ais-SortBy--input')
+            .click('.ais-SortBy--input')
+            .waitForElementVisible('.v-select-list')
+            .click('#sort-by-test_Pressbooks_directory_sort_by_wordCount')
+            .pause(3000)
             .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .elements('css selector', '.ais-Hits__books-book', function(bookElement) {
                 let previousWC = 0, elementId;
@@ -36,10 +38,12 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .waitForElementVisible('.ais-SortBy-select')
-            .click('.ais-SortBy-select option[value=test_Pressbooks_directory]')
-            .pause(2000)
-            .waitForElementVisible('.ais-Hits__books-book')
+            .waitForElementVisible('.ais-SortBy--input')
+            .click('.ais-SortBy--input')
+            .waitForElementVisible('.v-select-list')
+            .click('#sort-by-test_Pressbooks_directory')
+            .pause(3000)
+            .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .elements('css selector', '.ais-Hits__books-book', function(bookElement) {
                 let previousName = '', elementId;
                 bookElement.value.forEach((v) => {
@@ -70,9 +74,11 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .waitForElementVisible('.ais-SortBy-select')
-            .click('.ais-SortBy-select option[value=test_Pressbooks_directory_sort_by_lastUpdated]')
-            .pause(2000)
+            .waitForElementVisible('.ais-SortBy--input')
+            .click('.ais-SortBy--input')
+            .waitForElementVisible('.v-select-list')
+            .click('#sort-by-test_Pressbooks_directory_sort_by_lastUpdated')
+            .pause(3000)
             .waitForElementVisible('.updated')
             .elements('css selector', '.ais-Hits__books-book', function(bookElement) {
                 let previousDate = 0, elementId;
