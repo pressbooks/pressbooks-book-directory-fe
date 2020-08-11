@@ -11,6 +11,7 @@
       />
     </v-sheet>
     <v-card
+        v-else
       :class="addClasses(item)"
     >
       <v-row class="v-card__content">
