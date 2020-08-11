@@ -1,16 +1,24 @@
 <template>
-  <div>
-    <div v-if="item.author && item.author.length > 0">
+  <div class="v-card__details">
+    <div
+      v-if="item.author && item.author.length > 0"
+      class="author"
+    >
       <strong>Author(s): </strong>
       <span
         v-for="(author, index) in item.author"
         :key="index"
       >
         <span v-if="index != 0">, </span>
-        <span class="v-card--item author">{{ author }}</span>
+        <span
+          class="v-card--item author"
+        >{{ author }}</span>
       </span>
     </div>
-    <div v-if="item.editor && item.editor.length > 0">
+    <div
+      v-if="item.editor && item.editor.length > 0"
+      class="editor"
+    >
       <strong>Editor(s): </strong>
       <span
         v-for="(editor, index) in item.editor"
@@ -28,29 +36,42 @@
       <span
         v-for="(about, index) in item.about"
         :key="index"
+        class="v-card--item subject"
       >
         <span v-if="index != 0">, </span>
-        <span class="v-card--item">{{ about }}</span>
+        <span class="v-card--item subject">{{ about }}</span>
       </span>
     </div>
     <div
       v-if="item.has_lastUpdated"
-      class=""
+      class="updated"
     >
       <strong>Updated: </strong>
       <span class="v-card--item updated">{{ unixDateToStandard(item.lastUpdated) }}</span>
     </div>
-    <div v-if="item.publisher_name">
+    <div
+      v-if="item.publisher_name"
+      class="publisher"
+    >
       <strong>Publisher: </strong>
       <span class="v-card--item publisher">{{ item.publisherName }}</span>
     </div>
-    <div v-show="item.wordCount">
+    <div
+      v-show="item.wordCount"
+      class="wordcount"
+    >
       <strong>Word Count: </strong><span class="v-card--item ais-Hits__books-book-wordcount">{{ item.wordCount }}</span>
     </div>
-    <div v-if="item.storageSize">
+    <div
+      v-if="item.storageSize"
+      class="storagesize"
+    >
       <strong>Storage Size: </strong><span class="v-card--item ais-Hits__books-book-storagesize">{{ toMB(item.storageSize) }}</span>
     </div>
-    <div v-if="item.description">
+    <div
+      v-if="item.description"
+      class="description"
+    >
       <strong>Description: </strong><span class="v-card--item description">{{ item.description }}</span>
     </div>
   </div>

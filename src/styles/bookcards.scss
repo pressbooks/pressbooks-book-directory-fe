@@ -10,6 +10,10 @@
   }
 
   &__content {
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+
     .network {
       font-family: $font-primary;
       text-transform: uppercase;
@@ -23,6 +27,17 @@
     a {
       color: $pb-red;
     }
+  }
+
+  .description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+
+  .v-card--item.description {
+    display: inline;
   }
 }
 
