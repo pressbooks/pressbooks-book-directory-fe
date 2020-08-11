@@ -6,9 +6,9 @@
         <ais-instant-search
           :search-client="$store.state.SClient.searchClient"
           :index-name="$store.state.SClient.indexName"
+          :stalled-search-delay="200"
         >
           <ais-configure
-            :hits-per-page.camel="$store.state.SClient.searchParameters.hitsPerPage"
             :facet-filters.camel="$store.state.SClient.notFilters"
             :filters.camel="($store.state.SClient.numericFilters.length > 0) ? $store.state.SClient.numericFilters : ''"
             :query="$store.state.SClient.searchParameters.searchQuery"

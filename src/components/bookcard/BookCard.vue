@@ -1,115 +1,144 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-card
-    :class="addClasses(item)"
-  >
-    <v-row class="v-card__content">
-      <v-col cols="9">
-        <div class="network">
-          {{ item.networkHost }} | {{ item.networkName }}
-        </div>
-        <v-card-title>
-          <a
-            :href="item.url"
-            target="_blank"
-          >{{ item.name }}</a>
-        </v-card-title>
-        <v-card-text>
-          <book-details :item="item" />
-        </v-card-text>
-      </v-col>
-      <v-col cols="3">
-        <v-row>
-          <v-col cols="12">
-            <v-img
-              class="book-cover"
-              :src="item.image"
-            />
-          </v-col>
-          <v-col cols="6">
-            <div class="language">
-              {{ item.languageCode }}
-            </div>
-          </v-col>
-          <v-col cols="6">
-            <v-tooltip top>
-              <template #activator="{ on, attrs }">
-                <v-img
-                  max-height="35"
-                  contain
-                  class="copyright"
-                  v-bind="attrs"
-                  :eager="true"
-                  :src="item.licenseIcon"
-                  :alt="item.licenseAlt"
-                  v-on="on"
-                />
-              </template>
-              <span>{{ item.licenseAlt }}</span>
-            </v-tooltip>
-          </v-col>
-          <v-col cols="6">
-            <v-tooltip bottom>
-              <template #activator="{ on, attrs }">
-                <v-img
-                  v-if="item.has_h5pActivities && item.h5pActivities > 0"
-                  max-height="35"
-                  contain
-                  :eager="true"
-                  v-bind="attrs"
-                  :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
-                  :src="h5pActivitiesImage"
-                  v-on="on"
-                />
-              </template>
-              <span>This book has {{ item.h5pActivities }} H5P Activities </span>
-            </v-tooltip>
-          </v-col>
-          <v-col cols="6">
-            <v-tooltip bottom>
-              <template #activator="{ on, attrs }">
-                <v-img
-                  v-if="item.has_isBasedOn"
-                  max-height="35"
-                  contain
-                  class="isBasedOn"
-                  v-bind="attrs"
-                  alt="Book based on another book"
-                  :src="basedOnImg"
-                  v-on="on"
-                />
-              </template>
-              <span>This book is based on another book </span>
-            </v-tooltip>
-            <v-tooltip bottom>
-              <template #activator="{ on, attrs }">
-                <v-img
-                  v-if="!item.has_isBasedOn"
-                  max-height="35"
-                  contain
-                  class="isBasedOn"
-                  v-bind="attrs"
-                  alt="This book is not based on another book"
-                  :src="originalImg"
-                  v-on="on"
-                />
-              </template>
-              <span>This book is not based on another book </span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-card>
+  <div>
+    <v-sheet
+      v-if="state && state.searchMetadata.isSearchStalled"
+      color="grey lighten-4"
+      class="px-3 pt-3 pb-3"
+    >
+      <v-skeleton-loader
+        class="mx-auto"
+        type="table-heading, card, actions"
+      />
+    </v-sheet>
+    <v-card
+      v-else
+      :class="addClasses(item)"
+    >
+      <v-row class="v-card__content">
+        <v-col cols="9">
+          <div class="network" v-if="item.networkHost">
+            {{ item.networkHost }} | {{ item.networkName }}
+          </div>
+          <v-card-title>
+            <a
+              :href="item.url"
+              target="_blank"
+            >{{ item.name }}</a>
+          </v-card-title>
+          <v-card-text>
+            <book-details :item="item" />
+          </v-card-text>
+        </v-col>
+        <v-col cols="3">
+          <v-row>
+            <v-col cols="12">
+              <v-img
+                class="book-cover"
+                :src="item.image"
+              />
+            </v-col>
+            <v-col cols="6">
+              <div class="language">
+                {{ item.languageCode }}
+              </div>
+            </v-col>
+            <v-col cols="6">
+              <v-tooltip top>
+                <template #activator="{ on, attrs }">
+                  <v-img
+                    max-height="35"
+                    contain
+                    class="copyright"
+                    v-bind="attrs"
+                    :eager="true"
+                    :src="item.licenseIcon"
+                    :alt="item.licenseAlt"
+                    v-on="on"
+                  />
+                </template>
+                <span>{{ item.licenseAlt }}</span>
+              </v-tooltip>
+            </v-col>
+            <v-col cols="6">
+              <v-tooltip bottom>
+                <template #activator="{ on, attrs }">
+                  <v-img
+                    v-if="item.has_h5pActivities && item.h5pActivities > 0"
+                    max-height="35"
+                    contain
+                    :eager="true"
+                    v-bind="attrs"
+                    :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
+                    :src="h5pActivitiesImage"
+                    v-on="on"
+                  />
+                </template>
+                <span>This book has {{ item.h5pActivities }} H5P Activities </span>
+              </v-tooltip>
+            </v-col>
+            <v-col cols="6">
+              <v-tooltip bottom>
+                <template #activator="{ on, attrs }">
+                  <v-img
+                    v-if="item.has_isBasedOn"
+                    max-height="35"
+                    contain
+                    class="isBasedOn"
+                    v-bind="attrs"
+                    alt="Book based on another book"
+                    :src="basedOnImg"
+                    v-on="on"
+                  />
+                </template>
+                <span>This book is based on another book </span>
+              </v-tooltip>
+              <v-tooltip bottom>
+                <template #activator="{ on, attrs }">
+                  <v-img
+                    v-if="!item.has_isBasedOn"
+                    max-height="35"
+                    contain
+                    class="isBasedOn"
+                    v-bind="attrs"
+                    alt="This book is not based on another book"
+                    :src="originalImg"
+                    v-on="on"
+                  />
+                </template>
+                <span>This book is not based on another book </span>
+              </v-tooltip>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-card>
+  </div>
 </template>
 
 <script>
 import BookDetails from './BookDetails';
+import {createWidgetMixin} from 'vue-instantsearch';
+
+const connectSearchMetaData = (renderFn, unmountFn) => () => ({
+    init() {
+        renderFn({ searchMetadata: {} }, true);
+    },
+
+    render({ searchMetadata }) {
+        renderFn({ searchMetadata }, false);
+    },
+
+    dispose() {
+        unmountFn();
+    },
+});
 
 export default {
     name: 'BookCard',
     components: {
         BookDetails
     },
+    mixins: [createWidgetMixin({ connector: connectSearchMetaData })],
     props: {
         item: {
             type: Object,

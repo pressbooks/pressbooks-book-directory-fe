@@ -33,6 +33,13 @@
         <span class="v-card--item">{{ about }}</span>
       </span>
     </div>
+    <div
+      v-if="item.has_lastUpdated"
+      class=""
+    >
+      <strong>Updated: </strong>
+      <span class="v-card--item updated">{{ unixDateToStandard(item.lastUpdated) }}</span>
+    </div>
     <div v-if="item.publisher_name">
       <strong>Publisher: </strong>
       <span class="v-card--item publisher">{{ item.publisherName }}</span>
@@ -67,6 +74,13 @@ export default {
         toMB(value) {
             let v = (parseInt(value) / 1024) / 1024;
             return parseFloat(v).toFixed(2) + ' MB';
+        },
+        unixDateToStandard(unixDate) {
+            let date = new Date(unixDate * 1000);
+            let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDay()) + 1;
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' + day : day;
+            return month + '-' + day + '-' + date.getUTCFullYear();
         },
         applyFilters(item, attribute, index = null, operator = ':') {
             let filters = [];
