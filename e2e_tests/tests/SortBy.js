@@ -1,5 +1,5 @@
 module.exports = {
-    'Sorting by Word Count (desc.)' : function (browser) {
+    'Sorting by Word Count (desc.)' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
@@ -25,16 +25,16 @@ module.exports = {
                             if (previousWC === 0) {
                                 previousWC = parseInt(words.value);
                             } else {
-                                browser.assert.ok(previousWC >= parseInt(words.value), "Word Count: " + parseInt(words.value) + " words. Correct Word Count order for this card.");
+                                browser.assert.ok(previousWC >= parseInt(words.value), 'Word Count: ' + parseInt(words.value) + ' words. Correct Word Count order for this card.');
                                 previousWC = parseInt(words.value);
                             }
                         });
                         done();
                     });
-                })
+                });
             });
     },
-    'Sorting by name (asc.)' : function (browser) {
+    'Sorting by name (asc.)' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
@@ -61,16 +61,16 @@ module.exports = {
                             if (previousName === '') {
                                 previousName = words.value;
                             } else {
-                                browser.assert.ok(previousName <= words.value, "Book name: " + words.value + ". Correct name order for this card.");
+                                browser.assert.ok(previousName <= words.value, 'Book name: ' + words.value + '. Correct name order for this card.');
                                 previousName = words.value;
                             }
                         });
                         done();
                     });
-                })
+                });
             });
     },
-    'Sorting by last updated (desc.)' : function (browser) {
+    'Sorting by last updated (desc.)' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
@@ -97,13 +97,13 @@ module.exports = {
                                 previousDate = new Date(date.value);
                             } else {
                                 date.value = new Date(date.value);
-                                browser.assert.ok(previousDate >= date.value, "Date: " + date.value + ". Correct last updated order for this card.");
+                                browser.assert.ok(previousDate >= date.value, 'Date: ' + date.value + '. Correct last updated order for this card.');
                                 previousDate = date.value;
                             }
                         });
                         done();
                     });
-                })
+                });
             });
     }
 };

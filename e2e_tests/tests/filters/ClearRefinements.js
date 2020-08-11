@@ -1,5 +1,5 @@
 module.exports = {
-    'Excluding by ARR License and then apply clear all refinements button action': function (browser) {
+    'Excluding by ARR License and then apply clear all refinements button action' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
@@ -9,6 +9,6 @@ module.exports = {
             .pause(2000)
             .click('.ais-ClearRefinements-button')
             .pause(2000)
-            .assert.cssClassPresent(".ais-Hits__books-book", "ais-Hits__books--allrights");
+            .assert.cssClassPresent('.ais-Hits__books-book', 'ais-Hits__books--allrights');
     }
 };

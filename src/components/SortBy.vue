@@ -1,23 +1,23 @@
 <template>
   <ais-sort-by
-      :items="[
-          { value: 'test_Pressbooks_directory', label: 'Title (A-Z)' },
-          { value: 'test_Pressbooks_directory_sort_by_wordCount', label: 'Word count ↓' },
-          { value: 'test_Pressbooks_directory_sort_by_lastUpdated', label: 'Recently updated' }
-      ]"
+    :items="[
+      { value: 'test_Pressbooks_directory', label: 'Title (A-Z)' },
+      { value: 'test_Pressbooks_directory_sort_by_wordCount', label: 'Word count ↓' },
+      { value: 'test_Pressbooks_directory_sort_by_lastUpdated', label: 'Recently updated' }
+    ]"
   >
-    <template v-slot="{ items, refine }">
+    <template #default="{ items, refine }">
       <v-select
+        v-model="selected"
         :items="items"
         item-text="label"
         item-value="value"
         class="ais-SortBy--input"
         dense
-        v-model="selected"
-        @change="sortBy(selected, refine)"
         label="Sort cards by:"
+        @change="sortBy(selected, refine)"
       >
-        <template v-slot:item="{ item }">
+        <template #item="{ item }">
           <div :id="'sort-by-' + item.value">
             <v-list-item>
               <v-list-item-content>
@@ -37,16 +37,16 @@
 
 <script>
 export default {
-  name: 'SortBy',
-  data() {
-    return {
-      selected: ''
+    name: 'SortBy',
+    data() {
+        return {
+            selected: ''
+        };
+    },
+    methods: {
+        sortBy(sel, refine) {
+            refine(sel);
+        }
     }
-  },
-  methods: {
-    sortBy(sel, refine) {
-      refine(sel);
-    }
-  }
-}
+};
 </script>
