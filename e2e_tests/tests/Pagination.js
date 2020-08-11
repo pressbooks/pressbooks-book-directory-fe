@@ -17,7 +17,7 @@ module.exports = {
                 if (totalPages > parseInt(totalPages)) {
                     totalPages = parseInt(totalPages) + 1;
                 }
-                browser.elements('css selector', '.ais-Pagination-link', function(elem) {
+                browser.elements('css selector', '.ais-Pagination-link', (elem) => {
                     let pages = (elem.value.length / 2) - 4;
                     browser.assert.ok(totalPages === pages, 'Pages expected: ' + totalPages + '. Pages shown: ' + pages);
                 });
