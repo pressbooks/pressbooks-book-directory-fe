@@ -17,19 +17,19 @@ let stats = {
 export default {
     state: stats,
     mutations: {
-        setTotalBooks: (state, totalBooks) => {
+        setTotalBooks(state, totalBooks) {
             state.totalBooks = totalBooks;
         },
-        setTotalNetworks: (state, totalNetworks) => {
+        setTotalNetworks(state, totalNetworks) {
             state.totalNetworks = totalNetworks;
         },
-        setFacetFilters: (state, ff) => {
+        setFacetFilters(state, ff) {
             state.facetFilters = ff;
         },
-        setKeepFacets: (state, fs) => {
+        setKeepFacets(state, fs) {
             state.keepFacets = fs;
         },
-        setFilters: (state, response) => {
+        setFilters(state, response) {
             let fs = {};
             for (let facet in response.facets) {
                 if (state.keepFacets.indexOf(facet) < 0) {
@@ -53,7 +53,7 @@ export default {
                 facets: context.state.facets,
                 facetFilters: context.state.facetFilters
             }).then(function (response) {
-                context.commit("setTotalBooks", response.nbHits);
+                context.commit('setTotalBooks', response.nbHits);
                 context.commit('setTotalNetworks', Object.keys(response.facets.networkName).length);
                 context.commit('setFilters', response);
             });
