@@ -9,6 +9,7 @@ module.exports = {
             .pause(2000)
             .click('.ais-ClearRefinements-button')
             .pause(2000)
-            .assert.cssClassPresent('.ais-Hits__books-book', 'ais-Hits__books--allrights');
+            .assert.cssClassPresent('.ais-Hits__books-book', 'ais-Hits__books--allrights')
+            .end();
     }
 };

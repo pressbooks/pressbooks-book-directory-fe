@@ -72,7 +72,7 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Filtering by German Language and excluding CC BY SA License' (browser) {
         browser
@@ -121,7 +121,7 @@ module.exports = {
                     browser.assert.ok(language === 'DE', 'Book in with language legend ' + language);
                 });
             });
-        });
+        }).end();
     },
     'Filtering by CC BY and Public Domain licenses and Based On another book and excluding English Language' (browser) {
         browser
@@ -195,7 +195,7 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Apply include language filter and check results / quantities' (browser) {
         browser
@@ -237,6 +237,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };

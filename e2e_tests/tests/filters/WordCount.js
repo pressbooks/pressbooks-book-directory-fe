@@ -27,7 +27,7 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     },
     'Filtering books by Word Count between 0 and 2 words' (browser) {
         browser
@@ -58,7 +58,7 @@ module.exports = {
                         }
                     });
                 });
-            });
+            }).end();
     },
     'Filtering books by Word Count between 3000 and 200 words, expect >= 3000 and ignore 200' (browser) {
         browser
@@ -87,6 +87,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };

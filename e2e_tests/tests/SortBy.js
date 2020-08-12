@@ -25,14 +25,17 @@ module.exports = {
                             if (previousWC === 0) {
                                 previousWC = parseInt(words.value);
                             } else {
-                                browser.assert.ok(previousWC >= parseInt(words.value), 'Word Count: ' + parseInt(words.value) + ' words. Correct Word Count order for this card.');
+                                browser.assert.ok(
+                                    previousWC >= parseInt(words.value),
+                                    'Word Count: ' + parseInt(words.value) + ' words. Correct Word Count order for this card.'
+                                );
                                 previousWC = parseInt(words.value);
                             }
                         });
                         done();
                     });
                 });
-            });
+            }).end();
     },
     'Sorting by name (asc.)' (browser) {
         browser
@@ -61,14 +64,17 @@ module.exports = {
                             if (previousName === '') {
                                 previousName = words.value;
                             } else {
-                                browser.assert.ok(previousName <= words.value, 'Book name: ' + words.value + '. Correct name order for this card.');
+                                browser.assert.ok(
+                                    previousName <= words.value,
+                                    'Book name: ' + words.value + '. Correct name order for this card.'
+                                );
                                 previousName = words.value;
                             }
                         });
                         done();
                     });
                 });
-            });
+            }).end();
     },
     'Sorting by last updated (desc.)' (browser) {
         browser
@@ -97,13 +103,16 @@ module.exports = {
                                 previousDate = new Date(date.value);
                             } else {
                                 date.value = new Date(date.value);
-                                browser.assert.ok(previousDate >= date.value, 'Date: ' + date.value + '. Correct last updated order for this card.');
+                                browser.assert.ok(
+                                    previousDate >= date.value,
+                                    'Date: ' + date.value + '. Correct last updated order for this card.'
+                                );
                                 previousDate = date.value;
                             }
                         });
                         done();
                     });
                 });
-            });
+            }).end();
     }
 };

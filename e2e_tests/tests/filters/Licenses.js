@@ -52,7 +52,7 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Filtering by CC BY and COO licenses and then excluding ARR license' (browser) {
         browser
@@ -88,6 +88,6 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     }
 };

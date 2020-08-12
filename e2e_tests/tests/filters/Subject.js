@@ -28,7 +28,7 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Filtering by subject' (browser) {
         browser
@@ -72,6 +72,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };

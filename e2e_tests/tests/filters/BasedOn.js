@@ -27,7 +27,7 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     },
     'Excluding books based on another books and check image in book card' (browser) {
         browser
@@ -57,6 +57,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };
