@@ -5,8 +5,7 @@ module.exports = {
             .waitForElementVisible('body')
             .assert.visible('#filter-basedOn')
             .click('#btn-include-based-another')
-            .pause(3000)
-            .waitForElementVisible('.isBasedOn')
+            .pause(4000)
             .elements('css selector', '.isBasedOn', (bookElement) => {
                 bookElement.value.forEach((v) => {
                     // Firefox - Safari exception
@@ -27,7 +26,7 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     },
     'Excluding books based on another books and check image in book card' (browser) {
         browser
@@ -35,8 +34,7 @@ module.exports = {
             .waitForElementVisible('body')
             .assert.visible('#filter-basedOn')
             .click('#btn-exclude-based-another')
-            .pause(3000)
-            .waitForElementVisible('.isBasedOn')
+            .pause(4000)
             .elements('css selector', '.isBasedOn', (bookElement) => {
                 bookElement.value.forEach((v) => {
                     // Firefox - Safari exception
@@ -57,6 +55,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };

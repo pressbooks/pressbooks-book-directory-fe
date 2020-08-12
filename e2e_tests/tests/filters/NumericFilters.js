@@ -26,6 +26,7 @@ module.exports = {
             })
             .getAttribute('#min-wordCount', 'value', (v) => {
                 browser.assert.ok(parseInt(v.value) === 0, 'Max value input is 0');
-            }).assert.not.urlContains('?words=' + encodeURIComponent('>=1200&&<=3000'));
+            }).assert.not.urlContains('?words=' + encodeURIComponent('>=1200&&<=3000'))
+            .end();
     },
 };

@@ -30,7 +30,7 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Filtering by publisher name' (browser) {
         browser
@@ -74,6 +74,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };

@@ -18,7 +18,7 @@ module.exports = {
                     browser.assert.ok(language === 'FR', 'Book in French language');
                 });
             });
-        });
+        }).end();
     },
     'Excluding books by "French" language and checking code in Book Card' (browser) {
         browser
@@ -39,6 +39,6 @@ module.exports = {
                     browser.assert.ok(language !== 'FR', 'Book in French language');
                 });
             });
-        });
+        }).end();
     },
 };

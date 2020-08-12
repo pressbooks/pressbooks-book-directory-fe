@@ -22,6 +22,6 @@ module.exports = {
                     browser.assert.ok(totalPages === pages, 'Pages expected: ' + totalPages + '. Pages shown: ' + pages);
                 });
             }
-        });
+        }).end();
     }
 };
