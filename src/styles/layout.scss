@@ -79,3 +79,14 @@
   width: 100%;
   margin: .25rem 1rem;
 }
+
+.ais-Pagination {
+  .ais-Pagination-item--selected .ais-Pagination-link {
+    background-color: $pb-red;
+    border-color: $pb-red;
+    color: white;
+  }
+  .ais-Breadcrumb-link, .ais-HierarchicalMenu-link, .ais-Menu-link, .ais-Pagination-link, .ais-RatingMenu-link {
+    color: $pb-red;
+  }
+}
