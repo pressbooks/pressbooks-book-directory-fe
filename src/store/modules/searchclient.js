@@ -51,7 +51,11 @@ let sClient = {
         networkName: {
             type: 'string',
             alias: 'net'
-        }
+        },
+        lastModified: {
+            type: 'numeric',
+            alias: 'lastUpdated'
+        },
     },
     searchParameters: {
         hitsPerPage: 10,

@@ -16,7 +16,10 @@
     >
       <v-row class="v-card__content">
         <v-col cols="9">
-          <div class="network" v-if="item.networkHost">
+          <div
+            v-if="item.networkHost"
+            class="network"
+          >
             {{ item.networkHost }} | {{ item.networkName }}
           </div>
           <v-card-title>
