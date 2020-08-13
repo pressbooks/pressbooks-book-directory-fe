@@ -40,9 +40,10 @@
               :id="'btn-include-' + field + '-' + item.facet.split(' ').join('-')"
               icon
               :disabled="wasFiltered(item.facet, false)"
+              :class="wasFiltered(item.facet, false) ? 'selected include': 'include'"
               @click="applyFilter(item.facet, false)"
             >
-              <v-icon color="green">
+              <v-icon>
                 mdi-check
               </v-icon>
             </v-btn>
@@ -50,6 +51,7 @@
               :id="'btn-exclude-' + field + '-' + item.facet.split(' ').join('-')"
               icon
               :disabled="wasFiltered(item.facet, true)"
+              :class="wasFiltered(item.facet, true) ? 'selected exclude': 'exclude'"
               @click="applyFilter(item.facet, true)"
             >
               <v-icon>mdi-close</v-icon>

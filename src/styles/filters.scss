@@ -63,7 +63,6 @@
         border-style: solid;
         border-color: $pb-red !important;
         font-weight: bold;
-        margin-left: 1.875rem;
         box-shadow: none;
       }
     }
@@ -122,6 +121,14 @@
   }
 }
 
+#filters .v-btn.include.selected {
+  background-color: $pb-blue;
+}
+
+#filters .v-btn.exclude.selected {
+  background-color: $pb-red;
+}
+
 .theme--light.v-label {
   font-size: small;
   color: $pb-dark;
@@ -174,7 +181,7 @@
 
   .v-chip {
     margin: .7rem .5rem .2rem .5rem;
-    background: #169db3 !important;
+    background: $pb-blue !important;
     color: $pb-light;
 
     &--not {
@@ -191,8 +198,16 @@
   font-weight: normal;
 }
 
-.v-icon.v-icon {
-  color: $pb-red !important;
+.exclude .v-icon.v-icon {
+  color: $pb-red;
+}
+
+.include .v-icon.v-icon {
+  color: $pb-blue;
+}
+
+.include.selected .v-icon.v-icon, .exclude.selected .v-icon.v-icon {
+  color: white !important;
 }
 
 .v-input__slot {
