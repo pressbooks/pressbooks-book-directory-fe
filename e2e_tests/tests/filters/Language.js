@@ -3,7 +3,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-languageName')
+            .waitForElementVisible('#filter-languageName')
             .click('#btn-include-languageName-French')
             .waitForElementVisible('.v-chip--clickable')
             .pause(2000);
@@ -18,13 +18,13 @@ module.exports = {
                     browser.assert.ok(language === 'FR', 'Book in French language');
                 });
             });
-        });
+        }).end();
     },
     'Excluding books by "French" language and checking code in Book Card' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-languageName')
+            .waitForElementVisible('#filter-languageName')
             .click('#btn-exclude-languageName-French')
             .waitForElementVisible('.v-chip--clickable')
             .pause(2000);
@@ -39,6 +39,6 @@ module.exports = {
                     browser.assert.ok(language !== 'FR', 'Book in French language');
                 });
             });
-        });
+        }).end();
     },
 };

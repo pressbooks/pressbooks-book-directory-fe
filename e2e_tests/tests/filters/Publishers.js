@@ -3,8 +3,8 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-publisher_name')
-            .assert.visible('#search-filter-publisher_name')
+            .waitForElementVisible('#filter-publisher_name')
+            .waitForElementVisible('#search-filter-publisher_name')
             .pause(2000)
             .setValue('#search-filter-publisher_name', 'uni')
             .pause(1000);
@@ -30,13 +30,13 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Filtering by publisher name' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-publisher_name')
+            .waitForElementVisible('#filter-publisher_name')
             .pause(2000)
             .element('css selector', '#filter-publisher_name', (filterElement) => {
                 // Firefox - Safari exception
@@ -74,6 +74,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };

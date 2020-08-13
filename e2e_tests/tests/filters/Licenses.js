@@ -3,7 +3,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-license_code')
+            .waitForElementVisible('#filter-license_code')
             .click('#btn-include-license_code-All-Rights-Reserved')
             .waitForElementVisible('.v-chip--clickable')
             .assert.cssClassPresent('.ais-Hits__books-book', 'ais-Hits__books--allrights')
@@ -13,7 +13,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-license_code')
+            .waitForElementVisible('#filter-license_code')
             .click('#btn-exclude-license_code-All-Rights-Reserved')
             .waitForElementVisible('.v-chip--clickable')
             .pause(2000)
@@ -24,7 +24,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-license_code')
+            .waitForElementVisible('#filter-license_code')
             .click('#btn-include-license_code-CC-BY')
             .click('#btn-include-license_code-CC0')
             .waitForElementVisible('.v-chip--clickable')
@@ -52,13 +52,13 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     },
     'Filtering by CC BY and COO licenses and then excluding ARR license' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-license_code')
+            .waitForElementVisible('#filter-license_code')
             .click('#btn-include-license_code-CC-BY')
             .click('#btn-include-license_code-CC0')
             .waitForElementVisible('.v-chip--clickable')
@@ -88,6 +88,6 @@ module.exports = {
                     });
                 });
             });
-        });
+        }).end();
     }
 };

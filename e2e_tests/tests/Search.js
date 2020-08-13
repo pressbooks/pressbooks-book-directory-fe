@@ -15,9 +15,8 @@ module.exports = {
                     .click('button[id=search-button]')
                     .waitForElementVisible('.ais-Hits__books')
                     .pause(2000)
-                    .assert.containsText('.network', networkName)
-                    .end();
+                    .assert.containsText('.network', networkName);
             });
-        });
+        }).end();
     }
 };

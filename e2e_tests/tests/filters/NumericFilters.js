@@ -3,7 +3,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-wordCount')
+            .waitForElementVisible('#filter-wordCount')
             .setValue('#min-wordCount', '1200')
             .setValue('#max-wordCount', '3000')
             .click('#btn-wordCount')
@@ -26,6 +26,7 @@ module.exports = {
             })
             .getAttribute('#min-wordCount', 'value', (v) => {
                 browser.assert.ok(parseInt(v.value) === 0, 'Max value input is 0');
-            }).assert.not.urlContains('?words=' + encodeURIComponent('>=1200&&<=3000'));
+            }).assert.not.urlContains('?words=' + encodeURIComponent('>=1200&&<=3000'))
+            .end();
     },
 };

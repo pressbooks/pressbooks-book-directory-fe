@@ -19,7 +19,10 @@ nightwatch_config = {
                 path : "./e2e_tests/screenshots"
             },
             log_path: './e2e_tests/log',
-            output_folder: "./e2e_tests/output"
+            output_folder: "./e2e_tests/output",
+            globals: {
+                asyncHookTimeout: 20000
+            }
         },
         chrome_win10: {
             desiredCapabilities : {

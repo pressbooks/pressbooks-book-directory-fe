@@ -28,7 +28,7 @@ module.exports = {
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
             .waitForElementVisible('.ais-Hits__books-book')
-            .assert.visible('#filter-about')
+            .waitForElementVisible('#filter-about')
             .pause(2000)
             .element('css selector', '#filter-about', (filterElement) => {
                 // Firefox - Safari exception
@@ -69,7 +69,7 @@ module.exports = {
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
             .waitForElementVisible('.ais-Hits__books-book')
-            .assert.visible('#filter-publisher_name')
+            .waitForElementVisible('#filter-publisher_name')
             .pause(2000)
             .element('css selector', '#filter-publisher_name', (filterElement) => {
                 // Firefox - Safari exception
@@ -103,6 +103,6 @@ module.exports = {
                             });
                     });
                 });
-            });
+            }).end();
     }
 };

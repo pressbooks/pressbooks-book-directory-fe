@@ -63,7 +63,6 @@
         border-style: solid;
         border-color: $pb-red !important;
         font-weight: bold;
-        margin-left: 1.875rem;
         box-shadow: none;
       }
     }
@@ -174,7 +173,7 @@
 
   .v-chip {
     margin: .7rem .5rem .2rem .5rem;
-    background: #169db3 !important;
+    background: $pb-blue !important;
     color: $pb-light;
 
     &--not {
@@ -191,8 +190,24 @@
   font-weight: normal;
 }
 
-.v-icon.v-icon {
-  color: $pb-red !important;
+.theme--light.v-btn.v-btn--icon.include {
+  color: $pb-blue;
+}
+
+.theme--light.v-btn.v-btn--icon.exclude {
+  color: $pb-red;
+}
+
+.include.selected {
+  background-color: $pb-blue;
+}
+
+.exclude.selected {
+  background-color: $pb-red;
+}
+
+.theme--light.v-btn.v-btn--disabled.selected .v-icon, .theme--light.v-btn.v-btn--disabled .v-btn__loading{
+  color: white !important;
 }
 
 .v-input__slot {

@@ -3,8 +3,8 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-wordCount')
-            .assert.visible('#max-wordCount')
+            .waitForElementVisible('#filter-wordCount')
+            .waitForElementVisible('#max-wordCount')
             .setValue('#min-wordCount', '1000')
             .setValue('#max-wordCount', '2000')
             .waitForElementVisible('.ais-Hits__books-book-wordcount')
@@ -27,14 +27,14 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     },
     'Filtering books by Word Count between 0 and 2 words' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-wordCount')
-            .assert.visible('#max-wordCount')
+            .waitForElementVisible('#filter-wordCount')
+            .waitForElementVisible('#max-wordCount')
             .setValue('#max-wordCount', '2')
             .waitForElementVisible('.ais-Hits__books-book-wordcount')
             .click('#btn-wordCount')
@@ -58,14 +58,14 @@ module.exports = {
                         }
                     });
                 });
-            });
+            }).end();
     },
     'Filtering books by Word Count between 3000 and 200 words, expect >= 3000 and ignore 200' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-wordCount')
-            .assert.visible('#max-wordCount')
+            .waitForElementVisible('#filter-wordCount')
+            .waitForElementVisible('#max-wordCount')
             .setValue('#min-wordCount', '3000')
             .setValue('#max-wordCount', '200')
             .waitForElementVisible('.ais-Hits__books-book-wordcount')
@@ -87,6 +87,6 @@ module.exports = {
                         });
                     });
                 });
-            });
+            }).end();
     }
 };
