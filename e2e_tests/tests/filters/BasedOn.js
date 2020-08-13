@@ -3,7 +3,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-basedOn')
+            .waitForElementVisible('#filter-basedOn')
             .click('#btn-include-based-another')
             .pause(4000)
             .elements('css selector', '.isBasedOn', (bookElement) => {
@@ -32,7 +32,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-basedOn')
+            .waitForElementVisible('#filter-basedOn')
             .click('#btn-exclude-based-another')
             .pause(4000)
             .elements('css selector', '.isBasedOn', (bookElement) => {

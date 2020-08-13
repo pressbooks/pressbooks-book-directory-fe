@@ -3,7 +3,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-license_code')
+            .waitForElementVisible('#filter-license_code')
             .click('#btn-exclude-license_code-All-Rights-Reserved')
             .waitForElementVisible('.v-chip--clickable')
             .pause(2000)
