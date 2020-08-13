@@ -3,8 +3,8 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-storageSize')
-            .assert.visible('#min-storageSize')
+            .waitForElementVisible('#filter-storageSize')
+            .waitForElementVisible('#min-storageSize')
             .setValue('#min-storageSize', '100')
             .setValue('#max-storageSize', '350')
             .click('#btn-storageSize')
