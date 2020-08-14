@@ -3,8 +3,8 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-about')
-            .assert.visible('#search-filter-about')
+            .waitForElementVisible('#filter-about')
+            .waitForElementVisible('#search-filter-about')
             .pause(2000)
             .setValue('#search-filter-about', 'gui')
             .pause(1000);
@@ -34,7 +34,7 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .assert.visible('#filter-about')
+            .waitForElementVisible('#filter-about')
             .pause(2000)
             .element('css selector', '#filter-about', (filterElement) => {
                 // Firefox - Safari exception
