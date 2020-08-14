@@ -28,7 +28,7 @@ module.exports = {
                     });
                 });
             });
-        }).end();
+        });
     },
     'Filtering by subject' (browser) {
         browser
@@ -54,7 +54,7 @@ module.exports = {
                             browser.elementIdClick(button.value[0].ELEMENT,  () => {
                                 browser.waitForElementVisible('.v-chip--clickable')
                                     .pause(2000)
-                                    .elements('css selector', '.subject', (bookElement) => {
+                                    .elements('css selector', '.subjects', (bookElement) => {
                                         bookElement.value.forEach((v) => {
                                             if (!v.hasOwnProperty('ELEMENT')) {
                                                 v.ELEMENT = Object.values(v)[0];
@@ -72,6 +72,6 @@ module.exports = {
                         });
                     });
                 });
-            }).end();
+            });
     }
 };
