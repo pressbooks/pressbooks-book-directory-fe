@@ -1,7 +1,7 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <date-range-filters
     title="Last modified"
-    field="lastModified"
+    field="lastUpdated"
   />
 </template>
 

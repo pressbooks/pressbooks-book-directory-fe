@@ -52,9 +52,9 @@ let sClient = {
             type: 'string',
             alias: 'net'
         },
-        lastModified: {
+        lastUpdated: {
             type: 'numeric',
-            alias: 'lastUpdated'
+            alias: 'updated'
         },
     },
     searchParameters: {

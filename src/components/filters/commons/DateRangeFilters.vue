@@ -13,7 +13,7 @@
         <v-list-item-title>
           <v-form @submit.prevent="applyFilter">
             <v-row>
-              <v-col cols="6">
+              <v-col cols="4">
                 <v-menu
                   ref="start"
                   v-model="start"
@@ -26,20 +26,21 @@
                       v-model="dateStartFormatted"
                       class="date-picker"
                       label="From"
+                      readonly
                       persistent-hint
                       prepend-icon="event"
                       v-bind="attrs"
-                      @blur="dateStart = parseDate(dateStartFormatted)"
                       v-on="on"
                     />
                   </template>
                   <v-date-picker
                     v-model="dateStart"
                     no-title
+                    :id="'min-date-' + field"
                   />
                 </v-menu>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="4">
                 <v-menu
                   ref="end"
                   v-model="end"
@@ -52,18 +53,28 @@
                       v-model="dateEndFormatted"
                       class="date-picker"
                       label="To"
+                      readonly
                       persistent-hint
                       prepend-icon="event"
                       v-bind="attrs"
-                      @blur="dateEnd = parseDate(dateEndFormatted)"
                       v-on="on"
                     />
                   </template>
                   <v-date-picker
                     v-model="dateEnd"
                     no-title
+                    :id="'max-date-' + field"
                   />
                 </v-menu>
+              </v-col>
+              <v-col cols="4">
+                <v-btn
+                  :id="'btn-date-' + field"
+                  type="submit"
+                  :disabled="!dateEndFormatted || !dateStartFormatted"
+                >
+                  Go
+                </v-btn>
               </v-col>
             </v-row>
           </v-form>
@@ -116,6 +127,37 @@ export default {
         dateEnd (val) {
             this.dateEndFormatted = this.formatDate(this.dateEnd);
         },
+        '$route.query': {
+            deep: true,
+            handler(q) {
+                let query = {...q};
+                if (query[this.alias] !== undefined) {
+                    let d1, d2, dateObjFrom, dateObjTo;
+                    let dates = query[this.alias].split('&&');
+                    if (dates.length === 1) {
+                        if (dates[0].search('>') >= 0) {
+                            d1 = dates[0].split('>=')[1];
+                            dateObjFrom = new Date(parseInt(d1) * 1000);
+                            this.dateStartFormatted = this.inputFormatDate(dateObjFrom);
+                        } else {
+                            d2 = dates[0].split('<=')[1];
+                            dateObjTo = new Date(parseInt(d2) * 1000);
+                            this.dateEndFormatted = this.inputFormatDate(dateObjTo);
+                        }
+                    } else {
+                        d1 = dates[0].split('>=')[1];
+                        d2 = dates[1].split('<=')[1];
+                        dateObjFrom = new Date(parseInt(d1) * 1000);
+                        dateObjTo = new Date(parseInt(d2) * 1000);
+                        this.dateStartFormatted = this.inputFormatDate(dateObjFrom);
+                        this.dateEndFormatted = this.inputFormatDate(dateObjTo);
+                    }
+                } else {
+                    this.dateStart = '';
+                    this.dateEnd ='';
+                }
+            }
+        }
     },
     mounted() {
         this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
@@ -126,6 +168,10 @@ export default {
         },
         formatDate (date) {
             if (!date) return null;
+            if (typeof date === 'number') {
+                date = new Date(date);
+                return this.inputFormatDate(date);
+            }
             const [year, month, day] = date.split('-');
             return `${month}/${day}/${year}`;
         },
@@ -134,6 +180,11 @@ export default {
             let dateObj = new Date(date);
             return Math.floor(dateObj.getTime());
         },
+        inputFormatDate(d) {
+            let month = (d.getUTCMonth()+1) < 10 ? '0' + (d.getUTCMonth()+1) : (d.getUTCMonth()+1);
+            let day = d.getUTCDate() < 10 ? '0' + d.getUTCDate() : d.getUTCDate();
+            return month + '/' + day + '/' + d.getUTCFullYear();
+        },
         clearFilters() {
             this.dateStart = '';
             this.dateEnd ='';
@@ -141,24 +192,25 @@ export default {
             delete query[this.alias];
             this.$router.replace({ query });
         },
-    },
-    applyFilter() {
-        // @todo: Update this method to apply date ranges in miliseconds
-        let query = {...this.$route.query};
-        let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-        let min = parseInt(this.number.min);
-        let max = parseInt(this.number.max);
+        applyFilter() {
+            let startObject = new Date(this.dateStart);
+            let endObject = new Date(this.dateEnd);
+            let startTimestamp = startObject.getTime() / 1000;
+            let endTimestamp = endObject.getTime() / 1000;
+            let query = {...this.$route.query};
+            let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
 
-        if (min > max) {
-            this.number.max = 0;
-            query[attribute] = '>=' + min;
+            if (startTimestamp > endTimestamp) {
+                this.dateEnd = '';
+                this.dateEndFormatted = '';
+                query[attribute] = '>=' + startObject;
+                this.$router.replace({ query });
+                return;
+            }
+
+            query[attribute] = '>=' + startTimestamp + '&&' + '<=' + endTimestamp;
             this.$router.replace({ query });
-            return;
         }
-
-        query[attribute] = '>=' + min + '&&' + '<=' + max;
-        this.$router.replace({ query });
     }
-
 };
 </script>
