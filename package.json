@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "lint-fix": "vue-cli-service lint --fix",
     "e2e": "./node_modules/.bin/nightwatch e2e_tests/tests/ -c ./e2e_tests/conf/nightwatch.conf.js",
     "e2e:browserstack": "node ./e2e_tests/conf/local.runner.js -c ./e2e_tests/conf/browserstack.nightwatch.conf.js",
     "nightwatch:output": "xunit-viewer -r e2e_tests/output/ -o 'e2e_tests/output/output.html'"
