@@ -188,6 +188,22 @@
 
 .v-input {
   font-weight: normal;
+
+  &.date-picker {
+    input {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .v-input__prepend-outer {
+      width: 0;
+      display: none;
+    }
+
+    i {
+      display: none;
+    }
+  }
 }
 
 .theme--light.v-btn.v-btn--icon.include {
@@ -212,4 +228,8 @@
 
 .v-input__slot {
   margin-top: 0.2rem;
+}
+
+.v-date-picker-table .v-btn.v-btn--active {
+  background: #bb2026 !important;
 }
