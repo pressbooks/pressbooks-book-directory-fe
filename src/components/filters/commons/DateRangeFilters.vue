@@ -34,9 +34,9 @@
                     />
                   </template>
                   <v-date-picker
+                    :id="'min-date-' + field"
                     v-model="dateStart"
                     no-title
-                    :id="'min-date-' + field"
                   />
                 </v-menu>
               </v-col>
@@ -61,9 +61,9 @@
                     />
                   </template>
                   <v-date-picker
+                    :id="'max-date-' + field"
                     v-model="dateEnd"
                     no-title
-                    :id="'max-date-' + field"
                   />
                 </v-menu>
               </v-col>
