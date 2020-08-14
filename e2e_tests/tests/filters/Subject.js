@@ -3,8 +3,8 @@ module.exports = {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .waitForElementVisible('#filter-about')
-            .waitForElementVisible('#search-filter-about')
+            .assert.visible('#filter-about')
+            .assert.visible('#search-filter-about')
             .pause(2000)
             .setValue('#search-filter-about', 'gui')
             .pause(1000);
@@ -28,13 +28,13 @@ module.exports = {
                     });
                 });
             });
-        }).end();
+        });
     },
     'Filtering by subject' (browser) {
         browser
             .url(process.env.HOST_TEST)
             .waitForElementVisible('body')
-            .waitForElementVisible('#filter-about')
+            .assert.visible('#filter-about')
             .pause(2000)
             .element('css selector', '#filter-about', (filterElement) => {
                 // Firefox - Safari exception
@@ -54,7 +54,7 @@ module.exports = {
                             browser.elementIdClick(button.value[0].ELEMENT,  () => {
                                 browser.waitForElementVisible('.v-chip--clickable')
                                     .pause(2000)
-                                    .elements('css selector', '.subject', (bookElement) => {
+                                    .elements('css selector', '.subjects', (bookElement) => {
                                         bookElement.value.forEach((v) => {
                                             if (!v.hasOwnProperty('ELEMENT')) {
                                                 v.ELEMENT = Object.values(v)[0];
@@ -72,6 +72,6 @@ module.exports = {
                         });
                     });
                 });
-            }).end();
+            });
     }
 };

@@ -30,7 +30,7 @@
     </div>
     <div
       v-if="item.about"
-      class="subject"
+      class="subjects"
     >
       <strong>Subject(s): </strong>
       <span
