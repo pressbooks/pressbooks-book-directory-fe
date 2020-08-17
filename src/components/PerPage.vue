@@ -14,7 +14,7 @@
         item-value="value"
         dense
         class="ais-HitsPerPage--input"
-        label="Cards per page:"
+        label="Books per page:"
         @change="perPage(selected, refine)"
       >
         <template #item="{ item }">
