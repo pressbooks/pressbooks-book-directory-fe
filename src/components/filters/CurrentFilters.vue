@@ -57,6 +57,11 @@ export default {
     name: 'CurrentFilters',
     components: {Pagination, Stats, SortBy, PerPage, ClearRefinements},
     methods: {
+        inputFormatDate(d) {
+            let month = (d.getUTCMonth()+1) < 10 ? '0' + (d.getUTCMonth()+1) : (d.getUTCMonth()+1);
+            let day = d.getUTCDate() < 10 ? '0' + d.getUTCDate() : d.getUTCDate();
+            return month + '/' + day + '/' + d.getUTCFullYear();
+        },
         removeFilters() {
             this.$router.replace({ query: {} });
         },
@@ -111,6 +116,11 @@ export default {
                 break;
             case 'wordCount':
                 label = 'Words ' + value.operator + ' ' + value.value;
+                break;
+            case 'lastUpdated':
+                let dateObj = new Date(parseInt(value.value) * 1000);
+                let date = this.inputFormatDate(dateObj);
+                label = 'Updated ' + value.operator + ' ' + date;
                 break;
             case 'storageSize':
                 label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';

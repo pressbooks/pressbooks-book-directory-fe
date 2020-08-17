@@ -5,6 +5,7 @@
   >
     <v-list dense>
       <licenses />
+      <last-modified />
       <subjects />
       <based-on />
       <word-count />
@@ -27,6 +28,7 @@ import H5PActivities from './H5PActivities';
 import Publishers from './Publishers';
 import StorageSize from './StorageSize';
 import Networks from './Networks';
+import LastModified from './LastModified';
 
 export default {
     name: 'Filters',
@@ -39,7 +41,8 @@ export default {
         BasedOn,
         Subjects,
         Licenses,
-        Languages
+        Languages,
+        LastModified
     },
     methods: {
         applyFilters() {

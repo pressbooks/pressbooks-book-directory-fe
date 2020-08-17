@@ -19,9 +19,10 @@
             :id="'btn-include-based-another'"
             icon
             :disabled="wasFiltered('true', false)"
+            :class="wasFiltered('true', false) ? 'selected include': 'include'"
             @click="applyFilter(true, false)"
           >
-            <v-icon color="green">
+            <v-icon>
               mdi-check
             </v-icon>
           </v-btn>
@@ -29,6 +30,7 @@
             :id="'btn-exclude-based-another'"
             icon
             :disabled="wasFiltered('false', true)"
+            :class="wasFiltered('false', true) ? 'selected exclude': 'exclude'"
             @click="applyFilter(true, true)"
           >
             <v-icon>mdi-close</v-icon>
