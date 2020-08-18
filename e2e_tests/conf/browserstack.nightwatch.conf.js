@@ -38,7 +38,10 @@ nightwatch_config = {
                 log_path: './e2e_tests/log'
             },
             log_path: './e2e_tests/log',
-            output_folder: "./e2e_tests/output"
+            output_folder: "./e2e_tests/output",
+            globals: {
+                asyncHookTimeout: 20000
+            }
         },
         chrome_mojave: {
             desiredCapabilities: {
@@ -54,7 +57,10 @@ nightwatch_config = {
                 log_path: './e2e_tests/log'
             },
             log_path: './e2e_tests/log',
-            output_folder: "./e2e_tests/output"
+            output_folder: "./e2e_tests/output",
+            globals: {
+                asyncHookTimeout: 20000
+            }
         },
         firefox_win10: {
             desiredCapabilities : {
@@ -70,7 +76,10 @@ nightwatch_config = {
                 log_path: './e2e_tests/log'
             },
             log_path: './e2e_tests/log',
-            output_folder: "./e2e_tests/output"
+            output_folder: "./e2e_tests/output",
+            globals: {
+                asyncHookTimeout: 20000
+            }
         },
         firefox_mojave: {
             desiredCapabilities : {
@@ -86,7 +95,10 @@ nightwatch_config = {
                 log_path: './e2e_tests/log'
             },
             log_path: './e2e_tests/log',
-            output_folder: "./e2e_tests/output"
+            output_folder: "./e2e_tests/output",
+            globals: {
+                asyncHookTimeout: 20000
+            }
         }
     }
 };

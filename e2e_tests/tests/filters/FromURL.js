@@ -46,7 +46,7 @@ module.exports = {
                             .waitForElementVisible('body')
                             .waitForElementVisible('.ais-Hits__books-book')
                             .pause(3000)
-                            .elements('css selector', '.subject', (bookElement) => {
+                            .elements('css selector', '.subjects', (bookElement) => {
                                 bookElement.value.forEach((v) => {
                                     if (!v.hasOwnProperty('ELEMENT')) {
                                         v.ELEMENT = Object.values(v)[0];
