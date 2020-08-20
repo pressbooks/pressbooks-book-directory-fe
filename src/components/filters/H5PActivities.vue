@@ -8,7 +8,7 @@
 <script>
 import NumericFilters from './commons/NumericFilters';
 export default {
-    name: 'H5PActivities',
-    components: {NumericFilters}
+  name: 'H5PActivities',
+  components: {NumericFilters}
 };
 </script>

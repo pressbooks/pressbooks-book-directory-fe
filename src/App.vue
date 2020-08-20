@@ -58,18 +58,18 @@ import Books from './components/Books';
 import WelcomeHeader from './components/WelcomeHeader';
 
 export default {
-    components: {
-        WelcomeHeader,
-        CurrentFilters,
-        Filters,
-        Pagination,
-        HeaderBar,
-        Books
-    },
-    mounted() {
-        let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
-        this.$store.dispatch('getStats', index);
-    }
+  components: {
+    WelcomeHeader,
+    CurrentFilters,
+    Filters,
+    Pagination,
+    HeaderBar,
+    Books
+  },
+  mounted() {
+    let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
+    this.$store.dispatch('getStats', index);
+  }
 };
 </script>
 <style lang="sass">

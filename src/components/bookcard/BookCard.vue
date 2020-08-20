@@ -123,54 +123,54 @@ import BookDetails from './BookDetails';
 import {createWidgetMixin} from 'vue-instantsearch';
 
 const connectSearchMetaData = (renderFn, unmountFn) => () => ({
-    init() {
-        renderFn({ searchMetadata: {} }, true);
-    },
+  init() {
+    renderFn({ searchMetadata: {} }, true);
+  },
 
-    render({ searchMetadata }) {
-        renderFn({ searchMetadata }, false);
-    },
+  render({ searchMetadata }) {
+    renderFn({ searchMetadata }, false);
+  },
 
-    dispose() {
-        unmountFn();
-    },
+  dispose() {
+    unmountFn();
+  },
 });
 
 export default {
-    name: 'BookCard',
-    components: {
-        BookDetails
-    },
-    mixins: [createWidgetMixin({ connector: connectSearchMetaData })],
-    props: {
-        item: {
-            type: Object,
-            default () { return {}; }
-        }
-    },
-    data() {
-        return {
-            h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
-            basedOnImg: this.$store.state.config.imagesPath + this.$store.state.config.basedOnImg,
-            originalImg: this.$store.state.config.imagesPath + this.$store.state.config.originalImg,
-            inCatalogColor: 'red lighten-4',
-            normalColor: 'white',
-            defaultImage: this.$store.state.config.imagesPath + this.$store.state.config.defaultBookCover
-        };
-    },
-    methods: {
-        addClasses(item) {
-            let classes = 'ais-Hits__books-book ';
-            if(item.has_inCatalog && item.inCatalog) {
-                classes += 'ais-Hits__books--border';
-            } else {
-                classes += 'ais-Hits__books--notcatalog';
-            }
-            if(item.license_name.indexOf('All Rights Reserved') >= 0) {
-                classes += ' ais-Hits__books--allrights';
-            }
-            return classes;
-        }
+  name: 'BookCard',
+  components: {
+    BookDetails
+  },
+  mixins: [createWidgetMixin({ connector: connectSearchMetaData })],
+  props: {
+    item: {
+      type: Object,
+      default () { return {}; }
     }
+  },
+  data() {
+    return {
+      h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
+      basedOnImg: this.$store.state.config.imagesPath + this.$store.state.config.basedOnImg,
+      originalImg: this.$store.state.config.imagesPath + this.$store.state.config.originalImg,
+      inCatalogColor: 'red lighten-4',
+      normalColor: 'white',
+      defaultImage: this.$store.state.config.imagesPath + this.$store.state.config.defaultBookCover
+    };
+  },
+  methods: {
+    addClasses(item) {
+      let classes = 'ais-Hits__books-book ';
+      if(item.has_inCatalog && item.inCatalog) {
+        classes += 'ais-Hits__books--border';
+      } else {
+        classes += 'ais-Hits__books--notcatalog';
+      }
+      if(item.license_name.indexOf('All Rights Reserved') >= 0) {
+        classes += ' ais-Hits__books--allrights';
+      }
+      return classes;
+    }
+  }
 };
 </script>

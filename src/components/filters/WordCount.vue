@@ -8,7 +8,7 @@
 <script>
 import NumericFilters from './commons/NumericFilters';
 export default {
-    name: 'WordCount',
-    components: {NumericFilters}
+  name: 'WordCount',
+  components: {NumericFilters}
 };
 </script>

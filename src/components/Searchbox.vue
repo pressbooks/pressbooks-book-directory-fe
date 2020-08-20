@@ -45,26 +45,26 @@
 
 <script>
 export default {
-    name: 'Searchbox',
-    data() {
-        return {
-            stringSearch: ''
-        };
-    },
-    watch: {
-        '$route.query.q' (q) {
-            this.stringSearch = q;
-        }
-    },
-    methods: {
-        search(refine, stringSearch) {
-            if (stringSearch.length > 3 || stringSearch.length === 0) {
-                let query = {...this.$route.query};
-                let attribute = this.$store.state.SClient.allowedFilters.search.alias;
-                query[attribute] = stringSearch;
-                this.$router.replace({ query });
-            }
-        }
+  name: 'Searchbox',
+  data() {
+    return {
+      stringSearch: ''
+    };
+  },
+  watch: {
+    '$route.query.q' (q) {
+      this.stringSearch = q;
     }
+  },
+  methods: {
+    search(refine, stringSearch) {
+      if (stringSearch.length > 3 || stringSearch.length === 0) {
+        let query = {...this.$route.query};
+        let attribute = this.$store.state.SClient.allowedFilters.search.alias;
+        query[attribute] = stringSearch;
+        this.$router.replace({ query });
+      }
+    }
+  }
 };
 </script>
