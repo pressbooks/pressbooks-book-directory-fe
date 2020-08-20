@@ -43,26 +43,26 @@
 
 <script>
 export default {
-    name: 'BasedOn',
-    data() {
-        return {
-            excluded: false,
-            field: 'has_isBasedOn'
-        };
+  name: 'BasedOn',
+  data() {
+    return {
+      excluded: false,
+      field: 'has_isBasedOn'
+    };
+  },
+  methods: {
+    applyFilter(itemValue, exclude) {
+      let query = {...this.$route.query}, value;
+      let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
+      value = !exclude;
+      query[attribute] = value;
+      this.$router.replace({ query });
     },
-    methods: {
-        applyFilter(itemValue, exclude) {
-            let query = {...this.$route.query}, value;
-            let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-            value = !exclude;
-            query[attribute] = value;
-            this.$router.replace({ query });
-        },
-        wasFiltered(value, exc) {
-            return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
+    wasFiltered(value, exc) {
+      return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
                     this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].value === value &&
                     this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].exclude === exc;
-        }
     }
+  }
 };
 </script>

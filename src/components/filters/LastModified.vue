@@ -9,7 +9,7 @@
 import DateRangeFilters from '@/components/filters/commons/DateRangeFilters';
 
 export default {
-    name: 'LastModified',
-    components: {DateRangeFilters}
+  name: 'LastModified',
+  components: {DateRangeFilters}
 };
 </script>

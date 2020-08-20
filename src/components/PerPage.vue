@@ -37,16 +37,16 @@
 
 <script>
 export default {
-    name: 'PerPage',
-    data() {
-        return {
-            selected: ''
-        };
-    },
-    methods: {
-        perPage(sel, refine) {
-            refine(sel);
-        }
+  name: 'PerPage',
+  data() {
+    return {
+      selected: ''
+    };
+  },
+  methods: {
+    perPage(sel, refine) {
+      refine(sel);
     }
+  }
 };
 </script>

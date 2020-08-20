@@ -37,16 +37,16 @@
 
 <script>
 export default {
-    name: 'SortBy',
-    data() {
-        return {
-            selected: ''
-        };
-    },
-    methods: {
-        sortBy(sel, refine) {
-            refine(sel);
-        }
+  name: 'SortBy',
+  data() {
+    return {
+      selected: ''
+    };
+  },
+  methods: {
+    sortBy(sel, refine) {
+      refine(sel);
     }
+  }
 };
 </script>

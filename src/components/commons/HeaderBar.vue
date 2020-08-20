@@ -21,12 +21,12 @@
 </template>
 <script>
 export default {
-    name: 'HeaderBar',
-    data() {
-        return {
-            logo: this.$store.state.config.imagesPath + this.$store.state.config.logo,
-            twitterUrl: this.$store.state.config.twitterUrl
-        };
-    }
+  name: 'HeaderBar',
+  data() {
+    return {
+      logo: this.$store.state.config.imagesPath + this.$store.state.config.logo,
+      twitterUrl: this.$store.state.config.twitterUrl
+    };
+  }
 };
 </script>

@@ -11,11 +11,11 @@
 
 <script>
 export default {
-    name: 'ClearRefinements',
-    methods: {
-        removeFilters() {
-            this.$router.replace({ query: {} });
-        },
-    }
+  name: 'ClearRefinements',
+  methods: {
+    removeFilters() {
+      this.$router.replace({ query: {} });
+    },
+  }
 };
 </script>

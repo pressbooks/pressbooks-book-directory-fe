@@ -16,6 +16,6 @@
 
 <script>
 export default {
-    name: 'Stats'
+  name: 'Stats'
 };
 </script>
