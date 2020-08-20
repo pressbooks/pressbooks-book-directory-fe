@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint && vue-cli-service lint --ext e2e_tests/tests",
+    "lint": "vue-cli-service lint && vue-cli-service lint --ext .js e2e_tests/tests && vue-cli-service lint --ext .js e2e_tests/conf",
     "lint-fix": "vue-cli-service lint --fix",
     "e2e": "./node_modules/.bin/nightwatch e2e_tests/tests/ -c ./e2e_tests/conf/nightwatch.conf.js",
     "e2e:browserstack": "node ./e2e_tests/conf/local.runner.js -c ./e2e_tests/conf/browserstack.nightwatch.conf.js",
