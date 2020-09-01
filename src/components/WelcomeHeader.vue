@@ -13,7 +13,7 @@
 <script>
 import Searchbox from './Searchbox';
 export default {
-    name: 'WelcomeHeader',
-    components: {Searchbox}
+  name: 'WelcomeHeader',
+  components: {Searchbox}
 };
 </script>

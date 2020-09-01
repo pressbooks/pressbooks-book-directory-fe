@@ -7,9 +7,9 @@ import stats from './modules/stats';
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    modules: {
-        SClient,
-        config,
-        stats
-    }
+  modules: {
+    SClient,
+    config,
+    stats
+  }
 });

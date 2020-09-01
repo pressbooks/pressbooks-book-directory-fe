@@ -60,59 +60,59 @@
 
 <script>
 export default {
-    name: 'NumericFilters',
-    filters: {
-        uppercase(t) {
-            return t.toUpperCase();
-        }
-    },
-    props: {
-        field: {
-            type: String,
-            default: ''
-        },
-        title: {
-            type: String,
-            default: ''
-        }
-    },
-    data() {
-        return {
-            number: {
-                min: 0,
-                max: 0,
-                alias: ''
-            }
-        };
-    },
-    mounted() {
-        this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
-    },
-    methods: {
-        uppercase(t) {
-            return t.toUpperCase();
-        },
-        clearFilters() {
-            this.number.min = 0;
-            this.number.max = 0;
-            let query = {...this.$route.query};
-            delete query[this.alias];
-            this.$router.replace({ query });
-        },
-        applyFilter() {
-            let query = {...this.$route.query};
-            let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-            let min = parseInt(this.number.min);
-            let max = parseInt(this.number.max);
-            if (min > max) {
-                this.number.max = 0;
-                query[attribute] = '>=' + min;
-                this.$router.replace({ query });
-                return;
-            }
-            query[attribute] = '>=' + min + '&&' + '<=' + max;
-            this.$router.replace({ query });
-        }
+  name: 'NumericFilters',
+  filters: {
+    uppercase(t) {
+      return t.toUpperCase();
     }
+  },
+  props: {
+    field: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      number: {
+        min: 0,
+        max: 0,
+        alias: ''
+      }
+    };
+  },
+  mounted() {
+    this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
+  },
+  methods: {
+    uppercase(t) {
+      return t.toUpperCase();
+    },
+    clearFilters() {
+      this.number.min = 0;
+      this.number.max = 0;
+      let query = {...this.$route.query};
+      delete query[this.alias];
+      this.$router.replace({ query });
+    },
+    applyFilter() {
+      let query = {...this.$route.query};
+      let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
+      let min = parseInt(this.number.min);
+      let max = parseInt(this.number.max);
+      if (min > max) {
+        this.number.max = 0;
+        query[attribute] = '>=' + min;
+        this.$router.replace({ query });
+        return;
+      }
+      query[attribute] = '>=' + min + '&&' + '<=' + max;
+      this.$router.replace({ query });
+    }
+  }
 };
 </script>

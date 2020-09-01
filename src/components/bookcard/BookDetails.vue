@@ -79,48 +79,48 @@
 
 <script>
 export default {
-    name: 'BookDetails',
-    props: {
-        item: {
-            type: Object,
-            default () { return {}; }
-        }
-    },
-    methods: {
-        upperCase(value) {
-            if (!value) return '';
-            value = value.toString();
-            return value.toUpperCase();
-        },
-        toMB(value) {
-            let v = (parseInt(value) / 1024) / 1024;
-            return parseFloat(v).toFixed(2) + ' MB';
-        },
-        unixDateToStandard(unixDate) {
-            let date = new Date(unixDate * 1000);
-            let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDay()) + 1;
-            month = month < 10 ? '0' + month : month;
-            day = day < 10 ? '0' + day : day;
-            return month + '-' + day + '-' + date.getUTCFullYear();
-        },
-        applyFilters(item, attribute, index = null, operator = ':') {
-            let filters = [];
-            item[attribute] = item[attribute] !== undefined ? item[attribute] : false;
-            if (index !== null) {
-                item[attribute] = item[attribute][index];
-            } else {
-                filters.push({
-                    attribute,
-                    item
-                });
-            }
-            this.$store.commit('setFiltersApplied', {
-                value: item[attribute],
-                attribute,
-                operator
-            });
-            this.$store.dispatch('applyFilters', filters);
-        }
+  name: 'BookDetails',
+  props: {
+    item: {
+      type: Object,
+      default () { return {}; }
     }
+  },
+  methods: {
+    upperCase(value) {
+      if (!value) return '';
+      value = value.toString();
+      return value.toUpperCase();
+    },
+    toMB(value) {
+      let v = (parseInt(value) / 1024) / 1024;
+      return parseFloat(v).toFixed(2) + ' MB';
+    },
+    unixDateToStandard(unixDate) {
+      let date = new Date(unixDate * 1000);
+      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDay()) + 1;
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      return month + '-' + day + '-' + date.getUTCFullYear();
+    },
+    applyFilters(item, attribute, index = null, operator = ':') {
+      let filters = [];
+      item[attribute] = item[attribute] !== undefined ? item[attribute] : false;
+      if (index !== null) {
+        item[attribute] = item[attribute][index];
+      } else {
+        filters.push({
+          attribute,
+          item
+        });
+      }
+      this.$store.commit('setFiltersApplied', {
+        value: item[attribute],
+        attribute,
+        operator
+      });
+      this.$store.dispatch('applyFilters', filters);
+    }
+  }
 };
 </script>
