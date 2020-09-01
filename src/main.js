@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
     for (let attr in to.query) {
       if (aliasAllowed.indexOf(attr) >= 0) {
         if (attr === store.state.SClient.allowedFilters.search.alias) {
-          store.state.SClient.searchParameters.searchQuery = to.query[attr];
+          // query search is handled in SearchBox component
           continue;
         }
         for (let realAttribute in store.state.SClient.allowedFilters) {
@@ -35,15 +35,12 @@ router.beforeEach((to, from, next) => {
       store.state.SClient.filtersExcluded = {};
       store.state.SClient.notFilters = [];
       store.state.SClient.numericFilters = [];
-      store.commit('setFacetFilters', store.state.SClient.notFilters);
-      store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
-      store.dispatch('getStats', index);
     } else {
       store.commit('setFiltersFromQueryParams', query);
-      store.commit('setFacetFilters', store.state.SClient.notFilters);
-      store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
-      store.dispatch('getStats', index);
     }
+    store.commit('setFacetFilters', store.state.SClient.notFilters);
+    store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
+    store.dispatch('getStats', index);
     next();
   });
 });
