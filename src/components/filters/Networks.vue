@@ -10,7 +10,7 @@
 <script>
 import ExcludedFilters from './commons/ExcludedFilters';
 export default {
-    name: 'Networks',
-    components: {ExcludedFilters}
+  name: 'Networks',
+  components: {ExcludedFilters}
 };
 </script>

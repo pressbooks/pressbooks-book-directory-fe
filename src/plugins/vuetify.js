@@ -5,6 +5,6 @@ import Vuetify from 'vuetify/lib';
 Vue.use(Vuetify);
 
 export default new Vuetify({
-    theme: { disable: true },
-    rtl: false, // If you want to set rtl theme then rtl:true else set to false
+  theme: { disable: true },
+  rtl: false, // If you want to set rtl theme then rtl:true else set to false
 });

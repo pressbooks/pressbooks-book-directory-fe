@@ -31,23 +31,23 @@ import Networks from './Networks';
 import LastModified from './LastModified';
 
 export default {
-    name: 'Filters',
-    components: {
-        Networks,
-        StorageSize,
-        Publishers,
-        H5PActivities,
-        WordCount,
-        BasedOn,
-        Subjects,
-        Licenses,
-        Languages,
-        LastModified
-    },
-    methods: {
-        applyFilters() {
-            this.$store.dispatch('refreshFilters');
-        }
+  name: 'Filters',
+  components: {
+    Networks,
+    StorageSize,
+    Publishers,
+    H5PActivities,
+    WordCount,
+    BasedOn,
+    Subjects,
+    Licenses,
+    Languages,
+    LastModified
+  },
+  methods: {
+    applyFilters() {
+      this.$store.dispatch('refreshFilters');
     }
+  }
 };
 </script>

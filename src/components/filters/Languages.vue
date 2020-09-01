@@ -10,7 +10,7 @@
 <script>
 import ExcludedFilters from './commons/ExcludedFilters';
 export default {
-    name: 'LanguageSubject',
-    components: {ExcludedFilters}
+  name: 'LanguageSubject',
+  components: {ExcludedFilters}
 };
 </script>

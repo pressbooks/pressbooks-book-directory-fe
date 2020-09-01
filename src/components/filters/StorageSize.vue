@@ -8,7 +8,7 @@
 <script>
 import NumericFilters from './commons/NumericFilters';
 export default {
-    name: 'StorageSize',
-    components: {NumericFilters}
+  name: 'StorageSize',
+  components: {NumericFilters}
 };
 </script>
