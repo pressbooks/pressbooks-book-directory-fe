@@ -62,8 +62,45 @@ function setFilters(oldFilters, allowedFilters) {
   return [fs, ns.join(' AND ')];
 }
 
+/*
+Get all matches string for a value and facet.
+  @param facet - String Alias Facet
+  @param value - Facet value to search (non case sensitive)
+  @param filtersAvailable - Object with all facets and values available
+  @param realAttrs - Mapped object alias/Real attribute
+  @return Array with all possible values
+*/
+function getSimilarFacetValues(facet, value, filtersAvailable, realAttrs) {
+  value = value.replace(/"/g,'');
+  // negative facet value
+  if (value[0] === '-') {
+    value = value.slice(1, value.length);
+  }
+  let fAvailable = {};
+  let possibleValues = [];
+  for (const rAttr in filtersAvailable) {
+    fAvailable[rAttr] = [];
+    for (let i = 0; i < filtersAvailable[rAttr].length; i++) {
+      fAvailable[rAttr].push(filtersAvailable[rAttr][i].facet);
+    }
+  }
+  let matches = fAvailable[realAttrs[facet]].filter(
+    function(e) {
+      return e.toLowerCase().search(value.toLowerCase()) >= 0;
+    }
+  );
+  if (matches.length > 0) {
+    for(let i = 0; i < matches.length; i++) {
+      matches[i] = (matches[i].search(' ') >= 0) ? '"' + matches[i] + '"' : matches[i];
+      possibleValues.push(matches[i]);
+    }
+  }
+  return possibleValues;
+}
+
 export default {
   functions: {
-    setFilters
+    setFilters,
+    getSimilarFacetValues
   }
 };

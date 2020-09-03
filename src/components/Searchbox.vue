@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import helpers from '@/store/helpers';
 export default {
   name: 'Searchbox',
   data() {
@@ -54,8 +55,11 @@ export default {
   },
   watch: {
     '$route.query.q' (q) {
+      if (typeof q === 'undefined') {
+        return true;
+      }
       this.stringSearch = '';
-      if (q !== undefined && q.length > 0) {
+      if (q.length > 0) {
         this.stringSearch = q;
         let stringToSearch = this.filterSearch(q);
         if (
@@ -67,48 +71,16 @@ export default {
           this.$store.state.SClient.numericFilters += ' AND' + stringToSearch.facetFilters;
         }
         this.$store.state.SClient.searchParameters.searchQuery = stringToSearch.stringSearch;
+        return true;
+      }
+      if (q.length === 0) {
+        let query = {...this.$route.query};
+        delete query.q;
+        this.$router.replace({ query });
       }
     }
   },
   methods: {
-    // Given a facet and substring facet value, search and return all possible values //
-    getSimilarFacetValues(facet, value) {
-      value = value.replace(/"/g,'');
-      // negative facet value
-      if (value[0] === '-') {
-        value = value.slice(1, value.length);
-      }
-      let filtersAvailable = this.$store.state.stats.filters;
-      let fAvailable = {};
-      let possibleValues = [];
-      for (const rAttr in filtersAvailable) {
-        fAvailable[rAttr] = [];
-        for (let i = 0; i < filtersAvailable[rAttr].length; i++) {
-          fAvailable[rAttr].push(filtersAvailable[rAttr][i].facet);
-        }
-      }
-      let realAttrs = this.getRealAttributesMapped();
-      let matches = fAvailable[realAttrs[facet]].filter(
-        function(e) {
-          return e.toLowerCase().search(value.toLowerCase()) >= 0;
-        }
-      );
-      if (matches.length > 0) {
-        for(let i = 0; i < matches.length; i++) {
-          matches[i] = (matches[i].search(' ') >= 0) ? '"' + matches[i] + '"' : matches[i];
-          possibleValues.push(matches[i]);
-        }
-      }
-      return possibleValues;
-    },
-    // get mapped object {realAttribute1: alias1, ...}
-    getRealAttributesMapped() {
-      let realAttrs = {};
-      for (const realAttribute in this.$store.state.SClient.allowedFilters) {
-        realAttrs[this.$store.state.SClient.allowedFilters[realAttribute].alias] = realAttribute;
-      }
-      return realAttrs;
-    },
     // Analyze strings  for literal and faceting searching //
     filterSearch(stringSearch) {
       if (stringSearch.length === 0) {
@@ -124,19 +96,15 @@ export default {
       let partialFacet = '';
       let stringToSearch = [];
       let store = this.$store;
-      const aliasAllowed = Object.keys(store.state.SClient.allowedFilters).map(function(key){return store.state.SClient.allowedFilters[key].alias;});
-
-      let realAttrs = this.getRealAttributesMapped();
+      const aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
+        .map(function(key) {
+          if (store.state.SClient.allowedFilters[key].search) {
+            return store.state.SClient.allowedFilters[key].alias;
+          }
+        });
+      store.commit('getRealAttributesMapped');
+      let realAttrs = store.state.SClient.mappedFilters;
       let possibleValues = [];
-
-      let filtersAvailable = this.$store.state.stats.filters;
-      let fAvailable = {};
-      for (const rAttr in filtersAvailable) {
-        fAvailable[rAttr] = [];
-        for (let i = 0; i < filtersAvailable[rAttr].length; i++) {
-          fAvailable[rAttr].push(filtersAvailable[rAttr][i].facet);
-        }
-      }
 
       for (let p = 0; p < parts.length; p++) {
         // Partial facetFilters
@@ -145,7 +113,7 @@ export default {
           if (parts[p][0] === '-') {
             stringFacetFilters[realAttrs[partialFacet]].operator = 'AND NOT';
           }
-          possibleValues = this.getSimilarFacetValues(partialFacet, parts[p]);
+          possibleValues = helpers.functions.getSimilarFacetValues(partialFacet, parts[p], store.state.stats.filters, realAttrs);
           if (possibleValues.length > 0) {
             for (let j = 0; j < possibleValues.length; j++) {
               stringFacetFilters[realAttrs[partialFacet]].filters.push(realAttrs[partialFacet] + ':' + possibleValues[j]);
@@ -158,7 +126,7 @@ export default {
         // Check if it is a search by facets
         if (parts[p].search(':') >= 0) {
           let facetAlias = parts[p].split(':');
-          if (typeof stringFacetFilters[realAttrs[realAttrs[facetAlias[0]]]] === 'undefined') {
+          if (typeof stringFacetFilters[realAttrs[facetAlias[0]]] === 'undefined') {
             stringFacetFilters[realAttrs[facetAlias[0]]] = {
               operator: 'OR',
               filters: []
@@ -172,7 +140,7 @@ export default {
               partialFacet += facetAlias[0];
               continue;
             } else {
-              possibleValues = this.getSimilarFacetValues(facetAlias[0], facetAlias[1]);
+              possibleValues = helpers.functions.getSimilarFacetValues(facetAlias[0], facetAlias[1], store.state.stats.filters, realAttrs);
               if (facetAlias[1][0] === '-') {
                 stringFacetFilters[realAttrs[facetAlias[0]]].operator = 'AND NOT';
               }
@@ -180,6 +148,9 @@ export default {
                 for (let j = 0; j < possibleValues.length; j++) {
                   stringFacetFilters[realAttrs[facetAlias[0]]].filters.push(realAttrs[facetAlias[0]] + ':' + possibleValues[j]);
                 }
+              } else {
+                // empty search //
+                stringFacetFilters[realAttrs[facetAlias[0]]].filters.push(realAttrs[facetAlias[0]] + ':' + facetAlias[1]);
               }
               continue;
             }
@@ -187,7 +158,6 @@ export default {
         }
         stringToSearch.push(parts[p]);
       }
-      console.log(stringFacetFilters);
       let stringFilters = '';
       let keysFacets = Object.keys(stringFacetFilters);
       let prefixOperator = '';
@@ -202,7 +172,14 @@ export default {
         }
       }
       stringFilters = (keysFacets.length > 1) ? stringFilters.slice(0, -5) : stringFilters;
-      console.log(stringFilters);
+      if (stringToSearch.length > 1) {
+        for (let i = 1; i < stringToSearch.length; i++) {
+          if (stringToSearch[i-1] === '-' && stringToSearch[i][0] === '"') {
+            stringToSearch[i] = stringToSearch[i-1] + stringToSearch[i];
+            stringToSearch.splice(i-1, 1);
+          }
+        }
+      }
       return {
         facetFilters: stringFilters,
         stringSearch: stringToSearch.join(' ')

@@ -14,49 +14,61 @@ let sClient = {
   allowedFilters: {
     license_code: {
       type: 'string',
-      alias: 'license'
+      alias: 'license',
+      search: true
     },
     about: {
       type: 'string',
-      alias: 'subj'
+      alias: 'subj',
+      search: true
     },
     has_isBasedOn: {
       type: 'boolean',
-      alias: 'based'
+      alias: 'based',
+      search: false
     },
     wordCount: {
       type: 'numeric',
-      alias: 'words'
+      alias: 'words',
+      search: false
     },
     languageName: {
       type: 'string',
-      alias: 'lang'
+      alias: 'lang',
+      search: true
     },
     publisher_name: {
       type: 'string',
-      alias: 'pub'
+      alias: 'pub',
+      search: true
     },
     storageSize: {
       type: 'numeric',
-      alias: 'storage'
+      alias: 'storage',
+      search: false
     },
     h5pActivities: {
       type: 'numeric',
-      alias: 'h5p'
+      alias: 'h5p',
+      search: false
     },
     search: {
       type: 'string',
-      alias: 'q'
+      alias: 'q',
+      search: false
     },
     networkName: {
       type: 'string',
-      alias: 'net'
+      alias: 'net',
+      search: true
     },
     lastUpdated: {
       type: 'numeric',
-      alias: 'updated'
+      alias: 'updated',
+      search: false
     },
   },
+  mappedFilters: {},
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
@@ -133,6 +145,14 @@ export default {
         let nf = helpers.functions.setFilters(fe, state.allowedFilters);
         state.notFilters = nf[0];
         state.numericFilters = nf[1];
+      }
+    },
+    // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}
+    getRealAttributesMapped(state) {
+      if (Object.keys(state.mappedFilters).length === 0) {
+        for (const realAttribute in state.allowedFilters) {
+          state.mappedFilters[state.allowedFilters[realAttribute].alias] = realAttribute;
+        }
       }
     }
   }

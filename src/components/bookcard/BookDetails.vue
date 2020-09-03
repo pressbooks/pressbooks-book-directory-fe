@@ -102,24 +102,6 @@ export default {
       month = month < 10 ? '0' + month : month;
       day = day < 10 ? '0' + day : day;
       return month + '-' + day + '-' + date.getUTCFullYear();
-    },
-    applyFilters(item, attribute, index = null, operator = ':') {
-      let filters = [];
-      item[attribute] = item[attribute] !== undefined ? item[attribute] : false;
-      if (index !== null) {
-        item[attribute] = item[attribute][index];
-      } else {
-        filters.push({
-          attribute,
-          item
-        });
-      }
-      this.$store.commit('setFiltersApplied', {
-        value: item[attribute],
-        attribute,
-        operator
-      });
-      this.$store.dispatch('applyFilters', filters);
     }
   }
 };
