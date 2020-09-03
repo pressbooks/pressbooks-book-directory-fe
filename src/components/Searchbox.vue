@@ -35,7 +35,7 @@
         <v-btn
           id="search-button"
           type="submit"
-          :disabled="(stringSearch.length < 3 && stringSearch > 0) || stringSearch.length > 512"
+          :disabled="(stringSearch.length < 3 && stringSearch.length > 0) || stringSearch.length > 512"
         >
           Search
         </v-btn>
