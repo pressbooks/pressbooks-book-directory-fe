@@ -69,6 +69,7 @@ let sClient = {
     },
   },
   mappedFilters: {},
+  searchFilters: '',
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
@@ -108,7 +109,15 @@ export default {
       state.filtersExcluded = { ...filters  };
       let nf = helpers.functions.setFilters(filters, state.allowedFilters);
       state.notFilters = nf[0];
-      state.numericFilters = nf[1];
+      if (state.searchFilters.length > 0) {
+        if (nf[1].length > 0) {
+          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
+        } else {
+          state.numericFilters = state.searchFilters;
+        }
+      } else {
+        state.numericFilters = nf[1];
+      }
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -119,7 +128,15 @@ export default {
       state.filtersExcluded = { ...oldFilters  };
       let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
       state.notFilters = nf[0];
-      state.numericFilters = nf[1];
+      if (state.searchFilters.length > 0) {
+        if (nf[1].length > 0) {
+          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
+        } else {
+          state.numericFilters = state.searchFilters;
+        }
+      } else {
+        state.numericFilters = nf[1];
+      }
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };

@@ -63,13 +63,27 @@ export default {
         this.stringSearch = q;
         let stringToSearch = this.filterSearch(q);
         if (
-          typeof (this.$store.state.SClient.numericFilters) === 'undefined' ||
-          this.$store.state.SClient.numericFilters.length === 0
+          stringToSearch.facetFilters.length > 0 &&
+            (
+              typeof (this.$store.state.SClient.numericFilters) === 'undefined' ||
+              this.$store.state.SClient.numericFilters.length === 0
+            )
         ) {
           this.$store.state.SClient.numericFilters = stringToSearch.facetFilters;
-        } else {
-          this.$store.state.SClient.numericFilters += ' AND' + stringToSearch.facetFilters;
+        } else if (
+          stringToSearch.facetFilters.length > 0 &&
+          this.$store.state.SClient.numericFilters.length > 0
+        ) {
+          this.$store.state.SClient.numericFilters += ' AND (' + stringToSearch.facetFilters + ')';
         }
+        if (
+          stringToSearch.facetFilters.length === 0 &&
+          this.$store.state.SClient.searchFilters.length > 0 &&
+          this.$store.state.SClient.numericFilters.length > 0
+        ) {
+          this.$store.state.SClient.numericFilters = '';
+        }
+        this.$store.state.SClient.searchFilters = stringToSearch.facetFilters;
         this.$store.state.SClient.searchParameters.searchQuery = stringToSearch.stringSearch;
         return true;
       }
