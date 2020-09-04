@@ -168,5 +168,78 @@ module.exports = {
           });
         });
       });
+  },
+  'Search filtering by 2 facet and then clean search and search by normal term' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .assert.visible('#search-book')
+      .pause(3000)
+      .element('css selector', '#filter-about', (filterElement) => {
+        // Firefox - Safari exception
+        if (!filterElement.hasOwnProperty('ELEMENT')) {
+          filterElement.ELEMENT = Object.values(filterElement.value)[0];
+        }
+        browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content', (content) => {
+          if (!content.value[0].hasOwnProperty('ELEMENT')) {
+            content.value[0].ELEMENT = Object.values(content.value[0])[0];
+          }
+          browser.elementIdText(content.value[0].ELEMENT, (nn) => {
+            let subj = nn.value.split(' (')[0];
+            let stringToSearch = ' subj:"' + subj.slice(0, 8) + '"';
+            browser.setValue('#search-book', stringToSearch)
+              .click('button[id=search-button]')
+              .pause(2000)
+              .waitForElementVisible('.ais-Hits__books')
+              .elements('css selector', '.subjects', (bookElement) => {
+                bookElement.value.forEach((v) => {
+                  if (!v.hasOwnProperty('ELEMENT')) {
+                    v.ELEMENT = Object.values(v)[0];
+                  }
+                  browser.elementIdText(v.ELEMENT, (s) => {
+                    browser
+                      .assert.ok(
+                        s.value.toLowerCase().search(subj.slice(0, 8).toLowerCase()) >= 0,
+                        'Book with subject ' + s.value + '. It contains ' + subj.slice(0, 8) + ' term.'
+                      );
+                  });
+                });
+              }).perform((done) => {
+                browser.element('css selector', '.v-card__title',  (elem) => {
+                  if (!elem.value.hasOwnProperty('ELEMENT')) {
+                    elem.value.ELEMENT = Object.values(elem.value)[0];
+                  }
+                  browser.elementIdText(elem.value.ELEMENT, (title) => {
+                    let titleToSearch = title.value.slice(0, 10);
+                    browser
+                      .waitForElementVisible('#search-book')
+                      .setValue('#search-book', '')
+                      .setValue('#search-book', titleToSearch)
+                      .pause(2000)
+                      .click('button[id=search-button]')
+                      .click('button[id=search-button]')
+                      .pause(6000)
+                      .waitForElementVisible('.ais-Hits__books')
+                      .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
+                        bookElement.value.forEach((v) => {
+                          if (!v.hasOwnProperty('ELEMENT')) {
+                            v.ELEMENT = Object.values(v)[0];
+                          }
+                          browser.elementIdText(v.ELEMENT, (textBookCard) => {
+                            browser
+                              .assert.ok(
+                                textBookCard.value.toLowerCase().search(titleToSearch.toLowerCase()) >= 0,
+                                'Book content: ' + textBookCard.value + '.It contains "' + titleToSearch + '" term.'
+                              );
+                          });
+                        });
+                      });
+                    done();
+                  });
+                });
+              });
+          });
+        });
+      }).end();
   }
 };
