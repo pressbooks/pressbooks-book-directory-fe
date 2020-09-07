@@ -166,7 +166,10 @@ export default {
       } else {
         classes += 'ais-Hits__books--notcatalog';
       }
-      if(item.license_name.indexOf('All Rights Reserved') >= 0) {
+      if (
+        typeof item.license_name !== 'undefined' &&
+        item.license_name.indexOf('All Rights Reserved') >= 0
+      ) {
         classes += ' ais-Hits__books--allrights';
       }
       return classes;

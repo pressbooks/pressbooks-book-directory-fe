@@ -14,11 +14,13 @@ let sClient = {
   allowedFilters: {
     license_code: {
       type: 'string',
-      alias: 'license'
+      alias: 'license',
+      empty: 'has_license'
     },
     about: {
       type: 'string',
-      alias: 'subj'
+      alias: 'subj',
+      empty: 'has_abouts'
     },
     has_isBasedOn: {
       type: 'boolean',
@@ -30,11 +32,13 @@ let sClient = {
     },
     languageName: {
       type: 'string',
-      alias: 'lang'
+      alias: 'lang',
+      empty: 'has_language_name'
     },
     publisher_name: {
       type: 'string',
-      alias: 'pub'
+      alias: 'pub',
+      empty: 'has_publisher'
     },
     storageSize: {
       type: 'numeric',
@@ -50,7 +54,8 @@ let sClient = {
     },
     networkName: {
       type: 'string',
-      alias: 'net'
+      alias: 'net',
+      empty: 'has_network_name'
     },
     lastUpdated: {
       type: 'numeric',
@@ -69,7 +74,7 @@ export default {
   state: sClient,
   mutations: {
     setFiltersFromQueryParams(state, query) {
-      let filters = {}, exclude = false, toInsert = {};
+      let filters = {}, exclude = false, toInsert = {}, currentAttr = '';
       for (let attribute in query) {
         filters[attribute] = [];
         for (let i = 0; i < query[attribute].length; i++) {
@@ -81,8 +86,16 @@ export default {
           if (state.allowedFilters[attribute].type === 'boolean' && query[attribute][i] === 'false') {
             exclude = true;
           }
+          currentAttr = attribute;
+          if (
+            query[attribute][i] === 'empty' &&
+            Object.prototype.hasOwnProperty.call(state.allowedFilters[attribute], 'empty')
+          ) {
+            query[attribute][i] = false;
+            currentAttr = state.allowedFilters[attribute].empty;
+          }
           toInsert = {
-            attribute,
+            attribute: currentAttr,
             exclude,
             value: query[attribute][i]
           };

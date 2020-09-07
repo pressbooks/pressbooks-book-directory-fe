@@ -4,8 +4,11 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-basedOn')
+      .waitForElementVisible('.isBasedOn')
       .click('#btn-include-based-another')
       .pause(4000)
+      .waitForElementVisible('.ais-Hits__books-book')
+      .waitForElementVisible('.isBasedOn')
       .elements('css selector', '.isBasedOn', (bookElement) => {
         bookElement.value.forEach((v) => {
           // Firefox - Safari exception

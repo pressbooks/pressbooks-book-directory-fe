@@ -40,26 +40,28 @@ module.exports = {
             content.value[0].ELEMENT = Object.values(content.value[0])[0];
           }
           browser.elementIdText(content.value[0].ELEMENT, (nn) => {
-            let aboutName = nn.value.split(' (')[0];
-            browser
-              .url(process.env.HOST_TEST + '/?subj=' + encodeURIComponent(aboutName))
-              .waitForElementVisible('body')
-              .waitForElementVisible('.ais-Hits__books-book')
-              .pause(3000)
-              .elements('css selector', '.subjects', (bookElement) => {
-                bookElement.value.forEach((v) => {
-                  if (!v.hasOwnProperty('ELEMENT')) {
-                    v.ELEMENT = Object.values(v)[0];
-                  }
-                  browser.elementIdText(v.ELEMENT, (text) => {
-                    let tx = text.value;
-                    browser.assert.ok(
-                      tx.toLowerCase().search(aboutName.toLowerCase()) >= 0,
-                      'Book contains the subject: ' + aboutName
-                    );
+            if (nn.value.search('/ empty') < 0) {
+              let aboutName = nn.value.split(' (')[0];
+              browser
+                .url(process.env.HOST_TEST + '/?subj=' + encodeURIComponent(aboutName))
+                .waitForElementVisible('body')
+                .waitForElementVisible('.ais-Hits__books-book')
+                .pause(3000)
+                .elements('css selector', '.subjects', (bookElement) => {
+                  bookElement.value.forEach((v) => {
+                    if (!v.hasOwnProperty('ELEMENT')) {
+                      v.ELEMENT = Object.values(v)[0];
+                    }
+                    browser.elementIdText(v.ELEMENT, (text) => {
+                      let tx = text.value;
+                      browser.assert.ok(
+                        tx.toLowerCase().search(aboutName.toLowerCase()) >= 0,
+                        'Book contains the subject: ' + aboutName
+                      );
+                    });
                   });
                 });
-              });
+            }
           });
         });
       }).end();

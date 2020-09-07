@@ -5,11 +5,13 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-license_code')
       .click('#btn-exclude-license_code-All-Rights-Reserved')
+      .pause(2000)
       .waitForElementVisible('.v-chip--clickable')
       .pause(2000)
+      .waitForElementVisible('.ais-Hits__books-book')
       .click('.ais-ClearRefinements-button')
       .pause(2000)
-      .assert.cssClassPresent('.ais-Hits__books-book', 'ais-Hits__books--allrights')
+      .assert.not.containsText('.filters__head', 'All Rights Reserved')
       .end();
   }
 };
