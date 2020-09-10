@@ -2,17 +2,16 @@
   <v-container class="welcome-header">
     <h1>Welcome to Pressbooks Directory</h1>
     <p>
-      This directory provides an index of <strong>{{ $store.state.stats.totalBooks }}</strong> public books
-      published across <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks. Find books
-      of interest by searching, applying filters, or simply browsing the book cards below.
+      This directory provides an index of <strong>{{ $store.state.stats.totalBooks }}</strong> books published across
+      <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks. Search and filter books by keyword,
+      subject matter, license, and more.
     </p>
     <p>
-      <b>Note:</b> The site you are now viewing is a beta version of the directory. Functionality and content on this
-      site is subject to change before the final release of the directory. To provide feedback on your experience using
-      the beta to find books of interest, please use <a
+      <b>Note:</b> Pressbooks Directory is still in beta. Functionality and content on this site is subject to change.
+      Tell us what you think by filling out our <a
         href="https://forms.gle/SH2TwGttNnJcY7x49"
         target="_blank"
-      >this form</a>.
+      >feedback form</a>.
     </p>
     <searchbox />
   </v-container>
