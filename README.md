@@ -106,13 +106,7 @@ In case you want to see reports locally, you can use [xunit-viewer](https://gith
 just run: `npm run nightwatch:output`, and a `e2e_tests/output/output.html` report file will be generated. You can open that file in any browser to see the report.  
 When a test fails, you can see screenshots about the fail in `e2e_tests/screenshots/` folder.
 
-### Vue references
+### Algolia's configuration
 
-Full demos code
-
-```https://github.com/algolia/vue-instantsearch```
-
-Working demos
-
-```https://www.algolia.com/doc/guides/building-search-ui/resources/demos/vue```
+PB Directory app needs a properly Algolia's settings detailed [here](https://docs.google.com/document/d/1SNf7jIelkXwzzAxEbGSjEL59GMDeh3o3wH7myY3LfBM/edit#).
 

@@ -14,7 +14,12 @@ export default {
   name: 'ClearRefinements',
   methods: {
     removeFilters() {
-      this.$router.replace({ query: {} });
+      let query = {...this.$route.query};
+      let cleanQuery = {};
+      if (typeof query.q !== 'undefined') {
+        cleanQuery.q = query.q;
+      }
+      this.$router.replace({ query: cleanQuery });
     },
   }
 };
