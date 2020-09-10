@@ -25,7 +25,7 @@ module.exports = {
                 .getText('css selector', '.container__results-hits',  (d) => {
                   let text2 = d.value.split(' ');
                   let shown2 = parseInt(text2[2]);
-                  browser.assert.ok(shown === shown2, 'Total book is the same after clear all filters');
+                  browser.assert.ok(shown === shown2, 'Books total is the same after clearing all filters');
                 }).end();
             });
           });
