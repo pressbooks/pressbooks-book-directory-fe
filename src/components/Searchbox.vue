@@ -56,6 +56,8 @@ export default {
   watch: {
     '$route.query.q' (q) {
       if (typeof q === 'undefined') {
+        this.$store.state.SClient.searchFilters = '';
+        this.$store.state.SClient.searchParameters.searchQuery = '';
         return true;
       }
       this.stringSearch = '';

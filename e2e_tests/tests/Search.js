@@ -96,10 +96,10 @@ module.exports = {
               filterElement.ELEMENT = Object.values(filterElement.value)[0];
             }
             browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content',  (content) => {
-              if (!content.value[0].hasOwnProperty('ELEMENT')) {
-                content.value[0].ELEMENT = Object.values(content.value[0])[0];
+              if (!content.value[1].hasOwnProperty('ELEMENT')) {
+                content.value[1].ELEMENT = Object.values(content.value[1])[0];
               }
-              browser.elementIdText(content.value[0].ELEMENT,  (nn) => {
+              browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
                 let networkName = nn.value.split(' (')[0];
                 stringToSearch += ' net:"' + networkName.slice(0, 8) + '"';
                 browser.element('css selector', '#filter-about', (filterElement) => {
@@ -108,10 +108,10 @@ module.exports = {
                     filterElement.ELEMENT = Object.values(filterElement.value)[0];
                   }
                   browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content',  (content) => {
-                    if (!content.value[0].hasOwnProperty('ELEMENT')) {
-                      content.value[0].ELEMENT = Object.values(content.value[0])[0];
+                    if (!content.value[1].hasOwnProperty('ELEMENT')) {
+                      content.value[1].ELEMENT = Object.values(content.value[1])[0];
                     }
-                    browser.elementIdText(content.value[0].ELEMENT,  (nn) => {
+                    browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
                       let subj = nn.value.split(' (')[0];
                       stringToSearch += ' subj:"' + subj.slice(0, 8) + '"';
                       browser.setValue('#search-book', stringToSearch)
@@ -169,7 +169,7 @@ module.exports = {
         });
       });
   },
-  'Search filtering by 2 facet and then clean search and search by normal term' (browser) {
+  'Search filtering by 2 facet and then clear search and search by normal term' (browser) {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
@@ -181,10 +181,10 @@ module.exports = {
           filterElement.ELEMENT = Object.values(filterElement.value)[0];
         }
         browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content', (content) => {
-          if (!content.value[0].hasOwnProperty('ELEMENT')) {
-            content.value[0].ELEMENT = Object.values(content.value[0])[0];
+          if (!content.value[1].hasOwnProperty('ELEMENT')) {
+            content.value[1].ELEMENT = Object.values(content.value[1])[0];
           }
-          browser.elementIdText(content.value[0].ELEMENT, (nn) => {
+          browser.elementIdText(content.value[1].ELEMENT, (nn) => {
             let subj = nn.value.split(' (')[0];
             let stringToSearch = ' subj:"' + subj.slice(0, 8) + '"';
             browser.setValue('#search-book', stringToSearch)
