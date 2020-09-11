@@ -52,7 +52,7 @@ nightwatch_config = {
         'os_version': 'Mojave',
         'browser': 'Chrome',
         'browser_version': (process.env.CHROME_MOJAVE_VERSION) ? process.env.CHROME_MOJAVE_VERSION :  '83.0',
-        'browserstack.selenium_version': (process.env.CHROME_MOJAVE_SELENIUM_VERSION) ? process.env.CHROME_MOJAVE_SELENIUM_VERSION : '3.14.0',
+        'selenium_version': (process.env.CHROME_MOJAVE_SELENIUM_VERSION) ? process.env.CHROME_MOJAVE_SELENIUM_VERSION : '3.14.0',
         'resolution': '1280x960'
       },
       webdriver: {
@@ -72,7 +72,8 @@ nightwatch_config = {
         'os_version': '10',
         'browser': 'Firefox',
         'browser_version': (process.env.FIREFOX_W10_VERSION) ? process.env.FIREFOX_W10_VERSION : '77.0',
-        'browserstack.selenium_version': (process.env.FIREFOX_W10_SELENIUM_VERSION) ? process.env.FIREFOX_W10_SELENIUM_VERSION : '3.10.0',
+        'selenium_version': (process.env.FIREFOX_W10_SELENIUM_VERSION) ? process.env.FIREFOX_W10_SELENIUM_VERSION : '3.11.0',
+        'firefox.driver': (process.env.FIREFOX_W10_BROWSER_VERSION) ? process.env.FIREFOX_W10_BROWSER_VERSION : '0.27.0',
         'resolution': '1280x800'
       },
       webdriver: {
