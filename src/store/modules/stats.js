@@ -1,3 +1,5 @@
+import helpers from '../helpers';
+
 let stats = {
   totalBooks: 0,
   totalNetworks: 0,
@@ -50,6 +52,10 @@ export default {
         }
       }
       state.filters = fs;
+    },
+    // Given a facet and substring facet value, search and return all possible values //
+    getSimilarFacetValues(state, facetValue) {
+      return helpers.functions.getSimilarFacetValues(facetValue.facet, facetValue.value, state.filters);
     }
   },
   actions: {

@@ -12,12 +12,14 @@ router.beforeEach((to, from, next) => {
   let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
   store.dispatch('getStats', index).then(() => {
     let query = {};
+    let containsQ = false;
     let aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
       .map(function(key){return store.state.SClient.allowedFilters[key].alias;});
     for (let attr in to.query) {
       if (aliasAllowed.indexOf(attr) >= 0) {
         if (attr === store.state.SClient.allowedFilters.search.alias) {
-          store.state.SClient.searchParameters.searchQuery = to.query[attr];
+          // query search is handled in SearchBox component
+          containsQ = true;
           continue;
         }
         for (let realAttribute in store.state.SClient.allowedFilters) {
@@ -31,19 +33,16 @@ router.beforeEach((to, from, next) => {
         }
       }
     }
-    if (Object.keys(query).length === 0) {
+    if (Object.keys(query).length === 0 && !containsQ) {
       store.state.SClient.filtersExcluded = {};
       store.state.SClient.notFilters = [];
       store.state.SClient.numericFilters = [];
-      store.commit('setFacetFilters', store.state.SClient.notFilters);
-      store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
-      store.dispatch('getStats', index);
     } else {
       store.commit('setFiltersFromQueryParams', query);
-      store.commit('setFacetFilters', store.state.SClient.notFilters);
-      store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
-      store.dispatch('getStats', index);
     }
+    store.commit('setFacetFilters', store.state.SClient.notFilters);
+    store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
+    store.dispatch('getStats', index);
     next();
   });
 });

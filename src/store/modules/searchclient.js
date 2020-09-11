@@ -15,53 +15,66 @@ let sClient = {
     license_code: {
       type: 'string',
       alias: 'license',
-      empty: 'has_license'
+      empty: 'has_license',
+      search: true
     },
     about: {
       type: 'string',
       alias: 'subj',
-      empty: 'has_abouts'
+      empty: 'has_abouts',
+      search: true
     },
     has_isBasedOn: {
       type: 'boolean',
-      alias: 'based'
+      alias: 'based',
+      search: false
     },
     wordCount: {
       type: 'numeric',
-      alias: 'words'
+      alias: 'words',
+      search: false
     },
     languageName: {
       type: 'string',
       alias: 'lang',
-      empty: 'has_language_name'
+      empty: 'has_language_name',
+      search: true
     },
     publisher_name: {
       type: 'string',
       alias: 'pub',
-      empty: 'has_publisher'
+      empty: 'has_publisher',
+      search: true
     },
     storageSize: {
       type: 'numeric',
-      alias: 'storage'
+      alias: 'storage',
+      search: false
     },
     h5pActivities: {
       type: 'numeric',
-      alias: 'h5p'
+      alias: 'h5p',
+      search: false
     },
     search: {
       type: 'string',
-      alias: 'q'
+      alias: 'q',
+      search: false
     },
     networkName: {
       type: 'string',
       alias: 'net',
-      empty: 'has_network_name'
+      empty: 'has_network_name',
+      search: true
     },
     lastUpdated: {
       type: 'numeric',
-      alias: 'updated'
+      alias: 'updated',
+      search: false
     },
   },
+  mappedFilters: {},
+  searchFilters: '',
   searchParameters: {
     hitsPerPage: 10,
     facetFilters: [],
@@ -109,7 +122,15 @@ export default {
       state.filtersExcluded = { ...filters  };
       let nf = helpers.functions.setFilters(filters, state.allowedFilters);
       state.notFilters = nf[0];
-      state.numericFilters = nf[1];
+      if (state.searchFilters.length > 0) {
+        if (nf[1].length > 0) {
+          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
+        } else {
+          state.numericFilters = state.searchFilters;
+        }
+      } else {
+        state.numericFilters = nf[1];
+      }
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -120,7 +141,15 @@ export default {
       state.filtersExcluded = { ...oldFilters  };
       let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
       state.notFilters = nf[0];
-      state.numericFilters = nf[1];
+      if (state.searchFilters.length > 0) {
+        if (nf[1].length > 0) {
+          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
+        } else {
+          state.numericFilters = state.searchFilters;
+        }
+      } else {
+        state.numericFilters = nf[1];
+      }
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };
@@ -146,6 +175,14 @@ export default {
         let nf = helpers.functions.setFilters(fe, state.allowedFilters);
         state.notFilters = nf[0];
         state.numericFilters = nf[1];
+      }
+    },
+    // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}
+    getRealAttributesMapped(state) {
+      if (Object.keys(state.mappedFilters).length === 0) {
+        for (const realAttribute in state.allowedFilters) {
+          state.mappedFilters[state.allowedFilters[realAttribute].alias] = realAttribute;
+        }
       }
     }
   }
