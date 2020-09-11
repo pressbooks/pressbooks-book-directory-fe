@@ -9,7 +9,12 @@ let stats = {
     'about',
     'languageName',
     'publisher_name',
-    'has_isBasedOn'
+    'has_isBasedOn',
+    'has_license',
+    'has_abouts',
+    'has_language_name',
+    'has_publisher',
+    'has_network_name'
   ],
   filters: {},
   facetFilters: [],
@@ -60,6 +65,9 @@ export default {
         facetFilters: context.state.facetFilters
       }).then(function (response) {
         context.commit('setTotalBooks', response.nbHits);
+        if (typeof response.facets.networkName === 'undefined') {
+          response.facets.networkName = [];
+        }
         context.commit('setTotalNetworks', Object.keys(response.facets.networkName).length);
         context.commit('setFilters', response);
       });
