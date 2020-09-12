@@ -73,7 +73,7 @@ nightwatch_config = {
         'browser': 'Firefox',
         'browser_version': (process.env.FIREFOX_W10_VERSION) ? process.env.FIREFOX_W10_VERSION : '77.0',
         'selenium_version': (process.env.FIREFOX_W10_SELENIUM_VERSION) ? process.env.FIREFOX_W10_SELENIUM_VERSION : '3.11.0',
-        'firefox.driver': (process.env.FIREFOX_W10_DRIVER_VERSION) ? process.env.FIREFOX_W10_BROWSER_VERSION : '0.27.0',
+        'firefox.driver': (process.env.FIREFOX_W10_DRIVER_VERSION) ? process.env.FIREFOX_W10_DRIVER_VERSION : '0.27.0',
         'resolution': '1280x800'
       },
       webdriver: {
