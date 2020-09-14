@@ -58,6 +58,8 @@ export default {
       if (typeof q === 'undefined') {
         this.$store.state.SClient.searchFilters = '';
         this.$store.state.SClient.searchParameters.searchQuery = '';
+        this.$store.state.SClient.filtersParams = (this.$store.state.SClient.hasNumeric) ?
+          this.$store.state.SClient.numericFilters : '';
         return true;
       }
       this.stringSearch = '';
