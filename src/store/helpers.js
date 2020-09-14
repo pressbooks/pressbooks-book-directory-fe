@@ -98,9 +98,29 @@ function getSimilarFacetValues(facet, value, filtersAvailable, realAttrs) {
   return possibleValues;
 }
 
+/*
+Set paramsFilters according to numeric and search filters
+  @param numericFilters - String with conditions for numeric filters
+  @param searchFilters - String with conditions for filters from search box
+*/
+function setParamsFilters(numericFilters, searchFilters) {
+  let filtersParams = '';
+  if (searchFilters.length > 0) {
+    if (numericFilters.length > 0) {
+      filtersParams = '(' + numericFilters + ') AND (' + searchFilters + ')';
+    } else {
+      filtersParams = searchFilters;
+    }
+  } else {
+    filtersParams = numericFilters;
+  }
+  return filtersParams;
+}
+
 export default {
   functions: {
     setFilters,
-    getSimilarFacetValues
+    getSimilarFacetValues,
+    setParamsFilters
   }
 };
