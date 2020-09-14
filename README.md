@@ -78,7 +78,7 @@ In order to add more Browsers you can add it in `e2e_tests/conf/nightwatch.conf.
 its corresponding driver: https://nightwatchjs.org/gettingstarted/installation/#install-webdriver.
 
 #### Run E2E tests on BrowserStack
-Be sure you have **BROWSERSTACK_URL** and **BROWSERSTACK_ACCESS_KEY** environment variables correctly. Ask to your team mates for BrowserStack access if you don't have it.  
+Be sure you have **BROWSERSTACK_URL** (*in AWS Staging pipeline it runs on https://dev.pressbooks.directory*) and **BROWSERSTACK_ACCESS_KEY** environment variables correctly. Ask to your team mates for BrowserStack access if you don't have it.  
 In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.  
 
 Tests run on [Staging environment](https://staging.pressbooks.directory).  

@@ -10,7 +10,9 @@ let sClient = {
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
   filtersExcluded: [],
   notFilters: [],
-  numericFilters: [],
+  filtersParams: '',
+  numericFilters: '',
+  hasNumeric: false,
   allowedFilters: {
     license_code: {
       type: 'string',
@@ -122,15 +124,9 @@ export default {
       state.filtersExcluded = { ...filters  };
       let nf = helpers.functions.setFilters(filters, state.allowedFilters);
       state.notFilters = nf[0];
-      if (state.searchFilters.length > 0) {
-        if (nf[1].length > 0) {
-          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
-        } else {
-          state.numericFilters = state.searchFilters;
-        }
-      } else {
-        state.numericFilters = nf[1];
-      }
+      state.hasNumeric = (nf[1].length > 0);
+      state.numericFilters = nf[1];
+      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -141,22 +137,16 @@ export default {
       state.filtersExcluded = { ...oldFilters  };
       let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
       state.notFilters = nf[0];
-      if (state.searchFilters.length > 0) {
-        if (nf[1].length > 0) {
-          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
-        } else {
-          state.numericFilters = state.searchFilters;
-        }
-      } else {
-        state.numericFilters = nf[1];
-      }
+      state.hasNumeric = (nf[1].length > 0);
+      state.numericFilters = nf[1];
+      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };
       delete fe[field];
       let nf = helpers.functions.setFilters(fe, state.allowedFilters);
       state.notFilters = nf[0];
-      state.numericFilters = nf[1];
+      state.filtersParams = nf[1];
       state.filtersExcluded = fe;
     },
     deleteItemExcluded(state, f) {
@@ -174,7 +164,9 @@ export default {
         state.filtersExcluded = fe;
         let nf = helpers.functions.setFilters(fe, state.allowedFilters);
         state.notFilters = nf[0];
+        state.hasNumeric = (nf[1].length > 0);
         state.numericFilters = nf[1];
+        state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
       }
     },
     // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}
