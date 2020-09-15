@@ -2,6 +2,11 @@ require('dotenv').config({path: '.env.local'});
 process.env.HOST_TEST = process.env.BROWSERSTACK_URL;
 nightwatch_config = {
   src_folders: ['e2e_tests/tests'],
+  test_workers: {
+    enabled: true,
+    workers: 'auto',
+    detailed_output: false
+  },
   selenium: {
     start_process: false,
     host: 'hub-cloud.browserstack.com',
