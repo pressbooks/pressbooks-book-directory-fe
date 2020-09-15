@@ -68,6 +68,6 @@ reports:
   #files:
     #- '**/*'
   #base-directory: dist
-  cache:
-    paths:
-      - 'dist/*'
+    #cache:
+  #paths:
+  # - paths

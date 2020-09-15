@@ -4,8 +4,9 @@ nightwatch_config = {
   src_folders: ['e2e_tests/tests'],
   test_workers: {
     enabled: true,
-    workers: 'auto',
-    detailed_output: false
+    workers: process.env.E2E_WORKERS ? parseInt(process.env.E2E_WORKERS) : 'auto',
+    detailed_output: false,
+    parallel_process_delay: process.env.E2E_WORKERS_DELAY ? parseInt(process.env.E2E_WORKERS_DELAY) : 10
   },
   selenium: {
     start_process: false,
