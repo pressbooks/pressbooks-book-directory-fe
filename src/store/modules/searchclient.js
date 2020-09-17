@@ -18,7 +18,7 @@ let sClient = {
       type: 'string',
       alias: 'license',
       empty: 'has_license',
-      search: true
+      search: false
     },
     about: {
       type: 'string',
