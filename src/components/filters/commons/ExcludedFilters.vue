@@ -21,38 +21,40 @@
         </v-icon>
       </v-text-field>
     </v-list-item>
-    <template v-if="$store.state.stats.filters[field] !== undefined">
-      <v-list-item
-        v-show="stringSearch.length === 0 || (stringSearch.length > 0 && textEmpty.search(stringSearch) >= 0)"
+    <v-list-item
+      v-show="stringSearch.length === 0 || (stringSearch.length > 0 && textEmpty.search(stringSearch) >= 0)"
+    >
+      <v-list-item-content
+        :class="(wasFiltered('empty', false) || wasFiltered('empty', true)) ? 'v-list-item__content--filtered' : ''"
       >
-        <v-list-item-content>
-          {{ textEmpty }} ({{ emptyFieldCount }})
-        </v-list-item-content>
-        <v-list-item-action>
-          <div>
-            <v-btn
-              :id="'btn-include-empty-' + field"
-              class="include"
-              icon
-              :disabled="wasFiltered('empty', false)"
-              @click="applyFilter('empty', false)"
-            >
-              <v-icon>
-                mdi-check
-              </v-icon>
-            </v-btn>
-            <v-btn
-              :id="'btn-exclude-empty-' + field"
-              icon
-              class="exclude"
-              :disabled="wasFiltered('empty', true)"
-              @click="applyFilter('empty', true)"
-            >
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-          </div>
-        </v-list-item-action>
-      </v-list-item>
+        {{ textEmpty }} ({{ emptyFieldCount }})
+      </v-list-item-content>
+      <v-list-item-action>
+        <div>
+          <v-btn
+            :id="'btn-include-empty-' + field"
+            :class="wasFiltered('empty', false) ? 'selected include': 'include'"
+            icon
+            :disabled="wasFiltered('empty', false)"
+            @click="applyFilter('empty', false)"
+          >
+            <v-icon>
+              mdi-check
+            </v-icon>
+          </v-btn>
+          <v-btn
+            :id="'btn-exclude-empty-' + field"
+            icon
+            :class="wasFiltered('empty', true) ? 'selected exclude': 'exclude'"
+            :disabled="wasFiltered('empty', true)"
+            @click="applyFilter('empty', true)"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
+      </v-list-item-action>
+    </v-list-item>
+    <template v-if="$store.state.stats.filters[field] !== undefined">
       <v-list-item
         v-for="(item, k) in $store.state.stats.filters[field].slice(0, limited)"
         :key="k"
@@ -198,13 +200,13 @@ export default {
       let l = this.limited - this.steps;
       this.limited = (l > 0) ? l : 1;
     },
-    wasFiltered(value, exc) {
+    wasFiltered(value, exclude) {
       let field = this.field.slice(0);
       if (value === 'empty') {
-        value = !exc;
+        value = false;
       }
       return typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined' &&
-                    this.$store.state.SClient.filtersExcluded[field].find(v => v.value === value && v.exclude === exc) !== undefined;
+                    this.$store.state.SClient.filtersExcluded[field].find(v => v.value === value && v.exclude === exclude) !== undefined;
     },
     clearFilters() {
       let query = {...this.$route.query};
