@@ -8,8 +8,11 @@
     </p>
     <p>
       <b>Note:</b> Pressbooks Directory is still in beta. Functionality and content on this site is subject to change.
-      Tell us what you think by filling out our <a href="https://forms.gle/SH2TwGttNnJcY7x49" target="_blank">
-      feedback form</a>.
+      Tell us what you think by filling out our <a
+        href="https://forms.gle/SH2TwGttNnJcY7x49"
+        target="_blank"
+      >
+        feedback form</a>.
     </p>
     <searchbox />
   </v-container>

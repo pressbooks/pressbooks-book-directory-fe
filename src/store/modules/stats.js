@@ -51,6 +51,11 @@ export default {
           fs[facet] = [...state.filters[facet]];
         }
       }
+      for (let facet in state.filters) {
+        if (typeof fs[facet] === 'undefined' && state.keepFacets.indexOf(facet) >= 0) {
+          fs[facet] = [...state.filters[facet]];
+        }
+      }
       state.filters = fs;
     },
     // Given a facet and substring facet value, search and return all possible values //
