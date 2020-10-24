@@ -1,9 +1,9 @@
 <template>
   <ais-sort-by
     :items="[
-      { value: 'test_Pressbooks_directory', label: 'Title (A-Z)' },
-      { value: 'test_Pressbooks_directory_sort_by_wordCount', label: 'Word count ↓' },
-      { value: 'test_Pressbooks_directory_sort_by_lastUpdated', label: 'Recently updated' }
+      { value: defaultIndex, label: 'Title (A-Z)' },
+      { value: wordCountReplicaIndex, label: 'Word count ↓' },
+      { value: lastUpdatedReplicaIndex, label: 'Recently updated' }
     ]"
   >
     <template #default="{ items, refine }">
@@ -40,7 +40,10 @@ export default {
   name: 'SortBy',
   data() {
     return {
-      selected: ''
+      selected: '',
+      defaultIndex: process.env.VUE_APP_ALGOLIA_INDEX,
+      wordCountReplicaIndex: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
+      lastUpdatedReplicaIndex: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA
     };
   },
   methods: {
