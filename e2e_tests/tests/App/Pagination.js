@@ -1,10 +1,10 @@
 module.exports = {
-  'Apply \'Pubic Domain\' license filter and check quantity of pages' (browser) {
+  'Apply license filter and check quantity of pages' (browser) {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .assert.visible('#filter-license_code')
-      .click('#btn-include-license_code-Public-Domain')
+      .click('#cc-by > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
       .waitForElementVisible('.v-chip--clickable')
       .pause(2000)
       .waitForElementVisible('.ais-Pagination-list')

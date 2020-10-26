@@ -39,7 +39,6 @@ module.exports = {
       .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .click('#btn-wordCount')
       .pause(3000)
-      .waitForElementVisible('.ais-Hits__books-book')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         bookElement.value.forEach((v) => {
           if (!v.hasOwnProperty('ELEMENT')) {
