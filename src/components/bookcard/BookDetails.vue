@@ -12,7 +12,8 @@
         <span v-if="index != 0">, </span>
         <span
           class="v-card--item author"
-        >{{ author }}</span>
+          v-html="author"
+        ></span>
       </span>
     </div>
     <div
@@ -25,7 +26,7 @@
         :key="index"
       >
         <span v-if="index != 0">, </span>
-        <span class="v-card--item editor">{{ editor }}</span>
+        <span class="v-card--item editor" v-html="editor"></span>
       </span>
     </div>
     <div
@@ -54,7 +55,7 @@
       class="publisher"
     >
       <strong>Publisher: </strong>
-      <span class="v-card--item publisher">{{ item.publisherName }}</span>
+      <span class="v-card--item publisher" v-html="item.publisherName"></span>
     </div>
     <div
       v-show="item.wordCount"
@@ -72,7 +73,7 @@
       v-if="item.description"
       class="description"
     >
-      <strong>Description: </strong><span class="v-card--item description">{{ item.description }}</span>
+      <strong>Description: </strong><span class="v-card--item description" v-html="item.description"></span>
     </div>
   </div>
 </template>

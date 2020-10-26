@@ -89,83 +89,85 @@ module.exports = {
         }
         browser.elementIdText(elem.value.ELEMENT, (title) => {
           let searchTitleExclude = title.value.split(' ').slice(0, 1).join(' ');
-          let stringToSearch = '-' + searchTitleExclude;
-          browser.element('css selector', '#filter-networkName', (filterElement) => {
-            // Firefox - Safari exception
-            if (!filterElement.hasOwnProperty('ELEMENT')) {
-              filterElement.ELEMENT = Object.values(filterElement.value)[0];
-            }
-            browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content',  (content) => {
-              if (!content.value[1].hasOwnProperty('ELEMENT')) {
-                content.value[1].ELEMENT = Object.values(content.value[1])[0];
+          if (searchTitleExclude.length > 3) {
+            let stringToSearch = '-' + searchTitleExclude;
+            browser.element('css selector', '#filter-networkName', (filterElement) => {
+              // Firefox - Safari exception
+              if (!filterElement.hasOwnProperty('ELEMENT')) {
+                filterElement.ELEMENT = Object.values(filterElement.value)[0];
               }
-              browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
-                let networkName = nn.value.split(' (')[0];
-                stringToSearch += ' net:"' + networkName.slice(0, 8) + '"';
-                browser.element('css selector', '#filter-about', (filterElement) => {
-                  // Firefox - Safari exception
-                  if (!filterElement.hasOwnProperty('ELEMENT')) {
-                    filterElement.ELEMENT = Object.values(filterElement.value)[0];
-                  }
-                  browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content',  (content) => {
-                    if (!content.value[1].hasOwnProperty('ELEMENT')) {
-                      content.value[1].ELEMENT = Object.values(content.value[1])[0];
+              browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content',  (content) => {
+                if (!content.value[1].hasOwnProperty('ELEMENT')) {
+                  content.value[1].ELEMENT = Object.values(content.value[1])[0];
+                }
+                browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
+                  let networkName = nn.value.split(' (')[0];
+                  stringToSearch += ' net:"' + networkName.slice(0, 8) + '"';
+                  browser.element('css selector', '#filter-about', (filterElement) => {
+                    // Firefox - Safari exception
+                    if (!filterElement.hasOwnProperty('ELEMENT')) {
+                      filterElement.ELEMENT = Object.values(filterElement.value)[0];
                     }
-                    browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
-                      let subj = nn.value.split(' (')[0];
-                      stringToSearch += ' subj:"' + subj.slice(0, 8) + '"';
-                      browser.setValue('#search-book', stringToSearch)
-                        .click('button[id=search-button]')
-                        .pause(2000)
-                        .waitForElementVisible('.ais-Hits__books')
-                        .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
-                          bookElement.value.forEach((v) => {
-                            if (!v.hasOwnProperty('ELEMENT')) {
-                              v.ELEMENT = Object.values(v)[0];
-                            }
-                            browser.elementIdText(v.ELEMENT, (textBookCard) => {
-                              browser
-                                .assert.ok(
-                                  textBookCard.value.toLowerCase().search(searchTitleExclude.toLowerCase()) < 0,
-                                  'Book without' + searchTitleExclude + ' term.'
-                                );
-                            });
-                          });
-                        })
-                        .elements('css selector', '.network', (bookElement) => {
-                          bookElement.value.forEach((v) => {
-                            if (!v.hasOwnProperty('ELEMENT')) {
-                              v.ELEMENT = Object.values(v)[0];
-                            }
-                            browser.elementIdText(v.ELEMENT, (netw) => {
-                              browser
-                                .assert.ok(
-                                  netw.value.toLowerCase().search(networkName.slice(0, 8).toLowerCase()) >= 0,
-                                  'Book with network ' + netw.value + '. It contains ' + networkName.slice(0, 8) + ' term.'
-                                );
-                            });
-                          });
-                        })
-                        .elements('css selector', '.subjects', (bookElement) => {
-                          bookElement.value.forEach((v) => {
-                            if (!v.hasOwnProperty('ELEMENT')) {
-                              v.ELEMENT = Object.values(v)[0];
-                            }
-                            browser.elementIdText(v.ELEMENT, (s) => {
-                              browser
-                                .assert.ok(
-                                  s.value.toLowerCase().search(subj.slice(0, 8).toLowerCase()) >= 0,
-                                  'Book with subject ' + s.value + '. It contains ' + subj.slice(0, 8) + ' term.'
-                                );
-                            });
-                          });
-                        }).end();
+                    browser.elementIdElements(filterElement.ELEMENT, 'css selector', '.v-list-item__content',  (content) => {
+                      if (!content.value[1].hasOwnProperty('ELEMENT')) {
+                        content.value[1].ELEMENT = Object.values(content.value[1])[0];
+                      }
+                      browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
+                        let subj = nn.value.split(' (')[0];
+                        stringToSearch += ' subj:"' + subj.slice(0, 8) + '"';
+                        browser.setValue('#search-book', stringToSearch)
+                            .click('button[id=search-button]')
+                            .pause(2000)
+                            .waitForElementVisible('.ais-Hits__books')
+                            .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
+                              bookElement.value.forEach((v) => {
+                                if (!v.hasOwnProperty('ELEMENT')) {
+                                  v.ELEMENT = Object.values(v)[0];
+                                }
+                                browser.elementIdText(v.ELEMENT, (textBookCard) => {
+                                  browser
+                                      .assert.ok(
+                                      textBookCard.value.toLowerCase().search(searchTitleExclude.toLowerCase()) < 0,
+                                      'Book without ' + searchTitleExclude + ' term.'
+                                  );
+                                });
+                              });
+                            })
+                            .elements('css selector', '.network', (bookElement) => {
+                              bookElement.value.forEach((v) => {
+                                if (!v.hasOwnProperty('ELEMENT')) {
+                                  v.ELEMENT = Object.values(v)[0];
+                                }
+                                browser.elementIdText(v.ELEMENT, (netw) => {
+                                  browser
+                                      .assert.ok(
+                                      netw.value.toLowerCase().search(networkName.slice(0, 8).toLowerCase()) >= 0,
+                                      'Book with network ' + netw.value + '. It contains ' + networkName.slice(0, 8) + ' term.'
+                                  );
+                                });
+                              });
+                            })
+                            .elements('css selector', '.subjects', (bookElement) => {
+                              bookElement.value.forEach((v) => {
+                                if (!v.hasOwnProperty('ELEMENT')) {
+                                  v.ELEMENT = Object.values(v)[0];
+                                }
+                                browser.elementIdText(v.ELEMENT, (s) => {
+                                  browser
+                                      .assert.ok(
+                                      s.value.toLowerCase().search(subj.slice(0, 8).toLowerCase()) >= 0,
+                                      'Book with subject ' + s.value + '. It contains ' + subj.slice(0, 8) + ' term.'
+                                  );
+                                });
+                              });
+                            }).end();
+                      });
                     });
                   });
                 });
               });
             });
-          });
+          }
         });
       });
   },
