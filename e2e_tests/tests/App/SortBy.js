@@ -6,7 +6,7 @@ module.exports = {
       .waitForElementVisible('.ais-SortBy--input')
       .click('.ais-SortBy--input')
       .waitForElementVisible('.v-select-list')
-      .click('#sort-by-test_Pressbooks_directory_sort_by_wordCount')
+      .click('#app > div.v-menu__content.theme--light.menuable__content__active > div > div:nth-child(2)')
       .pause(3000)
       .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
@@ -44,9 +44,8 @@ module.exports = {
       .waitForElementVisible('.ais-SortBy--input')
       .click('.ais-SortBy--input')
       .waitForElementVisible('.v-select-list')
-      .click('#sort-by-test_Pressbooks_directory')
+      .click('#app > div.v-menu__content.theme--light.menuable__content__active > div > div:nth-child(1)')
       .pause(3000)
-      .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         let previousName = '', elementId;
         bookElement.value.forEach((v) => {
@@ -83,7 +82,7 @@ module.exports = {
       .waitForElementVisible('.ais-SortBy--input')
       .click('.ais-SortBy--input')
       .waitForElementVisible('.v-select-list')
-      .click('#sort-by-test_Pressbooks_directory_sort_by_lastUpdated')
+      .click('#app > div.v-menu__content.theme--light.menuable__content__active > div > div:nth-child(3)')
       .pause(3000)
       .waitForElementVisible('.updated')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
