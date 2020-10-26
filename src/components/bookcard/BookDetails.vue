@@ -98,9 +98,8 @@ export default {
     },
     unixDateToStandard(unixDate) {
       let date = new Date(unixDate * 1000);
-      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDay()) + 1;
+      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDate());
       month = month < 10 ? '0' + month : month;
-      day = day < 10 ? '0' + day : day;
       return month + '-' + day + '-' + date.getUTCFullYear();
     }
   }
