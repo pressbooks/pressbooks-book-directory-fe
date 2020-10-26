@@ -22,7 +22,7 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
-                  <span :id="'sort-by-' + item.value">
+                  <span>
                     {{ item.label }}
                   </span>
                 </v-list-item-title>
