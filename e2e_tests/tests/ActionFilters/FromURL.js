@@ -112,16 +112,16 @@ module.exports = {
         });
       }).end();
   },
-  'Filtering books by Last Updated field between 2020-08-01 and 2020-09-01 by URL' (browser) {
+  'Filtering books by Last Updated field between 2020-08-01 and 2030-11-04 by URL' (browser) {
     browser
-      .url(process.env.HOST_TEST + '?updated=>%3D1596240000%26%26<%3D1598918400')
+      .url(process.env.HOST_TEST + '?updated=>%3D1596240000%26%26<%3D1920055338')
       .waitForElementVisible('body')
       .pause(2000)
       .waitForElementVisible('#filter-lastUpdated')
       .waitForElementVisible('.network')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         let from = new Date(1596240000);
-        let to = new Date(1598918400);
+        let to = new Date(1920055338);
         bookElement.value.forEach((v) => {
           if (!v.hasOwnProperty('ELEMENT')) {
             v.ELEMENT = Object.values(v)[0];
