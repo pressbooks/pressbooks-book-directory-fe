@@ -116,51 +116,51 @@ module.exports = {
                         let subj = nn.value.split(' (')[0];
                         stringToSearch += ' subj:"' + subj.slice(0, 8) + '"';
                         browser.setValue('#search-book', stringToSearch)
-                            .click('button[id=search-button]')
-                            .pause(2000)
-                            .waitForElementVisible('.ais-Hits__books')
-                            .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
-                              bookElement.value.forEach((v) => {
-                                if (!v.hasOwnProperty('ELEMENT')) {
-                                  v.ELEMENT = Object.values(v)[0];
-                                }
-                                browser.elementIdText(v.ELEMENT, (textBookCard) => {
-                                  browser
-                                      .assert.ok(
-                                      textBookCard.value.toLowerCase().search(searchTitleExclude.toLowerCase()) < 0,
-                                      'Book without ' + searchTitleExclude + ' term.'
+                          .click('button[id=search-button]')
+                          .pause(2000)
+                          .waitForElementVisible('.ais-Hits__books')
+                          .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
+                            bookElement.value.forEach((v) => {
+                              if (!v.hasOwnProperty('ELEMENT')) {
+                                v.ELEMENT = Object.values(v)[0];
+                              }
+                              browser.elementIdText(v.ELEMENT, (textBookCard) => {
+                                browser
+                                  .assert.ok(
+                                    textBookCard.value.toLowerCase().search(searchTitleExclude.toLowerCase()) < 0,
+                                    'Book without ' + searchTitleExclude + ' term.'
                                   );
-                                });
                               });
-                            })
-                            .elements('css selector', '.network', (bookElement) => {
-                              bookElement.value.forEach((v) => {
-                                if (!v.hasOwnProperty('ELEMENT')) {
-                                  v.ELEMENT = Object.values(v)[0];
-                                }
-                                browser.elementIdText(v.ELEMENT, (netw) => {
-                                  browser
-                                      .assert.ok(
-                                      netw.value.toLowerCase().search(networkName.slice(0, 8).toLowerCase()) >= 0,
-                                      'Book with network ' + netw.value + '. It contains ' + networkName.slice(0, 8) + ' term.'
+                            });
+                          })
+                          .elements('css selector', '.network', (bookElement) => {
+                            bookElement.value.forEach((v) => {
+                              if (!v.hasOwnProperty('ELEMENT')) {
+                                v.ELEMENT = Object.values(v)[0];
+                              }
+                              browser.elementIdText(v.ELEMENT, (netw) => {
+                                browser
+                                  .assert.ok(
+                                    netw.value.toLowerCase().search(networkName.slice(0, 8).toLowerCase()) >= 0,
+                                    'Book with network ' + netw.value + '. It contains ' + networkName.slice(0, 8) + ' term.'
                                   );
-                                });
                               });
-                            })
-                            .elements('css selector', '.subjects', (bookElement) => {
-                              bookElement.value.forEach((v) => {
-                                if (!v.hasOwnProperty('ELEMENT')) {
-                                  v.ELEMENT = Object.values(v)[0];
-                                }
-                                browser.elementIdText(v.ELEMENT, (s) => {
-                                  browser
-                                      .assert.ok(
-                                      s.value.toLowerCase().search(subj.slice(0, 8).toLowerCase()) >= 0,
-                                      'Book with subject ' + s.value + '. It contains ' + subj.slice(0, 8) + ' term.'
+                            });
+                          })
+                          .elements('css selector', '.subjects', (bookElement) => {
+                            bookElement.value.forEach((v) => {
+                              if (!v.hasOwnProperty('ELEMENT')) {
+                                v.ELEMENT = Object.values(v)[0];
+                              }
+                              browser.elementIdText(v.ELEMENT, (s) => {
+                                browser
+                                  .assert.ok(
+                                    s.value.toLowerCase().search(subj.slice(0, 8).toLowerCase()) >= 0,
+                                    'Book with subject ' + s.value + '. It contains ' + subj.slice(0, 8) + ' term.'
                                   );
-                                });
                               });
-                            }).end();
+                            });
+                          }).end();
                       });
                     });
                   });
@@ -243,5 +243,23 @@ module.exports = {
           });
         });
       }).end();
+  },
+  'Trying to search using a string that contains < 3 characters' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .pause(4000)
+      .assert.visible('#search-book')
+      .setValue('#search-book', 'fo')
+      .expect.element('#search-button').to.not.be.enabled;
+  },
+  'Trying to search using a string that contains 3 characters' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .pause(4000)
+      .assert.visible('#search-book')
+      .setValue('#search-book', 'foo')
+      .expect.element('#search-button').to.be.enabled;
   }
 };

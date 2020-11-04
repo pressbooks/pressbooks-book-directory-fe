@@ -10,10 +10,12 @@
         :key="index"
       >
         <span v-if="index != 0">, </span>
+        <!-- eslint-disable vue/no-v-html -->
         <span
           class="v-card--item author"
           v-html="author"
-        ></span>
+        />
+        <!--eslint-enable-->
       </span>
     </div>
     <div
@@ -26,7 +28,11 @@
         :key="index"
       >
         <span v-if="index != 0">, </span>
-        <span class="v-card--item editor" v-html="editor"></span>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span
+          class="v-card--item editor"
+          v-html="editor"
+        />
       </span>
     </div>
     <div
@@ -55,7 +61,10 @@
       class="publisher"
     >
       <strong>Publisher: </strong>
-      <span class="v-card--item publisher" v-html="item.publisherName"></span>
+      <span
+        class="v-card--item publisher"
+        v-html="item.publisherName"
+      />
     </div>
     <div
       v-show="item.wordCount"
@@ -73,7 +82,12 @@
       v-if="item.description"
       class="description"
     >
-      <strong>Description: </strong><span class="v-card--item description" v-html="item.description"></span>
+      <strong>Description: </strong>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <span
+        class="v-card--item description"
+        v-html="item.description"
+      />
     </div>
   </div>
 </template>
