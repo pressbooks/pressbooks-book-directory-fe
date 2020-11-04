@@ -35,7 +35,7 @@
         <v-btn
           id="search-button"
           type="submit"
-          :disabled="(stringSearch.length < 3 && stringSearch.length > 0) || stringSearch.length > 512"
+          :disabled="stringSearch.length < searchCharsLimit.min || stringSearch.length > searchCharsLimit.max"
         >
           Search
         </v-btn>
@@ -50,7 +50,11 @@ export default {
   name: 'Searchbox',
   data() {
     return {
-      stringSearch: ''
+      stringSearch: '',
+      searchCharsLimit: {
+        min: 3,
+        max: 512
+      }
     };
   },
   watch: {
@@ -198,7 +202,10 @@ export default {
       };
     },
     search(stringSearch) {
-      if ((stringSearch.length > 3 && stringSearch.length < 513) || stringSearch.length === 0) {
+      if (
+        (stringSearch.length >= this.searchCharsLimit.min && stringSearch.length <= this.searchCharsLimit.max) ||
+        stringSearch.length === 0 // Remove search case
+      ) {
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;
