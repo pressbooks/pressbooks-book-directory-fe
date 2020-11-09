@@ -91,7 +91,7 @@ module.exports = {
           let searchTitleExclude = title.value.split(' ').slice(0, 1).join(' ');
           if (searchTitleExclude.length > 3) {
             let stringToSearch = '-' + searchTitleExclude;
-            browser.element('css selector', '#filter-networkName', (filterElement) => {
+            browser.click('#filter-networkName').element('css selector', '#filter-networkName', (filterElement) => {
               // Firefox - Safari exception
               if (!filterElement.hasOwnProperty('ELEMENT')) {
                 filterElement.ELEMENT = Object.values(filterElement.value)[0];
@@ -103,7 +103,7 @@ module.exports = {
                 browser.elementIdText(content.value[1].ELEMENT,  (nn) => {
                   let networkName = nn.value.split(' (')[0];
                   stringToSearch += ' net:"' + networkName.slice(0, 8) + '"';
-                  browser.element('css selector', '#filter-about', (filterElement) => {
+                  browser.click('#filter-about').element('css selector', '#filter-about', (filterElement) => {
                     // Firefox - Safari exception
                     if (!filterElement.hasOwnProperty('ELEMENT')) {
                       filterElement.ELEMENT = Object.values(filterElement.value)[0];
@@ -177,6 +177,7 @@ module.exports = {
       .waitForElementVisible('body')
       .pause(4000)
       .assert.visible('#search-book')
+      .click('#filter-about')
       .element('css selector', '#filter-about', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {

@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-publisher_name')
+      .click('#filter-publisher_name')
       .waitForElementVisible('#search-filter-publisher_name')
       .pause(2000)
       .setValue('#search-filter-publisher_name', 'uni')
@@ -37,6 +38,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-publisher_name')
+      .click('#filter-publisher_name')
       .pause(2000)
       .element('css selector', '#filter-publisher_name', (filterElement) => {
         // Firefox - Safari exception
@@ -82,6 +84,7 @@ module.exports = {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
+      .click('#filter-publisher_name')
       .waitForElementVisible('#btn-exclude-empty-publisher_name')
       .pause(2000)
       .click('#btn-exclude-empty-publisher_name')

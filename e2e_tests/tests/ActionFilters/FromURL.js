@@ -32,6 +32,7 @@ module.exports = {
       .waitForElementVisible('.network')
       .waitForElementVisible('#filter-about')
       .pause(2000)
+      .click('#filter-about')
       .element('css selector', '#filter-about', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
@@ -76,6 +77,7 @@ module.exports = {
       .waitForElementVisible('.network')
       .waitForElementVisible('#filter-publisher_name')
       .pause(2000)
+      .click('#filter-publisher_name')
       .element('css selector', '#filter-publisher_name', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
@@ -119,6 +121,7 @@ module.exports = {
       .pause(2000)
       .waitForElementVisible('#filter-lastUpdated')
       .waitForElementVisible('.network')
+      .click('#filter-lastUpdated')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         let from = new Date(1596240000);
         let to = new Date(1920055338);

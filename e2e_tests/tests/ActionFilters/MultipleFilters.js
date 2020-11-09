@@ -7,7 +7,7 @@ module.exports = {
       .getText('css selector', '.container__results-hits',  (d) => {
         let text = d.value.split(' ');
         let shown = parseInt(text[2]);
-        browser.element('css selector', '#filter-languageName', (filterElement) => {
+        browser.click('#filter-languageName').element('css selector', '#filter-languageName', (filterElement) => {
           // Firefox - Safari exception
           if (!filterElement.hasOwnProperty('ELEMENT')) {
             filterElement.ELEMENT = Object.values(filterElement.value)[0];

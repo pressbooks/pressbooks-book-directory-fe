@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-basedOn')
+      .click('#filter-basedOn')
       .click('#btn-include-based-another')
       .pause(4000)
       .waitForElementVisible('.ais-Hits__books-book')
@@ -34,6 +35,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-basedOn')
+      .click('#filter-basedOn')
       .click('#btn-exclude-based-another')
       .pause(4000)
       .elements('css selector', '.isBasedOn', (bookElement) => {

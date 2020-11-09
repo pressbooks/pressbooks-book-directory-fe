@@ -5,6 +5,7 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-about')
       .pause(2000)
+      .click('#filter-about')
       .element('css selector', '#filter-about', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
@@ -50,6 +51,7 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-networkName')
       .pause(2000)
+      .click('#filter-networkName')
       .element('css selector', '#filter-networkName', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
@@ -118,6 +120,7 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-networkName')
       .pause(2000)
+      .click('#filter-networkName')
       .element('css selector', '#filter-networkName', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {

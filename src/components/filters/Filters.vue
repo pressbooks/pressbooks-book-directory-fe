@@ -3,7 +3,10 @@
     v-if="$store.state.config.canFilter"
     class="search-panel__filters"
   >
-    <v-list dense>
+    <v-list
+      dense
+      :expand="false"
+    >
       <licenses />
       <last-modified />
       <subjects />

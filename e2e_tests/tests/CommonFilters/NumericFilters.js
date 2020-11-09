@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-wordCount')
+      .click('#filter-wordCount')
       .setValue('#min-wordCount', '1200')
       .setValue('#max-wordCount', '3000')
       .click('#btn-wordCount')

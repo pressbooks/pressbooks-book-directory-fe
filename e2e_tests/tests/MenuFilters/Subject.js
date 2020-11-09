@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-about')
+      .click('#filter-about')
       .waitForElementVisible('#search-filter-about')
       .pause(2000)
       .setValue('#search-filter-about', 'gui')
@@ -36,6 +37,7 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-about')
       .pause(2000)
+      .click('#filter-about')
       .element('css selector', '#filter-about', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
@@ -80,6 +82,7 @@ module.exports = {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
+      .click('#filter-about')
       .waitForElementVisible('#btn-include-empty-about')
       .pause(2000)
       .click('#btn-include-empty-about')
