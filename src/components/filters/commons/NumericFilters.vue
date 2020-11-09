@@ -2,7 +2,7 @@
   <v-list-group
     :id="'filter-' + field"
     sub-group
-    value="true"
+    :value="false"
   >
     <template #activator>
       <v-list-item-title>{{ uppercase(title) }}</v-list-item-title>

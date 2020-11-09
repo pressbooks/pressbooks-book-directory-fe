@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-languageName')
+      .click('#filter-languageName')
       .click('#btn-include-languageName-French')
       .waitForElementVisible('.v-chip--clickable')
       .pause(2000);
@@ -25,6 +26,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-languageName')
+      .click('#filter-languageName')
       .click('#btn-exclude-languageName-French')
       .waitForElementVisible('.v-chip--clickable')
       .pause(2000);

@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-storageSize')
+      .click('#filter-storageSize')
       .waitForElementVisible('#min-storageSize')
       .setValue('#min-storageSize', '100')
       .setValue('#max-storageSize', '350')
