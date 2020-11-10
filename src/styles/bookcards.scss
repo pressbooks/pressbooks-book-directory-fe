@@ -76,6 +76,11 @@
       margin-bottom: .625rem;
     }
 
+    &__noresults {
+      font-family: $font-secondary;
+      color: $pb-blue;
+    }
+
    .language {
      font-family: $font-primary;
      text-transform: uppercase;

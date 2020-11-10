@@ -6,14 +6,12 @@
       <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks. Search and filter books by keyword,
       subject matter, license, and more.
     </p>
-    <p>
-      <b>Note:</b> Pressbooks Directory is still in beta. Functionality and content on this site is subject to change.
-      Tell us what you think by filling out our <a
-        href="https://forms.gle/SH2TwGttNnJcY7x49"
-        target="_blank"
-      >
-        feedback form</a>.
-    </p>
+    <!-- eslint-disable vue/no-v-html -->
+    <p
+      v-if="additionalText"
+      v-html="additionalText"
+    />
+    <!--eslint-enable-->
     <searchbox />
   </v-container>
 </template>
@@ -22,6 +20,11 @@
 import Searchbox from './Searchbox';
 export default {
   name: 'WelcomeHeader',
-  components: {Searchbox}
+  components: {Searchbox},
+  data() {
+    return {
+      additionalText: (process.env.VUE_APP_HEADER_ADDITIONAL_TEXT) ? process.env.VUE_APP_HEADER_ADDITIONAL_TEXT : false
+    };
+  }
 };
 </script>

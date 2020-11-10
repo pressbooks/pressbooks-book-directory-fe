@@ -1,14 +1,14 @@
 <template>
   <ais-hits :transform-items="transformItems">
     <template
-      #default="{ query, items }"
+      #default="{ items }"
     >
       <div class="ais-Hits__books">
         <p
           v-if="items.length === 0"
-          class="books-no-results"
+          class="ais-Hits__books__noresults"
         >
-          No results found matching <strong>{{ query }}</strong>.
+          No results found matching.
         </p>
         <div
           v-for="item in items"
