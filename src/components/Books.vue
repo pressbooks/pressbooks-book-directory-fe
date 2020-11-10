@@ -8,7 +8,8 @@
           v-if="items.length === 0"
           class="ais-Hits__books__noresults"
         >
-          No results found matching.
+          Sorry, no results were found for "{{ $store.state.SClient.searchParameters.searchQuery }}".
+          You may want to check your spelling, use alternative terms with similar meanings, or clear one or more filters.
         </p>
         <div
           v-for="item in items"
