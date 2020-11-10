@@ -1,14 +1,15 @@
 <template>
   <ais-hits :transform-items="transformItems">
     <template
-      #default="{ query, items }"
+      #default="{ items }"
     >
       <div class="ais-Hits__books">
         <p
           v-if="items.length === 0"
-          class="books-no-results"
+          class="ais-Hits__books__noresults"
         >
-          No results found matching <strong>{{ query }}</strong>.
+          Sorry, no results were found for "{{ $store.state.SClient.searchParameters.searchQuery }}".
+          You may want to check your spelling, use alternative terms with similar meanings, or clear one or more filters.
         </p>
         <div
           v-for="item in items"

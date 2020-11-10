@@ -32,10 +32,10 @@
             >
               <div v-if="$store.state.config.canFilter">
                 <books />
-                <pagination />
               </div>
             </v-col>
           </v-row>
+          <pagination />
         </ais-instant-search>
         <a
           href="https://www.algolia.com/"

@@ -8,14 +8,14 @@
       :expand="false"
     >
       <licenses />
-      <last-modified />
       <subjects />
-      <based-on />
-      <word-count />
-      <h5-p-activities />
       <networks />
+      <last-modified />
       <languages />
       <publishers />
+      <word-count />
+      <h5-p-activities />
+      <based-on />
       <storage-size />
     </v-list>
   </div>
