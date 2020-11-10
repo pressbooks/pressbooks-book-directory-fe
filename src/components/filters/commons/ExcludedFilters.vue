@@ -2,7 +2,7 @@
   <v-list-group
     :id="'filter-' + field"
     sub-group
-    :value="false"
+    :value="itemsFiltered"
   >
     <template #activator>
       <v-list-item-title>{{ uppercase(title) }}</v-list-item-title>
@@ -152,7 +152,8 @@ export default {
       alias: this.$store.state.SClient.allowedFilters[this.field].alias,
       empty: this.$store.state.SClient.allowedFilters[this.field].empty,
       emptyFieldCount: 0,
-      textEmpty: 'No value / empty'
+      textEmpty: 'No value / empty',
+      itemsFiltered: false
     };
   },
   watch: {
@@ -164,6 +165,12 @@ export default {
             this.emptyFieldCount = filters[this.empty][i].count;
           }
         }
+      }
+    },
+    '$store.state.SClient.filtersExcluded': {
+      deep: true,
+      handler() {
+        this.itemsFiltered = typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' && this.$store.state.SClient.filtersExcluded[this.field].length > 0;
       }
     }
   },
@@ -206,7 +213,7 @@ export default {
         value = false;
       }
       return typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined' &&
-                    this.$store.state.SClient.filtersExcluded[field].find(v => v.value === value && v.exclude === exclude) !== undefined;
+        this.$store.state.SClient.filtersExcluded[field].find(v => v.value === value && v.exclude === exclude) !== undefined;
     },
     clearFilters() {
       let query = {...this.$route.query};
