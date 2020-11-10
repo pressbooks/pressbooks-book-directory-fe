@@ -5,6 +5,7 @@ module.exports = {
       .waitForElementVisible('body')
       .pause(2000)
       .waitForElementVisible('.network')
+      .assert.visible('#btn-wordCount')
       .pause(3000)
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         bookElement.value.forEach((v) => {
@@ -50,6 +51,7 @@ module.exports = {
                 .waitForElementVisible('body')
                 .pause(3000)
                 .waitForElementVisible('.subjects')
+                .assert.visible('#filter-about > div.v-list-group__items > div:nth-child(2)')
                 .elements('css selector', '.subjects', (bookElement) => {
                   bookElement.value.forEach((v) => {
                     if (!v.hasOwnProperty('ELEMENT')) {
@@ -95,6 +97,7 @@ module.exports = {
                 .waitForElementVisible('body')
                 .pause(3000)
                 .waitForElementVisible('.publisher')
+                .assert.visible('#filter-publisher_name > div.v-list-group__items > div:nth-child(2)')
                 .elements('css selector', '.publisher', (bookElement) => {
                   bookElement.value.forEach((v) => {
                     if (!v.hasOwnProperty('ELEMENT')) {
@@ -120,6 +123,7 @@ module.exports = {
       .waitForElementVisible('body')
       .pause(2000)
       .waitForElementVisible('#filter-lastUpdated')
+      .assert.visible('#btn-date-lastUpdated')
       .waitForElementVisible('.network')
       .click('#filter-lastUpdated')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {

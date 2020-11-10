@@ -2,7 +2,7 @@
   <v-list-group
     :id="'filter-' + field"
     sub-group
-    :value="false"
+    :value="isFiltered"
   >
     <template #activator>
       <v-list-item-title>{{ uppercase(title) }}</v-list-item-title>
@@ -119,6 +119,7 @@ export default {
     dateEndFormatted: '',
     start: false,
     end: false,
+    isFiltered: false
   }),
   watch: {
     dateStart (val) {
@@ -132,6 +133,7 @@ export default {
       handler(q) {
         let query = {...q};
         if (query[this.alias] !== undefined) {
+          this.isFiltered = true;
           let d1, d2, dateObjFrom, dateObjTo;
           let dates = query[this.alias].split('&&');
           if (dates.length === 1) {

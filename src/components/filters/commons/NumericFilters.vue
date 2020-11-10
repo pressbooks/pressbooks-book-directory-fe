@@ -2,7 +2,7 @@
   <v-list-group
     :id="'filter-' + field"
     sub-group
-    :value="false"
+    :value="itemsFiltered"
   >
     <template #activator>
       <v-list-item-title>{{ uppercase(title) }}</v-list-item-title>
@@ -82,8 +82,33 @@ export default {
         min: 0,
         max: 0,
         alias: ''
-      }
+      },
+      itemsFiltered: false
     };
+  },
+  watch: {
+    '$store.state.SClient.filtersExcluded': {
+      deep: true,
+      handler(filters) {
+        if (
+          typeof(filters[this.field]) !== 'undefined' &&
+          filters[this.field].length > 0
+        ) {
+          this.itemsFiltered = true;
+          for (let i = 0; i < filters[this.field].length; i++) {
+            if (filters[this.field][i].operator === '>=') {
+              this.number.min = filters[this.field][i].value;
+            } else {
+              this.number.max = filters[this.field][i].value;
+            }
+          }
+        } else {
+          this.number.min = 0;
+          this.number.max = 0;
+          this.itemsFiltered = false;
+        }
+      }
+    }
   },
   mounted() {
     this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
