@@ -10,9 +10,12 @@
         :key="index"
       >
         <span v-if="index != 0">, </span>
+        <!-- eslint-disable vue/no-v-html -->
         <span
           class="v-card--item author"
-        >{{ author }}</span>
+          v-html="author"
+        />
+        <!--eslint-enable-->
       </span>
     </div>
     <div
@@ -25,7 +28,11 @@
         :key="index"
       >
         <span v-if="index != 0">, </span>
-        <span class="v-card--item editor">{{ editor }}</span>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span
+          class="v-card--item editor"
+          v-html="editor"
+        />
       </span>
     </div>
     <div
@@ -54,7 +61,10 @@
       class="publisher"
     >
       <strong>Publisher: </strong>
-      <span class="v-card--item publisher">{{ item.publisherName }}</span>
+      <span
+        class="v-card--item publisher"
+        v-html="item.publisherName"
+      />
     </div>
     <div
       v-show="item.wordCount"
@@ -72,7 +82,12 @@
       v-if="item.description"
       class="description"
     >
-      <strong>Description: </strong><span class="v-card--item description">{{ item.description }}</span>
+      <strong>Description: </strong>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <span
+        class="v-card--item description"
+        v-html="item.description"
+      />
     </div>
   </div>
 </template>
@@ -98,9 +113,8 @@ export default {
     },
     unixDateToStandard(unixDate) {
       let date = new Date(unixDate * 1000);
-      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDay()) + 1;
+      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDate());
       month = month < 10 ? '0' + month : month;
-      day = day < 10 ? '0' + day : day;
       return month + '-' + day + '-' + date.getUTCFullYear();
     }
   }

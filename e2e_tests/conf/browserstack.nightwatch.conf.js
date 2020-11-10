@@ -2,6 +2,12 @@ require('dotenv').config({path: '.env.local'});
 process.env.HOST_TEST = process.env.BROWSERSTACK_URL;
 nightwatch_config = {
   src_folders: ['e2e_tests/tests'],
+  test_workers: {
+    enabled: true,
+    workers: process.env.E2E_WORKERS ? parseInt(process.env.E2E_WORKERS) : 'auto',
+    detailed_output: false,
+    parallel_process_delay: process.env.E2E_WORKERS_DELAY ? parseInt(process.env.E2E_WORKERS_DELAY) : 10
+  },
   selenium: {
     start_process: false,
     host: 'hub-cloud.browserstack.com',
@@ -52,7 +58,7 @@ nightwatch_config = {
         'os_version': 'Mojave',
         'browser': 'Chrome',
         'browser_version': (process.env.CHROME_MOJAVE_VERSION) ? process.env.CHROME_MOJAVE_VERSION :  '83.0',
-        'browserstack.selenium_version': (process.env.CHROME_MOJAVE_SELENIUM_VERSION) ? process.env.CHROME_MOJAVE_SELENIUM_VERSION : '3.14.0',
+        'selenium_version': (process.env.CHROME_MOJAVE_SELENIUM_VERSION) ? process.env.CHROME_MOJAVE_SELENIUM_VERSION : '3.14.0',
         'resolution': '1280x960'
       },
       webdriver: {
@@ -72,7 +78,8 @@ nightwatch_config = {
         'os_version': '10',
         'browser': 'Firefox',
         'browser_version': (process.env.FIREFOX_W10_VERSION) ? process.env.FIREFOX_W10_VERSION : '77.0',
-        'browserstack.selenium_version': (process.env.FIREFOX_W10_SELENIUM_VERSION) ? process.env.FIREFOX_W10_SELENIUM_VERSION : '3.10.0',
+        'selenium_version': (process.env.FIREFOX_W10_SELENIUM_VERSION) ? process.env.FIREFOX_W10_SELENIUM_VERSION : '3.11.0',
+        'firefox.driver': (process.env.FIREFOX_W10_DRIVER_VERSION) ? process.env.FIREFOX_W10_DRIVER_VERSION : '0.27.0',
         'resolution': '1280x800'
       },
       webdriver: {

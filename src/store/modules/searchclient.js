@@ -10,16 +10,20 @@ let sClient = {
   indexName: process.env.VUE_APP_ALGOLIA_INDEX,
   filtersExcluded: [],
   notFilters: [],
-  numericFilters: [],
+  filtersParams: '',
+  numericFilters: '',
+  hasNumeric: false,
   allowedFilters: {
     license_code: {
       type: 'string',
       alias: 'license',
-      search: true
+      empty: 'has_license',
+      search: false
     },
     about: {
       type: 'string',
       alias: 'subj',
+      empty: 'has_abouts',
       search: true
     },
     has_isBasedOn: {
@@ -35,11 +39,13 @@ let sClient = {
     languageName: {
       type: 'string',
       alias: 'lang',
+      empty: 'has_language_name',
       search: true
     },
     publisher_name: {
       type: 'string',
       alias: 'pub',
+      empty: 'has_publisher',
       search: true
     },
     storageSize: {
@@ -60,6 +66,7 @@ let sClient = {
     networkName: {
       type: 'string',
       alias: 'net',
+      empty: 'has_network_name',
       search: true
     },
     lastUpdated: {
@@ -82,7 +89,7 @@ export default {
   state: sClient,
   mutations: {
     setFiltersFromQueryParams(state, query) {
-      let filters = {}, exclude = false, toInsert = {};
+      let filters = {}, exclude = false, toInsert = {}, currentAttr = '';
       for (let attribute in query) {
         filters[attribute] = [];
         for (let i = 0; i < query[attribute].length; i++) {
@@ -94,8 +101,16 @@ export default {
           if (state.allowedFilters[attribute].type === 'boolean' && query[attribute][i] === 'false') {
             exclude = true;
           }
+          currentAttr = attribute;
+          if (
+            query[attribute][i] === 'empty' &&
+            Object.prototype.hasOwnProperty.call(state.allowedFilters[attribute], 'empty')
+          ) {
+            query[attribute][i] = false;
+            currentAttr = state.allowedFilters[attribute].empty;
+          }
           toInsert = {
-            attribute,
+            attribute: currentAttr,
             exclude,
             value: query[attribute][i]
           };
@@ -109,15 +124,9 @@ export default {
       state.filtersExcluded = { ...filters  };
       let nf = helpers.functions.setFilters(filters, state.allowedFilters);
       state.notFilters = nf[0];
-      if (state.searchFilters.length > 0) {
-        if (nf[1].length > 0) {
-          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
-        } else {
-          state.numericFilters = state.searchFilters;
-        }
-      } else {
-        state.numericFilters = nf[1];
-      }
+      state.hasNumeric = (nf[1].length > 0);
+      state.numericFilters = nf[1];
+      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -128,22 +137,16 @@ export default {
       state.filtersExcluded = { ...oldFilters  };
       let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
       state.notFilters = nf[0];
-      if (state.searchFilters.length > 0) {
-        if (nf[1].length > 0) {
-          state.numericFilters = '(' + nf[1] + ') AND (' + state.searchFilters + ')';
-        } else {
-          state.numericFilters = state.searchFilters;
-        }
-      } else {
-        state.numericFilters = nf[1];
-      }
+      state.hasNumeric = (nf[1].length > 0);
+      state.numericFilters = nf[1];
+      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };
       delete fe[field];
       let nf = helpers.functions.setFilters(fe, state.allowedFilters);
       state.notFilters = nf[0];
-      state.numericFilters = nf[1];
+      state.filtersParams = nf[1];
       state.filtersExcluded = fe;
     },
     deleteItemExcluded(state, f) {
@@ -161,7 +164,9 @@ export default {
         state.filtersExcluded = fe;
         let nf = helpers.functions.setFilters(fe, state.allowedFilters);
         state.notFilters = nf[0];
+        state.hasNumeric = (nf[1].length > 0);
         state.numericFilters = nf[1];
+        state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
       }
     },
     // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}

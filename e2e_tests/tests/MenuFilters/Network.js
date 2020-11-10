@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-networkName')
+      .click('#filter-networkName')
       .pause(2000)
       .element('css selector', '#filter-networkName', (filterElement) => {
         // Firefox - Safari exception

@@ -2,7 +2,7 @@
   <v-list-group
     id="filter-basedOn"
     sub-group
-    value="true"
+    :value="false"
   >
     <template #activator>
       <v-list-item-title>BASED ON</v-list-item-title>

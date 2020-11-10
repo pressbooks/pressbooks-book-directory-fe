@@ -56,6 +56,22 @@ import Pagination from '@/components/commons/Pagination';
 export default {
   name: 'CurrentFilters',
   components: {Pagination, Stats, SortBy, PerPage, ClearRefinements},
+  data() {
+    return {
+      attrAllowed: [],
+      allowed: this.$store.state.SClient.allowedFilters,
+      attrAllowedEmpty: []
+    };
+  },
+  mounted() {
+    this. attrAllowed = Object.keys(this.$store.state.SClient.allowedFilters);
+    let allowed = this.allowed;
+    this.attrAllowedEmpty = Object.keys(this.allowed).map(key => {
+      if (typeof allowed[key].empty !== 'undefined') {
+        return allowed[key].empty;
+      }
+    });
+  },
   methods: {
     inputFormatDate(d) {
       let month = (d.getUTCMonth()+1) < 10 ? '0' + (d.getUTCMonth()+1) : (d.getUTCMonth()+1);
@@ -73,12 +89,18 @@ export default {
             type: this.$store.state.SClient.allowedFilters[attribute].type
           };
         }
+        if (f.attribute === this.$store.state.SClient.allowedFilters[attribute].empty) {
+          return {
+            alias: this.$store.state.SClient.allowedFilters[attribute].alias,
+            type: this.$store.state.SClient.allowedFilters[attribute].type
+          };
+        }
       }
       return false;
     },
     closeExcludeFilter(f) {
       let currentQuery = {...this.$route.query};
-      let attrAllowed = Object.keys(this.$store.state.SClient.allowedFilters);
+      let attrAllowed = this.attrAllowed.concat(this.attrAllowedEmpty);
       let aliasType = this.getAliasType(f);
       if (attrAllowed.indexOf(f.attribute) < 0 || !aliasType) {
         return false;
@@ -94,7 +116,7 @@ export default {
             } else if(f.exclude) {
               value = currentQuery[attr][i].substr(1);
             }
-            if (f.value === value) {
+            if (f.value === value || value === 'empty') {
               currentQuery[attr].splice(i, 1);
               if (currentQuery[attr].length === 0) {
                 delete currentQuery[attr];
@@ -129,7 +151,12 @@ export default {
         label = 'H5P Activities ' + value.operator + ' ' + value.value;
         break;
       default:
-        label = value.value;
+        if (this.attrAllowedEmpty.indexOf(value.attribute) >= 0) {
+          let aliasType = this.getAliasType(value);
+          label = aliasType.alias + ': Empty';
+        } else {
+          label = value.value;
+        }
       }
       return label;
     }

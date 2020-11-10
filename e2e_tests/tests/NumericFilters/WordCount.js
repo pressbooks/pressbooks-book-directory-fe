@@ -4,6 +4,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-wordCount')
+      .click('#filter-wordCount')
       .waitForElementVisible('#max-wordCount')
       .setValue('#min-wordCount', '1000')
       .setValue('#max-wordCount', '2000')
@@ -34,12 +35,12 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-wordCount')
+      .click('#filter-wordCount')
       .waitForElementVisible('#max-wordCount')
       .setValue('#max-wordCount', '2')
       .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .click('#btn-wordCount')
       .pause(3000)
-      .waitForElementVisible('.ais-Hits__books-book')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         bookElement.value.forEach((v) => {
           if (!v.hasOwnProperty('ELEMENT')) {
@@ -65,6 +66,7 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-wordCount')
+      .click('#filter-wordCount')
       .waitForElementVisible('#max-wordCount')
       .setValue('#min-wordCount', '3000')
       .setValue('#max-wordCount', '200')

@@ -9,7 +9,12 @@ let stats = {
     'about',
     'languageName',
     'publisher_name',
-    'has_isBasedOn'
+    'has_isBasedOn',
+    'has_license',
+    'has_abouts',
+    'has_language_name',
+    'has_publisher',
+    'has_network_name'
   ],
   filters: {},
   facetFilters: [],
@@ -46,6 +51,11 @@ export default {
           fs[facet] = [...state.filters[facet]];
         }
       }
+      for (let facet in state.filters) {
+        if (typeof fs[facet] === 'undefined' && state.keepFacets.indexOf(facet) >= 0) {
+          fs[facet] = [...state.filters[facet]];
+        }
+      }
       state.filters = fs;
     },
     // Given a facet and substring facet value, search and return all possible values //
@@ -60,6 +70,9 @@ export default {
         facetFilters: context.state.facetFilters
       }).then(function (response) {
         context.commit('setTotalBooks', response.nbHits);
+        if (typeof response.facets.networkName === 'undefined') {
+          response.facets.networkName = [];
+        }
         context.commit('setTotalNetworks', Object.keys(response.facets.networkName).length);
         context.commit('setFilters', response);
       });

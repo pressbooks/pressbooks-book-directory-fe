@@ -2,7 +2,7 @@
   <v-list-group
     :id="'filter-' + field"
     sub-group
-    value="true"
+    :value="itemsFiltered"
   >
     <template #activator>
       <v-list-item-title>{{ uppercase(title) }}</v-list-item-title>
@@ -20,6 +20,39 @@
           mdi-magnify
         </v-icon>
       </v-text-field>
+    </v-list-item>
+    <v-list-item
+      v-show="stringSearch.length === 0 || (stringSearch.length > 0 && textEmpty.search(stringSearch) >= 0)"
+    >
+      <v-list-item-content
+        :class="(wasFiltered('empty', false) || wasFiltered('empty', true)) ? 'v-list-item__content--filtered' : ''"
+      >
+        {{ textEmpty }} ({{ emptyFieldCount }})
+      </v-list-item-content>
+      <v-list-item-action>
+        <div>
+          <v-btn
+            :id="'btn-include-empty-' + field"
+            :class="wasFiltered('empty', false) ? 'selected include': 'include'"
+            icon
+            :disabled="wasFiltered('empty', false)"
+            @click="applyFilter('empty', false)"
+          >
+            <v-icon>
+              mdi-check
+            </v-icon>
+          </v-btn>
+          <v-btn
+            :id="'btn-exclude-empty-' + field"
+            icon
+            :class="wasFiltered('empty', true) ? 'selected exclude': 'exclude'"
+            :disabled="wasFiltered('empty', true)"
+            @click="applyFilter('empty', true)"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
+      </v-list-item-action>
     </v-list-item>
     <template v-if="$store.state.stats.filters[field] !== undefined">
       <v-list-item
@@ -116,8 +149,30 @@ export default {
       limited: 100,
       max: 5000,
       auxItems: [],
-      alias: this.$store.state.SClient.allowedFilters[this.field].alias
+      alias: this.$store.state.SClient.allowedFilters[this.field].alias,
+      empty: this.$store.state.SClient.allowedFilters[this.field].empty,
+      emptyFieldCount: 0,
+      textEmpty: 'No value / empty',
+      itemsFiltered: false
     };
+  },
+  watch: {
+    '$store.state.stats.filters': {
+      deep: true,
+      handler(filters) {
+        for (let i = 0; i < filters[this.empty].length; i++) {
+          if (filters[this.empty][i].facet === 'false') {
+            this.emptyFieldCount = filters[this.empty][i].count;
+          }
+        }
+      }
+    },
+    '$store.state.SClient.filtersExcluded': {
+      deep: true,
+      handler() {
+        this.itemsFiltered = typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' && this.$store.state.SClient.filtersExcluded[this.field].length > 0;
+      }
+    }
   },
   mounted() {
     this.limited = this.limit;
@@ -152,9 +207,13 @@ export default {
       let l = this.limited - this.steps;
       this.limited = (l > 0) ? l : 1;
     },
-    wasFiltered(value, exc) {
-      return typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' &&
-                    this.$store.state.SClient.filtersExcluded[this.field].find(v => v.value === value && v.exclude === exc) !== undefined;
+    wasFiltered(value, exclude) {
+      let field = this.field.slice(0);
+      if (value === 'empty') {
+        value = false;
+      }
+      return typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined' &&
+        this.$store.state.SClient.filtersExcluded[field].find(v => v.value === value && v.exclude === exclude) !== undefined;
     },
     clearFilters() {
       let query = {...this.$route.query};

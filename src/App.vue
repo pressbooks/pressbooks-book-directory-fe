@@ -10,7 +10,7 @@
         >
           <ais-configure
             :facet-filters.camel="$store.state.SClient.notFilters"
-            :filters.camel="($store.state.SClient.numericFilters.length > 0) ? $store.state.SClient.numericFilters : ''"
+            :filters.camel="($store.state.SClient.filtersParams.length > 0) ? $store.state.SClient.filtersParams : ''"
             :query="$store.state.SClient.searchParameters.searchQuery"
           />
           <welcome-header />

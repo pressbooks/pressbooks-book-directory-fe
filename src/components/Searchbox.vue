@@ -35,7 +35,7 @@
         <v-btn
           id="search-button"
           type="submit"
-          :disabled="(stringSearch.length < 3 && stringSearch.length > 0) || stringSearch.length > 512"
+          :disabled="stringSearch.length > 0 && (stringSearch.length < searchCharsLimit.min || stringSearch.length > searchCharsLimit.max)"
         >
           Search
         </v-btn>
@@ -50,39 +50,41 @@ export default {
   name: 'Searchbox',
   data() {
     return {
-      stringSearch: ''
+      stringSearch: '',
+      searchCharsLimit: {
+        min: 3,
+        max: 512
+      }
     };
   },
   watch: {
     '$route.query.q' (q) {
       if (typeof q === 'undefined') {
+        this.$store.state.SClient.searchFilters = '';
+        this.$store.state.SClient.searchParameters.searchQuery = '';
+        this.$store.state.SClient.filtersParams = (this.$store.state.SClient.hasNumeric) ?
+          this.$store.state.SClient.numericFilters : '';
         return true;
       }
       this.stringSearch = '';
       if (q.length > 0) {
         this.stringSearch = q;
         let stringToSearch = this.filterSearch(q);
+
         if (
-          stringToSearch.facetFilters.length > 0 &&
-            (
-              typeof (this.$store.state.SClient.numericFilters) === 'undefined' ||
-              this.$store.state.SClient.numericFilters.length === 0
-            )
+          this.$store.state.SClient.hasNumeric &&
+          stringToSearch.facetFilters.length > 0
         ) {
-          this.$store.state.SClient.numericFilters = stringToSearch.facetFilters;
-        } else if (
-          stringToSearch.facetFilters.length > 0 &&
-          this.$store.state.SClient.numericFilters.length > 0
-        ) {
-          this.$store.state.SClient.numericFilters += ' AND (' + stringToSearch.facetFilters + ')';
+          this.$store.state.SClient.filtersParams =
+              '(' + this.$store.state.SClient.numericFilters + ') AND (' + stringToSearch.facetFilters + ')';
         }
         if (
-          stringToSearch.facetFilters.length === 0 &&
-          this.$store.state.SClient.searchFilters.length > 0 &&
-          this.$store.state.SClient.numericFilters.length > 0
+          !this.$store.state.SClient.hasNumeric &&
+          stringToSearch.facetFilters.length > 0
         ) {
-          this.$store.state.SClient.numericFilters = '';
+          this.$store.state.SClient.filtersParams = stringToSearch.facetFilters;
         }
+
         this.$store.state.SClient.searchFilters = stringToSearch.facetFilters;
         this.$store.state.SClient.searchParameters.searchQuery = stringToSearch.stringSearch;
         return true;
@@ -200,7 +202,10 @@ export default {
       };
     },
     search(stringSearch) {
-      if ((stringSearch.length > 3 && stringSearch.length < 513) || stringSearch.length === 0) {
+      if (
+        (stringSearch.length >= this.searchCharsLimit.min && stringSearch.length <= this.searchCharsLimit.max) ||
+        stringSearch.length === 0 // Remove search case
+      ) {
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;
