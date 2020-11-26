@@ -118,12 +118,12 @@ function setParamsFilters(numericFilters, searchFilters) {
 }
 
 function unescapeHTML(text) {
-  return text ? text
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '\"')
-    .replace(/&#039;/g, '\'') : null;
+  if (text) {
+    let domText = document.createElement('textarea');
+    domText.innerHTML = text;
+    return domText.value;
+  }
+  return text;
 }
 
 export default {
