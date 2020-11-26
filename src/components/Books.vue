@@ -25,6 +25,7 @@
 
 <script>
 import BookCard from './bookcard/BookCard.vue';
+import helpers from '@/store/helpers';
 export default {
   name: 'Books',
   components: {
@@ -37,19 +38,19 @@ export default {
         ...item,
         authorNames:
                         typeof item.author === 'object' && item.author !== null
-                          ? item.author.join(', ')
-                          : item.author,
+                          ? helpers.functions.unescapeHTML(item.author.join(', '))
+                          : helpers.functions.unescapeHTML(item.author),
         editorNames:
                         item.has_editor && typeof item.editor === 'object'
-                          ? item.editor.join(', ')
-                          : item.editor,
+                          ? helpers.functions.unescapeHTML(item.editor.join(', '))
+                          : helpers.functions.unescapeHTML(item.editor),
         image: item.image
           ? item.image
           : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
-        publisherName: item.publisher_name ? item.publisher_name : false,
+        publisherName: item.publisher_name ? helpers.functions.unescapeHTML(item.publisher_name) : false,
         lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
         description: item.description
-          ? vm.removeXMLTags(item.description)
+          ? helpers.functions.unescapeHTML(vm.removeXMLTags(item.description))
           : false,
         licenseIcon: item.license_name
           ? vm.getLicenseIcon(item).image
@@ -59,7 +60,8 @@ export default {
           : false,
         isBasedOn: item.isBasedOn !== undefined,
         subject: item.subject !== undefined ? item.subject : false,
-        word_count: item.word_count !== undefined ? item.word_count : false
+        word_count: item.word_count !== undefined ? item.word_count : false,
+        name: helpers.functions.unescapeHTML(item.name)
       }));
     },
     getLicenseIcon(item) {
