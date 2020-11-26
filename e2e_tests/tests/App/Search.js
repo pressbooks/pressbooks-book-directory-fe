@@ -20,60 +20,46 @@ module.exports = {
         });
       });
   },
-  'Searching by publisher (partial string) and literal string from random description' (browser) {
+  'Searching by subject (partial string) and literal string from random title' (browser) {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .pause(4000)
       .assert.visible('#search-book')
-      .element('css selector', '.v-card--item.description',  (elem) => {
+      .element('css selector', '#book-list > div > div > div > div:nth-child(2) > div > div > div > div.col.col-9 > div.v-card__title',  (elem) => {
         if (!elem.value.hasOwnProperty('ELEMENT')) {
           elem.value.ELEMENT = Object.values(elem.value)[0];
         }
-        browser.elementIdText(elem.value.ELEMENT, (description) => {
-          let searchDescription = description.value.split(' ').slice(0, 2).join(' ');
-          let stringToSearch = '"' + searchDescription + '"';
+        browser.elementIdText(elem.value.ELEMENT, (title) => {
+          let searchTitle = title.value.split(' ').slice(0, 2).join(' ');
+          let stringToSearch = '';
           browser
-            .element('css selector', '.v-card--item.publisher',  (elem) => {
+            .element('css selector', '.v-card--item.subject',  (elem) => {
               if (!elem.value.hasOwnProperty('ELEMENT')) {
                 elem.value.ELEMENT = Object.values(elem.value)[0];
               }
-              browser.elementIdText(elem.value.ELEMENT, (publisher) => {
-                stringToSearch += ' pub:"' + publisher.value.substring(0, 3) + '"';
+              browser.elementIdText(elem.value.ELEMENT, (subject) => {
+                stringToSearch += 'subj:"' + subject.value.substring(0, 3) + '"';
                 browser.setValue('#search-book', stringToSearch)
                   .click('button[id=search-button]')
                   .pause(2000)
                   .waitForElementVisible('.ais-Hits__books')
-                  .elements('css selector', '.v-card--item.publisher', (elems) => {
+                  .elements('css selector', '.v-card--item.subjects', (elems) => {
                     elems.value.forEach((elem) => {
                       if (!elem.hasOwnProperty('ELEMENT')) {
                         elem.ELEMENT = Object.values(elem)[0];
                       }
-                      browser.elementIdText(elem.ELEMENT, (publisherCard) => {
+                      browser.elementIdText(elem.ELEMENT, (subjectCard) => {
                         browser
                           .assert.ok(
-                            publisherCard.value.search(publisher.value.substring(0, 3)) >= 0,
-                            'Book with publisher ' + publisherCard.value + '. It contains publisher string ' + publisher.value.substring(0, 3)
+                            subjectCard.value.search(subject.value.substring(0, 3)) >= 0,
+                            'Book with subj ' + subjectCard.value + '. It contains string ' + subject.value.substring(0, 3)
                           );
                       });
                     });
                   });
               });
             })
-            .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
-              bookElement.value.forEach((v) => {
-                if (!v.hasOwnProperty('ELEMENT')) {
-                  v.ELEMENT = Object.values(v)[0];
-                }
-                browser.elementIdText(v.ELEMENT, (textBookCard) => {
-                  browser
-                    .assert.ok(
-                      textBookCard.value.search(searchDescription) >= 0,
-                      'Book with text' + textBookCard.value + '. It contains string ' + searchDescription
-                    );
-                });
-              });
-            });
         });
       }).end();
   },
@@ -88,7 +74,7 @@ module.exports = {
           elem.value.ELEMENT = Object.values(elem.value)[0];
         }
         browser.elementIdText(elem.value.ELEMENT, (title) => {
-          let searchTitleExclude = title.value.split(' ').slice(0, 1).join(' ');
+          let searchTitleExclude = title.value.split(' ').slice(0, 1).join(' ').replace(/[^a-zA-Z ]/g, '');
           if (searchTitleExclude.length > 3) {
             let stringToSearch = '-' + searchTitleExclude;
             browser.click('#filter-networkName').element('css selector', '#filter-networkName', (filterElement) => {
