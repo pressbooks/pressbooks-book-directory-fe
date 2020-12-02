@@ -117,10 +117,20 @@ function setParamsFilters(numericFilters, searchFilters) {
   return filtersParams;
 }
 
+function unescapeHTML(text) {
+  if (text) {
+    let domText = document.createElement('textarea');
+    domText.innerHTML = text;
+    return domText.value;
+  }
+  return text;
+}
+
 export default {
   functions: {
     setFilters,
     getSimilarFacetValues,
-    setParamsFilters
+    setParamsFilters,
+    unescapeHTML
   }
 };

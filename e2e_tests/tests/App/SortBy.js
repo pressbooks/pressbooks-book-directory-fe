@@ -60,14 +60,17 @@ module.exports = {
           }).perform((done) => {
             browser.elementIdText(elementId, (words) => {
               words.value = words.value.toLowerCase();
-              if (previousName === '') {
-                previousName = words.value;
-              } else {
-                browser.assert.ok(
-                  previousName <= words.value,
-                  'Book name: ' + words.value + '. Correct name order for this card.'
-                );
-                previousName = words.value;
+              if (words.value[0].match(/[a-z]/i)) {
+                if (previousName === '') {
+                  previousName = words.value;
+                } else {
+                  let lexOrder = previousName.localeCompare(words.value) < 0 ? true : previousName <= words.value;
+                  browser.assert.ok(
+                    lexOrder,
+                    'Book name: ' + words.value + '. Correct name order for this card.'
+                  );
+                  previousName = words.value;
+                }
               }
             });
             done();
