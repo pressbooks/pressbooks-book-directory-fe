@@ -40,6 +40,7 @@ router.beforeEach((to, from, next) => {
     }
     store.commit('setFiltersFromQueryParams', query);
     store.commit('setFacetFilters', store.state.SClient.notFilters);
+    store.commit('setNumericFilters', store.state.SClient.numericFilters);
     store.commit('setKeepFacets', Object.keys(store.state.SClient.filtersExcluded));
     store.dispatch('getStats', index);
     next();
