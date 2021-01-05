@@ -18,6 +18,7 @@ let stats = {
   ],
   filters: {},
   facetFilters: [],
+  numericFilters: '',
   keepFacets: []
 };
 
@@ -32,6 +33,9 @@ export default {
     },
     setFacetFilters(state, ff) {
       state.facetFilters = ff;
+    },
+    setNumericFilters(state, numericFilters) {
+      state.numericFilters = numericFilters;
     },
     setKeepFacets(state, fs) {
       state.keepFacets = fs;
@@ -65,10 +69,14 @@ export default {
   },
   actions: {
     getStats(context, index) {
-      return index.search('', {
+      let params = {
         facets: context.state.facets,
         facetFilters: context.state.facetFilters
-      }).then(function (response) {
+      };
+      if (context.state.numericFilters.length > 0) {
+        params.filters = context.state.numericFilters;
+      }
+      return index.search('', params).then(function (response) {
         context.commit('setTotalBooks', response.nbHits);
         if (typeof response.facets.networkName === 'undefined') {
           response.facets.networkName = [];
