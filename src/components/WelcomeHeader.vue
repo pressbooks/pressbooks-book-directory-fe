@@ -4,7 +4,9 @@
     <p>
       This directory provides an index of <strong>{{ $store.state.stats.totalBooks }}</strong> books published across
       <strong>{{ $store.state.stats.totalNetworks }}</strong> Pressbooks networks. Search and filter books by keyword,
-      subject matter, license, and more.
+      subject matter, license, and more. See
+      <a href="https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/">our guide for
+        more detailed instructions</a> on using the Pressbooks Directory to find books of interest.
     </p>
     <!-- eslint-disable vue/no-v-html -->
     <p
@@ -18,6 +20,7 @@
 
 <script>
 import Searchbox from './Searchbox';
+
 export default {
   name: 'WelcomeHeader',
   components: {Searchbox},
