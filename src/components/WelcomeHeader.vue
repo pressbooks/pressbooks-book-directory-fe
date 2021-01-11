@@ -12,15 +12,17 @@
       v-html="additionalText"
     />
     <!--eslint-enable-->
+    <featured-books />
     <searchbox />
   </v-container>
 </template>
 
 <script>
 import Searchbox from './Searchbox';
+import FeaturedBooks from './FeaturedBooks';
 export default {
   name: 'WelcomeHeader',
-  components: {Searchbox},
+  components: {Searchbox, FeaturedBooks},
   data() {
     return {
       additionalText: (process.env.VUE_APP_HEADER_ADDITIONAL_TEXT) ? process.env.VUE_APP_HEADER_ADDITIONAL_TEXT : false
