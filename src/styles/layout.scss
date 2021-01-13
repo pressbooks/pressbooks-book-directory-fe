@@ -40,6 +40,10 @@
       font: 1.125rem $font-secondary;
       color: $pb-blue;
       margin-bottom: 1.5rem;
+
+      a {
+        color: $pb-red;
+      }
     }
 
     .searchbox {
@@ -58,7 +62,8 @@
     }
 
     &--featuredbook--image {
-      max-width: 180px;
+      max-height: 25rem;
+      max-width: 11rem;
     }
   }
 
@@ -68,6 +73,14 @@
 
   &--is-ltr .v-list-group--sub-group .v-list-item__icon:first-child {
     margin-right: .375rem;
+  }
+}
+
+.v-card {
+  &__title {
+    &--featuredbook {
+      word-break: break-word;
+    }
   }
 }
 
