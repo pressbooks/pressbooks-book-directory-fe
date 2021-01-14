@@ -67,6 +67,8 @@ Be sure you have **HOST_TEST** environment variable correctly. Normally for loca
 Those tests run locally and on **Chrome** and **Firefox**, make sure you have both browsers installed in you local machine.  
 Before run your E2E tests locally, be sure you already have the local server running: `npm run serve`.
 
+**Note: [Java JDK >= 7](https://www.oracle.com/java/technologies/javase-downloads.html) is required.**
+
 You can run tests locally with the following command:  `npm run e2e -- --env [Browser_OS]`. The *Browser_OS* args available are:  
 - firefox
 - chrome  
