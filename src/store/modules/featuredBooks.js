@@ -1,26 +1,24 @@
 import helpers from '../helpers';
 
 let featuredBooks = {
-  books: [],
-  field: 'featured'
+  books: []
 };
 
 export default {
   state: featuredBooks,
   mutations: {
-    setBooks(state, books) {
+    setFeaturedBooks(state, books) {
       state.books = books;
     }
   },
   actions: {
-    getBooks(context, index) {
+    getFeaturedBooks(context, index) {
+      const params = {
+        facetFilters: 'featured:true'
+      };
       return index.search('', params).then(function (response) {
-        context.commit('setTotalBooks', response.nbHits);
-        if (typeof response.facets.networkName === 'undefined') {
-          response.facets.networkName = [];
-        }
-        context.commit('setTotalNetworks', Object.keys(response.facets.networkName).length);
-        context.commit('setFilters', response);
+        console.log(response.hits);
+        context.commit('setFeaturedBooks', response.hits);
       });
     }
   }
