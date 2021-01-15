@@ -1,9 +1,9 @@
 <template>
   <v-img
-      class="book-cover"
-      :src="image"
-      :max-height="maxHeight"
-      :min-height="minHeight"
+    class="book-cover"
+    :src="image"
+    :max-height="maxHeight"
+    :min-height="minHeight"
   />
 </template>
 
@@ -11,7 +11,7 @@
 export default {
   name: 'BookCover',
   props: {
-    image: {type: String},
+    image: {type: String, default: ''},
     minHeight: {type: Number, default: null},
     maxHeight: {type: Number, default: null}
   }

@@ -17,7 +17,6 @@ export default {
         facetFilters: 'featured:true'
       };
       return index.search('', params).then(function (response) {
-        console.log(response.hits);
         context.commit('setFeaturedBooks', response.hits);
       });
     }
