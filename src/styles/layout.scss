@@ -40,6 +40,10 @@
       font: 1.125rem $font-secondary;
       color: $pb-blue;
       margin-bottom: 1.5rem;
+
+      a {
+        color: $pb-red;
+      }
     }
 
     .searchbox {
