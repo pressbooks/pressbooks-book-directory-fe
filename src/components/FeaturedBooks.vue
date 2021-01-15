@@ -1,8 +1,9 @@
 <template>
   <v-container
     v-if="$store.state.featuredBooks.books.length > 0"
-    class="pa-0"
+    class="pa-0 featuredbook"
   >
+    <h2>Featured Books</h2>
     <v-row no-gutters>
       <v-col
         :lg="7"
