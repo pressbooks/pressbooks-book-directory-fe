@@ -14,10 +14,12 @@ export default {
   actions: {
     getFeaturedBooks(context, index) {
       const params = {
-        facetFilters: 'featured:true'
+        facetFilters: 'is_featured:true'
       };
       return index.search('', params).then(function (response) {
-        context.commit('setFeaturedBooks', response.hits);
+        if (response.hasOwnProperty('hits')) {
+          context.commit('setFeaturedBooks', response.hits);
+        }
       });
     }
   }

@@ -14,7 +14,7 @@
       v-html="additionalText"
     />
     <!--eslint-enable-->
-    <featured-books v-show="$vuetify.breakpoint.width > 700" />
+    <featured-books v-if="$vuetify.breakpoint.width > 700" />
     <searchbox />
   </v-container>
 </template>

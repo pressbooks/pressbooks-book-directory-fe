@@ -36,5 +36,17 @@ module.exports = {
             );
         });
       });
+  },
+  'Check the link in the title for a featured book' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('#v-application__main_content > div > div.container.welcome-header > div > div > div.col-sm-12.col-md-12.col-lg-7.col > div > div > div:nth-child(1) > div > div.v-card__title.v-card__title--featuredbook > a')
+      .click('#v-application__main_content > div > div.container.welcome-header > div > div > div.col-sm-12.col-md-12.col-lg-7.col > div > div > div:nth-child(1) > div > div.v-card__title.v-card__title--featuredbook > a')
+      .windowHandles(function(result) {
+        const handle = result.value[1];
+        browser
+          .switchWindow(handle)
+          .expect.url().to.not.contain(process.env.HOST_TEST);
+      }).end();
   }
 };
