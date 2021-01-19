@@ -100,6 +100,9 @@ Optionally, you can specify / overwrite the current browsers version using the f
 - FIREFOX_W10_VERSION
 - FIREFOX_MOJAVE_VERSION
 
+**Note:** before run tests, make sure you created the `e2e_tests/log` folder, where browser stack log will be saved.  
+To create that folder run: `mkdir e2e_tests/log` in the root path.
+
 #### See tests reports locally
 If you run your tests on BrowserStack, you can see reports in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/). 
 In case you want to see reports locally, you can use [xunit-viewer](https://github.com/lukejpreston/xunit-viewer). After you ran your tests locally, 
