@@ -1,6 +1,6 @@
 <template>
   <v-container
-    v-if="$store.state.featuredBooks.books.length > 0"
+    v-if="$store.state.featuredBooks.books.length > 4"
     class="pa-0 featuredbook"
   >
     <h2>Featured Books</h2>
