@@ -62,20 +62,19 @@ to ensure the application uses https. The certification is renewed automatically
 We are using [Nightwatch](http://nightwatchjs.org/) with [BrowserStack](https://browserstack.com) for E2E testing, however you can use e2e tests locally as well.  
 Tests are located in `e2e_tests/tests` folder. 
 #### Run E2E tests locally
-Be sure you have **HOST_TEST** environment variable stored correctly. For local environments, this is typically *http://localhost:8080*.  
-Those tests run locally and on **Chrome** and **Firefox**, make sure you have both browsers installed on you local machine.  
-Before run your E2E tests locally, be sure you already have the local server running: `npm run serve`.
-
-You can run tests locally with the following command:  `npm run e2e -- --env [Browser_OS]`. The *Browser_OS* args available are:  
+1. Be sure you have **HOST_TEST** environment variable stored correctly. For local environments, this is typically *http://localhost:8080*.  
+1. Tests run locally and on **Chrome** and **Firefox**. Make sure you have both browsers installed on your local machine.  
+1. The local server should already be running: `npm run serve` before tests are run locally.
+1. Tests can be run locally with the following command:  `npm run e2e -- --env [Browser_OS]`. The *Browser_OS* args available are:  
 - firefox
 - chrome  
 
 Example: `npm run e2e -- --env firefox`.  
-Or you could run in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env firefox,chrome`.
+You can run tests in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env firefox,chrome`.
 
 Additional browsers can be added to the `e2e_tests/conf/nightwatch.conf.js` file. Before adding a new browser you should install its corresponding driver: https://nightwatchjs.org/gettingstarted/installation/#install-webdriver.
 
-#### Run E2E tests on BrowserStack
+n#### Run E2E tests on BrowserStack
 Be sure you have **BROWSERSTACK_URL** (*in AWS Staging pipeline it runs on https://dev.pressbooks.directory*) and **BROWSERSTACK_ACCESS_KEY** environment variables defined correctly. Ask your teammates for BrowserStack access if you don't have it.  
 In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.  
 
