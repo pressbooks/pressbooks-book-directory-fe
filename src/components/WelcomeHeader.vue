@@ -21,7 +21,7 @@
 
 <script>
 import Searchbox from './Searchbox';
-import FeaturedBooks from './FeaturedBooks';
+import FeaturedBooks from './featuredBook/FeaturedBooks';
 
 export default {
   name: 'WelcomeHeader',

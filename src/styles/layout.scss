@@ -103,6 +103,15 @@
   margin: 0;
 }
 
+.featuredbook {
+  &--col {
+    min-width: 20%;
+  }
+  &--col2 {
+    max-width: 24.8rem;
+  }
+}
+
 .v-list-group::after, .featuredbook::before, .featuredbook::after {
   display: inline-block;
   content: "";

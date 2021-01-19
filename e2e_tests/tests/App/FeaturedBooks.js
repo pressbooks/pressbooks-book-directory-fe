@@ -15,7 +15,7 @@ module.exports = {
           browser
             .element(
               'css selector',
-              '#v-application__main_content > div > div.container.welcome-header > div > div > div.col-sm-12.col-md-12.col-lg-7.col > div > div > div:nth-child(1) > div > div.v-card__title.v-card__title--featuredbook > a',
+              '#v-application__main_content > div > div.container.welcome-header > div > div > div.offset-1.ml-auto.featuredbook--col.col-lg-2.col > div > div.v-card__title.v-card__title--featuredbook > a',
               (elemTitle) => {
                 if (!elemTitle.value.hasOwnProperty('ELEMENT')) {
                   elemTitle.value.ELEMENT = Object.values(elemTitle.value)[0];
@@ -27,7 +27,7 @@ module.exports = {
                     .waitForElementVisible('.ais-Hits__books')
                     .pause(2000)
                     .assert.containsText(
-                      '#v-application__main_content > div > div.container.welcome-header > div > div > div.col-sm-12.col-md-12.col-lg-7.col > div > div > div:nth-child(1) > div > div.v-card__title.v-card__title--featuredbook > a',
+                      '#v-application__main_content > div > div.container.welcome-header > div > div > div.offset-1.ml-auto.featuredbook--col.col-lg-2.col > div > div.v-card__title.v-card__title--featuredbook > a',
                       featuredBook
                     )
                     .end();
@@ -40,8 +40,8 @@ module.exports = {
   'Check the link in the title for a featured book' (browser) {
     browser
       .url(process.env.HOST_TEST)
-      .waitForElementVisible('#v-application__main_content > div > div.container.welcome-header > div > div > div.col-sm-12.col-md-12.col-lg-7.col > div > div > div:nth-child(1) > div > div.v-card__title.v-card__title--featuredbook > a')
-      .click('#v-application__main_content > div > div.container.welcome-header > div > div > div.col-sm-12.col-md-12.col-lg-7.col > div > div > div:nth-child(1) > div > div.v-card__title.v-card__title--featuredbook > a')
+      .waitForElementVisible('#v-application__main_content > div > div.container.welcome-header > div > div > div.offset-1.ml-auto.featuredbook--col.col-lg-2.col > div > div.v-card__title.v-card__title--featuredbook > a')
+      .click('#v-application__main_content > div > div.container.welcome-header > div > div > div.offset-1.ml-auto.featuredbook--col.col-lg-2.col > div > div.v-card__title.v-card__title--featuredbook > a')
       .windowHandles(function(result) {
         const handle = result.value[1];
         browser
