@@ -79,14 +79,6 @@ import FeaturedBookCard from './FeaturedBookCard';
 export default {
   name: 'FeaturedBooks',
   components: {FeaturedBookCard},
-  data() {
-    return {
-      truncateLimit: 35,
-      imageSize: {
-        height: 240
-      }
-    };
-  },
   mounted() {
     let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
     this.$store.dispatch('getFeaturedBooks', index);
