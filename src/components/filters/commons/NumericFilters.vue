@@ -51,7 +51,7 @@
           tile
           @click="clearFilters()"
         >
-          CLEAR
+          Clear Filter
         </v-btn>
       </div>
     </v-list-item>
