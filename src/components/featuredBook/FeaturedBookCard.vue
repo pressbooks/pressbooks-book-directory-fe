@@ -1,17 +1,17 @@
 <template>
   <v-card
-      class="welcome-header--featuredbook--card"
-      :elevation="0"
+    class="welcome-header--featuredbook--card"
+    :elevation="0"
   >
     <book-cover
-        :image="featuredBook.image"
-        :min-height="240"
-        :max-height="240"
+      :image="featuredBook.image"
+      :min-height="240"
+      :max-height="240"
     />
     <v-card-title class="v-card__title--featuredbook">
       <a
-          :href="featuredBook.url"
-          target="_blank"
+        :href="featuredBook.url"
+        target="_blank"
       >
         {{ truncateTitle(featuredBook.name) }}
       </a>

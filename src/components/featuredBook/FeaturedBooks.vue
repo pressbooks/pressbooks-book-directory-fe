@@ -4,9 +4,16 @@
     class="pa-0 featuredbook"
   >
     <h2>Featured Books</h2>
-    <v-row no-gutters v-if="$vuetify.breakpoint.width > 1264" justify="center">
-      <v-col class="offset-1 ml-auto featuredbook--col" :lg="2">
-        <featured-book-card :featuredBook="$store.state.featuredBooks.books[0]" />
+    <v-row
+      v-if="$vuetify.breakpoint.width > 1264"
+      no-gutters
+      justify="center"
+    >
+      <v-col
+        class="offset-1 ml-auto featuredbook--col"
+        :lg="2"
+      >
+        <featured-book-card :featured-book="$store.state.featuredBooks.books[0]" />
       </v-col>
       <v-col
         v-for="(featuredBook, n) in $store.state.featuredBooks.books.slice(1, 5)"
@@ -14,10 +21,13 @@
         :lg="2"
         class="ml-auto featuredbook--col"
       >
-        <featured-book-card :featuredBook="featuredBook" />
+        <featured-book-card :featured-book="featuredBook" />
       </v-col>
     </v-row>
-    <v-row no-gutters v-else>
+    <v-row
+      v-else
+      no-gutters
+    >
       <v-col
         :lg="7"
         :md="12"
@@ -32,7 +42,7 @@
               :key="n"
               :lg="4"
             >
-              <featured-book-card :featuredBook="featuredBook" />
+              <featured-book-card :featured-book="featuredBook" />
             </v-col>
           </v-row>
         </v-container>
@@ -54,7 +64,7 @@
               :md="4"
               :sm="4"
             >
-              <featured-book-card :featuredBook="featuredBook" />
+              <featured-book-card :featured-book="featuredBook" />
             </v-col>
           </v-row>
         </v-container>
