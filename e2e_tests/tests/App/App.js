@@ -18,7 +18,7 @@ module.exports = {
         .waitForElementVisible('body')
         .pause(3000)
         .expect.element('#v-application__main_content > div > div.container.welcome-header')
-        .text.to.contain(additionalText);
+        .text.to.contain(additionalText.trim());
     }
   }
 };
