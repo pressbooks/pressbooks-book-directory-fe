@@ -4,7 +4,6 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .pause(4000)
-      .assert.visible('#v-application__main_content > div > div.container.welcome-header > div')
       .assert.visible('#search-book')
       .element('css selector', '.network', (elem) => {
         if (!elem.value.hasOwnProperty('ELEMENT')) {
@@ -13,40 +12,43 @@ module.exports = {
         browser.elementIdText(elem.value.ELEMENT, (network) => {
           let networkName = network.value;
           browser
-            .element(
-              'css selector',
-              '.v-card__title.v-card__title--featuredbook > a',
-              (elemTitle) => {
-                if (!elemTitle.value.hasOwnProperty('ELEMENT')) {
-                  elemTitle.value.ELEMENT = Object.values(elemTitle.value)[0];
-                }
-                browser.elementIdText(elemTitle.value.ELEMENT, (featureBooksTitle) => {
-                  let featuredBook = featureBooksTitle.value;
-                  browser.setValue('#search-book', networkName)
-                    .click('button[id=search-button]')
-                    .waitForElementVisible('.ais-Hits__books')
-                    .pause(2000)
-                    .assert.containsText(
-                      '.v-card__title.v-card__title--featuredbook > a',
-                      featuredBook
-                    )
-                    .end();
-                });
+            .isVisible('.v-card__title.v-card__title--featuredbook > a', (elemTitle) => {
+              if (!elemTitle.value.hasOwnProperty('ELEMENT')) {
+                elemTitle.value.ELEMENT = Object.values(elemTitle.value)[0];
               }
-            );
+              browser.elementIdText(elemTitle.value.ELEMENT, (featureBooksTitle) => {
+                let featuredBook = featureBooksTitle.value;
+                browser.setValue('#search-book', networkName)
+                  .click('button[id=search-button]')
+                  .waitForElementVisible('.ais-Hits__books')
+                  .pause(2000)
+                  .assert.containsText(
+                    '.v-card__title.v-card__title--featuredbook > a',
+                    featuredBook
+                  )
+                  .end();
+              });
+            });
         });
       });
   },
   'Check the link in the title for a featured book' (browser) {
     browser
       .url(process.env.HOST_TEST)
-      .waitForElementVisible('div.v-card__title.v-card__title--featuredbook > a')
-      .click('div.v-card__title.v-card__title--featuredbook > a')
-      .windowHandles(function(result) {
-        const handle = result.value[1];
-        browser
-          .switchWindow(handle)
-          .expect.url().to.not.contain(process.env.HOST_TEST);
-      }).end();
+      .isVisible(
+        '.v-card__title.v-card__title--featuredbook > a',
+        (elemTitle) => {
+          if (elemTitle.status === '0') {
+            browser
+              .click('div.v-card__title.v-card__title--featuredbook > a')
+              .windowHandles(function(result) {
+                const handle = result.value[1];
+                browser
+                  .switchWindow(handle)
+                  .expect.url().to.not.contain(process.env.HOST_TEST);
+              }).end();
+          }
+        }
+      );
   }
 };
