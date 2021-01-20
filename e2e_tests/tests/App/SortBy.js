@@ -48,34 +48,36 @@ module.exports = {
       .pause(3000)
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         let previousName = '', elementId;
-        bookElement.value.forEach((v) => {
-          if (!v.hasOwnProperty('ELEMENT')) {
-            v.ELEMENT = Object.values(v)[0];
-          }
-          browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books .v-card__title', (elem) => {
-            if (!elem.value.hasOwnProperty('ELEMENT')) {
-              elem.value.ELEMENT = Object.values(elem.value)[0];
+        if(bookElement.value.length > 0) {
+          bookElement.value.forEach((v) => {
+            if (!v.hasOwnProperty('ELEMENT')) {
+              v.ELEMENT = Object.values(v)[0];
             }
-            elementId = elem.value.ELEMENT;
-          }).perform((done) => {
-            browser.elementIdText(elementId, (words) => {
-              words.value = words.value.toLowerCase();
-              if (words.value[0].match(/[a-z]/i)) {
-                if (previousName === '') {
-                  previousName = words.value;
-                } else {
-                  let lexOrder = previousName.localeCompare(words.value) < 0 ? true : previousName <= words.value;
-                  browser.assert.ok(
-                    lexOrder,
-                    'Book name: ' + words.value + '. Correct name order for this card.'
-                  );
-                  previousName = words.value;
-                }
+            browser.elementIdElement(v.ELEMENT, 'css selector', '.ais-Hits__books .v-card__title', (elem) => {
+              if (!elem.value.hasOwnProperty('ELEMENT')) {
+                elem.value.ELEMENT = Object.values(elem.value)[0];
               }
+              elementId = elem.value.ELEMENT;
+            }).perform((done) => {
+              browser.elementIdText(elementId, (words) => {
+                words.value = words.value.toLowerCase();
+                if (words.value[0].match(/[a-z]/i) !== null) {
+                  if (previousName === '') {
+                    previousName = words.value;
+                  } else {
+                    let lexOrder = previousName.localeCompare(words.value) < 0 ? true : previousName <= words.value;
+                    browser.assert.ok(
+                      lexOrder,
+                      'Book name: ' + words.value + '. Previous book name: ' + previousName + '. Correct name order for this card.'
+                    );
+                    previousName = words.value;
+                  }
+                }
+              });
+              done();
             });
-            done();
           });
-        });
+        }
       }).end();
   },
   'Sorting by last updated (desc.)' (browser) {
