@@ -66,9 +66,9 @@
   }
 
   img {
-      max-height: 1.75rem;
-      margin-right: 2rem;
-    }
+    max-height: 1.75rem;
+    margin-right: 2rem;
+  }
 }
 
 .ais-Hits__books {
@@ -79,6 +79,27 @@
     &__noresults {
       font-family: $font-secondary;
       color: $pb-blue;
+    }
+
+    &__recommended {
+      width: 9rem;
+      background: $pb-blue;
+      position: absolute;
+      text-align: center;
+      padding-left: .3rem;
+      line-height: 1.7rem;
+      letter-spacing: .5px;
+      color: #ffffff;
+      z-index: 1;
+      box-shadow: 0 0 3px rgba(0,0,0,.3);
+      top: 25px;
+      right: -31px;
+      font-size: 0.83rem;
+      left: auto;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      text-transform: uppercase;
+      clip-path: polygon(20.5% 0%,82% 0%,84% 11%,100% 100%,70% 100%,30% 100%,2% 100%,0% 109%);
     }
 
    .language {
