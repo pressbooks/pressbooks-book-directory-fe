@@ -11,6 +11,7 @@
     <v-card-title class="v-card__title--featuredbook">
       <a
         :href="featuredBook.url"
+        :title="featuredBook.name"
         target="_blank"
       >
         {{ truncateTitle(featuredBook.name) }}
@@ -32,7 +33,7 @@ export default {
   },
   data() {
     return {
-      truncateLimit: 35,
+      truncateLimit: 50,
       imageSize: {
         height: 240
       }

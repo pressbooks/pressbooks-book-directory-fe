@@ -42,6 +42,10 @@
       margin-bottom: .75rem;
     }
 
+    a {
+      color: $pb-red;
+    }
+
     h2.ais-SearchBox__text {
       color: $pb-red;
       display: inline-block;
@@ -54,10 +58,6 @@
       font: 1.125rem $font-secondary;
       color: $pb-blue;
       margin-bottom: 1.5rem;
-
-      a {
-        color: $pb-red;
-      }
     }
 
     .searchbox {
