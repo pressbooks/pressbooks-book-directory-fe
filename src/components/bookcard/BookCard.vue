@@ -35,10 +35,7 @@
         <v-col cols="3">
           <v-row>
             <v-col cols="12">
-              <v-img
-                class="book-cover"
-                :src="item.image"
-              />
+              <book-cover :image="item.image" />
             </v-col>
             <v-col cols="6">
               <div class="language">
@@ -120,6 +117,7 @@
 
 <script>
 import BookDetails from './BookDetails';
+import BookCover from '../commons/BookCover';
 import {createWidgetMixin} from 'vue-instantsearch';
 
 const connectSearchMetaData = (renderFn, unmountFn) => () => ({
@@ -139,7 +137,8 @@ const connectSearchMetaData = (renderFn, unmountFn) => () => ({
 export default {
   name: 'BookCard',
   components: {
-    BookDetails
+    BookDetails,
+    BookCover
   },
   mixins: [createWidgetMixin({ connector: connectSearchMetaData })],
   props: {

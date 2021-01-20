@@ -36,29 +36,48 @@
       margin-bottom: .75rem;
     }
 
+    h2 {
+      color: $pb-blue;
+      font-size: 1.6rem;
+      margin-bottom: .75rem;
+    }
+
+    a {
+      color: $pb-red;
+    }
+
+    h2.ais-SearchBox__text {
+      color: $pb-red;
+      display: inline-block;
+      float: left;
+      text-transform: uppercase;
+      margin: .2rem 0 0 0;
+     }
+
     p {
       font: 1.125rem $font-secondary;
       color: $pb-blue;
       margin-bottom: 1.5rem;
-
-      a {
-        color: $pb-red;
-      }
     }
 
     .searchbox {
       width: 100%;
 
-      h2 {
-        display: inline-block;
-        float: left;
-        text-transform: uppercase;
-      }
-
       .v-input__prepend-outer {
         margin: .625rem .125rem 0 .5rem ;
       }
 
+    }
+
+    &--featuredbook--card {
+      max-height: 25rem;
+      max-width: 11rem;
+
+      .v-card__title--featuredbook {
+        padding: 16px 0;
+        line-height: 1.3;
+        font-size: 1.15rem;
+      }
     }
   }
 
@@ -71,12 +90,29 @@
   }
 }
 
+.v-card {
+  &__title {
+    &--featuredbook {
+      word-break: break-word;
+    }
+  }
+}
+
 .v-text-field {
   padding: 0;
   margin: 0;
 }
 
-.v-list-group::after {
+.featuredbook {
+  &--col {
+    min-width: 20%;
+  }
+  &--col2 {
+    max-width: 24.8rem;
+  }
+}
+
+.v-list-group::after, .featuredbook::before, .featuredbook::after {
   display: inline-block;
   content: "";
   border-top: 1px solid #e6e6e6;

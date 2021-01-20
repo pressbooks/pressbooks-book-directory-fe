@@ -60,14 +60,16 @@ to ensure the application uses https. The certification is renewed automatically
 
 ### Testing
 We are using [Nightwatch](http://nightwatchjs.org/) with [BrowserStack](https://browserstack.com) for E2E testing, however you can use e2e tests locally as well.  
-Tests are located in `e2e_tests/tests` folder. 
+Tests are located in `e2e_tests/tests` folder.
 #### Run E2E tests locally
-1. Be sure you have **HOST_TEST** environment variable stored correctly. For local environments, this is typically *http://localhost:8080*.  
-1. Tests run locally and on **Chrome** and **Firefox**. Make sure you have both browsers installed on your local machine.  
+**Note: [Java JDK >= 7](https://www.oracle.com/java/technologies/javase-downloads.html) is required.**
+
+1. Be sure you have **HOST_TEST** environment variable stored correctly. For local environments, this is typically *http://localhost:8080*.
+1. Tests run locally and on **Chrome** and **Firefox**. Make sure you have both browsers installed on your local machine.
 1. The local server should already be running: `npm run serve` before tests are run locally.
-1. Tests can be run locally with the following command:  `npm run e2e -- --env [Browser_OS]`. The *Browser_OS* args available are:  
+1. Tests can be run locally with the following command:  `npm run e2e -- --env [Browser_OS]`. The *Browser_OS* args available are:
 - firefox
-- chrome  
+- chrome
 
 Example: `npm run e2e -- --env firefox`.  
 You can run tests in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env firefox,chrome`.
@@ -76,22 +78,22 @@ Additional browsers can be added to the `e2e_tests/conf/nightwatch.conf.js` file
 
 n#### Run E2E tests on BrowserStack
 Be sure you have **BROWSERSTACK_URL** (*in AWS Staging pipeline it runs on https://dev.pressbooks.directory*) and **BROWSERSTACK_ACCESS_KEY** environment variables defined correctly. Ask your teammates for BrowserStack access if you don't have it.  
-In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.  
+In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.
 
 Tests run on [Staging environment](https://staging.pressbooks.directory).  
 Nightwatch / BrowserStack configurations are located in `e2e_tests/conf/browserstack.nightwatch.conf.js` file.
 
-You can run tests with the following command:  `npm run e2e:browserstack -- --env [Browser_OS]`. The *Browser_OS* args available are:  
+You can run tests with the following command:  `npm run e2e:browserstack -- --env [Browser_OS]`. The *Browser_OS* args available are:
 - chrome_win10: It runs Google Chrome on Windows 10 OS
 - chrome_mojave: It runs Google Chrome on OS X Mojave.
 - firefox_win10: It runs Firefox on Windows 10 OS.
-- firefox_mojave: It runs Firefox on OS X Mojave.  
+- firefox_mojave: It runs Firefox on OS X Mojave.
 
 Example: `npm run e2e:browserstack -- --env chrome_catalina`.  
-Or you could run in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env chrome_catalina,firefox_win10,chrome_win10`.  
+Or you could run in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env chrome_catalina,firefox_win10,chrome_win10`.
 
 You can add more Browsers / OS in `e2e_tests/conf/browserstack.nightwatch.conf.js` file in test_settings object using [this generator](https://www.browserstack.com/automate/capabilities).  
-Optionally, you can specify / overwrite the current browsers version using the following environment variables:  
+Optionally, you can specify / overwrite the current browsers version using the following environment variables:
 - CHROME_W10_VERSION
 - CHROME_MOJAVE_VERSION
 - FIREFOX_W10_VERSION
