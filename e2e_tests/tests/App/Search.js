@@ -199,13 +199,12 @@ module.exports = {
                     elem.value.ELEMENT = Object.values(elem.value)[0];
                   }
                   browser.elementIdText(elem.value.ELEMENT, (title) => {
-                    let titleToSearch = title.value.slice(0, 10);
+                    let titleToSearch = title.value.split(' ')[0].replace(/[^\w\s]/gi, '');
                     browser
                       .waitForElementVisible('#search-book')
                       .setValue('#search-book', '')
                       .setValue('#search-book', titleToSearch)
                       .pause(2000)
-                      .click('button[id=search-button]')
                       .click('button[id=search-button]')
                       .pause(6000)
                       .waitForElementVisible('.ais-Hits__books')
