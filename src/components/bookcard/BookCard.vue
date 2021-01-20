@@ -16,6 +16,7 @@
     >
       <v-row class="v-card__content">
         <v-col cols="9">
+          <section v-if="item.is_recommended" class="ais-Hits__books__recommended">Recommended</section>
           <div
             v-if="item.networkHost"
             class="network"
