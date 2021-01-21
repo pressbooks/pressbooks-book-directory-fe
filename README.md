@@ -76,7 +76,7 @@ You can run tests in multiple browsers with a single command with environments s
 
 Additional browsers can be added to the `e2e_tests/conf/nightwatch.conf.js` file. Before adding a new browser you should install its corresponding driver: https://nightwatchjs.org/gettingstarted/installation/#install-webdriver.
 
-n#### Run E2E tests on BrowserStack
+#### Run E2E tests on BrowserStack
 Be sure you have **BROWSERSTACK_URL** (*in AWS Staging pipeline it runs on https://dev.pressbooks.directory*) and **BROWSERSTACK_ACCESS_KEY** environment variables defined correctly. Ask your teammates for BrowserStack access if you don't have it.  
 In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.
 
@@ -106,5 +106,9 @@ If you run your tests on BrowserStack, you can see reports in [App Live BrowserS
 In case you want to see reports locally, you can use [xunit-viewer](https://github.com/lukejpreston/xunit-viewer). After running tests locally, `npm run nightwatch:output` will generate an `e2e_tests/output/output.html` report file. This output file can be opened in any browser. When a test fails, screenshots containing more details about the failure can be found in the `e2e_tests/screenshots/` folder.
 
 ### Algolia configuration
-
 The Pressbooks Directory app must be properly configured with an Algolia application and index. See details [here](https://docs.google.com/document/d/1SNf7jIelkXwzzAxEbGSjEL59GMDeh3o3wH7myY3LfBM/edit#).
+
+### Google Analytics integration
+In `public/index.html` file you can find the required script for Google Analytics.  
+If `VUE_APP_GA_MEASUREMENT_ID` environment variable defined, the Google Analytics script will be added. 
+In order to send data to google, only thing needed is to add the environment variable.
