@@ -119,3 +119,5 @@ You can track errors and monitor performance with Sentry by defining the [Sentry
 and data performance will be sent to Sentry.  
 Defining `VUE_APP_SENTRY_TRACE_RATE` you can set the [Trace Sample Rate](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#tracesSampleRate) for tracing 
 the application in Sentry. If it is not defined, then the default value will be 0.5.
+The environment value for Sentry is defined in `VUE_APP_ENVIRONMENT`, if this value is not defined, the default 
+value will be `development`.

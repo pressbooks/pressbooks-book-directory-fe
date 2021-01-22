@@ -53,7 +53,7 @@ if (typeof process.env.VUE_APP_SENTRY_DSN !== 'undefined') {
   Sentry.init({
     Vue,
     dsn: process.env.VUE_APP_SENTRY_DSN,
-    environment: process.env.NODE_ENV,
+    environment: typeof process.env.VUE_APP_ENVIRONMENT !== 'undefined' ? process.env.VUE_APP_ENVIRONMENT : 'development',
     integrations: [
       new Integrations.BrowserTracing(),
     ],
