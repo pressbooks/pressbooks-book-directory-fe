@@ -112,3 +112,10 @@ The Pressbooks Directory app must be properly configured with an Algolia applica
 In `public/index.html` file you can find the required script for Google Analytics.  
 If `VUE_APP_GA_MEASUREMENT_ID` environment variable defined, the Google Analytics script will be added. 
 In order to send data to google, only thing needed is to add the environment variable.
+
+### Sentry Integration
+You can track errors and monitor performance with Sentry by defining the [Sentry DSN](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#dsn) in
+`VUE_APP_SENTRY_DSN` environment variable. If this variable is defined, Sentry errors
+and data performance will be sent to Sentry.  
+Defining `VUE_APP_SENTRY_TRACE_RATE` you can set the [Trace Sample Rate](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#tracesSampleRate) for tracing 
+the application in Sentry. If it is not defined, then the default value will be 0.5.

@@ -8,10 +8,8 @@ module.exports = {
       .waitForElementVisible('#max-wordCount')
       .setValue('#min-wordCount', '1000')
       .setValue('#max-wordCount', '2000')
-      .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .click('#btn-wordCount')
       .pause(3000)
-      .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         if(bookElement.value.length > 0) {
           bookElement.value.forEach((v) => {
@@ -40,7 +38,6 @@ module.exports = {
       .click('#filter-wordCount')
       .waitForElementVisible('#max-wordCount')
       .setValue('#max-wordCount', '2')
-      .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .click('#btn-wordCount')
       .pause(3000)
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
@@ -74,10 +71,8 @@ module.exports = {
       .waitForElementVisible('#max-wordCount')
       .setValue('#min-wordCount', '3000')
       .setValue('#max-wordCount', '200')
-      .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .click('#btn-wordCount')
       .pause(3000)
-      .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         if(bookElement.value.length > 0) {
           bookElement.value.forEach((v) => {
@@ -119,10 +114,8 @@ module.exports = {
               .waitForElementVisible('#max-wordCount')
               .setValue('#min-wordCount', '100')
               .setValue('#max-wordCount', '500')
-              .waitForElementVisible('.ais-Hits__books-book-wordcount')
               .click('#btn-wordCount')
               .pause(3000)
-              .waitForElementVisible('.ais-Hits__books-book-wordcount')
               .element(
                 'css selector',
                 '#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
