@@ -112,6 +112,7 @@
         <v-btn
           tile
           @click="clearFilters()"
+          :id="'clear-' + field"
         >
           Clear Filter
         </v-btn>
@@ -153,7 +154,8 @@ export default {
       empty: this.$store.state.SClient.allowedFilters[this.field].empty,
       emptyFieldCount: 0,
       textEmpty: 'No value / empty',
-      itemsFiltered: false
+      itemsFiltered: false,
+      filterApplied: false
     };
   },
   watch: {
@@ -165,6 +167,10 @@ export default {
             this.emptyFieldCount = filters[this.empty][i].count;
           }
         }
+        if (this.filterApplied && this.stringSearch.length > 0) {
+          this.searchForItems();
+        }
+        this.filterApplied = false;
       }
     },
     '$store.state.SClient.filtersExcluded': {
@@ -218,9 +224,11 @@ export default {
     clearFilters() {
       let query = {...this.$route.query};
       delete query[this.alias];
+      this.stringSearch = '';
       this.$router.replace({ query });
     },
     applyFilter(itemValue, exclude) {
+      this.filterApplied = true;
       let query = {...this.$route.query}, value;
       value = exclude ? '-' + itemValue : itemValue;
       if (typeof(query[this.alias]) === 'undefined') {
