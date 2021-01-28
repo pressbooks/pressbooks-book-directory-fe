@@ -147,5 +147,92 @@ module.exports = {
           });
         });
       }).end();
+  },
+  'Perform a search in networks filter, apply the filter and check those are not changed' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .waitForElementVisible('#filter-networkName')
+      .click('#filter-networkName')
+      .getText('#filter-networkName > div.v-list-group__items > div:nth-child(4) > div.v-list-item__content', (networkText3) => {
+        const secondText = networkText3.value.substr(0, 4);
+        browser.getText('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__content', (networkText) => {
+          if (networkText.value && networkText.value.length > 1 && networkText.value.search('No value / empty') < 0) {
+            const searchText = networkText.value.substr(0, 2);
+            let networksFiltered = [];
+            browser
+              .setValue('#search-filter-networkName', searchText)
+              .pause(2000)
+              .elements('css selector', '#filter-networkName > div.v-list-group__items', (networksElement) => {
+                networksElement.value.forEach((v) => {
+                  if (!v.hasOwnProperty('ELEMENT')) {
+                    v.ELEMENT = Object.values(v)[0];
+                  }
+                  browser.elementIdText(v.ELEMENT, (networkElement) => {
+                    networksFiltered.push(networkElement.value);
+                  });
+                });
+              }).perform((done) => {
+              // Filter any of the networks listed
+                browser
+                  .click('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
+                  .pause(3000)
+                  .elements('css selector', '#filter-networkName > div.v-list-group__items', (netElements) => {
+                    netElements.value.forEach((v) => {
+                      if (!v.hasOwnProperty('ELEMENT')) {
+                        v.ELEMENT = Object.values(v)[0];
+                      }
+                      browser.elementIdText(v.ELEMENT, (netEl) => {
+                        browser.assert.ok(
+                          networksFiltered.indexOf(netEl.value) >= 0,
+                          'Network item is present in the list just like before apply the filter.'
+                        );
+                      });
+                    });
+                  }).perform((doneFirstCheck) => {
+                    networksFiltered = [];
+                    browser
+                      .click('#clear-networkName')
+                      .pause(2000)
+                      .click('#filter-networkName')
+                      .setValue('#search-filter-networkName', secondText)
+                      .pause(2000)
+                      .elements('css selector', '#filter-networkName > div.v-list-group__items', (networksElement) => {
+                        networksElement.value.forEach((v) => {
+                          if (!v.hasOwnProperty('ELEMENT')) {
+                            v.ELEMENT = Object.values(v)[0];
+                          }
+                          browser.elementIdText(v.ELEMENT, (networkElement) => {
+                            networksFiltered.push(networkElement.value);
+                          });
+                        });
+                      }).perform((done2) => {
+                        // Filter any of the networks listed
+                        browser
+                          .click('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
+                          .pause(3000)
+                          .elements('css selector', '#filter-networkName > div.v-list-group__items', (netElements) => {
+                            netElements.value.forEach((v) => {
+                              if (!v.hasOwnProperty('ELEMENT')) {
+                                v.ELEMENT = Object.values(v)[0];
+                              }
+                              browser.elementIdText(v.ELEMENT, (netEl) => {
+                                browser.assert.ok(
+                                  networksFiltered.indexOf(netEl.value) >= 0,
+                                  'Network item is present in the list after apply the filter twice just like before apply the filter the first time.'
+                                );
+                              });
+                            });
+                          });
+                        done2();
+                      });
+                    doneFirstCheck();
+                  });
+                done();
+              });
+            return true;
+          }
+        });
+      });
   }
 };
