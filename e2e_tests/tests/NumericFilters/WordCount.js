@@ -92,45 +92,31 @@ module.exports = {
         }
       }).end();
   },
-  'Filtering between 100 and 500 words and validating filters quantity change in license code filter' (browser){
+  'Filtering between 1000 and 7000 words and validating filters quantity change in license code filter' (browser){
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-wordCount')
       .click('#filter-license_code')
       .pause(1000)
-      .element(
-        'css selector',
+      .getText(
         '#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
         (filterText) => {
-          if (!filterText.hasOwnProperty('ELEMENT')) {
-            filterText.ELEMENT = Object.values(filterText.value)[0];
-          }
-          let licenseQty;
-          browser.elementIdText(filterText.ELEMENT, (text) => {
-            licenseQty = text.value;
-            browser
-              .click('#filter-wordCount')
-              .waitForElementVisible('#max-wordCount')
-              .setValue('#min-wordCount', '100')
-              .setValue('#max-wordCount', '500')
-              .click('#btn-wordCount')
-              .pause(3000)
-              .element(
-                'css selector',
-                '#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
-                (filterText2) => {
-                  if (!filterText2.hasOwnProperty('ELEMENT')) {
-                    filterText2.ELEMENT = Object.values(filterText2.value)[0];
-                  }
-                  browser.elementIdText(filterText2.ELEMENT, (text2) => {
-                    browser.assert.ok(
-                      text2.value !== licenseQty,
-                      'Qty. before word count filter: ' + licenseQty + '. Qty. after word count filter: ' + text2.value
-                    );
-                  });
-                });
-          });
+          browser
+            .click('#filter-wordCount')
+            .waitForElementVisible('#max-wordCount')
+            .setValue('#min-wordCount', '1000')
+            .setValue('#max-wordCount', '7000')
+            .click('#btn-wordCount')
+            .pause(3000)
+            .getText(
+              '#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
+              (filterText2) => {
+                browser.assert.ok(
+                  filterText2.value !== filterText.value,
+                  'Qty. before word count filter: ' + filterText.value + '. Qty. after word count filter: ' + filterText2.value
+                );
+              });
         }
       ).end();
   }
