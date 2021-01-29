@@ -12,7 +12,7 @@ module.exports = {
       .waitForElementVisible('.container__results-hits');
     browser.getText('css selector', '.container__results-hits',  (d) => {
       let text = d.value.split(' ');
-      let shown = parseInt(text[2]);
+      let shown = parseInt(text[1]);
       let totalPages = shown / 10;
       if (totalPages > 1) {
         if (totalPages > parseInt(totalPages)) {

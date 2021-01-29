@@ -26,6 +26,7 @@
     "jsonwebtoken": "^8.5.1",
     "vue": "^2.6.11",
     "vue-instantsearch": "^3.0.3",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.3.4",
     "vue-server-renderer": "^2.6.11",
     "vuetify": "^2.2.11",

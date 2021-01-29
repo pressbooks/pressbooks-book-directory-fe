@@ -66,9 +66,48 @@ export default {
     HeaderBar,
     Books
   },
+  data(){
+    return {
+      metaTags: [
+        {
+          'http-equiv': 'Content-Type',
+          content: 'text/html; charset=utf-8'
+        },
+        {
+          'http-equiv': 'X-UA-Compatible',
+          content: 'IE=edge'
+        },
+        {
+          charset: 'utf-8'
+        },
+        {
+          name: 'description',
+          content: 'A searchable library of free textbooks and other open educational resources (OER) published using the Pressbooks Authoring & Editing Platform'
+        },
+        {
+          name: 'viewport',
+          content: 'width=device-width,initial-scale=1.0'
+        }
+      ]
+    };
+  },
   mounted() {
     let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
     this.$store.dispatch('getStats', index);
+    if (
+      typeof process.env.VUE_APP_ENVIRONMENT === 'undefined' ||
+      process.env.VUE_APP_ENVIRONMENT.toLowerCase() !== 'production'
+    ) {
+      this.metaTags.push({
+        name: 'robots',
+        content: 'noindex'
+      });
+    }
+  },
+  metaInfo() {
+    return {
+      meta: this.metaTags
+    };
   }
 };
 </script>
