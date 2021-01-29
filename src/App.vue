@@ -82,7 +82,7 @@ export default {
         },
         {
           name: 'description',
-          content: ''
+          content: 'A searchable library of free textbooks and other open educational resources (OER) published using the Pressbooks Authoring & Editing Platform'
         },
         {
           name: 'viewport',
@@ -100,7 +100,7 @@ export default {
     ) {
       this.metaTags.push({
         name: 'robots',
-        content: 'noindex, nofollow'
+        content: 'noindex'
       });
     }
   },
