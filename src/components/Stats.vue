@@ -7,7 +7,7 @@
       <div class="filters__stats__results">
         <span class="container__results">Results: </span>
         <span class="container__results-hits">
-          {{ nbHits }} / {{ $store.state.stats.totalBooksFixed }} shown
+          {{ nbHits }} / {{ $store.state.stats.numberOfBooksIndexed }} shown
         </span>
       </div>
     </template>
