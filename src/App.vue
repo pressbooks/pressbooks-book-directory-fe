@@ -78,15 +78,12 @@ export default {
           content: 'IE=edge'
         },
         {
-          charset: 'utf-8'
-        },
-        {
           name: 'description',
           content: 'A searchable library of free textbooks and other open educational resources (OER) published using the Pressbooks Authoring & Editing Platform'
         },
         {
           name: 'viewport',
-          content: 'width=device-width,initial-scale=1.0'
+          content: 'width=device-width,initial-scale=1'
         }
       ]
     };
