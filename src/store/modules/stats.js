@@ -3,6 +3,8 @@ import helpers from '../helpers';
 let stats = {
   totalBooks: 0,
   totalNetworks: 0,
+  numberOfBooksIndexed: 0,
+  numberOfNetworksIndexed:0,
   facets: [
     'networkName',
     'license_code',
@@ -30,6 +32,12 @@ export default {
     },
     setTotalNetworks(state, totalNetworks) {
       state.totalNetworks = totalNetworks;
+    },
+    setNumberOfBooksIndexed(state, books) {
+      state.numberOfBooksIndexed = books;
+    },
+    setNumberOfNetworksIndexed(state, networks) {
+      state.numberOfNetworksIndexed = networks;
     },
     setFacetFilters(state, ff) {
       state.facetFilters = ff;
@@ -83,6 +91,12 @@ export default {
         }
         context.commit('setTotalNetworks', Object.keys(response.facets.networkName).length);
         context.commit('setFilters', response);
+        if (context.state.numberOfBooksIndexed === 0) {
+          context.commit('setNumberOfBooksIndexed', response.nbHits);
+        }
+        if (context.state.numberOfNetworksIndexed === 0) {
+          context.commit('setNumberOfNetworksIndexed', Object.keys(response.facets.networkName).length);
+        }
       });
     }
   }

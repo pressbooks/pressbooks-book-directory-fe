@@ -110,9 +110,9 @@
     <v-list-item>
       <div class="ais-ClearRefinements">
         <v-btn
+          :id="'clear-' + field"
           tile
           @click="clearFilters()"
-          :id="'clear-' + field"
         >
           Clear Filter
         </v-btn>
