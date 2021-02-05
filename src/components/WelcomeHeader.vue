@@ -15,17 +15,19 @@
     />
     <!--eslint-enable-->
     <featured-books v-if="$vuetify.breakpoint.width > 700" />
+    <collections v-if="$vuetify.breakpoint.width > 700" />
     <searchbox />
   </v-container>
 </template>
 
 <script>
 import Searchbox from './Searchbox';
-import FeaturedBooks from './featuredBook/FeaturedBooks';
+import FeaturedBooks from './additionalCards/FeaturedBooks';
+import Collections from './additionalCards/Collections';
 
 export default {
   name: 'WelcomeHeader',
-  components: {Searchbox, FeaturedBooks},
+  components: {Collections, Searchbox, FeaturedBooks},
   data() {
     return {
       additionalText: (process.env.VUE_APP_HEADER_ADDITIONAL_TEXT) ? process.env.VUE_APP_HEADER_ADDITIONAL_TEXT : false,

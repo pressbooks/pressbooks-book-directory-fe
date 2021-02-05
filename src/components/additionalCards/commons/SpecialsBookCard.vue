@@ -1,32 +1,32 @@
 <template>
   <v-card
-    class="welcome-header--featuredbook--card"
+    class="welcome-header--specialheader--card"
     :elevation="0"
   >
     <book-cover
-      :image="featuredBook.image"
+      :image="card.image"
       :min-height="240"
       :max-height="240"
     />
-    <v-card-title class="v-card__title--featuredbook">
+    <v-card-title class="v-card__title--specialheader">
       <a
-        :href="featuredBook.url"
-        :title="featuredBook.name"
+        :href="card.url"
+        :title="card.name"
         target="_blank"
       >
-        {{ truncateTitle(featuredBook.name) }}
+        {{ truncateTitle(card.name) }}
       </a>
     </v-card-title>
   </v-card>
 </template>
 
 <script>
-import BookCover from '../commons/BookCover';
+import BookCover from '../../commons/BookCover';
 export default {
-  name: 'FeaturedBookCard',
+  name: 'SpecialsBookCard',
   components: {BookCover},
   props: {
-    featuredBook: {
+    card: {
       type: Object,
       default () { return {}; }
     }
