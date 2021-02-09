@@ -74,6 +74,12 @@ let sClient = {
       alias: 'updated',
       search: false
     },
+    collections: {
+      type: 'string',
+      alias: 'collec',
+      search: false,
+      default: []
+    }
   },
   mappedFilters: {},
   searchFilters: '',

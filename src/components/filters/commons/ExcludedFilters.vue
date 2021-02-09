@@ -22,6 +22,7 @@
       </v-text-field>
     </v-list-item>
     <v-list-item
+      v-if="typeof $store.state.SClient.allowedFilters[field].empty !== 'undefined'"
       v-show="stringSearch.length === 0 || (stringSearch.length > 0 && textEmpty.search(stringSearch) >= 0)"
     >
       <v-list-item-content
@@ -153,6 +154,7 @@ export default {
       alias: this.$store.state.SClient.allowedFilters[this.field].alias,
       empty: this.$store.state.SClient.allowedFilters[this.field].empty,
       emptyFieldCount: 0,
+      wasEmptyFieldLoaded: false,
       textEmpty: 'No value / empty',
       itemsFiltered: false,
       filterApplied: false
@@ -162,15 +164,28 @@ export default {
     '$store.state.stats.filters': {
       deep: true,
       handler(filters) {
-        for (let i = 0; i < filters[this.empty].length; i++) {
-          if (filters[this.empty][i].facet === 'false') {
-            this.emptyFieldCount = filters[this.empty][i].count;
+        if (typeof filters[this.empty] !== 'undefined') {
+          for (let i = 0; i < filters[this.empty].length; i++) {
+            if (filters[this.empty][i].facet === 'false') {
+              this.emptyFieldCount = filters[this.empty][i].count;
+            }
           }
+          if (this.filterApplied && this.stringSearch.length > 0) {
+            this.searchForItems();
+          }
+          this.filterApplied = false;
+          return true;
         }
-        if (this.filterApplied && this.stringSearch.length > 0) {
-          this.searchForItems();
+        if (
+          typeof this.$store.state.SClient.allowedFilters[this.field].empty === 'undefined' &&
+          !this.wasEmptyFieldLoaded
+        ) {
+          this.emptyFieldCount = this.$store.state.stats.totalBooks -
+            this.$store.state.stats.filters[this.field].reduce((a, b) => {
+              return a + b.count;
+            }, 0);
+          this.wasEmptyFieldLoaded = true;
         }
-        this.filterApplied = false;
       }
     },
     '$store.state.SClient.filtersExcluded': {
@@ -238,7 +253,7 @@ export default {
         for (let i = 0; i < filters.length; i++) {
           if (
             (exclude && filters[i][0] !== '-') ||
-                        (!exclude && filters[i][0] === '-')
+            (!exclude && filters[i][0] === '-')
           ) {
             query[this.alias] = value.toString();
             return this.$router.replace({ query });
