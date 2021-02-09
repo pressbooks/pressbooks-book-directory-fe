@@ -18,7 +18,8 @@ let stats = {
     'has_language_name',
     'has_publisher',
     'has_network_name',
-    'is_recommended'
+    'is_recommended',
+    'collections'
   ],
   filters: {},
   facetFilters: [],
