@@ -55,7 +55,7 @@ export default {
     filter(card) {
       let query = {...this.$route.query};
       query[this.$store.state.SClient.allowedFilters[card.facet].alias] = card.name;
-      this.$router.replace({ query });
+      this.$router.replace({ query, hash: '#current-filters' });
     }
   }
 };
