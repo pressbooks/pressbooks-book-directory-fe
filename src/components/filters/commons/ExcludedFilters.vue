@@ -154,7 +154,6 @@ export default {
       alias: this.$store.state.SClient.allowedFilters[this.field].alias,
       empty: this.$store.state.SClient.allowedFilters[this.field].empty,
       emptyFieldCount: 0,
-      wasEmptyFieldLoaded: false,
       textEmpty: 'No value / empty',
       itemsFiltered: false,
       filterApplied: false
@@ -175,16 +174,6 @@ export default {
           }
           this.filterApplied = false;
           return true;
-        }
-        if (
-          typeof this.$store.state.SClient.allowedFilters[this.field].empty === 'undefined' &&
-          !this.wasEmptyFieldLoaded
-        ) {
-          this.emptyFieldCount = this.$store.state.stats.totalBooks -
-            this.$store.state.stats.filters[this.field].reduce((a, b) => {
-              return a + b.count;
-            }, 0);
-          this.wasEmptyFieldLoaded = true;
         }
       }
     },
