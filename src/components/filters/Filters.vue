@@ -7,6 +7,7 @@
       dense
       :expand="false"
     >
+      <recommended v-if="$store.state.stats.numberOfRecommendedBooksIndexed > 0" />
       <licenses />
       <subjects />
       <networks />
