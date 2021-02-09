@@ -7,8 +7,8 @@
       dense
       :expand="false"
     >
-      <licenses />
       <recommended v-if="$store.state.stats.numberOfRecommendedBooksIndexed > 0" />
+      <licenses />
       <subjects />
       <networks />
       <collections-filter v-if="$store.state.collections.collections.length > 0" />
