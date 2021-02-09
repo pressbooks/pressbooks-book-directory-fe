@@ -58,10 +58,10 @@ export default {
       query[attribute] = value;
       this.$router.replace({ query });
     },
-    wasFiltered(value, exc) {
+    wasFiltered(value, is_excluded) {
       return typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' &&
           this.$store.state.SClient.filtersExcluded[this.field][0].value === value &&
-          this.$store.state.SClient.filtersExcluded[this.field][0].exclude === exc;
+          this.$store.state.SClient.filtersExcluded[this.field][0].exclude === is_excluded;
     }
   }
 };
