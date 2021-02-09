@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="current-filters">
     <v-row class="filters">
       <v-col
         class="filters__head filters__head--red"
