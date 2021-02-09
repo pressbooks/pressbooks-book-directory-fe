@@ -5,6 +5,7 @@ let stats = {
   totalNetworks: 0,
   numberOfBooksIndexed: 0,
   numberOfNetworksIndexed:0,
+  numberOfRecommendedBooksIndexed: 0,
   facets: [
     'networkName',
     'license_code',
@@ -16,7 +17,8 @@ let stats = {
     'has_abouts',
     'has_language_name',
     'has_publisher',
-    'has_network_name'
+    'has_network_name',
+    'is_recommended'
   ],
   filters: {},
   facetFilters: [],
@@ -47,6 +49,9 @@ export default {
     },
     setKeepFacets(state, fs) {
       state.keepFacets = fs;
+    },
+    setNumberOfRecommendedBooksIndexed(state, numberOfRecommended) {
+      state.numberOfRecommendedBooksIndexed = numberOfRecommended;
     },
     setFilters(state, response) {
       let fs = {};
@@ -88,6 +93,13 @@ export default {
         context.commit('setTotalBooks', response.nbHits);
         if (typeof response.facets.networkName === 'undefined') {
           response.facets.networkName = [];
+        }
+        if (
+          typeof response.facets.is_recommended !== 'undefined' &&
+          context.state.numberOfNetworksIndexed === 0 &&
+          response.facets.is_recommended['true'] > 0
+        ) {
+          context.commit('setNumberOfRecommendedBooksIndexed', response.facets.is_recommended['true']);
         }
         context.commit('setTotalNetworks', Object.keys(response.facets.networkName).length);
         context.commit('setFilters', response);
