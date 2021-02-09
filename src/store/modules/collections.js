@@ -36,7 +36,8 @@ export default {
                     return {
                       image: book.image,
                       name: book[context.state.coverImageFacetName][0],
-                      url: ''
+                      url: false,
+                      facet: context.state.collectionsFacetName
                     };
                   })
                 );

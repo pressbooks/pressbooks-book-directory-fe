@@ -10,9 +10,18 @@
     />
     <v-card-title class="v-card__title--specialheader">
       <a
+        v-if="card.url"
         :href="card.url"
         :title="card.name"
         target="_blank"
+      >
+        {{ truncateTitle(card.name) }}
+      </a>
+      <a
+        v-if="!card.url"
+        :title="card.name"
+        target="_self"
+        @click="filter(card)"
       >
         {{ truncateTitle(card.name) }}
       </a>
@@ -42,6 +51,11 @@ export default {
   methods: {
     truncateTitle(title) {
       return title.length > this.truncateLimit ? title.substr(0, this.truncateLimit - 1) + '...' : title;
+    },
+    filter(card) {
+      let query = {...this.$route.query};
+      query[this.$store.state.SClient.allowedFilters[card.facet].alias] = card.name;
+      this.$router.replace({ query });
     }
   }
 };

@@ -16,7 +16,8 @@ let stats = {
     'has_abouts',
     'has_language_name',
     'has_publisher',
-    'has_network_name'
+    'has_network_name',
+    'collections'
   ],
   filters: {},
   facetFilters: [],
