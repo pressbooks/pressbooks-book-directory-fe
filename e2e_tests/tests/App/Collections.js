@@ -28,5 +28,24 @@ module.exports = {
         await browser.end();
       }
     }
+  },
+  async 'Checking scroll behavior when a collection  is clicked' (browser) {
+    await browser
+      .url(process.env.HOST_TEST);
+    await browser
+      .waitForElementVisible('#current-filters');
+    const collectionCardSelector = '#special-header-collections > div > div.offset-1.ml-auto.specialheader--col.col-lg-2.col > div > div.v-card__title.v-card__title--specialheader > a';
+    const isCollectionCardVisible = await browser
+      .isVisible({
+        selector: collectionCardSelector,
+        index: 0,
+        suppressNotFoundErrors: true
+      });
+    if (parseInt(isCollectionCardVisible.status) !== -1) {
+      await browser.click(collectionCardSelector);
+      await browser.pause(1500);
+      browser.assert.urlContains('#current-filters');
+    }
+
   }
 };

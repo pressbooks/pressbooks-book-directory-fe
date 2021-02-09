@@ -12,5 +12,12 @@ export default new Router({
       name: 'Home',
       component: App
     }
-  ]
+  ],
+  scrollBehavior (to) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      };
+    }
+  },
 });

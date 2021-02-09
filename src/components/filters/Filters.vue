@@ -7,6 +7,7 @@
       dense
       :expand="false"
     >
+      <recommended v-if="$store.state.stats.numberOfRecommendedBooksIndexed > 0" />
       <licenses />
       <subjects />
       <networks />
@@ -16,6 +17,7 @@
       <publishers />
       <word-count />
       <h5-p-activities />
+      <recommended v-if="$store.state.stats.numberOfRecommendedBooksIndexed > 0" />
       <based-on />
       <storage-size />
     </v-list>
@@ -33,11 +35,13 @@ import Publishers from './Publishers';
 import StorageSize from './StorageSize';
 import Networks from './Networks';
 import LastModified from './LastModified';
+import Recommended from './Recommended';
 import CollectionsFilter from './Collections';
 
 export default {
   name: 'Filters',
   components: {
+    Recommended,
     CollectionsFilter,
     Networks,
     StorageSize,
