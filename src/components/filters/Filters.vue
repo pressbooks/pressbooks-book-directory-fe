@@ -17,7 +17,6 @@
       <publishers />
       <word-count />
       <h5-p-activities />
-      <recommended v-if="$store.state.stats.numberOfRecommendedBooksIndexed > 0" />
       <based-on />
       <storage-size />
     </v-list>
