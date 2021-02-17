@@ -52,7 +52,7 @@
         />
       </v-container>
       <press-tour
-        v-if="$store.state.config.showTour"
+        v-if="$store.state.config.showTour && this.$store.state.componentsLoaded.searchbox"
         :auto-scroll="true"
       />
     </main>
