@@ -16,7 +16,7 @@ exports[`Check main structure for App.vue should have AisInstantSearch component
     <main role="main">
       <div class="container" id="v-application__main_content">
         <div class="ais-InstantSearch">
-          <!----> <button type="button" class="float-right v-btn v-btn--contained theme--dark v-size--default" aria-label="Visit Pressbooks' Twitter account"><span class="v-btn__content">
+          <!----> <button type="button" class="float-right v-btn v-btn--contained theme--dark v-size--default" aria-label="Take the tour"><span class="v-btn__content">
           Take the tour
         </span></button>
           <div class="container welcome-header">

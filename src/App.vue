@@ -15,7 +15,7 @@
           />
           <v-btn
             class="float-right"
-            aria-label="Visit Pressbooks' Twitter account"
+            aria-label="Take the tour"
             @click="$store.commit('showTour')"
           >
             Take the tour
