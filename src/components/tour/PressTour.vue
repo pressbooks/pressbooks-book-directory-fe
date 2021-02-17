@@ -287,6 +287,9 @@ export default {
       this.intro.onexit(() => {
         this.searchInput.value = '';
         this.$store.commit('showTour');
+        //Restore filters accordion to the initial state
+        firstFilter.click();
+        firstFilter.parentElement.nextElementSibling.firstChild.click();
       });
 
       this.intro.onafterchange((targetElement) => {
