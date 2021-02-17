@@ -13,6 +13,13 @@
             :filters.camel="($store.state.SClient.filtersParams.length > 0) ? $store.state.SClient.filtersParams : ''"
             :query="$store.state.SClient.searchParameters.searchQuery"
           />
+          <v-btn
+            class="float-right"
+            aria-label="Visit Pressbooks' Twitter account"
+            @click="$store.commit('showTour')"
+          >
+            Take the tour
+          </v-btn>
           <welcome-header />
           <current-filters />
           <v-row>
@@ -44,6 +51,10 @@
           class="filters__stats-algolia-logo"
         />
       </v-container>
+      <press-tour
+        v-if="$store.state.config.showTour"
+        :auto-scroll="true"
+      />
     </main>
   </v-app>
 </template>
@@ -56,6 +67,7 @@ import HeaderBar from './components/commons/HeaderBar';
 import CurrentFilters from './components/filters/CurrentFilters';
 import Books from './components/Books';
 import WelcomeHeader from './components/WelcomeHeader';
+import PressTour from './components/tour/PressTour';
 
 export default {
   components: {
@@ -64,7 +76,8 @@ export default {
     Filters,
     Pagination,
     HeaderBar,
-    Books
+    Books,
+    PressTour
   },
   data(){
     return {
@@ -100,6 +113,7 @@ export default {
         content: 'noindex'
       });
     }
+
   },
   metaInfo() {
     return {

@@ -2,6 +2,7 @@ let config = {
   imagesPath: 'assets/images/',
   logo: 'pressbooks-logo.jpeg',
   twitterUrl: 'https://twitter.com/intent/follow?screen_name=pressbooks',
+  guideUrl: 'https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/',
   h5pLogo: 'h5p.png',
   basedOnImg: 'is-child.png',
   originalImg: 'is-base.png',
@@ -44,9 +45,15 @@ let config = {
       alt: 'Public Domain'
     }
   },
-  canFilter: true
+  canFilter: true,
+  showTour: false
 };
 
 export default {
-  state: config
+  state: config,
+  mutations: {
+    showTour(state) {
+      state.showTour = !state.showTour;
+    }
+  }
 };

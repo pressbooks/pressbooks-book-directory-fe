@@ -1,0 +1,18 @@
+.introjs{
+  &-tooltip-title,
+  &-tooltiptext {
+    font-family: $font-primary;
+    p {
+      font-family: $font-primary;
+    }
+  }
+  &-button {
+    text-shadow: none;
+    color: $pb-light;
+    background: $pb-red;
+    border-radius: 4px;
+  }
+  &-progressbar {
+    background-color: $pb-red;
+  }
+}

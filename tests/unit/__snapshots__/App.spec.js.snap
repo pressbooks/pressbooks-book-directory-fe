@@ -4,193 +4,192 @@ exports[`Check main structure for App.vue should have AisInstantSearch component
 <div data-app="true" class="v-application v-application--is-ltr theme--dark" id="app">
   <div class="v-application--wrap">
     <header class="toolbar v-sheet v-sheet--tile theme--dark v-toolbar" style="height: 64px;">
-      <div class="v-toolbar__content" style="height: 64px;">
-        <div class="v-responsive v-image logo">
-          <transition-stub name="fade-transition" mode="in-out">
-            <div class="v-image__image v-image__image--preload v-image__image--cover" style="background-position: center center;"></div>
-          </transition-stub>
-          <div class="v-responsive__content"></div>
-        </div> <a href="https://twitter.com/intent/follow?screen_name=pressbooks" class="v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default"><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-twitter theme--dark"></i></span></a>
-      </div>
+      <div class="v-toolbar__content" style="height: 64px;"><a href="https://pressbooks.com" aria-label="Visit Pressbooks.com" target="_blank">
+          <div class="v-responsive v-image logo">
+            <transition-stub name="fade-transition" mode="in-out">
+              <div class="v-image__image v-image__image--preload v-image__image--cover" style="background-position: center center;"></div>
+            </transition-stub>
+            <div class="v-responsive__content"></div>
+          </div>
+        </a> <a href="https://twitter.com/intent/follow?screen_name=pressbooks" class="v-btn v-btn--flat v-btn--icon v-btn--round theme--dark v-size--default" aria-label="Visit Pressbooks' Twitter account"><span class="v-btn__content"><i aria-hidden="true" class="v-icon notranslate mdi mdi-twitter theme--dark"></i></span></a></div>
     </header>
-    <div class="container v-application__main_content">
-      <div class="ais-InstantSearch">
-        <!---->
-        <div class="welcome-header">
-          <div class="container welcome-header welcome-header__content">
-            <p class="welcome-header welcome-header__content--bold-red">Welcome to Pressbooks Directory</p>
-            <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
-              This site presents a searchable, filterable directory of <strong>0 </strong>
-              public books published across
-              <strong>0</strong> Pressbooks networks (see full list [link]).
-            </p>
-            <p class="welcome-header welcome-header__intro welcome-header__intro--italic">
-              You can find books of interest by searching the full text of all metadata, applying one or more filters,
-              or simply browsing the book cards below. [More details about using the site.]
+    <main role="main">
+      <div class="container" id="v-application__main_content">
+        <div class="ais-InstantSearch">
+          <!----> <button type="button" class="float-right v-btn v-btn--contained theme--dark v-size--default" aria-label="Visit Pressbooks' Twitter account"><span class="v-btn__content">
+          Take the tour
+        </span></button>
+          <div class="container welcome-header">
+            <h1>Welcome to Pressbooks Directory</h1>
+            <p>
+              This directory provides an index of <strong>0</strong> books published across
+              <strong>0</strong> Pressbooks networks. Search and filter books by keyword,
+              subject matter, license, and more. See
+              <a href="https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/">our guide for
+                more detailed instructions</a> on using the Pressbooks Directory to find books of interest.
             </p>
             <!---->
+            <!---->
+            <!---->
+            <form novalidate="novalidate" class="v-form">
+              <div class="row justify-space-between">
+                <div class="col-md-2 col-12">
+                  <h2 class="ais-SearchBox__text">
+                    Find a book:
+                  </h2>
+                </div>
+                <div class="col-md-9 col-12">
+                  <div class="v-input theme--dark v-text-field">
+                    <div class="v-input__control">
+                      <div class="v-input__slot">
+                        <div class="v-text-field__slot"><label for="search-book" class="v-label theme--dark" style="left: 0px; position: absolute;">Search all book metadata</label><input id="search-book" type="search"></div>
+                        <div class="v-input__append-inner"><i aria-hidden="true" class="v-icon notranslate mdi mdi-magnify theme--dark"></i></div>
+                      </div>
+                      <div class="v-text-field__details">
+                        <div class="v-messages theme--dark">
+                          <transition-group-stub tag="div" name="message-transition" class="v-messages__wrapper"></transition-group-stub>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div align="center" class="col-md-1 col-12"><button type="submit" class="v-btn v-btn--contained theme--dark v-size--default" id="search-button"><span class="v-btn__content">
+        Search
+      </span></button></div>
+              </div>
+            </form>
           </div>
-        </div>
-        <div class="filters">
-          <div class="filters__head filters__head--red">
-            Active Filters:
+          <div id="current-filters">
+            <div class="row filters">
+              <div class="filters__head filters__head--red col-md-9 col-12">
+                Active Filters:
+                <button type="reset" disabled="disabled" class="ais-ClearRefinements-button ais-ClearRefinements-button--disabled">
+                  Clear refinements
+                </button>
+                <!---->
+              </div>
+              <div class="col-md-3 col-12">
+                <!---->
+                <!---->
+                <!---->
+              </div>
+            </div>
+            <div class="text-center">
+              <!---->
+            </div>
           </div>
-          <!---->
-          <!---->
-        </div>
-        <div class="row no-gutters">
-          <div class="col-md-3 col-6">
-            <div class="search-panel__filters">
-              <div role="list" class="v-list v-sheet v-sheet--tile theme--dark v-list--dense">
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">LICENSE</div>
-                  </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
+          <div class="row">
+            <div id="filters" class="col-md-4 col-lg-3 col-12">
+              <div class="search-panel__filters">
+                <div role="list" class="v-list v-sheet v-sheet--tile theme--dark v-list--dense">
+                  <!---->
+                  <div class="v-list-group v-list-group--sub-group" id="filter-license_code">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">LICENSE</div>
+                    </div>
+                    <transition-stub name="expand-transition">
                       <!---->
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <!---->
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">SUBJECT</div>
+                    </transition-stub>
                   </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
+                  <div class="v-list-group v-list-group--sub-group" id="filter-about">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">SUBJECT</div>
+                    </div>
+                    <transition-stub name="expand-transition">
                       <!---->
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <!---->
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">BASED ON</div>
+                    </transition-stub>
                   </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
+                  <div class="v-list-group v-list-group--sub-group" id="filter-networkName">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">NETWORK</div>
+                    </div>
+                    <transition-stub name="expand-transition">
                       <!---->
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <!---->
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">WORDS</div>
+                    </transition-stub>
                   </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <div class="v-list-item__content">
-                          <div class="v-list-item__title">
-                            <!---->
-                          </div>
-                        </div>
-                      </div>
+                  <!---->
+                  <div class="v-list-group v-list-group--sub-group" id="filter-lastUpdated">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">LAST UPDATED</div>
                     </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">H5P ACTIVITIES</div>
-                  </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <div class="v-list-item__content">
-                          <div class="v-list-item__title">
-                            <!---->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">NETWORK</div>
-                  </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
+                    <transition-stub name="expand-transition">
                       <!---->
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <!---->
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">LANGUAGE</div>
+                    </transition-stub>
                   </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
+                  <div class="v-list-group v-list-group--sub-group" id="filter-languageName">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">LANGUAGE</div>
+                    </div>
+                    <transition-stub name="expand-transition">
                       <!---->
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <!---->
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">PUBLISHER</div>
+                    </transition-stub>
                   </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
+                  <div class="v-list-group v-list-group--sub-group" id="filter-publisher_name">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">PUBLISHER</div>
+                    </div>
+                    <transition-stub name="expand-transition">
                       <!---->
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <!---->
-                      </div>
-                    </div>
-                  </transition-stub>
-                </div>
-                <div class="v-list-group v-list-group--active v-list-group--sub-group primary--text">
-                  <div tabindex="0" aria-expanded="true" role="button" class="v-list-group__header v-list-item v-list-item--active v-list-item--link theme--dark">
-                    <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
-                    <div class="v-list-item__title">STORAGE SIZE</div>
+                    </transition-stub>
                   </div>
-                  <transition-stub name="expand-transition">
-                    <div class="v-list-group__items">
-                      <div tabindex="-1" role="listitem" class="v-list-item theme--dark">
-                        <div class="v-list-item__content">
-                          <div class="v-list-item__title">
-                            <!---->
-                          </div>
-                        </div>
-                      </div>
+                  <div class="v-list-group v-list-group--sub-group" id="filter-wordCount">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">WORD COUNT</div>
                     </div>
-                  </transition-stub>
+                    <transition-stub name="expand-transition">
+                      <!---->
+                    </transition-stub>
+                  </div>
+                  <div class="v-list-group v-list-group--sub-group" id="filter-h5pActivities">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">H5P ACTIVITIES</div>
+                    </div>
+                    <transition-stub name="expand-transition">
+                      <!---->
+                    </transition-stub>
+                  </div>
+                  <div class="v-list-group v-list-group--sub-group" id="filter-basedOn">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">BASED ON</div>
+                    </div>
+                    <transition-stub name="expand-transition">
+                      <!---->
+                    </transition-stub>
+                  </div>
+                  <div class="v-list-group v-list-group--sub-group" id="filter-storageSize">
+                    <div tabindex="0" aria-expanded="false" role="button" class="v-list-group__header v-list-item v-list-item--link theme--dark">
+                      <div class="v-list-item__icon v-list-group__header__prepend-icon"><i aria-hidden="true" class="v-icon notranslate mdi mdi-menu-down theme--dark"></i></div>
+                      <div class="v-list-item__title">STORAGE SIZE</div>
+                    </div>
+                    <transition-stub name="expand-transition">
+                      <!---->
+                    </transition-stub>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-9 col-12">
-            <div>
-              <!---->
-              <div class="text-center">
+            <div id="book-list" class="col-md-8 col-lg-9 col-12">
+              <div>
                 <!---->
               </div>
             </div>
           </div>
-        </div>
+          <div class="text-center">
+            <!---->
+          </div>
+        </div> <a href="https://www.algolia.com/" aria-label="Search by Algolia" target="_blank" class="filters__stats-algolia-logo"></a>
       </div>
-    </div>
+      <!---->
+    </main>
   </div>
 </div>
 `;
