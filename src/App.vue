@@ -52,8 +52,10 @@
         />
       </v-container>
       <press-tour
-        v-if="$store.state.config.showTour && this.$store.state.componentsLoaded.searchbox"
+        v-if="$store.state.config.showTour"
+        :overlay="0.5"
         :auto-scroll="true"
+        :typing-speed="17"
       />
     </main>
   </v-app>

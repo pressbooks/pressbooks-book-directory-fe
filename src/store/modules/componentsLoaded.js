@@ -1,6 +1,5 @@
 let componentsLoaded = {
-  welcomeHeader: false,
-  searchbox: false
+  welcomeHeader: false
 };
 
 export default {
