@@ -14,7 +14,6 @@
       v-html="additionalText"
     />
     <!--eslint-enable-->
-    <featured-books v-if="$vuetify.breakpoint.width > 700" />
     <collections v-if="$vuetify.breakpoint.width > 700" />
     <searchbox />
   </v-container>
@@ -22,12 +21,11 @@
 
 <script>
 import Searchbox from './Searchbox';
-import FeaturedBooks from './additionalCards/FeaturedBooks';
 import Collections from './additionalCards/Collections';
 
 export default {
   name: 'WelcomeHeader',
-  components: {Collections, Searchbox, FeaturedBooks},
+  components: {Collections, Searchbox},
   data() {
     return {
       additionalText: (process.env.VUE_APP_HEADER_ADDITIONAL_TEXT) ? process.env.VUE_APP_HEADER_ADDITIONAL_TEXT : false,
