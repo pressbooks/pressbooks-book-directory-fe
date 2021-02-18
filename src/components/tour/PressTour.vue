@@ -85,57 +85,39 @@ export default {
               element: searchInputContainer,
             },
             {
-              title: 'Multiple words search',
+              title: 'Searching for multiple words',
               intro: `
         <p>If you enter multiple words, the search will produce results that contain all of those words.</p>
+        <p>For example, a search for <strong>open education</strong> will retrieve books that include the words 'open' AND 'education'.</p>
          `,
               element: searchInputContainer,
             },
             {
-              title: 'Multiple words search',
+              title: 'Searching for exact phrases',
               intro: `
-        <p>A search for <strong>open education</strong> will retrieve books that include the words open AND education.</p>
+        <p>You can search for an exact phrase by putting the desired term in quotation marks.</p>
+        <p>For example, a search for <strong>teaching "open education"</strong> will retrieve books that include the word 'teaching' AND the exact phrase 'open education'.</p>
          `,
               element: searchInputContainer,
             },
             {
-              title: 'Refine your search',
+              title: 'Excluding words or phrases',
               intro: `
-        <p>You can search for an exact phrase by putting it in quotation marks.</p>
+        <p>To exclude a word or phrase from the results, use the <strong>"-"</strong> sign before the word you want to exclude.</p>
+        <p>For example, a search for <strong>"open education" -teaching</strong> will retrieve books that include the exact phrase 'open education' but NOT the word 'teaching'.</p>
          `,
               element: searchInputContainer,
             },
             {
-              title: 'Refine your search',
+              title: 'Performing a search',
               intro: `
-        <p>A search for <strong>teaching "open education"</strong> will retrieve books that include the word teaching and the exact phrase open education.</p>
-         `,
-              element: searchInputContainer,
-            },
-            {
-              title: 'Refine your search',
-              intro: `
-        <p>To exclude a word or phrase from the results, use the <strong>"-"</strong> sign before the word you want to exclude.
-         `,
-              element: searchInputContainer,
-            },
-            {
-              title: 'Refine your search',
-              intro: `
-        A search for <strong> -teaching "open education" </strong> will retrieve books that include the exact phrase open education but not the word teaching.
-         `,
-              element: searchInputContainer,
-            },
-            {
-              title: 'Get your books',
-              intro: `
-        To see updated search results (after changing or removing a query), select the "Search" button.
+        <p>To see updated search results (after changing or removing a query), select the "Search" button.</p>
          `,
               element: searchButton,
               position: 'bottom'
             },
             {
-              title: 'Use filters',
+              title: 'Using facet filters',
               intro: `
         <p>Filters allow you to perform faceted search to narrow down your results by license, subject, word count, and more. Faceted searching can be combined with text search or used separately.</p>
          `,
@@ -159,32 +141,32 @@ export default {
               position: 'right'
             },
             {
-              title: 'Apply multiple filters',
+              title: 'Applying multiple filters',
               intro: `
-             You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.
+         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
             `,
               element: document.querySelector('#filters .search-panel__filters'),
               position: 'right'
             },
             {
-              title: 'Clear filters',
+              title: 'Clearing filters for a single facet',
               intro: `
-             All active filters for a facet can be removed at once by selecting the ‘Clear Filter’ button.
+         <p>All active filters for a facet can be removed at once by selecting the ‘Clear Filter’ button.</p>
             `,
               element: document.querySelector('#filters .ais-ClearRefinements button'),
               position: 'right'
             },
             {
-              title: 'Clear refinements',
+              title: 'Viewing all active filters',
               intro: `
-        <p>All filters/refinements that are currently being applied to your results will be displayed here.</p>
+        <p>All filters that are currently being applied to your results will be displayed here.</p>
         <p>Include filters are blue. Exclude filters are red and display the word NOT before the filtered term.</p>
          `,
               element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
               position: 'bottom'
             },
             {
-              title: 'Clear refinements',
+              title: 'Clearing filters',
               intro: `
         <p>You can clear individual filters by clicking on them.</p>
         <p>You can clear all active filters by clicking on the ‘Clear Refinements’ button.</p>
@@ -193,15 +175,7 @@ export default {
               position: 'bottom'
             },
             {
-              title: 'How to analyze results',
-              intro: `
-        <p>Once you’ve performed a search, you will see several book cards displayed as your search results. </p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container'),
-              position: 'top'
-            },
-            {
-              title: 'Pagination',
+              title: 'Changing results pagination',
               intro: `
         <p>You can change the number of results shown per page [10, 20, 50].</p>
          `,
@@ -209,12 +183,20 @@ export default {
               position: 'bottom'
             },
             {
-              title: 'Sort',
+              title: 'Changing results sort order',
               intro: `
         <p>You can change your preferred display order.</p>
          `,
               element: document.querySelector('#current-filters .ais-SortBy'),
               position: 'bottom'
+            },
+            {
+              title: 'Viewing search results',
+              intro: `
+        <p>Once you’ve performed a search, you will see several book cards displayed as your search results. </p>
+         `,
+              element: document.querySelector('.ais-Hits__books__container'),
+              position: 'top'
             },
             {
               title: 'Network information',
@@ -225,21 +207,21 @@ export default {
               position: 'bottom'
             },
             {
-              title: 'Book Title',
+              title: 'Book title',
               intro: `
-        <p>Clicking the title of the resource will take you to the book’s home page.</p>
+        <p>The title of each book is also a link. Clicking the book's title or cover image will take you to the book’s home page.</p>
          `,
               element: document.querySelector('.ais-Hits__books__container .v-card__title'),
             },
             {
-              title: 'Book Information',
+              title: 'Additional book information',
               intro: `
         <p>Each book card displays additional information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
          `,
               element: document.querySelector('.ais-Hits__books__container .v-card__details'),
             },
             {
-              title: 'Additional Information',
+              title: 'Visual icons',
               intro: `
         <p>Beneath the cover image, you will see a set of icons that convey additional information about the book.</p>
          `,
@@ -257,7 +239,7 @@ export default {
             {
               title: 'Copyright',
               intro: `
-        <p>This icon indicates the copyright license for the work (all rights reserved or one of the creative commons licenses). Hovering over the icon will display the license name.</p>
+        <p>This icon indicates the copyright license selected for the work (All Rights Reserved or one of the Creative Commons licenses). Hovering over the icon will display the license name.</p>
          `,
               element: document.querySelector('.ais-Hits__books__container .v-card__content .copyright'),
               position: 'left'
@@ -266,13 +248,13 @@ export default {
               title: 'H5P Activities',
               intro: `
         <img src="${this.h5pActivitiesImage}" alt="H5P Logo" width="${this.h5pLogoWidth}" />
-        <p>The H5P logo is displayed when a book contains interactive H5P elements. Hovering over the icon will display the number of H5P activities in that book.</p>
+        <p>The H5P logo is displayed when a book contains interactive H5P elements. Hovering over the icon will display the number of H5P activities present in that book.</p>
          `,
               element: document.querySelector('.ais-Hits__books__container .v-card__content .row'),
               position: 'left'
             },
             {
-              title: 'Thank you',
+              title: 'Visit the guide',
               intro: `
         <p>You’ve concluded the Pressbooks Directory tour! For more details on using the Directory to find books of interest to you, please see our <a target="_blank" href="${this.guideUrl}">guide chapter</a>.</p>
          `
@@ -296,13 +278,13 @@ export default {
           let value = '';
 
           switch (this.stepIndex) {
-          case 2:
+          case 1:
             value = 'open education';
             break;
-          case 4:
+          case 2:
             value = 'teaching "open education"';
             break;
-          case 6:
+          case 3:
             value = '-teaching "open education"';
             break;
           }
