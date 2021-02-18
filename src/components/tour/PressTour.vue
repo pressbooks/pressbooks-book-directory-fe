@@ -74,7 +74,9 @@ export default {
           steps: [
             {
               title: 'Take a tour',
-              intro: 'Welcome to Pressbooks Directory'
+              intro: `
+              <p>Welcome to Pressbooks Directory. Use the 'next' and 'back' buttons to navigate this tour or click on the X button to exit the tour at any point.</p>
+              `,
             },
             {
               title: 'The search bar',
@@ -114,7 +116,31 @@ export default {
         <p>To see updated search results (after changing or removing a query), select the "Search" button.</p>
          `,
               element: searchButton,
-              position: 'bottom'
+              position: 'left'
+            },
+            {
+              title: 'Viewing search results',
+              intro: `
+        <p>Once you’ve performed a search, you will see the number of results for your query. This value will be updated each time you perform a new search or change the applied filters.</p>
+         `,
+              element: document.querySelector('.filters__stats__results'),
+              position: 'left'
+            },
+            {
+              title: 'Changing results pagination',
+              intro: `
+        <p>You can change the number of results shown per page [10, 20, 50].</p>
+         `,
+              element: document.querySelector('#current-filters .ais-HitsPerPage'),
+              position: 'left'
+            },
+            {
+              title: 'Changing results sort order',
+              intro: `
+        <p>You can change your preferred display order.</p>
+         `,
+              element: document.querySelector('#current-filters .ais-SortBy'),
+              position: 'left'
             },
             {
               title: 'Using facet filters',
@@ -175,25 +201,9 @@ export default {
               position: 'bottom'
             },
             {
-              title: 'Changing results pagination',
+              title: 'Interpreting book cards',
               intro: `
-        <p>You can change the number of results shown per page [10, 20, 50].</p>
-         `,
-              element: document.querySelector('#current-filters .ais-HitsPerPage'),
-              position: 'bottom'
-            },
-            {
-              title: 'Changing results sort order',
-              intro: `
-        <p>You can change your preferred display order.</p>
-         `,
-              element: document.querySelector('#current-filters .ais-SortBy'),
-              position: 'bottom'
-            },
-            {
-              title: 'Viewing search results',
-              intro: `
-        <p>Once you’ve performed a search, you will see several book cards displayed as your search results. </p>
+        <p>After performing a search, you will be presented with a list of relevant book cards. </p>
          `,
               element: document.querySelector('.ais-Hits__books__container'),
               position: 'top'

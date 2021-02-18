@@ -1,6 +1,7 @@
 .introjs {
   &-tooltip {
-    max-width: 450px;
+    min-width: 450px;
+    max-width: 600px;
   }
   &-tooltip-title,
   &-tooltiptext {
@@ -9,6 +10,10 @@
     p {
       font-family: $font-primary;
       margin-bottom: 1rem;
+    }
+
+    a {
+      color: $pb-red;
     }
   }
 
@@ -22,4 +27,6 @@
   &-progressbar {
     background-color: $pb-red;
   }
+
+
 }
