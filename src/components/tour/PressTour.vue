@@ -293,7 +293,7 @@ export default {
               title: 'H5P Activities',
               intro: `
         <img src="${this.h5pActivitiesImage}" alt="H5P Logo" width="${this.h5pLogoWidth}" />
-        <p>The H5P logo is displayed when a book contains interactive H5P elements. Hovering over the icon will display the number of H5P activities present in that book.</p>
+        <p>The H5P logo is displayed when a book contains interactive H5P elements (like quizzes or flashcards). Hovering over the icon will display the number of H5P activities present in that book.</p>
          `,
               element: document.querySelector('.ais-Hits__books__container .v-card__content .row'),
               position: 'left'
