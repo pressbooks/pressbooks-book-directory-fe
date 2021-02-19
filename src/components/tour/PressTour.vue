@@ -223,7 +223,7 @@ export default {
         <p>All filters that are currently being applied to your results will be displayed here.</p>
         <p>Include filters are blue. Exclude filters are red and display the word NOT before the filtered term.</p>
          `,
-              element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
+              element: document.querySelector('.filters__head'),
               position: 'bottom'
             },
             {
