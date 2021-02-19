@@ -18,7 +18,7 @@ module.exports = {
       filterText = regExpression.exec(filterText.value);
       let quantityOfBooksInCollection = filterText[1];
       await browser.click('#filter-collections > div.v-list-group__items > div:nth-child(1) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include');
-      let booksCountInResults = await browser.getText('#v-application__main_content > div > div:nth-child(2) > div.row.filters > div.col-md-3.col-12 > div.ais-Stats > div > span.container__results-hits');
+      let booksCountInResults = await browser.getText('#current-filters span[data-test-id="stats_results"]');
       booksCountInResults = booksCountInResults.value.split(' / ')[0];
       await browser.assert.ok(
         parseInt(booksCountInResults) === parseInt(quantityOfBooksInCollection),
