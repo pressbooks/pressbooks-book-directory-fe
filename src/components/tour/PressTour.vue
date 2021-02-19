@@ -4,6 +4,41 @@
 <script>
 const introJS = require('intro.js');
 
+
+/**
+ * This function fix the introJS scroll handling when the markup is too nested
+ * @param index
+ */
+function scrollHelper(index) {
+  let currentScroll = window.scrollY;
+  let top = 0;
+  switch (index) {
+  case 1:
+  case 2:
+  case 3:
+  case 4:
+    top = currentScroll - 80;
+    break;
+  case 5:
+  case 6:
+  case 7:
+  case 8:
+    top = currentScroll - 250;
+    break;
+  case 9:
+    top = currentScroll - 100;
+    break;
+  }
+  if(top > 0) {
+    setTimeout(()=>{
+      window.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
+    },50);
+  }
+}
+
 export default {
   name: 'PressTour',
   props: {
@@ -23,7 +58,6 @@ export default {
   data() {
     return {
       intro: null,
-      stepIndex: 0,
       searchInput: document.getElementById('search-book'),
       h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
       guideUrl: this.$store.state.config.guideUrl,
@@ -38,6 +72,7 @@ export default {
     };
 
     const blurInput = () => {
+      this.searchInput.value = '';
       this.searchInput.previousElementSibling.classList.remove('v-label--active');
     };
 
@@ -283,19 +318,19 @@ export default {
 
         blurInput();
 
-        if (targetElement.classList.contains('v-input__control') && this.stepIndex > 0) {
+        if (targetElement.classList.contains('v-input__control') && this.intro._currentStep > 1) {
 
           let value = '';
 
-          switch (this.stepIndex) {
-          case 1:
+          switch (this.intro._currentStep) {
+          case 2:
             value = 'open education';
             break;
-          case 2:
+          case 3:
             value = 'teaching "open education"';
             break;
-          case 3:
-            value = '-teaching "open education"';
+          case 4:
+            value = '"open education" -teaching ';
             break;
           }
           if (value) {
@@ -314,7 +349,8 @@ export default {
           this.searchInput.value = '';
 
         }
-        this.stepIndex++;
+
+        scrollHelper(this.intro._currentStep);
 
       });
 

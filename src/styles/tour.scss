@@ -1,7 +1,9 @@
 .introjs {
   &-tooltip {
-    min-width: 450px;
-    max-width: 600px;
+    @media (min-width: 768px) {
+      min-width: 450px;
+      max-width: 600px;
+    }
   }
   &-tooltip-title,
   &-tooltiptext {
