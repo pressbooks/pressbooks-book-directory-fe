@@ -6,7 +6,7 @@ const introJS = require('intro.js');
 
 
 /**
- * This function fix the introJS scroll handling when the markup is too nested
+ * This function fixes the introJS scroll handling when the markup is too nested
  * @param index
  */
 function scrollHelper(index) {
@@ -191,8 +191,8 @@ export default {
             {
               title: 'Viewing all active filters',
               intro: `
-        <p>All filters that are currently being applied to your results will be displayed here.</p>
-        <p>Include filters are blue. Exclude filters are red and display the word NOT before the filtered term.</p>
+        <p>All filters that are currently being applied to your results will be displayed here. Exclude filters will display the word NOT before the filtered term.</p>
+        <p>Clear individual filters by clicking on them.</p>
          `,
               element: document.querySelector('.filters__head'),
               position: 'bottom'
@@ -200,7 +200,6 @@ export default {
             {
               title: 'Clearing filters',
               intro: `
-        <p>Clear individual filters by clicking on them.</p>
         <p>Clear all active filters by clicking on the ‘Clear Active Filters’ button.</p>
          `,
               element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
@@ -209,18 +208,12 @@ export default {
             {
               title: 'Interpreting book cards',
               intro: `
-        <p>After performing a search, you will be presented with a list of relevant book cards. Each book card will display the root URL and name of the network where the resource is hosted. Clicking on a book's title or cover image will take you to the book’s home page.</p>
+        <p>After performing a search, you will be presented with a list of relevant book cards. Each book card displays additional information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
+        <p>Clicking on a book's title or cover image will take you to the book’s home page.</p>
         </p>
          `,
-              element: document.querySelector('.ais-Hits__books__container'),
+              element: document.querySelector('.v-card__content .col-9'),
               position: 'top'
-            },
-            {
-              title: 'Additional book information',
-              intro: `
-        <p>Each book card displays additional information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__details'),
             },
             {
               title: 'Visual icons',
