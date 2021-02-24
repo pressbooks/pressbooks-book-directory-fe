@@ -211,10 +211,12 @@
 
 .include.selected {
   background-color: $pb-blue;
+  color: white !important;
 }
 
 .exclude.selected {
   background-color: $pb-red;
+  color: white !important;
 }
 
 .theme--light.v-btn.v-btn--disabled.selected .v-icon, .theme--light.v-btn.v-btn--disabled .v-btn__loading{
