@@ -117,7 +117,7 @@ export default {
               title: 'The search bar',
               intro: `
         <p>This search bar allows you to search within all of the metadata fields for the books indexed in Pressbooks Directory (title, author, subject, publisher, description, etc.).</p>
-        <p>It does <em>not</em> search the <em>content</em> of the books.</p>
+        <p>It does <strong>not</strong> search the <strong>content</strong> of the books.</p>
          `,
               element: searchInputContainer,
             },
