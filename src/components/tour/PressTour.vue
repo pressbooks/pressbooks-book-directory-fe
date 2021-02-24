@@ -110,14 +110,14 @@ export default {
             {
               title: 'Take a tour',
               intro: `
-              <p>Welcome to Pressbooks Directory. Use the 'next' and 'back' buttons to navigate this tour or click on the X button to exit the tour at any point.</p>
+              <p>Welcome to Pressbooks Directory. Use the 'next' and 'back' buttons to navigate this tour.</p>
               `,
             },
             {
               title: 'The search bar',
               intro: `
-        <p>This search bar allows you to search within all of the metadata fields for the books indexed in the directory (title, author, subject, publisher, description, etc.).</p>
-        <p>It does not search the content of the books.</p>
+        <p>This search bar allows you to search within all of the metadata fields for the books indexed in Pressbooks Directory (title, author, subject, publisher, description, etc.).</p>
+        <p>It does <em>not</em> search the <em>content</em> of the books.</p>
          `,
               element: searchInputContainer,
             },
@@ -132,7 +132,7 @@ export default {
             {
               title: 'Searching for exact phrases',
               intro: `
-        <p>You can search for an exact phrase by putting the desired term in quotation marks.</p>
+        <p>Search for an exact phrase by putting the desired term in quotation marks.</p>
         <p>For example, a search for <strong>teaching "open education"</strong> will retrieve books that include the word 'teaching' AND the exact phrase 'open education'.</p>
          `,
               element: searchInputContainer,
@@ -157,24 +157,9 @@ export default {
               title: 'Viewing search results',
               intro: `
         <p>Once you’ve performed a search, you will see the number of results for your query. This value will be updated each time you perform a new search or change the applied filters.</p>
+        <p>You can change the number of results shown per page [10, 20, 50] and the method used to sort your results.</p>
          `,
-              element: document.querySelector('.filters__stats__results'),
-              position: 'left'
-            },
-            {
-              title: 'Changing results pagination',
-              intro: `
-        <p>You can change the number of results shown per page [10, 20, 50].</p>
-         `,
-              element: document.querySelector('#current-filters .ais-HitsPerPage'),
-              position: 'left'
-            },
-            {
-              title: 'Changing results sort order',
-              intro: `
-        <p>You can change your preferred display order.</p>
-         `,
-              element: document.querySelector('#current-filters .ais-SortBy'),
+              element: document.querySelector('.row.filters .col-md-3'),
               position: 'left'
             },
             {
@@ -188,27 +173,13 @@ export default {
             {
               title: 'Include filter',
               intro: `
-        <p>Clicking the blue checkmark will filter results so that books with this attribute are included in the results.</p>
+        <p>Click the checkmark to apply that filter and see only those results, or click the X to omit those results. Click the same option again to remove that filter.</p>
+        <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
          `,
-              element: document.querySelector('#filter-license_code .v-list-item__action button:first-child'),
+              element: document.querySelector('#filter-license_code .v-list-item__action'),
               position: 'right'
             },
-            {
-              title: 'Exclude filter',
-              intro: `
-        <p>Clicking the red X will filter results so that books with this attribute are excluded from the results.</p>
-         `,
-              element: document.querySelector('#filter-license_code .v-list-item__action button:last-child'),
-              position: 'right'
-            },
-            {
-              title: 'Applying multiple filters',
-              intro: `
-         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
-            `,
-              element: document.querySelector('#filters .search-panel__filters'),
-              position: 'right'
-            },
+
             {
               title: 'Clearing filters for a single facet',
               intro: `
@@ -229,8 +200,8 @@ export default {
             {
               title: 'Clearing filters',
               intro: `
-        <p>You can clear individual filters by clicking on them.</p>
-        <p>You can clear all active filters by clicking on the ‘Clear Refinements’ button.</p>
+        <p>Clear individual filters by clicking on them.</p>
+        <p>Clear all active filters by clicking on the ‘Clear Active Filters’ button.</p>
          `,
               element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
               position: 'bottom'
@@ -238,25 +209,11 @@ export default {
             {
               title: 'Interpreting book cards',
               intro: `
-        <p>After performing a search, you will be presented with a list of relevant book cards. </p>
+        <p>After performing a search, you will be presented with a list of relevant book cards. Each book card will display the root URL and name of the network where the resource is hosted. Clicking on a book's title or cover image will take you to the book’s home page.</p>
+        </p>
          `,
               element: document.querySelector('.ais-Hits__books__container'),
               position: 'top'
-            },
-            {
-              title: 'Network information',
-              intro: `
-        <p>Each book card will display the root URL and name of the network where the resource is hosted.</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .network'),
-              position: 'bottom'
-            },
-            {
-              title: 'Book title',
-              intro: `
-        <p>The title of each book is also a link. Clicking the book's title or cover image will take you to the book’s home page.</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__title'),
             },
             {
               title: 'Additional book information',
