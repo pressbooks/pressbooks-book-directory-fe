@@ -4,30 +4,33 @@
 <script>
 const introJS = require('intro.js');
 
-
 /**
- * This function fixes the introJS scroll handling when the markup is too nested
- * @param index
+ * This function fixes the introJS scroll by adding padding for some elements to improve the visualization
+ * @param index (step number)
  */
 function scrollHelper(index) {
-  let currentScroll = window.scrollY;
-  let top = 0;
   let timeout = 50;
+  let top = 0;
   switch (index) {
   case 1:
   case 2:
   case 3:
   case 4:
-    top = currentScroll - 80;
+  case 10:
+    top = 80;
     break;
   case 5:
   case 6:
   case 7:
   case 8:
-    top = currentScroll - 250;
+    top = 250;
     break;
   case 9:
-    top = currentScroll - 100;
+    top = 100;
+    break;
+  case 12:
+    top = 120;
+    timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
   case 12:
     timeout = 1000;
@@ -35,13 +38,13 @@ function scrollHelper(index) {
     break;
   }
 
-  if(top > 0) {
+  if(top !== 0) {
     setTimeout(()=>{
       window.scrollTo({
-        top,
+        top: window.scrollY - top,
         behavior: 'smooth',
       });
-    }, timeout);
+    },timeout);
   }
 }
 
@@ -81,7 +84,6 @@ export default {
       this.searchInput.value = '';
       this.searchInput.previousElementSibling.classList.remove('v-label--active');
     };
-
 
     const filterUsedForTour = document.querySelector('#filter-license_code .v-list-item');
 
