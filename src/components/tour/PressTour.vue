@@ -6,36 +6,41 @@ const introJS = require('intro.js');
 
 
 /**
- * This function fixes the introJS scroll handling when the markup is too nested
- * @param index
+ * This function fixes the introJS scroll adding some padding for some elements to improve the visualization
+ * @param index (step number)
  */
 function scrollHelper(index) {
-  let currentScroll = window.scrollY;
+  let timeout = 50;
   let top = 0;
   switch (index) {
   case 1:
   case 2:
   case 3:
   case 4:
-    top = currentScroll - 80;
+  case 10:
+    top = 80;
     break;
   case 5:
   case 6:
   case 7:
   case 8:
-    top = currentScroll - 250;
+    top = 250;
     break;
   case 9:
-    top = currentScroll - 100;
+    top = 100;
+    break;
+  case 12:
+    top = 120;
+    timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
   }
-  if(top > 0) {
+  if(top !== 0) {
     setTimeout(()=>{
       window.scrollTo({
-        top,
+        top: window.scrollY - top,
         behavior: 'smooth',
       });
-    },50);
+    },timeout);
   }
 }
 
@@ -210,10 +215,8 @@ export default {
               intro: `
         <p>After performing a search, you will be presented with a list of relevant book cards. Each book card displays additional information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
         <p>Clicking on a book's title or cover image will take you to the book’s home page.</p>
-        </p>
          `,
               element: document.querySelector('.v-card__content .col-9'),
-              position: 'top'
             },
             {
               title: 'Visual icons',
