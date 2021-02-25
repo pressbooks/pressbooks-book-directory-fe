@@ -12,6 +12,7 @@ const introJS = require('intro.js');
 function scrollHelper(index) {
   let currentScroll = window.scrollY;
   let top = 0;
+  let timeout = 50;
   switch (index) {
   case 1:
   case 2:
@@ -28,14 +29,19 @@ function scrollHelper(index) {
   case 9:
     top = currentScroll - 100;
     break;
+  case 12:
+    timeout = 1000;
+    top = currentScroll - 200;
+    break;
   }
+
   if(top > 0) {
     setTimeout(()=>{
       window.scrollTo({
         top,
         behavior: 'smooth',
       });
-    },50);
+    }, timeout);
   }
 }
 
@@ -208,12 +214,11 @@ export default {
             {
               title: 'Interpreting book cards',
               intro: `
-        <p>After performing a search, you will be presented with a list of relevant book cards. Each book card displays additional information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
-        <p>Clicking on a book's title or cover image will take you to the book’s home page.</p>
-        </p>
+        <p>Each book card displays information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
+        <p>Clicking a book's title or cover will take you to the book’s home page.</p>
          `,
               element: document.querySelector('.v-card__content .col-9'),
-              position: 'top'
+              position: 'bottom'
             },
             {
               title: 'Visual icons',
