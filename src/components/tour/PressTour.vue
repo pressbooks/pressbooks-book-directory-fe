@@ -32,10 +32,6 @@ function scrollHelper(index) {
     top = 120;
     timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
-  case 12:
-    timeout = 1000;
-    top = currentScroll - 200;
-    break;
   }
 
   if(top !== 0) {
