@@ -3,11 +3,17 @@
     <h1>Welcome to Pressbooks Directory</h1>
     <p>
       This directory provides an index of <strong>{{ $store.state.stats.numberOfBooksIndexed }}</strong> books published across
-      <strong>{{ $store.state.stats.numberOfNetworksIndexed }}</strong> Pressbooks networks. Search and filter books by keyword,
-      subject matter, license, and more. See
-      <a href="https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/">our guide for
-        more detailed instructions</a> on using the Pressbooks Directory to find books of interest.
+      <strong>{{ $store.state.stats.numberOfNetworksIndexed }}</strong> Pressbooks networks. Learn more about how the directory
+      works by <a href="https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/">reading our guide</a>
+      or taking the self-guided tour below.
     </p>
+    <v-btn
+      class="directory-tour"
+      aria-label="Take the tour"
+      @click="$store.commit('showTour')"
+    >
+      Take the tour
+    </v-btn>
     <!-- eslint-disable vue/no-v-html -->
     <p
       v-if="additionalText"

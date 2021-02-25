@@ -4,38 +4,43 @@
 <script>
 const introJS = require('intro.js');
 
-
 /**
- * This function fix the introJS scroll handling when the markup is too nested
- * @param index
+ * This function fixes the introJS scroll by adding padding for some elements to improve the visualization
+ * @param index (step number)
  */
 function scrollHelper(index) {
-  let currentScroll = window.scrollY;
+  let timeout = 50;
   let top = 0;
   switch (index) {
   case 1:
   case 2:
   case 3:
   case 4:
-    top = currentScroll - 80;
+  case 10:
+    top = 80;
     break;
   case 5:
   case 6:
   case 7:
   case 8:
-    top = currentScroll - 250;
+    top = 250;
     break;
   case 9:
-    top = currentScroll - 100;
+    top = 100;
+    break;
+  case 12:
+    top = 120;
+    timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
   }
-  if(top > 0) {
+
+  if(top !== 0) {
     setTimeout(()=>{
       window.scrollTo({
-        top,
+        top: window.scrollY - top,
         behavior: 'smooth',
       });
-    },50);
+    },timeout);
   }
 }
 
@@ -76,7 +81,6 @@ export default {
       this.searchInput.previousElementSibling.classList.remove('v-label--active');
     };
 
-
     const filterUsedForTour = document.querySelector('#filter-license_code .v-list-item');
 
     const typing = (text, current = 0) => {
@@ -110,14 +114,14 @@ export default {
             {
               title: 'Take a tour',
               intro: `
-              <p>Welcome to Pressbooks Directory. Use the 'next' and 'back' buttons to navigate this tour or click on the X button to exit the tour at any point.</p>
+              <p>Welcome to Pressbooks Directory. Use the 'next' and 'back' buttons to navigate this tour.</p>
               `,
             },
             {
               title: 'The search bar',
               intro: `
-        <p>This search bar allows you to search within all of the metadata fields for the books indexed in the directory (title, author, subject, publisher, description, etc.).</p>
-        <p>It does not search the content of the books.</p>
+        <p>This search bar allows you to search within all of the metadata fields for the books indexed in Pressbooks Directory (title, author, subject, publisher, description, etc.).</p>
+        <p>It does <strong>not</strong> search the <strong>content</strong> of the books.</p>
          `,
               element: searchInputContainer,
             },
@@ -132,7 +136,7 @@ export default {
             {
               title: 'Searching for exact phrases',
               intro: `
-        <p>You can search for an exact phrase by putting the desired term in quotation marks.</p>
+        <p>Search for an exact phrase by putting the desired term in quotation marks.</p>
         <p>For example, a search for <strong>teaching "open education"</strong> will retrieve books that include the word 'teaching' AND the exact phrase 'open education'.</p>
          `,
               element: searchInputContainer,
@@ -157,24 +161,9 @@ export default {
               title: 'Viewing search results',
               intro: `
         <p>Once you’ve performed a search, you will see the number of results for your query. This value will be updated each time you perform a new search or change the applied filters.</p>
+        <p>You can change the number of results shown per page [10, 20, 50] and the method used to sort your results.</p>
          `,
-              element: document.querySelector('.filters__stats__results'),
-              position: 'left'
-            },
-            {
-              title: 'Changing results pagination',
-              intro: `
-        <p>You can change the number of results shown per page [10, 20, 50].</p>
-         `,
-              element: document.querySelector('#current-filters .ais-HitsPerPage'),
-              position: 'left'
-            },
-            {
-              title: 'Changing results sort order',
-              intro: `
-        <p>You can change your preferred display order.</p>
-         `,
-              element: document.querySelector('#current-filters .ais-SortBy'),
+              element: document.querySelector('.row.filters .col-md-3'),
               position: 'left'
             },
             {
@@ -188,27 +177,13 @@ export default {
             {
               title: 'Include filter',
               intro: `
-        <p>Clicking the blue checkmark will filter results so that books with this attribute are included in the results.</p>
+        <p>Click the checkmark to apply that filter and see only those results, or click the X to omit those results. Click the same option again to remove that filter.</p>
+        <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
          `,
-              element: document.querySelector('#filter-license_code .v-list-item__action button:first-child'),
+              element: document.querySelector('#filter-license_code .v-list-item__action'),
               position: 'right'
             },
-            {
-              title: 'Exclude filter',
-              intro: `
-        <p>Clicking the red X will filter results so that books with this attribute are excluded from the results.</p>
-         `,
-              element: document.querySelector('#filter-license_code .v-list-item__action button:last-child'),
-              position: 'right'
-            },
-            {
-              title: 'Applying multiple filters',
-              intro: `
-         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
-            `,
-              element: document.querySelector('#filters .search-panel__filters'),
-              position: 'right'
-            },
+
             {
               title: 'Clearing filters for a single facet',
               intro: `
@@ -220,17 +195,16 @@ export default {
             {
               title: 'Viewing all active filters',
               intro: `
-        <p>All filters that are currently being applied to your results will be displayed here.</p>
-        <p>Include filters are blue. Exclude filters are red and display the word NOT before the filtered term.</p>
+        <p>All filters that are currently being applied to your results will be displayed here. Exclude filters will display the word NOT before the filtered term.</p>
+        <p>Clear individual filters by clicking on them.</p>
          `,
-              element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
+              element: document.querySelector('.filters__head'),
               position: 'bottom'
             },
             {
               title: 'Clearing filters',
               intro: `
-        <p>You can clear individual filters by clicking on them.</p>
-        <p>You can clear all active filters by clicking on the ‘Clear Refinements’ button.</p>
+        <p>Clear all active filters by clicking on the ‘Clear Active Filters’ button.</p>
          `,
               element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
               position: 'bottom'
@@ -238,32 +212,11 @@ export default {
             {
               title: 'Interpreting book cards',
               intro: `
-        <p>After performing a search, you will be presented with a list of relevant book cards. </p>
+        <p>Each book card displays information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
+        <p>Clicking a book's title or cover will take you to the book’s home page.</p>
          `,
-              element: document.querySelector('.ais-Hits__books__container'),
-              position: 'top'
-            },
-            {
-              title: 'Network information',
-              intro: `
-        <p>Each book card will display the root URL and name of the network where the resource is hosted.</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .network'),
+              element: document.querySelector('.v-card__content .col-9'),
               position: 'bottom'
-            },
-            {
-              title: 'Book title',
-              intro: `
-        <p>The title of each book is also a link. Clicking the book's title or cover image will take you to the book’s home page.</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__title'),
-            },
-            {
-              title: 'Additional book information',
-              intro: `
-        <p>Each book card displays additional information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__details'),
             },
             {
               title: 'Visual icons',
@@ -293,7 +246,7 @@ export default {
               title: 'H5P Activities',
               intro: `
         <img src="${this.h5pActivitiesImage}" alt="H5P Logo" width="${this.h5pLogoWidth}" />
-        <p>The H5P logo is displayed when a book contains interactive H5P elements. Hovering over the icon will display the number of H5P activities present in that book.</p>
+        <p>The H5P logo is displayed when a book contains interactive H5P elements (like quizzes or flashcards). Hovering over the icon will display the number of H5P activities present in that book.</p>
          `,
               element: document.querySelector('.ais-Hits__books__container .v-card__content .row'),
               position: 'left'

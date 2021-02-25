@@ -13,13 +13,6 @@
             :filters.camel="($store.state.SClient.filtersParams.length > 0) ? $store.state.SClient.filtersParams : ''"
             :query="$store.state.SClient.searchParameters.searchQuery"
           />
-          <v-btn
-            class="float-right"
-            aria-label="Take the tour"
-            @click="$store.commit('showTour')"
-          >
-            Take the tour
-          </v-btn>
           <welcome-header />
           <current-filters />
           <v-row>
