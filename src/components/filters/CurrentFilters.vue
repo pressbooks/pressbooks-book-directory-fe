@@ -11,6 +11,7 @@
         <ul
           v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0"
           class="ais-CurrentRefinements-list"
+          :data-test-chip-filters="Object.keys($store.state.SClient.filtersExcluded).length"
         >
           <li
             v-for="iv in $store.state.SClient.filtersExcluded"

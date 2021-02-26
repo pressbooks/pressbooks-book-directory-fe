@@ -234,5 +234,49 @@ module.exports = {
           }
         });
       });
+  },
+  'Apply 2 subjects filters and then click in one filter twice to check if the 2nd filter was removed' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .waitForElementVisible('#filter-about')
+      .click('#filter-about')
+      .pause(1000)
+      .click('*[data-test-include-btn="0"]')
+      .pause(1500)
+      .click('*[data-test-include-btn="1"]')
+      .pause(1500)
+      .click('*[data-test-include-btn="2"]')
+      .pause(1500)
+      .click('*[data-test-include-btn="1"]')
+      .pause(1500)
+      .getText('*[data-test-filter-item="1"]', (filterText) => {
+        filterText.value = filterText.value.split(' (')[0];
+        browser
+          .expect.element('*[data-test-chip-filters]')
+          .text.to.not.contain(filterText.value);
+      }).end();
+  },
+  'Exclude 2 subjects filters and then click in one filter twice to check if the 2nd filter was removed' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .waitForElementVisible('#filter-about')
+      .click('#filter-about')
+      .pause(1000)
+      .click('*[data-test-exclude-btn="0"]')
+      .pause(1500)
+      .click('*[data-test-exclude-btn="1"]')
+      .pause(1500)
+      .click('*[data-test-exclude-btn="2"]')
+      .pause(1500)
+      .click('*[data-test-exclude-btn="1"]')
+      .pause(1500)
+      .getText('*[data-test-filter-item="1"]', (filterText) => {
+        filterText.value = filterText.value.split(' (')[0];
+        browser
+          .expect.element('*[data-test-chip-filters]')
+          .text.to.not.contain(filterText.value);
+      }).end();
   }
 };

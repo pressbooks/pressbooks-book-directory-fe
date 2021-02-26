@@ -18,7 +18,6 @@
           <v-btn
             :id="'btn-include-based-another'"
             icon
-            :disabled="wasFiltered('true', false)"
             :class="wasFiltered('true', false) ? 'selected include': 'include'"
             @click="applyFilter(true, false)"
           >
@@ -29,7 +28,6 @@
           <v-btn
             :id="'btn-exclude-based-another'"
             icon
-            :disabled="wasFiltered('false', true)"
             :class="wasFiltered('false', true) ? 'selected exclude': 'exclude'"
             @click="applyFilter(true, true)"
           >
@@ -52,11 +50,19 @@ export default {
   },
   methods: {
     applyFilter(itemValue, exclude) {
+      if (this.wasFiltered((!exclude).toString(), exclude)) {
+        return this.removeFilter();
+      }
       let query = {...this.$route.query}, value;
       let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
       value = !exclude;
       query[attribute] = value;
       this.$router.replace({ query });
+    },
+    removeFilter() {
+      let queryString = {...this.$route.query};
+      delete queryString[this.$store.state.SClient.allowedFilters[this.field].alias];
+      this.$router.replace({ query: queryString });
     },
     wasFiltered(value, exc) {
       return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
