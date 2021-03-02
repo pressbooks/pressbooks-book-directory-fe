@@ -175,7 +175,7 @@ module.exports = {
               }).perform((done) => {
               // Filter any of the networks listed
                 browser
-                  .click('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
+                  .click('*[data-test-include-btn="0"]')
                   .pause(3000)
                   .elements('css selector', '#filter-networkName > div.v-list-group__items', (netElements) => {
                     netElements.value.forEach((v) => {

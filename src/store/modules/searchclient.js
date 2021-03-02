@@ -7,7 +7,30 @@ let sClient = {
     process.env.VUE_APP_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: process.env.VUE_APP_ALGOLIA_INDEX,
+  indexName: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+  availableIndexes: [
+    {
+      value: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      default: true,
+      orderedBy: 'updated',
+      isReplica: true,
+      label: 'Recently updated'
+    },
+    {
+      value: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
+      default: false,
+      orderedBy: 'wordCount',
+      isReplica: true,
+      label: 'Word count ↓'
+    },
+    {
+      value: process.env.VUE_APP_ALGOLIA_INDEX,
+      default: false,
+      orderedBy: 'name',
+      isReplica: false,
+      label: 'Title (A-Z)'
+    }
+  ],
   filtersExcluded: [],
   notFilters: [],
   filtersParams: '',

@@ -6,7 +6,7 @@ module.exports = {
       .waitForElementVisible('#filter-license_code')
       .click('#filter-license_code')
       .click('#btn-include-license_code-All-Rights-Reserved')
-      .waitForElementVisible('.v-chip--clickable')
+      .waitForElementVisible('.ais-CurrentRefinements-list')
       .assert.cssClassPresent('.ais-Hits__books-book', 'ais-Hits__books--allrights')
       .expect.element('.ais-Hits__books-book').to.not.have.css('background-color').which.contains('#FFFFFF');
   },

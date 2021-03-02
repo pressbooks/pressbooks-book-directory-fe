@@ -13,7 +13,11 @@ Vue.use(InstantSearch);
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
-  let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
+  // let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
+  let indexName = store.state.SClient.availableIndexes.filter((index) => {
+    return ! index.isReplica;
+  });
+  let index = store.state.SClient.searchClient.initIndex(indexName[0].value);
   store.dispatch('getStats', index).then(() => {
     let query = {};
     let containsQ = false;
