@@ -86,7 +86,7 @@
       <!-- eslint-disable-next-line vue/no-v-html -->
       <span
         class="v-card--item description"
-        v-html="item.description"
+        v-html="item.disambiguatingDescription"
       />
     </div>
   </div>
