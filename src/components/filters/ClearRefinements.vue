@@ -5,7 +5,7 @@
     :disabled="Object.keys($store.state.SClient.filtersExcluded).length === 0"
     @click.prevent="removeFilters()"
   >
-    Clear refinements
+    Clear Active Filters
   </button>
 </template>
 

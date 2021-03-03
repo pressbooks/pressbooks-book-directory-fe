@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="current-filters">
     <v-row class="filters">
       <v-col
         class="filters__head filters__head--red"
@@ -11,6 +11,7 @@
         <ul
           v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0"
           class="ais-CurrentRefinements-list"
+          :data-test-chip-filters="Object.keys($store.state.SClient.filtersExcluded).length"
         >
           <li
             v-for="iv in $store.state.SClient.filtersExcluded"
@@ -135,6 +136,9 @@ export default {
       switch (value.attribute) {
       case 'has_isBasedOn':
         label = (value.value) ? 'Based on another book' : 'Original';
+        break;
+      case 'is_recommended':
+        label = (value.value) ? 'Recommended' : 'Not recommended';
         break;
       case 'wordCount':
         label = 'Words ' + value.operator + ' ' + value.value;

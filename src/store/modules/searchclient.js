@@ -74,6 +74,17 @@ let sClient = {
       alias: 'updated',
       search: false
     },
+    is_recommended: {
+      type: 'boolean',
+      alias: 'recommended',
+      search: false
+    },
+    collections: {
+      type: 'string',
+      alias: 'collec',
+      search: false,
+      default: []
+    }
   },
   mappedFilters: {},
   searchFilters: '',

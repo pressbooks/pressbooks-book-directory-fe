@@ -1,23 +1,24 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-list-group
-    id="filter-basedOn"
+    id="filter-recommended"
     sub-group
     :value="false"
   >
     <template #activator>
-      <v-list-item-title>BASED ON</v-list-item-title>
+      <v-list-item-title>RECOMMENDED</v-list-item-title>
     </template>
     <v-list-item>
       <v-list-item-content
         :class="(wasFiltered('false', false) || wasFiltered('true', false)) ? 'v-list-item__content--filtered' : ''"
       >
-        Based on another book
+        Recommended books
       </v-list-item-content>
-      <v-list-item-action id="isBasedOn-another">
+      <v-list-item-action id="recommended-filter-item">
         <div>
           <v-btn
-            :id="'btn-include-based-another'"
+            id="btn-included-recommended"
             icon
+            :disabled="wasFiltered('true', false)"
             :class="wasFiltered('true', false) ? 'selected include': 'include'"
             @click="applyFilter(true, false)"
           >
@@ -26,8 +27,9 @@
             </v-icon>
           </v-btn>
           <v-btn
-            :id="'btn-exclude-based-another'"
+            id="btn-excluded-recommended"
             icon
+            :disabled="wasFiltered('false', true)"
             :class="wasFiltered('false', true) ? 'selected exclude': 'exclude'"
             @click="applyFilter(true, true)"
           >
@@ -41,33 +43,25 @@
 
 <script>
 export default {
-  name: 'BasedOn',
+  name: 'Recommended',
   data() {
     return {
       excluded: false,
-      field: 'has_isBasedOn'
+      field: 'is_recommended'
     };
   },
   methods: {
     applyFilter(itemValue, exclude) {
-      if (this.wasFiltered((!exclude).toString(), exclude)) {
-        return this.removeFilter();
-      }
       let query = {...this.$route.query}, value;
       let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
       value = !exclude;
       query[attribute] = value;
       this.$router.replace({ query });
     },
-    removeFilter() {
-      let queryString = {...this.$route.query};
-      delete queryString[this.$store.state.SClient.allowedFilters[this.field].alias];
-      this.$router.replace({ query: queryString });
-    },
-    wasFiltered(value, exc) {
-      return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
-                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].value === value &&
-                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].exclude === exc;
+    wasFiltered(value, is_excluded) {
+      return typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' &&
+          this.$store.state.SClient.filtersExcluded[this.field][0].value === value &&
+          this.$store.state.SClient.filtersExcluded[this.field][0].exclude === is_excluded;
     }
   }
 };

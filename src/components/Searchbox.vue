@@ -96,6 +96,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$store.commit('setComponentAsLoaded', 'searchbox');
+  },
   methods: {
     // Analyze strings  for literal and faceting searching //
     filterSearch(stringSearch) {

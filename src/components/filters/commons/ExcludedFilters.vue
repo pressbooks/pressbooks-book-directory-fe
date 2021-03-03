@@ -22,6 +22,7 @@
       </v-text-field>
     </v-list-item>
     <v-list-item
+      v-if="typeof $store.state.SClient.allowedFilters[field].empty !== 'undefined'"
       v-show="stringSearch.length === 0 || (stringSearch.length > 0 && textEmpty.search(stringSearch) >= 0)"
     >
       <v-list-item-content
@@ -35,7 +36,6 @@
             :id="'btn-include-empty-' + field"
             :class="wasFiltered('empty', false) ? 'selected include': 'include'"
             icon
-            :disabled="wasFiltered('empty', false)"
             @click="applyFilter('empty', false)"
           >
             <v-icon>
@@ -46,7 +46,6 @@
             :id="'btn-exclude-empty-' + field"
             icon
             :class="wasFiltered('empty', true) ? 'selected exclude': 'exclude'"
-            :disabled="wasFiltered('empty', true)"
             @click="applyFilter('empty', true)"
           >
             <v-icon>mdi-close</v-icon>
@@ -62,6 +61,7 @@
         <v-list-item-content
           :id="'filter-item-name-' + item.facet.split(' ').join('-')"
           :class="(wasFiltered(item.facet, false) || wasFiltered(item.facet, true)) ? 'v-list-item__content--filtered' : ''"
+          :data-test-filter-item="k"
         >
           {{ showItem(item) }}
         </v-list-item-content>
@@ -72,8 +72,8 @@
             <v-btn
               :id="'btn-include-' + field + '-' + item.facet.split(' ').join('-')"
               icon
-              :disabled="wasFiltered(item.facet, false)"
               :class="wasFiltered(item.facet, false) ? 'selected include': 'include'"
+              :data-test-include-btn="k"
               @click="applyFilter(item.facet, false)"
             >
               <v-icon>
@@ -83,8 +83,8 @@
             <v-btn
               :id="'btn-exclude-' + field + '-' + item.facet.split(' ').join('-')"
               icon
-              :disabled="wasFiltered(item.facet, true)"
               :class="wasFiltered(item.facet, true) ? 'selected exclude': 'exclude'"
+              :data-test-exclude-btn="k"
               @click="applyFilter(item.facet, true)"
             >
               <v-icon>mdi-close</v-icon>
@@ -162,15 +162,18 @@ export default {
     '$store.state.stats.filters': {
       deep: true,
       handler(filters) {
-        for (let i = 0; i < filters[this.empty].length; i++) {
-          if (filters[this.empty][i].facet === 'false') {
-            this.emptyFieldCount = filters[this.empty][i].count;
+        if (typeof filters[this.empty] !== 'undefined') {
+          for (let i = 0; i < filters[this.empty].length; i++) {
+            if (filters[this.empty][i].facet === 'false') {
+              this.emptyFieldCount = filters[this.empty][i].count;
+            }
           }
+          if (this.filterApplied && this.stringSearch.length > 0) {
+            this.searchForItems();
+          }
+          this.filterApplied = false;
+          return true;
         }
-        if (this.filterApplied && this.stringSearch.length > 0) {
-          this.searchForItems();
-        }
-        this.filterApplied = false;
       }
     },
     '$store.state.SClient.filtersExcluded': {
@@ -227,7 +230,28 @@ export default {
       this.stringSearch = '';
       this.$router.replace({ query });
     },
+    removeFilter(itemValue) {
+      let queryString = {...this.$route.query};
+      let filtersApplied = queryString[this.alias].split('&&'), filterItem;
+      for (let i = 0; i < filtersApplied.length; i++) {
+        filterItem = filtersApplied[i][0] === '-' ? filtersApplied[i].substring(1) : filtersApplied[i];
+        if (filterItem === itemValue) {
+          filtersApplied.splice(i, 1);
+          if (filtersApplied.length === 0) {
+            delete queryString[this.alias];
+            this.filterApplied = false;
+          } else {
+            queryString[this.alias] = filtersApplied.join('&&');
+          }
+          this.$router.replace({ query: queryString });
+          return;
+        }
+      }
+    },
     applyFilter(itemValue, exclude) {
+      if (this.wasFiltered(itemValue, exclude)) {
+        return this.removeFilter(itemValue);
+      }
       this.filterApplied = true;
       let query = {...this.$route.query}, value;
       value = exclude ? '-' + itemValue : itemValue;
@@ -238,7 +262,7 @@ export default {
         for (let i = 0; i < filters.length; i++) {
           if (
             (exclude && filters[i][0] !== '-') ||
-                        (!exclude && filters[i][0] === '-')
+            (!exclude && filters[i][0] === '-')
           ) {
             query[this.alias] = value.toString();
             return this.$router.replace({ query });

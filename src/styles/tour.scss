@@ -1,0 +1,34 @@
+.introjs {
+  &-tooltip {
+    @media (min-width: 768px) {
+      min-width: 450px;
+      max-width: 600px;
+    }
+  }
+  &-tooltip-title,
+  &-tooltiptext {
+    font-family: $font-primary;
+
+    p {
+      font-family: $font-primary;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: $pb-red;
+    }
+  }
+
+  &-button {
+    text-shadow: none;
+    color: $pb-light;
+    background: $pb-red;
+    border-radius: 4px;
+  }
+
+  &-progressbar {
+    background-color: $pb-red;
+  }
+
+
+}

@@ -44,6 +44,12 @@
           class="filters__stats-algolia-logo"
         />
       </v-container>
+      <press-tour
+        v-if="$store.state.config.showTour"
+        :overlay="0.5"
+        :auto-scroll="true"
+        :typing-speed="17"
+      />
     </main>
   </v-app>
 </template>
@@ -56,6 +62,7 @@ import HeaderBar from './components/commons/HeaderBar';
 import CurrentFilters from './components/filters/CurrentFilters';
 import Books from './components/Books';
 import WelcomeHeader from './components/WelcomeHeader';
+import PressTour from './components/tour/PressTour';
 
 export default {
   components: {
@@ -64,7 +71,8 @@ export default {
     Filters,
     Pagination,
     HeaderBar,
-    Books
+    Books,
+    PressTour
   },
   data(){
     return {
@@ -100,6 +108,7 @@ export default {
         content: 'noindex'
       });
     }
+
   },
   metaInfo() {
     return {

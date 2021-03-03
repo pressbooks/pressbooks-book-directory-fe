@@ -119,5 +119,21 @@ module.exports = {
               });
         }
       ).end();
-  }
+  },'Filtering books using only one filter with an empty value' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .waitForElementVisible('#filter-wordCount')
+      .click('#filter-wordCount')
+      .waitForElementVisible('#max-wordCount')
+      .setValue('#max-wordCount', '') //an empty value will be converted to 0
+      .waitForElementVisible('#min-wordCount')
+      .setValue('#min-wordCount', '1')
+      .click('#btn-wordCount')
+      .pause(3000)
+      .elements('css selector', '.ais-CurrentRefinements-item', () => {
+        browser.expect.elements('.ais-CurrentRefinements-item .v-chip').count.to.equal(1);
+      })
+      .end();
+  },
 };

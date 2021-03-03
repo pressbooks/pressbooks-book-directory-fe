@@ -7,9 +7,11 @@
       dense
       :expand="false"
     >
+      <recommended v-if="$store.state.stats.numberOfRecommendedBooksIndexed > 0" />
       <licenses />
       <subjects />
       <networks />
+      <collections-filter v-if="$store.state.collections.collections.length > 0" />
       <last-modified />
       <languages />
       <publishers />
@@ -32,10 +34,14 @@ import Publishers from './Publishers';
 import StorageSize from './StorageSize';
 import Networks from './Networks';
 import LastModified from './LastModified';
+import Recommended from './Recommended';
+import CollectionsFilter from './Collections';
 
 export default {
   name: 'Filters',
   components: {
+    Recommended,
+    CollectionsFilter,
     Networks,
     StorageSize,
     Publishers,

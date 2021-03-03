@@ -41,7 +41,12 @@
         <v-col cols="3">
           <v-row>
             <v-col cols="12">
-              <book-cover :image="item.image" />
+              <a
+                :href="item.url"
+                target="_blank"
+              >
+                <book-cover :image="item.image" />
+              </a>
             </v-col>
             <v-col cols="6">
               <div class="language">

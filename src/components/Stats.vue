@@ -6,7 +6,10 @@
     >
       <div class="filters__stats__results">
         <span class="container__results">Results: </span>
-        <span class="container__results-hits">
+        <span
+          class="container__results-hits"
+          data-test-id="stats_results"
+        >
           {{ nbHits }} / {{ $store.state.stats.numberOfBooksIndexed }} shown
         </span>
       </div>

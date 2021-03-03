@@ -27,12 +27,12 @@ module.exports = {
       .waitForElementVisible('#filter-networkName')
       .pause(2000)
       .click('#filter-networkName')
-      .getText('#v-application__main_content > div > div:nth-child(2) > div.row.filters > div.col-md-3.col-12 > div.ais-Stats > div > span.container__results-hits', (resultsText) => {
+      .getText('#current-filters span[data-test-id="stats_results"]', (resultsText) => {
         const totalShown = parseInt(resultsText.value.split('/ ')[1]);
         browser
           .click('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
           .pause(3000)
-          .getText('#v-application__main_content > div > div:nth-child(2) > div.row.filters > div.col-md-3.col-12 > div.ais-Stats > div > span.container__results-hits', (resultsTextAfter) => {
+          .getText('#current-filters span[data-test-id="stats_results"]', (resultsTextAfter) => {
             const totalShownAfter = parseInt(resultsTextAfter.value.split('/ ')[1]);
             browser
               .assert.ok(

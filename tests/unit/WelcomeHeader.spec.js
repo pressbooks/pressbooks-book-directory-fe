@@ -26,7 +26,7 @@ describe("WelcomeHeader.vue", () => {
     });
 
     it("should have the \"Welcome to Pressbooks Directory title\"", () => {
-        const title = wrapper.find(".welcome-header__content--bold-red");
+        const title = wrapper.find("h1");
         expect(wrapper.html()).toMatchSnapshot();
         expect(title.text()).toBe("Welcome to Pressbooks Directory");
     });

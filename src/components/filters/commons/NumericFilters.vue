@@ -15,7 +15,7 @@
               <v-col cols="4">
                 <v-text-field
                   :id="'min-' + field"
-                  v-model="number.min"
+                  v-model.trim.number="number.min"
                   type="number"
                   :min="0"
                   label="Min"
@@ -24,7 +24,7 @@
               <v-col cols="4">
                 <v-text-field
                   :id="'max-' + field"
-                  v-model="number.max"
+                  v-model.trim.number="number.max"
                   type="number"
                   :min="number.min"
                   label="Max"
@@ -86,6 +86,14 @@ export default {
       itemsFiltered: false
     };
   },
+  computed: {
+    min() {
+      return this.number.min.length === 0 ? 0 : this.number.min;
+    },
+    max() {
+      return this.number.max.length === 0 ? 0 : this.number.max;
+    }
+  },
   watch: {
     '$store.state.SClient.filtersExcluded': {
       deep: true,
@@ -127,8 +135,8 @@ export default {
     applyFilter() {
       let query = {...this.$route.query};
       let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-      let min = parseInt(this.number.min);
-      let max = parseInt(this.number.max);
+      let min = parseInt(this.min);
+      let max = parseInt(this.max);
       if (min > max) {
         this.number.max = 0;
         query[attribute] = '>=' + min;

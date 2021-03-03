@@ -1,5 +1,3 @@
-import helpers from '../helpers';
-
 let featuredBooks = {
   books: []
 };
