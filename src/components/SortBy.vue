@@ -1,10 +1,6 @@
 <template>
   <ais-sort-by
-    :items="[
-      { value: defaultIndex, label: 'Title (A-Z)' },
-      { value: wordCountReplicaIndex, label: 'Word count ↓' },
-      { value: lastUpdatedReplicaIndex, label: 'Recently updated' }
-    ]"
+    :items="$store.state.SClient.availableIndexes"
   >
     <template #default="{ items, refine }">
       <v-select
@@ -18,7 +14,7 @@
         @change="sortBy(selected, refine)"
       >
         <template #item="{ item }">
-          <div :id="'sort-by-' + item.value">
+          <div :data-test-sort-item="item.orderedBy">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>
@@ -41,9 +37,9 @@ export default {
   data() {
     return {
       selected: '',
-      defaultIndex: process.env.VUE_APP_ALGOLIA_INDEX,
-      wordCountReplicaIndex: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
-      lastUpdatedReplicaIndex: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA
+      defaultIndex: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      indexSortedByWordCount: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
+      indexSortedByName: process.env.VUE_APP_ALGOLIA_INDEX
     };
   },
   methods: {

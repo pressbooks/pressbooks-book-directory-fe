@@ -6,7 +6,7 @@ module.exports = {
       .waitForElementVisible('.ais-SortBy--input')
       .click('.ais-SortBy--input')
       .waitForElementVisible('.v-select-list')
-      .click('#app > div.v-menu__content.theme--light.menuable__content__active > div > div:nth-child(2)')
+      .click('*[data-test-sort-item="wordCount"]')
       .pause(3000)
       .waitForElementVisible('.ais-Hits__books-book-wordcount')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
@@ -44,7 +44,7 @@ module.exports = {
       .waitForElementVisible('.ais-SortBy--input')
       .click('.ais-SortBy--input')
       .waitForElementVisible('.v-select-list')
-      .click('#app > div.v-menu__content.theme--light.menuable__content__active > div > div:nth-child(1)')
+      .click('*[data-test-sort-item="name"]')
       .pause(3000)
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {
         let previousName = '', elementId;
@@ -87,7 +87,7 @@ module.exports = {
       .waitForElementVisible('.ais-SortBy--input')
       .click('.ais-SortBy--input')
       .waitForElementVisible('.v-select-list')
-      .click('#app > div.v-menu__content.theme--light.menuable__content__active > div > div:nth-child(3)')
+      .click('*[data-test-sort-item="updated"]')
       .pause(3000)
       .waitForElementVisible('.updated')
       .elements('css selector', '.ais-Hits__books-book', (bookElement) => {

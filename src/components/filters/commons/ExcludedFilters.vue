@@ -180,6 +180,9 @@ export default {
       deep: true,
       handler() {
         this.itemsFiltered = typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' && this.$store.state.SClient.filtersExcluded[this.field].length > 0;
+        if (!this.itemsFiltered) {
+          this.stringSearch = '';
+        }
       }
     }
   },
