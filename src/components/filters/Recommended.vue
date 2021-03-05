@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       excluded: false,
-      field: 'is_recommended'
+      field: 'isRecommended'
     };
   },
   methods: {

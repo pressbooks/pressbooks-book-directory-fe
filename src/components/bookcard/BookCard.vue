@@ -17,7 +17,7 @@
       <v-row class="v-card__content">
         <v-col cols="9">
           <section
-            v-if="item.is_recommended"
+            v-if="item.isRecommended"
             class="ais-Hits__books__recommended"
           >
             Recommended
@@ -74,7 +74,7 @@
               <v-tooltip bottom>
                 <template #activator="{ on, attrs }">
                   <v-img
-                    v-if="item.has_h5pActivities && item.h5pActivities > 0"
+                    v-if="item.hasH5pActivities && item.h5pActivities > 0"
                     max-height="35"
                     contain
                     :eager="true"
@@ -91,7 +91,7 @@
               <v-tooltip bottom>
                 <template #activator="{ on, attrs }">
                   <v-img
-                    v-if="item.has_isBasedOn"
+                    v-if="item.hasIsBasedOn"
                     max-height="35"
                     contain
                     class="isBasedOn"
@@ -106,7 +106,7 @@
               <v-tooltip bottom>
                 <template #activator="{ on, attrs }">
                   <v-img
-                    v-if="!item.has_isBasedOn"
+                    v-if="!item.hasIsBasedOn"
                     max-height="35"
                     contain
                     class="isBasedOn"
@@ -171,14 +171,14 @@ export default {
   methods: {
     addClasses(item) {
       let classes = 'ais-Hits__books-book ';
-      if(item.has_inCatalog && item.inCatalog) {
+      if(item.hasInCatalog && item.inCatalog) {
         classes += 'ais-Hits__books--border';
       } else {
         classes += 'ais-Hits__books--notcatalog';
       }
       if (
-        typeof item.license_name !== 'undefined' &&
-        item.license_name.indexOf('All Rights Reserved') >= 0
+        typeof item.licenseName !== 'undefined' &&
+        item.licenseName.indexOf('All Rights Reserved') >= 0
       ) {
         classes += ' ais-Hits__books--allrights';
       }
