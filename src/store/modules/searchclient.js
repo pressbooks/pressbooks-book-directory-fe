@@ -14,19 +14,19 @@ let sClient = {
   numericFilters: '',
   hasNumeric: false,
   allowedFilters: {
-    license_code: {
+    licenseCode: {
       type: 'string',
       alias: 'license',
-      empty: 'has_license',
+      empty: 'hasLicense',
       search: false
     },
     about: {
       type: 'string',
       alias: 'subj',
-      empty: 'has_abouts',
+      empty: 'hasAbout',
       search: true
     },
-    has_isBasedOn: {
+    hasIsBasedOn: {
       type: 'boolean',
       alias: 'based',
       search: false
@@ -39,13 +39,13 @@ let sClient = {
     languageName: {
       type: 'string',
       alias: 'lang',
-      empty: 'has_language_name',
+      empty: 'hasLanguageName',
       search: true
     },
-    publisher_name: {
+    publisherName: {
       type: 'string',
       alias: 'pub',
-      empty: 'has_publisher',
+      empty: 'hasPublisher',
       search: true
     },
     storageSize: {
@@ -66,7 +66,7 @@ let sClient = {
     networkName: {
       type: 'string',
       alias: 'net',
-      empty: 'has_network_name',
+      empty: 'hasNetworkName',
       search: true
     },
     lastUpdated: {
@@ -74,7 +74,7 @@ let sClient = {
       alias: 'updated',
       search: false
     },
-    is_recommended: {
+    isRecommended: {
       type: 'boolean',
       alias: 'recommended',
       search: false
