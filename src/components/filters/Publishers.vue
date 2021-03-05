@@ -1,6 +1,6 @@
 <template>
   <excluded-filters
-    field="publisher_name"
+    field="publisherName"
     :searchable="true"
     title="publisher"
     :limit="10"

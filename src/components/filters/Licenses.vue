@@ -1,6 +1,6 @@
 <template>
   <excluded-filters
-    field="license_code"
+    field="licenseCode"
     :searchable="false"
     title="license"
     :limit="20"
