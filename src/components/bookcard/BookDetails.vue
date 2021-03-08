@@ -79,7 +79,7 @@
       <strong>Storage Size: </strong><span class="v-card--item ais-Hits__books-book-storagesize">{{ toMB(item.storageSize) }}</span>
     </div>
     <div
-      v-if="item.description"
+      v-if="item.disambiguatingDescription"
       class="description"
     >
       <strong>Description: </strong>
