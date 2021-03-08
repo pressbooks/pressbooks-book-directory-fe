@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       excluded: false,
-      field: 'has_isBasedOn'
+      field: 'hasIsBasedOn'
     };
   },
   methods: {
@@ -65,9 +65,9 @@ export default {
       this.$router.replace({ query: queryString });
     },
     wasFiltered(value, exc) {
-      return typeof(this.$store.state.SClient.filtersExcluded['has_isBasedOn']) !== 'undefined' &&
-                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].value === value &&
-                    this.$store.state.SClient.filtersExcluded['has_isBasedOn'][0].exclude === exc;
+      return typeof(this.$store.state.SClient.filtersExcluded['hasIsBasedOn']) !== 'undefined' &&
+                    this.$store.state.SClient.filtersExcluded['hasIsBasedOn'][0].value === value &&
+                    this.$store.state.SClient.filtersExcluded['hasIsBasedOn'][0].exclude === exc;
     }
   }
 };

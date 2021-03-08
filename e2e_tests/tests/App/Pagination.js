@@ -5,9 +5,9 @@ module.exports = {
       .waitForElementVisible('body')
       .assert.visible('#filter-license_code')
       .click('#filter-license_code')
-      .click('#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
-      .waitForElementVisible('.v-chip--clickable')
+      .click('*[data-test-include-btn="0"]')
       .pause(2000)
+      .waitForElementVisible('.v-chip--clickable')
       .waitForElementVisible('.ais-Pagination-list')
       .waitForElementVisible('.container__results-hits');
     browser.getText('css selector', '.container__results-hits',  (d) => {

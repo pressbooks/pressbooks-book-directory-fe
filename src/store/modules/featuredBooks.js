@@ -12,7 +12,7 @@ export default {
   actions: {
     getFeaturedBooks(context, index) {
       const params = {
-        facetFilters: 'is_featured:true'
+        facetFilters: 'isFeatured:true'
       };
       return index.search('', params).then(function (response) {
         if (response.hasOwnProperty('hits')) {
