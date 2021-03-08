@@ -89,7 +89,6 @@ let sClient = {
     networkName: {
       type: 'string',
       alias: 'net',
-      empty: 'hasNetworkName',
       search: true
     },
     lastUpdated: {
