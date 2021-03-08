@@ -97,10 +97,10 @@ module.exports = {
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-wordCount')
-      .click('#filter-license_code')
+      .click('#filter-licenseCode')
       .pause(1000)
       .getText(
-        '#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
+        '#filter-licenseCode > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
         (filterText) => {
           browser
             .click('#filter-wordCount')
@@ -110,7 +110,7 @@ module.exports = {
             .click('#btn-wordCount')
             .pause(3000)
             .getText(
-              '#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
+              '#filter-licenseCode > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content',
               (filterText2) => {
                 browser.assert.ok(
                   filterText2.value !== filterText.value,
