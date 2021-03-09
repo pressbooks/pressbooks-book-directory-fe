@@ -154,10 +154,10 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-networkName')
       .click('#filter-networkName')
-      .getText('#filter-networkName > div.v-list-group__items > div:nth-child(4) > div.v-list-item__content', (networkText3) => {
+      .getText('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__content', (networkText3) => {
         const secondText = networkText3.value.substr(0, 4);
         browser.getText('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__content', (networkText) => {
-          if (networkText.value && networkText.value.length > 1 && networkText.value.search('No value / empty') < 0) {
+          if (networkText.value && networkText.value.length > 1) {
             const searchText = networkText.value.substr(0, 2);
             let networksFiltered = [];
             browser
@@ -209,7 +209,7 @@ module.exports = {
                       }).perform((done2) => {
                         // Filter any of the networks listed
                         browser
-                          .click('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
+                          .click('#filter-networkName > div.v-list-group__items > div:nth-child(2) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
                           .pause(3000)
                           .elements('css selector', '#filter-networkName > div.v-list-group__items', (netElements) => {
                             netElements.value.forEach((v) => {
