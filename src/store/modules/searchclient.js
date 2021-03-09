@@ -40,7 +40,6 @@ let sClient = {
     licenseCode: {
       type: 'string',
       alias: 'license',
-      empty: 'hasLicense',
       search: false
     },
     about: {
@@ -89,7 +88,6 @@ let sClient = {
     networkName: {
       type: 'string',
       alias: 'net',
-      empty: 'hasNetworkName',
       search: true
     },
     lastUpdated: {
