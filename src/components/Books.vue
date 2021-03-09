@@ -49,9 +49,7 @@ export default {
           : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
         publisherName: item.publisherName ? helpers.functions.unescapeHTML(item.publisherName) : false,
         lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
-        description: item.description
-          ? helpers.functions.unescapeHTML(vm.removeXMLTags(item.description))
-          : false,
+        description: vm.getBookDescription(item),
         licenseIcon: item.licenseName
           ? vm.getLicenseIcon(item).image
           : false,
@@ -91,7 +89,13 @@ export default {
       return {image: false, alt: false};
     },
     removeXMLTags(string) {
-      return string.replace(/<[^>]*>/g, '');
+      return string.replace(/(<([^>]+)>)/gi, '');
+    },
+    getBookDescription(item) {
+      if (!item.hasDescription && item.hasDisambiguatingDescription) {
+        return this.removeXMLTags(helpers.functions.unescapeHTML(item.disambiguatingDescription));
+      }
+      return item.hasDescription ? this.removeXMLTags(helpers.functions.unescapeHTML(item.description)) : '';
     }
   }
 };

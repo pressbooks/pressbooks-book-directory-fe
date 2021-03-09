@@ -3,13 +3,13 @@ module.exports = {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
-      .waitForElementVisible('#filter-publisher_name')
-      .click('#filter-publisher_name')
-      .waitForElementVisible('#search-filter-publisher_name')
+      .waitForElementVisible('#filter-publisherName')
+      .click('#filter-publisherName')
+      .waitForElementVisible('#search-filter-publisherName')
       .pause(2000)
-      .setValue('#search-filter-publisher_name', 'uni')
+      .setValue('#search-filter-publisherName', 'uni')
       .pause(1000);
-    browser.elements('css selector', '#filter-publisher_name', (filterElement) => {
+    browser.elements('css selector', '#filter-publisherName', (filterElement) => {
       filterElement.value.forEach((v) => {
         if (!v.hasOwnProperty('ELEMENT')) {
           v.ELEMENT = Object.values(v)[0];
@@ -37,10 +37,10 @@ module.exports = {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
-      .waitForElementVisible('#filter-publisher_name')
-      .click('#filter-publisher_name')
+      .waitForElementVisible('#filter-publisherName')
+      .click('#filter-publisherName')
       .pause(2000)
-      .element('css selector', '#filter-publisher_name', (filterElement) => {
+      .element('css selector', '#filter-publisherName', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
           filterElement.ELEMENT = Object.values(filterElement.value)[0];
@@ -84,10 +84,10 @@ module.exports = {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
-      .click('#filter-publisher_name')
-      .waitForElementVisible('#btn-exclude-empty-publisher_name')
+      .click('#filter-publisherName')
+      .waitForElementVisible('#btn-exclude-empty-publisherName')
       .pause(2000)
-      .click('#btn-exclude-empty-publisher_name')
+      .click('#btn-exclude-empty-publisherName')
       .pause(3000)
       .waitForElementVisible('.ais-Hits__books-book')
       .elements('css selector', '.publisher', (bookElement) => {
