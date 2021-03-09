@@ -81,7 +81,7 @@ export default {
       this.searchInput.previousElementSibling.classList.remove('v-label--active');
     };
 
-    const filterUsedForTour = document.querySelector('#filter-license_code .v-list-item');
+    const filterUsedForTour = document.querySelector('#filter-licenseCode .v-list-item');
 
     const typing = (text, current = 0) => {
       this.searchInput.value+=text[current];

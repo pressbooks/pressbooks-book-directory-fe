@@ -154,7 +154,7 @@ module.exports = {
       .waitForElementVisible('body')
       .waitForElementVisible('#filter-networkName')
       .click('#filter-networkName')
-      .getText('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__content', (networkText3) => {
+      .getText('#filter-networkName > div.v-list-group__items > div:nth-child(2) > div.v-list-item__content', (networkText3) => {
         const secondText = networkText3.value.substr(0, 4);
         browser.getText('#filter-networkName > div.v-list-group__items > div:nth-child(3) > div.v-list-item__content', (networkText) => {
           if (networkText.value && networkText.value.length > 1) {

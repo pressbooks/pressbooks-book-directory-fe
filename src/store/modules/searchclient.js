@@ -40,7 +40,6 @@ let sClient = {
     licenseCode: {
       type: 'string',
       alias: 'license',
-      empty: 'hasLicense',
       search: false
     },
     about: {
