@@ -107,6 +107,14 @@ export default {
       }
     };
   },
+  watch: {
+    '$store.state.SClient.notFilters' : {
+      deep: true,
+      handler(){
+        this.currentQuery = null;
+      }
+    }
+  },
   mounted() {
     let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
     this.$store.dispatch('getStats', index);
