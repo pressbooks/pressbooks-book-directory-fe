@@ -25,5 +25,23 @@ module.exports = {
         });
       }
     }).end();
+  },
+  'Pagination is reset after a new search is performed' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .pause(4000)
+      .assert.visible('#search-book')
+      .setValue('#search-book', 'learning')
+      .click('button[id=search-button]')
+      .waitForElementVisible('.ais-Hits__books')
+      .click('ul.ais-Pagination-list > li:nth-of-type(4)')
+      .waitForElementVisible('.ais-Hits__books')
+      .assert.containsText('ul.ais-Pagination-list > .ais-Pagination-item--selected > a', '2')
+      .click('#search-book')
+      .setValue('#search-book','ing')
+      .click('button[id=search-button]')
+      .waitForElementVisible('.ais-Hits__books')
+      .assert.containsText('ul.ais-Pagination-list > .ais-Pagination-item--selected > a', '1');
   }
 };
