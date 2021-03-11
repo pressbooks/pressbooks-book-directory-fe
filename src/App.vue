@@ -7,6 +7,7 @@
           :search-client="$store.state.SClient.searchClient"
           :index-name="$store.state.SClient.indexName"
           :stalled-search-delay="200"
+          :search-function="paginationHook"
         >
           <ais-configure
             :facet-filters.camel="$store.state.SClient.notFilters"
@@ -76,6 +77,7 @@ export default {
   },
   data(){
     return {
+      currentQuery: '',
       metaTags: [
         {
           'http-equiv': 'Content-Type',
@@ -93,8 +95,25 @@ export default {
           name: 'viewport',
           content: 'width=device-width,initial-scale=1'
         }
-      ]
+      ],
+      paginationHook: (helper) => {
+        if(helper.getPage() === 0) {
+          this.currentQuery = helper.state.query;
+        }
+        if(this.currentQuery !== helper.state.query) {
+          helper.setPage(0); // reset the pagination when the query changes
+        }
+        helper.search();
+      }
     };
+  },
+  watch: {
+    '$store.state.SClient.notFilters' : {
+      deep: true,
+      handler(){
+        this.currentQuery = null;
+      }
+    }
   },
   mounted() {
     let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
