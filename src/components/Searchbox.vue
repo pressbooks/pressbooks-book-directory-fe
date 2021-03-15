@@ -209,6 +209,9 @@ export default {
         (stringSearch.length >= this.searchCharsLimit.min && stringSearch.length <= this.searchCharsLimit.max) ||
         stringSearch.length === 0 // Remove search case
       ) {
+        setTimeout(() => {
+          this.$scrollTo('#current-filters', 0);
+        }, 500);
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;
