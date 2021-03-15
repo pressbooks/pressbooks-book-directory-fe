@@ -19,7 +19,6 @@
       </a>
       <a
         v-if="!card.url"
-        v-scroll-to="'#current-filters'"
         :title="card.name"
         target="_self"
         @click="filter(card)"
@@ -54,6 +53,7 @@ export default {
       return title.length > this.truncateLimit ? title.substr(0, this.truncateLimit - 1) + '...' : title;
     },
     filter(card) {
+      this.$vuetify.goTo('#current-filters');
       let query = {...this.$route.query};
       query[this.$store.state.SClient.allowedFilters[card.facet].alias] = card.name;
       this.$router.replace({ query });
