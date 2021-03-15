@@ -7,9 +7,11 @@ import router from './router';
 import * as Sentry from '@sentry/vue';
 import { Integrations } from '@sentry/tracing';
 import VueMeta from 'vue-meta';
+import VueScrollTo from 'vue-scrollto';
 
 Vue.use(VueMeta);
 Vue.use(InstantSearch);
+Vue.use(VueScrollTo);
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {

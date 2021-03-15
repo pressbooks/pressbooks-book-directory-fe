@@ -1,5 +1,8 @@
 <template>
-  <div class="text-center">
+  <div
+    v-scroll-to="'#current-filters'"
+    class="text-center"
+  >
     <ais-pagination />
   </div>
 </template>

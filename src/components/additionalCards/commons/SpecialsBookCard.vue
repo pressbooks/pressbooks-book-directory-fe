@@ -19,6 +19,7 @@
       </a>
       <a
         v-if="!card.url"
+        v-scroll-to="'#current-filters'"
         :title="card.name"
         target="_self"
         @click="filter(card)"
@@ -55,7 +56,7 @@ export default {
     filter(card) {
       let query = {...this.$route.query};
       query[this.$store.state.SClient.allowedFilters[card.facet].alias] = card.name;
-      this.$router.replace({ query, hash: '#current-filters' });
+      this.$router.replace({ query });
     }
   }
 };
