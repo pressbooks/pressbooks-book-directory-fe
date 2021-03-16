@@ -31,7 +31,6 @@ module.exports = {
           elem.value.ELEMENT = Object.values(elem.value)[0];
         }
         browser.elementIdText(elem.value.ELEMENT, (title) => {
-          let searchTitle = title.value.split(' ').slice(0, 2).join(' ');
           let stringToSearch = '';
           browser
             .element('css selector', '.v-card--item.subject',  (elem) => {

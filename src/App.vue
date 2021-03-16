@@ -78,6 +78,7 @@ export default {
   data(){
     return {
       currentQuery: '',
+      currentPage: 0,
       metaTags: [
         {
           'http-equiv': 'Content-Type',
@@ -96,15 +97,6 @@ export default {
           content: 'width=device-width,initial-scale=1'
         }
       ],
-      paginationHook: (helper) => {
-        if(helper.getPage() === 0) {
-          this.currentQuery = helper.state.query;
-        }
-        if(this.currentQuery !== helper.state.query) {
-          helper.setPage(0); // reset the pagination when the query changes
-        }
-        helper.search();
-      }
     };
   },
   watch: {
@@ -127,7 +119,17 @@ export default {
         content: 'noindex'
       });
     }
-
+  },
+  methods: {
+    paginationHook(helper) {
+      if(helper.getPage() === 0) {
+        this.currentQuery = helper.state.query;
+      }
+      if(this.currentQuery !== helper.state.query) {
+        helper.setPage(0); // reset the pagination when the query changes
+      }
+      helper.search();
+    }
   },
   metaInfo() {
     return {
