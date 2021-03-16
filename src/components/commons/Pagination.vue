@@ -1,6 +1,6 @@
 <template>
   <div
-    v-scroll-to="'#current-filters'"
+    @click="scrollToBooksList"
     class="text-center"
   >
     <ais-pagination />
@@ -9,6 +9,13 @@
 
 <script>
 export default {
-  name: 'Pagination'
+  name: 'Pagination',
+  methods: {
+    scrollToBooksList() {
+      setTimeout(() => {
+        this.$vuetify.goTo('#current-filters');
+      }, 500);
+    }
+  }
 };
 </script>
