@@ -51,5 +51,28 @@ module.exports = {
       await browser.pause(3000);
       browser.expect.element('.ais-Hits__books__recommended').to.not.be.present;
     }
+  },
+  async 'Filtering by recommended books and removing filter by clicking the filter twice. Then exclude filter is applied' (browser) {
+    await browser
+      .url(process.env.HOST_TEST);
+    await browser
+      .waitForElementVisible('body');
+    await browser.pause(4000);
+    const isRecommendedVisible = await browser
+      .isVisible({
+        selector: '#filter-recommended',
+        index: 0,
+        suppressNotFoundErrors: true
+      });
+    if (parseInt(isRecommendedVisible.status) !== -1) {
+      await browser.click('#filter-recommended');
+      await browser.click('#btn-included-recommended');
+      await browser.pause(3000);
+      await browser.click('#btn-included-recommended');
+      await browser.pause(3000);
+      await browser.click('#btn-excluded-recommended');
+      await browser.pause(2000);
+      browser.expect.element('.ais-Hits__books__recommended').to.not.be.present;
+    }
   }
 };

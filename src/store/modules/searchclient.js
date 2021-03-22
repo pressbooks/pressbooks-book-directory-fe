@@ -7,26 +7,48 @@ let sClient = {
     process.env.VUE_APP_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: process.env.VUE_APP_ALGOLIA_INDEX,
+  indexName: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+  availableIndexes: [
+    {
+      value: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      default: true,
+      orderedBy: 'updated',
+      isReplica: true,
+      label: 'Recently updated'
+    },
+    {
+      value: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
+      default: false,
+      orderedBy: 'wordCount',
+      isReplica: true,
+      label: 'Word count ↓'
+    },
+    {
+      value: process.env.VUE_APP_ALGOLIA_INDEX,
+      default: false,
+      orderedBy: 'name',
+      isReplica: false,
+      label: 'Title (A-Z)'
+    }
+  ],
   filtersExcluded: [],
   notFilters: [],
   filtersParams: '',
   numericFilters: '',
   hasNumeric: false,
   allowedFilters: {
-    license_code: {
+    licenseCode: {
       type: 'string',
       alias: 'license',
-      empty: 'has_license',
       search: false
     },
     about: {
       type: 'string',
       alias: 'subj',
-      empty: 'has_abouts',
+      empty: 'hasAbout',
       search: true
     },
-    has_isBasedOn: {
+    hasIsBasedOn: {
       type: 'boolean',
       alias: 'based',
       search: false
@@ -39,13 +61,13 @@ let sClient = {
     languageName: {
       type: 'string',
       alias: 'lang',
-      empty: 'has_language_name',
+      empty: 'hasLanguageName',
       search: true
     },
-    publisher_name: {
+    publisherName: {
       type: 'string',
       alias: 'pub',
-      empty: 'has_publisher',
+      empty: 'hasPublisher',
       search: true
     },
     storageSize: {
@@ -66,7 +88,6 @@ let sClient = {
     networkName: {
       type: 'string',
       alias: 'net',
-      empty: 'has_network_name',
       search: true
     },
     lastUpdated: {
@@ -74,7 +95,7 @@ let sClient = {
       alias: 'updated',
       search: false
     },
-    is_recommended: {
+    isRecommended: {
       type: 'boolean',
       alias: 'recommended',
       search: false

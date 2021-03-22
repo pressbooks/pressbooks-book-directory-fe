@@ -134,10 +134,10 @@ export default {
       let label;
       let mb = (value.attribute === 'storageSize') ? parseInt(value.value) : 0;
       switch (value.attribute) {
-      case 'has_isBasedOn':
+      case 'hasIsBasedOn':
         label = (value.value) ? 'Based on another book' : 'Original';
         break;
-      case 'is_recommended':
+      case 'isRecommended':
         label = (value.value) ? 'Recommended' : 'Not recommended';
         break;
       case 'wordCount':

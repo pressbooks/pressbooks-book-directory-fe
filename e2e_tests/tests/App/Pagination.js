@@ -3,11 +3,11 @@ module.exports = {
     browser
       .url(process.env.HOST_TEST)
       .waitForElementVisible('body')
-      .assert.visible('#filter-license_code')
-      .click('#filter-license_code')
-      .click('#filter-license_code > div.v-list-group__items > div:nth-child(2) > div.v-list-item__action > div > button.v-btn.v-btn--flat.v-btn--icon.v-btn--round.theme--light.v-size--default.include')
-      .waitForElementVisible('.v-chip--clickable')
+      .assert.visible('#filter-licenseCode')
+      .click('#filter-licenseCode')
+      .click('*[data-test-include-btn="0"]')
       .pause(2000)
+      .waitForElementVisible('.v-chip--clickable')
       .waitForElementVisible('.ais-Pagination-list')
       .waitForElementVisible('.container__results-hits');
     browser.getText('css selector', '.container__results-hits',  (d) => {
@@ -25,5 +25,23 @@ module.exports = {
         });
       }
     }).end();
+  },
+  'Pagination is reset after a new search is performed' (browser) {
+    browser
+      .url(process.env.HOST_TEST)
+      .waitForElementVisible('body')
+      .pause(4000)
+      .assert.visible('#search-book')
+      .setValue('#search-book', 'int')
+      .click('button[id=search-button]')
+      .waitForElementVisible('.ais-Hits__books')
+      .click('ul.ais-Pagination-list > li:nth-of-type(4)')
+      .waitForElementVisible('.ais-Hits__books')
+      .assert.containsText('ul.ais-Pagination-list > .ais-Pagination-item--selected > a', '2')
+      .click('#search-book')
+      .setValue('#search-book','ro')
+      .click('button[id=search-button]')
+      .waitForElementVisible('.ais-Hits__books')
+      .assert.containsText('ul.ais-Pagination-list > .ais-Pagination-item--selected > a', '1');
   }
 };

@@ -50,14 +50,14 @@
       </span>
     </div>
     <div
-      v-if="item.has_lastUpdated"
+      v-if="item.hasLastUpdated"
       class="updated"
     >
       <strong>Updated: </strong>
       <span class="v-card--item updated">{{ unixDateToStandard(item.lastUpdated) }}</span>
     </div>
     <div
-      v-if="item.publisher_name"
+      v-if="item.publisherName"
       class="publisher"
     >
       <strong>Publisher: </strong>

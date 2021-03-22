@@ -47,26 +47,24 @@ export default {
         image: item.image
           ? item.image
           : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
-        publisherName: item.publisher_name ? helpers.functions.unescapeHTML(item.publisher_name) : false,
+        publisherName: item.publisherName ? helpers.functions.unescapeHTML(item.publisherName) : false,
         lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
-        description: item.description
-          ? helpers.functions.unescapeHTML(vm.removeXMLTags(item.description))
-          : false,
-        licenseIcon: item.license_name
+        description: vm.getBookDescription(item),
+        licenseIcon: item.licenseName
           ? vm.getLicenseIcon(item).image
           : false,
-        licenseAlt: item.license_name
+        licenseAlt: item.licenseName
           ? vm.getLicenseIcon(item).alt
           : false,
         isBasedOn: item.isBasedOn !== undefined,
         subject: item.subject !== undefined ? item.subject : false,
-        word_count: item.word_count !== undefined ? item.word_count : false,
+        wordCount: item.wordCount !== undefined ? item.wordCount : false,
         name: helpers.functions.unescapeHTML(item.name)
       }));
     },
     getLicenseIcon(item) {
-      if (item.license_name !== undefined) {
-        let license = item.license_name;
+      if (item.licenseName !== undefined) {
+        let license = item.licenseName;
         let img = {
           image:
                             this.$store.state.config.imagesPath +
@@ -91,7 +89,13 @@ export default {
       return {image: false, alt: false};
     },
     removeXMLTags(string) {
-      return string.replace(/<[^>]*>/g, '');
+      return string.replace(/(<([^>]+)>)/gi, '');
+    },
+    getBookDescription(item) {
+      if (!item.hasDescription && item.hasDisambiguatingDescription) {
+        return this.removeXMLTags(helpers.functions.unescapeHTML(item.disambiguatingDescription));
+      }
+      return item.hasDescription ? this.removeXMLTags(helpers.functions.unescapeHTML(item.description)) : '';
     }
   }
 };

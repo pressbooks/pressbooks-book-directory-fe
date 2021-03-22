@@ -77,10 +77,10 @@ module.exports = {
       .waitForElementVisible('body')
       .pause(2000)
       .waitForElementVisible('.network')
-      .waitForElementVisible('#filter-publisher_name')
+      .waitForElementVisible('#filter-publisherName')
       .pause(2000)
-      .click('#filter-publisher_name')
-      .element('css selector', '#filter-publisher_name', (filterElement) => {
+      .click('#filter-publisherName')
+      .element('css selector', '#filter-publisherName', (filterElement) => {
         // Firefox - Safari exception
         if (!filterElement.hasOwnProperty('ELEMENT')) {
           filterElement.ELEMENT = Object.values(filterElement.value)[0];
@@ -97,7 +97,7 @@ module.exports = {
                 .waitForElementVisible('body')
                 .pause(3000)
                 .waitForElementVisible('.publisher')
-                .assert.visible('#filter-publisher_name > div.v-list-group__items > div:nth-child(2)')
+                .assert.visible('#filter-publisherName > div.v-list-group__items > div:nth-child(2)')
                 .elements('css selector', '.publisher', (bookElement) => {
                   bookElement.value.forEach((v) => {
                     if (!v.hasOwnProperty('ELEMENT')) {

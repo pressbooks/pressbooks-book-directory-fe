@@ -18,7 +18,6 @@
           <v-btn
             id="btn-included-recommended"
             icon
-            :disabled="wasFiltered('true', false)"
             :class="wasFiltered('true', false) ? 'selected include': 'include'"
             @click="applyFilter(true, false)"
           >
@@ -29,7 +28,6 @@
           <v-btn
             id="btn-excluded-recommended"
             icon
-            :disabled="wasFiltered('false', true)"
             :class="wasFiltered('false', true) ? 'selected exclude': 'exclude'"
             @click="applyFilter(true, true)"
           >
@@ -47,11 +45,14 @@ export default {
   data() {
     return {
       excluded: false,
-      field: 'is_recommended'
+      field: 'isRecommended'
     };
   },
   methods: {
     applyFilter(itemValue, exclude) {
+      if (this.wasFiltered((!exclude).toString(), exclude)) {
+        return this.removeFilter();
+      }
       let query = {...this.$route.query}, value;
       let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
       value = !exclude;
@@ -62,7 +63,12 @@ export default {
       return typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' &&
           this.$store.state.SClient.filtersExcluded[this.field][0].value === value &&
           this.$store.state.SClient.filtersExcluded[this.field][0].exclude === is_excluded;
-    }
+    },
+    removeFilter() {
+      let queryString = {...this.$route.query};
+      delete queryString[this.$store.state.SClient.allowedFilters[this.field].alias];
+      this.$router.replace({ query: queryString });
+    },
   }
 };
 </script>
