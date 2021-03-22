@@ -168,12 +168,13 @@ export default {
               this.emptyFieldCount = filters[this.empty][i].count;
             }
           }
-          if (this.filterApplied && this.stringSearch.length > 0) {
-            this.searchForItems();
-          }
-          this.filterApplied = false;
           return true;
         }
+        if (this.filterApplied && this.stringSearch.length > 0) {
+          console.log(this.stringSearch);
+          this.searchForItems();
+        }
+        this.filterApplied = false;
       }
     },
     '$store.state.SClient.filtersExcluded': {
