@@ -171,7 +171,6 @@ export default {
           return true;
         }
         if (this.filterApplied && this.stringSearch.length > 0) {
-          console.log(this.stringSearch);
           this.searchForItems();
         }
         this.filterApplied = false;
