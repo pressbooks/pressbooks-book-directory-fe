@@ -1,189 +1,67 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <div>
-    <v-sheet
-      v-if="state && state.searchMetadata.isSearchStalled"
-      color="grey lighten-4"
-      class="px-3 pt-3 pb-3"
-    >
-      <v-skeleton-loader
-        class="mx-auto"
-        type="table-heading, card, actions"
-      />
-    </v-sheet>
-    <v-card
-      v-else
-      :class="addClasses(item)"
-    >
-      <v-row class="v-card__content">
-        <v-col cols="9">
-          <section
-            v-if="item.isRecommended"
-            class="ais-Hits__books__recommended"
-          >
-            Recommended
-          </section>
-          <div
-            v-if="item.networkHost"
-            class="network"
-          >
-            {{ item.networkHost }} | {{ item.networkName }}
+<template>
+  <div class="book-box mt-4">
+    <div class="flex flex-row flex-wrap items-center border border-gray-300 px-8 py-8 shadow-md">
+      <div class="w-full md:w-2/3 md:pr-4">
+        <div class="data">
+          <div class="flex mb-5">
+            <div class="tag bg-red-800 border leading-none border-red-900 mb-3 text-white px-4 py-2 uppercase rounded font-pbBold">
+              Recommended
+            </div>
           </div>
-          <v-card-title>
-            <a
-              :href="item.url"
-              target="_blank"
-            >{{ item.name }}</a>
-          </v-card-title>
-          <v-card-text>
-            <book-details :item="item" />
-          </v-card-text>
-        </v-col>
-        <v-col cols="3">
-          <v-row>
-            <v-col cols="12">
-              <a
-                :href="item.url"
-                target="_blank"
-              >
-                <book-cover :image="item.image" />
-              </a>
-            </v-col>
-            <v-col cols="6">
-              <div class="language">
-                {{ item.languageCode }}
-              </div>
-            </v-col>
-            <v-col cols="6">
-              <v-tooltip top>
-                <template #activator="{ on, attrs }">
-                  <v-img
-                    max-height="35"
-                    contain
-                    class="copyright"
-                    v-bind="attrs"
-                    :eager="true"
-                    :src="item.licenseIcon"
-                    :alt="item.licenseAlt"
-                    v-on="on"
-                  />
-                </template>
-                <span>{{ item.licenseAlt }}</span>
-              </v-tooltip>
-            </v-col>
-            <v-col cols="6">
-              <v-tooltip bottom>
-                <template #activator="{ on, attrs }">
-                  <v-img
-                    v-if="item.hasH5pActivities && item.h5pActivities > 0"
-                    max-height="35"
-                    contain
-                    :eager="true"
-                    v-bind="attrs"
-                    :alt="'This book has ' + item.h5pActivities + ' H5P Activities'"
-                    :src="h5pActivitiesImage"
-                    v-on="on"
-                  />
-                </template>
-                <span>This book has {{ item.h5pActivities }} H5P Activities </span>
-              </v-tooltip>
-            </v-col>
-            <v-col cols="6">
-              <v-tooltip bottom>
-                <template #activator="{ on, attrs }">
-                  <v-img
-                    v-if="item.hasIsBasedOn"
-                    max-height="35"
-                    contain
-                    class="isBasedOn"
-                    v-bind="attrs"
-                    alt="Book based on another book"
-                    :src="basedOnImg"
-                    v-on="on"
-                  />
-                </template>
-                <span>This book is based on another book </span>
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template #activator="{ on, attrs }">
-                  <v-img
-                    v-if="!item.hasIsBasedOn"
-                    max-height="35"
-                    contain
-                    class="isBasedOn"
-                    v-bind="attrs"
-                    alt="This book is not based on another book"
-                    :src="originalImg"
-                    v-on="on"
-                  />
-                </template>
-                <span>This book is not based on another book </span>
-              </v-tooltip>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-card>
+          <div class="supername leading-tight uppercase font-pbBold mb-2">
+            Lorem ipsum dolor sit amet, consectetur adipisicing
+          </div>
+          <div class="name leading-tight text-gray uppercase text-red-800 text-xl font-pbBold mb-2">
+            1, 2, 3 Write!
+          </div>
+          <div class="complement leading-tight uppercase font-pbBold mb-2">
+            39557 words | 96.89 MB
+          </div>
+          <ul class="py-4">
+            <meta-info title="Author(s):" text="Gay Monteverde"/>
+            <meta-info title="Subject(s):" text="Language learning writting skills"/>
+            <meta-info title="Updated:" text="01-22-2021"/>
+            <meta-info title="Publisher:" text="MMHCC Library Pages"/>
+            <meta-info title="Language:" text="English"/>
+          </ul>
+          <div class="text leading-loose font-pbRegular">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque corporis dolorem
+            doloribus eveniet expedita explicabo fugit, incidunt ipsa laudantium non quidem quisquam
+            quos ratione reiciendis suscipit unde voluptates? Earum harum ipsum laboriosam laborum
+            libero magnam natus omnis vel? Architecto culpa.
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/3 md:pl-8">
+        <div class="image">
+          <img src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg" width="100%" alt="">
+        </div>
+        <ul class="tags pt-3 flex flex-row justify-around">
+          <li>
+            <a href="#!">
+              <img src="https://pressbooks.directory/assets/images/licenses/allrights.png" class="h-5" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <img src="https://pressbooks.directory/assets/images/is-base.png" class="h-5" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <img src="https://pressbooks.directory/assets/images/licenses/by-nc-sa.png" class="h-5" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <img src="https://pressbooks.directory/assets/images/h5p.png" class="h-5" alt="">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
-
-<script>
-import BookDetails from './BookDetails';
-import BookCover from '../commons/BookCover';
-import {createWidgetMixin} from 'vue-instantsearch';
-
-const connectSearchMetaData = (renderFn, unmountFn) => () => ({
-  init() {
-    renderFn({ searchMetadata: {} }, true);
-  },
-
-  render({ searchMetadata }) {
-    renderFn({ searchMetadata }, false);
-  },
-
-  dispose() {
-    unmountFn();
-  },
-});
-
-export default {
-  name: 'BookCard',
-  components: {
-    BookDetails,
-    BookCover
-  },
-  mixins: [createWidgetMixin({ connector: connectSearchMetaData })],
-  props: {
-    item: {
-      type: Object,
-      default () { return {}; }
-    }
-  },
-  data() {
-    return {
-      h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
-      basedOnImg: this.$store.state.config.imagesPath + this.$store.state.config.basedOnImg,
-      originalImg: this.$store.state.config.imagesPath + this.$store.state.config.originalImg,
-      inCatalogColor: 'red lighten-4',
-      normalColor: 'white',
-      defaultImage: this.$store.state.config.imagesPath + this.$store.state.config.defaultBookCover
-    };
-  },
-  methods: {
-    addClasses(item) {
-      let classes = 'ais-Hits__books-book ';
-      if(item.hasInCatalog && item.inCatalog) {
-        classes += 'ais-Hits__books--border';
-      } else {
-        classes += 'ais-Hits__books--notcatalog';
-      }
-      if (
-        typeof item.licenseName !== 'undefined' &&
-        item.licenseName.indexOf('All Rights Reserved') >= 0
-      ) {
-        classes += ' ais-Hits__books--allrights';
-      }
-      return classes;
-    }
-  }
-};
+<script setup>
+import MetaInfo from "./MetaInfo.vue";
 </script>
