@@ -459,7 +459,7 @@
 </template>
 
 <script setup>
-import BookCard from "./components/BookCard.vue";
+import BookCard from "./components/bookcard/BookCard.vue";
 </script>
 
 <style>

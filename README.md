@@ -7,34 +7,33 @@ VUE_APP_ALGOLIA_API_READ_KEY=
 VUE_APP_ALGOLIA_INDEX=  
 
 ## Project setup
+
+This Project is a Vue 3 vite project based on https://vitejs.dev/ is backwards compatible with Vue 2.
+
 ### Requirements
-- node v.10.16.3 or higher
-- npm v6.9.0 or higher
+
+- Node.js version >=12.0.0.
 
 ### Install dependencies
 ```
-npm install
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn run dev
 ```
-app will run in port 8080
+app will run in port 3000
 
 ### Compiles and minifies for production
 ```
-npm run build
+yarn run build
 ```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files
 ```
-npm run lint
+yarn run lint
 ```
 
 ### Customize configuration

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+
+@font-face {
+    font-family: 'Karmilla';
+    src: local('Karmilla'), url(../src/assets/fonts/Karmilla-Bold-014.woff) format('woff');
+}
+
+@tailwind utilities;
+
+.ricardo {
+    text-decoration: underline;
+}
