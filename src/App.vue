@@ -1,119 +1,10 @@
 <template>
   <div>
-    <header class="bg-white">
-      <div class="container mx-auto px-8">
-        <nav class="py-2 md:py-2 flex justify-between items-center">
-          <img
-            :src="assetsPath + '/logo.png'"
-            alt="Logo"
-          >
-          <button class="border border-red-700 rounded-full px-8 py-3 text-red-700 text-sm">
-            Take the tour
-          </button>
-        </nav>
-      </div>
-    </header>
+    <pb-navbar />
 
     <welcome-header />
 
-    <section class="section-cover">
-      <div class="container mx-auto px-8">
-        <div class="border-t border-gray-300">
-          <div class="w-full mx-auto py-20 text-center">
-            <div class="section-title text-4xl mb-12">
-              Featured Collections
-            </div>
-            <div class="items flex flex-row flex-wrap items-center">
-              <div class="item w-full mb-6 md:mb-0 md:w-1/5 px-3">
-                <a
-                  href="#!"
-                  class="flex flex-col items-center"
-                >
-                  <div class="image">
-                    <img
-                      src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
-                      width="100%"
-                      alt=""
-                    >
-                  </div>
-                  <div class="text py-4 px-2 font-semibold">
-                    Lorem ipsum dolor sit amet, adipisicing...
-                  </div>
-                </a>
-              </div>
-              <div class="item w-full mb-6 md:mb-0 md:w-1/5">
-                <a
-                  href="#!"
-                  class="flex flex-col items-center"
-                >
-                  <div class="image">
-                    <img
-                      src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
-                      width="100%"
-                      alt=""
-                    >
-                  </div>
-                  <div class="text py-4 px-2 font-semibold">
-                    Lorem ipsum dolor sit amet, adipisicing...
-                  </div>
-                </a>
-              </div>
-              <div class="item w-full mb-6 md:mb-0 md:w-1/5 px-3">
-                <a
-                  href="#!"
-                  class="flex flex-col items-center"
-                >
-                  <div class="image">
-                    <img
-                      src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
-                      width="100%"
-                      alt=""
-                    >
-                  </div>
-                  <div class="text py-4 px-2 font-semibold">
-                    Lorem ipsum dolor sit amet, adipisicing...
-                  </div>
-                </a>
-              </div>
-              <div class="item w-full mb-6 md:mb-0 md:w-1/5 px-3">
-                <a
-                  href="#!"
-                  class="flex flex-col items-center"
-                >
-                  <div class="image">
-                    <img
-                      src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
-                      width="100%"
-                      alt=""
-                    >
-                  </div>
-                  <div class="text py-4 px-2 font-semibold">
-                    Lorem ipsum dolor sit amet, adipisicing...
-                  </div>
-                </a>
-              </div>
-              <div class="item w-full mb-6 md:mb-0 md:w-1/5 px-3">
-                <a
-                  href="#!"
-                  class="flex flex-col items-center"
-                >
-                  <div class="image">
-                    <img
-                      src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
-                      width="100%"
-                      alt=""
-                    >
-                  </div>
-                  <div class="text py-4 px-2 font-semibold">
-                    Lorem ipsum dolor sit amet, adipisicing...
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <pb-collections></pb-collections>
 
     <section class="section-books bg-white">
       <div class="content container mx-auto px-8 py-12">
@@ -200,7 +91,7 @@
                       <div class="action">
                         <a href="#!">
                           <img
-                            :src="assetsPath + 'icons/chev-down.png'"
+                            :src="assetsPath + '/icons/chev-down.png'"
                             width="16"
                             alt=""
                           >
@@ -234,163 +125,9 @@
           </div>
         </div>
         <div class="flex flex-row flex-wrap">
-          <div class="w-full md:w-1/4 md:pr-10 mb-12">
-            <div class="font-semibold text-xl mb-8 md:mb-4">
-              Filters:
-            </div>
-            <div class="filters border border-gray-300">
-              <div class="filter-group border-b border-gray-300">
-                <div class="heading px-5 py-3 bg-gray-200">
-                  <div class="flex flex-row items-center justify-between">
-                    <div class="title font-pbRegular">
-                      License
-                    </div>
-                    <div class="action">
-                      <a href="#!">
-                        <img
-                          :src="assetsPath + '/icons/chev-up.png'"
-                          width="16"
-                          alt=""
-                        >
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="body">
-                  <div class="border-t border-gray-200">
-                    <a
-                      href="#!"
-                      class="flex flex-row items-center justify-between px-5 py-3"
-                    >
-                      <div class="title text-sm text-gray-600 w-full">
-                        Education (20)
-                      </div>
-                      <div class="action w-6 flex flex-row justify-end">
-                        <img
-                          :src="assetsPath + '/icons/check.png'"
-                          width="15"
-                          alt=""
-                        >
-                      </div>
-                    </a>
-                  </div>
-                  <div class="border-t border-gray-200">
-                    <a
-                      href="#!"
-                      class="flex flex-row items-center justify-between px-5 py-3"
-                    >
-                      <div class="title text-sm text-gray-600 w-full">
-                        Open learning, distance education (144)
-                      </div>
-                      <div class="action w-6 flex flex-row justify-end">
-                        <img
-                          :src="assetsPath + '/icons/check.png'"
-                          width="15"
-                          alt=""
-                        >
-                      </div>
-                    </a>
-                  </div>
-                  <div class="border-t border-gray-200">
-                    <a
-                      href="#!"
-                      class="flex flex-row items-center justify-between px-5 py-3"
-                    >
-                      <div class="title text-sm text-gray-600 w-full">
-                        Chemistry (22)
-                      </div>
-                      <div class="action w-6 flex flex-row justify-end" />
-                    </a>
-                  </div>
-                  <div class="flex flex-row items-center justify-between px-5 py-3 border-t border-gray-200">
-                    <div class="action w-full text-sm text-red-800">
-                      <a
-                        href="#!"
-                        class=" uppercase py-2 block text-center"
-                      >
-                        view more
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="filter-group border-b border-gray-300">
-                <div class="heading px-5 py-3">
-                  <div class="flex flex-row items-center justify-between">
-                    <div class="title font-pbRegular">
-                      Subject
-                    </div>
-                    <div class="action">
-                      <a href="#!">
-                        <img
-                          :src="assetsPath + '/icons/chev-down.png'"
-                          width="16"
-                          alt=""
-                        >
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="body hidden">
-                  <div class="flex flex-row items-center justify-between px-5 py-3 border-t border-gray-200">
-                    <div class="title text-sm text-gray-600 w-full">
-                      Education (20)
-                    </div>
-                    <div class="action w-6 flex flex-row justify-end">
-                      <a
-                        href="#!"
-                        class=""
-                      >
-                        <img
-                          :src="assetsPath + '/icons/check.png'"
-                          width="15"
-                          alt=""
-                        >
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="filter-group border-b border-gray-300">
-                <div class="heading px-5 py-3">
-                  <div class="flex flex-row items-center justify-between">
-                    <div class="title font-pbRegular">
-                      Network
-                    </div>
-                    <div class="action">
-                      <a href="#!">
-                        <img
-                          :src="assetsPath + '/icons/chev-down.png'"
-                          width="16"
-                          alt=""
-                        >
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="body hidden">
-                  <div class="flex flex-row items-center justify-between px-5 py-3 border-t border-gray-200">
-                    <div class="title text-sm text-gray-600 w-full">
-                      Education (20)
-                    </div>
-                    <div class="action w-6 flex flex-row justify-end">
-                      <a
-                        href="#!"
-                        class=""
-                      >
-                        <img
-                          :src="assetsPath + '/icons/check.png'"
-                          width="15"
-                          alt=""
-                        >
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Filters  Start -->
+          <pb-filters />
+          <!-- Filters  End -->
           <div class="md:flex-col w-full md:w-3/4">
             <div class="font-semibold text-2xl mb-8">
               Results: 1889 books
@@ -440,7 +177,7 @@
                 <div>
                   <a
                     href="#!"
-                    class="text block ml-2"width="14"
+                    class="text block ml-2" width="14"
                       alt=""
                     >
                   </a>
@@ -459,7 +196,7 @@
                       class="block"
                     >
                       <img
-                        :src="assetsPath + 'icons/arrow-left.png'"
+                        :src="assetsPath + '/icons/arrow-left.png'"
                         width="100%"
                         alt=""
                       >
@@ -550,7 +287,7 @@
                     class="block"
                   >
                     <img
-                      :src="assetsPath + 'icons/arrow-right.png'"
+                      :src="assetsPath + '/icons/arrow-right.png'"
                       width="100%"
                       alt=""
                     >
@@ -563,75 +300,26 @@
       </div>
     </section>
 
-    <footer>
-      <div class="container mx-auto py-12 px-8">
-        <div class="top">
-          <img
-            :src="assetsPath + 'src/assets/logo-simple.png'"
-            width="170"
-            alt="Logo"
-          >
-        </div>
-        <div class="bottom flex flex-row w-full items-end justify-between pt-4">
-          <div class="left">
-            <div class="text-sm">
-              © Pressbooks Directory 2021
-            </div>
-          </div>
-          <div class="right">
-            <div class="icons flex flex-row">
-              <div class="icon px-2">
-                <a
-                  href="#!"
-                  class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
-                >
-                  <img
-                    :src="assetPaths + 'src/assets/icons/social-twitter.svg'"
-                    width="20"
-                    alt="Logo"
-                  >
-                </a>
-              </div>
-              <div class="icon px-2">
-                <a
-                  href="#!"
-                  class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
-                >
-                  <img
-                    :src="assetsPath + 'src/assets/icons/social-in.svg'"
-                    width="19"
-                    alt="Logo"
-                  >
-                </a>
-              </div>
-              <div class="icon px-2">
-                <a
-                  href="#!"
-                  class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
-                >
-                  <img
-                    :src="assetsPath + 'src/assets/icons/social-youtube.svg'"
-                    width="20"
-                    alt="Logo"
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <pb-footer />
   </div>
 </template>
 
 <script>
 import BookCard from './components/bookcard/BookCard.vue';
 import WelcomeHeader from './components/WelcomeHeader.vue';
-export default {
+import PbFooter from './components/PbFooter.vue';
+import PbCollections from './components/collections/PbCollections.vue';
+import PbNavbar from './components/PbNavbar.vue';
+import PbFilters from './components/filters/PbFilters.vue';
 
+export default {
   components: {
+    PbFilters,
     BookCard,
-    WelcomeHeader
+    WelcomeHeader,
+    PbFooter,
+    PbCollections,
+    PbNavbar
   },
   data() {
     return {
