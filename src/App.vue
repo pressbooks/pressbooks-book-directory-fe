@@ -181,9 +181,7 @@
                 </div>
               </div>
             </div>
-            <BookCard />
-            <BookCard />
-            <BookCard />
+            <books />
             <div class="pagination">
               <div class="container mx-auto py-16">
                 <div class="flex flex-row w-full items-center md:w-1/2 justify-center text-gray-600">
@@ -302,7 +300,7 @@
 </template>
 
 <script>
-import BookCard from './components/bookcard/BookCard.vue';
+import Books from './components/books/Books.vue';
 import WelcomeHeader from './components/WelcomeHeader.vue';
 import PbFooter from './components/PbFooter.vue';
 import PbCollections from './components/collections/PbCollections.vue';
@@ -312,7 +310,7 @@ import PbFilters from './components/filters/PbFilters.vue';
 export default {
   components: {
     PbFilters,
-    BookCard,
+    Books,
     WelcomeHeader,
     PbFooter,
     PbCollections,

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import BookCard from './bookcard/BookCard.vue';
+import BookCard from './books/BookCard.vue';
 import helpers from '@/store/helpers';
 export default {
   name: 'Books',

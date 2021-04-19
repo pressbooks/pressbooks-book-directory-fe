@@ -3,10 +3,12 @@
     <div class="container mx-auto px-8">
       <div class="border-gray-300">
         <div class="w-full mx-auto py-20 text-center">
-          <div class="section-title text-4xl mb-12">
+          <h2 class="section-title font-headings font-bold text-4xl mb-12">
             Featured Collections
+          </h2>
+          <div class="items flex flex-row flex-wrap items-center">
+            <pb-collection-card v-for="collection in 5" :key="collection" />
           </div>
-          <pb-collection-card />
         </div>
       </div>
     </div>
