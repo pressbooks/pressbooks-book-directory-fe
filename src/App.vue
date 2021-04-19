@@ -626,7 +626,7 @@
   </footer>
 </template>
 
-<script setup>
+<script>
 import BookCard from './components/bookcard/BookCard.vue';
 import WelcomeHeader from './components/WelcomeHeader.vue';
 

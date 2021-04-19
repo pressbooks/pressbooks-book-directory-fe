@@ -5,11 +5,18 @@
   </li>
 </template>
 
-<script setup>
-import {defineProps} from 'vue';
-
-const props = defineProps({
-  title: String,
-  text: String
-});
+<script>
+export default {
+  name: 'MetaInfo',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    text: {
+      type: String,
+      default: ''
+    }
+  }
+};
 </script>
