@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        headings: ['Karmilla', 'sans-serif'],
         pbBold: ['Karmilla', 'sans-serif'],
         pbRegular: ['Spectral', 'sans-serif'],
       }
