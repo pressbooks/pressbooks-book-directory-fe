@@ -1,7 +1,7 @@
 <template>
   <section class="section-cover">
-    <div class="container mx-auto w-full md:w-3/5 py-20 px-8">
-      <h1 class="section-title text-5xl mb-6">
+    <div class="container mx-auto w-full md:w-2/3 py-20 px-8">
+      <h1 class="section-title text-5xl mb-6 font-bold">
         Welcome to Pressbooks Directory
       </h1>
       <p class="section-summary font-pbRegular text-gray-700 mb-8 leading-7">
