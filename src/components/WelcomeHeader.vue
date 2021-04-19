@@ -17,8 +17,5 @@
 
 export default {
   name: 'WelcomeHeader',
-  data() {
-
-  }
 };
 </script>
