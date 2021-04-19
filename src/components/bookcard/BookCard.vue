@@ -18,11 +18,26 @@
             39557 words | 96.89 MB
           </div>
           <ul class="py-4">
-            <meta-info title="Author(s):" text="Gay Monteverde"/>
-            <meta-info title="Subject(s):" text="Language learning writting skills"/>
-            <meta-info title="Updated:" text="01-22-2021"/>
-            <meta-info title="Publisher:" text="MMHCC Library Pages"/>
-            <meta-info title="Language:" text="English"/>
+            <meta-info
+              title="Author(s):"
+              text="Gay Monteverde"
+            />
+            <meta-info
+              title="Subject(s):"
+              text="Language learning writting skills"
+            />
+            <meta-info
+              title="Updated:"
+              text="01-22-2021"
+            />
+            <meta-info
+              title="Publisher:"
+              text="MMHCC Library Pages"
+            />
+            <meta-info
+              title="Language:"
+              text="English"
+            />
           </ul>
           <div class="text leading-loose font-pbRegular">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque corporis dolorem
@@ -34,27 +49,47 @@
       </div>
       <div class="w-full md:w-1/3 md:pl-8">
         <div class="image">
-          <img src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg" width="100%" alt="">
+          <img
+            src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
+            width="100%"
+            alt=""
+          >
         </div>
         <ul class="tags pt-3 flex flex-row justify-around">
           <li>
             <a href="#!">
-              <img src="https://pressbooks.directory/assets/images/licenses/allrights.png" class="h-5" alt="">
+              <img
+                src="https://pressbooks.directory/assets/images/licenses/allrights.png"
+                class="h-5"
+                alt=""
+              >
             </a>
           </li>
           <li>
             <a href="#!">
-              <img src="https://pressbooks.directory/assets/images/is-base.png" class="h-5" alt="">
+              <img
+                src="https://pressbooks.directory/assets/images/is-base.png"
+                class="h-5"
+                alt=""
+              >
             </a>
           </li>
           <li>
             <a href="#!">
-              <img src="https://pressbooks.directory/assets/images/licenses/by-nc-sa.png" class="h-5" alt="">
+              <img
+                src="https://pressbooks.directory/assets/images/licenses/by-nc-sa.png"
+                class="h-5"
+                alt=""
+              >
             </a>
           </li>
           <li>
             <a href="#!">
-              <img src="https://pressbooks.directory/assets/images/h5p.png" class="h-5" alt="">
+              <img
+                src="https://pressbooks.directory/assets/images/h5p.png"
+                class="h-5"
+                alt=""
+              >
             </a>
           </li>
         </ul>
@@ -63,5 +98,5 @@
   </div>
 </template>
 <script setup>
-import MetaInfo from "./MetaInfo.vue";
+import MetaInfo from './MetaInfo.vue';
 </script>

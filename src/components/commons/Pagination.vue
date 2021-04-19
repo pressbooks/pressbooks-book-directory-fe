@@ -1,7 +1,7 @@
 <template>
   <div
-    @click="scrollToBooksList"
     class="text-center"
+    @click="scrollToBooksList"
   >
     <ais-pagination />
   </div>
