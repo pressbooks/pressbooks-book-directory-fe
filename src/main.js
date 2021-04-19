@@ -5,7 +5,7 @@ import VueMeta from 'vue-meta';
 import './index.css';
 
 Vue.use(VueMeta);
-Vue.use(InstantSearch);
+// Vue.use(InstantSearch);
 
 // Fix this later
 /*
