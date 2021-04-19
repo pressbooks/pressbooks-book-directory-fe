@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "eslint ./src --ext .js --ext .vue"
   },
   "dependencies": {
     "@sentry/vue": "^6.2.5",
