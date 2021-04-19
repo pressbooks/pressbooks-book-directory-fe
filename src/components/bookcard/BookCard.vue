@@ -97,6 +97,12 @@
     </div>
   </div>
 </template>
-<script setup>
+<script>
 import MetaInfo from './MetaInfo.vue';
+export default {
+  name: 'BookCard',
+  components: {
+    MetaInfo
+  }
+};
 </script>

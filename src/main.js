@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import InstantSearch from 'vue-instantsearch';
+// import InstantSearch from 'vue-instantsearch';
 import VueMeta from 'vue-meta';
 import './index.css';
 
