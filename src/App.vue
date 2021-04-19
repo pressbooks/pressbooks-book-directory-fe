@@ -1,11 +1,8 @@
 <template>
   <div>
     <pb-navbar />
-
     <welcome-header />
-
-    <pb-collections></pb-collections>
-
+    <pb-collections />
     <section class="section-books bg-white">
       <div class="content container mx-auto px-8 py-12">
         <div class="py-12">
@@ -177,10 +174,10 @@
                 <div>
                   <a
                     href="#!"
-                    class="text block ml-2" width="14"
-                      alt=""
-                    >
-                  </a>
+                    class="text block ml-2"
+                    width="14"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
