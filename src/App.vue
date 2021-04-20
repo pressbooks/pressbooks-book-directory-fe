@@ -1,7 +1,7 @@
 <template>
   <ais-instant-search
-      :index-name="$store.state.SClient.indexName"
-      :search-client="$store.state.SClient.searchClient"
+    :index-name="$store.state.SClient.indexName"
+    :search-client="$store.state.SClient.searchClient"
   >
     <pb-navbar />
     <welcome-header />
@@ -40,87 +40,17 @@
                 </div>
               </div>
             </div>
-            <div class="topFilters right w-full md:w-2/5 flex flex-row flex-wrap md:pl-10 md:mb-4">
-              <div class="w-full md:w-1/2 mb-4">
-                <div class="topFilter flex flex-row w-full md:pr-4">
-                  <div class="dropdown relative w-full px-5 py-4 border border-gray-300">
-                    <div class="dropdown-head flex flex-row items-center justify-between w-full">
-                      <div class="title text-sm">
-                        Sort books by
-                      </div>
-                      <div class="action">
-                        <a href="#!">
-                          <img
-                            :src="assetsPath + '/icons/chev-down.png'"
-                            width="16"
-                            alt=""
-                          >
-                        </a>
-                      </div>
-                    </div>
-                    <div class="dropdown-body hidden z-20 bg-white shadow-lg border border-gray-300 absolute top-0 left-0 w-full mt-16 text-sm">
-                      <a
-                        class="flex py-3 px-4 border-b border-gray-300"
-                        href="#!"
-                      >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                      </a>
-                      <a
-                        class="flex py-3 px-4 border-b border-gray-300"
-                        href="#!"
-                      >
-                        Lorem ipsum dolor
-                      </a>
-                      <a
-                        class="flex py-3 px-4 border-b border-gray-300"
-                        href="#!"
-                      >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolor dolorum eius expedita
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 md:mb-4">
-                <div class="topFilter flex flex-row w-full md:pl-4">
-                  <div class="dropdown relative w-full px-5 py-4 border border-gray-300">
-                    <div class="dropdown-head flex flex-row items-center justify-between w-full">
-                      <div class="title text-sm">
-                        Sort books by
-                      </div>
-                      <div class="action">
-                        <a href="#!">
-                          <img
-                            :src="assetsPath + '/icons/chev-down.png'"
-                            width="16"
-                            alt=""
-                          >
-                        </a>
-                      </div>
-                    </div>
-                    <div class="dropdown-body hidden z-20 bg-white shadow-lg border border-gray-300 absolute top-0 left-0 w-full mt-16 text-sm">
-                      <a
-                        class="flex py-3 px-4 border-b border-gray-300"
-                        href="#!"
-                      >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                      </a>
-                      <a
-                        class="flex py-3 px-4 border-b border-gray-300"
-                        href="#!"
-                      >
-                        Lorem ipsum dolor
-                      </a>
-                      <a
-                        class="flex py-3 px-4 border-b border-gray-300"
-                        href="#!"
-                      >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolor dolorum eius expedita
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="topFilters right w-full md:w-2/5 flex flex-row flex-wrap space-y-4 md:space-y-0 md:pl-10 md:mb-4">
+              <pb-dropdown
+                class="w-full md:w-1/2 md:mb-4"
+                :options="perPageOptions"
+                placeholder="Books per page"
+              />
+              <pb-dropdown
+                class="w-full md:w-1/2 md:mb-4"
+                :options="sortByOptions"
+                placeholder="Sort cards by"
+              />
             </div>
           </div>
         </div>
@@ -163,11 +93,22 @@ export default {
     WelcomeHeader,
     PbFooter,
     PbCollections,
-    PbNavbar
+    PbNavbar,
+    PbDropdown,
   },
   data() {
     return {
-      assetsPath: '../src/assets'
+      assetsPath: '../src/assets',
+      perPageOptions: [
+        {label: '10 books', code: 10},
+        {label: '20 books', code: 20},
+        {label: '50 books', code: 50},
+      ],
+      sortByOptions: [
+        {label: 'Recently updated', code: 1},
+        {label: 'Word count', code: 2},
+        {label: 'Title (A-Z)', code: 3},
+      ]
     };
   }
 };
