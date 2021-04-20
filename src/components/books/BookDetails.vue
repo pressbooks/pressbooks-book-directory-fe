@@ -28,7 +28,7 @@
     </ul>
     <p
       v-if="hasDescription"
-      class="text leading-loose font-pbRegular"
+      class="text leading-loose font-pbRegular line-clamp-6"
       v-html="item.description"
     />
   </div>
