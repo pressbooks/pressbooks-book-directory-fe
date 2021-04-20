@@ -4,9 +4,9 @@
     <welcome-header />
     <pb-collections />
     <section class="section-books bg-white">
-      <div class="content container mx-auto px-8 py-12">
-        <div class="py-12">
-          <div class="section-title text-4xl mb-12 text-center mb-10">
+      <div class="content container mx-auto px-8 py-8">
+        <div class="py-8">
+          <div class="section-title text-4xl font-headings font-bold text-center mb-10">
             Find a book
           </div>
           <div class="flex flex-row flex-wrap items-end">
@@ -16,7 +16,7 @@
                   <div class="border-b border-gray-300 flex flex-row w-full items-center">
                     <div class="icon">
                       <img
-                        :src="assetsPath + '/icons/search.png'"
+                        :src="assetsPath + '/icons/icon-search.svg'"
                         width="22"
                         alt=""
                       >
