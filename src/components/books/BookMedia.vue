@@ -40,7 +40,10 @@ export default {
     PbBookIcon
   },
   props: {
-    item: Object
+    item: {
+      type: Object,
+      default() { return {}; }
+    },
   },
   computed: {
     hasH5PActivities() {

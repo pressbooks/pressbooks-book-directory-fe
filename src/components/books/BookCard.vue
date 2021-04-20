@@ -27,7 +27,10 @@ export default {
     Recommended,
   },
   props: {
-    item: Object
+    item: {
+      type: Object,
+      default() { return {}; }
+    },
   }
 };
 </script>

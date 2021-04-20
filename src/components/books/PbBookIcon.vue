@@ -12,8 +12,14 @@
 export default {
   name:'PbBookIcon',
   props: {
-    icon: String,
-    alt: String,
+    icon: {
+      type: String,
+      default: ''
+    },
+    alt: {
+      type: String,
+      default: ''
+    },
   }
 };
 </script>

@@ -6,7 +6,10 @@
 export default {
   name: 'PbBookCover',
   props: {
-    image: String,
+    image: {
+      type: String,
+      default: ''
+    },
   }
 };
 </script>

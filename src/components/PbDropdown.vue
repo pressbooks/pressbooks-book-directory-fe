@@ -14,7 +14,10 @@
 export default {
   name: 'PbDropdown',
   props: {
-    options: Array,
+    options: {
+      type: Array,
+      default() { return []; }
+    },
     placeholder: {
       type: String,
       default: 'Options'
