@@ -3,28 +3,28 @@ import helpers from '../helpers';
 
 let sClient = {
   searchClient: algoliasearch(
-    process.env.VUE_APP_ALGOLIA_APP_ID,
-    process.env.VUE_APP_ALGOLIA_API_READ_KEY,
+    import.meta.env.VITE_ALGOLIA_APP_ID,
+    import.meta.env.VITE_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
   availableIndexes: [
     {
-      value: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      value: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
       default: true,
       orderedBy: 'updated',
       isReplica: true,
       label: 'Recently updated'
     },
     {
-      value: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
+      value: import.meta.env.VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
       default: false,
       orderedBy: 'wordCount',
       isReplica: true,
       label: 'Word count ↓'
     },
     {
-      value: process.env.VUE_APP_ALGOLIA_INDEX,
+      value: import.meta.env.VITE_ALGOLIA_INDEX,
       default: false,
       orderedBy: 'name',
       isReplica: false,
