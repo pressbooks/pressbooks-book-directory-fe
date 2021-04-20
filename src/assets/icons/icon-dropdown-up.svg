@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="9px" viewBox="0 0 15 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-dropdown-up</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Pressbooks---Directory---Applied-Filters" transform="translate(-357.000000, -1585.000000)" fill="#BB2026" fill-rule="nonzero" stroke="#BB2026" stroke-width="0.667549976">
+            <g id="Group-17" transform="translate(130.000000, 1485.000000)">
+                <g id="Group-11" transform="translate(20.000000, 92.000000)">
+                    <path d="M220.851642,9.15873934 C220.653519,8.94739361 220.332023,8.94706925 220.133469,9.15795548 L214.859074,14.7611988 C214.661053,14.9719769 214.338922,14.9719499 214.140545,14.7607934 L208.866531,9.15795548 C208.668002,8.94704222 208.346506,8.94739361 208.148358,9.15873934 C207.95026,9.37008508 207.95059,9.712363 208.149094,9.92324923 L213.422752,15.5257087 C213.719848,15.8419299 214.109975,16 214.500152,16 C214.890102,16 215.280127,15.841984 215.576842,15.5260871 L220.850906,9.92324923 C221.04941,9.712363 221.04974,9.37008508 220.851642,9.15873934 Z" id="icon-dropdown-up" transform="translate(214.500000, 12.500000) scale(1, -1) translate(-214.500000, -12.500000) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
