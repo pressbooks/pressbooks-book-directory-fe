@@ -1,12 +1,11 @@
 <template>
   <div>
     <vue-select
-        :options="options"
-        :placeholder="placeholder"
-        :searchable="searchable"
-        :clearable="false"
+      :options="options"
+      :placeholder="placeholder"
+      :searchable="searchable"
+      :clearable="false"
     >
-
     </vue-select>
   </div>
 </template>
