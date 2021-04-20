@@ -1,5 +1,55 @@
 <template>
   <div class="w-full md:w-1/4 md:pr-10 mb-12">
+    <vsa-list>
+      <!-- Here you can use v-for to loop through items  -->
+      <vsa-item>
+        <vsa-heading>
+          This is the heading
+        </vsa-heading>
+
+        <vsa-content>
+          This is the content
+        </vsa-content>
+      </vsa-item>
+      <vsa-item>
+        <vsa-heading>
+          This is the heading
+        </vsa-heading>
+
+        <vsa-content>
+          This is the content
+        </vsa-content>
+      </vsa-item>
+      <vsa-item>
+        <vsa-heading>
+          This is the heading
+        </vsa-heading>
+
+        <vsa-content>
+          This is the content
+        </vsa-content>
+      </vsa-item>
+      <vsa-item>
+        <vsa-heading>
+          This is the heading
+        </vsa-heading>
+
+        <vsa-content>
+          This is the content
+        </vsa-content>
+      </vsa-item>
+      <vsa-item>
+        <vsa-heading>
+          This is the heading
+        </vsa-heading>
+
+        <vsa-content>
+          This is the content
+        </vsa-content>
+      </vsa-item>
+    </vsa-list>
+  </div>
+<!--  <div class="w-full md:w-1/4 md:pr-10 mb-12">
     <div class="font-semibold text-xl mb-8 md:mb-4">
       Filters:
     </div>
@@ -155,7 +205,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 </template>
 <script>
 export default {

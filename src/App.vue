@@ -129,172 +129,13 @@
             <div class="font-semibold text-2xl mb-8">
               Results: 1889 books
             </div>
-            <div class="font-semibold text-lg mb-3">
-              Active Filters
-            </div>
-            <div class="tags flex flex-row flex-wrap">
-              <div class="tag flex flex-row items-center bg-gray-200 px-3 py-3 rounded-full mr-2 mb-2">
-                <div class="text text-sm leading-none">
-                  Education
-                </div>
-                <div>
-                  <a
-                    href="#!"
-                    class="text block ml-2"
-                  >
-                    <img
-                      :src="assetsPath + '/icons/times.png'"
-                      width="14"
-                      alt=""
-                    >
-                  </a>
-                </div>
-              </div>
-              <div class="tag flex flex-row items-center bg-gray-200 px-3 py-3 rounded-full mr-2 mb-2">
-                <div class="text text-sm leading-none">
-                  Lorem ipsum dolor sit
-                </div>
-                <div>
-                  <a
-                    href="#!"
-                    class="text block ml-2"
-                  >
-                    <img
-                      :src="assetsPath + '/icons/times.png'"
-                      width="14"
-                      alt=""
-                    >
-                  </a>
-                </div>
-              </div>
-              <div class="tag flex flex-row items-center bg-gray-200 px-3 py-3 rounded-full mr-2 mb-2">
-                <div class="text text-sm leading-none">
-                  Lorem ipsum dolor sit amet, consectetur
-                </div>
-                <div>
-                  <a
-                    href="#!"
-                    class="text block ml-2"
-                    width="14"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
+            <pb-active-filters />
             <books />
-            <div class="pagination">
-              <div class="container mx-auto py-16">
-                <div class="flex flex-row w-full items-center md:w-1/2 justify-center text-gray-600">
-                  <div class="action pr-4 w-12">
-                    <a
-                      href="#!"
-                      class="block"
-                    >
-                      <img
-                        :src="assetsPath + '/icons/arrow-left.png'"
-                        width="100%"
-                        alt=""
-                      >
-                    </a>
-                  </div>
-                  <div class="page font-bold text-gray-900">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      1
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      2
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      3
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      4
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      5
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      6
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      7
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      8
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      9
-                    </a>
-                  </div>
-                  <div class="page">
-                    <a
-                      href="!"
-                      class="block px-2"
-                    >
-                      10
-                    </a>
-                  </div>
-                  <a
-                    href="#!"
-                    class="block"
-                  >
-                    <img
-                      :src="assetsPath + '/icons/arrow-right.png'"
-                      width="100%"
-                      alt=""
-                    >
-                  </a>
-                </div>
-              </div>
-            </div>
+            <pb-pagination />
           </div>
         </div>
       </div>
     </section>
-
     <pb-footer />
   </div>
 </template>
@@ -306,9 +147,14 @@ import PbFooter from './components/PbFooter.vue';
 import PbCollections from './components/collections/PbCollections.vue';
 import PbNavbar from './components/PbNavbar.vue';
 import PbFilters from './components/filters/PbFilters.vue';
+import PbDropdown from './components/PbDropdown.vue';
+import PbPagination from './components/PbPagination.vue';
+import PbActiveFilters from './components/filters/PbActiveFilters.vue';
 
 export default {
   components: {
+    PbActiveFilters,
+    PbPagination,
     PbFilters,
     Books,
     WelcomeHeader,

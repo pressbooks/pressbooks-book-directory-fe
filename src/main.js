@@ -2,6 +2,10 @@ import Vue from 'vue';
 import App from './App.vue';
 // import InstantSearch from 'vue-instantsearch';
 import VueMeta from 'vue-meta';
+import VueSelect from 'vue-select';
+import VueSimpleAccordion from 'vue-simple-accordion';
+
+import 'vue-select/dist/vue-select.css';
 import './index.css';
 
 Vue.use(VueMeta);

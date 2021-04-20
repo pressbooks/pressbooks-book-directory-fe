@@ -1,8 +1,8 @@
 <template>
   <section class="section-cover">
-    <div class="container mx-auto w-full md:w-2/3 py-20 px-8">
+    <div class="container mx-auto w-full md:w-2/3 pt-10 px-8">
       <h1 class="section-title text-5xl mb-6 font-headings font-bold">
-        Welcome to Pressbooks Directory
+        Hello world
       </h1>
       <p class="section-summary font-pbRegular text-gray-700 mb-8 leading-7">
         This directory provides an index of <strong>8888</strong> books published across <strong>95</strong> Pressbooks
