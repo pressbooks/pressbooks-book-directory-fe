@@ -7,7 +7,7 @@
           aria-label="Pressbooks Homepage"
         >
           <img
-            :src="assetsPath + '/logo-simple.png'"
+            :src="assetsPath + '/logo-color.svg'"
             width="170"
             alt="Pressbooks logo"
             class="inline float-left mr-8"

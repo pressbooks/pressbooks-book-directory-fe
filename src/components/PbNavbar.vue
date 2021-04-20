@@ -4,7 +4,7 @@
       <nav class="py-2 md:py-2 flex justify-between items-center">
         <a href="#">
           <img
-          :src="assetsPath + '/logo.png'"
+          :src="assetsPath + '/logo-pressbooks-directory.svg'"
           alt="Pressbooks Directory"
         >
         </a>
