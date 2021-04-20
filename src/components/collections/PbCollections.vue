@@ -1,6 +1,6 @@
 <template>
   <section class="section-cover">
-    <div class="container mx-auto px-8 py-10">
+    <div class="container mx-auto px-8 py-12">
       <div class="border-gray-300">
         <div class="w-full mx-auto text-center">
           <h2 class="section-title font-headings font-bold text-4xl mb-12">
