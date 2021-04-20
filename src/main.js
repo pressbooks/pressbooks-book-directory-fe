@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
-// import InstantSearch from 'vue-instantsearch';
+import InstantSearch from 'vue-instantsearch';
 import VueMeta from 'vue-meta';
 import './index.css';
+import {store} from './store';
 
 Vue.use(VueMeta);
-// Vue.use(InstantSearch);
+Vue.use(InstantSearch);
 
 // Fix this later
 /*
@@ -26,5 +27,7 @@ if (typeof process.env.VUE_APP_SENTRY_DSN !== 'undefined') {
 }
 */
 
-new Vue({render: h => h(App),
+new Vue({
+  render: h => h(App),
+  store
 }).$mount('#app');
