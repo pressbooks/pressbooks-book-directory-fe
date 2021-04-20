@@ -1,87 +1,45 @@
 <template>
-  <div class="w-full md:w-1/4 md:pr-10 mb-12">
-    <div class="font-semibold text-xl mb-8 md:mb-4">
-      Filters:
-    </div>
-    <div class="filters border border-gray-300">
-      <div class="filter-group border-b border-gray-300">
-        <div class="heading px-5 py-3 bg-gray-200">
-          <div class="flex flex-row items-center justify-between">
-            <div class="title font-pbRegular font-bold">
-              {{ title }}
-            </div>
+  <vsa-item class="filters border" v-if="typeof $store.state.stats.filters[field] !== 'undefined'">
+    <vsa-heading class="title font-pbRegular font-bold text-base py-3">
+      {{ title }}
+    </vsa-heading>
+    <vsa-icon>
+      <ChevronUpIcon
+        class="open h-6 w-6 text-red-800"
+      />
+    </vsa-icon>
+    <vsa-content>
+      <div
+        v-for="(item, k) in $store.state.stats.filters[field]"
+        :key="k"
+        class="body"
+      >
+        <div class="border-t border-gray-200">
+          <a
+            class="flex flex-row items-center justify-between p-3 "
+          >
             <div
-              class="action"
-              @click="expandFilter"
-              :aria-expanded="isExpanded"
+              class="'title text-sm text-black-600 w-full'"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-red-800"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
+              {{ showItem(item) }}
             </div>
-          </div>
-        </div>
-        <div class="body" v-if="isExpanded">
-          <div class="border-t border-gray-200">
-            <a
-              href="#!"
-              class="flex flex-row items-center justify-between px-5 py-3"
-            >
-              <div class="title text-sm text-black-600 w-full">
-                Education (20)
-              </div>
-              <pb-filter-buttons />
-            </a>
-          </div>
-          <div class="border-t border-gray-200">
-            <a
-              href="#!"
-              class="flex flex-row items-center justify-between px-5 py-3"
-            >
-              <div class="title text-sm text-black-600 w-full">
-                Open learning, distance education (144)
-              </div>
-              <pb-filter-buttons />
-            </a>
-          </div>
-          <div class="border-t border-gray-200">
-            <a
-              href="#!"
-              class="flex flex-row items-center justify-between px-5 py-3"
-            >
-              <div class="title text-sm text-black-600 w-full">
-                Chemistry (22)
-              </div>
-              <div class="action w-6 flex flex-row justify-end" />
-            </a>
-          </div>
-          <div class="flex flex-row items-center justify-between px-5 py-3 border-t border-gray-200">
-            <div class="action w-full text-sm text-red-800">
-              <a
-                href="#!"
-                class=" uppercase py-2 block text-center"
-              >
-                view more
-              </a>
-            </div>
-          </div>
+            <pb-filter-buttons
+              :item="item"
+              :field="field"
+            />
+          </a>
         </div>
       </div>
-    </div>
-  </div>
+    </vsa-content>
+  </vsa-item>
 </template>
 
 <script>
 import PbFilterButtons from './PbFilterButtons.vue';
+import { ChevronUpIcon } from '@vue-hero-icons/outline';
 export default {
   name: 'PbSelectableFilters',
-  components: {PbFilterButtons},
+  components: { PbFilterButtons, ChevronUpIcon },
   props: {
     title: {
       type: String,
@@ -90,18 +48,22 @@ export default {
     searchable: {
       type: Boolean,
       default: false
+    },
+    field: {
+      type: String,
+      default: ''
     }
+  },
+  computed: {
+
   },
   methods: {
     expandFilter() {
       this.isExpanded = !this.isExpanded;
+    },
+    showItem(item) {
+      return item.facet + ' (' + item.count + ')';
     }
-  },
-  data() {
-    return {
-      assetsPath: '../src/assets',
-      isExpanded: false
-    };
   }
 };
 </script>
