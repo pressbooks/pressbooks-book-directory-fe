@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <ais-instant-search
+      :index-name="$store.state.SClient.indexName"
+      :search-client="$store.state.SClient.searchClient"
+  >
     <pb-navbar />
     <welcome-header />
     <pb-collections />
@@ -137,7 +140,7 @@
       </div>
     </section>
     <pb-footer />
-  </div>
+  </ais-instant-search>
 </template>
 
 <script>
