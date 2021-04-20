@@ -8,7 +8,7 @@
         <div class="border-b border-gray-300 flex flex-row w-full items-center">
           <div class="icon">
             <img
-              :src="assetsPath + '/icons/icon-search.svg'"
+              src="/assets/icons/icon-search.svg"
               width="22"
               alt=""
             >
@@ -42,7 +42,6 @@ export default {
   name: 'PbSearchBox',
   data() {
     return {
-      assetsPath: '../src/assets',
       stringSearch: '',
       searchCharsLimit: {
         min: 3,

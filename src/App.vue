@@ -44,11 +44,6 @@ export default {
     PbFooter,
     PbCollections,
     PbNavbar,
-  },
-  data() {
-    return {
-      assetsPath: '../src/assets',
-    };
   }
 };
 </script>

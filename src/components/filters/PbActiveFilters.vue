@@ -15,11 +15,6 @@ export default {
   name: 'PbActiveFilters',
   components: {
     PbSelectedFilter
-  },
-  data() {
-    return {
-      assetsPath: '../src/assets'
-    };
   }
 };
 </script>

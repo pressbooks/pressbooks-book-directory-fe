@@ -29,7 +29,6 @@ export default {
   components: {PbSearchBox, PbDropdown},
   data() {
     return {
-      assetsPath: '../src/assets',
       perPageOptions: [
         {label: '10 books', code: 10},
         {label: '20 books', code: 20},

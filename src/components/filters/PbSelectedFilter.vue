@@ -5,11 +5,7 @@
     </div>
     <div>
       <button class="text block ml-2">
-        <img
-          :src="assetsPath + '/icons/times.png'"
-          width="14"
-          alt=""
-        >
+        x
       </button>
     </div>
   </div>
@@ -23,11 +19,6 @@ export default {
       type: String,
       default: ''
     }
-  },
-  data() {
-    return {
-      assetsPath: '../src/assets'
-    };
   }
 };
 </script>
