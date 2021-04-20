@@ -1,15 +1,18 @@
 <template>
-  <div class="action w-6 flex flex-row justify-end">
+  <div class="action w-14 flex flex-row justify-end">
     <div
       class="include"
-      @click="applyFilter(item.facet, false)"
+      @click="applyFilter(item, false)"
     >
-      <CheckCircleIcon v-if="wasFiltered(item.facet, false) " class="h-6 w-6"></CheckCircleIcon>
-      <CheckCircleIconSolid v-else class="h-6 w-6 text-red-800"></CheckCircleIconSolid>
+      <CheckCircleIconSolid v-if="wasFiltered(item.facet, false)" class="h-6 w-6 text-red-800"></CheckCircleIconSolid>
+      <CheckCircleIcon v-else class="h-6 w-6"></CheckCircleIcon>
     </div>
-    <div class="pl-1 exclude" @click="applyFilter(item.facet, true)">
-      <XCircleIcon v-if="wasFiltered(item.facet, true)" class="h-6 w-6"></XCircleIcon>
-      <XCircleIconSolid v-else class="h-6 w-6 text-red-800"></XCircleIconSolid>
+    <div
+      class="pl-1 exclude"
+      @click="applyFilter(item, true)"
+    >
+      <XCircleIconSolid v-if="wasFiltered(item.facet, true)" class="h-6 w-6 text-red-800"></XCircleIconSolid>
+      <XCircleIcon v-else class="h-6 w-6"></XCircleIcon>
     </div>
   </div>
 </template>
@@ -117,12 +120,13 @@ export default {
       }
     },
     applyFilter(itemValue, exclude) {
-      if (this.wasFiltered(itemValue, exclude)) {
-        return this.removeFilter(itemValue);
+      const itemFacet = itemValue.facet;
+      if (this.wasFiltered(itemFacet, exclude)) {
+        return this.removeFilter(itemFacet);
       }
       this.filterApplied = true;
       let query = {...this.$route.query}, value;
-      value = exclude ? '-' + itemValue : itemValue;
+      value = exclude ? '-' + itemFacet : itemFacet;
       if (typeof(query[this.alias]) === 'undefined') {
         query[this.alias] = value.toString();
       } else {

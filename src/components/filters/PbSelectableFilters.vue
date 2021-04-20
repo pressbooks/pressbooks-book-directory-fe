@@ -1,13 +1,12 @@
 <template>
   <vsa-item class="filters border" v-if="typeof $store.state.stats.filters[field] !== 'undefined'">
-    <vsa-heading class="title font-pbRegular font-bold text-base">
+    <vsa-heading class="title font-pbRegular font-bold text-base py-3">
       {{ title }}
     </vsa-heading>
     <vsa-icon>
       <ChevronUpIcon
         class="open h-6 w-6 text-red-800"
-      ></ChevronUpIcon>
-      <ChevronDownIcon class="close h-6 w-6 text-red-800"></ChevronDownIcon>
+      />
     </vsa-icon>
     <vsa-content>
       <div
@@ -17,10 +16,11 @@
       >
         <div class="border-t border-gray-200">
           <a
-            href="#!"
-            class="flex flex-row items-center justify-between px-5 py-3"
+            class="flex flex-row items-center justify-between p-3 "
           >
-            <div class="title text-sm text-black-600 w-full">
+            <div
+              class="'title text-sm text-black-600 w-full'"
+            >
               {{ showItem(item) }}
             </div>
             <pb-filter-buttons
@@ -36,10 +36,10 @@
 
 <script>
 import PbFilterButtons from './PbFilterButtons.vue';
-import { ChevronUpIcon, ChevronDownIcon } from '@vue-hero-icons/outline';
+import { ChevronUpIcon } from '@vue-hero-icons/outline';
 export default {
   name: 'PbSelectableFilters',
-  components: { PbFilterButtons, ChevronUpIcon, ChevronDownIcon },
+  components: { PbFilterButtons, ChevronUpIcon },
   props: {
     title: {
       type: String,
@@ -53,6 +53,9 @@ export default {
       type: String,
       default: ''
     }
+  },
+  computed: {
+
   },
   methods: {
     expandFilter() {
