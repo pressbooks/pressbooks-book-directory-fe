@@ -154,7 +154,7 @@ export default {
         }
       }
       state.filtersExcluded = { ...filters  };
-      helpers.setNumericFilters(filters,state);
+      helpers.functions.setNumericFilters(filters,state);
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -163,7 +163,7 @@ export default {
       }
       oldFilters[filter.attribute].push(filter);
       state.filtersExcluded = { ...oldFilters  };
-      helpers.setNumericFilters(oldFilters,state);
+      helpers.functions.setNumericFilters(oldFilters,state);
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };
@@ -186,7 +186,7 @@ export default {
           }
         }
         state.filtersExcluded = fe;
-        helpers.setNumericFilters(fe,state);
+        helpers.functions.setNumericFilters(fe,state);
       }
     },
     // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}

@@ -18,7 +18,10 @@
 export default {
   name: 'BookInfo',
   props: {
-    item: Object
+    item: {
+      type: Object,
+      default() { return {}; }
+    },
   },
   computed: {
     sizeInMb() {

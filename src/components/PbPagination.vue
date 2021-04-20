@@ -2,16 +2,12 @@
   <div class="pagination">
     <div class="container mx-auto py-16">
       <div class="flex flex-row w-full items-center md:w-1/2 justify-center text-gray-600">
-        <div class="action pr-4 w-12">
+        <div class="action">
           <a
             href="#!"
             class="block"
           >
-            <img
-              :src="assetsPath + '/icons/arrow-left.png'"
-              width="100%"
-              alt=""
-            >
+            <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-red-800"></ArrowNarrowLeftIcon>
           </a>
         </div>
         <div class="page font-bold text-gray-900">
@@ -98,11 +94,7 @@
           href="#!"
           class="block"
         >
-          <img
-            :src="assetsPath + '/icons/arrow-right.png'"
-            width="100%"
-            alt=""
-          >
+          <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-red-800"></ArrowNarrowRightIcon>
         </a>
       </div>
     </div>
@@ -110,12 +102,17 @@
 </template>
 
 <script>
+import { ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from '@vue-hero-icons/outline';
+
 export default {
   name: 'PbPagination',
-  data() {
-    return {
-      assetsPath: '../src/assets'
-    };
-  }
+  components: {
+    ArrowNarrowLeftIcon,
+    ArrowNarrowRightIcon
+  },
 };
 </script>
+
+<style>
+
+</style>

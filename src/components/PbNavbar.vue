@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white">
+  <header class="bg-white shadow-md">
     <div class="container mx-auto px-8">
       <nav class="py-2 md:py-2 flex justify-between items-center">
         <a href="#">
