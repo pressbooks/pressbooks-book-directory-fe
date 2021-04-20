@@ -18,6 +18,23 @@
 
 @tailwind utilities;
 
+/* This should be extracted to another file */
+.v-select {
+    @apply w-full;
+}
+
+.vs__dropdown-toggle {
+    @apply flex items-center justify-between w-full px-4 py-3 rounded-none border border-gray-300;
+}
+
+.vs__search {
+    @apply placeholder-gray-800 text-sm;
+}
+
+.vs__actions {
+    @apply flex items-center;
+}
+
 body {
     font-family: 'Karmilla', sans-serif;
 }

@@ -10,6 +10,8 @@ import './index.css';
 import {store} from './store';
 
 Vue.use(VueMeta);
+Vue.component('vue-select', VueSelect);
+Vue.use(VueSimpleAccordion);
 Vue.use(InstantSearch);
 
 // Fix this later
