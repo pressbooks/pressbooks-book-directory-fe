@@ -126,11 +126,20 @@ function unescapeHTML(text) {
   return text;
 }
 
+function setNumericFilters(filters, state) {
+  let nf = setFilters(filters, state.allowedFilters);
+  state.notFilters = nf[0];
+  state.hasNumeric = (nf[1].length > 0);
+  state.numericFilters = nf[1];
+  state.filtersParams = setParamsFilters(state.numericFilters, state.searchFilters);
+}
+
 export default {
   functions: {
     setFilters,
     getSimilarFacetValues,
     setParamsFilters,
-    unescapeHTML
+    unescapeHTML,
+    setNumericFilters
   }
 };

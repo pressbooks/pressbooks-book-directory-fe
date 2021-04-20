@@ -111,10 +111,11 @@
 
 <script>
 export default {
-  name: 'PbPagination'
+  name: 'PbPagination',
+  data() {
+    return {
+      assetsPath: '../src/assets'
+    };
+  }
 };
 </script>
-
-<style>
-
-</style>

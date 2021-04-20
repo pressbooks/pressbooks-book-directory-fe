@@ -1,40 +1,6 @@
+@import "styles/base.css";
+@import "styles/components.css";
+@import "styles/utilities.css";
+@import "styles/fonts.scss";
 @import "styles/accordion.scss";
-@tailwind base;
-@tailwind components;
-
-@font-face {
-    font-family: 'Karmilla';
-    src: url(../src/assets/fonts/karmilla-regular-webfont.woff) format('woff');
-    font-style: normal;
-    font-weight: normal;
-}
-
-@font-face {
-    font-family: 'Karmilla';
-    src: url(../src/assets/fonts/karmilla-bold-webfont.woff) format('woff');
-    font-style: normal;
-    font-weight: bold;
-}
-
-@tailwind utilities;
-
-/* This should be extracted to another file */
-.v-select {
-    @apply w-full;
-}
-
-.vs__dropdown-toggle {
-    @apply flex items-center justify-between w-full px-4 py-3 rounded-none border border-gray-300;
-}
-
-.vs__search {
-    @apply placeholder-gray-800 text-sm;
-}
-
-.vs__actions {
-    @apply flex items-center;
-}
-
-body {
-    font-family: 'Karmilla', sans-serif;
-}
+@import "styles/dropdown.css";

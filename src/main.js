@@ -10,7 +10,7 @@ import './index.css';
 import {store} from './store';
 
 Vue.use(VueMeta);
-Vue.component('vue-select', VueSelect);
+Vue.component('VueSelect', VueSelect);
 Vue.use(VueSimpleAccordion);
 Vue.use(InstantSearch);
 
@@ -35,5 +35,5 @@ if (typeof process.env.VUE_APP_SENTRY_DSN !== 'undefined') {
 
 new Vue({
   render: h => h(App),
-  store
+  store,
 }).$mount('#app');

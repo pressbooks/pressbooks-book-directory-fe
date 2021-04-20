@@ -1,121 +1,77 @@
 <template>
-  <div class="v-card__details">
-    <div
-      v-if="item.author && item.author.length > 0"
-      class="author"
-    >
-      <strong>Author(s): </strong>
-      <span
-        v-for="(author, index) in item.author"
-        :key="index"
-      >
-        <span v-if="index != 0">, </span>
-        <!-- eslint-disable vue/no-v-html -->
-        <span
-          class="v-card--item author"
-          v-html="author"
-        />
-        <!--eslint-enable-->
-      </span>
-    </div>
-    <div
-      v-if="item.editor && item.editor.length > 0"
-      class="editor"
-    >
-      <strong>Editor(s): </strong>
-      <span
-        v-for="(editor, index) in item.editor"
-        :key="index"
-      >
-        <span v-if="index != 0">, </span>
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <span
-          class="v-card--item editor"
-          v-html="editor"
-        />
-      </span>
-    </div>
-    <div
-      v-if="item.about"
-      class="subjects"
-    >
-      <strong>Subject(s): </strong>
-      <span
-        v-for="(about, index) in item.about"
-        :key="index"
-        class="v-card--item subject"
-      >
-        <span v-if="index != 0">, </span>
-        <span class="v-card--item subject">{{ about }}</span>
-      </span>
-    </div>
-    <div
-      v-if="item.hasLastUpdated"
-      class="updated"
-    >
-      <strong>Updated: </strong>
-      <span class="v-card--item updated">{{ unixDateToStandard(item.lastUpdated) }}</span>
-    </div>
-    <div
-      v-if="item.publisherName"
-      class="publisher"
-    >
-      <strong>Publisher: </strong>
-      <span
-        class="v-card--item publisher"
-        v-html="item.publisherName"
+  <div>
+    <ul class="py-4 space-y-2">
+      <meta-info
+        v-if="hasAuthors"
+        title="Author(s):"
+        :text="authors"
       />
-    </div>
-    <div
-      v-show="item.wordCount"
-      class="wordcount"
-    >
-      <strong>Word Count: </strong><span class="v-card--item ais-Hits__books-book-wordcount">{{ item.wordCount }}</span>
-    </div>
-    <div
-      v-if="item.storageSize"
-      class="storagesize"
-    >
-      <strong>Storage Size: </strong><span class="v-card--item ais-Hits__books-book-storagesize">{{ toMB(item.storageSize) }}</span>
-    </div>
-    <div
-      v-if="item.description"
-      class="description"
-    >
-      <strong>Description: </strong>
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <span
-        class="v-card--item description"
-        v-html="item.description"
+      <meta-info
+        v-if="hasSubjects"
+        title="Subject(s):"
+        :text="subjects"
       />
-    </div>
+      <meta-info
+        v-if="hasLastUpdated"
+        title="Updated:"
+        :text="lastUpdated"
+      />
+      <meta-info
+        v-if="hasPublisher"
+        title="Publisher:"
+        :text="item.publisherName"
+      />
+      <meta-info
+        title="Language:"
+        :text="item.languageName"
+      />
+    </ul>
+    <p
+      v-if="hasDescription"
+      class="text leading-loose font-pbRegular"
+      v-html="item.description"
+    />
   </div>
 </template>
 
 <script>
+import MetaInfo from './MetaInfo.vue';
+
 export default {
   name: 'BookDetails',
-  props: {
-    item: {
-      type: Object,
-      default () { return {}; }
-    }
+  components: {
+    MetaInfo
   },
-  methods: {
-    upperCase(value) {
-      if (!value) return '';
-      value = value.toString();
-      return value.toUpperCase();
+  props: {
+    item: Object
+  },
+  computed: {
+    hasAuthors() {
+      return this.item.author && this.item.author.length > 0;
     },
-    toMB(value) {
-      let v = (parseInt(value) / 1024) / 1024;
-      return parseFloat(v).toFixed(2) + ' MB';
+    hasDescription() {
+      return this.item.description;
     },
-    unixDateToStandard(unixDate) {
-      let date = new Date(unixDate * 1000);
-      let month = parseInt(date.getUTCMonth()) + 1, day = parseInt(date.getUTCDate());
-      month = month < 10 ? '0' + month : month;
-      return month + '-' + day + '-' + date.getUTCFullYear();
+    hasLastUpdated() {
+      return this.item.hasLastUpdated;
+    },
+    hasPublisher() {
+      return this.item.publisherName;
+    },
+    hasSubjects() {
+      return this.item.about && this.item.about.length > 0;
+    },
+    authors() {
+      return this.item.author.join(', ');
+    },
+    subjects() {
+      return this.item.about.join(', ');
+    },
+    lastUpdated() {
+      const date = new Date(this.item.lastUpdated * 1000);
+      const month = date.getUTCMonth() +1, day = date.getUTCDate();
+
+      return `${month < 10 ? '0' + month : month}-${day}-${date.getUTCFullYear()}`;
     }
   }
 };

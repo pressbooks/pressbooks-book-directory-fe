@@ -154,11 +154,7 @@ export default {
         }
       }
       state.filtersExcluded = { ...filters  };
-      let nf = helpers.functions.setFilters(filters, state.allowedFilters);
-      state.notFilters = nf[0];
-      state.hasNumeric = (nf[1].length > 0);
-      state.numericFilters = nf[1];
-      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
+      helpers.setNumericFilters(filters,state);
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -167,11 +163,7 @@ export default {
       }
       oldFilters[filter.attribute].push(filter);
       state.filtersExcluded = { ...oldFilters  };
-      let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
-      state.notFilters = nf[0];
-      state.hasNumeric = (nf[1].length > 0);
-      state.numericFilters = nf[1];
-      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
+      helpers.setNumericFilters(oldFilters,state);
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };
@@ -194,11 +186,7 @@ export default {
           }
         }
         state.filtersExcluded = fe;
-        let nf = helpers.functions.setFilters(fe, state.allowedFilters);
-        state.notFilters = nf[0];
-        state.hasNumeric = (nf[1].length > 0);
-        state.numericFilters = nf[1];
-        state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
+        helpers.setNumericFilters(fe,state);
       }
     },
     // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}

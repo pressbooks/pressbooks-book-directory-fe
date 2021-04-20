@@ -11,6 +11,9 @@ module.exports = {
         headings: ['Karmilla', 'sans-serif'],
         pbBold: ['Karmilla', 'sans-serif'],
         pbRegular: ['Spectral', 'sans-serif'],
+      },
+      colors: {
+        'pb-blue': '#F3F9FA',
       }
     },
   },
