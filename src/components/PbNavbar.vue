@@ -4,9 +4,8 @@
       <nav class="py-2 md:py-2 flex justify-between items-center">
         <a href="#">
           <img
-
           :src="assetsPath + '/logo.png'"
-          alt="Logo"
+          alt="Pressbooks Directory"
         >
         </a>
         <button class="border border-red-700 rounded-full px-8 py-3 text-red-700 text-sm">

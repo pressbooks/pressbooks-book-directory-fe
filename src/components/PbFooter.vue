@@ -2,16 +2,35 @@
   <footer>
     <div class="container mx-auto py-12 px-8">
       <div class="top">
-        <img
-          :src="assetsPath + '/logo-simple.png'"
-          width="170"
-          alt="Logo"
+        <a
+          href="https://pressbooks.com"
+          aria-label="Pressbooks Homepage"
         >
+          <img
+            :src="assetsPath + '/logo-simple.png'"
+            width="170"
+            alt="Pressbooks logo"
+            class="inline float-left mr-8"
+          >
+        </a>
+        <a
+          href="https://www.algolia.com/"
+          aria-label="Search by Algolia"
+          target="_blank"
+          class="float-left"
+        >
+          <img
+            :src="assetsPath + '/search-by-algolia.svg'"
+            width="170"
+            alt="Search by Algolia"
+            class="inline float-left"
+          >
+        </a>
       </div>
       <div class="bottom flex flex-row w-full items-end justify-between pt-4">
         <div class="left">
           <div class="text-sm">
-            © Pressbooks Directory 2021
+            © Pressbooks 2021
           </div>
         </div>
         <div class="right">
