@@ -4,15 +4,27 @@
       class="include"
       @click="applyFilter(item, false)"
     >
-      <CheckCircleIconSolid v-if="wasFiltered(item.facet, false)" class="h-6 w-6 text-red-800"></CheckCircleIconSolid>
-      <CheckCircleIcon v-else class="h-6 w-6"></CheckCircleIcon>
+      <CheckCircleIconSolid
+        v-if="wasFiltered(item.facet, false)"
+        class="h-6 w-6 text-red-800"
+      />
+      <CheckCircleIcon
+        v-else
+        class="h-6 w-6"
+      />
     </div>
     <div
       class="pl-1 exclude"
       @click="applyFilter(item, true)"
     >
-      <XCircleIconSolid v-if="wasFiltered(item.facet, true)" class="h-6 w-6 text-red-800"></XCircleIconSolid>
-      <XCircleIcon v-else class="h-6 w-6"></XCircleIcon>
+      <XCircleIconSolid
+        v-if="wasFiltered(item.facet, true)"
+        class="h-6 w-6 text-red-800"
+      />
+      <XCircleIcon
+        v-else
+        class="h-6 w-6"
+      />
     </div>
   </div>
 </template>
@@ -59,6 +71,34 @@ export default {
       itemsFiltered: false,
       filterApplied: false
     };
+  },
+  watch: {
+    '$store.state.stats.filters': {
+      deep: true,
+      handler(filters) {
+        if (typeof filters[this.empty] !== 'undefined') {
+          for (let i = 0; i < filters[this.empty].length; i++) {
+            if (filters[this.empty][i].facet === 'false') {
+              this.emptyFieldCount = filters[this.empty][i].count;
+            }
+          }
+          return true;
+        }
+        if (this.filterApplied && this.stringSearch.length > 0) {
+          this.searchForItems();
+        }
+        this.filterApplied = false;
+      }
+    },
+    '$store.state.SClient.filtersExcluded': {
+      deep: true,
+      handler() {
+        this.itemsFiltered = typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' && this.$store.state.SClient.filtersExcluded[this.field].length > 0;
+        if (!this.itemsFiltered) {
+          this.stringSearch = '';
+        }
+      }
+    }
   },
   methods: {
     searchForItems() {
@@ -143,34 +183,6 @@ export default {
         query[this.alias] += '&&' + value.toString();
       }
       this.$router.replace({ query });
-    }
-  },
-  watch: {
-    '$store.state.stats.filters': {
-      deep: true,
-      handler(filters) {
-        if (typeof filters[this.empty] !== 'undefined') {
-          for (let i = 0; i < filters[this.empty].length; i++) {
-            if (filters[this.empty][i].facet === 'false') {
-              this.emptyFieldCount = filters[this.empty][i].count;
-            }
-          }
-          return true;
-        }
-        if (this.filterApplied && this.stringSearch.length > 0) {
-          this.searchForItems();
-        }
-        this.filterApplied = false;
-      }
-    },
-    '$store.state.SClient.filtersExcluded': {
-      deep: true,
-      handler() {
-        this.itemsFiltered = typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' && this.$store.state.SClient.filtersExcluded[this.field].length > 0;
-        if (!this.itemsFiltered) {
-          this.stringSearch = '';
-        }
-      }
     }
   }
 };

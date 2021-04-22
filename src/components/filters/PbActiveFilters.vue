@@ -5,7 +5,8 @@
     </div>
     <div v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0">
       <div
-        v-for="iv in $store.state.SClient.filtersExcluded"
+        v-for="(iv, key) in $store.state.SClient.filtersExcluded"
+        :key="key"
         class="active-filters flex flex-row flex-wrap"
       >
         <pb-selected-filter

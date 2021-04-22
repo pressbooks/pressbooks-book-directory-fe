@@ -7,7 +7,10 @@
             Featured Collections
           </h2>
           <div class="items flex flex-row flex-wrap items-center">
-            <pb-collection-card v-for="collection in 5" :key="collection" />
+            <pb-collection-card
+              v-for="collection in 5"
+              :key="collection"
+            />
           </div>
         </div>
       </div>

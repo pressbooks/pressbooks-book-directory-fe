@@ -5,8 +5,8 @@
     </div>
     <div>
       <button
-        @click.prevent="closeExcludeFilter(value)"
         class="text block ml-2"
+        @click.prevent="closeExcludeFilter(value)"
       >
         x
       </button>
