@@ -9,6 +9,26 @@
         :searchable="false"
         field="licenseCode"
       />
+      <pb-selectable-filters
+        title="Subject"
+        :searchable="true"
+        field="about"
+      />
+      <pb-selectable-filters
+        title="Network"
+        :searchable="false"
+        field="networkName"
+      />
+      <pb-selectable-filters
+        title="Language"
+        :searchable="false"
+        field="languageName"
+      />
+      <pb-selectable-filters
+        title="Publisher"
+        :searchable="false"
+        field="publisherName"
+      />
     </vsa-list>
   </div>
 </template>
