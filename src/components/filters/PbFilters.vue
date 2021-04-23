@@ -3,7 +3,7 @@
     <div class="font-semibold text-xl mb-8 md:mb-4">
       Filters:
     </div>
-    <vsa-list>
+    <vsa-list :auto-collapse="false">
       <pb-selectable-filters
         title="License"
         :searchable="false"
