@@ -5,13 +5,17 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "eslint ./src --ext .js --ext .vue"
+    "lint": "eslint ./src --ext .js --ext .vue",
+    "start": "npm run dev & wait-on tcp:3001 -v",
+    "test": "cypress open",
+    "test:ci": "cypress run --headless"
   },
   "dependencies": {
     "@sentry/vue": "^6.2.5",
     "@tailwindcss/line-clamp": "^0.2.0",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
+    "@vue/cli-plugin-babel": "^4.5.12",
     "algoliasearch": "^4.9.0",
     "intro.js": "^3.4.0",
     "vue": "^2.6.12",
@@ -24,6 +28,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
+    "cypress": "^7.1.0",
     "eslint": "^7.24.0",
     "eslint-plugin-vue": "^7.9.0",
     "postcss": "^8.2.8",

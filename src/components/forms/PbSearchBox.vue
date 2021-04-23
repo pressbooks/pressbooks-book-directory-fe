@@ -207,7 +207,9 @@ export default {
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;
-        this.$router.replace({ query });
+        if(this.$router.history.current.query.q !== query.q){
+          this.$router.replace({ query });
+        }
       }
     }
   }
