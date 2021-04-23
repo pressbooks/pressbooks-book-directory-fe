@@ -26,11 +26,13 @@
         :text="item.languageName"
       />
     </ul>
+    <!-- eslint-disable vue/no-v-html -->
     <p
       v-if="hasDescription"
       class="text leading-loose font-pbRegular line-clamp-6"
       v-html="item.description"
     />
+    <!-- eslint-enable vue/no-v-html -->
   </div>
 </template>
 

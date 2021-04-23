@@ -3,6 +3,11 @@
     :index-name="$store.state.SClient.indexName"
     :search-client="$store.state.SClient.searchClient"
   >
+    <ais-configure
+      :facet-filters.camel="$store.state.SClient.notFilters"
+      :filters.camel="($store.state.SClient.filtersParams.length > 0) ? $store.state.SClient.filtersParams : ''"
+      :query="$store.state.SClient.searchParameters.searchQuery"
+    />
     <pb-navbar />
     <welcome-header />
     <pb-collections />
@@ -39,11 +44,6 @@ export default {
     PbFooter,
     PbCollections,
     PbNavbar,
-  },
-  data() {
-    return {
-      assetsPath: '../src/assets',
-    };
   }
 };
 </script>

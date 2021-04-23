@@ -7,7 +7,7 @@
           aria-label="Pressbooks Homepage"
         >
           <img
-            :src="assetsPath + '/logo-simple.png'"
+            src="/assets/logo-color.svg"
             width="170"
             alt="Pressbooks logo"
             class="inline float-left mr-8"
@@ -20,7 +20,7 @@
           class="float-left"
         >
           <img
-            :src="assetsPath + '/search-by-algolia.svg'"
+            src="/assets/search-by-algolia.svg"
             width="170"
             alt="Search by Algolia"
             class="inline float-left"
@@ -41,7 +41,7 @@
                 class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
               >
                 <img
-                  :src="assetsPath + '/icons/social-twitter.svg'"
+                  src="/assets/icons/social-twitter.svg"
                   width="20"
                   alt="Logo"
                 >
@@ -53,7 +53,7 @@
                 class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
               >
                 <img
-                  :src="assetsPath + '/icons/social-in.svg'"
+                  src="/assets/icons/social-in.svg"
                   width="19"
                   alt="Logo"
                 >
@@ -65,7 +65,7 @@
                 class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
               >
                 <img
-                  :src="assetsPath + '/icons/social-youtube.svg'"
+                  src="/assets/icons/social-youtube.svg"
                   width="20"
                   alt="Logo"
                 >
@@ -80,11 +80,6 @@
 
 <script>
 export default {
-  name: 'PbFooter',
-  data() {
-    return {
-      assetsPath: '../../src/assets',
-    };
-  }
+  name: 'PbFooter'
 };
 </script>

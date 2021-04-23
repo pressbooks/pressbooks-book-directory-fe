@@ -1,5 +1,8 @@
 <template>
-  <vsa-item class="filters border" v-if="typeof $store.state.stats.filters[field] !== 'undefined'">
+  <vsa-item
+    v-if="typeof $store.state.stats.filters[field] !== 'undefined'"
+    class="filters border"
+  >
     <vsa-heading class="title font-pbRegular font-bold text-base py-3">
       {{ title }}
     </vsa-heading>
