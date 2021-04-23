@@ -4,7 +4,11 @@
       {{ `${item.networkHost} | ${item.networkName}` }}
     </h2>
     <h2 class="name leading-tight text-red-800 text-xl font-headings font-semibold mb-2">
-      <a :href="item.url" target="_blank" rel="noopener external">
+      <a
+        :href="item.url"
+        target="_blank"
+        rel="noopener external"
+      >
         {{ item.name }}
       </a>
     </h2>

@@ -1,5 +1,8 @@
 <template>
-  <img class="w-full" :src="image" />
+  <img
+    class="w-full"
+    :src="image"
+  >
 </template>
 
 <script>

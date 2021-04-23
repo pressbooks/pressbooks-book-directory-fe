@@ -7,7 +7,7 @@
             href="#!"
             class="block"
           >
-            <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-red-800"></ArrowNarrowLeftIcon>
+            <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-red-800" />
           </a>
         </div>
         <div class="page font-bold text-gray-900">
@@ -94,7 +94,7 @@
           href="#!"
           class="block"
         >
-          <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-red-800"></ArrowNarrowRightIcon>
+          <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-red-800" />
         </a>
       </div>
     </div>

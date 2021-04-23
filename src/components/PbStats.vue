@@ -1,7 +1,8 @@
 <template>
   <ais-stats>
     <template
-      #default="{ nbHits }">
+      #default="{ nbHits }"
+    >
       <div class="font-semibold text-2xl mb-8">
         Results:  {{ nbHits }} books
       </div>
