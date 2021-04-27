@@ -11,9 +11,9 @@ version: 0.2
   # key: secret-id:json-key:version-stage:version-id
   # key: secret-id:json-key:version-stage:version-id
   #exported-variables:
-  # - variable
-  # - variable
-  #git-credential-helper: yes
+# - variable
+# - variable
+#git-credential-helper: yes
 
 phases:
   #install:
@@ -28,22 +28,28 @@ phases:
   pre_build:
     commands:
       - npm install
-      - npm run lint
+      - npm install -g browserstack-e2e-cli
+      #- command
   build:
     commands:
-      - VITE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VITE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VITE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} VITE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA=${VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA} VITE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA=${VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA} npm run build
-  #post_build:
-    #commands:
+      - mkdir -p ./e2e_tests/log
+      - touch ./e2e_tests/log/browserstack.log
+      - browserstack-e2e run --sync --username ${BROWSERSTACK_USER} --key ${BROWSERSTACK_ACCESS_KEY}
+      #post_build:
+      #commands:
       # - command
       # - command
-#reports:
-  #browserstack-reports:
-    #files:
-      #- '**/*'
-    #base-directory: ./e2e_tests/output
+reports:
+  browserstack-reports:
+    files:
+      - '**/*'
+    base-directory: ./e2e_tests/output
     #discard-paths: yes
-    #file-format: JunitXml
-artifacts:
-  files:
-    - '**/*'
-  base-directory: dist
+    file-format: JunitXml
+    #artifacts:
+    #files:
+    #- '**/*'
+    #base-directory: dist
+    #cache:
+  #paths:
+  # - paths
