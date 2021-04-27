@@ -76,8 +76,8 @@ export default {
       }
       state.filters = fs;
     },
-    updateFacetFilter(state, payload) {
-      state.filters[payload.field] = [...payload.value];
+    updateFacetFilter(state, { field, value }) {
+      state.filters[field] = [...value];
     },
     // Given a facet and substring facet value, search and return all possible values //
     getSimilarFacetValues(state, facetValue) {
