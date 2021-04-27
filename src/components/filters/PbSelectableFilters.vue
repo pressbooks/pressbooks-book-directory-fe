@@ -1,72 +1,119 @@
 <template>
-  <vsa-item
-    v-if="typeof $store.state.stats.filters[field] !== 'undefined'"
-    class="filters border"
-  >
-    <vsa-heading class="title font-pbRegular font-bold text-base py-3">
-      {{ title }}
-    </vsa-heading>
-    <vsa-icon>
-      <ChevronUpIcon
-        class="open h-6 w-6 text-red-800"
-      />
-    </vsa-icon>
-    <vsa-content>
+  <pb-accordion v-if="typeof $store.state.stats.filters[field] !== 'undefined'">
+    <template #title>
+      <span class="title font-headings font-semibold">
+        {{ title }}
+      </span>
+    </template>
+    <template #content>
       <div
-        v-for="(item, k) in $store.state.stats.filters[field]"
-        :key="k"
-        class="body"
+        v-if="searchable"
+        class="px-4 flex items-center w-full"
       >
-        <div class="border-t border-gray-200">
-          <a
-            class="flex flex-row items-center justify-between p-3 "
-          >
-            <div
-              class="'title text-sm text-black-600 w-full'"
-            >
-              {{ showItem(item) }}
-            </div>
-            <pb-filter-buttons
-              :item="item"
-              :field="field"
-            />
-          </a>
-        </div>
+        <search-icon class="h-5 w-5 text-gray-500" />
+        <input
+          :id="`search-filter-${field}`"
+          v-model="search"
+          type="text"
+          class="w-full text-sm py-2 px-3 focus:outline-none"
+          :placeholder="`Search ${title}`"
+          @input="searchForItems"
+        >
       </div>
-    </vsa-content>
-  </vsa-item>
+      <div
+        v-for="(item, key) in items"
+        :key="key"
+        class="body py-2 px-4 flex items-center justify-between space-x-1"
+      >
+        <span class="title text-sm text-gray-900 w-full">
+          {{ `${item.facet} (${item.count})` }}
+        </span>
+        <pb-filter-buttons
+          :item="item"
+          :field="field"
+        />
+      </div>
+    </template>
+  </pb-accordion>
 </template>
 
 <script>
+import {SearchIcon} from '@vue-hero-icons/outline';
+import PbAccordion from '../PbAccordion.vue';
 import PbFilterButtons from './PbFilterButtons.vue';
-import { ChevronUpIcon } from '@vue-hero-icons/outline';
+
 export default {
   name: 'PbSelectableFilters',
-  components: { PbFilterButtons, ChevronUpIcon },
+  components: {
+    PbAccordion,
+    PbFilterButtons,
+    SearchIcon,
+  },
   props: {
-    title: {
+    field: {
       type: String,
       default: ''
+    },
+    limit: {
+      type: Number,
+      default: 10,
     },
     searchable: {
       type: Boolean,
       default: false
     },
-    field: {
+    title: {
       type: String,
       default: ''
-    }
+    },
+  },
+  data() {
+    return {
+      cache: [],
+      search: '',
+    };
   },
   computed: {
-
+    items() {
+      return this.$store.state.stats.filters[this.field].slice(0, this.limit);
+    }
   },
   methods: {
-    expandFilter() {
-      this.isExpanded = !this.isExpanded;
+    cacheIsEmpty() {
+      return this.cache.length === 0;
     },
-    showItem(item) {
-      return item.facet + ' (' + item.count + ')';
-    }
+    searchIsEmpty() {
+      return this.search === '';
+    },
+    storeItems() {
+      return this.$store.state.stats.filters[this.field];
+    },
+    updateStore(items) {
+      this.$store.commit('updateFacetFilter', {
+        field: this.field,
+        value: items
+      });
+    },
+    searchForItems() {
+      if (this.cacheIsEmpty()) {
+        this.cache = [...this.storeItems()];
+      }
+
+      if (!this.searchIsEmpty() && this.storeItems() !== undefined) {
+        const term = this.search.toLowerCase();
+        const items = this.cacheIsEmpty() ? this.storeItems() : this.cache;
+
+        const filtered = items.filter(
+          item => item.facet.toLowerCase().search(term) >= 0
+        );
+
+        return this.updateStore(filtered);
+      }
+
+      if (!this.cacheIsEmpty() && this.searchIsEmpty()) {
+        this.updateStore(this.cache);
+      }
+    },
   }
 };
 </script>

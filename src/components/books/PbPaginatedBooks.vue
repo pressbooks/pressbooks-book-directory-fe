@@ -1,5 +1,5 @@
 <template>
-  <div class="md:flex-col w-full md:w-3/4">
+  <div class="w-full flex-1">
     <pb-stats />
     <pb-active-filters />
     <books />

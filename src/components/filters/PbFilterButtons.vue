@@ -1,6 +1,6 @@
 <template>
-  <div class="action w-14 flex flex-row justify-end">
-    <div
+  <div class="action flex justify-end space-x-1">
+    <button
       class="include"
       @click="applyFilter(item, false)"
     >
@@ -12,9 +12,9 @@
         v-else
         class="h-6 w-6"
       />
-    </div>
-    <div
-      class="pl-1 exclude"
+    </button>
+    <button
+      class="exclude"
       @click="applyFilter(item, true)"
     >
       <XCircleIconSolid
@@ -25,7 +25,7 @@
         v-else
         class="h-6 w-6"
       />
-    </div>
+    </button>
   </div>
 </template>
 
