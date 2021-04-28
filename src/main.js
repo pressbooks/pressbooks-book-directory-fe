@@ -3,7 +3,6 @@ import App from './App.vue';
 import InstantSearch from 'vue-instantsearch';
 import VueMeta from 'vue-meta';
 import VueSelect from 'vue-select';
-import VueSimpleAccordion from 'vue-simple-accordion';
 import router from './router';
 
 import 'vue-select/dist/vue-select.css';
@@ -12,7 +11,6 @@ import {store} from './store';
 
 Vue.use(VueMeta);
 Vue.component('VueSelect', VueSelect);
-Vue.use(VueSimpleAccordion);
 Vue.use(InstantSearch);
 
 router.beforeEach((to, from, next) => {

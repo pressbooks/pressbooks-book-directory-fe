@@ -1,15 +1,34 @@
 <template>
-  <div class="w-full md:w-1/4 md:pr-10 mb-12">
-    <div class="font-semibold text-xl mb-8 md:mb-4">
+  <div class="w-full md:w-60 lg:w-72">
+    <h2 class="font-semibold text-xl mb-8 md:mb-4">
       Filters:
-    </div>
-    <vsa-list>
+    </h2>
+    <div class="w-full border border-gray-200 shadow divide-y divide-gray-200">
       <pb-selectable-filters
         title="License"
-        :searchable="false"
         field="licenseCode"
       />
-    </vsa-list>
+      <pb-selectable-filters
+        title="Subject"
+        field="about"
+        :searchable="true"
+      />
+      <pb-selectable-filters
+        title="Network"
+        field="networkName"
+        :searchable="true"
+      />
+      <pb-selectable-filters
+        title="Language"
+        field="languageName"
+        :searchable="true"
+      />
+      <pb-selectable-filters
+        title="Publisher"
+        field="publisherName"
+        :searchable="true"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -19,7 +38,6 @@ export default {
   name: 'PbFilters',
   components: {
     PbSelectableFilters
-  }
+  },
 };
-
 </script>
