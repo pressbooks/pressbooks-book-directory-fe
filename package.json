@@ -8,7 +8,8 @@
     "lint": "eslint ./src --ext .js --ext .vue",
     "start": "npm run dev & wait-on tcp:3001 -v",
     "test": "cypress open",
-    "test:ci": "cypress run --headless"
+    "test:ci": "cypress run --headless",
+    "test:stack": "BROWSERSTACK_LOCAL=true BROWSERSTACK_USERNAME=$(grep BROWSERSTACK_USERNAME .env | cut -d '=' -f2) BROWSERSTACK_ACCESS_KEY=$(grep BROWSERSTACK_ACCESS_KEY .env | cut -d '=' -f2) browserstack-cypress run --sync"
   },
   "dependencies": {
     "@sentry/vue": "^6.2.5",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.2.5",
+    "browserstack-cypress-cli": "^1.8.1",
     "cypress": "^7.1.0",
     "eslint": "^7.24.0",
     "eslint-plugin-vue": "^7.9.0",
