@@ -73,6 +73,13 @@ export default {
       search: '',
     };
   },
+  watch: {
+    '$store.state.stats.filters': {
+      handler() {
+        this.searchForItems();
+      }
+    }
+  },
   computed: {
     items() {
       return this.$store.state.stats.filters[this.field].slice(0, this.limit);
