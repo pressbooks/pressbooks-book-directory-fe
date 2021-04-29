@@ -1,10 +1,10 @@
-# Pressbook Directory (Front End)
+# Pressbooks Directory (Front End)
 
 ## Environment variables setup
 Create an .env.local file and add the following keys with their respective values:
-VUE_APP_ALGOLIA_APP_ID=  
-VUE_APP_ALGOLIA_API_READ_KEY=  
-VUE_APP_ALGOLIA_INDEX=  
+VITE_ALGOLIA_APP_ID=  
+VITE_APP_ALGOLIA_API_READ_KEY=  
+VITE_APP_ALGOLIA_INDEX=  
 
 ## Project setup
 
@@ -16,28 +16,28 @@ This Project is a Vue 3 vite project based on https://vitejs.dev/ is backwards c
 
 ### Install dependencies
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn run dev
+npm run dev
 ```
-app will run in port 3000
+app will run in port 3001
 
 ### Compiles and minifies for production
 ```
-yarn run build
-```
+npm run build
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+npm run lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+See [Configuration Reference](https://vitejs.dev/).
 ### Deployment
 Deployment of this application is automatic once the dev or master branch is updated.
 The pipeline uses AWS's CodePipeline to check periodically for changes in the github repository, 
@@ -51,60 +51,46 @@ edit the 'Build' stage.
 
 Then update the buildspec of the CodeBuild Project configuration in AWS.
 
-ex: VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} NEW_ENV_VAR=${NEW_ENV_VAR_VALUE} npm run build
+ex: VITE_APP_ALGOLIA_APP_ID=${VITE_APP_ALGOLIA_APP_ID} NEW_ENV_VAR=${NEW_ENV_VAR_VALUE} npm run build
 
 ### SSL Certificates
 SSL certificates use AWS's Certification Manager along with CloudFront
 to ensure the application uses https. The certification is renewed automatically by AWS.
 
 ### Testing
-We are using [Nightwatch](http://nightwatchjs.org/) with [BrowserStack](https://browserstack.com) for E2E testing, however you can use e2e tests locally as well.  
-Tests are located in `e2e_tests/tests` folder.
+We are using [Cypress](https://www.cypress.io/) with [BrowserStack](https://browserstack.com) for E2E testing, however you can use e2e tests locally as well.  
+Tests are located in `e2e/integration` folder.
 #### Run E2E tests locally
-**Note: [Java JDK >= 7](https://www.oracle.com/java/technologies/javase-downloads.html) is required.**
 
-1. Be sure you have **HOST_TEST** environment variable stored correctly. For local environments, this is typically *http://localhost:8080*.
-1. Tests run locally and on **Chrome** and **Firefox**. Make sure you have both browsers installed on your local machine.
-1. The local server should already be running: `npm run serve` before tests are run locally.
-1. Tests can be run locally with the following command:  `npm run e2e -- --env [Browser_OS]`. The *Browser_OS* args available are:
-- firefox
-- chrome
-
-Example: `npm run e2e -- --env firefox`.  
-You can run tests in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env firefox,chrome`.
-
-Additional browsers can be added to the `e2e_tests/conf/nightwatch.conf.js` file. Before adding a new browser you should install its corresponding driver: https://nightwatchjs.org/gettingstarted/installation/#install-webdriver.
+1. You can run local tests on **Chrome**, **Firefox** and **Edge**. Make sure you have at least one of those browsers installed on your local machine.
+1. We use `e2e_pressbooks_directory`, `e2e_pressbooks_sort_by_wordCount` and `e2e_pressbooks_directory_by_lastUpdated` Algolia indexes for run our tests.  
+   Make sure you added those to your `.env` file:
+   ```
+   VITE_ALGOLIA_INDEX=e2e_pressbooks_directory
+   VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA=e2e_pressbooks_sort_by_wordCount
+   VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA=e2e_pressbooks_directory_by_lastUpdated
+   ```
+1. The local server should already be running: `npm run dev` before tests are run locally.
+1. Tests can be run locally with the following command:  `npm run test`. Cypress app will open, and you would choose in which browser do you want to run your tests
 
 #### Run E2E tests on BrowserStack
-Be sure you have **BROWSERSTACK_URL** (*in AWS Staging pipeline it runs on https://dev.pressbooks.directory*) and **BROWSERSTACK_ACCESS_KEY** environment variables defined correctly. Ask your teammates for BrowserStack access if you don't have it.  
-In [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/) you should see build results in **nightwatch-test-build** build project.
 
-Tests run on [Staging environment](https://staging.pressbooks.directory).  
-Nightwatch / BrowserStack configurations are located in `e2e_tests/conf/browserstack.nightwatch.conf.js` file.
+Example: `npm run test:stack`.
 
-You can run tests with the following command:  `npm run e2e:browserstack -- --env [Browser_OS]`. The *Browser_OS* args available are:
-- chrome_win10: It runs Google Chrome on Windows 10 OS
-- chrome_mojave: It runs Google Chrome on OS X Mojave.
-- firefox_win10: It runs Firefox on Windows 10 OS.
-- firefox_mojave: It runs Firefox on OS X Mojave.
+Make sure you declared your BrowserStack credentials in your `.env` file:
+```
+BROWSERSTACK_USERNAME=<YOUR BROWSERSTACK USERNAME>
+BROWSERSTACK_ACCESS_KEY=<YOUR BROWSER STACK ACCESS KEY>
+```
+For more information see: https://www.browserstack.com/docs/automate/selenium/reset-access-key
 
-Example: `npm run e2e:browserstack -- --env chrome_catalina`.  
-Or you could run in multiple browsers with a single command with environments separated by commas: `npm run e2e:browserstack -- --env chrome_catalina,firefox_win10,chrome_win10`.
+All browser matrix is setup on: `browserstack.json`
 
-You can add more Browsers / OS in `e2e_tests/conf/browserstack.nightwatch.conf.js` file in test_settings object using [this generator](https://www.browserstack.com/automate/capabilities).  
-Optionally, you can specify / overwrite the current browsers version using the following environment variables:
-- CHROME_W10_VERSION
-- CHROME_MOJAVE_VERSION
-- FIREFOX_W10_VERSION
-- FIREFOX_MOJAVE_VERSION
-
-**Note:** before running tests, make sure an `e2e_tests/log` folder exists for storing the BrowserStack test log. To create this folder run: `mkdir e2e_tests/log` in the root path.
-
-#### See tests reports locally
+#### See tests Reports
 If you run your tests on BrowserStack, you can see reports in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/). 
-In case you want to see reports locally, you can use [xunit-viewer](https://github.com/lukejpreston/xunit-viewer). After running tests locally, `npm run nightwatch:output` will generate an `e2e_tests/output/output.html` report file. This output file can be opened in any browser. When a test fails, screenshots containing more details about the failure can be found in the `e2e_tests/screenshots/` folder.
 
 ### Algolia configuration
+All tests will run against `e2e_pressbooks_directory` index
 The Pressbooks Directory app must be properly configured with an Algolia application and index. See details [here](https://docs.google.com/document/d/1SNf7jIelkXwzzAxEbGSjEL59GMDeh3o3wH7myY3LfBM/edit#).
 
 ### Google Analytics integration
@@ -114,9 +100,9 @@ In order to send data to google, only thing needed is to add the environment var
 
 ### Sentry Integration
 You can track errors and monitor performance with Sentry by defining the [Sentry DSN](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#dsn) in
-`VUE_APP_SENTRY_DSN` environment variable. If this variable is defined, Sentry errors
+`VITE_APP_SENTRY_DSN` environment variable. If this variable is defined, Sentry errors
 and data performance will be sent to Sentry.  
-Defining `VUE_APP_SENTRY_TRACE_RATE` you can set the [Trace Sample Rate](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#tracesSampleRate) for tracing 
+Defining `VITE_APP_SENTRY_TRACE_RATE` you can set the [Trace Sample Rate](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#tracesSampleRate) for tracing 
 the application in Sentry. If it is not defined, then the default value will be 0.5.
-The environment value for Sentry is defined in `VUE_APP_ENVIRONMENT`, if this value is not defined, the default 
+The environment value for Sentry is defined in `VITE_APP_ENVIRONMENT`, if this value is not defined, the default 
 value will be `development`.
