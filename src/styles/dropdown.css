@@ -17,3 +17,7 @@
 .vs__search, .vs__search:focus {
     @apply placeholder-gray-800;
 }
+
+.vs__dropdown-option--highlight {
+    @apply bg-gray-100 text-gray-900;
+}
