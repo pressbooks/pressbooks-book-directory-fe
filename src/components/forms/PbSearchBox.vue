@@ -1,6 +1,6 @@
 <template>
   <form
-    class="left w-full md:w-3/5 mb-8"
+    class="left w-full flex-1 flex-shrink-0"
     @submit.prevent="search(stringSearch)"
   >
     <div class="flex flex-row items-end">

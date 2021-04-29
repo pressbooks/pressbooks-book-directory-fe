@@ -3,13 +3,17 @@
 }
 
 .vs__dropdown-toggle {
-    @apply flex items-center justify-between w-full px-4 py-3 rounded-none border border-gray-300;
+    @apply flex items-center justify-between w-full py-3 px-2 rounded-none border border-gray-300;
 }
 
-.vs__search {
-    @apply placeholder-gray-800 text-sm;
+.vs__selected {
+    @apply absolute block;
 }
 
-.vs__actions {
-    @apply flex items-center;
+.vs__selected, .vs__search, .vs__search:focus {
+    @apply w-11/12 border-0 text-sm truncate;
+}
+
+.vs__search, .vs__search:focus {
+    @apply placeholder-gray-800;
 }
