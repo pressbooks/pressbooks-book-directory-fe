@@ -62,13 +62,27 @@ We are using [Cypress](https://www.cypress.io/) with [BrowserStack](https://brow
 Tests are located in `e2e/integration` folder.
 #### Run E2E tests locally
 
-1. You can run local tests on **Chrome**, **Firefox** and **Edge**. Make sure you have both browsers installed on your local machine.
+1. You can run local tests on **Chrome**, **Firefox** and **Edge**. Make sure you have at least one of those browsers installed on your local machine.
+1. We use `e2e_pressbooks_directory`, `e2e_pressbooks_sort_by_wordCount` and `e2e_pressbooks_directory_by_lastUpdated` Algolia indexes for run our tests.  
+   Make sure you added those to your `.env` file:
+   ```
+   VITE_ALGOLIA_INDEX=e2e_pressbooks_directory
+   VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA=e2e_pressbooks_sort_by_wordCount
+   VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA=e2e_pressbooks_directory_by_lastUpdated
+   ```
 1. The local server should already be running: `npm run dev` before tests are run locally.
 1. Tests can be run locally with the following command:  `npm run test`. Cypress app will open, and you would choose in which browser do you want to run your tests
 
 #### Run E2E tests on BrowserStack
 
 Example: `npm run test:stack`.
+
+Make sure you declared your BrowserStack credentials in your `.env` file:
+```
+BROWSERSTACK_USERNAME=<YOUR BROWSERSTACK USERNAME>
+BROWSERSTACK_ACCESS_KEY=<YOUR BROWSER STACK ACCESS KEY>
+```
+For more information see: https://www.browserstack.com/docs/automate/selenium/reset-access-key
 
 All browser matrix is setup on: `browserstack.json`
 

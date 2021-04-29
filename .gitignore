@@ -22,7 +22,7 @@ pnpm-debug.log*
 *.sw?
 .env
 
-# Nightwatch
-/e2e_tests/output
-/e2e_tests/screenshots
-/e2e_tests/log
+# Cypress
+local.log
+log/
+results/
