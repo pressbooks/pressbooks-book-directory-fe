@@ -1,5 +1,8 @@
 <template>
-  <div class="book-box mt-4">
+  <div
+    class="book-box mt-4"
+    data-cy="book-card"
+  >
     <div class="flex flex-row flex-wrap items-start border border-gray-300 px-8 py-8 shadow-md">
       <div class="w-full md:w-2/3 md:pr-4">
         <div class="data">
