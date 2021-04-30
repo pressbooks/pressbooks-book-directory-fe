@@ -4,38 +4,38 @@ describe('Search', () => {
 
     beforeEach(() => {
       cy.viewport(1280, 720);
+      cy.visit('/');
+      cy.get('[data-cy="book-input-search"]').as('inputSearch').clear();
+      cy.get('[data-cy="book-button-search"]').as('buttonSearch');
     });
 
     it('Search for specific book', () => {
-      cy.visit('/');
 
-      cy.get('div.input input').type('math science');
-      cy.get('form button[type="submit"]').click();
+      cy.intercept('**/indexes/*/queries?*').as('searchResults');
+
+      cy.get('@inputSearch').type('math science');
+      cy.get('@buttonSearch').click();
+
+      cy.wait(['@searchResults']).then(()=>{
+        cy.get('[data-cy="book-card"]').should('have.length', 2);
+      });
 
       cy.url()
         .should('include','?q=math%20science');
-
-      cy.intercept('**/indexes/*/queries?*').then(()=>{
-        cy.get('.book-box').should('have.length', 2);
-      });
 
     });
 
     it('Search button will be disabled if < 3 characters', () => {
 
-      cy.visit('/');
-
-      cy.get('div.input input').clear().type('fo');
-      cy.get('form button[type="submit"]').should('be.disabled');
+      cy.get('@inputSearch').type('fo');
+      cy.get('@buttonSearch').should('be.disabled');
 
     });
 
     it('Search button will be enabled if >= 3 characters', () => {
 
-      cy.visit('/');
-
-      cy.get('div.input input').clear().type('foo');
-      cy.get('form button[type="submit"]').should('be.enabled');
+      cy.get('@inputSearch').type('foo');
+      cy.get('@buttonSearch').should('be.enabled');
 
     });
 

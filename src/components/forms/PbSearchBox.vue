@@ -10,7 +10,7 @@
             <img
               src="/assets/icons/icon-search.svg"
               width="22"
-              alt=""
+              alt="Search"
             >
           </div>
           <div class="input w-full pr-30">
@@ -19,6 +19,7 @@
               class="w-full text-sm py-3 px-4 focus:outline-none"
               type="search"
               placeholder="Find a book"
+              data-cy="book-input-search"
             >
           </div>
         </div>
@@ -28,6 +29,7 @@
           type="submit"
           class="w-full py-3 text-sm rounded-full text-white bg-red-700"
           :disabled="stringSearch.length > 0 && (stringSearch.length < searchCharsLimit.min || stringSearch.length > searchCharsLimit.max)"
+          data-cy="book-button-search"
         >
           Search
         </button>
