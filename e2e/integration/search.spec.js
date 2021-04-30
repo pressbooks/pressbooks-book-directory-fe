@@ -17,7 +17,7 @@ describe('Search', () => {
       cy.get('@buttonSearch').click();
 
       cy.wait(['@searchResults']).then(()=>{
-        cy.get('.ais-Hits .book-box').should('have.length', 2);
+        cy.get('[data-cy="book-card"]').should('have.length', 2);
       });
 
       cy.url()
