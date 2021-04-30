@@ -14,6 +14,7 @@
       <meta-info
         v-if="hasLastUpdated"
         title="Updated:"
+        class="updated"
         :text="lastUpdated"
       />
       <meta-info

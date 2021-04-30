@@ -5,8 +5,9 @@
   >
     <template #default="{ items, refine }">
       <pb-dropdown
-        placeholder="Sort cards by"
+        placeholder="Sort books by"
         :options="items"
+        class="sort-books-by"
         @input="refine"
       />
     </template>

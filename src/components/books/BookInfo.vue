@@ -13,7 +13,7 @@
       </a>
     </h2>
     <p class="complement leading-tight font-headings mb-2">
-      {{ `${item.wordCount} words | ${sizeInMb} MB` }}
+      <span class="word-count">{{ item.wordCount }}</span> words | <span class="size">{{ sizeInMb }}</span> MB
     </p>
   </div>
 </template>
