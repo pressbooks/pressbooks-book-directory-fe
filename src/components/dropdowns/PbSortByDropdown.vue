@@ -7,7 +7,7 @@
       <pb-dropdown
         placeholder="Sort books by"
         :options="items"
-        class="sort-books-by"
+        data-cy="sort-books-by"
         @input="refine"
       />
     </template>

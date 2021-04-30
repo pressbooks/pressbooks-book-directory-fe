@@ -14,7 +14,7 @@
       <meta-info
         v-if="hasLastUpdated"
         title="Updated:"
-        class="updated"
+        data-cy="book-last-updated"
         :text="lastUpdated"
       />
       <meta-info

@@ -7,7 +7,7 @@
       <pb-dropdown
         placeholder="Books per page"
         :options="items"
-        class="books-per-page"
+        data-cy="books-per-page"
         @input="refine"
       />
     </template>
