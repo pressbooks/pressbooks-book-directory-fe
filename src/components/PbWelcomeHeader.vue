@@ -5,7 +5,7 @@
         Welcome to Pressbooks Directory
       </h1>
       <p class="section-summary font-pbRegular text-gray-700 leading-7 text-xl">
-        This directory provides an index of <strong>8888</strong> books published across <strong>95</strong> Pressbooks
+        This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed }}</strong> Pressbooks
         networks. Learn to use the Directory by taking the self-guided tour in the top nav bar or reading
         <a href="https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/">our guide</a>.
       </p>
@@ -31,10 +31,18 @@
 <script>
 
 export default {
-  name: 'WelcomeHeader',
+  name: 'PbWelcomeHeader',
   data() {
     return {
       site: import.meta.env.VITE_PRESSBOOKS_SITE,
+    }
+  },
+  computed: {
+    totalBooksIndexed() {
+      return this.$store.state.stats.numberOfBooksIndexed;
+    },
+    totalNetworksIndexed() {
+      return this.$store.state.stats.numberOfNetworksIndexed;
     }
   }
 };
