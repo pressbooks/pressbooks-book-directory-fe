@@ -77,6 +77,10 @@ Tests are located in `e2e/integration` folder.
 
 Example: `npm run test:stack`.
 
+Running only one spec file
+
+Example: `npm run test:stack --specs=e2e/integration/pagination.spec.js`.
+
 Make sure you declared your BrowserStack credentials in your `.env` file:
 ```
 BROWSERSTACK_USERNAME=<YOUR BROWSERSTACK USERNAME>

@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       site: import.meta.env.VITE_PRESSBOOKS_SITE,
-    }
+    };
   }
 };
 </script>
