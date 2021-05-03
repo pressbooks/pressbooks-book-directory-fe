@@ -1,34 +1,45 @@
+@import "../../node_modules/intro.js/introjs.css";
 .introjs {
   &-tooltip {
+    @apply p-8 rounded-lg relative;
     @media (min-width: 768px) {
       min-width: 450px;
       max-width: 600px;
     }
   }
-  &-tooltip-title,
+  &-tooltip-header {
+    @apply font-headings mx-auto;
+  }
+  &-tooltip-title {
+    @apply font-headings text-center float-none text-3xl;
+  }
   &-tooltiptext {
-    font-family: $font-primary;
+    @apply font-pbBold;
 
     p {
-      font-family: $font-primary;
+      @apply font-pbBold;
       margin-bottom: 1rem;
     }
 
     a {
-      color: $pb-red;
+      @apply text-red-800;
     }
   }
 
+  &-tooltipbuttons{
+    @apply border-0;
+  }
+
   &-button {
-    text-shadow: none;
-    color: $pb-light;
-    background: $pb-red;
-    border-radius: 4px;
+    @apply bg-transparent border-0;
   }
 
   &-progressbar {
-    background-color: $pb-red;
+     @apply bg-red-800;
   }
 
+  &-skipbutton{
+    @apply absolute right-2 top-2 float-none text-red-800 text-4xl;
+  }
 
 }

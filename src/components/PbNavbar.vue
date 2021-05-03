@@ -8,7 +8,10 @@
             alt="Pressbooks Directory"
           >
         </a>
-        <button class="border border-red-700 rounded-full px-8 py-3 text-red-700 text-sm">
+        <button
+          class="border border-red-700 rounded-full px-8 py-3 text-red-700 text-sm"
+          @click="$store.commit('showTour')"
+        >
           Take the tour
         </button>
       </nav>

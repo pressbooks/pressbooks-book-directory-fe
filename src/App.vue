@@ -24,6 +24,12 @@
       </div>
     </section>
     <pb-footer />
+    <pb-tour
+      v-if="$store.state.config.showTour"
+      :overlay="0.5"
+      :auto-scroll="true"
+      :typing-speed="17"
+    />
   </ais-instant-search>
 </template>
 
@@ -35,9 +41,11 @@ import PbNavbar from './components/PbNavbar.vue';
 import PbFilters from './components/filters/PbFilters.vue';
 import PbSearchAndSortBox from './components/PbSearchAndSortBox.vue';
 import PbPaginatedBooks from './components/books/PbPaginatedBooks.vue';
+import PbTour from './components/PbTour.vue';
 
 export default {
   components: {
+    PbTour,
     PbPaginatedBooks,
     PbSearchAndSortBox,
     PbFilters,
