@@ -14,7 +14,7 @@
         Pressbooks Directory is more powerful when paired with a PressbooksEDU Authoring & Editing Platform, which allows you to clone, revise, remix, and redistribute all of the openly licensed content found through this Directory.
       </p>
 
-      <div class="flex items-center justify-center pt-12 mx-auto">
+      <div class="flex items-center justify-center pt-6 mx-auto">
         <a
           :href="site"
           target="_blank"
