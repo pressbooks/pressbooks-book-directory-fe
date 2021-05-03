@@ -16,7 +16,7 @@
         <div class="py-8">
           <pb-search-and-sort-box />
         </div>
-        <div class="flex flex-row flex-wrap space-y-10 md:space-y-0 md:space-x-10">
+        <div class="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10">
           <pb-filters />
           <pb-paginated-books />
         </div>

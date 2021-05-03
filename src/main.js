@@ -5,7 +5,6 @@ import VueMeta from 'vue-meta';
 import VueSelect from 'vue-select';
 import router from './router';
 
-import 'vue-select/dist/vue-select.css';
 import './index.css';
 import {store} from './store';
 

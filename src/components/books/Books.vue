@@ -1,8 +1,9 @@
 <template>
-  <ais-hits :transform-items="transformItems">
-    <template
-      #default="{ items }"
-    >
+  <ais-hits
+    :transform-items="transformItems"
+    class="mt-4 space-y-4"
+  >
+    <template #default="{ items }">
       <p
         v-if="items.length === 0"
         class="ais-Hits__books__noresults"

@@ -4,7 +4,8 @@
       :options="options"
       :placeholder="placeholder"
       :searchable="searchable"
-      :clearable="false"
+      :clearable="clearable"
+      @input="select"
     />
   </div>
 </template>
@@ -14,6 +15,10 @@
 export default {
   name: 'PbDropdown',
   props: {
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
     options: {
       type: Array,
       default() { return []; }
@@ -25,6 +30,12 @@ export default {
     searchable: {
       type: Boolean,
       default: false,
+    },
+  },
+  emits: ['input'],
+  methods: {
+    select({ value }) {
+      this.$emit('input', value);
     }
   }
 };

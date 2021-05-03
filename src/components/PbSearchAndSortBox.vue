@@ -1,44 +1,39 @@
 <template>
-  <form>
-    <div class="section-title text-4xl font-headings font-bold text-center mb-10">
+  <div class="space-y-10">
+    <div class="section-title text-4xl font-headings font-bold text-center">
       Find a book
     </div>
-    <div class="flex flex-row flex-wrap items-end">
+    <div class="flex flex-col items-center space-y-10 md:flex-row md:space-y-0 md:space-x-10">
       <pb-search-box />
-      <div class="topFilters right w-full md:w-2/5 flex flex-row flex-wrap space-y-4 md:space-y-0 md:pl-10 md:mb-4">
-        <pb-dropdown
-          class="w-full md:w-1/2 md:mb-4"
-          :options="perPageOptions"
-          placeholder="Books per page"
-        />
-        <pb-dropdown
-          class="w-full md:w-1/2 md:mb-4"
-          :options="sortByOptions"
-          placeholder="Sort cards by"
-        />
+
+      <div class="topFilters right w-full flex flex-col space-y-4 md:w-2/5 md:flex-row md:space-y-0 md:space-x-4">
+        <pb-per-page-dropdown :options="perPageOptions" />
+        <pb-sort-by-dropdown :options="sortByOptions" />
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
-import PbDropdown from './PbDropdown.vue';
+import PbPerPageDropdown from './dropdowns/PbPerPageDropdown.vue';
+import PbSortByDropdown from './dropdowns/PbSortByDropdown.vue';
 import PbSearchBox from './forms/PbSearchBox.vue';
+
 export default {
   name: 'PbSearchAndSortBox',
-  components: {PbSearchBox, PbDropdown},
+  components: {
+    PbPerPageDropdown,
+    PbSortByDropdown,
+    PbSearchBox
+  },
   data() {
     return {
       perPageOptions: [
-        {label: '10 books', code: 10},
-        {label: '20 books', code: 20},
-        {label: '50 books', code: 50},
+        { label: '10 books', value: 10, default: true },
+        { label: '20 books', value: 20 },
+        { label: '50 books', value: 50 },
       ],
-      sortByOptions: [
-        {label: 'Recently updated', code: 1},
-        {label: 'Word count', code: 2},
-        {label: 'Title (A-Z)', code: 3},
-      ]
+      sortByOptions: this.$store.state.SClient.availableIndexes
     };
   }
 };
