@@ -2,6 +2,7 @@
   <ais-instant-search
     :index-name="$store.state.SClient.indexName"
     :search-client="$store.state.SClient.searchClient"
+    :search-function="paginationHook"
   >
     <ais-configure
       :facet-filters.camel="$store.state.SClient.notFilters"
@@ -44,6 +45,31 @@ export default {
     PbFooter,
     PbCollections,
     PbNavbar,
-  }
+  },
+  data() {
+    return {
+      currentQuery: '',
+      currentPage: 0,
+    };
+  },
+  watch: {
+    '$store.state.SClient.notFilters' : {
+      deep: true,
+      handler(){
+        this.currentQuery = null;
+      }
+    }
+  },
+  methods: {
+    paginationHook(helper) {
+      if(helper.getPage() === 0) {
+        this.currentQuery = helper.state.query;
+      }
+      if(this.currentQuery !== helper.state.query) {
+        helper.setPage(0); // reset the pagination when the query changes
+      }
+      helper.search();
+    }
+  },
 };
 </script>
