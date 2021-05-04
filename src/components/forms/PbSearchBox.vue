@@ -40,6 +40,7 @@
 
 <script>
 import helpers from '../../store/helpers';
+import {scrollTo} from '../../utils/helpers';
 export default {
   name: 'PbSearchBox',
   data() {
@@ -203,8 +204,7 @@ export default {
         (stringSearch.length >= this.searchCharsLimit.min && stringSearch.length <= this.searchCharsLimit.max) ||
           stringSearch.length === 0 // Remove search case
       ) {
-        //this.$vuetify.goTo('#current-filters');
-        // TODO: Scroll to current filters
+        scrollTo('#books');
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;

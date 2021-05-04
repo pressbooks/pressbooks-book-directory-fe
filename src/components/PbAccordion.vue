@@ -1,6 +1,9 @@
 <template>
-  <article>
+  <article
+    data-cy="filter"
+  >
     <button
+      data-cy="filter-header-button"
       :class="[
         'w-full flex items-center justify-between py-3 px-4 focus:outline-none',
         openAccordion && 'border-b'

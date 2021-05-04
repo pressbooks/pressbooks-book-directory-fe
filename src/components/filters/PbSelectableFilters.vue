@@ -23,6 +23,7 @@
       <div
         v-for="(item, key) in items"
         :key="key"
+        data-cy="filter-option"
         class="body py-2 px-4 flex items-center justify-between space-x-1"
       >
         <span class="title text-sm text-gray-900 w-full">
