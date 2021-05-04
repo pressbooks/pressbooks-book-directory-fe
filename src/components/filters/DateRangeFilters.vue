@@ -17,8 +17,8 @@
       />
       <t-button
         :disabled="datesModel.length < 2"
-        @click="filterByDateRange()"
         class="w-full"
+        @click="filterByDateRange()"
       >
         Go
       </t-button>
