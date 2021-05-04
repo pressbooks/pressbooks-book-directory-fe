@@ -18,6 +18,10 @@
         field="networkName"
         :searchable="true"
       />
+      <date-range-filters
+        title="Last Updated"
+        field="lastUpdated"
+      />
       <pb-selectable-filters
         title="Language"
         field="languageName"
@@ -33,10 +37,12 @@
 </template>
 <script>
 import PbSelectableFilters from './PbSelectableFilters.vue';
+import DateRangeFilters from './DateRangeFilters.vue';
 
 export default {
   name: 'PbFilters',
   components: {
+    DateRangeFilters,
     PbSelectableFilters
   },
 };
