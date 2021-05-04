@@ -10,7 +10,7 @@
       :query="$store.state.SClient.searchParameters.searchQuery"
     />
     <pb-navbar />
-    <welcome-header />
+    <pb-welcome-header />
     <pb-collections />
     <section class="section-books bg-white">
       <div class="content container mx-auto px-8 py-8">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import WelcomeHeader from './components/WelcomeHeader.vue';
+import PbWelcomeHeader from './components/PbWelcomeHeader.vue';
 import PbFooter from './components/PbFooter.vue';
 import PbCollections from './components/collections/PbCollections.vue';
 import PbNavbar from './components/PbNavbar.vue';
@@ -41,7 +41,7 @@ export default {
     PbPaginatedBooks,
     PbSearchAndSortBox,
     PbFilters,
-    WelcomeHeader,
+    PbWelcomeHeader,
     PbFooter,
     PbCollections,
     PbNavbar,
