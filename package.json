@@ -9,7 +9,7 @@
     "start": "npm run dev & wait-on tcp:3001 -v",
     "test": "cypress open",
     "test:ci": "cypress run --headless",
-    "test:stack": "BROWSERSTACK_LOCAL=true BROWSERSTACK_USERNAME=$(grep BROWSERSTACK_USERNAME .env | cut -d '=' -f2) BROWSERSTACK_ACCESS_KEY=$(grep BROWSERSTACK_ACCESS_KEY .env | cut -d '=' -f2) browserstack-cypress run --sync"
+    "test:stack": "BROWSERSTACK_LOCAL=true BROWSERSTACK_USERNAME=$(grep BROWSERSTACK_USERNAME .env | cut -d '=' -f2) BROWSERSTACK_ACCESS_KEY=$(grep BROWSERSTACK_ACCESS_KEY .env | cut -d '=' -f2) browserstack-cypress run --sync --specs $npm_config_specs"
   },
   "dependencies": {
     "@sentry/vue": "^6.2.5",

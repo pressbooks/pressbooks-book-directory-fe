@@ -2,6 +2,7 @@
   <div class="action flex justify-end space-x-1">
     <button
       class="include"
+      data-cy="filter-include-button"
       @click="applyFilter(item, false)"
     >
       <CheckCircleIconSolid
@@ -15,6 +16,7 @@
     </button>
     <button
       class="exclude"
+      data-cy="filter-exclude-button"
       @click="applyFilter(item, true)"
     >
       <XCircleIconSolid

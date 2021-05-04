@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       site: import.meta.env.VITE_PRESSBOOKS_SITE,
-    }
+    };
   },
   computed: {
     totalBooksIndexed() {
@@ -43,7 +43,7 @@ export default {
     },
     totalNetworksIndexed() {
       return this.$store.state.stats.numberOfNetworksIndexed;
-    }
+    },
   }
 };
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full flex-1">
+  <div
+    id="books"
+    class="w-full flex-1"
+  >
     <pb-stats />
     <pb-active-filters />
     <books />

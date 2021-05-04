@@ -1,108 +1,69 @@
 <template>
   <div class="pagination">
-    <div class="container mx-auto py-16">
-      <div class="flex flex-row w-full items-center md:w-1/2 justify-center text-gray-600">
-        <div class="action">
-          <a
-            href="#!"
-            class="block"
-          >
-            <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-red-800" />
-          </a>
-        </div>
-        <div class="page font-bold text-gray-900">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            1
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            2
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            3
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            4
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            5
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            6
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            7
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            8
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            9
-          </a>
-        </div>
-        <div class="page">
-          <a
-            href="!"
-            class="block px-2"
-          >
-            10
-          </a>
-        </div>
-        <a
-          href="#!"
-          class="block"
+    <div
+      class="container mx-auto py-16"
+    >
+      <ais-pagination :total-pages="10">
+        <ul
+          slot-scope="{
+            currentRefinement,
+            pages,
+            isFirstPage,
+            isLastPage,
+            refine,
+            createURL
+          }"
+          class="flex flex-row w-full items-center md:w-1/2 justify-center text-gray-600"
+          data-cy="paginator"
+          @click="scrollToBooksList"
         >
-          <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-red-800" />
-        </a>
-      </div>
+          <li
+            v-if="!isFirstPage"
+            class="action"
+          >
+            <a
+              class="block"
+              :href="createURL(0)"
+              data-cy="paginator-prev"
+              @click.prevent="refine(0)"
+            >
+              <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-red-800" />
+            </a>
+          </li>
+          <li
+            v-for="page in pages"
+            :key="page"
+            class="page"
+            data-cy="paginator-link"
+          >
+            <a
+              class="block px-2"
+              :class="currentRefinement === page ? 'font-bold font-gray-900' : ''"
+              :href="createURL(page)"
+              @click.prevent="refine(page)"
+            >
+              {{ page + 1 }}
+            </a>
+          </li>
+          <li v-if="!isLastPage">
+            <a
+              class="block"
+              :href="createURL(currentRefinement + 1)"
+              data-cy="paginator-next"
+              @click.prevent="refine(currentRefinement + 1)"
+            >
+              <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-red-800" />
+            </a>
+          </li>
+        </ul>
+      </ais-pagination>
     </div>
   </div>
 </template>
 
 <script>
 import { ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from '@vue-hero-icons/outline';
+import {scrollTo} from '../utils/helpers';
 
 export default {
   name: 'PbPagination',
@@ -110,6 +71,11 @@ export default {
     ArrowNarrowLeftIcon,
     ArrowNarrowRightIcon
   },
+  methods: {
+    scrollToBooksList() {
+      scrollTo('#books');
+    }
+  }
 };
 </script>
 
