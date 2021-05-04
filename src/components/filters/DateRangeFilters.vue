@@ -47,9 +47,10 @@ export default {
     return {
       datesModel: [],
       alias: '',
+      defaultDateStart: new Date(2017, 7, 29), // Default starting date: 2017-08-29
       dates: {
         from: {
-          date: new Date(2015, 1, 1), // Default starting date: 2015-02-01
+          date: this.defaultDateStart,
           inputFormat: ''
         },
         to: {
@@ -105,7 +106,7 @@ export default {
     resetDateData() {
       this.dates = {
         from: {
-          date: new Date(2015, 1, 1), // Default starting date: 2015-02-01
+          date: this.defaultDateStart,
           inputFormat: ''
         },
         to: {
@@ -131,6 +132,7 @@ export default {
     },
     convertTimestampsToDate(timestampDates, datePresent = false) {
       if (datePresent) {
+        this.resetDateData();
         this.dates[datePresent].date = new Date(timestampDates[0] * 1000);
         this.dates[datePresent].inputFormat = this.dates[datePresent].date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
       } else {
