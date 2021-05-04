@@ -1,5 +1,5 @@
 <template>
-  <pb-accordion>
+  <pb-accordion :open="accordionOpened">
     <template #title>
       <span class="title font-headings font-semibold">
         {{ title }}
@@ -7,8 +7,7 @@
     </template>
     <template #content>
       <t-datepicker
-        v-model="date"
-        :initial-date="initialDate"
+        v-model="datesModel"
         conjunction
         :inline="true"
         :months-per-view="1"
@@ -17,9 +16,9 @@
         time-picker-ok-button="Ok"
       />
       <t-button
-        variant="secondary"
-        :disabled="date.length < 2"
+        :disabled="datesModel.length < 2"
         @click="filterByDateRange()"
+        class="w-full"
       >
         Go
       </t-button>
@@ -46,11 +45,19 @@ export default {
   },
   data() {
     return {
-      date: [],
-      dateStartFormatted: '',
-      dateEndFormatted: '',
+      datesModel: [],
       alias: '',
-      initialDate: []
+      dates: {
+        from: {
+          date: new Date(2015, 1, 1), // Default starting date: 2015-02-01
+          inputFormat: ''
+        },
+        to: {
+          date: new Date(),
+          inputFormat: ''
+        }
+      },
+      accordionOpened: false
     };
   },
   watch: {
@@ -58,14 +65,36 @@ export default {
       deep: true,
       handler(q) {
         let query = {...q};
-        if (query[this.alias] !== undefined && this.date.length < 2) {
+        if (query[this.alias] !== undefined) {
           const dates = query[this.alias].split('&&');
-          if (dates.length === 2) {
-            dates[0] = dates[0].split('>=')[1];
-            dates[1] = dates[1].split('<=')[1];
-            this.convertTimestampsToDate(dates);
+          const datesFilteredLength = dates.length;
+          this.accordionOpened = true;
+          switch (datesFilteredLength) {
+          case 2:
+            if (this.datesModel.length < 2) {
+              dates[0] = dates[0].split('>=')[1];
+              dates[1] = dates[1].split('<=')[1];
+              this.convertTimestampsToDate(dates);
+            }
+            break;
+          case 1:
+            let splitString = '<=', datePresent = 'to';
+            if (dates[0].search('>=') >= 0) {
+              splitString = '>=';
+              datePresent = 'from';
+            }
+            dates[0] = dates[0].split(splitString)[1];
+            this.convertTimestampsToDate(dates, datePresent);
+            break;
+          default:
+            this.resetDateData();
+            break;
           }
+          return true;
         }
+        this.resetDateData();
+        this.datesModel = [];
+        this.accordionOpened = false;
       }
     }
   },
@@ -73,28 +102,50 @@ export default {
     this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
   },
   methods: {
+    resetDateData() {
+      this.dates = {
+        from: {
+          date: new Date(2015, 1, 1), // Default starting date: 2015-02-01
+          inputFormat: ''
+        },
+        to: {
+          date: new Date(),
+          inputFormat: ''
+        }
+      };
+    },
     filterByDateRange() {
       this.convertDatesToTimestamp();
-      if (this.dateEndFormatted > this.dateStartFormatted) {
+      if (this.dates.to.timestamp > this.dates.from.timestamp) {
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-        query[attribute] = '>=' + this.dateStartFormatted + '&&' + '<=' + this.dateEndFormatted;
+        query[attribute] = '>=' + this.dates.from.timestamp + '&&' + '<=' + this.dates.to.timestamp;
         this.$router.replace({ query });
       }
     },
     convertDatesToTimestamp() {
-      let dateStart = new Date(this.date[0] + ' 00:00:00');
-      let dateEnd = new Date(this.date[1] + ' 23:59:59');
-      this.dateStartFormatted = (dateStart.getTime() / 1000) - (dateStart.getTimezoneOffset()*60);
-      this.dateEndFormatted = (dateEnd.getTime() / 1000) - (dateEnd.getTimezoneOffset()*60);
+      let dateStart = new Date(this.datesModel[0] + ' 00:00:00');
+      let dateEnd = new Date(this.datesModel[1] + ' 23:59:59');
+      this.dates.from.timestamp  = (dateStart.getTime() / 1000) - (dateStart.getTimezoneOffset()*60);
+      this.dates.to.timestamp = (dateEnd.getTime() / 1000) - (dateEnd.getTimezoneOffset()*60);
     },
-    convertTimestampsToDate(timestampDates) {
-      const dateFrom = new Date(timestampDates[0] * 1000);
-      const dateTo = new Date(timestampDates[1] * 1000);
-      this.dateStartFormatted  = dateFrom.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' });
-      this.dateEndFormatted = dateTo.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' });
-      this.date[0] = dateFrom.toLocaleString('fr-CA', {year: 'numeric', month:'numeric', day:'numeric'});
-      this.date[1] = dateTo.toLocaleString('fr-CA', {year: 'numeric', month:'numeric', day:'numeric'});
+    convertTimestampsToDate(timestampDates, datePresent = false) {
+      if (datePresent) {
+        this.dates[datePresent].date = new Date(timestampDates[0] * 1000);
+        this.dates[datePresent].inputFormat = this.dates[datePresent].date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+      } else {
+        this.dates.from.date = new Date(timestampDates[0] * 1000);
+        this.dates.to.date = new Date(timestampDates[1] * 1000);
+      }
+      this.setDatesModelFromDatesProperty();
+    },
+    setDatesModelFromDatesProperty() {
+      this.dates.from.inputFormat  = this.dates.from.date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+      this.dates.to.inputFormat = this.dates.to.date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+      this.datesModel = [
+        this.dates.from.date.toLocaleString('fr-CA', {year: 'numeric', month:'numeric', day:'numeric', timeZone: 'UTC'}),
+        this.dates.to.date.toLocaleString('fr-CA', {year: 'numeric', month:'numeric', day:'numeric', timeZone: 'UTC'})
+      ];
     }
   }
 };

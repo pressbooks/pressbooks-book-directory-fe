@@ -18,10 +18,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {
-      opacity: ['disabled'],
-      cursor: ['disabled'],
-    },
+    extend: {}
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
