@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         'pb-blue': '#F3F9FA',
+        'pb-red' : '#BB2026'
       }
     },
   },

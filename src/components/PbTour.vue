@@ -17,30 +17,30 @@ function scrollHelper(index) {
   case 3:
   case 4:
   case 10:
-    top = 80;
+    top = 0;
     break;
   case 5:
   case 6:
   case 7:
   case 8:
-    top = 250;
+    top = 0;
     break;
   case 9:
-    top = 100;
+    top = 0;
     break;
   case 12:
-    top = 120;
+    top = 0;
     timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
   }
 
-  if(top !== 0) {
-    setTimeout(()=>{
+  if (top !== 0) {
+    setTimeout(() => {
       window.scrollTo({
         top: window.scrollY - top,
         behavior: 'smooth',
       });
-    },timeout);
+    }, timeout);
   }
 }
 
@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       intro: null,
-      searchInput: document.getElementById('search-book'),
+      searchInput: document.querySelector('input[data-cy="book-input-search"]'),
       h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
       guideUrl: this.$store.state.config.guideUrl,
       h5pLogoWidth: 100,
@@ -73,23 +73,25 @@ export default {
   mounted() {
 
     const focusInput = () => {
-      this.searchInput.previousElementSibling.classList.add('v-label--active');
+      //this.searchInput.previousElementSibling.classList.add('v-label--active');
     };
 
     const blurInput = () => {
       this.searchInput.value = '';
-      this.searchInput.previousElementSibling.classList.remove('v-label--active');
+      //this.searchInput.previousElementSibling.classList.remove('v-label--active');
     };
 
-    const filterUsedForTour = document.querySelector('article[data-cy="filter"]:first-child');
+    const filterUsedForTour = document.querySelector('article[data-cy="filter"]:first-child button');
 
     const typing = (text, current = 0) => {
-      this.searchInput.value+=text[current];
-      if (current < text.length-1) {
+      this.searchInput.value += text[current];
+      if (current < text.length - 1) {
         current++;
-        setTimeout(()=>{typing(text, current);},this.typingSpeed);
+        setTimeout(() => {
+          typing(text, current);
+        }, this.typingSpeed);
       } else {
-        this.searchInput.setAttribute('value',this.searchInput.value);
+        this.searchInput.setAttribute('value', this.searchInput.value);
       }
     };
 
@@ -98,10 +100,11 @@ export default {
     //Wait for v-if to show the first filter to bind introJs selectors
     //TODO: Remove the timeout using an observer event or something like that
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-      const searchInputContainer = document.querySelector('.welcome-header .v-input__control');
-      const searchButton = document.getElementById('search-button');
+      const searchInputContainer = document.querySelector('div[data-cy="search-container"]');
+
+      const searchButton = document.querySelector('button[data-cy="book-button-search"]');
 
       this.intro = introJs()
         .setOptions({
@@ -155,23 +158,29 @@ export default {
         <p>To see updated search results (after changing or removing a query), select the "Search" button.</p>
          `,
               element: searchButton,
-              position: 'left'
+              position: 'bottom'
             },
             {
               title: 'Viewing search results',
               intro: `
         <p>Once you’ve performed a search, you will see the number of results for your query. This value will be updated each time you perform a new search or change the applied filters.</p>
+         `,
+              element: document.querySelector('.ais-Stats'),
+              position: 'bottom'
+            }, {
+              title: 'Changing Results Display',
+              intro: `
         <p>You can change the number of results shown per page [10, 20, 50] and the method used to sort your results.</p>
          `,
-              element: document.querySelector('.row.filters .col-md-3'),
-              position: 'left'
+              element: document.querySelector('.topFilters'),
+              position: 'bottom'
             },
             {
               title: 'Using facet filters',
               intro: `
         <p>Filters allow you to perform faceted search to narrow down your results by license, subject, word count, and more. Faceted searching can be combined with text search or used separately.</p>
          `,
-              element: document.querySelector('#filter-licenseCode'),
+              element: document.querySelector('article[data-cy="filter"]:nth-of-type(1)'),
               position: 'right'
             },
             {
@@ -180,16 +189,7 @@ export default {
         <p>Click the checkmark to apply that filter and see only those results, or click the X to omit those results. Click the same option again to remove that filter.</p>
         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
          `,
-              element: document.querySelector('#filter-licenseCode .v-list-item__action'),
-              position: 'right'
-            },
-
-            {
-              title: 'Clearing filters for a single facet',
-              intro: `
-         <p>All active filters for a facet can be removed at once by selecting the ‘Clear Filter’ button.</p>
-            `,
-              element: document.querySelector('#filters .ais-ClearRefinements button'),
+              element: document.querySelector('article[data-cy="filter"]:nth-of-type(1)'),
               position: 'right'
             },
             {
@@ -198,16 +198,15 @@ export default {
         <p>All filters that are currently being applied to your results will be displayed here. Exclude filters will display the word NOT before the filtered term.</p>
         <p>Clear individual filters by clicking on them.</p>
          `,
-              element: document.querySelector('.filters__head'),
+              element: document.querySelector('div[data-cy="active-filters"]'),
               position: 'bottom'
             },
             {
               title: 'Clearing filters',
               intro: `
-        <p>Clear all active filters by clicking on the ‘Clear Active Filters’ button.</p>
+        <p>Clear all active filters by clicking on the ‘Clear all’ button.</p>
          `,
-              element: document.querySelector('.filters__head .ais-ClearRefinements-button'),
-              position: 'bottom'
+              element: document.querySelector('.clear-filters'),
             },
             {
               title: 'Interpreting book cards',
@@ -271,7 +270,11 @@ export default {
 
         blurInput();
 
-        if (targetElement.classList.contains('v-input__control') && this.intro._currentStep > 1) {
+        console.log(targetElement);
+        console.log(targetElement.tagName);
+        console.log(this.intro._currentStep);
+
+        if (targetElement.classList.contains('input-wrapper') && this.intro._currentStep > 1) {
 
           let value = '';
 
@@ -297,7 +300,17 @@ export default {
 
           }
 
-        } else {
+        } else if(targetElement.tagName === 'ARTICLE' && this.intro._currentStep === 9) {
+
+
+          [1,2,3].forEach(function(item, index){
+            setTimeout(()=>{
+              const filter = document.querySelector('article[data-cy="filter"]:nth-of-type(1) [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
+              filter.click();
+            }, index * 2000);
+          });
+
+        }else {
 
           this.searchInput.value = '';
 
@@ -307,8 +320,7 @@ export default {
 
       });
 
-    },this.waitForFilter);
-
+    }, this.waitForFilter);
 
 
   }

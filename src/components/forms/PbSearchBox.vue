@@ -4,7 +4,10 @@
     @submit.prevent="search(stringSearch)"
   >
     <div class="flex flex-row items-end">
-      <div class="w-2/3 md:w-4/5 pr-6 flex flex-row items-end">
+      <div
+        class="w-2/3 md:w-4/5 pr-6 flex flex-row items-end input-wrapper"
+        data-cy="search-container"
+      >
         <div class="border-b border-gray-300 flex flex-row w-full items-center">
           <div class="icon">
             <img

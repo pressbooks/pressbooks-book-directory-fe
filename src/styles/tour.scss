@@ -1,7 +1,7 @@
-@import "../../node_modules/intro.js/introjs.css";
+@import "introjs.css";
 .introjs {
   &-tooltip {
-    @apply p-8 rounded-lg relative;
+    @apply p-8 rounded-lg;
     @media (min-width: 768px) {
       min-width: 450px;
       max-width: 600px;
@@ -11,7 +11,7 @@
     @apply font-headings mx-auto;
   }
   &-tooltip-title {
-    @apply font-headings text-center float-none text-3xl;
+    @apply font-headings text-center float-none text-3xl mt-8;
   }
   &-tooltiptext {
     @apply font-pbBold;
@@ -22,7 +22,7 @@
     }
 
     a {
-      @apply text-red-800;
+      @apply text-pb-red;
     }
   }
 
@@ -30,16 +30,53 @@
     @apply border-0;
   }
 
-  &-button {
-    @apply bg-transparent border-0;
+  &-nextbutton {
+    @apply bg-transparent border-0 uppercase font-pbBold tracking-widest font-bold text-sm;
+    &:after {
+      content: "";
+      display: block;
+      background: url('/assets/icons/arrow.svg') no-repeat;
+      width: 2em;
+      height: 2em;
+      float: right;
+      margin: -.3em  0 0 1em;
+    }
+  }
+
+  &-prevbutton {
+    @apply bg-transparent border-0 uppercase font-pbBold tracking-widest font-bold text-sm;
+    &:before {
+      content: "";
+      display: block;
+      background: url('/assets/icons/arrow.svg') no-repeat;
+      width: 2em;
+      height: 2em;
+      float: left;
+      margin: -.3em 1em 0 0;
+      transform: rotate(180deg);
+    }
+  }
+
+  &-progress {
+    @apply mb-6
   }
 
   &-progressbar {
-     @apply bg-red-800;
+    @apply bg-pb-red;
   }
 
   &-skipbutton{
-    @apply absolute right-2 top-2 float-none text-red-800 text-4xl;
+    @apply absolute right-0 top-0 float-none text-pb-red text-4xl invisible;
+    &:after {
+      visibility: visible;
+      content: "";
+      display: block;
+      background: url('/assets/icons/close.svg') no-repeat;
+      width: 1em;
+      height: 1em;
+      float:left;
+      margin-top: .5em;
+    }
   }
 
 }
