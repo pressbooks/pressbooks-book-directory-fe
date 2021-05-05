@@ -6,15 +6,15 @@
       data-cy="filter-header-button"
       :class="[
         'w-full flex items-center justify-between py-3 px-4',
-        open && 'border-b'
+        opened && 'border-b'
       ]"
-      @click.prevent="open = !open"
+      @click.prevent="opened = !opened"
     >
       <slot name="title" />
       <chevron-down-icon
         :class="[
           'h-6 w-6 text-red-800 transform duration-150',
-          open && 'rotate-180'
+          opened && 'rotate-180'
         ]"
       />
     </button>
@@ -27,7 +27,7 @@
       leave-to-class="opacity-0 translate-y-0"
     >
       <div
-        v-show="open"
+        v-show="opened"
         class="h-full divide-y divide-gray-200"
       >
         <slot name="content" />
@@ -42,10 +42,21 @@ import { ChevronDownIcon } from '@vue-hero-icons/outline';
 export default {
   name: 'PbAccordion',
   components: { ChevronDownIcon },
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      open: false
+      opened: false
     };
   },
+  watch: {
+    open(o) {
+      this.opened = o;
+    }
+  }
 };
 </script>

@@ -3,7 +3,9 @@ import App from './App.vue';
 import InstantSearch from 'vue-instantsearch';
 import VueMeta from 'vue-meta';
 import VueSelect from 'vue-select';
+import VueTailwind from 'vue-tailwind';
 import router from './router';
+import VueTailwindConfig from './vuetailwind.config';
 
 import './index.css';
 import {store} from './store';
@@ -11,6 +13,7 @@ import {store} from './store';
 Vue.use(VueMeta);
 Vue.component('VueSelect', VueSelect);
 Vue.use(InstantSearch);
+Vue.use(VueTailwind, VueTailwindConfig);
 
 router.beforeEach((to, from, next) => {
   let indexName = store.state.SClient.availableIndexes.filter((index) => {
