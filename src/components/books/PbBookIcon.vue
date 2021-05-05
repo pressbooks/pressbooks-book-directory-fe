@@ -1,5 +1,8 @@
 <template>
-  <li>
+  <li
+    :data-cy="dataCy"
+    class="w-full p-2 block"
+  >
     <img
       :src="icon"
       :alt="alt"
@@ -17,6 +20,10 @@ export default {
       default: ''
     },
     alt: {
+      type: String,
+      default: ''
+    },
+    dataCy: {
       type: String,
       default: ''
     },

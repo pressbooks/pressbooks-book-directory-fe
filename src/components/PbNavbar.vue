@@ -10,7 +10,10 @@
           >
         </a>
         <!-- focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:ring-opacity-75 -->
-        <button class="border border-red-700 bg-white font-semibold rounded-full py-3 px-4 text-sm text-red-700 sm:px-6">
+        <button
+          class="border border-pb-red rounded-full px-8 py-3 text-pb-red text-sm border-2 font-bold"
+          @click="$store.commit('showTour')"
+        >
           Take the tour
         </button>
       </nav>

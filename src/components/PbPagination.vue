@@ -27,7 +27,7 @@
               data-cy="paginator-prev"
               @click.prevent="refine(0)"
             >
-              <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-red-800" />
+              <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-pb-red" />
             </a>
           </li>
           <li
@@ -52,7 +52,7 @@
               data-cy="paginator-next"
               @click.prevent="refine(currentRefinement + 1)"
             >
-              <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-red-800" />
+              <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-pb-red" />
             </a>
           </li>
         </ul>
