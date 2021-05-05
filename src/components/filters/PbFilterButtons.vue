@@ -7,7 +7,7 @@
     >
       <CheckCircleIconSolid
         v-if="wasFiltered(item.facet, false)"
-        class="h-6 w-6 text-red-800"
+        class="h-6 w-6"
       />
       <CheckCircleIcon
         v-else
@@ -21,7 +21,7 @@
     >
       <XCircleIconSolid
         v-if="wasFiltered(item.facet, true)"
-        class="h-6 w-6 text-red-800"
+        class="h-6 w-6"
       />
       <XCircleIcon
         v-else

@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-10">
-    <div class="section-title text-4xl  font-bold text-center">
+    <div class="section-title text-4xl font-bold text-center">
       Find a book
     </div>
     <div class="flex flex-col items-center space-y-10 md:flex-row md:space-y-0 md:space-x-10">
