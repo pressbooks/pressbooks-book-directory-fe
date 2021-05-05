@@ -14,6 +14,7 @@
         :show="true"
         :range="true"
         time-picker-ok-button="Ok"
+        :clearable="false"
       />
       <t-button
         :disabled="datesModel.length < 2"
@@ -64,8 +65,7 @@ export default {
   watch: {
     '$route.query': {
       deep: true,
-      handler(q) {
-        let query = {...q};
+      handler(query) {
         if (query[this.alias] !== undefined) {
           const dates = query[this.alias].split('&&');
           const datesFilteredLength = dates.length;

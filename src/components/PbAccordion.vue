@@ -6,15 +6,15 @@
       data-cy="filter-header-button"
       :class="[
         'w-full flex items-center justify-between py-3 px-4 focus:outline-none',
-        openAccordion && 'border-b'
+        opened && 'border-b'
       ]"
-      @click.prevent="openAccordion = !openAccordion"
+      @click.prevent="opened = !opened"
     >
       <slot name="title" />
       <chevron-down-icon
         :class="[
           'h-6 w-6 text-red-800 transform duration-150',
-          openAccordion && 'rotate-180'
+          opened && 'rotate-180'
         ]"
       />
     </button>
@@ -27,7 +27,7 @@
       leave-to-class="opacity-0 translate-y-0"
     >
       <div
-        v-show="openAccordion"
+        v-show="opened"
         class="h-full divide-y divide-gray-200"
       >
         <slot name="content" />
@@ -50,12 +50,12 @@ export default {
   },
   data() {
     return {
-      openAccordion: false
+      opened: false
     };
   },
   watch: {
     open(o) {
-      this.openAccordion = o;
+      this.opened = o;
     }
   }
 };

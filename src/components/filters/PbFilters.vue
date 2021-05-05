@@ -37,7 +37,7 @@
 </template>
 <script>
 import PbSelectableFilters from './PbSelectableFilters.vue';
-import DateRangeFilters from './DateRangeFilters.vue';
+import DateRangeFilters from './PbDateRangeFilters.vue';
 
 export default {
   name: 'PbFilters',
