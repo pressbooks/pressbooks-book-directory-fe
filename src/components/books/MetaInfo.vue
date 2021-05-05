@@ -1,7 +1,7 @@
 <template>
   <li>
-    <strong class="font-pbBold">{{ title }}</strong>
-    <span class="font-pbRegular text-red-600">{{ text }}</span>
+    <strong>{{ title }}</strong>
+    <span>{{ text }}</span>
   </li>
 </template>
 

@@ -27,7 +27,7 @@
       <div class="w-1/3 md:w-1/5">
         <button
           type="submit"
-          class="w-full py-3 text-sm rounded-full text-white bg-red-700"
+          class="w-full py-3 font-semibold rounded-full text-white bg-red-700"
           :disabled="stringSearch.length > 0 && (stringSearch.length < searchCharsLimit.min || stringSearch.length > searchCharsLimit.max)"
           data-cy="book-button-search"
         >

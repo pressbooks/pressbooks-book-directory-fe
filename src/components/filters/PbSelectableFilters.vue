@@ -1,7 +1,7 @@
 <template>
   <pb-accordion v-if="typeof $store.state.stats.filters[field] !== 'undefined'">
     <template #title>
-      <span class="title font-headings font-semibold">
+      <span class="title  font-semibold">
         {{ title }}
       </span>
     </template>
