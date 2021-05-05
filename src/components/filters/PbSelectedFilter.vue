@@ -7,7 +7,7 @@
       class="flex items-center"
       @click.prevent="closeExcludeFilter(value)"
     >
-      <XCircleIcon class="h-4 w-4"/>
+      <XCircleIcon class="h-4 w-4" />
     </button>
   </div>
 </template>
@@ -17,9 +17,9 @@ import { XCircleIcon } from '@vue-hero-icons/outline';
 
 export default {
   name: 'PbSelectedFilter',
-	components: {
+  components: {
   	XCircleIcon
-	},
+  },
   props: {
     name: {
       type: String,
