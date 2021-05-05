@@ -6,13 +6,18 @@
         :alt="item.name"
       />
     </div>
-    <ul class="tags pt-3 flex flex-row justify-around">
+    <ul
+      class="tags pt-3 flex flex-row justify-around"
+      data-cy="book-icons"
+    >
       <pb-book-icon
+        test-id="book-license"
         :icon="item.licenseIcon"
         :alt="item.licenseAlt"
       />
       <pb-book-icon
         v-if="isBasedOn"
+        test-id="book-original"
         icon="https://pressbooks.directory/assets/images/is-child.png"
         alt="Book based on another book"
       />

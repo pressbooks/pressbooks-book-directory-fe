@@ -12,24 +12,8 @@ function scrollHelper(index) {
   let timeout = 50;
   let top = 0;
   switch (index) {
-  case 1:
-  case 2:
-  case 3:
-  case 4:
-  case 10:
-    top = 0;
-    break;
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    top = 0;
-    break;
-  case 9:
-    top = 0;
-    break;
   case 12:
-    top = 0;
+    top = 180;
     timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
   }
@@ -72,13 +56,8 @@ export default {
   },
   mounted() {
 
-    const focusInput = () => {
-      //this.searchInput.previousElementSibling.classList.add('v-label--active');
-    };
-
     const blurInput = () => {
       this.searchInput.value = '';
-      //this.searchInput.previousElementSibling.classList.remove('v-label--active');
     };
 
     const filterUsedForTour = document.querySelector('article[data-cy="filter"]:first-child button');
@@ -206,31 +185,23 @@ export default {
               intro: `
         <p>Clear all active filters by clicking on the ‘Clear all’ button.</p>
          `,
-              element: document.querySelector('.clear-filters'),
+              element: document.querySelector('div[data-cy="active-filters"] .clear-filters'),
+              position: 'left'
             },
             {
               title: 'Interpreting book cards',
               intro: `
-        <p>Each book card displays information about the book, when available, including author(s), subject(s), date last updated, publisher, word count, storage size, and description.</p>
+        <p>Each book card displays available information about the book, including title, word count, storage size, author(s), subject(s), date last updated, publisher, and language.</p>
         <p>Clicking a book's title or cover will take you to the book’s home page.</p>
          `,
-              element: document.querySelector('.v-card__content .col-9'),
-              position: 'bottom'
+              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]'),
             },
             {
               title: 'Visual icons',
               intro: `
         <p>Beneath the cover image, you will see a set of icons that convey additional information about the book.</p>
          `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__content .row'),
-              position: 'left'
-            },
-            {
-              title: 'Language',
-              intro: `
-        <p>This abbreviation denotes a book’s language (e.g. English, French, Spanish).</p>
-         `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__content .language'),
+              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
               position: 'left'
             },
             {
@@ -238,7 +209,7 @@ export default {
               intro: `
         <p>This icon indicates the copyright license selected for the work (All Rights Reserved or one of the Creative Commons licenses). Hovering over the icon will display the license name.</p>
          `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__content .copyright'),
+              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
               position: 'left'
             },
             {
@@ -247,7 +218,7 @@ export default {
         <img src="${this.h5pActivitiesImage}" alt="H5P Logo" width="${this.h5pLogoWidth}" />
         <p>The H5P logo is displayed when a book contains interactive H5P elements (like quizzes or flashcards). Hovering over the icon will display the number of H5P activities present in that book.</p>
          `,
-              element: document.querySelector('.ais-Hits__books__container .v-card__content .row'),
+              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
               position: 'left'
             },
             {
@@ -262,17 +233,12 @@ export default {
       this.intro.onexit(() => {
         this.searchInput.value = '';
         this.$store.commit('showTour');
-        //Restore filters accordion to the initial state
         filterUsedForTour.click();
       });
 
       this.intro.onafterchange((targetElement) => {
 
         blurInput();
-
-        console.log(targetElement);
-        console.log(targetElement.tagName);
-        console.log(this.intro._currentStep);
 
         if (targetElement.classList.contains('input-wrapper') && this.intro._currentStep > 1) {
 
@@ -291,7 +257,6 @@ export default {
           }
           if (value) {
 
-            focusInput();
             typing(value); //simulate typing
 
           } else {
@@ -300,17 +265,32 @@ export default {
 
           }
 
-        } else if(targetElement.tagName === 'ARTICLE' && this.intro._currentStep === 9) {
+        } else if(this.intro._currentStep === 9) {
 
+          // Facets filter click
 
           [1,2,3].forEach(function(item, index){
             setTimeout(()=>{
               const filter = document.querySelector('article[data-cy="filter"]:nth-of-type(1) [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
               filter.click();
-            }, index * 2000);
+            }, index * 1000);
           });
 
-        }else {
+        } else if(this.intro._currentStep === 11) {
+
+          // Rebind DOM for remaining steps on the book card
+
+          this.intro._introItems[12].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
+          this.intro._introItems[13].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
+          this.intro._introItems[14].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-license"]');
+          this.intro._introItems[15].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
+
+          setTimeout(()=> {
+            const clear = document.querySelector('button[data-cy="clear-all-filters"]');
+            clear.click();
+          },2000);
+
+        } else {
 
           this.searchInput.value = '';
 

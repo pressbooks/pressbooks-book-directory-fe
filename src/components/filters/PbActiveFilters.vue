@@ -4,7 +4,7 @@
       Active Filters
     </div>
     <div
-      v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0"
+      v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0 || $store.state.config.showTour === true"
       class="filters flex flex-row justify-between"
     >
       <div class="active-filters flex flex-row flex-wrap w-full md:w-4/5">
@@ -25,7 +25,7 @@
         class="w-full md:w-1/5 justify-center align-middle flex flex-col clear-filters"
       >
         <button
-          v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0"
+          v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0 || $store.state.config.showTour === true"
           type="reset"
           class="font-bold text-pb-red text-right"
           data-cy="clear-all-filters"
