@@ -1,6 +1,9 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 module.exports = {
   mode: 'jit',
   purge: [
+    './**/*.html',
     './public/**/*.html',
     './src/**/*.{js,vue}',
   ],
@@ -8,12 +11,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        headings: ['Karmilla', 'sans-serif'],
-        pbBold: ['Karmilla', 'sans-serif'],
-        pbRegular: ['Spectral', 'sans-serif'],
+        sans: ['Karmilla', ...fontFamily.sans],
+        serif: ['Spectral', ...fontFamily.serif],
       },
       colors: {
         'pb-blue': '#F3F9FA',
+        'pb-dark-blue': '#00243a',
       }
     },
   },
