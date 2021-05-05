@@ -30,7 +30,7 @@
         :text="item.languageName"
       />
     </ul>
-    <div class="book-description">
+    <div data-cy="book-description">
       <!-- eslint-disable vue/no-v-html -->
       <p
         v-if="hasDescription"

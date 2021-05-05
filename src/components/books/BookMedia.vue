@@ -11,7 +11,7 @@
       data-cy="book-icons"
     >
       <pb-book-icon
-        test-id="book-license"
+        data-cy="book-license"
         :icon="item.licenseIcon"
         :alt="item.licenseAlt"
       />
@@ -22,7 +22,7 @@
       />
       <pb-book-icon
         v-if="isBasedOn"
-        test-id="book-original"
+        data-cy="book-original"
         icon="https://pressbooks.directory/assets/images/is-child.png"
         alt="Book based on another book"
       />

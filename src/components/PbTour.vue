@@ -13,7 +13,7 @@ function scrollHelper(index) {
   let top = 0;
   switch (index) {
   case 12:
-    top = 180;
+    top = 100;
     timeout = 500; //this element needs an extra timeout to calculate the scrollY position
     break;
   }
@@ -151,7 +151,7 @@ export default {
               intro: `
         <p>You can change the number of results shown per page [10, 20, 50] and the method used to sort your results.</p>
          `,
-              element: document.querySelector('.topFilters'),
+              element: document.querySelector('div[data-cy="top-filters"]'),
               position: 'bottom'
             },
             {

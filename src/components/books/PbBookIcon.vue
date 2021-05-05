@@ -1,6 +1,6 @@
 <template>
   <li
-    :data-cy="testId"
+    :data-cy="dataCy"
     class="w-full p-2 block"
   >
     <img
@@ -23,7 +23,7 @@ export default {
       type: String,
       default: ''
     },
-    testId: {
+    dataCy: {
       type: String,
       default: ''
     },
