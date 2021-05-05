@@ -16,13 +16,15 @@
         time-picker-ok-button="Ok"
         :clearable="false"
       />
-      <t-button
-        :disabled="datesModel.length < 2"
-        class="w-full"
-        @click="filterByDateRange()"
-      >
-        Go
-      </t-button>
+      <div class="p-2">
+        <t-button
+          :disabled="datesModel.length < 2"
+          class="w-full"
+          @click="filterByDateRange"
+        >
+          Go
+        </t-button>
+      </div>
     </template>
   </pb-accordion>
 </template>

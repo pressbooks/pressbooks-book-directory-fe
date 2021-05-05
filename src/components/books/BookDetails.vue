@@ -1,8 +1,7 @@
 <template>
   <div>
-    <ul
-      class="py-4 space-y-2"
-      data-cy="book-meta"
+    <ul class="py-4 space-y-1"
+        data-cy="book-meta"
     >
       <meta-info
         v-if="hasAuthors"
@@ -34,7 +33,7 @@
       <!-- eslint-disable vue/no-v-html -->
       <p
         v-if="hasDescription"
-        class="text leading-loose font-pbRegular line-clamp-6"
+        class="leading-relaxed font-serif line-clamp-6"
         v-html="item.description"
       />
       <!-- eslint-enable vue/no-v-html -->

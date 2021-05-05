@@ -7,17 +7,22 @@
       />
     </div>
     <ul
-      class="tags pt-3 flex flex-row justify-around"
+      class="tags pt-3 flex space-x-3"
       data-cy="book-icons"
     >
       <pb-book-icon
-        test-id="book-license"
+         test-id="book-license"
         :icon="item.licenseIcon"
         :alt="item.licenseAlt"
       />
       <pb-book-icon
-        v-if="isBasedOn"
+        v-if="hasH5PActivities"
+        icon="https://pressbooks.directory/assets/images/h5p.png"
+        :alt="`This book has ${item.h5pActivities} H5P Activities`"
+      />
+      <pb-book-icon
         test-id="book-original"
+        v-if="isBasedOn"
         icon="https://pressbooks.directory/assets/images/is-child.png"
         alt="Book based on another book"
       />
@@ -25,11 +30,6 @@
         v-if="!isBasedOn"
         icon="https://pressbooks.directory/assets/images/is-base.png"
         alt="This book is not based on another book"
-      />
-      <pb-book-icon
-        v-if="hasH5PActivities"
-        icon="https://pressbooks.directory/assets/images/h5p.png"
-        :alt="`This book has ${item.h5pActivities} H5P Activities`"
       />
     </ul>
   </div>

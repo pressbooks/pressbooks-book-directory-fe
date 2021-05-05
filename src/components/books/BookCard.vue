@@ -1,15 +1,14 @@
 <template>
-  <div data-cy="book-card">
-    <div class="flex flex-row flex-wrap items-start border border-gray-300 px-8 py-8 shadow-md">
-      <div class="w-full md:w-2/3 md:pr-4">
-        <div class="data">
-          <recommended v-if="item.isRecommended" />
-          <book-info :item="item" />
-          <book-details :item="item" />
-        </div>
-      </div>
-      <book-media :item="item" />
+  <div
+    data-cy="book-card"
+    class="flex flex-row flex-wrap items-start border border-gray-300 px-8 py-8 shadow-md"
+  >
+    <div class="w-full md:w-2/3 md:pr-4">
+      <recommended v-if="item.isRecommended" />
+      <book-info :item="item" />
+      <book-details :item="item" />
     </div>
+    <book-media :item="item" />
   </div>
 </template>
 <script>

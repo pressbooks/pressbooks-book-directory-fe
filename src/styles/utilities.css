@@ -1,4 +1,1 @@
 @tailwind utilities;
-body {
-    @apply font-headings bg-pb-blue;
-}
