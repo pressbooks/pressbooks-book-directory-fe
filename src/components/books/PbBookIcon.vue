@@ -3,7 +3,7 @@
     <img
       :src="icon"
       :alt="alt"
-      class="h-5"
+      class="h-6"
     >
   </li>
 </template>

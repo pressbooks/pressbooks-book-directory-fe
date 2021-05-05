@@ -10,12 +10,12 @@
         v-if="searchable"
         class="px-4 flex items-center w-full"
       >
-        <search-icon class="h-5 w-5 text-gray-500" />
+        <search-icon class="h-5 w-5 text-gray-400" />
         <input
           :id="`search-filter-${field}`"
           v-model="search"
           type="text"
-          class="w-full text-sm py-2 px-3 focus:outline-none"
+          class="w-full border-0 text-sm py-2 px-3 focus:outline-none focus:ring-0"
           :placeholder="`Search ${title}`"
           @input="searchForItems"
         >
