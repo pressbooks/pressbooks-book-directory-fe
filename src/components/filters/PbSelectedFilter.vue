@@ -1,5 +1,8 @@
 <template>
-  <div class="flex items-center bg-gray-200 py-1 px-2 rounded-full space-x-2 mr-2 mb-2">
+  <div
+    class="flex items-center bg-gray-200 py-1 px-2 rounded-full space-x-2 mr-2 mb-2"
+    data-cy="chip-filter"
+  >
     <div class="text-sm">
       {{ name }}
     </div>
