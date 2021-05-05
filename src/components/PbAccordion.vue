@@ -5,7 +5,7 @@
     <button
       data-cy="filter-header-button"
       :class="[
-        'w-full flex items-center justify-between py-3 px-4 focus:outline-none',
+        'w-full flex items-center justify-between py-3 px-4',
         open && 'border-b'
       ]"
       @click.prevent="open = !open"
