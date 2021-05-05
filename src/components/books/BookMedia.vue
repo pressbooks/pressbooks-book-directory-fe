@@ -11,7 +11,7 @@
       data-cy="book-icons"
     >
       <pb-book-icon
-         test-id="book-license"
+        test-id="book-license"
         :icon="item.licenseIcon"
         :alt="item.licenseAlt"
       />
@@ -21,8 +21,8 @@
         :alt="`This book has ${item.h5pActivities} H5P Activities`"
       />
       <pb-book-icon
-        test-id="book-original"
         v-if="isBasedOn"
+        test-id="book-original"
         icon="https://pressbooks.directory/assets/images/is-child.png"
         alt="Book based on another book"
       />

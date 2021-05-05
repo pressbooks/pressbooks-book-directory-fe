@@ -1,7 +1,8 @@
 <template>
   <div>
-    <ul class="py-4 space-y-1"
-        data-cy="book-meta"
+    <ul
+      class="py-4 space-y-1"
+      data-cy="book-meta"
     >
       <meta-info
         v-if="hasAuthors"

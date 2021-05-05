@@ -8,16 +8,16 @@
     }
   }
   &-tooltip-header {
-    @apply font-headings mx-auto;
+    @apply font-sans mx-auto;
   }
   &-tooltip-title {
-    @apply font-headings text-center float-none text-3xl;
+    @apply font-sans text-center float-none text-3xl;
   }
   &-tooltiptext {
-    @apply font-pbBold;
+    @apply font-sans;
 
     p {
-      @apply font-pbBold;
+      @apply font-sans;
       margin-bottom: 1rem;
     }
 
@@ -31,7 +31,7 @@
   }
 
   &-nextbutton {
-    @apply bg-transparent border-0 uppercase font-pbBold tracking-widest font-bold text-sm;
+    @apply bg-transparent border-0 uppercase font-sans tracking-widest font-bold text-sm;
     &:after {
       content: "";
       display: block;
@@ -44,7 +44,7 @@
   }
 
   &-prevbutton {
-    @apply bg-transparent border-0 uppercase font-pbBold tracking-widest font-bold text-sm;
+    @apply bg-transparent border-0 uppercase font-sans tracking-widest font-bold text-sm;
     &:before {
       content: "";
       display: block;
