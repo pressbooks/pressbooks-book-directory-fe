@@ -4,6 +4,7 @@
     class="w-full flex-1"
   >
     <pb-stats />
+    <pb-pagination />
     <pb-active-filters />
     <books />
     <pb-pagination />
