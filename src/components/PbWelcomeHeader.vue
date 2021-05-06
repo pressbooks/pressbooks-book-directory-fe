@@ -9,8 +9,10 @@
         This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed }}</strong> Pressbooks
         networks. Learn to use the Directory by taking the self-guided tour in the top nav bar or reading 
         <a
-          href="https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/"
+          :href="guide"
           class="pb-dark-blue underline"
+          target="_blank"
+          rel="noopener"
         >our guide</a>.
       </p>
 
@@ -24,6 +26,7 @@
           target="_blank"
           rel="noopener"
           class="inline-block text-center text-lg py-3 px-6 border-2 border-red-700 text-white bg-red-700 font-semibold capitalize rounded-full"
+          data-cy="learn-about-pressbooks"
         >
           Learn more about PressbooksEDU
         </a>
@@ -36,12 +39,13 @@
 
 export default {
   name: 'PbWelcomeHeader',
-  data() {
-    return {
-      site: import.meta.env.VITE_PRESSBOOKS_SITE,
-    };
-  },
   computed: {
+    guide() {
+      return this.$store.state.config.urls.guide;
+    },
+    site() {
+      return this.$store.state.config.urls.pressbooks;
+    },
     totalBooksIndexed() {
       return this.$store.state.stats.numberOfBooksIndexed;
     },
