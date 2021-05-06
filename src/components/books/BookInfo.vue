@@ -8,7 +8,7 @@
         class="text-red-700"
         :href="item.url"
         target="_blank"
-        rel="noopener external"
+        rel="noopener"
         data-cy="book-title"
       >
         {{ item.name }}

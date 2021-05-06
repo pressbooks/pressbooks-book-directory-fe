@@ -1,77 +1,35 @@
 <template>
   <footer>
-    <div class="container mx-auto py-12 px-8">
-      <div class="top">
+    <div class="container mx-auto py-12 px-8 space-y-4">
+      <div class="flex items-center space-x-6">
         <a
-          href="https://pressbooks.com"
+          :href="site"
           aria-label="Pressbooks Homepage"
+          class="inline-block"
+          target="_blank"
+          rel="noopener"
+          data-cy="pressbooks-homepage"
         >
           <img
             src="/assets/logo-color.svg"
-            width="170"
             alt="Pressbooks logo"
-            class="inline float-left mr-8"
+            class="w-40"
           >
         </a>
-        <a
-          href="https://www.algolia.com/"
-          aria-label="Search by Algolia"
-          target="_blank"
-          class="float-left"
-        >
-          <img
-            src="/assets/search-by-algolia.svg"
-            width="170"
-            alt="Search by Algolia"
-            class="inline float-left"
-          >
-        </a>
+        <ais-powered-by class="inline-block" />
       </div>
-      <div class="bottom flex flex-row w-full items-end justify-between pt-4">
-        <div class="left">
-          <div class="text-sm">
-            © Pressbooks 2021
-          </div>
+      <div class="flex w-full items-center justify-between">
+        <div class="mt-1 text-sm">
+          © Pressbooks 2021
         </div>
-        <div class="right">
-          <div class="icons flex flex-row">
-            <div class="icon px-2">
-              <a
-                href="#!"
-                class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
-              >
-                <img
-                  src="/assets/icons/social-twitter.svg"
-                  width="20"
-                  alt="Logo"
-                >
-              </a>
-            </div>
-            <div class="icon px-2">
-              <a
-                href="#!"
-                class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
-              >
-                <img
-                  src="/assets/icons/social-in.svg"
-                  width="19"
-                  alt="Logo"
-                >
-              </a>
-            </div>
-            <div class="icon px-2">
-              <a
-                href="#!"
-                class="flex w-8 h-8 bg-red-700 items-center justify-center rounded-full hover:bg-red-800"
-              >
-                <img
-                  src="/assets/icons/social-youtube.svg"
-                  width="20"
-                  alt="Logo"
-                >
-              </a>
-            </div>
-          </div>
+        <div class="flex space-x-4">
+          <pb-social-link
+            v-for="(socialLink, key) in socialLinks"
+            :key="key"
+            :href="socialLink.href"
+            :icon="socialLink.icon"
+            :name="socialLink.name"
+          />
         </div>
       </div>
     </div>
@@ -79,7 +37,24 @@
 </template>
 
 <script>
+import PbSocialLink from './PbSocialLink.vue';
+
 export default {
-  name: 'PbFooter'
+  name: 'PbFooter',
+  components: {PbSocialLink},
+  data() {
+    return {
+      socialLinks: [
+        { href: this.$store.state.config.urls.twitter, icon: 'social-twitter.svg', name: 'Twitter'},
+        { href: this.$store.state.config.urls.linkedin, icon: 'social-in.svg', name: 'Linkedin'},
+        { href: this.$store.state.config.urls.youtube, icon: 'social-youtube.svg', name: 'Youtube'},
+      ]
+    };
+  },
+  computed: {
+    site() {
+      return this.$store.state.config.urls.pressbooks;
+    }
+  }
 };
 </script>
