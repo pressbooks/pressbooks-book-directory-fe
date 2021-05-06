@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('algoliaQueryRequest', () => {
+  cy.intercept('**/indexes/*/queries?*')
+    .as('algoliaQuery')
+    .wait(2000);
+});

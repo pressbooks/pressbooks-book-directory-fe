@@ -4,7 +4,6 @@ describe('Filter collections', () => {
     beforeEach(() => {
       cy.viewport(1280, 720)
         .visit('/')
-        .intercept('**/indexes/*/queries?*').as('filtering')
         .get('[data-cy=collection-section]').as('collectionSection');
     });
 
@@ -20,30 +19,27 @@ describe('Filter collections', () => {
         .contains('OpenStax')
         .click();
 
-      cy.get('[data-cy=selected-filters]')
+      cy.algoliaQueryRequest()
+        .get('[data-cy=selected-filters]')
         .find('.text')
         .contains('OpenStax')
         .url().should('include', 'collec=OpenStax')
-        .wait('@filtering')
-        .wait(2000)
         .get('[data-cy=book-title]')
         .contains('Anatomy & Physiology');
     });
 
     it('Filter by Interactive OER collection using URL', () => {
       cy.visit('http://localhost:3001/?collec=Interactive%20OER')
+        .algoliaQueryRequest()
         .get('[data-cy=selected-filters]')
         .find('.text')
         .contains('Interactive OER')
-        .wait('@filtering')
-        .wait(2000)
         .get('[data-cy=book-title]')
         .contains('Business Writing For Everyone');
     });
 
     it('Filter by Nursing/Healthcare collection using side menu', () => {
       cy.get('[data-cy=collections-filter]').as('collectionsFilter')
-        .get('@collectionsFilter')
         .find('[data-cy=filter-header-button]')
         .contains('Collection')
         .click();
@@ -53,15 +49,17 @@ describe('Filter collections', () => {
         .get('@nursingCollectionFilter')
         .contains('Nursing/Healthcare')
         .get('@nursingCollectionFilter')
-        .find('[data-cy=filter-include-button]')
+        .find('[data-cy=filter-include-button]').should('have.class', 'include')
         .click();
 
-      cy.get('[data-cy=selected-filters]')
+      cy.algoliaQueryRequest()
+        .get('[data-cy=selected-filters]')
+        .should(($filtersApplied) => {
+          expect($filtersApplied).to.have.length(1);
+        })
         .find('.text')
-        .contains('Nursing/Healthcare')
+        .contains('Nursing/Healthcare').should('be.visible')
         .url().should('include', 'collec=Nursing%2FHealthcare')
-        .wait('@filtering')
-        .wait(1000)
         .get('[data-cy=book-title]')
         .contains('Nursing Pharmacology')
         .get('[data-cy=book-title]')
