@@ -17,18 +17,18 @@
       />
       <pb-book-icon
         v-if="hasH5PActivities"
-        icon="https://pressbooks.directory/assets/images/h5p.png"
+        icon="/assets/images/h5p.png"
         :alt="`This book has ${item.h5pActivities} H5P Activities`"
       />
       <pb-book-icon
         v-if="isBasedOn"
         data-cy="book-original"
-        icon="https://pressbooks.directory/assets/images/is-child.png"
+        icon="/assets/images/is-child.png"
         alt="Book based on another book"
       />
       <pb-book-icon
         v-if="!isBasedOn"
-        icon="https://pressbooks.directory/assets/images/is-base.png"
+        icon="/assets/images/is-base.png"
         alt="This book is not based on another book"
       />
     </ul>

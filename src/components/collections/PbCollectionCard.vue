@@ -6,7 +6,7 @@
     >
       <div class="image">
         <img
-          src="https://idaho.pressbooks.pub/app/plugins/pressbooks/assets/dist/images/default-book-cover.jpg"
+          src="/assets/images/default-book-cover.jpg"
           width="100%"
           alt=""
         >
