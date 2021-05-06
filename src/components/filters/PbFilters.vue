@@ -18,6 +18,12 @@
         field="networkName"
         :searchable="true"
       />
+      <pb-selectable-filters
+        title="Collection"
+        field="collections"
+        :searchable="false"
+        data-cy="collections-filter"
+      />
       <date-range-filters
         title="Last Updated"
         field="lastUpdated"

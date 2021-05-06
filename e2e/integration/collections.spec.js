@@ -15,7 +15,6 @@ describe('See collections cards', () => {
     });
 
     it('Filter by clicking in an image collection card', () => {
-      cy.get('[data-cy=collection-section]').as('collectionSection');
       cy.get('@collectionSection')
         .find('.text')
         .contains('OpenStax')
@@ -36,6 +35,24 @@ describe('See collections cards', () => {
         .contains('Interactive OER');
       cy.get('[data-cy=book-title]')
         .contains('Business Writing For Everyone');
+    });
+
+    it('Filter collection by side menu', () => {
+      cy.get('[data-cy=collections-filter]').as('collectionsFilter');
+      cy.get('@collectionsFilter')
+        .find('[data-cy=filter-header-button]')
+        .contains('Collection')
+        .click();
+      cy.get('@collectionsFilter')
+        .find('[data-cy=filter-option]')
+        .contains('Nursing/Healthcare')
+        .find('[data-cy=filter-include-button]')
+        .click();
+      cy.wait('@filtering');
+      cy.get('[data-cy=selected-filters]')
+        .find('.text')
+        .contains('Nursing/Healthcare')
+        .url().should('include', 'collec=Nursing%2FHealthcare');
     });
   });
 });
