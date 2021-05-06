@@ -76,14 +76,12 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.state.stats.filters[this.field].slice(0, this.limit);
-    }
-  },
-  watch: {
-    '$store.state.stats.filters': {
-      handler() {
-        this.searchForItems();
+      if (this.field === 'about') {
+        console.log(this.storeItems());
       }
+      const items = this.storeItems() || [];
+
+      return items.slice(0, this.limit);
     }
   },
   methods: {
@@ -94,7 +92,7 @@ export default {
       return this.search === '';
     },
     storeItems() {
-      return this.$store.state.stats.filters[this.field];
+      return this.$store.getters.filters(this.field);
     },
     updateStore(items) {
       this.$store.commit('updateFacetFilter', {

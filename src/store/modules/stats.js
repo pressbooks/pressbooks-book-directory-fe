@@ -115,5 +115,10 @@ export default {
         }
       });
     }
+  },
+  getters: {
+    filters: (state) => (field) => {
+      return state.filters[field];
+    },
   }
 };
