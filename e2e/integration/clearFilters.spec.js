@@ -9,6 +9,8 @@ describe('Clear Filters',()=>{
 
       cy.wait('@algoliaRequest');
 
+      cy.get('article[data-cy="filter"]').should('have.length.above',1);
+
       cy.get('article[data-cy="filter"]:first-child').as('firstAccordionOption');
 
       cy.get('@firstAccordionOption').click();
