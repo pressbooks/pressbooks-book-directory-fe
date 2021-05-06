@@ -20,8 +20,8 @@ describe('Filter collections', () => {
         .click();
 
       cy.algoliaQueryRequest()
-        .get('[data-cy=selected-filters]')
-        .find('.text')
+        .get('[data-cy=chip-filter]')
+        .find('.text-sm')
         .contains('OpenStax')
         .url().should('include', 'collec=OpenStax')
         .get('[data-cy=book-title]')
@@ -31,8 +31,8 @@ describe('Filter collections', () => {
     it('Filter by Interactive OER collection using URL', () => {
       cy.visit('http://localhost:3001/?collec=Interactive%20OER')
         .algoliaQueryRequest()
-        .get('[data-cy=selected-filters]')
-        .find('.text')
+        .get('[data-cy=chip-filter]')
+        .find('.text-sm')
         .contains('Interactive OER')
         .get('[data-cy=book-title]')
         .contains('Business Writing For Everyone');
@@ -53,11 +53,11 @@ describe('Filter collections', () => {
         .click();
 
       cy.algoliaQueryRequest()
-        .get('[data-cy=selected-filters]')
+        .get('[data-cy=chip-filter]')
         .should(($filtersApplied) => {
           expect($filtersApplied).to.have.length(1);
         })
-        .find('.text')
+        .find('.text-sm')
         .contains('Nursing/Healthcare').should('be.visible')
         .url().should('include', 'collec=Nursing%2FHealthcare')
         .get('[data-cy=book-title]')

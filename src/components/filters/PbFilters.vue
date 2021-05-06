@@ -24,7 +24,7 @@
         :searchable="false"
         data-cy="collections-filter"
       />
-      <date-range-filters
+      <pb-date-range-filters
         title="Last Updated"
         field="lastUpdated"
       />
@@ -42,13 +42,13 @@
   </div>
 </template>
 <script>
+import PbDateRangeFilters from './PbDateRangeFilters.vue';
 import PbSelectableFilters from './PbSelectableFilters.vue';
-import DateRangeFilters from './PbDateRangeFilters.vue';
 
 export default {
   name: 'PbFilters',
   components: {
-    DateRangeFilters,
+    PbDateRangeFilters,
     PbSelectableFilters
   },
 };

@@ -3,31 +3,26 @@
     class="left w-full flex-1 flex-shrink-0"
     @submit.prevent="search(stringSearch)"
   >
-    <div class="flex flex-row items-end">
-      <div class="w-2/3 md:w-4/5 pr-6 flex flex-row items-end">
-        <div class="border-b border-gray-300 flex flex-row w-full items-center">
-          <div class="icon">
-            <img
-              src="/assets/icons/icon-search.svg"
-              width="22"
-              alt="Search"
-            >
-          </div>
-          <div class="input w-full pr-30">
-            <input
-              v-model="stringSearch"
-              class="w-full text-sm py-3 px-4 focus:outline-none"
-              type="search"
-              placeholder="Find a book"
-              data-cy="book-input-search"
-            >
-          </div>
+    <div class="flex flex-row items-end space-x-6">
+      <div
+        class="w-2/3 md:w-4/5 flex flex-row items-end input-wrapper"
+        data-cy="search-container"
+      >
+        <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
+          <search-icon class="h-6 w-6 text-gray-400" />
+          <input
+            v-model="stringSearch"
+            class="w-full border-0 text-sm py-3 px-4 focus:outline-none focus:ring-0"
+            type="search"
+            placeholder="Find a book"
+            data-cy="book-input-search"
+          >
         </div>
       </div>
       <div class="w-1/3 md:w-1/5">
         <button
           type="submit"
-          class="w-full py-3 text-sm rounded-full text-white bg-red-700"
+          class="w-full py-3 font-semibold rounded-full text-white bg-red-700"
           :disabled="stringSearch.length > 0 && (stringSearch.length < searchCharsLimit.min || stringSearch.length > searchCharsLimit.max)"
           data-cy="book-button-search"
         >
@@ -39,10 +34,15 @@
 </template>
 
 <script>
+import {SearchIcon} from '@vue-hero-icons/outline';
 import helpers from '../../store/helpers';
 import {scrollTo} from '../../utils/helpers';
+
 export default {
   name: 'PbSearchBox',
+  components: {
+  	SearchIcon,
+  },
   data() {
     return {
       stringSearch: '',

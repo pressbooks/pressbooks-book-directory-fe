@@ -34,7 +34,8 @@
     "cypress": "^7.1.0",
     "eslint": "^7.24.0",
     "eslint-plugin-vue": "^7.9.0",
-    "postcss": "^8.2.8",
+    "postcss": "^8.2.13",
+    "postcss-nested": "^5.0.5",
     "tailwindcss": "^2.1.1",
     "vite": "^2.2.0",
     "vite-plugin-vue2": "^1.4.4"

@@ -1,8 +1,6 @@
 <template>
-  <div class="flex mb-5">
-    <div class="tag flex bg-red-800 border leading-none border-red-900 mb-3 text-white px-4 py-2 uppercase rounded font-pbBold">
-      Recommended
-    </div>
+  <div class="inline-block bg-red-700 leading-none border border-red-900 text-white py-2 px-3 uppercase text-sm tracking-widest font-bold rounded mb-5">
+    Recommended
   </div>
 </template>
 

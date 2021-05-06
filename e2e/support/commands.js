@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('algoliaQueryRequest', (alias='algoliaQuery', waitMs = 500) => {
+Cypress.Commands.add('algoliaQueryRequest', (alias='algoliaQuery', waitMs = 700) => {
   cy.intercept('**/indexes/*/queries?*')
     .as(alias)
     .wait(waitMs); // wait the store and algolia's widgets processing time

@@ -1,14 +1,19 @@
 <template>
-  <header class="bg-white shadow-md">
-    <div class="container mx-auto px-8">
-      <nav class="py-2 md:py-2 flex justify-between items-center">
+  <header class="bg-white shadow">
+    <div class="container mx-auto px-4 sm:px-8">
+      <nav class="py-4 flex justify-between items-center space-x-4">
         <a href="#">
           <img
             src="/assets/logo-pressbooks-directory.svg"
             alt="Pressbooks Directory"
+            class="h-full w-auto"
           >
         </a>
-        <button class="border border-red-700 rounded-full px-8 py-3 text-red-700 text-sm">
+        <!-- focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:ring-opacity-75 -->
+        <button
+          class="border border-pb-red rounded-full px-8 py-3 text-pb-red text-sm border-2 font-bold"
+          @click="$store.commit('showTour')"
+        >
           Take the tour
         </button>
       </nav>

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <ul class="py-4 space-y-2">
+    <ul
+      class="py-4 space-y-1"
+      data-cy="book-meta"
+    >
       <meta-info
         v-if="hasAuthors"
         title="Author(s):"
@@ -27,13 +30,15 @@
         :text="item.languageName"
       />
     </ul>
-    <!-- eslint-disable vue/no-v-html -->
-    <p
-      v-if="hasDescription"
-      class="text leading-loose font-pbRegular line-clamp-6"
-      v-html="item.description"
-    />
-    <!-- eslint-enable vue/no-v-html -->
+    <div data-cy="book-description">
+      <!-- eslint-disable vue/no-v-html -->
+      <p
+        v-if="hasDescription"
+        class="leading-relaxed font-serif line-clamp-6"
+        v-html="item.description"
+      />
+      <!-- eslint-enable vue/no-v-html -->
+    </div>
   </div>
 </template>
 

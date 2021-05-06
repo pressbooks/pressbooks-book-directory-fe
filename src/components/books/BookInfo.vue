@@ -1,19 +1,20 @@
 <template>
-  <div>
-    <h2 class="leading-tight uppercase font-headings text-sm font-medium mb-2">
+  <div class="space-y-2 mb-2">
+    <h2 class="tracking-widest uppercase text-sm font-medium">
       {{ `${item.networkHost} | ${item.networkName}` }}
     </h2>
-    <h2 class="leading-tight text-red-800 text-xl font-headings font-semibold mb-2">
+    <h2 class="leading-tight text-xl font-semibold mb-1">
       <a
+        class="text-red-700"
         :href="item.url"
         target="_blank"
-        rel="noopener external"
+        rel="noopener"
         data-cy="book-title"
       >
         {{ item.name }}
       </a>
     </h2>
-    <p class="leading-tight font-headings mb-2">
+    <p class="leading-tight">
       <span data-cy="book-word-count">{{ item.wordCount }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB
     </p>
   </div>

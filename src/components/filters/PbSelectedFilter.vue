@@ -1,25 +1,28 @@
 <template>
   <div
-    class="tag flex flex-row items-center bg-gray-200 px-3 py-3 rounded-full mr-2 mb-2"
-    data-cy="selected-filters"
+    class="flex items-center bg-gray-200 py-1 px-2 rounded-full space-x-2 mr-2 mb-2"
+    data-cy="chip-filter"
   >
-    <div class="text text-sm leading-none">
+    <div class="text-sm">
       {{ name }}
     </div>
-    <div>
-      <button
-        class="text block ml-2"
-        @click.prevent="closeExcludeFilter(value)"
-      >
-        x
-      </button>
-    </div>
+    <button
+      class="flex items-center"
+      @click.prevent="closeExcludeFilter(value)"
+    >
+      <XCircleIcon class="h-4 w-4" />
+    </button>
   </div>
 </template>
 
 <script>
+import { XCircleIcon } from '@vue-hero-icons/outline';
+
 export default {
   name: 'PbSelectedFilter',
+  components: {
+  	XCircleIcon
+  },
   props: {
     name: {
       type: String,
