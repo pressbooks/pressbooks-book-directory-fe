@@ -1,5 +1,8 @@
 <template>
-  <div class="tag flex flex-row items-center bg-gray-200 px-3 py-3 rounded-full mr-2 mb-2">
+  <div
+    class="tag flex flex-row items-center bg-gray-200 px-3 py-3 rounded-full mr-2 mb-2"
+    data-cy="selected-filters"
+  >
     <div class="text text-sm leading-none">
       {{ name }}
     </div>

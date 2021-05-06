@@ -32,7 +32,7 @@ describe('Sort books by', () => {
             const sorted = _.sortBy(wordCounts).reverse();
 
             expect(wordCounts).to.deep.equal(sorted);
-        });
+          });
       });
     });
 
