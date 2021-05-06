@@ -3,9 +3,9 @@ describe('Clear Filters',()=>{
     beforeEach(()=>{
       cy.viewport(1280, 720);
 
-      cy.visit('/');
-
       cy.intercept('**/indexes/*/queries?*').as('algoliaRequest');
+
+      cy.visit('/');
 
       cy.wait('@algoliaRequest');
 
@@ -20,6 +20,8 @@ describe('Clear Filters',()=>{
     });
 
     it('Clear chip refinement',()=>{
+
+      cy.wait('@algoliaRequest');
 
       cy.url()
         .should('include','?license=CC%20BY');
@@ -36,6 +38,8 @@ describe('Clear Filters',()=>{
     });
 
     it('Clear all refinements',()=>{
+
+      cy.wait('@algoliaRequest');
 
       cy.url()
         .should('include','?license=CC%20BY');
