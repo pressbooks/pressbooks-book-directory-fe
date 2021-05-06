@@ -24,7 +24,7 @@ describe('Welcome header book and network counts', () => {
     });
 
     it('Does not change indexed amount after performing a search', function() {
-      cy.intercept('**/indexes/*/queries?*').as('searchResults');
+      cy.algoliaQueryRequest('searchResults');
 
       cy.get('@searchInput').type('math science');
       cy.get('@searchButton').click();

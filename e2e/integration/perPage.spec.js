@@ -3,9 +3,9 @@ describe('Books per page', () => {
     beforeEach(() => {
       cy.viewport(1280, 720);
 
-      cy.intercept('**/indexes/*/queries?*').as('listing');
-
       cy.visit('/');
+
+      cy.algoliaQueryRequest('listing');
     });
 
     it('Shows 10 books per page by default', () => {
@@ -16,7 +16,7 @@ describe('Books per page', () => {
 
     it('Changes the amount of books displayed when requested', () => {
       [20, 50].forEach(length => {
-        cy.intercept('**/indexes/*/queries?*').as(`listing${length}`);
+        cy.algoliaQueryRequest(`listing${length}`);
 
         cy.get('[data-cy=books-per-page] .vs__dropdown-toggle').click();
 

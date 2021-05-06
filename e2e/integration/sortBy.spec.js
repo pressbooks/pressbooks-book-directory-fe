@@ -12,7 +12,7 @@ describe('Sort books by', () => {
         .find('.vs__dropdown-toggle')
         .click();
 
-      cy.intercept('**/indexes/*/queries?*').as('sorting');
+      cy.algoliaQueryRequest('sorting');
     });
 
     it('Sorts by word count in descending order', () => {

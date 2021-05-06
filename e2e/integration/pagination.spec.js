@@ -13,7 +13,7 @@ describe('Pagination', () => {
       cy.get('article[data-cy="filter"]:first-child').as('firstAccordionOption');
       cy.get('@firstAccordionOption').find('[data-cy="filter-option"]:nth-of-type(7) button[data-cy="filter-include-button"]').as('publicDomainFilter');
 
-      cy.intercept('**/indexes/*/queries?*').as('algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
     });
 
     it('Render next page books after clicking a page', () => {
