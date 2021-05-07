@@ -47,6 +47,10 @@
         field="wordCount"
       />
       <pb-numeric-filters
+        title="H5P Activities"
+        field="h5pActivities"
+      />
+      <pb-numeric-filters
         title="Storage"
         field="storageSize"
       />
