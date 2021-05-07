@@ -61,11 +61,6 @@ export default {
       excludedChecked: false,
       sExpanded: false,
       excluded: false,
-      stringSearch: '',
-      steps: 5,
-      limited: 100,
-      max: 5000,
-      auxItems: [],
       alias: this.$store.state.SClient.allowedFilters[this.field].alias,
       empty: this.$store.state.SClient.allowedFilters[this.field].empty,
       emptyFieldCount: 0,
@@ -86,49 +81,12 @@ export default {
           }
           return true;
         }
-        if (this.filterApplied && this.stringSearch.length > 0) {
-          this.searchForItems();
-        }
+
         this.filterApplied = false;
       }
     },
-    '$store.state.SClient.filtersExcluded': {
-      deep: true,
-      handler() {
-        this.itemsFiltered = typeof(this.$store.state.SClient.filtersExcluded[this.field]) !== 'undefined' && this.$store.state.SClient.filtersExcluded[this.field].length > 0;
-        if (!this.itemsFiltered) {
-          this.stringSearch = '';
-        }
-      }
-    }
   },
   methods: {
-    searchForItems() {
-      if (this.auxItems.length === 0) {
-        this.auxItems = [...this.$store.state.stats.filters[this.field]];
-      }
-      if (this.stringSearch.length > 0 && this.$store.state.stats.filters[this.field] !== undefined) {
-        if (this.auxItems.length > 0) {
-          this.$store.state.stats.filters[this.field] = [...this.auxItems];
-        }
-        let str = this.stringSearch;
-        let find = this.$store.state.stats.filters[this.field].filter(
-          v => v.facet.toLowerCase().search(str.toLowerCase()) >= 0
-        );
-        this.$store.state.stats.filters[this.field] = find;
-      } else if (this.auxItems.length > 0 && this.stringSearch.length === 0) {
-        this.$store.state.stats.filters[this.field] = [...this.auxItems];
-      }
-    },
-    showMore() {
-      this.max = this.$store.state.stats.filters[this.field].length;
-      let l = this.limited + this.steps;
-      this.limited = (l < this.max) ? l : this.max;
-    },
-    showLess() {
-      let l = this.limited - this.steps;
-      this.limited = (l > 0) ? l : 1;
-    },
     wasFiltered(value, exclude) {
       let field = this.field.slice(0);
       if (value === 'empty') {
@@ -140,7 +98,6 @@ export default {
     clearFilters() {
       let query = {...this.$route.query};
       delete query[this.alias];
-      this.stringSearch = '';
       this.$router.replace({ query });
     },
     removeFilter(itemValue) {

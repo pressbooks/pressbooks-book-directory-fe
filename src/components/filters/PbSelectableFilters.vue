@@ -17,7 +17,6 @@
           type="text"
           class="w-full border-0 text-sm py-2 px-3 focus:outline-none focus:ring-0"
           :placeholder="`Search ${title}`"
-          @input="searchForItems"
         >
       </div>
       <div
@@ -70,55 +69,26 @@ export default {
   },
   data() {
     return {
-      cache: [],
       search: '',
     };
   },
   computed: {
     items() {
-      if (this.field === 'about') {
-        console.log(this.storeItems());
-      }
-      const items = this.storeItems() || [];
+      const items = this.$store.state.stats.filters[this.field] || [];
 
-      return items.slice(0, this.limit);
+      if (this.searchIsEmpty()) {
+        return items.slice(0, this.limit);
+      }
+
+      const term = this.search.toLowerCase();
+      const search = (item) => item.facet.toLowerCase().search(term) !== -1;
+
+      return items.filter(search).slice(0, this.limit);
     }
   },
   methods: {
-    cacheIsEmpty() {
-      return this.cache.length === 0;
-    },
     searchIsEmpty() {
       return this.search === '';
-    },
-    storeItems() {
-      return this.$store.getters.filters(this.field);
-    },
-    updateStore(items) {
-      this.$store.commit('updateFacetFilter', {
-        field: this.field,
-        value: items
-      });
-    },
-    searchForItems() {
-      if (this.cacheIsEmpty()) {
-        this.cache = [...this.storeItems()];
-      }
-
-      if (!this.searchIsEmpty() && this.storeItems() !== undefined) {
-        const term = this.search.toLowerCase();
-        const items = this.cacheIsEmpty() ? this.storeItems() : this.cache;
-
-        const filtered = items.filter(
-          item => item.facet.toLowerCase().search(term) >= 0
-        );
-
-        return this.updateStore(filtered);
-      }
-
-      if (!this.cacheIsEmpty() && this.searchIsEmpty()) {
-        this.updateStore(this.cache);
-      }
     },
   }
 };
