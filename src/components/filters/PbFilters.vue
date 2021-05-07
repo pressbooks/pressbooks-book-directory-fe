@@ -1,7 +1,7 @@
 <template>
   <div class="w-full md:w-60 lg:w-72">
-    <h2 class="font-semibold text-xl mb-8 md:mb-4">
-      Filters:
+    <h2 class="font-semibold text-2xl mb-4 md:mb-4">
+      Filters
     </h2>
     <div class="w-full border border-gray-200 shadow divide-y divide-gray-200">
       <pb-selectable-filters
@@ -17,6 +17,12 @@
         title="Network"
         field="networkName"
         :searchable="true"
+      />
+      <pb-selectable-filters
+        title="Collection"
+        field="collections"
+        :searchable="false"
+        data-cy="collections-filter"
       />
       <pb-date-range-filters
         title="Last Updated"

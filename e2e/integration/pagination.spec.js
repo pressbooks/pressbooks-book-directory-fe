@@ -14,8 +14,8 @@ describe('Pagination', () => {
       cy.get('@firstAccordionOption').find('[data-cy="filter-option"]:nth-of-type(7) button[data-cy="filter-include-button"]').as('publicDomainFilter');
 
       cy.get('article[data-cy="filter"]').should('have.length.above',1);
+      cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.intercept('**/indexes/*/queries?*').as('algoliaRequest');
     });
 
     it('Render next page books after clicking a page', () => {
@@ -23,7 +23,7 @@ describe('Pagination', () => {
       cy.get('@firstBookTitle').contains('Prior Learning Portfolio Development');
       cy.get('@firstPageLink').find('a').should('have.class','font-bold');
 
-      cy.get('@firstPageLink').next().click();
+      cy.get('@firstPageLink').next().click({multiple:true});
 
       cy.wait('@algoliaRequest');
 
@@ -44,13 +44,13 @@ describe('Pagination', () => {
 
       cy.get('@firstBookTitle').contains('Fundamentals of Plant Genebanking');
 
-      cy.get('ul[data-cy="paginator"] [data-cy="paginator-link"]').should('have.length', 3);
+      cy.get('ul[data-cy="paginator"]').eq(0).find('[data-cy="paginator-link"]').should('have.length', 3);
 
     });
 
     it('Reset current pagination when a new search is performed',()=>{
 
-      cy.get('@firstPageLink').next().next().click();
+      cy.get('@firstPageLink').next().next().click({multiple:true});
 
       cy.wait('@algoliaRequest');
 

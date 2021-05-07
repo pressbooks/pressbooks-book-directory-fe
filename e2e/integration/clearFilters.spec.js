@@ -3,11 +3,9 @@ describe('Clear Filters',()=>{
     beforeEach(()=>{
       cy.viewport(1280, 720);
 
-      cy.intercept('**/indexes/*/queries?*').as('algoliaRequest');
-
       cy.visit('/');
 
-      cy.wait('@algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('article[data-cy="filter"]').should('have.length.above',1);
 

@@ -11,7 +11,7 @@ describe('Search', () => {
 
     it('Search for specific book', () => {
 
-      cy.intercept('**/indexes/*/queries?*').as('searchResults');
+      cy.algoliaQueryRequest('searchResults');
 
       cy.get('@inputSearch').type('math science');
       cy.get('@buttonSearch').click();

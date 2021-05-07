@@ -3,15 +3,13 @@ describe('Books per page', () => {
     beforeEach(() => {
       cy.viewport(1280, 720);
 
-      cy.intercept('**/indexes/*/queries?*').as('listing');
-
       cy.visit('/');
+
+      cy.algoliaQueryRequest('listing');
     });
 
     it('Shows 10 books per page by default', () => {
-      cy.wait('@listing').then(() => {
-        cy.get('[data-cy=book-card]').should('have.length', 10);
-      });
+      cy.get('[data-cy=book-card]').should('have.length', 10);
     });
 
     it('Changes the amount of books displayed when requested', () => {
@@ -25,7 +23,7 @@ describe('Books per page', () => {
         cy.wait(`@listing${length}`).then(() => {
           cy.get('[data-cy=book-card]').should('have.length', length);
         });
-      })
+      });
     });
   });
 });

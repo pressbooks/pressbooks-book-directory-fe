@@ -1,10 +1,8 @@
 # Pressbooks Directory (Front End)
 
 ## Environment variables setup
-Create an .env.local file and add the following keys with their respective values:
-VITE_ALGOLIA_APP_ID=  
-VITE_APP_ALGOLIA_API_READ_KEY=  
-VITE_APP_ALGOLIA_INDEX=  
+Create an `.env.local` file using the `.env.example` file: `cp .env.example .env.local`  
+and set the values for those variables for your local environments.
 
 ## Project setup
 
@@ -72,6 +70,8 @@ Tests are located in `e2e/integration` folder.
    ```
 1. The local server should already be running: `npm run dev` before tests are run locally.
 1. Tests can be run locally with the following command:  `npm run test`. Cypress app will open, and you would choose in which browser do you want to run your tests
+1. You can run E2E tests on headless mode by running: `npm run test:ci`
+1. You also can run E2E tests on BrowserStack locally by running: `npm run test:stack` (make sure you have been defined `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY` env variables. See next section for more details).
 
 #### Run E2E tests on BrowserStack
 
