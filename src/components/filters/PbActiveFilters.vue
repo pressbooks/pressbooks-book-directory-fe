@@ -1,6 +1,6 @@
 <template>
   <div data-cy="active-filters">
-    <div class="font-semibold text-lg mb-3">
+    <div class="font-semibold text-lg mb-1">
       Active Filters
     </div>
     <div

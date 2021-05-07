@@ -4,8 +4,8 @@
     class="w-full flex-1"
   >
     <pb-stats />
-    <pb-pagination />
     <pb-active-filters />
+    <pb-pagination />
     <books />
     <pb-pagination />
   </div>
