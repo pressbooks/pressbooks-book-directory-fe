@@ -55,29 +55,34 @@ export default {
       state.numberOfRecommendedBooksIndexed = numberOfRecommended;
     },
     setFilters(state, response) {
-      let fs = {};
-      for (let facet in response.facets) {
-        if (state.keepFacets.indexOf(facet) < 0) {
-          fs[facet] = [];
-          for (const f in response.facets[facet]) {
-            fs[facet].push({
-              count: response.facets[facet][f],
-              facet: f
-            });
-          }
-        } else {
-          fs[facet] = [...state.filters[facet]];
+      let filters = {};
+
+      for(let facetName of Object.keys(response.facets)) {
+        if (state.keepFacets.includes(facetName)) {
+          filters[facetName] = [...state.filters[facetName]];
+
+          continue;
         }
+
+        const facetItems = response.facets[facetName];
+
+        filters[facetName] = Object.keys(facetItems).map((item) => {
+          return {
+            count: facetItems[item],
+            facet: item,
+          };
+        });
       }
-      for (let facet in state.filters) {
-        if (typeof fs[facet] === 'undefined' && state.keepFacets.indexOf(facet) >= 0) {
-          fs[facet] = [...state.filters[facet]];
+
+      for (let facetName in state.filters) {
+        if (typeof  filters[facetName] !== 'undefined' || !state.keepFacets.includes(facetName)) {
+          continue;
         }
+
+        filters[facetName] = [...state.filters[facetName]];
       }
-      state.filters = fs;
-    },
-    updateFacetFilter(state, { field, value }) {
-      state.filters[field] = [...value];
+
+      state.filters = {...filters};
     },
     // Given a facet and substring facet value, search and return all possible values //
     getSimilarFacetValues(state, facetValue) {
@@ -115,10 +120,5 @@ export default {
         }
       });
     }
-  },
-  getters: {
-    filters: (state) => (field) => {
-      return state.filters[field];
-    },
   }
 };
