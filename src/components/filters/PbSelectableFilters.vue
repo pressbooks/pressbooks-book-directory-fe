@@ -9,6 +9,7 @@
       <div
         v-if="searchable"
         class="px-4 flex items-center w-full"
+        data-cy="filter-search"
       >
         <search-icon class="h-5 w-5 text-gray-400" />
         <input
