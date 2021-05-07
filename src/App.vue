@@ -13,7 +13,7 @@
     <pb-welcome-header />
     <pb-collections />
     <section class="section-books bg-white">
-      <div class="content container mx-auto px-8 py-4">
+      <div class="content container mx-auto px-8">
         <div class="py-8">
           <pb-search-and-sort-box />
         </div>

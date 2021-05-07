@@ -1,13 +1,13 @@
 <template>
   <section class="section-cover">
-    <div class="container mx-auto w-full md:w-3/5 pt-12 px-8">
-      <h1 class="section-title text-5xl mb-6 font-bold text-center">
+    <div class="container mx-auto w-full md:w-2/3 pt-8 px-8">
+      <h1 class="section-title text-5xl mb-8 font-bold text-center">
         Welcome to Pressbooks Directory
       </h1>
 
       <p class="font-serif text-gray-700 leading-7 text-xl">
         This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed }}</strong> Pressbooks
-        networks. Learn to use the Directory by taking the self-guided tour in the top nav bar or reading 
+        networks. Learn to use the Directory by taking the self-guided tour in the top nav bar or reading
         <a
           :href="guide"
           class="pb-dark-blue underline"
@@ -20,7 +20,7 @@
         Pressbooks Directory is more powerful when paired with a PressbooksEDU Authoring & Editing Platform, which allows you to clone, revise, remix, and redistribute all of the openly licensed content found through this Directory.
       </p>
 
-      <div class="flex items-center justify-center pt-6 mx-auto">
+      <div class="flex items-center justify-center mt-4 mx-auto">
         <a
           :href="site"
           target="_blank"
