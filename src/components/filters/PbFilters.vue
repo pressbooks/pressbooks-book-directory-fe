@@ -38,16 +38,26 @@
         field="publisherName"
         :searchable="true"
       />
+      <pb-numeric-filters
+        title="Word Count"
+        field="wordCount"
+      />
+      <pb-numeric-filters
+        title="Storage"
+        field="storageSize"
+      />
     </div>
   </div>
 </template>
 <script>
 import PbDateRangeFilters from './PbDateRangeFilters.vue';
 import PbSelectableFilters from './PbSelectableFilters.vue';
+import PbNumericFilters from './PbNumericFilters.vue';
 
 export default {
   name: 'PbFilters',
   components: {
+    PbNumericFilters,
     PbDateRangeFilters,
     PbSelectableFilters
   },
