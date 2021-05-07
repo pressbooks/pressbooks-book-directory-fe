@@ -131,6 +131,12 @@ export default {
     },
     wasFiltered(value, exclude) {
       let field = this.field.slice(0);
+      if (value === true) {
+        // Boolean
+        return typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined' &&
+            this.$store.state.SClient.filtersExcluded[field][0].value !== exclude.toString();
+      }
+
       if (value === 'empty') {
         value = false;
       }
@@ -167,8 +173,17 @@ export default {
         return this.removeFilter(itemFacet);
       }
       this.filterApplied = true;
-      let query = {...this.$route.query}, value;
-      value = exclude ? '-' + itemFacet : itemFacet;
+      let query = {...this.$route.query}, value = itemFacet;
+      if (exclude) {
+        if (
+          typeof itemValue.type !== 'undefined' &&
+          itemValue.type === 'boolean'
+        ) {
+          value = false;
+        } else {
+          value = '-' + itemFacet;
+        }
+      }
       if (typeof(query[this.alias]) === 'undefined') {
         query[this.alias] = value.toString();
       } else {

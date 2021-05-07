@@ -1,5 +1,5 @@
 <template>
-  <pb-accordion>
+  <pb-accordion :open="typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined'">
     <template #title>
       <span class="title font-semibold">
         {{ title }}
@@ -97,6 +97,8 @@ export default {
           filters[this.field].length > 0
         ) {
           this.itemsFiltered = true;
+          this.number.min = 0;
+          this.number.max = 0;
           for (let i = 0; i < filters[this.field].length; i++) {
             if (filters[this.field][i].operator === '>=') {
               this.number.min = filters[this.field][i].value;
