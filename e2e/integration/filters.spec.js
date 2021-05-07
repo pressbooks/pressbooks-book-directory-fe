@@ -1,4 +1,4 @@
-describe('Filters',()=>{
+describe('Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
       cy.viewport(1280, 720)
