@@ -1,9 +1,9 @@
 <template>
   <div class="pagination">
     <div
-      class="container mx-auto py-16"
+      class="container mx-auto my-4"
     >
-      <ais-pagination :total-pages="10">
+      <ais-pagination :total-pages="500">
         <ul
           slot-scope="{
             currentRefinement,
@@ -13,7 +13,7 @@
             refine,
             createURL
           }"
-          class="flex flex-row w-full items-center md:w-1/2 justify-center text-gray-600"
+          class="flex flex-row w-full items-center justify-center text-gray-600"
           data-cy="paginator"
           @click="scrollToBooksList"
         >
