@@ -1,6 +1,6 @@
 <template>
   <section
-    class="section-cover"
+    class="bg-pb-blue"
     data-cy="collection-section"
   >
     <div class="container mx-auto p-8">

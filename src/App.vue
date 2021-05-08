@@ -12,12 +12,12 @@
     <pb-navbar />
     <pb-welcome-header />
     <pb-collections />
-    <section class="section-books bg-white">
+    <section>
       <div class="content container mx-auto px-8">
-        <div class="py-8">
+        <div class="py-8 border-b border-grey-300">
           <pb-search-and-sort-box />
         </div>
-        <div class="flex flex-col md:flex-row space-y-10 md:space-y-0 md:space-x-10">
+        <div class="flex flex-col mt-8 md:flex-row space-y-10 md:space-y-0 md:space-x-10">
           <pb-filters />
           <pb-paginated-books />
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full md:w-60 lg:w-72">
-    <h2 class="font-semibold text-2xl mb-4 md:mb-4">
+    <h2 class="font-semibold text-2xl mb-4">
       Filters
     </h2>
     <div class="w-full border border-gray-200 shadow divide-y divide-gray-200">
