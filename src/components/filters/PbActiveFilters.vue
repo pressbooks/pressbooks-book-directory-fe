@@ -9,11 +9,11 @@
     >
       <div class="active-filters flex flex-row flex-wrap w-full md:w-4/5">
         <template
-          v-for="(iv) in $store.state.SClient.filtersExcluded"
+          v-for="(iv, keyFiltersExcluded) in $store.state.SClient.filtersExcluded"
         >
           <pb-selected-filter
-            v-for="value in iv"
-            :key="value.value"
+            v-for="(value, keyFiltersApplied) in iv"
+            :key="keyFiltersExcluded.toString() + keyFiltersApplied.toString()"
             :name="getLabel(value)"
             :value="value"
             :attributes-allowed="attrAllowed"

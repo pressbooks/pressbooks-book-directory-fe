@@ -37,7 +37,7 @@
               type="number"
               class="outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
               name="custom-input-number"
-              :min="number.min"
+              :min="0"
             />
           </div>
           <t-button
@@ -118,9 +118,6 @@ export default {
     this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
   },
   methods: {
-    uppercase(t) {
-      return t.toUpperCase();
-    },
     clearFilters() {
       this.number.min = 0;
       this.number.max = 0;
