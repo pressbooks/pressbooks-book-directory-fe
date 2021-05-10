@@ -167,7 +167,7 @@ export default {
         return this.removeFilter(itemFacet);
       }
       this.filterApplied = true;
-      let query = {...this.$route.query}, value = itemFacet;
+      let query = {...this.$route.query}, value;
       value = exclude ? '-' + itemFacet : itemFacet;
       if (typeof(query[this.alias]) === 'undefined') {
         query[this.alias] = value.toString();
