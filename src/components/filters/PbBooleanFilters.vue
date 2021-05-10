@@ -1,5 +1,5 @@
 <template>
-  <pb-accordion :open="typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined'">
+  <pb-accordion :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'">
     <template #title>
       <span class="title font-semibold">
         {{ title }}

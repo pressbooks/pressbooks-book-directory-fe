@@ -1,5 +1,5 @@
 <template>
-  <pb-accordion :open="typeof(this.$store.state.SClient.filtersExcluded[field]) !== 'undefined'">
+  <pb-accordion :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'">
     <template #title>
       <span class="title font-semibold">
         {{ title }}
@@ -22,7 +22,7 @@
               class="outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
               name="custom-input-number"
               :min="0"
-            />
+            >
           </div>
           <label
             :for="field + '-max'"
@@ -38,7 +38,7 @@
               class="outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
               name="custom-input-number"
               :min="0"
-            />
+            >
           </div>
           <t-button
             type="submit"

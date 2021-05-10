@@ -1,7 +1,7 @@
 <template>
   <pb-accordion
     v-if="typeof $store.state.stats.filters[field] !== 'undefined'"
-    :open="typeof this.$store.state.SClient.filtersExcluded[field] !== 'undefined'"
+    :open="typeof $store.state.SClient.filtersExcluded[field] !== 'undefined'"
   >
     <template #title>
       <span class="title font-semibold">
