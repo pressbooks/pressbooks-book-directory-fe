@@ -55,32 +55,30 @@ export default {
       state.numberOfRecommendedBooksIndexed = numberOfRecommended;
     },
     setFilters(state, response) {
-      let filters = {};
-
-      for(let facetName of Object.keys(response.facets)) {
+      let filters = Object.keys(response.facets).reduce((filters, facetName) => {
         if (state.keepFacets.includes(facetName)) {
           filters[facetName] = [...state.filters[facetName]];
 
-          continue;
+          return filters;
         }
 
-        const facetItems = response.facets[facetName];
+        let facetItems = response.facets[facetName];
 
-        filters[facetName] = Object.keys(facetItems).map((item) => {
-          return {
-            count: facetItems[item],
-            facet: item,
-          };
-        });
-      }
+        filters[facetName] = Object.keys(facetItems).map((item) => ({
+          count: facetItems[item],
+          facet: item,
+        }));
 
-      for (let facetName in state.filters) {
-        if (typeof  filters[facetName] !== 'undefined' || !state.keepFacets.includes(facetName)) {
-          continue;
+        return filters;
+      }, {});
+
+      Object.keys(state.filters).forEach((facetName) => {
+        if (typeof filters[facetName] !== 'undefined' || !state.keepFacets.includes(facetName)) {
+          return;
         }
 
         filters[facetName] = [...state.filters[facetName]];
-      }
+      });
 
       state.filters = {...filters};
     },
