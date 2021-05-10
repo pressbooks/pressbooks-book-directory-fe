@@ -4,6 +4,10 @@
       Filters
     </h2>
     <div class="w-full border border-gray-200 shadow divide-y divide-gray-200">
+      <pb-boolean-filters
+        title="Recommended"
+        field="isRecommended"
+      />
       <pb-selectable-filters
         title="License"
         field="licenseCode"
@@ -38,16 +42,32 @@
         field="publisherName"
         :searchable="true"
       />
+      <pb-numeric-filters
+        title="Word Count"
+        field="wordCount"
+      />
+      <pb-numeric-filters
+        title="H5P Activities"
+        field="h5pActivities"
+      />
+      <pb-numeric-filters
+        title="Storage"
+        field="storageSize"
+      />
     </div>
   </div>
 </template>
 <script>
 import PbDateRangeFilters from './PbDateRangeFilters.vue';
 import PbSelectableFilters from './PbSelectableFilters.vue';
+import PbNumericFilters from './PbNumericFilters.vue';
+import PbBooleanFilters from './PbBooleanFilters.vue';
 
 export default {
   name: 'PbFilters',
   components: {
+    PbBooleanFilters,
+    PbNumericFilters,
     PbDateRangeFilters,
     PbSelectableFilters
   },
