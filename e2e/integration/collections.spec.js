@@ -45,7 +45,7 @@ describe('Filter collections', () => {
         .click();
 
       cy.get('@collectionsFilter')
-        .find('[data-cy=filter-option]:first-child').as('nursingCollectionFilter')
+        .find('[data-cy=filter-option]').first().as('nursingCollectionFilter')
         .get('@nursingCollectionFilter')
         .contains('Nursing/Healthcare')
         .get('@nursingCollectionFilter')

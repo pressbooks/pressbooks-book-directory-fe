@@ -1,26 +1,21 @@
-describe('Clear Filters',()=>{
-  context('Desktop Resolution', () =>{
-    beforeEach(()=>{
-      cy.viewport(1280, 720);
+describe('Clear Filters',() => {
+  context('Desktop Resolution', () => {
+    beforeEach(() => {
+      cy.viewport(1280, 720)
+        .visit('/')
+        .algoliaQueryRequest('algoliaRequest');
 
-      cy.visit('/');
+      cy.get('article[data-cy=license-filter]').as('licenseAccordion');
 
-      cy.algoliaQueryRequest('algoliaRequest');
+      cy.get('@licenseAccordion').click();
 
-      cy.get('article[data-cy="filter"]').should('have.length.above',1);
-
-      cy.get('article[data-cy="filter"]:first-child').as('firstAccordionOption');
-
-      cy.get('@firstAccordionOption').click();
-
-      [1,2,3].forEach((option)=>{
-        cy.get('@firstAccordionOption').find('[data-cy="filter-option"]:nth-of-type('+option+') button[data-cy="filter-include-button"]').click();
+      [1, 2, 3].forEach((option) => {
+        cy.get('@licenseAccordion').find(`[data-cy=filter-option]:nth-of-type(${option}) button[data-cy=filter-include-button]`).click();
       });
 
     });
 
-    it('Clear chip refinement',()=>{
-
+    it('Clear chip refinement', () => {
       cy.wait('@algoliaRequest');
 
       cy.url()
@@ -37,8 +32,7 @@ describe('Clear Filters',()=>{
 
     });
 
-    it('Clear all refinements',()=>{
-
+    it('Clear all refinements', () => {
       cy.wait('@algoliaRequest');
 
       cy.url()
@@ -52,8 +46,6 @@ describe('Clear Filters',()=>{
 
       cy.url()
         .should('not.contain','?');
-
     });
-
   });
 });

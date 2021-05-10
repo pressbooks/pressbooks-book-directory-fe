@@ -5,10 +5,8 @@ describe('Filters',() => {
         .visit('/')
         .algoliaQueryRequest('algoliaRequest');
 
-      cy.get('article[data-cy="filter"]').should('have.length.above', 1);
-
-      cy.get('article[data-cy=filter]:first-child').as('licenseAccordion')
-        .get('article[data-cy=filter]:nth-child(2)').as('subjectAccordion');
+      cy.get('article[data-cy=license-filter]').as('licenseAccordion')
+        .get('article[data-cy=subject-filter]').as('subjectAccordion');
 
       cy.get('@licenseAccordion').click()
         .get('@subjectAccordion').click();
