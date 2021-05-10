@@ -13,7 +13,7 @@
             refine,
             createURL
           }"
-          class="flex flex-row w-full items-center justify-center text-gray-600"
+          class="flex flex-row w-full items-center justify-center"
           data-cy="paginator"
           @click="scrollToBooksList"
         >

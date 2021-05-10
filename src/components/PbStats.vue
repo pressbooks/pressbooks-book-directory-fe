@@ -3,7 +3,7 @@
     <template
       #default="{ nbHits }"
     >
-      <div class="font-semibold text-2xl">
+      <div class="font-semibold text-2xl mb-6">
         Results:  {{ nbHits }} books
       </div>
     </template>
