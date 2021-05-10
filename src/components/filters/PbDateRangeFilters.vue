@@ -27,6 +27,7 @@
         <t-button
           :disabled="disabled"
           class="w-full"
+          :data-cy="`apply-filter-${field}`"
           @click="filterByDateRange"
         >
           Go
