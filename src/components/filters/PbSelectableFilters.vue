@@ -9,6 +9,7 @@
       <div
         v-if="searchable"
         class="px-4 flex items-center w-full"
+        data-cy="filter-search"
       >
         <search-icon class="h-5 w-5 text-gray-400" />
         <input
@@ -17,7 +18,6 @@
           type="text"
           class="w-full border-0 text-sm py-2 px-3 focus:outline-none focus:ring-0"
           :placeholder="`Search ${title}`"
-          @input="searchForItems"
         >
       </div>
       <div
@@ -70,57 +70,26 @@ export default {
   },
   data() {
     return {
-      cache: [],
       search: '',
     };
   },
   computed: {
     items() {
-      return this.$store.state.stats.filters[this.field].slice(0, this.limit);
-    }
-  },
-  watch: {
-    '$store.state.stats.filters': {
-      handler() {
-        this.searchForItems();
+      const items = this.$store.state.stats.filters[this.field] || [];
+
+      if (this.searchIsEmpty()) {
+        return items.slice(0, this.limit);
       }
+
+      const term = this.search.toLowerCase();
+      const search = (item) => item.facet.toLowerCase().search(term) !== -1;
+
+      return items.filter(search).slice(0, this.limit);
     }
   },
   methods: {
-    cacheIsEmpty() {
-      return this.cache.length === 0;
-    },
     searchIsEmpty() {
       return this.search === '';
-    },
-    storeItems() {
-      return this.$store.state.stats.filters[this.field];
-    },
-    updateStore(items) {
-      this.$store.commit('updateFacetFilter', {
-        field: this.field,
-        value: items
-      });
-    },
-    searchForItems() {
-      if (this.cacheIsEmpty()) {
-        this.cache = [...this.storeItems()];
-      }
-
-      if (!this.searchIsEmpty() && this.storeItems() !== undefined) {
-        const term = this.search.toLowerCase();
-        const items = this.cacheIsEmpty() ? this.storeItems() : this.cache;
-
-        const filtered = items.filter(
-          item => item.facet.toLowerCase().search(term) >= 0
-        );
-
-        return this.updateStore(filtered);
-      }
-
-      if (!this.cacheIsEmpty() && this.searchIsEmpty()) {
-        this.updateStore(this.cache);
-      }
     },
   }
 };
