@@ -152,7 +152,7 @@ export default {
               element: document.querySelector('.ais-Stats'),
               position: 'bottom'
             }, {
-              title: 'Changing Results Display',
+              title: 'Changing results display',
               intro: `
         <p>You can change the number of results displayed per page and the method used to sort your results using these dropdowns.</p>
          `,
