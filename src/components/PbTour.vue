@@ -154,7 +154,7 @@ export default {
             }, {
               title: 'Changing Results Display',
               intro: `
-        <p>You can change the number of results shown per page [10, 20, 50] and the method used to sort your results.</p>
+        <p>You can change the number of results displayed per page and the method used to sort your results using these dropdowns.</p>
          `,
               element: document.querySelector('div[data-cy="top-filters"]'),
               position: 'bottom'
