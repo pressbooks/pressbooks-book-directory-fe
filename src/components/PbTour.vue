@@ -65,7 +65,7 @@ export default {
       this.searchInput.value = '';
     };
 
-    const filterUsedForTour = document.querySelector('article[data-cy="filter"]:first-child button');
+    const filterUsedForTour = document.querySelector('article[data-cy="license-filter"] button');
 
     const typing = (text, current = 0) => {
       this.searchInput.value += text[current];
@@ -164,7 +164,7 @@ export default {
               intro: `
         <p>Filters allow you to perform faceted search to narrow down your results by license, subject, word count, and more. Faceted searching can be combined with text search or used separately.</p>
          `,
-              element: document.querySelector('article[data-cy="filter"]:nth-of-type(1)'),
+              element: document.querySelector('article[data-cy="license-filter"]'),
               position: 'right'
             },
             {
@@ -173,7 +173,7 @@ export default {
         <p>Click the checkmark to apply that filter and see only those results, or click the X to omit those results. Click the same option again to remove that filter.</p>
         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
          `,
-              element: document.querySelector('article[data-cy="filter"]:nth-of-type(1)'),
+              element: document.querySelector('article[data-cy="license-filter"]'),
               position: 'right'
             },
             {
@@ -276,7 +276,7 @@ export default {
 
           [1,2,3].forEach(function(item, index){
             setTimeout(()=>{
-              const filter = document.querySelector('article[data-cy="filter"]:nth-of-type(1) [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
+              const filter = document.querySelector('article[data-cy="license-filter"] [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
               filter.click();
             }, index * 1000);
           });
