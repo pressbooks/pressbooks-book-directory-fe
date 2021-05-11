@@ -116,7 +116,7 @@ export default {
       return this.displayAmount < this.items.length;
     },
     showLessVisible() {
-      if (this.displayAmount <= this.minDisplayAmount) {
+      if (this.displayItems.length < this.minDisplayAmount) {
         return false;
       }
 
