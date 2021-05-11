@@ -11,6 +11,7 @@
           <t-datepicker
             v-model="dates.start"
             placeholder="From date"
+            :max-date="dates.to"
             :data-cy="`from-date-${field}`"
           />
         </div>
@@ -18,6 +19,7 @@
           <t-datepicker
             v-model="dates.to"
             placeholder="To date"
+            :min-date="dates.start"
             :data-cy="`to-date-${field}`"
           />
         </div>
@@ -25,8 +27,8 @@
 
       <div class="p-2">
         <t-button
-          :disabled="disabled"
           class="w-full"
+          :disabled="disabled"
           :data-cy="`apply-filter-${field}`"
           @click="filterByDateRange"
         >
@@ -38,7 +40,7 @@
 </template>
 
 <script>
-import { format, fromUnixTime, getUnixTime, isValid, parse } from 'date-fns';
+import { format, fromUnixTime, getUnixTime, isBefore, isValid, parse } from 'date-fns';
 import PbAccordion from '../PbAccordion.vue';
 
 export default {
@@ -59,8 +61,8 @@ export default {
   data() {
     return {
       dates: {
-        start: '',
-        to: '',
+        start: null,
+        to: null,
       },
       opened: false,
     };
@@ -70,7 +72,7 @@ export default {
       return this.$store.state.SClient.allowedFilters[this.field].alias;
     },
     disabled() {
-      return this.dates.start === '' && this.dates.to === '';
+      return !this.dates.start && !this.dates.to;
     }
   },
   watch: {
@@ -93,16 +95,18 @@ export default {
 
         if (startRegex.test(queryString)) {
           [, start] = queryString.match(startRegex);
+          start = fromUnixTime(start);
         }
 
         if (toRegex.test(queryString)) {
           [, to] = queryString.match(toRegex);
+          to = fromUnixTime(to);
         }
 
         this.opened = true;
         this.dates = {
-          start: start ? format(fromUnixTime(start), 'yyyy-MM-dd'): '',
-          to: to ? format(fromUnixTime(to), 'yyyy-MM-dd') : '',
+          start: isValid(start) ? format(start, 'yyyy-MM-dd'): null,
+          to: isValid(to) ? format(to, 'yyyy-MM-dd') : null,
         };
       }
     }
@@ -111,8 +115,8 @@ export default {
     reset() {
       this.opened = false;
       this.dates = {
-        start: '',
-        to: '',
+        start: null,
+        to: null,
       };
     },
     buildQueryString() {
@@ -124,6 +128,10 @@ export default {
         start: getUnixTime(start),
         to: getUnixTime(to) - to.getTimezoneOffset() * 60
       };
+
+      if (isBefore(to, start)) {
+        return;
+      }
 
       if (isValid(start)) {
         queryString = `>=${timestamps.start}`;
