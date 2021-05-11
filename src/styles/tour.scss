@@ -22,9 +22,7 @@
     }
 
     a {
-      @apply text-pb-red;
-      @apply font-sans;
-      text-decoration: underline;
+      @apply text-pb-red font-sans underline;
     }
   }
 
