@@ -28,6 +28,11 @@ function scrollHelper(index) {
   }
 }
 
+function isMobile()
+{
+  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) );
+}
+
 export default {
   name: 'PbTour',
   props: {
@@ -105,7 +110,7 @@ export default {
         <p>This search bar allows you to search within all of the metadata fields for the books indexed in Pressbooks Directory (title, author, subject, publisher, description, etc.).</p>
         <p>It does <strong>not</strong> search the <strong>content</strong> of the books.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Searching for multiple words',
@@ -113,7 +118,7 @@ export default {
         <p>If you enter multiple words, the search will produce results that contain all of those words.</p>
         <p>For example, a search for <strong>open education</strong> will retrieve books that include the words 'open' AND 'education'.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Searching for exact phrases',
@@ -121,7 +126,7 @@ export default {
         <p>Search for an exact phrase by putting the desired term in quotation marks.</p>
         <p>For example, a search for <strong>teaching "open education"</strong> will retrieve books that include the word 'teaching' AND the exact phrase 'open education'.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Excluding words or phrases',
@@ -129,14 +134,14 @@ export default {
         <p>To exclude a word or phrase from the results, use the <strong>"-"</strong> sign before the word you want to exclude.</p>
         <p>For example, a search for <strong>"open education" -teaching</strong> will retrieve books that include the exact phrase 'open education' but NOT the word 'teaching'.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Performing a search',
               intro: `
         <p>To see updated search results (after changing or removing a query), select the "Search" button.</p>
          `,
-              element: searchButton,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchButton,
               position: 'bottom'
             },
             {
@@ -185,7 +190,7 @@ export default {
               intro: `
         <p>Clear all active filters by clicking on the ‘Clear all’ button.</p>
          `,
-              element: document.querySelector('div[data-cy="active-filters"] .clear-filters'),
+              element: isMobile() ? document.querySelector('div[data-cy="active-filters"]') :document.querySelector('div[data-cy="active-filters"] .clear-filters'),
               position: 'left'
             },
             {
@@ -240,7 +245,7 @@ export default {
 
         blurInput();
 
-        if (targetElement.classList.contains('input-wrapper') && this.intro._currentStep > 1) {
+        if ((targetElement.classList.contains('input-wrapper') || targetElement.tagName === 'FORM') && this.intro._currentStep > 1) {
 
           let value = '';
 
@@ -275,6 +280,8 @@ export default {
               filter.click();
             }, index * 1000);
           });
+
+          this.intro._introItems[10].element = document.querySelector('div[data-cy="active-filters"]');
 
         } else if(this.intro._currentStep === 11) {
 
