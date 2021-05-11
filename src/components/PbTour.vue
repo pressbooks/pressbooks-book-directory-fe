@@ -54,7 +54,7 @@ export default {
       intro: null,
       searchInput: document.querySelector('input[data-cy="book-input-search"]'),
       h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
-      guideUrl: this.$store.state.config.guideUrl,
+      guideUrl: this.$store.state.config.urls.guide,
       h5pLogoWidth: 100,
       waitForFilter: 300
     };
