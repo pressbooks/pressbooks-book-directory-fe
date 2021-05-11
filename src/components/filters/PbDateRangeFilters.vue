@@ -1,25 +1,35 @@
 <template>
-  <pb-accordion :open="accordionOpened">
+  <pb-accordion :open="opened">
     <template #title>
       <span class="title font-headings font-semibold">
         {{ title }}
       </span>
     </template>
     <template #content>
-      <t-datepicker
-        v-model="datesModel"
-        conjunction
-        :inline="true"
-        :months-per-view="1"
-        :show="true"
-        :range="true"
-        time-picker-ok-button="Ok"
-        :clearable="false"
-      />
+      <div>
+        <div class="p-2">
+          <t-datepicker
+            v-model="dates.start"
+            placeholder="From date"
+            :max-date="dates.to"
+            :data-cy="`from-date-${field}`"
+          />
+        </div>
+        <div class="p-2">
+          <t-datepicker
+            v-model="dates.to"
+            placeholder="To date"
+            :min-date="dates.start"
+            :data-cy="`to-date-${field}`"
+          />
+        </div>
+      </div>
+
       <div class="p-2">
         <t-button
-          :disabled="datesModel.length < 2"
           class="w-full"
+          :disabled="disabled"
+          :data-cy="`apply-filter-${field}`"
           @click="filterByDateRange"
         >
           Go
@@ -30,7 +40,9 @@
 </template>
 
 <script>
+import { format, fromUnixTime, getUnixTime, isBefore, isValid, parse } from 'date-fns';
 import PbAccordion from '../PbAccordion.vue';
+
 export default {
   name: 'DateRangeFilters',
   components: {
@@ -48,109 +60,104 @@ export default {
   },
   data() {
     return {
-      datesModel: [],
-      alias: '',
-      defaultDateStart: new Date(2017, 7, 29), // Default starting date: 2017-08-29
       dates: {
-        from: {
-          date: this.defaultDateStart,
-          inputFormat: ''
-        },
-        to: {
-          date: new Date(),
-          inputFormat: ''
-        }
+        start: null,
+        to: null,
       },
-      accordionOpened: false
+      opened: false,
     };
+  },
+  computed: {
+    alias() {
+      return this.$store.state.SClient.allowedFilters[this.field].alias;
+    },
+    disabled() {
+      return !this.dates.start && !this.dates.to;
+    }
   },
   watch: {
     '$route.query': {
       deep: true,
       handler(query) {
-        if (query[this.alias] !== undefined) {
-          const dates = query[this.alias].split('&&');
-          const datesFilteredLength = dates.length;
-          this.accordionOpened = true;
-          switch (datesFilteredLength) {
-          case 2:
-            if (this.datesModel.length < 2) {
-              dates[0] = dates[0].split('>=')[1];
-              dates[1] = dates[1].split('<=')[1];
-              this.convertTimestampsToDate(dates);
-            }
-            break;
-          case 1:
-            let splitString = '<=', datePresent = 'to';
-            if (dates[0].search('>=') >= 0) {
-              splitString = '>=';
-              datePresent = 'from';
-            }
-            dates[0] = dates[0].split(splitString)[1];
-            this.convertTimestampsToDate(dates, datePresent);
-            break;
-          default:
-            this.resetDateData();
-            break;
-          }
-          return true;
+        if (query[this.alias] === undefined) {
+          return this.reset();
         }
-        this.resetDateData();
-        this.datesModel = [];
-        this.accordionOpened = false;
+
+        let queryString = query[this.alias];
+
+        let toRegex = new RegExp(/\<=(.*)/); // grab anything after <=
+        let startRegex = queryString.includes('&&')
+          ? new RegExp(/\>=(.*)\&&/) // grab anything between >= and &&
+          : new RegExp(/\>=(.*)/); // grab anything after >=;
+
+        let start = null;
+        let to = null;
+
+        if (startRegex.test(queryString)) {
+          [, start] = queryString.match(startRegex);
+          start = fromUnixTime(start);
+        }
+
+        if (toRegex.test(queryString)) {
+          [, to] = queryString.match(toRegex);
+          to = fromUnixTime(to);
+        }
+
+        this.opened = true;
+        this.dates = {
+          start: isValid(start) ? format(start, 'yyyy-MM-dd'): null,
+          to: isValid(to) ? format(to, 'yyyy-MM-dd') : null,
+        };
       }
     }
-  },
-  mounted() {
-    this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
   },
   methods: {
-    resetDateData() {
+    reset() {
+      this.opened = false;
       this.dates = {
-        from: {
-          date: this.defaultDateStart,
-          inputFormat: ''
-        },
-        to: {
-          date: new Date(),
-          inputFormat: ''
-        }
+        start: null,
+        to: null,
       };
     },
+    buildQueryString() {
+      let queryString = null;
+      let start = parse(`${this.dates.start} 00:00:00`, 'yyyy-MM-dd H:m:s', new Date);
+      let to = parse(`${this.dates.to} 23:59:59`, 'yyyy-MM-dd H:m:s', new Date);
+
+      let timestamps = {
+        start: getUnixTime(start),
+        to: getUnixTime(to) - to.getTimezoneOffset() * 60
+      };
+
+      if (isBefore(to, start)) {
+        return;
+      }
+
+      if (isValid(start)) {
+        queryString = `>=${timestamps.start}`;
+      }
+
+      if (isValid(to)) {
+        queryString = queryString ? `${queryString}&&<=${timestamps.to}` : `<=${timestamps.to}`;
+      }
+
+      return queryString;
+    },
     filterByDateRange() {
-      this.convertDatesToTimestamp();
-      if (this.dates.to.timestamp > this.dates.from.timestamp) {
-        let query = {...this.$route.query};
-        let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
-        query[attribute] = '>=' + this.dates.from.timestamp + '&&' + '<=' + this.dates.to.timestamp;
-        this.$router.replace({ query });
+      let query = { ... this.$route.query };
+      let queryString = this.buildQueryString();
+
+      if (! queryString) {
+        return;
       }
+
+      return this.$router.replace({
+        query: {
+          ...query,
+          [this.alias]: queryString
+        }
+      });
     },
-    convertDatesToTimestamp() {
-      let dateStart = new Date(this.datesModel[0] + ' 00:00:00');
-      let dateEnd = new Date(this.datesModel[1] + ' 23:59:59');
-      this.dates.from.timestamp  = (dateStart.getTime() / 1000) - (dateStart.getTimezoneOffset()*60);
-      this.dates.to.timestamp = (dateEnd.getTime() / 1000) - (dateEnd.getTimezoneOffset()*60);
-    },
-    convertTimestampsToDate(timestampDates, datePresent = false) {
-      if (datePresent) {
-        this.resetDateData();
-        this.dates[datePresent].date = new Date(timestampDates[0] * 1000);
-        this.dates[datePresent].inputFormat = this.dates[datePresent].date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-      } else {
-        this.dates.from.date = new Date(timestampDates[0] * 1000);
-        this.dates.to.date = new Date(timestampDates[1] * 1000);
-      }
-      this.setDatesModelFromDatesProperty();
-    },
-    setDatesModelFromDatesProperty() {
-      this.dates.from.inputFormat  = this.dates.from.date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-      this.dates.to.inputFormat = this.dates.to.date.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-      this.datesModel = [
-        this.dates.from.date.toLocaleString('fr-CA', {year: 'numeric', month:'numeric', day:'numeric', timeZone: 'UTC'}),
-        this.dates.to.date.toLocaleString('fr-CA', {year: 'numeric', month:'numeric', day:'numeric', timeZone: 'UTC'})
-      ];
-    }
   }
 };
 </script>

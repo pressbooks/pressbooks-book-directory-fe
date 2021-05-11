@@ -19,6 +19,7 @@
     "@vue-hero-icons/solid": "^1.7.2",
     "@vue/cli-plugin-babel": "^4.5.12",
     "algoliasearch": "^4.9.0",
+    "date-fns": "^2.21.3",
     "intro.js": "^3.4.0",
     "vue": "^2.6.12",
     "vue-instantsearch": "^3.6.0",
