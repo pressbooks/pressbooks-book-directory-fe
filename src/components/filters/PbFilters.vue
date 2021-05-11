@@ -3,56 +3,15 @@
     <h2 class="font-semibold text-2xl mb-4">
       Filters
     </h2>
-    <div class="w-full border border-gray-200 shadow divide-y divide-gray-200">
-      <pb-boolean-filters
-        title="Recommended"
-        field="isRecommended"
-      />
-      <pb-selectable-filters
-        title="License"
-        field="licenseCode"
-      />
-      <pb-selectable-filters
-        title="Subject"
-        field="about"
-        :searchable="true"
-      />
-      <pb-selectable-filters
-        title="Network"
-        field="networkName"
-        :searchable="true"
-      />
-      <pb-selectable-filters
-        title="Collection"
-        field="collections"
-        :searchable="false"
-        data-cy="collections-filter"
-      />
-      <pb-date-range-filters
-        title="Last Updated"
-        field="lastUpdated"
-      />
-      <pb-selectable-filters
-        title="Language"
-        field="languageName"
-        :searchable="true"
-      />
-      <pb-selectable-filters
-        title="Publisher"
-        field="publisherName"
-        :searchable="true"
-      />
-      <pb-numeric-filters
-        title="Word Count"
-        field="wordCount"
-      />
-      <pb-numeric-filters
-        title="H5P Activities"
-        field="h5pActivities"
-      />
-      <pb-numeric-filters
-        title="Storage"
-        field="storageSize"
+    <div
+      class="w-full border border-gray-200 shadow divide-y divide-gray-200"
+      data-cy="facet-filters"
+    >
+      <component
+        :is="filter.component"
+        v-for="(filter, index) in filters"
+        :key="index"
+        v-bind="{...filter.props}"
       />
     </div>
   </div>
@@ -71,5 +30,55 @@ export default {
     PbDateRangeFilters,
     PbSelectableFilters
   },
+  data() {
+    return {
+      filters: [
+        {
+          component: 'pb-boolean-filters',
+          props: { title: 'Recommended', field: 'isRecommended', 'data-cy': 'recommended-filter' }
+        },
+        {
+          component: 'pb-selectable-filters',
+          props: { title: 'License', field: 'licenseCode', 'data-cy': 'license-filter' }
+        },
+        {
+          component: 'pb-selectable-filters',
+          props: { title: 'Subject', field: 'about', 'data-cy': 'subject-filter', searchable: true }
+        },
+        {
+          component: 'pb-selectable-filters',
+          props: { title: 'Network', field: 'networkName', 'data-cy': 'network-filter', searchable: true }
+        },
+        {
+          component: 'pb-selectable-filters',
+          props: { title: 'Collection', field: 'collections', 'data-cy': 'collections-filter', searchable: true }
+        },
+        {
+          component: 'pb-date-range-filters',
+          props: { title: 'Last Updated', field: 'lastUpdated', 'data-cy': 'last-updated-filter' }
+        },
+        {
+          component: 'pb-selectable-filters',
+          props: { title: 'Language', field: 'languageName', 'data-cy': 'language-filter', searchable: true }
+        },
+        {
+          component: 'pb-selectable-filters',
+          props: { title: 'Publisher', field: 'publisherName', 'data-cy': 'publisher-filter', searchable: true }
+        },
+        {
+          component: 'pb-numeric-filters',
+          props: { title: 'Word Count', field: 'wordCount', 'data-cy': 'word-count-filter' }
+        },
+        {
+          component: 'pb-numeric-filters',
+          props: { title: 'H5P Activities', field: 'h5pActivities', 'data-cy': 'h5p-filter' }
+        },
+        {
+          component: 'pb-numeric-filters',
+          props: { title: 'Storage', field: 'storageSize', 'data-cy': 'storage-filter' }
+        },
+      ]
+    };
+  }
 };
 </script>

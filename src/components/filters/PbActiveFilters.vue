@@ -5,9 +5,9 @@
     </div>
     <div
       v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0 || $store.state.config.showTour === true"
-      class="filters flex flex-row justify-between"
+      class="flex flex-col md:flex-row justify-between items-start"
     >
-      <div class="active-filters flex flex-row flex-wrap w-full md:w-4/5">
+      <div class="active-filters flex flex-col flex-wrap flex-1 md:flex-row">
         <template
           v-for="(iv, keyFiltersExcluded) in $store.state.SClient.filtersExcluded"
         >
@@ -22,16 +22,16 @@
         </template>
       </div>
       <div
-        class="w-full md:w-1/5 justify-center align-middle flex flex-col clear-filters"
+        class="flex-shrink-0 justify-center align-middle flex flex-col clear-filters"
       >
         <button
           v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0 || $store.state.config.showTour === true"
           type="reset"
-          class="font-bold text-pb-red text-right"
+          class="font-bold text-pb-red text-right uppercase"
           data-cy="clear-all-filters"
           @click.prevent="removeFilters()"
         >
-          CLEAR ALL
+          Clear all
         </button>
       </div>
     </div>

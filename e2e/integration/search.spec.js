@@ -5,8 +5,8 @@ describe('Search', () => {
     beforeEach(() => {
       cy.viewport(1280, 720);
       cy.visit('/');
-      cy.get('[data-cy="book-input-search"]').as('inputSearch').clear();
-      cy.get('[data-cy="book-button-search"]').as('buttonSearch');
+      cy.get('[data-cy=book-input-search]').as('inputSearch').clear();
+      cy.get('[data-cy=book-button-search]').as('buttonSearch');
     });
 
     it('Search for specific book', () => {
@@ -17,7 +17,7 @@ describe('Search', () => {
       cy.get('@buttonSearch').click();
 
       cy.wait(['@searchResults']).then(()=>{
-        cy.get('[data-cy="book-card"]').should('have.length', 2);
+        cy.get('[data-cy=book-card]').should('have.length', 2);
       });
 
       cy.url()
