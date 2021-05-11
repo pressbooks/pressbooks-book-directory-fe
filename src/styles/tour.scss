@@ -23,6 +23,8 @@
 
     a {
       @apply text-pb-red;
+      @apply font-sans;
+      text-decoration: underline;
     }
   }
 
