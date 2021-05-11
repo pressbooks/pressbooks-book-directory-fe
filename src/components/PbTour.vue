@@ -28,6 +28,11 @@ function scrollHelper(index) {
   }
 }
 
+function isMobile()
+{
+  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) );
+}
+
 export default {
   name: 'PbTour',
   props: {
@@ -49,7 +54,7 @@ export default {
       intro: null,
       searchInput: document.querySelector('input[data-cy="book-input-search"]'),
       h5pActivitiesImage: this.$store.state.config.imagesPath + this.$store.state.config.h5pLogo,
-      guideUrl: this.$store.state.config.guideUrl,
+      guideUrl: this.$store.state.config.urls.guide,
       h5pLogoWidth: 100,
       waitForFilter: 300
     };
@@ -60,7 +65,7 @@ export default {
       this.searchInput.value = '';
     };
 
-    const filterUsedForTour = document.querySelector('article[data-cy="filter"]:first-child button');
+    const filterUsedForTour = document.querySelector('article[data-cy="license-filter"] button');
 
     const typing = (text, current = 0) => {
       this.searchInput.value += text[current];
@@ -105,7 +110,7 @@ export default {
         <p>This search bar allows you to search within all of the metadata fields for the books indexed in Pressbooks Directory (title, author, subject, publisher, description, etc.).</p>
         <p>It does <strong>not</strong> search the <strong>content</strong> of the books.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Searching for multiple words',
@@ -113,7 +118,7 @@ export default {
         <p>If you enter multiple words, the search will produce results that contain all of those words.</p>
         <p>For example, a search for <strong>open education</strong> will retrieve books that include the words 'open' AND 'education'.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Searching for exact phrases',
@@ -121,7 +126,7 @@ export default {
         <p>Search for an exact phrase by putting the desired term in quotation marks.</p>
         <p>For example, a search for <strong>teaching "open education"</strong> will retrieve books that include the word 'teaching' AND the exact phrase 'open education'.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Excluding words or phrases',
@@ -129,14 +134,14 @@ export default {
         <p>To exclude a word or phrase from the results, use the <strong>"-"</strong> sign before the word you want to exclude.</p>
         <p>For example, a search for <strong>"open education" -teaching</strong> will retrieve books that include the exact phrase 'open education' but NOT the word 'teaching'.</p>
          `,
-              element: searchInputContainer,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchInputContainer,
             },
             {
               title: 'Performing a search',
               intro: `
         <p>To see updated search results (after changing or removing a query), select the "Search" button.</p>
          `,
-              element: searchButton,
+              element: isMobile() ? document.querySelector('form[data-cy="search-form"]') : searchButton,
               position: 'bottom'
             },
             {
@@ -147,9 +152,9 @@ export default {
               element: document.querySelector('.ais-Stats'),
               position: 'bottom'
             }, {
-              title: 'Changing Results Display',
+              title: 'Changing results display',
               intro: `
-        <p>You can change the number of results shown per page [10, 20, 50] and the method used to sort your results.</p>
+        <p>You can change the number of results displayed per page and the method used to sort your results using these dropdowns.</p>
          `,
               element: document.querySelector('div[data-cy="top-filters"]'),
               position: 'bottom'
@@ -159,7 +164,7 @@ export default {
               intro: `
         <p>Filters allow you to perform faceted search to narrow down your results by license, subject, word count, and more. Faceted searching can be combined with text search or used separately.</p>
          `,
-              element: document.querySelector('article[data-cy="filter"]:nth-of-type(1)'),
+              element: document.querySelector('article[data-cy="license-filter"]'),
               position: 'right'
             },
             {
@@ -168,7 +173,7 @@ export default {
         <p>Click the checkmark to apply that filter and see only those results, or click the X to omit those results. Click the same option again to remove that filter.</p>
         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
          `,
-              element: document.querySelector('article[data-cy="filter"]:nth-of-type(1)'),
+              element: document.querySelector('article[data-cy="license-filter"]'),
               position: 'right'
             },
             {
@@ -185,7 +190,7 @@ export default {
               intro: `
         <p>Clear all active filters by clicking on the ‘Clear all’ button.</p>
          `,
-              element: document.querySelector('div[data-cy="active-filters"] .clear-filters'),
+              element: isMobile() ? document.querySelector('div[data-cy="active-filters"]') :document.querySelector('div[data-cy="active-filters"] .clear-filters'),
               position: 'left'
             },
             {
@@ -240,7 +245,7 @@ export default {
 
         blurInput();
 
-        if (targetElement.classList.contains('input-wrapper') && this.intro._currentStep > 1) {
+        if ((targetElement.classList.contains('input-wrapper') || targetElement.tagName === 'FORM') && this.intro._currentStep > 1) {
 
           let value = '';
 
@@ -271,10 +276,12 @@ export default {
 
           [1,2,3].forEach(function(item, index){
             setTimeout(()=>{
-              const filter = document.querySelector('article[data-cy="filter"]:nth-of-type(1) [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
+              const filter = document.querySelector('article[data-cy="license-filter"] [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
               filter.click();
             }, index * 1000);
           });
+
+          this.intro._introItems[10].element = document.querySelector('div[data-cy="active-filters"]');
 
         } else if(this.intro._currentStep === 11) {
 
