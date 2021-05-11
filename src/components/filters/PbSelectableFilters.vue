@@ -44,6 +44,7 @@
         <button
           v-if="showMoreVisible"
           class="p-1 text-pb-dark-blue text-xs"
+          :data-cy="`show-more-${field}`"
           @click="incrementDisplayAmount"
         >
           Show more ({{ amountLeft }})
@@ -51,6 +52,7 @@
         <button
           v-if="showLessVisible"
           class="p-1 text-pb-dark-blue text-xs"
+          :data-cy="`show-less-${field}`"
           @click="resetDisplayAmount"
         >
           Show less
