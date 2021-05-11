@@ -1,6 +1,7 @@
 <template>
   <form
     class="left w-full flex-1 flex-shrink-0"
+    data-cy="search-form"
     @submit.prevent="search(stringSearch)"
   >
     <div class="flex flex-row items-end space-x-6">

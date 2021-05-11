@@ -68,7 +68,9 @@ export default {
       return month + '/' + day + '/' + d.getUTCFullYear();
     },
     removeFilters() {
-      this.$router.replace({ query: {} });
+      if (Object.keys(this.$route.query).length !== 0) {
+        this.$router.replace({ query: {} });
+      }
     },
     getLabel(value) {
       let label;
