@@ -1,7 +1,5 @@
 <template>
-  <article
-    data-cy="filter"
-  >
+  <article>
     <button
       data-cy="filter-header-button"
       :class="[
