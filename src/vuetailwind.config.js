@@ -94,7 +94,7 @@ export default {
     component: TButton,
     props: {
       fixedClasses: 'block px-4 py-2 font-bold focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed',
-      classes: 'text-white bg-red-700 shadow-sm rounded hover:bg-red-700',
+      classes: 'text-white bg-red-700 shadow-sm rounded-full hover:bg-red-700',
       variants: {
         secondary: 'text-gray-800 bg-white border border-gray-300 shadow-sm hover:text-gray-600',
         error: 'text-white bg-red-700 border border-transparent rounded shadow-sm hover:bg-red-700',

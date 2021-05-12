@@ -13,7 +13,7 @@
               class="block text-sm"
               :for="`${field}-min`"
             >
-              Min.
+              Min
             </label>
             <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
               <input
@@ -30,7 +30,7 @@
               class="block text-sm"
               :for="`${field}-max`"
             >
-              Max.
+              Max
             </label>
             <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
               <input
