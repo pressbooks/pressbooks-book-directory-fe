@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      opened: false
+      opened: this.open
     };
   },
   watch: {

@@ -11,7 +11,7 @@
         class="body py-2 px-4 flex items-center justify-between space-x-1"
       >
         <span class="title text-sm text-gray-900 w-full">
-          {{ title }}
+          {{ `${title} (${count})` }}
         </span>
         <div class="action flex justify-end space-x-1">
           <button
@@ -76,6 +76,17 @@ export default {
     return {
       excluded: false
     };
+  },
+  computed: {
+    count() {
+      let filter = this.$store.state.stats.filters[this.field];
+
+      if (!filter) {
+        return;
+      }
+
+      return filter[1].count;
+    }
   },
   methods: {
     applyFilter(itemValue, exclude) {
