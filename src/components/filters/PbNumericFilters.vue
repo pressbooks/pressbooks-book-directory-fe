@@ -7,45 +7,50 @@
     </template>
     <template #content>
       <form @submit.prevent="applyFilter">
-        <div class="custom-number-input h-10 w-full flex items-center">
-          <label
-            :for="field + '-min'"
-            class="w-full text-sm font-semibold"
-          >
-            Min
-          </label>
-          <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1 pr-2">
-            <input
-              :id="field + '-min'"
-              v-model.trim.number="number.min"
-              type="number"
-              class="outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
-              name="custom-input-number"
-              :min="0"
+        <div class="flex items-center space-x-4 py-2 px-4">
+          <div>
+            <label
+              class="block text-sm"
+              :for="`${field}-min`"
             >
+              Min
+            </label>
+            <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
+              <input
+                :id="`${field}-min`"
+                v-model.trim.number="number.min"
+                :min="0"
+                type="number"
+                class="w-full border-0 text-sm p-1 focus:outline-none focus:ring-0"
+              >
+            </div>
           </div>
-          <label
-            :for="field + '-max'"
-            class="w-full text-sm font-semibold"
-          >
-            Max
-          </label>
-          <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-            <input
-              :id="field + '-max'"
-              v-model.trim.number="number.max"
-              type="number"
-              class="outline-none focus:outline-none text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
-              name="custom-input-number"
-              :min="0"
+          <div>
+            <label
+              class="block text-sm"
+              :for="`${field}-max`"
             >
+              Max
+            </label>
+            <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
+              <input
+                :id="`${field}-max`"
+                v-model.trim.number="number.max"
+                :min="0"
+                type="number"
+                class="w-full border-0 text-sm p-1 focus:outline-none focus:ring-0"
+              >
+            </div>
           </div>
-          <t-button
-            type="submit"
-            :disabled="number.min === 0 && number.max === 0"
-          >
-            Go
-          </t-button>
+
+          <div>
+            <t-button
+              type="submit"
+              :disabled="number.min === 0 && number.max === 0"
+            >
+              Go
+            </t-button>
+          </div>
         </div>
       </form>
     </template>
