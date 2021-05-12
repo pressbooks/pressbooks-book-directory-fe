@@ -1,25 +1,20 @@
+import {search} from '../support/common';
+import Elements from '../support/elements';
+
 describe('Search', () => {
 
   context('Desktop resolution', () => {
 
-    beforeEach(() => {
-      cy.viewport(1280, 720);
-      cy.visit('/');
-      cy.get('[data-cy=book-input-search]').as('inputSearch').clear();
-      cy.get('[data-cy=book-button-search]').as('buttonSearch');
+    beforeEach(()=>{
+      cy.get(Elements.search.input).as('inputSearch').clear();
+      cy.get(Elements.search.button).as('buttonSearch');
     });
 
     it('Search for specific book', () => {
 
-      cy.algoliaQueryRequest('searchResults');
+      search('math science');
 
-      cy.get('@inputSearch').type('math science');
-      cy.get('@buttonSearch').click();
-
-      cy.wait(['@searchResults']).then(()=>{
-        cy.get('[data-cy=book-card]').should('have.length', 2);
-      });
-
+      cy.get('[data-cy=book-card]').should('have.length', 2);
       cy.url()
         .should('include','?q=math%20science');
 

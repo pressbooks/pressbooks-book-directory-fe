@@ -2,9 +2,7 @@ describe('Filter collections', () => {
 
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720)
-        .visit('/')
-        .get('[data-cy=collection-section]').as('collectionSection');
+      cy.get('[data-cy=collection-section]').as('collectionSection');
     });
 
     it('Check for collections section and review the title section', () => {

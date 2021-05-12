@@ -1,9 +1,7 @@
 describe('Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720)
-        .visit('/')
-        .algoliaQueryRequest('algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('article[data-cy=license-filter]').as('licenseAccordion');
       cy.get('article[data-cy=subject-filter]').as('subjectAccordion');
