@@ -24,7 +24,7 @@
         >
       </div>
       <div
-        v-for="(item, key) in items"
+        v-for="(item, key) in displayItems"
         :key="key"
         data-cy="filter-option"
         class="body py-2 px-4 flex items-center justify-between space-x-1"
@@ -36,6 +36,27 @@
           :item="item"
           :field="field"
         />
+      </div>
+      <div
+        v-if="showMoreVisible || showLessVisible"
+        class="flex items-center justify-center py-2 px-4"
+      >
+        <button
+          v-if="showMoreVisible"
+          class="p-1 text-pb-dark-blue text-xs"
+          :data-cy="`show-more-${field}`"
+          @click="incrementDisplayAmount"
+        >
+          Show more ({{ amountLeft }})
+        </button>
+        <button
+          v-if="showLessVisible"
+          class="p-1 text-pb-dark-blue text-xs"
+          :data-cy="`show-less-${field}`"
+          @click="resetDisplayAmount"
+        >
+          Show less
+        </button>
       </div>
     </template>
   </pb-accordion>
@@ -58,10 +79,6 @@ export default {
       type: String,
       default: ''
     },
-    limit: {
-      type: Number,
-      default: 10,
-    },
     searchable: {
       type: Boolean,
       default: false
@@ -74,6 +91,9 @@ export default {
   data() {
     return {
       search: '',
+      displayAmount: 10,
+      minDisplayAmount: 10,
+      maxDisplayAmount: 1000,
     };
   },
   computed: {
@@ -81,16 +101,42 @@ export default {
       const items = this.$store.state.stats.filters[this.field] || [];
 
       if (this.searchIsEmpty()) {
-        return items.slice(0, this.limit);
+        return items.slice(0, this.maxDisplayAmount);
       }
 
       const term = this.search.toLowerCase();
       const search = (item) => item.facet.toLowerCase().search(term) !== -1;
 
-      return items.filter(search).slice(0, this.limit);
+      return items.filter(search).slice(0, this.maxDisplayAmount);
+    },
+    displayItems() {
+      return this.items.slice(0, this.displayAmount);
+    },
+    showMoreVisible() {
+      return this.displayAmount < this.items.length;
+    },
+    showLessVisible() {
+      if (this.displayItems.length < this.minDisplayAmount) {
+        return false;
+      }
+
+      return this.displayAmount > this.items.length || this.displayAmount >= this.maxDisplayAmount;
+    },
+    amountLeft() {
+      return this.items.length - this.displayItems.length;
     }
   },
   methods: {
+    incrementDisplayAmount() {
+      if (this.displayAmount >= this.items.length) {
+        return;
+      }
+
+      this.displayAmount += 10;
+    },
+    resetDisplayAmount() {
+      this.displayAmount = this.minDisplayAmount;
+    },
     searchIsEmpty() {
       return this.search === '';
     },
