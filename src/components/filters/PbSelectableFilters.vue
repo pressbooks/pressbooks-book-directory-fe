@@ -120,7 +120,7 @@ export default {
         return false;
       }
 
-      return this.displayAmount > this.items.length;
+      return this.displayAmount > this.items.length || this.displayAmount >= this.maxDisplayAmount;
     },
     amountLeft() {
       return this.items.length - this.displayItems.length;
