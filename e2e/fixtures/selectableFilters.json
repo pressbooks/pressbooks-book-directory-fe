@@ -1,0 +1,53 @@
+{
+  "License": {
+    "include": [ "CC BY-ND", "CC0" ],
+    "exclude": [ "CC BY", "CC BY-NC-SA" ],
+    "field": "licenseCode",
+    "urlAlias": "license",
+    "search": {
+      "searchable": false
+    }
+  },
+  "Subject": {
+    "include": [ "Mathematics", "Chemistry" ],
+    "exclude": [ "Education", "Open learning, distance education" ],
+    "field": "about",
+    "urlAlias": "subj",
+    "search": {
+      "searchable": true,
+      "searchTerm": "math",
+      "filter": "Mathematical logic"
+    }
+  },
+  "Network": {
+    "include": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
+    "exclude": [ "eCampusOntario Open Authoring Platform", "British Columbia/Yukon Open Authoring Platform" ],
+    "field": "networkName",
+    "urlAlias": "net",
+    "search": {
+      "searchable": true,
+      "searchTerm": "publ",
+      "filter": "Milne Publishing"
+    }
+  },
+  "Language": {
+    "include": [ "Turkish", "Hindi" ],
+    "exclude": [ "English", "English (Canada)" ],
+    "field": "languageName",
+    "urlAlias": "lang",
+    "search": {
+      "searchable": false
+    }
+  },
+  "Publisher": {
+    "include": [ "Rebus Community", "The Ohio State University" ],
+    "exclude": [ "BCcampus", "OpenStax" ],
+    "field": "publisherName",
+    "urlAlias": "pub",
+    "search": {
+      "searchable": true,
+      "searchTerm": "reb",
+      "filter": "Rebus Foundation"
+    }
+  }
+}

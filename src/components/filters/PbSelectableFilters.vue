@@ -2,6 +2,7 @@
   <pb-accordion
     v-if="typeof $store.state.stats.filters[field] !== 'undefined'"
     :open="typeof $store.state.SClient.filtersExcluded[field] !== 'undefined'"
+    :data-cy-button="`${field}`"
   >
     <template #title>
       <span class="title font-semibold">
@@ -18,6 +19,7 @@
         <input
           :id="`search-filter-${field}`"
           v-model="search"
+          :data-cy="`search-filter-${field}`"
           type="text"
           class="w-full border-0 text-sm py-2 px-3 focus:outline-none focus:ring-0"
           :placeholder="`Search ${title}`"
@@ -26,7 +28,7 @@
       <div
         v-for="(item, key) in items"
         :key="key"
-        data-cy="filter-option"
+        :data-cy="`filter-${field}-option`"
         class="body py-2 px-4 flex items-center justify-between space-x-1"
       >
         <span class="title text-sm text-gray-900 w-full">

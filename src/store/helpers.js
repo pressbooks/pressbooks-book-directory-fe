@@ -134,12 +134,17 @@ function setNumericFilters(filters, state) {
   state.filtersParams = setParamsFilters(state.numericFilters, state.searchFilters);
 }
 
+function getLowerCaseAlphanumericAndHyphen(str) {
+  return str.replaceAll(/[^a-zA-Z0-9_]+/ig,'-').toLowerCase();
+}
+
 export default {
   functions: {
     setFilters,
     getSimilarFacetValues,
     setParamsFilters,
     unescapeHTML,
-    setNumericFilters
+    setNumericFilters,
+    getLowerCaseAlphanumericAndHyphen
   }
 };
