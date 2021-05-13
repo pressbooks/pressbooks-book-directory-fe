@@ -1,8 +1,12 @@
-import {search, listenRequest} from '../support/common';
+import {search} from '../support/common';
+import Elements from '../support/elements';
 
 describe('Welcome header book and network counts', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
+
+      cy.get(Elements.search.input).as('inputSearch').clear();
+      cy.get(Elements.search.button).as('buttonSearch');
 
       cy.wait('@fetching').then(({response}) => {
 

@@ -15,12 +15,9 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
-import Elements from './elements';
 
 beforeEach(() => {
   cy.viewport(1280, 720);
   cy.intercept('**/indexes/*/query?*').as('fetching');
   cy.visit('/');
-  cy.get(Elements.search.input).as('inputSearch').clear();
-  cy.get(Elements.search.button).as('buttonSearch');
 });
