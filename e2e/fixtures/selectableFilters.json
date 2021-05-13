@@ -6,6 +6,23 @@
     "urlAlias": "license",
     "search": {
       "searchable": false
+    },
+    "bookCards": {
+      "filters": [ "CC BY-NC", "CC BY-NC-SA" ],
+      "include": true,
+      "booksTitle": [
+        "Prior Learning Portfolio Development",
+        "Para vivir con salud",
+        "Teaching in Desire2Learn",
+        "Dini Afrika ya Mashariki",
+        "Jinsia na Mapenzi Afrika ya Mashariki",
+        "Physics 103 and 104 Teaching Guide",
+        "Collecting and Mapping Data",
+        "Process of Science Companion, Book 3: Data Analysis Statistics and Experimental Design",
+        "MTLE Resources",
+        "Resources for Self-Instructional Learners of Less Commonly Taught Languages"
+      ],
+      "booksCount": 725
     }
   },
   "Subject": {
@@ -17,6 +34,23 @@
       "searchable": true,
       "searchTerm": "math",
       "filter": "Mathematical logic"
+    },
+    "bookCards": {
+      "filters": [ "Sociology", "Chemistry" ],
+      "include": true,
+      "booksTitle": [
+        "Exploring the Physical World: Introductory Chemistry and Physics",
+        "Consent & Sexual Violence: Training and Facilitation Guide",
+        "CHEM:1110 Lab Manual Spring 2020",
+        "Accountability and Repairing Relationships: Training and Facilitation Guide",
+        "Active Bystander Intervention: Training and Facilitation Guide",
+        "Consent & Sexual Violence: Training and Facilitation Guide",
+        "Supporting Survivors: Training and Facilitation Guide",
+        "Accountability and Repairing Relationships: Training and Facilitation Guide",
+        "Supporting Survivors: Training and Facilitation Guide",
+        "Active Bystander Intervention: Training and Facilitation Guide"
+      ],
+      "booksCount": 47
     }
   },
   "Network": {
@@ -28,6 +62,23 @@
       "searchable": true,
       "searchTerm": "publ",
       "filter": "Milne Publishing"
+    },
+    "bookCards": {
+      "filters": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
+      "include": true,
+      "booksTitle": [
+        "Un dictionnaire décolonial",
+        "Large Animal Surgery - Supplemental Notes",
+        "La gravité des choses",
+        "\"The Death of Ivan Ilich\": An Electronic Study Edition of the Russian Text",
+        "Prendre la parole",
+        "Developing Change Agents",
+        "Apples",
+        "Vet Med: Applied GI Physiology- Supplemental Notes",
+        "La révolution des Communs et le droit",
+        "Human Biology 2nd edition"
+      ],
+      "booksCount": 107
     }
   },
   "Language": {
@@ -37,6 +88,23 @@
     "urlAlias": "lang",
     "search": {
       "searchable": false
+    },
+    "bookCards": {
+      "filters": [ "English", "English (Canada)", "English (United States)" ],
+      "include": false,
+      "booksTitle": [
+        "Para vivir con salud",
+        "Un dictionnaire décolonial",
+        "Programmes d'étude et ressources autorisées",
+        "La gravité des choses",
+        "Violence Domestique dans les Communautés d’Immigrants: Études de Cas",
+        "Prendre la parole",
+        "A parar bien la oreja: cuaderno de comprensión auditiva",
+        "La révolution des Communs et le droit",
+        "Taali fulɓe gaawooɓe, durooɓe egga hoɗaaɓe gorgal Niijer - Contes des Peuls Gaawooɓe, pasteurs nomades de l’ouest du Niger",
+        "Guide décolonisé et pluriversel de formation à la recherche en sciences sociales et humaines"
+      ],
+      "booksCount": 89
     }
   },
   "Publisher": {
@@ -48,6 +116,23 @@
       "searchable": true,
       "searchTerm": "reb",
       "filter": "Rebus Foundation"
+    },
+    "bookCards": {
+      "filters": [ "BCcampus" ],
+      "include": false,
+      "booksTitle": [
+        "Prior Learning Portfolio Development",
+        "Para vivir con salud",
+        "SPAN 463: Los gitanos en la cultura hispana",
+        "Significant Statistics",
+        "Journal of Research in Progress Vol. 4",
+        "Teaching in Desire2Learn",
+        "Pressbooks 101",
+        "Academic Reading & Vocabulary Skills",
+        "Dini Afrika ya Mashariki",
+        "Jinsia na Mapenzi Afrika ya Mashariki"
+      ],
+      "booksCount": 2182
     }
   }
 }

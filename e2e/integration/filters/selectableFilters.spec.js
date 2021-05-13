@@ -1,14 +1,15 @@
 import helpers from '../../../src/store/helpers';
 let facetFilters = {};
+
 describe('Using selectable filters', () => {
   beforeEach(function () {
     if (Object.keys(facetFilters).length === 0) {
-      cy.fixture('selectableFilters.json').then((selectableFiltersButtons) => {
-        facetFilters = selectableFiltersButtons;
+      cy.fixture('selectableFilters.json').then((selectableFiltersFixture) => {
+        facetFilters = selectableFiltersFixture;
       });
     }
   });
-  context('Desktop resolution', () => {
+  context('Selectable Filters - Desktop resolution', () => {
     it('Include filter action. Check URL and chip. Remove filter by clicking twice and check URL.', () => {
       for (const facet in facetFilters) {
         let field = facetFilters[facet].field;
@@ -98,6 +99,31 @@ describe('Using selectable filters', () => {
       }
     });
 
+    it('Exclude filter action and remove it by clicking in the chip', () => {
+      for (const facet in facetFilters) {
+        let field = facetFilters[facet].field;
+        cy.viewport(1280, 720)
+          .visit('/')
+          .algoliaQueryRequest();
+        for (const excludeFacet of facetFilters[facet].exclude) {
+          cy.get(`[data-cy=filter-${field}-header-button]`)
+            .click();
+          let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(excludeFacet);
+          cy.get(`[data-cy=filter-${field}-${facetButton}-exclude-button]`)
+            .click();
+          // Remove filter by clicking in the active filter chip
+          cy.get(`[data-cy=chip-filter-${field}-${facetButton}-button]`)
+            .click();
+          cy.algoliaQueryRequest()
+            .url()
+            .should('not.include', facetFilters[facet].urlAlias + '=-' + encodeURIComponent(excludeFacet));
+          // check the accordion was closed
+          cy.get(`[data-cy=filter-${field}-header-button]`)
+            .not('.border-b');
+        }
+      }
+    });
+
     it('Search facet and check it keeps after apply filter', () => {
       for (const facet in facetFilters) {
         if (facetFilters[facet].search.searchable) {
@@ -126,6 +152,31 @@ describe('Using selectable filters', () => {
               expect(facetsListAfter).to.deep.equal(facetsListBefore);
             });
         }
+      }
+    });
+
+    it.only('Apply include/exclude filters and review the book cards', () => {
+      for (const facet in facetFilters) {
+        let field = facetFilters[facet].field;
+        cy.viewport(1280, 720)
+          .visit('/')
+          .algoliaQueryRequest()
+          .get(`[data-cy=filter-${field}-header-button]`)
+          .click();
+        const textCyIncludeExclude = facetFilters[facet].bookCards.include ? 'include' : 'exclude';
+        for (const filter of facetFilters[facet].bookCards.filters) {
+          let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(filter);
+          cy.get(`[data-cy=filter-${field}-${facetButton}-${textCyIncludeExclude}-button]`)
+            .click();
+        }
+        cy.algoliaQueryRequest()
+          .get('[data-cy=book-title]')
+          .each(($title) => {
+            cy.get('[data-cy=book-title]').should(() => {
+              expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
+                .to.contain.oneOf(facetFilters[facet].bookCards.booksTitle);
+            });
+          });
       }
     });
   });
