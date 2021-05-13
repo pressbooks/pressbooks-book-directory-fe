@@ -1,10 +1,6 @@
 describe('Books per page', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720);
-
-      cy.visit('/');
-
       cy.algoliaQueryRequest('listing');
     });
 

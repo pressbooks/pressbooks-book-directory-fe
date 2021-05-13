@@ -1,9 +1,6 @@
 describe('External links', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720);
-
-      cy.visit('/');
 
       cy.get('[data-cy=learn-about-pressbooks]').as('learnAboutPressbooks');
       cy.get('[data-cy=pressbooks-homepage]').as('pressbooksHomepage');
