@@ -155,7 +155,7 @@ describe('Using selectable filters', () => {
       }
     });
 
-    it.only('Apply include/exclude filters and review the book cards', () => {
+    it('Apply include/exclude filters and review the book cards', () => {
       for (const facet in facetFilters) {
         let field = facetFilters[facet].field;
         cy.viewport(1280, 720)
