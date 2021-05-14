@@ -138,12 +138,6 @@ function getLowerCaseAlphanumericAndHyphen(str) {
   return str.replaceAll(/[^a-zA-Z0-9_]+/ig,'-').toLowerCase();
 }
 
-function encodeFacetFilterForURL(str) {
-  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-    return '%' + c.charCodeAt(0).toString(16);
-  }).replace('%2C', ',');
-}
-
 export default {
   functions: {
     setFilters,
@@ -151,7 +145,6 @@ export default {
     setParamsFilters,
     unescapeHTML,
     setNumericFilters,
-    getLowerCaseAlphanumericAndHyphen,
-    encodeFacetFilterForURL
+    getLowerCaseAlphanumericAndHyphen
   }
 };
