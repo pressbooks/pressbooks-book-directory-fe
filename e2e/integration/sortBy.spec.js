@@ -2,10 +2,6 @@ const { _ } = Cypress;
 describe('Sort books by', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720);
-
-      cy.visit('/');
-
       cy.get('[data-cy=sort-books-by]').as('sortBooksBy');
 
       cy.get('@sortBooksBy')
