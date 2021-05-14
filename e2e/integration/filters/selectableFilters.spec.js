@@ -1,22 +1,17 @@
 import helpers from '../../../src/store/helpers';
-let facetFilters = {};
+const facetFilters = require('../../fixtures/selectableFilters.json');
 
-describe('Using selectable filters', () => {
-  beforeEach(function () {
-    if (Object.keys(facetFilters).length === 0) {
-      cy.fixture('selectableFilters.json').then((selectableFiltersFixture) => {
-        facetFilters = selectableFiltersFixture;
+for (const facet in facetFilters) {
+  let field = facetFilters[facet].field;
+  describe(`Apply ${facet} filters`, () => {
+    context('Desktop resolution', () => {
+      beforeEach(function () {
+        cy.viewport(1280, 720)
+          .visit('/')
+          .algoliaQueryRequest();
       });
-    }
-  });
-  context('Selectable Filters - Desktop resolution', () => {
-    it('Include filter action. Check URL and chip. Remove filter by clicking twice and check URL.', () => {
-      for (const facet in facetFilters) {
-        let field = facetFilters[facet].field;
-        for (const includeFacet of facetFilters[facet].include) {
-          cy.viewport(1280, 720)
-            .visit('/')
-            .algoliaQueryRequest();
+      for (const includeFacet of facetFilters[facet].include) {
+        it(`Include ${facet} ${includeFacet} filter action. Check URL and chip. Remove filter by clicking twice and check URL.`, () => {
           cy.get(`[data-cy=filter-${field}-header-button]`)
             .click();
           let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(includeFacet);
@@ -30,25 +25,35 @@ describe('Using selectable filters', () => {
             .find('.text-sm')
             .contains(includeFacet).should('be.visible')
             .url()
-            .should('include', facetFilters[facet].urlAlias + '=' + encodeURIComponent(includeFacet));
+            .should('include', facetFilters[facet].urlAlias + '=' + helpers.functions.encodeFacetFilterForURL(includeFacet));
 
           // Remove filter by clicking again in the button filter
           cy.get(`[data-cy=filter-${field}-${facetButton}-include-button]`)
             .click();
           cy.algoliaQueryRequest()
             .url()
-            .should('not.include', facetFilters[facet].urlAlias + '=' + encodeURIComponent(includeFacet));
-        }
+            .should('not.include', facetFilters[facet].urlAlias + '=' + helpers.functions.encodeFacetFilterForURL(includeFacet));
+        });
+        it(`Include ${facet} ${includeFacet} filter action and remove it by clicking in the chip`, () => {
+          cy.get(`[data-cy=filter-${field}-header-button]`)
+            .click();
+          let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(includeFacet);
+          cy.get(`[data-cy=filter-${field}-${facetButton}-include-button]`)
+            .click();
+          // Remove filter by clicking in the active filter chip
+          cy.get(`[data-cy=chip-filter-${field}-${facetButton}-button]`)
+            .click();
+          cy.algoliaQueryRequest()
+            .url()
+            .should('not.include', facetFilters[facet].urlAlias + '=' + helpers.functions.encodeFacetFilterForURL(includeFacet));
+          // check the accordion was closed
+          cy.get(`[data-cy=filter-${field}-header-button]`)
+            .not('.border-b');
+        });
       }
-    });
 
-    it('Exclude filter action. Check URL and chip.  Remove filter by clicking twice and check URL.', () => {
-      for (const facet in facetFilters) {
-        let field = facetFilters[facet].field;
-        cy.viewport(1280, 720)
-          .visit('/')
-          .algoliaQueryRequest();
-        for (const excludeFacet of facetFilters[facet].include) {
+      for (const excludeFacet of facetFilters[facet].exclude) {
+        it(`Exclude ${facet} ${excludeFacet} filter action. Check URL and chip.  Remove filter by clicking twice and check URL.`, () => {
           cy.get(`[data-cy=filter-${field}-header-button]`)
             .click();
           let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(excludeFacet);
@@ -62,50 +67,16 @@ describe('Using selectable filters', () => {
             .find('.text-sm')
             .contains(excludeFacet).should('be.visible')
             .url()
-            .should('include', facetFilters[facet].urlAlias + '=-' + encodeURIComponent(excludeFacet));
+            .should('include', facetFilters[facet].urlAlias + '=-' + helpers.functions.encodeFacetFilterForURL(excludeFacet));
 
           // Remove filter by clicking again in the button filter
           cy.get(`[data-cy=filter-${field}-${facetButton}-exclude-button]`)
             .click();
           cy.algoliaQueryRequest()
             .url()
-            .should('not.include', facetFilters[facet].urlAlias + '=-' + encodeURIComponent(excludeFacet));
-        }
-      }
-    });
-
-    it('Include filter action and remove it by clicking in the chip', () => {
-      for (const facet in facetFilters) {
-        let field = facetFilters[facet].field;
-        cy.viewport(1280, 720)
-          .visit('/')
-          .algoliaQueryRequest();
-        for (const includeFacet of facetFilters[facet].include) {
-          cy.get(`[data-cy=filter-${field}-header-button]`)
-            .click();
-          let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(includeFacet);
-          cy.get(`[data-cy=filter-${field}-${facetButton}-include-button]`)
-            .click();
-          // Remove filter by clicking in the active filter chip
-          cy.get(`[data-cy=chip-filter-${field}-${facetButton}-button]`)
-            .click();
-          cy.algoliaQueryRequest()
-            .url()
-            .should('not.include', facetFilters[facet].urlAlias + '=' + encodeURIComponent(includeFacet));
-          // check the accordion was closed
-          cy.get(`[data-cy=filter-${field}-header-button]`)
-            .not('.border-b');
-        }
-      }
-    });
-
-    it('Exclude filter action and remove it by clicking in the chip', () => {
-      for (const facet in facetFilters) {
-        let field = facetFilters[facet].field;
-        cy.viewport(1280, 720)
-          .visit('/')
-          .algoliaQueryRequest();
-        for (const excludeFacet of facetFilters[facet].exclude) {
+            .should('not.include', facetFilters[facet].urlAlias + '=-' + helpers.functions.encodeFacetFilterForURL(excludeFacet));
+        });
+        it(`Exclude ${excludeFacet} filter action and remove it by clicking in the chip`, () => {
           cy.get(`[data-cy=filter-${field}-header-button]`)
             .click();
           let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(excludeFacet);
@@ -116,23 +87,17 @@ describe('Using selectable filters', () => {
             .click();
           cy.algoliaQueryRequest()
             .url()
-            .should('not.include', facetFilters[facet].urlAlias + '=-' + encodeURIComponent(excludeFacet));
+            .should('not.include', facetFilters[facet].urlAlias + '=-' + helpers.functions.encodeFacetFilterForURL(excludeFacet));
           // check the accordion was closed
           cy.get(`[data-cy=filter-${field}-header-button]`)
             .not('.border-b');
-        }
+        });
       }
-    });
 
-    it('Search facet and check it keeps after apply filter', () => {
-      for (const facet in facetFilters) {
-        if (facetFilters[facet].search.searchable) {
-          let field = facetFilters[facet].field;
+      if (facetFilters[facet].search.searchable) {
+        it(`Search in ${facet} facet and check it keeps after apply filter`, () => {
           let facetButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(facetFilters[facet].search.filter);
           let facetsListBefore = [], facetsListAfter = [];
-          cy.viewport(1280, 720)
-            .visit('/')
-            .algoliaQueryRequest();
           cy.get(`[data-cy=filter-${field}-header-button]`)
             .click();
           cy.get(`[data-cy=search-filter-${field}]`)
@@ -151,17 +116,11 @@ describe('Using selectable filters', () => {
             }).should(() => {
               expect(facetsListAfter).to.deep.equal(facetsListBefore);
             });
-        }
+        });
       }
-    });
 
-    it('Apply include/exclude filters and review the book cards', () => {
-      for (const facet in facetFilters) {
-        let field = facetFilters[facet].field;
-        cy.viewport(1280, 720)
-          .visit('/')
-          .algoliaQueryRequest()
-          .get(`[data-cy=filter-${field}-header-button]`)
+      it(`Apply include/exclude ${facet} filters and review the book cards`, () => {
+        cy.get(`[data-cy=filter-${field}-header-button]`)
           .click();
         const textCyIncludeExclude = facetFilters[facet].bookCards.include ? 'include' : 'exclude';
         for (const filter of facetFilters[facet].bookCards.filters) {
@@ -177,7 +136,7 @@ describe('Using selectable filters', () => {
                 .to.contain.oneOf(facetFilters[facet].bookCards.booksTitle);
             });
           });
-      }
+      });
     });
   });
-});
+}
