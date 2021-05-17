@@ -4,7 +4,7 @@ const Elements = {
     button: '[data-cy=book-button-search]'
   },
   filterChips: '[data-cy=chip-filter]',
-  books: {
+  booksCards: {
     titles: '[data-cy=book-title]'
   },
   filterAccordion(facet) {
@@ -12,7 +12,8 @@ const Elements = {
   },
   filterOptions(facet) {
     return `[data-cy=filter-${facet}-option]`;
-  }
+  },
+  numberOfBooks: '[data-cy=number-of-books]'
 };
 
 

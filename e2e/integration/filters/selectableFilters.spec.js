@@ -111,13 +111,15 @@ for (const facet in facetFilters) {
         for (const filter of facetFilters[facet].bookCards.filters) {
           clickFilter(field, filter, isInclude);
         }
-        cy.get(Elements.books.titles)
+        cy.get(Elements.booksCards.titles)
           .each(($title) => {
-            cy.get(Elements.books.titles).should(() => {
+            cy.get(Elements.booksCards.titles).should(() => {
               expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
                 .to.contain.oneOf(facetFilters[facet].bookCards.booksTitle);
             });
           });
+        cy.get(Elements.numberOfBooks)
+          .contains( `Results: ${facetFilters[facet].bookCards.count}`);
       });
     });
   });

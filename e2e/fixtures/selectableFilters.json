@@ -22,7 +22,7 @@
         "MTLE Resources",
         "Resources for Self-Instructional Learners of Less Commonly Taught Languages"
       ],
-      "booksCount": 725
+      "count": 725
     }
   },
   "Subject": {
@@ -50,7 +50,7 @@
         "Supporting Survivors: Training and Facilitation Guide",
         "Active Bystander Intervention: Training and Facilitation Guide"
       ],
-      "booksCount": 47
+      "count": 47
     }
   },
   "Network": {
@@ -78,7 +78,7 @@
         "La révolution des Communs et le droit",
         "Human Biology 2nd edition"
       ],
-      "booksCount": 107
+      "count": 107
     }
   },
   "Language": {
@@ -104,7 +104,7 @@
         "Taali fulɓe gaawooɓe, durooɓe egga hoɗaaɓe gorgal Niijer - Contes des Peuls Gaawooɓe, pasteurs nomades de l’ouest du Niger",
         "Guide décolonisé et pluriversel de formation à la recherche en sciences sociales et humaines"
       ],
-      "booksCount": 89
+      "count": 89
     }
   },
   "Publisher": {
@@ -132,7 +132,30 @@
         "Dini Afrika ya Mashariki",
         "Jinsia na Mapenzi Afrika ya Mashariki"
       ],
-      "booksCount": 2182
+      "count": 2182
+    }
+  },
+  "Collection": {
+    "include": [ "Dual/High Enrollment", "Interactive OER" ],
+    "exclude": [ "Nursing/Healthcare", "Student Authored" ],
+    "field": "collections",
+    "urlAlias": "collec",
+    "search": {
+      "searchable": true,
+      "searchTerm": "open",
+      "filter": "OpenStax"
+    },
+    "bookCards": {
+      "filters": [ "Open Pedagogy", "Dual/High Enrollment" ],
+      "include": true,
+      "booksTitle": [
+        "Facilitating online learning with the 5R's",
+        "Environmental Biology",
+        "Inclusive Spectrums",
+        "Open at the Margins",
+        "Open Anthology of Earlier American Literature"
+      ],
+      "count": 5
     }
   }
 }
