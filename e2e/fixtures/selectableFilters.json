@@ -1,16 +1,13 @@
 {
   "License": {
-    "include": [ "CC BY-ND", "CC0" ],
-    "exclude": [ "CC BY", "CC BY-NC-SA" ],
+    "includes": [ "CC BY-ND", "CC0" ],
+    "excludes": [ "CC BY", "CC BY-NC-SA" ],
     "field": "licenseCode",
     "urlAlias": "license",
-    "search": {
-      "searchable": false
-    },
     "bookCards": {
       "filters": [ "CC BY-NC", "CC BY-NC-SA" ],
       "include": true,
-      "booksTitle": [
+      "titles": [
         "Prior Learning Portfolio Development",
         "Para vivir con salud",
         "Teaching in Desire2Learn",
@@ -26,19 +23,18 @@
     }
   },
   "Subject": {
-    "include": [ "Mathematics", "Chemistry" ],
-    "exclude": [ "Education", "Open learning, distance education" ],
+    "includes": [ "Mathematics", "Chemistry" ],
+    "excludes": [ "Education", "Open learning, distance education" ],
     "field": "about",
     "urlAlias": "subj",
     "search": {
-      "searchable": true,
       "searchTerm": "math",
       "filter": "Mathematical logic"
     },
     "bookCards": {
       "filters": [ "Sociology", "Chemistry" ],
       "include": true,
-      "booksTitle": [
+      "titles": [
         "Exploring the Physical World: Introductory Chemistry and Physics",
         "Consent & Sexual Violence: Training and Facilitation Guide",
         "CHEM:1110 Lab Manual Spring 2020",
@@ -54,19 +50,18 @@
     }
   },
   "Network": {
-    "include": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
-    "exclude": [ "eCampusOntario Open Authoring Platform", "British Columbia/Yukon Open Authoring Platform" ],
+    "includes": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
+    "excludes": [ "eCampusOntario Open Authoring Platform", "British Columbia/Yukon Open Authoring Platform" ],
     "field": "networkName",
     "urlAlias": "net",
     "search": {
-      "searchable": true,
       "searchTerm": "publ",
       "filter": "Milne Publishing"
     },
     "bookCards": {
       "filters": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
       "include": true,
-      "booksTitle": [
+      "titles": [
         "Un dictionnaire décolonial",
         "Large Animal Surgery - Supplemental Notes",
         "La gravité des choses",
@@ -82,17 +77,14 @@
     }
   },
   "Language": {
-    "include": [ "Turkish", "Hindi" ],
-    "exclude": [ "English", "English (Canada)" ],
+    "includes": [ "Turkish", "Hindi" ],
+    "excludes": [ "English", "English (Canada)" ],
     "field": "languageName",
     "urlAlias": "lang",
-    "search": {
-      "searchable": false
-    },
     "bookCards": {
       "filters": [ "English", "English (Canada)", "English (United States)" ],
       "include": false,
-      "booksTitle": [
+      "titles": [
         "Para vivir con salud",
         "Un dictionnaire décolonial",
         "Programmes d'étude et ressources autorisées",
@@ -108,19 +100,18 @@
     }
   },
   "Publisher": {
-    "include": [ "Rebus Community", "The Ohio State University" ],
-    "exclude": [ "BCcampus", "OpenStax" ],
+    "includes": [ "Rebus Community", "The Ohio State University" ],
+    "excludes": [ "BCcampus", "OpenStax" ],
     "field": "publisherName",
     "urlAlias": "pub",
     "search": {
-      "searchable": true,
       "searchTerm": "reb",
       "filter": "Rebus Foundation"
     },
     "bookCards": {
       "filters": [ "BCcampus" ],
       "include": false,
-      "booksTitle": [
+      "titles": [
         "Prior Learning Portfolio Development",
         "Para vivir con salud",
         "SPAN 463: Los gitanos en la cultura hispana",
@@ -136,19 +127,18 @@
     }
   },
   "Collection": {
-    "include": [ "Dual/High Enrollment", "Interactive OER" ],
-    "exclude": [ "Nursing/Healthcare", "Student Authored" ],
+    "includes": [ "Dual/High Enrollment", "Interactive OER" ],
+    "excludes": [ "Nursing/Healthcare", "Student Authored" ],
     "field": "collections",
     "urlAlias": "collec",
     "search": {
-      "searchable": true,
       "searchTerm": "open",
       "filter": "OpenStax"
     },
     "bookCards": {
       "filters": [ "Open Pedagogy", "Dual/High Enrollment" ],
       "include": true,
-      "booksTitle": [
+      "titles": [
         "Facilitating online learning with the 5R's",
         "Environmental Biology",
         "Inclusive Spectrums",

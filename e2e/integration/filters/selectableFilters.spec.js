@@ -11,13 +11,13 @@ import {
 const facetFilters = require('../../fixtures/selectableFilters.json');
 
 for (const facet in facetFilters) {
-  let field = facetFilters[facet].field;
+  let {field, urlAlias, includes, excludes, bookCards} = facetFilters[facet];
   describe(`Apply ${facet} filters`, () => {
     context('Desktop resolution', () => {
       beforeEach(function () {
         cy.algoliaQueryRequest();
       });
-      for (const includeFacet of facetFilters[facet].include) {
+      for (const includeFacet of includes) {
         it(`Include ${facet} ${includeFacet} filter action. Check URL and chip. Remove filter by clicking twice and check URL.`, () => {
           clickAccordionHeader(field);
           clickFilter(field, includeFacet, true);
@@ -28,12 +28,12 @@ for (const facet in facetFilters) {
             .find('.text-sm')
             .contains(includeFacet).should('be.visible')
             .url()
-            .should('include', facetFilters[facet].urlAlias + '=' + encodeFacetFilterForURL(includeFacet));
+            .should('include', urlAlias + '=' + encodeFacetFilterForURL(includeFacet));
 
           // Remove filter by clicking again in the button filter
           clickFilter(field, includeFacet, true);
           cy.url()
-            .should('not.include', facetFilters[facet].urlAlias + '=' + encodeFacetFilterForURL(includeFacet));
+            .should('not.include', urlAlias + '=' + encodeFacetFilterForURL(includeFacet));
         });
         it(`Include ${facet} ${includeFacet} filter action and remove it by clicking in the chip`, () => {
           clickAccordionHeader(field);
@@ -42,7 +42,7 @@ for (const facet in facetFilters) {
           // Remove filter by clicking in the active filter chip
           removeChipFilter(field, includeFacet);
           cy.url()
-            .should('not.include', facetFilters[facet].urlAlias + '=' + encodeFacetFilterForURL(includeFacet));
+            .should('not.include', urlAlias + '=' + encodeFacetFilterForURL(includeFacet));
 
           // check the accordion was closed
           cy.get(Elements.filterAccordion(field))
@@ -50,7 +50,7 @@ for (const facet in facetFilters) {
         });
       }
 
-      for (const excludeFacet of facetFilters[facet].exclude) {
+      for (const excludeFacet of excludes) {
         it(`Exclude ${facet} ${excludeFacet} filter action. Check URL and chip.  Remove filter by clicking twice and check URL.`, () => {
           clickAccordionHeader(field);
           clickFilter(field, excludeFacet, false);
@@ -62,12 +62,12 @@ for (const facet in facetFilters) {
             .find('.text-sm')
             .contains(excludeFacet).should('be.visible')
             .url()
-            .should('include', facetFilters[facet].urlAlias + '=-' + encodeFacetFilterForURL(excludeFacet));
+            .should('include', urlAlias + '=-' + encodeFacetFilterForURL(excludeFacet));
 
           // Remove filter by clicking again in the button filter
           clickFilter(field, excludeFacet, false);
           cy.url()
-            .should('not.include', facetFilters[facet].urlAlias + '=-' + encodeFacetFilterForURL(excludeFacet));
+            .should('not.include', urlAlias + '=-' + encodeFacetFilterForURL(excludeFacet));
         });
         it(`Exclude ${excludeFacet} filter action and remove it by clicking in the chip`, () => {
           clickAccordionHeader(field);
@@ -76,7 +76,7 @@ for (const facet in facetFilters) {
           // Remove filter by clicking in the active filter chip
           removeChipFilter(field, excludeFacet);
           cy.url()
-            .should('not.include', facetFilters[facet].urlAlias + '=-' + encodeFacetFilterForURL(excludeFacet));
+            .should('not.include', urlAlias + '=-' + encodeFacetFilterForURL(excludeFacet));
 
           // check the accordion was closed
           cy.get(Elements.filterAccordion(field))
@@ -84,7 +84,7 @@ for (const facet in facetFilters) {
         });
       }
 
-      if (facetFilters[facet].search.searchable) {
+      if ('search' in facetFilters[facet]) {
         it(`Search in ${facet} facet and check it keeps after apply filter`, () => {
           clickAccordionHeader(field);
           searchFacet(field, facetFilters[facet].search.searchTerm);
@@ -107,19 +107,19 @@ for (const facet in facetFilters) {
 
       it(`Apply include/exclude ${facet} filters and review the book cards`, () => {
         clickAccordionHeader(field);
-        const isInclude = facetFilters[facet].bookCards.include ? true : false;
-        for (const filter of facetFilters[facet].bookCards.filters) {
+        const isInclude = !!bookCards.include;
+        for (const filter of bookCards.filters) {
           clickFilter(field, filter, isInclude);
         }
         cy.get(Elements.booksCards.titles)
           .each(($title) => {
             cy.get(Elements.booksCards.titles).should(() => {
               expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
-                .to.contain.oneOf(facetFilters[facet].bookCards.booksTitle);
+                .to.contain.oneOf(bookCards.titles);
             });
           });
         cy.get(Elements.numberOfBooks)
-          .contains( `Results: ${facetFilters[facet].bookCards.count}`);
+          .contains( `Results: ${bookCards.count}`);
       });
     });
   });
