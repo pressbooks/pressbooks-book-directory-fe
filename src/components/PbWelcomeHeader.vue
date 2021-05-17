@@ -7,10 +7,15 @@
 
       <p class="font-serif leading-7 text-lg">
         This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed }}</strong> Pressbooks
-        networks. Learn to use the Directory by taking the self-guided tour in the top nav bar or reading
+        networks. Learn to use the Directory by taking a <button
+          class="text-pb-red underline"
+          @click="$store.commit('showTour')"
+      >
+        self-guided tour
+      </button> or reading
         <a
           :href="guide"
-          class="text-red-700 underline"
+          class="text-pb-red underline"
           target="_blank"
           rel="noopener"
         >our guide</a>.
