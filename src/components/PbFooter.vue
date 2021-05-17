@@ -3,81 +3,17 @@
     <div class="container mx-auto lg:px-16 py-16 space-y-4">
       <div class="flex pb-8 border-b border-grey">
         <ul class="flex flex-col font-bold lg:flex-row w-full items-center justify-between space-y-8 lg:space-y-0">
-          <li class="nav-item">
+          <li
+            v-for="(link, index) in links"
+            :key="index"
+            class="nav-item"
+          >
             <a
-              :href="site"
-              aria-label="Pressbooks Homepage"
+              v-bind="link"
               target="_blank"
               rel="noopener"
-              data-cy="pressbooks-homepage"
             >
-              Pressbooks
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              :href="blog"
-              aria-label="Pressbooks blog"
-              target="_blank"
-              rel="noopener"
-              data-cy="pressbooks-blog"
-            >
-              Blog
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              :href="opensource"
-              aria-label="Pressbooks Open Source"
-              target="_blank"
-              rel="noopener"
-              data-cy="pressbooks-opensource"
-            >
-              Pressbooks Open Source
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              :href="contact"
-              aria-label="Contact"
-              target="_blank"
-              rel="noopener"
-              data-cy="pressbooks-contact"
-            >
-              Contact
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              :href="jobs"
-              aria-label="Work with us"
-              target="_blank"
-              rel="noopener"
-              data-cy="pressbooks-jobs"
-            >
-              Work with us
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              :href="accessibility"
-              aria-label="Accessibility"
-              target="_blank"
-              rel="noopener"
-              data-cy="pressbooks-accessibility"
-            >
-              Accessibility
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              :href="procurement"
-              aria-label="EDU Procurement Helpers"
-              target="_blank"
-              rel="noopener"
-              data-cy="pressbooks-procurement"
-            >
-              EDU Procurement Helpers
+              {{ link.text }}
             </a>
           </li>
         </ul>
@@ -93,9 +29,7 @@
           <pb-social-link
             v-for="(socialLink, key) in socialLinks"
             :key="key"
-            :href="socialLink.href"
-            :icon="socialLink.icon"
-            :name="socialLink.name"
+            v-bind="socialLink"
           />
         </div>
       </div>
@@ -111,6 +45,15 @@ export default {
   components: {PbSocialLink},
   data() {
     return {
+      links: [
+        { href: this.$store.state.config.urls.pressbooks, text: 'Pressbooks', 'aria-label': 'Pressbooks Homepage', 'data-cy': 'pressbooks-homepage' },
+        { href: this.$store.state.config.urls.blog, text: 'Blog', 'aria-label': 'Pressbooks Blog', 'data-cy': 'pressbooks-blog' },
+        { href: this.$store.state.config.urls.opensource, text: 'Pressbooks Open Source', 'aria-label': 'Pressbooks Open Source', 'data-cy': 'pressbooks-opensource' },
+        { href: this.$store.state.config.urls.contact, text: 'Contact', 'aria-label': 'Contact', 'data-cy': 'pressbooks-contact' },
+        { href: this.$store.state.config.urls.jobs, text: 'Work with us', 'aria-label': 'Work with us', 'data-cy': 'pressbooks-jobs' },
+        { href: this.$store.state.config.urls.accessibility, text: 'Accessibility', 'aria-label': 'Accessibility', 'data-cy': 'pressbooks-accessibility' },
+        { href: this.$store.state.config.urls.procurement, text: 'EDU Procurement Helpers', 'aria-label': 'EDU Procurement Helpers', 'data-cy': 'pressbooks-procurement' },
+      ],
       socialLinks: [
         { href: this.$store.state.config.urls.twitter, icon: 'social-twitter.svg', name: 'Twitter'},
         { href: this.$store.state.config.urls.linkedin, icon: 'social-in.svg', name: 'Linkedin'},
@@ -118,28 +61,5 @@ export default {
       ]
     };
   },
-  computed: {
-    site() {
-      return this.$store.state.config.urls.pressbooks;
-    },
-    blog() {
-      return this.$store.state.config.urls.blog;
-    },
-    opensource() {
-      return this.$store.state.config.urls.opensource;
-    },
-    contact() {
-      return this.$store.state.config.urls.contact;
-    },
-    jobs() {
-      return this.$store.state.config.urls.jobs;
-    },
-    accessibility() {
-      return this.$store.state.config.urls.accessibility;
-    },
-    procurement() {
-      return this.$store.state.config.urls.procurement;
-    }
-  }
 };
 </script>
