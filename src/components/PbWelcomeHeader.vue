@@ -9,9 +9,9 @@
         This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed }}</strong> Pressbooks
         networks. Learn to use the Directory by taking the <a
           href="#"
-          @click="$store.commit('showTour')"
           class="text-red-700 underline"
-          >self-guided tour</a> or reading
+          @click="$store.commit('showTour')"
+        >self-guided tour</a> or reading
         <a
           :href="guide"
           class="text-red-700 underline"
