@@ -93,6 +93,8 @@ cy.get(Elements.search.button).as('buttonSearch');
 
 * https://docs.cypress.io/api/cypress-api/custom-commands#Best-Practices
 
+Create a custom command when you are sure that command will be used across the entire app.
+
 **Example custom command**
 
 ```javascript
@@ -104,6 +106,8 @@ Cypress.Commands.add('algoliaQueryRequest', (alias='algoliaQuery', waitMs = 700)
     .get('div[data-cy=facet-filters] article').should('have.length.above', 1); // Make sure the accordion filters is present
 });
 ```
+
+Create a raw js function when you want to reuse behavior but not in everyplace.
 
 **Example custom reusable code**
 
