@@ -11,7 +11,7 @@ describe('Pagination', () => {
       cy.get('ul[data-cy=paginator] [data-cy=paginator-link]:first-child').as('firstPageLink');
       cy.get('[data-cy=paginator-next]').as('nextPaginatorArrow');
       cy.get('article[data-cy=license-filter]').as('licenseAccordion');
-      cy.get('@licenseAccordion').find('[data-cy=filter-option]:nth-of-type(7) button[data-cy=filter-include-button]').as('publicDomainFilter');
+      cy.get('[data-cy=filter-licenseCode-public-domain-include-button]').as('publicDomainFilter');
 
       cy.algoliaQueryRequest('algoliaRequest');
     });

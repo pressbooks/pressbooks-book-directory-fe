@@ -8,6 +8,7 @@
     </div>
     <button
       class="flex items-center"
+      :data-cy="`chip-filter-${value.attribute}-${getAlphanumericFacet(value.value)}-button`"
       @click.prevent="closeExcludeFilter(value)"
     >
       <XCircleIcon class="h-4 w-4" />
@@ -17,6 +18,7 @@
 
 <script>
 import { XCircleIcon } from '@vue-hero-icons/outline';
+import helpers from '../../store/helpers';
 
 export default {
   name: 'PbSelectedFilter',
@@ -89,6 +91,9 @@ export default {
           }
         }
       }
+    },
+    getAlphanumericFacet(facet) {
+      return helpers.functions.getLowerCaseAlphanumericAndHyphen(facet);
     }
   }
 };

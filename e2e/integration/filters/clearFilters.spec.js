@@ -8,10 +8,12 @@ describe('Clear Filters',() => {
 
       cy.get('@licenseAccordion').click();
 
-      [1, 2, 3].forEach((option) => {
-        cy.get('@licenseAccordion').find(`[data-cy=filter-option]:nth-of-type(${option}) button[data-cy=filter-include-button]`).click();
-      });
-
+      cy.get('[data-cy=filter-licenseCode-cc-by-include-button]')
+        .click()
+        .get('[data-cy=filter-licenseCode-cc-by-nc-sa-include-button]')
+        .click()
+        .get('[data-cy=filter-licenseCode-all-rights-reserved-include-button]')
+        .click();
     });
 
     it('Clear chip refinement', () => {

@@ -2,7 +2,7 @@
   <div class="action flex justify-end space-x-1">
     <button
       class="include"
-      data-cy="filter-include-button"
+      :data-cy="`filter-${field}-${getAlphanumericFacet(item.facet)}-include-button`"
       @click="applyFilter(item, false)"
     >
       <CheckCircleIconSolid
@@ -16,7 +16,7 @@
     </button>
     <button
       class="exclude"
-      data-cy="filter-exclude-button"
+      :data-cy="`filter-${field}-${getAlphanumericFacet(item.facet)}-exclude-button`"
       @click="applyFilter(item, true)"
     >
       <XCircleIconSolid
@@ -34,6 +34,7 @@
 <script>
 import { CheckCircleIcon, XCircleIcon } from '@vue-hero-icons/outline';
 import { CheckCircleIcon as CheckCircleIconSolid, XCircleIcon as XCircleIconSolid } from '@vue-hero-icons/solid';
+import helpers from '../../store/helpers';
 
 export default {
   name: 'PbFilterButtons',
@@ -142,6 +143,9 @@ export default {
         query[this.alias] += '&&' + value.toString();
       }
       this.$router.replace({ query });
+    },
+    getAlphanumericFacet(facet) {
+      return helpers.functions.getLowerCaseAlphanumericAndHyphen(facet);
     }
   }
 };

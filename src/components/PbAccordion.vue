@@ -1,7 +1,7 @@
 <template>
   <article>
     <button
-      data-cy="filter-header-button"
+      :data-cy="`filter-${dataCyButton}-header-button`"
       :class="[
         'w-full flex items-center justify-between py-3 px-4',
         opened && 'border-b'
@@ -44,6 +44,10 @@ export default {
     open: {
       type: Boolean,
       default: false
+    },
+    dataCyButton: {
+      type: String,
+      default: ''
     }
   },
   data() {
