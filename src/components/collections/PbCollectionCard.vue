@@ -1,17 +1,18 @@
 <template>
-  <div class="item w-full mb-6 md:mb-0 md:w-1/5 px-3">
+  <div class="w-full h-full">
     <a
-      class="flex flex-col items-center"
-      @click="filter(card)"
+      href="#"
+      class="p-1 cursor-pointer h-full flex flex-col"
+      @click.prevent="filter(card)"
     >
-      <div class="image">
+      <div class="aspect-w-3 aspect-h-4 overflow-hidden">
         <img
           :src="card.image"
-          width="100%"
           :alt="card.name"
+          class="h-full w-full object-cover"
         >
       </div>
-      <div class="text py-4 px-2 font-semibold">
+      <div class="text mt-4 px-2 font-semibold">
         {{ truncateTitle(card.name) }}
       </div>
     </a>
