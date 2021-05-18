@@ -1,6 +1,9 @@
 <template>
   <div class="w-full md:w-1/3 md:pl-8">
-    <div class="image" data-cy="book-cover">
+    <div
+      class="image"
+      data-cy="book-cover"
+    >
       <pb-book-cover
         :image="item.image"
         :alt="item.name"
