@@ -111,11 +111,11 @@ for (const facet in facetFilters) {
         for (const filter of bookCards.filters) {
           clickFilter(field, filter, isInclude);
         }
-        cy.get(Elements.booksCards.titles)
+        cy.get(Elements.booksCards.title)
           .each(($title) => {
-            cy.get(Elements.booksCards.titles).should(() => {
+            cy.get(Elements.booksCards.title).should(() => {
               expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
-                .to.contain.oneOf(bookCards.titles);
+                .to.contain.oneOf(bookCards.title);
             });
           });
         cy.get(Elements.numberOfBooks)

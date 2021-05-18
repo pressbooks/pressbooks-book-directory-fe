@@ -1,3 +1,5 @@
+import config from './modules/config';
+
 function setFilters(oldFilters, allowedFilters) {
   let fs = [], ns = [], strQuery = '', f = {};
   let query = [], queryExcluded = [], numerics = {}, q =[];
@@ -138,6 +140,37 @@ function getLowerCaseAlphanumericAndHyphen(str) {
   return str.replaceAll(/[^a-zA-Z0-9_]+/ig,'-').toLowerCase();
 }
 
+/**
+ * Get Icon file and Alt text for a license given the license name
+ * @param licenseName
+ * @returns {{image: boolean, alt: boolean}|{image: string, alt: string}}
+ */
+function getLicenseIconAndAltByLicenseName(licenseName) {
+  if (licenseName !== undefined) {
+    let img = {
+      image:
+        config.state.imagesPath +
+        'licenses/' +
+        config.state.licenseIcons['public-domain'].image,
+      alt: config.state.licenseIcons['public-domain'].alt
+    };
+    let licenseFileName = licenseName
+      .toLowerCase()
+      .split(' ')
+      .join('-');
+    for (const key in config.state.licenseIcons) {
+      if (licenseFileName == key) {
+        img = {
+          image: config.state.imagesPath + 'licenses/' + config.state.licenseIcons[key].image,
+          alt: config.state.licenseIcons[key].alt
+        };
+      }
+    }
+    return img;
+  }
+  return {image: false, alt: false};
+}
+
 export default {
   functions: {
     setFilters,
@@ -145,6 +178,7 @@ export default {
     setParamsFilters,
     unescapeHTML,
     setNumericFilters,
-    getLowerCaseAlphanumericAndHyphen
+    getLowerCaseAlphanumericAndHyphen,
+    getLicenseIconAndAltByLicenseName
   }
 };
