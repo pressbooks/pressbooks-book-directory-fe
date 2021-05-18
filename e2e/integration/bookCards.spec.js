@@ -172,7 +172,7 @@ describe('Book cards', function () {
         }
       });
     });
-    it.only('Read more action for longer description', () => {
+    it('Read more action for longer description', () => {
       search('Para vivir con salud').wait(1000);
       cy.get(Elements.booksCards.description)
         .should('contain', 'Read more')
