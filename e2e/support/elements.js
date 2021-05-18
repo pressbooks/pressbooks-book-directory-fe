@@ -21,7 +21,8 @@ const Elements = {
     description: '[data-cy=book-description]',
     publisher: '[data-cy=book-publisher]',
     original: '[data-cy=book-original]',
-    notOriginal: '[data-cy=book-not-original]'
+    notOriginal: '[data-cy=book-not-original]',
+    recommended: '[data-cy=book-recommended]'
   },
   filterAccordion(facet) {
     return `[data-cy=filter-${facet}-header-button]`;

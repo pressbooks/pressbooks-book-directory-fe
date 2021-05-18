@@ -81,6 +81,12 @@ describe('Book cards', function () {
           'of the portfolio, BAS & MDS students will be able to challenge for up to 12 upper-division credits in ' +
           'designated courses.Produced in partnership with Boise State University');
     });
+    it('Check recommended attribute in the book cards', () => {
+      search('Open Music Theory');
+      cy.get(Elements.booksCards.recommended)
+        .should('include.text', 'Recommended');
+
+    });
     it('Check all book cards attributes from a particular book', () => {
       const attributesToCheck =  [
         {
