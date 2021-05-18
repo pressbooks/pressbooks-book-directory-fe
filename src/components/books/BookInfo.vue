@@ -1,6 +1,9 @@
 <template>
   <div class="space-y-2 mb-2">
-    <h2 class="tracking-widest uppercase text-sm font-medium">
+    <h2
+      class="tracking-widest uppercase text-sm font-medium"
+      data-cy="book-network"
+    >
       {{ `${item.networkHost} | ${item.networkName}` }}
     </h2>
     <h2 class="leading-tight text-xl font-semibold mb-1">

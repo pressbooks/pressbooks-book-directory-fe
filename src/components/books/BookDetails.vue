@@ -8,11 +8,19 @@
         v-if="hasAuthors"
         title="Author(s):"
         :text="authors"
+        data-cy="book-authors"
+      />
+      <meta-info
+        v-if="item.hasEditor"
+        title="Editor(s):"
+        :text="editors"
+        data-cy="book-editors"
       />
       <meta-info
         v-if="hasSubjects"
         title="Subject(s):"
         :text="subjects"
+        data-cy="book-subjects"
       />
       <meta-info
         v-if="hasLastUpdated"
@@ -24,10 +32,12 @@
         v-if="hasPublisher"
         title="Publisher:"
         :text="item.publisherName"
+        data-cy="book-publisher"
       />
       <meta-info
         title="Language:"
         :text="item.languageName"
+        data-cy="book-language"
       />
     </ul>
     <div data-cy="book-description">
@@ -35,6 +45,7 @@
       <p
         v-if="hasDescription"
         class="leading-relaxed font-serif line-clamp-6"
+        data-cy="book-description"
         v-html="item.description"
       />
       <!-- eslint-enable vue/no-v-html -->
@@ -83,6 +94,9 @@ export default {
       const month = date.getUTCMonth() +1, day = date.getUTCDate();
 
       return `${month < 10 ? '0' + month : month}-${day}-${date.getUTCFullYear()}`;
+    },
+    editors() {
+      return this.item.editor.join(', ');
     }
   }
 };

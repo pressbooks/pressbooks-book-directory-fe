@@ -1,3 +1,5 @@
+import config from './modules/config';
+
 function setFilters(oldFilters, allowedFilters) {
   let fs = [], ns = [], strQuery = '', f = {};
   let query = [], queryExcluded = [], numerics = {}, q =[];
@@ -138,6 +140,25 @@ function getLowerCaseAlphanumericAndHyphen(str) {
   return str.replaceAll(/[^a-zA-Z0-9_]+/ig,'-').toLowerCase();
 }
 
+/**
+ * Get Icon file and Alt text for a license given the license name
+ * @param licenseName
+ * @returns {{image: boolean, alt: boolean}|{image: string, alt: string}}
+ */
+function getLicenseIconAndAltByLicenseName(licenseName) {
+  if (licenseName === undefined) {
+    return {image: false, alt: false};
+  }
+
+  const key = licenseName.toLowerCase().split(' ').join('-');
+  const license = config.state.licenseIcons[key || 'public-domain'] ;
+
+  return {
+    image: `${config.state.imagesPath}licenses/${license.image}`,
+    alt: license.alt
+  };
+}
+
 export default {
   functions: {
     setFilters,
@@ -145,6 +166,7 @@ export default {
     setParamsFilters,
     unescapeHTML,
     setNumericFilters,
-    getLowerCaseAlphanumericAndHyphen
+    getLowerCaseAlphanumericAndHyphen,
+    getLicenseIconAndAltByLicenseName
   }
 };

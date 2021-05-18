@@ -1,9 +1,10 @@
 import helpers from '../../src/store/helpers';
+import Elements from './elements';
 
 function search(term) {
   cy.algoliaQueryRequest('searchResults');
-  cy.get('@inputSearch').type(term);
-  cy.get('@buttonSearch').click();
+  cy.get(Elements.search.input).type(term);
+  cy.get(Elements.search.button).click();
   return cy.wait(['@searchResults']);
 }
 
@@ -20,7 +21,7 @@ function encodeFacetFilterForURL(str) {
  * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
  */
 function clickAccordionHeader(facet) {
-  return cy.get(`[data-cy=filter-${facet}-header-button]`)
+  return cy.get(Elements.filterAccordion(facet))
     .click();
 }
 

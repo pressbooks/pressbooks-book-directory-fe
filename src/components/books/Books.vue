@@ -59,30 +59,7 @@ export default {
       }));
     },
     getLicenseIcon(item) {
-      if (item.licenseName !== undefined) {
-        let license = item.licenseName;
-        let img = {
-          image:
-              this.$store.state.config.imagesPath +
-              'licenses/' +
-              this.$store.state.config.licenseIcons['public-domain'].image,
-          alt: this.$store.state.config.licenseIcons['public-domain'].alt
-        };
-        let lic = license
-          .toLowerCase()
-          .split(' ')
-          .join('-');
-        for (const key in this.$store.state.config.licenseIcons) {
-          if (lic == key) {
-            img = {
-              image: this.$store.state.config.imagesPath + 'licenses/' + this.$store.state.config.licenseIcons[key].image,
-              alt: this.$store.state.config.licenseIcons[key].alt
-            };
-          }
-        }
-        return img;
-      }
-      return {image: false, alt: false};
+      return helpers.functions.getLicenseIconAndAltByLicenseName(item.licenseName);
     },
     removeXMLTags(string) {
       return string.replace(/(<([^>]+)>)/gi, '');
