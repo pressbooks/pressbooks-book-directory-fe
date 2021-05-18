@@ -146,29 +146,17 @@ function getLowerCaseAlphanumericAndHyphen(str) {
  * @returns {{image: boolean, alt: boolean}|{image: string, alt: string}}
  */
 function getLicenseIconAndAltByLicenseName(licenseName) {
-  if (licenseName !== undefined) {
-    let img = {
-      image:
-        config.state.imagesPath +
-        'licenses/' +
-        config.state.licenseIcons['public-domain'].image,
-      alt: config.state.licenseIcons['public-domain'].alt
-    };
-    let licenseFileName = licenseName
-      .toLowerCase()
-      .split(' ')
-      .join('-');
-    for (const key in config.state.licenseIcons) {
-      if (licenseFileName == key) {
-        img = {
-          image: config.state.imagesPath + 'licenses/' + config.state.licenseIcons[key].image,
-          alt: config.state.licenseIcons[key].alt
-        };
-      }
-    }
-    return img;
+  if (licenseName === undefined) {
+    return {image: false, alt: false};
   }
-  return {image: false, alt: false};
+
+  const key = licenseName.toLowerCase().split(' ').join('-');
+  const license = config.state.licenseIcons[key || 'public-domain'] ;
+
+  return {
+    image: `${config.state.imagesPath}licenses/${license.image}`,
+    alt: license.alt
+  };
 }
 
 export default {
