@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@sentry/vue": "^6.2.5",
+    "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
