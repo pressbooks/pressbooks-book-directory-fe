@@ -1,11 +1,24 @@
 import helpers from '../../src/store/helpers';
 import Elements from './elements';
+import {EventBus} from '../../src/utils/helpers';
+
+function waitToMount(event) {
+  return cy.wrap(new Promise((resolve)=>{
+    EventBus.$on(event,()=>{
+      resolve(true);
+    });
+  }));
+}
 
 function search(term) {
   cy.algoliaQueryRequest('searchResults');
-  cy.get(Elements.search.input).type(term);
-  cy.get(Elements.search.button).click();
-  return cy.wait(['@searchResults']);
+  return waitToMount('pbfilters')
+    .then(()=>{
+      cy.log('RESOLVED');
+      cy.get(Elements.search.input).type(term);
+      cy.get(Elements.search.button).click();
+      return cy.wait(['@searchResults']);
+    });
 }
 
 function encodeFacetFilterForURL(str) {
@@ -73,6 +86,6 @@ export {
   clickAccordionHeader,
   clickFilter,
   searchFacet,
-  removeChipFilter
+  removeChipFilter,
 };
 

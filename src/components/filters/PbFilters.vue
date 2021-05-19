@@ -21,6 +21,7 @@ import PbDateRangeFilters from './PbDateRangeFilters.vue';
 import PbSelectableFilters from './PbSelectableFilters.vue';
 import PbNumericFilters from './PbNumericFilters.vue';
 import PbBooleanFilters from './PbBooleanFilters.vue';
+import {EventBus} from '../../utils/helpers';
 
 export default {
   name: 'PbFilters',
@@ -79,6 +80,9 @@ export default {
         },
       ]
     };
+  },
+  updated() {
+    EventBus.$emit('pbfilters');
   }
 };
 </script>

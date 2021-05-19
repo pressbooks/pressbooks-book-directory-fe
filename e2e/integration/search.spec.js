@@ -12,11 +12,14 @@ describe('Search', () => {
 
     it('Search for specific book', () => {
 
-      search('math science');
+      search('math science').then(()=>{
 
-      cy.get('[data-cy=book-card]').should('have.length', 2);
-      cy.url()
-        .should('include','?q=math%20science');
+        cy.get('[data-cy=book-card]').should('have.length', 2);
+        cy.url()
+          .should('include','?q=math%20science');
+
+      });
+
 
     });
 
