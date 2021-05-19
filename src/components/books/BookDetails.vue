@@ -42,12 +42,25 @@
     </ul>
     <div data-cy="book-description">
       <!-- eslint-disable vue/no-v-html -->
-      <p
+      <v-clamp
         v-if="hasDescription"
-        class="leading-relaxed font-serif line-clamp-6"
+        autoresize
+        :max-lines="maxLinesDescription"
+        class="leading-relaxed font-serif"
         data-cy="book-description"
-        v-html="item.description"
-      />
+      >
+        {{ item.description }}
+        <template #after="{ toggle, clamped }">
+          <button
+            v-if="clamped"
+            class="block text-pb-red underline"
+            data-cy="book-read-more-description"
+            @click.prevent="toggle"
+          >
+            Read more
+          </button>
+        </template>
+      </v-clamp>
       <!-- eslint-enable vue/no-v-html -->
     </div>
   </div>
@@ -55,17 +68,24 @@
 
 <script>
 import MetaInfo from './MetaInfo.vue';
+import VClamp from 'vue-clamp';
 
 export default {
   name: 'BookDetails',
   components: {
-    MetaInfo
+    MetaInfo,
+    VClamp
   },
   props: {
     item: {
       type: Object,
       default() { return {}; }
     },
+  },
+  data() {
+    return {
+      maxLinesDescription: 6
+    };
   },
   computed: {
     hasAuthors() {
