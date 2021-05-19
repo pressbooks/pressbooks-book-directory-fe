@@ -1,9 +1,8 @@
 describe('Filter last updated', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720)
-        .visit('/')
-        .algoliaQueryRequest('algoliaRequest')
+
+      cy.algoliaQueryRequest('algoliaRequest')
         .get('article[data-cy=last-updated-filter]').as('lastUpdatedAccordion');
 
       cy.get('@lastUpdatedAccordion')

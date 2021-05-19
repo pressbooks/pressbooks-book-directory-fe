@@ -3,13 +3,13 @@
     class="bg-pb-blue"
     data-cy="collection-section"
   >
-    <div class="container mx-auto p-8">
+    <div class="container mx-auto py-10 px-8">
       <div class="border-gray-300">
         <div class="w-full mx-auto text-center">
           <h2 class="section-title font-bold text-4xl mb-12">
             Featured Collections
           </h2>
-          <div class="items flex flex-row flex-wrap items-center">
+          <div class="grid grid-cols-1 gap-y-3 md:grid-cols-5 md:gap-x-3">
             <pb-collection-card
               v-for="(card, n) in $store.state[storeName][storeProperty].slice(0, collectionCardsLimit)"
               :key="n"

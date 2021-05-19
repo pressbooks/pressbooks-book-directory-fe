@@ -14,7 +14,10 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+beforeEach(() => {
+  cy.viewport(1280, 720);
+  cy.intercept('**/indexes/*/query?*').as('fetching');
+  cy.visit('/');
+});

@@ -8,11 +8,19 @@
         v-if="hasAuthors"
         title="Author(s):"
         :text="authors"
+        data-cy="book-authors"
+      />
+      <meta-info
+        v-if="item.hasEditor"
+        title="Editor(s):"
+        :text="editors"
+        data-cy="book-editors"
       />
       <meta-info
         v-if="hasSubjects"
         title="Subject(s):"
         :text="subjects"
+        data-cy="book-subjects"
       />
       <meta-info
         v-if="hasLastUpdated"
@@ -24,19 +32,35 @@
         v-if="hasPublisher"
         title="Publisher:"
         :text="item.publisherName"
+        data-cy="book-publisher"
       />
       <meta-info
         title="Language:"
         :text="item.languageName"
+        data-cy="book-language"
       />
     </ul>
     <div data-cy="book-description">
       <!-- eslint-disable vue/no-v-html -->
-      <p
+      <v-clamp
         v-if="hasDescription"
-        class="leading-relaxed font-serif line-clamp-6"
-        v-html="item.description"
-      />
+        autoresize
+        :max-lines="maxLinesDescription"
+        class="leading-relaxed font-serif"
+        data-cy="book-description"
+      >
+        {{ item.description }}
+        <template #after="{ toggle, clamped }">
+          <button
+            v-if="clamped"
+            class="block text-pb-red underline"
+            data-cy="book-read-more-description"
+            @click.prevent="toggle"
+          >
+            Read more
+          </button>
+        </template>
+      </v-clamp>
       <!-- eslint-enable vue/no-v-html -->
     </div>
   </div>
@@ -44,17 +68,24 @@
 
 <script>
 import MetaInfo from './MetaInfo.vue';
+import VClamp from 'vue-clamp';
 
 export default {
   name: 'BookDetails',
   components: {
-    MetaInfo
+    MetaInfo,
+    VClamp
   },
   props: {
     item: {
       type: Object,
       default() { return {}; }
     },
+  },
+  data() {
+    return {
+      maxLinesDescription: 6
+    };
   },
   computed: {
     hasAuthors() {
@@ -83,6 +114,9 @@ export default {
       const month = date.getUTCMonth() +1, day = date.getUTCDate();
 
       return `${month < 10 ? '0' + month : month}-${day}-${date.getUTCFullYear()}`;
+    },
+    editors() {
+      return this.item.editor.join(', ');
     }
   }
 };

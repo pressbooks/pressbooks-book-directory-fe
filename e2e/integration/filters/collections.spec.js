@@ -2,9 +2,7 @@ describe('Filter collections', () => {
 
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720)
-        .visit('/')
-        .get('[data-cy=collection-section]').as('collectionSection');
+      cy.get('[data-cy=collection-section]').as('collectionSection');
     });
 
     it('Check for collections section and review the title section', () => {
@@ -39,17 +37,10 @@ describe('Filter collections', () => {
     });
 
     it('Filter by Nursing/Healthcare collection using side menu', () => {
-      cy.get('[data-cy=collections-filter]').as('collectionsFilter')
-        .find('[data-cy=filter-header-button]')
-        .contains('Collection')
+      cy.get('[data-cy=filter-collections-header-button]')
         .click();
 
-      cy.get('@collectionsFilter')
-        .find('[data-cy=filter-option]').first().as('nursingCollectionFilter')
-        .get('@nursingCollectionFilter')
-        .contains('Nursing/Healthcare')
-        .get('@nursingCollectionFilter')
-        .find('[data-cy=filter-include-button]').should('have.class', 'include')
+      cy.get('[data-cy=filter-collections-nursing-healthcare-include-button')
         .click();
 
       cy.algoliaQueryRequest()

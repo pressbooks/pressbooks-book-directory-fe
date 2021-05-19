@@ -1,18 +1,19 @@
 describe('Clear Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
-      cy.viewport(1280, 720)
-        .visit('/')
-        .algoliaQueryRequest('algoliaRequest');
+
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('article[data-cy=license-filter]').as('licenseAccordion');
 
       cy.get('@licenseAccordion').click();
 
-      [1, 2, 3].forEach((option) => {
-        cy.get('@licenseAccordion').find(`[data-cy=filter-option]:nth-of-type(${option}) button[data-cy=filter-include-button]`).click();
-      });
-
+      cy.get('[data-cy=filter-licenseCode-cc-by-include-button]')
+        .click()
+        .get('[data-cy=filter-licenseCode-cc-by-nc-sa-include-button]')
+        .click()
+        .get('[data-cy=filter-licenseCode-all-rights-reserved-include-button]')
+        .click();
     });
 
     it('Clear chip refinement', () => {

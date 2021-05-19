@@ -1,6 +1,9 @@
 <template>
   <div class="w-full md:w-1/3 md:pl-8">
-    <div class="image">
+    <div
+      class="image"
+      data-cy="book-cover"
+    >
       <pb-book-cover
         :image="item.image"
         :alt="item.name"
@@ -17,17 +20,19 @@
       />
       <pb-book-icon
         v-if="hasH5PActivities"
+        data-cy="book-h5p"
         icon="/assets/images/h5p.png"
         :alt="`This book has ${item.h5pActivities} H5P Activities`"
       />
       <pb-book-icon
         v-if="isBasedOn"
-        data-cy="book-original"
+        data-cy="book-not-original"
         icon="/assets/images/is-child.png"
         alt="Book based on another book"
       />
       <pb-book-icon
         v-if="!isBasedOn"
+        data-cy="book-original"
         icon="/assets/images/is-base.png"
         alt="This book is not based on another book"
       />
