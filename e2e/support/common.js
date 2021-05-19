@@ -1,24 +1,16 @@
 import helpers from '../../src/store/helpers';
 import Elements from './elements';
-import {EventBus} from '../../src/utils/helpers';
 
-function waitToMount(event) {
-  return cy.wrap(new Promise((resolve)=>{
-    EventBus.$on(event,()=>{
-      resolve(true);
-    });
-  }));
-}
-
+/**
+ * Type a term in the search box and perform the search.
+ *
+ * @param term - string. Any search term.
+ * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
+ */
 function search(term) {
-  cy.algoliaQueryRequest('searchResults');
-  return waitToMount('pbfilters')
-    .then(()=>{
-      cy.log('RESOLVED');
-      cy.get(Elements.search.input).type(term);
-      cy.get(Elements.search.button).click();
-      return cy.wait(['@searchResults']);
-    });
+  cy.get(Elements.search.input).type(term);
+  cy.get(Elements.search.button).click();
+  return cy.algoliaQueryRequest('searchRequest');
 }
 
 function encodeFacetFilterForURL(str) {
@@ -50,9 +42,8 @@ function clickAccordionHeader(facet) {
 function clickFilter(facet, facetItem, include) {
   const includeExclude = include ? 'include' : 'exclude';
   const facetItemButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(facetItem);
-  return cy.get(`[data-cy=filter-${facet}-${facetItemButton}-${includeExclude}-button]`)
-    .click()
-    .algoliaQueryRequest();
+  cy.get(`[data-cy=filter-${facet}-${facetItemButton}-${includeExclude}-button]`)
+    .click().algoliaQueryRequest('filterRequest');
 }
 
 /**
@@ -77,7 +68,7 @@ function removeChipFilter(facet, facetItem) {
   const facetItemButton = helpers.functions.getLowerCaseAlphanumericAndHyphen(facetItem);
   return cy.get(`[data-cy=chip-filter-${facet}-${facetItemButton}-button]`)
     .click()
-    .algoliaQueryRequest();
+    .algoliaQueryRequest('removeFilter');
 }
 
 export {

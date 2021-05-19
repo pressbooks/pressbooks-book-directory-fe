@@ -1,7 +1,6 @@
 describe('Show more/less facet filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
-      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('article[data-cy=license-filter]').as('licenseAccordion');
       cy.get('article[data-cy=subject-filter]').as('subjectAccordion');
@@ -56,6 +55,8 @@ describe('Show more/less facet filters',() => {
         .should('contain.text', 'Show more (2)')
         .click();
 
+      cy.algoliaQueryRequest();
+
       cy.get('@languageAccordion')
         .find('button[data-cy=show-more-languageName]')
         .should('not.exist');
@@ -83,6 +84,8 @@ describe('Show more/less facet filters',() => {
         () => cy.get('@networkAccordion').find('button[data-cy=show-more-networkName]').click()
       );
 
+      cy.algoliaQueryRequest();
+
       cy.get('@networkAccordion')
         .find('[data-cy=filter-networkName-option]')
         .should('have.length', 96);
@@ -90,6 +93,8 @@ describe('Show more/less facet filters',() => {
       cy.get('@networkAccordion')
         .find('button[data-cy=show-less-networkName]')
         .click();
+
+      cy.algoliaQueryRequest();
 
       cy.get('@networkAccordion')
         .find('[data-cy=filter-networkName-option]')

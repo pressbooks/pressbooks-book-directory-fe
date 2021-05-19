@@ -14,9 +14,6 @@ for (const facet in facetFilters) {
   let {field, urlAlias, includes, excludes, bookCards} = facetFilters[facet];
   describe(`Apply ${facet} filters`, () => {
     context('Desktop resolution', () => {
-      beforeEach(function () {
-        cy.algoliaQueryRequest();
-      });
       for (const includeFacet of includes) {
         it(`Include ${facet} ${includeFacet} filter action. Check URL and chip. Remove filter by clicking twice and check URL.`, () => {
           clickAccordionHeader(field);
@@ -115,7 +112,7 @@ for (const facet in facetFilters) {
           .each(($title) => {
             cy.get(Elements.booksCards.title).should(() => {
               expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
-                .to.contain.oneOf(bookCards.title);
+                .to.contain.oneOf(bookCards.titles);
             });
           });
         cy.get(Elements.numberOfBooks)

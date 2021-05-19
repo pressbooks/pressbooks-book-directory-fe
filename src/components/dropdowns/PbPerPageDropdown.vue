@@ -8,7 +8,9 @@
         placeholder="Books per page"
         :options="items"
         data-cy="books-per-page"
-        @input="refine"
+        @input="(data)=>{
+          onInput(data,refine)
+        }"
       />
     </template>
   </ais-hits-per-page>
@@ -23,6 +25,12 @@ export default {
     options: {
       type: Array,
       default() { return []; }
+    }
+  },
+  methods: {
+    onInput(data, refine) {
+      refine(data);
+      this.$store.state.SClient.searchParameters.hitsPerPage = data;
     }
   }
 };

@@ -82,7 +82,7 @@ export default {
     };
   },
   updated() {
-    EventBus.$emit('pbfilters');
+    EventBus.$emit('pb-filters');
   }
 };
 </script>

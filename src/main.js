@@ -9,7 +9,6 @@ import VueTailwindConfig from './vuetailwind.config';
 
 import './index.css';
 import {store} from './store';
-import {EventBus} from './utils/helpers';
 
 Vue.use(VueMeta);
 Vue.component('VueSelect', VueSelect);
@@ -57,8 +56,6 @@ router.beforeEach((to, from, next) => {
     next();
   });
 });
-
-window.bus = EventBus;
 
 new Vue({
   render: h => h(App),

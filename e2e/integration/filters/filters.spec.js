@@ -1,6 +1,7 @@
 describe('Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
+
       cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('article[data-cy=license-filter]').as('licenseAccordion')
@@ -30,12 +31,16 @@ describe('Filters',() => {
       cy.get('[data-cy=filter-licenseCode-all-rights-reserved-include-button]')
         .click();
 
+      cy.algoliaQueryRequest('algoliaRequest');
+
       cy.get('@subjectFirstItem')
         .find('span')
         .should('contain.text', 'Education (5)');
 
       cy.get('button[data-cy=filter-licenseCode-all-rights-reserved-exclude-button]')
         .click();
+
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('@subjectFirstItem')
         .find('span')
@@ -52,6 +57,8 @@ describe('Filters',() => {
 
       cy.get('[data-cy=filter-licenseCode-all-rights-reserved-include-button]')
         .click();
+
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('@subjectFirstItem')
         .find('span')

@@ -13,7 +13,6 @@ describe('Pagination', () => {
       cy.get('article[data-cy=license-filter]').as('licenseAccordion');
       cy.get('[data-cy=filter-licenseCode-public-domain-include-button]').as('publicDomainFilter');
 
-      cy.algoliaQueryRequest('algoliaRequest');
     });
 
     it('Render next page books after clicking a page', () => {
@@ -22,7 +21,7 @@ describe('Pagination', () => {
 
       cy.get('@firstPageLink').next().click({multiple:true});
 
-      cy.wait('@algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('@firstBookTitle').contains('Physics 103 and 104 Teaching Guide');
       cy.get('@firstPageLink').next().find('a').should('have.class','font-bold');
@@ -31,11 +30,14 @@ describe('Pagination', () => {
     });
 
     it('Paginate on facet search',() => {
+
+      cy.algoliaQueryRequest('algoliaRequest');
+
       cy.get('@licenseAccordion').click();
 
       cy.get('@publicDomainFilter').click();
 
-      cy.wait('@algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('@firstBookTitle').contains('Fundamentals of Plant Genebanking');
 
@@ -45,7 +47,7 @@ describe('Pagination', () => {
     it('Reset current pagination when a new search is performed',() => {
       cy.get('@firstPageLink').next().next().click({multiple:true});
 
-      cy.wait('@algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('[data-cy=paginator-link]:nth-of-type(4)').find('a').should('have.class','font-bold');
 
@@ -53,7 +55,7 @@ describe('Pagination', () => {
 
       cy.get('[data-cy=book-button-search]').click();
 
-      cy.wait('@algoliaRequest');
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('@firstPageLink').find('a').should('have.class','font-bold');
     });

@@ -1,4 +1,3 @@
-Cypress.Commands.add('algoliaQueryRequest', (alias='algoliaQuery', waitMs = 700) => {
-  cy.intercept('**/indexes/*/queries?*')
-    .as(alias);
+Cypress.Commands.add('algoliaQueryRequest', (alias='algoliaQuery') => {
+  cy.get('#nprogress').should('not.exist').as(alias);
 });

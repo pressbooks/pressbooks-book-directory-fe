@@ -3,6 +3,7 @@ import {clickAccordionHeader, clickFilter, search} from '../support/common';
 import helpers from '../../src/store/helpers';
 
 describe('Book cards', function () {
+
   context('Desktop resolution', () => {
     it('Check mandatory book card attributes for the first page', () => {
       const mandatoryAttributes =  [
@@ -65,10 +66,11 @@ describe('Book cards', function () {
         });
     });
     it('Search a book with editors and check if the editor field is present in the book cards', () => {
-      search('Nursing Pharmacology');
-      cy.get(Elements.booksCards.editors)
-        .first()
-        .contains('Elizabeth Christman, MSN, RN, CNE and Kimberly Ernstmeyer, CNE, CHSE, APNP-BC');
+      search('Nursing Pharmacology').then(()=>{
+        cy.get(Elements.booksCards.editors)
+          .first()
+          .contains('Elizabeth Christman, MSN, RN, CNE and Kimberly Ernstmeyer, CNE, CHSE, APNP-BC');
+      });
     });
     it('Search a book with description and check it is present in the book cards', () => {
       search('Prior Learning Portfolio Development');
