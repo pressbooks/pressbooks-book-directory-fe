@@ -5,7 +5,7 @@
       class="p-1 cursor-pointer h-full flex flex-col"
       @click.prevent="filter(card)"
     >
-      <div class="aspect-w-3 aspect-h-4 overflow-hidden">
+      <div class="aspect-w-3 aspect-h-4 overflow-hidden rounded">
         <img
           :src="card.image"
           :alt="card.name"
