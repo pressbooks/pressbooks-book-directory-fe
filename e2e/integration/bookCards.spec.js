@@ -174,5 +174,15 @@ describe('Book cards', function () {
         }
       });
     });
+    it('Read more action for longer description', () => {
+      search('Para vivir con salud').wait(1000);
+      cy.get(Elements.booksCards.description)
+        .should('contain', 'Read more')
+        .should('not.contain', 'While a growing number of literature departments teach Spanish courses with a health focus');
+      cy.get('[data-cy=book-read-more-description]')
+        .click()
+        .should('not.contain', 'Read more')
+        .should('contain', 'Seventeen countries are represented, including the United States.');
+    });
   });
 });
