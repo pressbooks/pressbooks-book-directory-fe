@@ -51,16 +51,14 @@
       >
         {{ item.description }}
         <template #after="{ toggle, clamped }">
-          <br>
-          <a
+          <button
             v-if="clamped"
-            href="#"
-            class="text-pb-red underline"
+            class="block text-pb-red underline"
             data-cy="book-read-more-description"
             @click.prevent="toggle"
           >
             Read more
-          </a>
+          </button>
         </template>
       </v-clamp>
       <!-- eslint-enable vue/no-v-html -->
