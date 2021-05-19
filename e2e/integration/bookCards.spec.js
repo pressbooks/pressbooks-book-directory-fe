@@ -76,12 +76,7 @@ describe('Book cards', function () {
       search('Prior Learning Portfolio Development');
       cy.get(Elements.booksCards.description)
         .first()
-        .contains('Written specifically for students in Boise State University’s Bachelor of Applied Science ' +
-          'and Multidisciplinary Studies Program, but applicable for students at many institutions, this textbook ' +
-          'guides students through the process of creating a prior learning portfolio, including creating a prior ' +
-          'learning resume, writing an educational narrative, and gathering supporting documentation. Upon completion ' +
-          'of the portfolio, BAS & MDS students will be able to challenge for up to 12 upper-division credits in ' +
-          'designated courses.Produced in partnership with Boise State University');
+        .should('include.text','Written specifically for students in Boise State University’s Bachelor of Applied Science');
     });
     it('Check recommended attribute in the book cards', () => {
       search('Open Music Theory');
@@ -157,7 +152,7 @@ describe('Book cards', function () {
         },
       ];
 
-      search('Significant Statistics').wait(1000);
+      search('Significant Statistics')
       cy.fixture('bookCard').then((bookCard) => {
         for(const attribute of attributesToCheck) {
           if ('image' in attribute) {
@@ -165,7 +160,7 @@ describe('Book cards', function () {
               .first()
               .find('img')
               .should('have.attr', 'src')
-              .should('contain', bookCard[attribute.fixtureProperty]);
+              .should('include', bookCard[attribute.fixtureProperty]);
             continue;
           }
           cy.get(attribute.element)
@@ -180,7 +175,8 @@ describe('Book cards', function () {
         .should('contain', 'Read more')
         .should('not.contain', 'While a growing number of literature departments teach Spanish courses with a health focus');
       cy.get('[data-cy=book-read-more-description]')
-        .click()
+        .click();
+      cy.get(Elements.booksCards.description)
         .should('not.contain', 'Read more')
         .should('contain', 'Seventeen countries are represented, including the United States.');
     });

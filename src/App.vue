@@ -106,7 +106,7 @@ export default {
     hideLoader() {
       setTimeout(()=>{
         NProgress.done();
-      },1000);
+      },2500);
     }
   }
 };
