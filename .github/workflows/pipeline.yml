@@ -46,7 +46,7 @@ jobs:
           browser: chrome
           headless: true
 
-      - name: Deploy to AWS
+      - name: Deploy to AWS Testing
         uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
         if: github.ref == 'refs/heads/v2'
         with:
@@ -55,14 +55,14 @@ jobs:
           aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
           pipeline-name: "v2_pressbooks_directory"
 
-      - name: Deploy to AWS Dev
+      - name: Deploy to AWS Dev / Staging
         uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
         if: github.ref == 'refs/heads/dev'
         with:
           aws-region: "ca-central-1"
           aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
           aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
-          pipeline-name: "dev_pressbooks_directory"
+          pipeline-name: "pressbooks-directory-front-end"
 
       - name: Deploy to AWS Production
         uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
