@@ -106,7 +106,7 @@ export default {
     hideLoader() {
       setTimeout(()=>{
         NProgress.done();
-      },2500);
+      },window.Cypress ? 3000 : 250);
     }
   }
 };
