@@ -78,6 +78,7 @@ export default {
     }
   },
   beforeMount() {
+    NProgress.configure({ showSpinner: false });
     NProgress.start();
   },
   updated() {
