@@ -151,11 +151,7 @@ function getLicenseIconAndAltByLicenseName(licenseName) {
   }
 
   const key = licenseName.toLowerCase().split(' ').join('-');
-  const license = config.state.licenseIcons[key || 'public-domain'] ;
-
-  if (license === undefined) {
-    return {image: '', alt: ''};
-  }
+  const license = config.state.licenseIcons[key] || config.state.licenseIcons['public-domain'];
 
   return {
     image: `${config.state.imagesPath}licenses/${license.image}`,
