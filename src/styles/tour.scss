@@ -1,5 +1,8 @@
 @import "introjs.css";
 .introjs {
+  &-tooltipReferenceLayer * {
+    @apply font-sans;
+  }
   &-tooltip {
     @apply px-8 py-4 rounded-lg;
     @media (min-width: 768px) {
@@ -8,21 +11,18 @@
     }
   }
   &-tooltip-header {
-    @apply font-sans mx-auto pt-1;
+    @apply mx-auto pt-1;
   }
   &-tooltip-title {
-    @apply font-sans text-center float-none text-3xl;
+    @apply text-center float-none text-3xl;
   }
   &-tooltiptext {
-    @apply font-sans;
-
     p {
-      @apply font-sans;
-      margin-bottom: 1rem;
+      @apply mb-4;
     }
 
     a {
-      @apply text-pb-red font-sans underline;
+      @apply text-pb-red underline;
     }
   }
 
@@ -31,7 +31,7 @@
   }
 
   &-nextbutton {
-    @apply bg-transparent border-0 uppercase font-sans tracking-widest font-bold text-sm;
+    @apply bg-transparent border-0 uppercase tracking-widest font-bold text-sm;
     &:after {
       content: "";
       display: block;
@@ -44,7 +44,7 @@
   }
 
   &-prevbutton {
-    @apply bg-transparent border-0 uppercase font-sans tracking-widest font-bold text-sm;
+    @apply bg-transparent border-0 uppercase tracking-widest font-bold text-sm;
     &:before {
       content: "";
       display: block;
@@ -78,5 +78,4 @@
       margin-top: .5em;
     }
   }
-
 }
