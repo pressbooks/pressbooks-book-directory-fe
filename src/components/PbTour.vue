@@ -276,7 +276,7 @@ export default {
 
           [1,2,3].forEach(function(item, index){
             setTimeout(()=>{
-              const filter = document.querySelector('article[data-cy="license-filter"] [data-cy="filter-option"]:nth-of-type('+item+') button[data-cy="filter-include-button"]');
+              const filter = document.querySelector('article[data-cy="license-filter"] [data-cy="filter-licenseCode-option"]:nth-of-type('+item+') button:nth-of-type(1)');
               filter.click();
             }, index * 1000);
           });
