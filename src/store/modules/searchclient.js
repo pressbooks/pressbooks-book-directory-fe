@@ -111,10 +111,11 @@ let sClient = {
   searchFilters: '',
   searchParameters: {
     hitsPerPage: 10,
+    sortedBy: '',
     facetFilters: [],
     page: 0,
     searchQuery: ''
-  }
+  },
 };
 
 export default {

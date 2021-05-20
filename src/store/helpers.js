@@ -151,7 +151,7 @@ function getLicenseIconAndAltByLicenseName(licenseName) {
   }
 
   const key = licenseName.toLowerCase().split(' ').join('-');
-  const license = config.state.licenseIcons[key || 'public-domain'] ;
+  const license = config.state.licenseIcons[key] || config.state.licenseIcons['public-domain'];
 
   return {
     image: `${config.state.imagesPath}licenses/${license.image}`,
@@ -163,10 +163,9 @@ export default {
   functions: {
     setFilters,
     getSimilarFacetValues,
-    setParamsFilters,
     unescapeHTML,
     setNumericFilters,
     getLowerCaseAlphanumericAndHyphen,
-    getLicenseIconAndAltByLicenseName
+    getLicenseIconAndAltByLicenseName,
   }
 };

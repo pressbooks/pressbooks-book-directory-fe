@@ -1,8 +1,5 @@
 describe('Books per page', () => {
   context('Desktop resolution', () => {
-    beforeEach(() => {
-      cy.algoliaQueryRequest('listing');
-    });
 
     it('Shows 10 books per page by default', () => {
       cy.get('[data-cy=book-card]').should('have.length', 10);
@@ -11,6 +8,8 @@ describe('Books per page', () => {
     it('Changes the amount of books displayed when requested', () => {
       [20, 50].forEach(length => {
         cy.intercept('**/indexes/*/queries?*').as(`listing${length}`);
+
+        cy.algoliaQueryRequest('listing');
 
         cy.get('[data-cy=books-per-page] .vs__dropdown-toggle').click();
 

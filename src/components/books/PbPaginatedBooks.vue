@@ -18,6 +18,6 @@ import Books from './Books.vue';
 import PbPagination from '../PbPagination.vue';
 export default {
   name: 'PbPaginatedBooks',
-  components: {PbPagination, Books, PbActiveFilters, PbStats}
+  components: {PbPagination, Books, PbActiveFilters, PbStats},
 };
 </script>

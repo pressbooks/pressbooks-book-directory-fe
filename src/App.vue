@@ -3,6 +3,7 @@
     :index-name="$store.state.SClient.indexName"
     :search-client="$store.state.SClient.searchClient"
     :search-function="paginationHook"
+    :middlewares="middlewares"
   >
     <ais-configure
       :facet-filters.camel="$store.state.SClient.notFilters"
@@ -42,6 +43,7 @@ import PbFilters from './components/filters/PbFilters.vue';
 import PbSearchAndSortBox from './components/PbSearchAndSortBox.vue';
 import PbPaginatedBooks from './components/books/PbPaginatedBooks.vue';
 import PbTour from './components/PbTour.vue';
+import NProgress from 'nprogress/nprogress';
 
 export default {
   components: {
@@ -58,6 +60,7 @@ export default {
     return {
       currentQuery: '',
       currentPage: 0,
+      middlewares: [this.middleware]
     };
   },
   watch: {
@@ -66,18 +69,46 @@ export default {
       handler(){
         this.currentQuery = null;
       }
+    },
+    '$store.state.SClient' : {
+      deep: true,
+      handler(){
+        NProgress.start();
+      }
     }
+  },
+  beforeMount() {
+    NProgress.configure({ showSpinner: false });
+    NProgress.start();
+  },
+  updated() {
+    this.hideLoader();
   },
   methods: {
     paginationHook(helper) {
+
       if(helper.getPage() === 0) {
         this.currentQuery = helper.state.query;
       }
       if(this.currentQuery !== helper.state.query) {
         helper.setPage(0); // reset the pagination when the query changes
       }
+
       helper.search();
+
+    },
+    middleware() {
+      return {
+        onStateChange: ({ uiState }) => {
+          this.hideLoader();
+        }
+      };
+    },
+    hideLoader() {
+      setTimeout(()=>{
+        NProgress.done();
+      },window.Cypress ? 3000 : 250);
     }
-  },
+  }
 };
 </script>

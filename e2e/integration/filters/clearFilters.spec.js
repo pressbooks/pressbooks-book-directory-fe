@@ -2,8 +2,6 @@ describe('Clear Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
 
-      cy.algoliaQueryRequest('algoliaRequest');
-
       cy.get('article[data-cy=license-filter]').as('licenseAccordion');
 
       cy.get('@licenseAccordion').click();
@@ -14,10 +12,12 @@ describe('Clear Filters',() => {
         .click()
         .get('[data-cy=filter-licenseCode-all-rights-reserved-include-button]')
         .click();
+
+      cy.algoliaQueryRequest('algoliaRequest');
+
     });
 
     it('Clear chip refinement', () => {
-      cy.wait('@algoliaRequest');
 
       cy.url()
         .should('include','?license=CC%20BY');
@@ -25,6 +25,8 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 3);
 
       cy.get('[data-cy=chip-filter]:nth-of-type(1) button').click();
+
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 2);
 
@@ -34,7 +36,6 @@ describe('Clear Filters',() => {
     });
 
     it('Clear all refinements', () => {
-      cy.wait('@algoliaRequest');
 
       cy.url()
         .should('include','?license=CC%20BY');
@@ -42,6 +43,8 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 3);
 
       cy.get('[data-cy=clear-all-filters]').click();
+
+      cy.algoliaQueryRequest('algoliaRequest');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 0);
 

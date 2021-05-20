@@ -8,7 +8,9 @@
         placeholder="Sort books by"
         :options="items"
         data-cy="sort-books-by"
-        @input="refine"
+        @input="(data)=>{
+          onInput(data,refine)
+        }"
       />
     </template>
   </ais-sort-by>
@@ -23,6 +25,12 @@ export default {
     options: {
       type: Array,
       default() { return []; }
+    }
+  },
+  methods: {
+    onInput(data, refine) {
+      refine(data);
+      this.$store.state.SClient.searchParameters.sortedBy = data;
     }
   }
 };

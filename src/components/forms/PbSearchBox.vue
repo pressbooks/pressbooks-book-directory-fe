@@ -38,6 +38,7 @@
 import {SearchIcon} from '@vue-hero-icons/outline';
 import helpers from '../../store/helpers';
 import {scrollTo} from '../../utils/helpers';
+import NProgress from 'nprogress/nprogress';
 
 export default {
   name: 'PbSearchBox',
@@ -206,6 +207,7 @@ export default {
           stringSearch.length === 0 // Remove search case
       ) {
         scrollTo('#books');
+        NProgress.start();
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;
