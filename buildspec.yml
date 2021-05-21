@@ -1,48 +1,19 @@
 version: 0.2
 
-  #env:
-  #variables:
-  # key: "value"
-  # key: "value"
-  #parameter-store:
-  # key: "value"
-  # key: "value"
-  #secrets-manager:
-  # key: secret-id:json-key:version-stage:version-id
-  # key: secret-id:json-key:version-stage:version-id
-  #exported-variables:
-  # - variable
-  # - variable
-  #git-credential-helper: yes
-
 phases:
-  #install:
-  #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
-  #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
-  #runtime-versions:
-  # name: version
-  # name: version
-  #commands:
-  # - command
-  # - command
+  install:
+    runtime-versions:
+      nodejs: 15.14.0
+    commands:
+      - npm install npm@7.7.6 -g
+      - npm set progress=false
   pre_build:
     commands:
       - npm install
       - npm run lint
   build:
     commands:
-      - VITE_ALGOLIA_APP_ID=${VITE_ALGOLIA_APP_ID} VITE_ALGOLIA_API_READ_KEY=${VITE_ALGOLIA_API_READ_KEY} VITE_ALGOLIA_INDEX=${VITE_ALGOLIA_INDEX} VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA=${VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA} VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA=${VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA} npm run build
-  #post_build:
-    #commands:
-      # - command
-      # - command
-#reports:
-  #browserstack-reports:
-    #files:
-      #- '**/*'
-    #base-directory: ./e2e_tests/output
-    #discard-paths: yes
-    #file-format: JunitXml
+      - npm run build
 artifacts:
   files:
     - '**/*'
