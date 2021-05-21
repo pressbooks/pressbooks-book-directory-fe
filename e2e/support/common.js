@@ -31,6 +31,17 @@ function clickAccordionHeader(facet) {
 }
 
 /**
+ * Click submit button for Numeric Filters.
+ *
+ * @param facet - string. Algolia's facet, examples: licenseCode, publisherName.
+ * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
+ */
+function submitNumericFilter(facet) {
+  return cy.get(Elements.numericOption(facet))
+    .click();
+}
+
+/**
  * Click in a facet filter (include or exclude button). It could apply or remove a filter,
  * depending on if it was clicked once or twice.
  *
@@ -58,6 +69,29 @@ function searchFacet(facet, term) {
 }
 
 /**
+ *
+ * @param facet - string. Algolia's facet, examples: wordCount, storage.
+ * @param type - string. Type could be min or max.
+ * @param term - string. Term to search.
+ * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
+ */
+function fillNumericValue(facet, type, term) {
+  return cy.get(Elements.numericOption(facet,type))
+    .clear().type(term);
+}
+
+
+/**
+ *
+ * @param facet - string. Algolia's facet, examples: wordCount, storage.
+ * @param type - string. Type could be min or max.
+ * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
+ */
+function getNumericInput(facet, type) {
+  return cy.get(Elements.numericOption(facet,type));
+}
+
+/**
  * Click in a chip filter to remove the filter applied.
  *
  * @param facet - string. Algolia's facet, examples: licenseCode, publisherName.
@@ -78,5 +112,8 @@ export {
   clickFilter,
   searchFacet,
   removeChipFilter,
+  fillNumericValue,
+  getNumericInput,
+  submitNumericFilter
 };
 
