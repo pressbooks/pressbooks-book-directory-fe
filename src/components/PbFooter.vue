@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-pb-blue">
-    <div class="container mx-auto lg:px-16 py-16 space-y-4">
+    <div class="container mx-auto p-8 lg:p-16 space-y-4">
       <div class="flex pb-8 border-b border-grey">
         <ul class="flex flex-col font-bold lg:flex-row w-full items-center justify-between space-y-8 lg:space-y-0">
           <li
