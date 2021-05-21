@@ -71,5 +71,5 @@ jobs:
           aws-region: "ca-central-1"
           aws-access-key: ${{ secrets.AWS_PIPELINE_PROD_ACCESS_KEY }}
           aws-secret-key: ${{ secrets.AWS_PIPELINE_PROD_SECRET_KEY }}
-          pipeline-name: "prod_pressbooks_directory"
+          pipeline-name: "pressbooks-directory"
 
