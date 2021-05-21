@@ -30,6 +30,12 @@ const Elements = {
   filterOptions(facet) {
     return `[data-cy=filter-${facet}-option]`;
   },
+  numericOption(facet,type='') {
+    if(['min','max'].includes(type)) {
+      return `[data-cy-input=${facet}-${type}]`;
+    }
+    return `[data-cy-button=${facet}]`;
+  },
   numberOfBooks: '[data-cy=number-of-books]'
 };
 

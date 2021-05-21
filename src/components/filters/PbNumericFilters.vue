@@ -1,5 +1,8 @@
 <template>
-  <pb-accordion :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'">
+  <pb-accordion
+    :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'"
+    :data-cy-button="`${field}`"
+  >
     <template #title>
       <span class="title font-semibold">
         {{ title }}
@@ -22,6 +25,7 @@
                 :min="0"
                 type="number"
                 class="w-full border-0 text-sm p-1 focus:outline-none focus:ring-0"
+                :data-cy-input="`${field}-min`"
               >
             </div>
           </div>
@@ -39,11 +43,12 @@
                 :min="0"
                 type="number"
                 class="w-full border-0 text-sm p-1 focus:outline-none focus:ring-0"
+                :data-cy-input="`${field}-max`"
               >
             </div>
           </div>
 
-          <div>
+          <div :data-cy-button="`${field}`">
             <t-button
               type="submit"
               :disabled="number.min === 0 && number.max === 0"
