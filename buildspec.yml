@@ -18,7 +18,6 @@ phases:
   pre_build:
     commands:
       - npm install
-      - npm run lint
   build:
     commands:
       - npm run build
