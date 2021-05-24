@@ -1,16 +1,19 @@
 import Vue from 'vue';
 import App from './App.vue';
-import vuetify from './plugins/vuetify';
 import InstantSearch from 'vue-instantsearch';
-import { store } from './store/index';
-import router from './router';
-import * as Sentry from '@sentry/vue';
-import { Integrations } from '@sentry/tracing';
 import VueMeta from 'vue-meta';
+import VueSelect from 'vue-select';
+import VueTailwind from 'vue-tailwind';
+import router from './router';
+import VueTailwindConfig from './vuetailwind.config';
+
+import './index.css';
+import {store} from './store';
 
 Vue.use(VueMeta);
+Vue.component('VueSelect', VueSelect);
 Vue.use(InstantSearch);
-Vue.config.productionTip = false;
+Vue.use(VueTailwind, VueTailwindConfig);
 
 router.beforeEach((to, from, next) => {
   let indexName = store.state.SClient.availableIndexes.filter((index) => {
@@ -54,24 +57,7 @@ router.beforeEach((to, from, next) => {
   });
 });
 
-if (typeof process.env.VUE_APP_SENTRY_DSN !== 'undefined') {
-  Sentry.init({
-    Vue,
-    dsn: process.env.VUE_APP_SENTRY_DSN,
-    environment: typeof process.env.VUE_APP_ENVIRONMENT !== 'undefined' ? process.env.VUE_APP_ENVIRONMENT : 'development',
-    integrations: [
-      new Integrations.BrowserTracing(),
-    ],
-    tracesSampleRate: typeof process.env.VUE_APP_SENTRY_TRACE_RATE !== 'undefined' ? parseFloat(process.env.VUE_APP_SENTRY_TRACE_RATE) : 0.5,
-    tracingOptions: {
-      trackComponents: true
-    },
-    logErrors: true
-  });
-}
-
 new Vue({
-  vuetify,
   render: h => h(App),
   store,
   router

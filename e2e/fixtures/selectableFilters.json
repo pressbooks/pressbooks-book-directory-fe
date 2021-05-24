@@ -1,0 +1,151 @@
+{
+  "License": {
+    "includes": [ "CC BY-ND", "CC0" ],
+    "excludes": [ "CC BY", "CC BY-NC-SA" ],
+    "field": "licenseCode",
+    "urlAlias": "license",
+    "bookCards": {
+      "filters": [ "CC BY-NC", "CC BY-NC-SA" ],
+      "include": true,
+      "titles": [
+        "Prior Learning Portfolio Development",
+        "Para vivir con salud",
+        "Teaching in Desire2Learn",
+        "Dini Afrika ya Mashariki",
+        "Jinsia na Mapenzi Afrika ya Mashariki",
+        "Physics 103 and 104 Teaching Guide",
+        "Collecting and Mapping Data",
+        "Process of Science Companion, Book 3: Data Analysis Statistics and Experimental Design",
+        "MTLE Resources",
+        "Resources for Self-Instructional Learners of Less Commonly Taught Languages"
+      ],
+      "count": 725
+    }
+  },
+  "Subject": {
+    "includes": [ "Mathematics", "Chemistry" ],
+    "excludes": [ "Education", "Open learning, distance education" ],
+    "field": "about",
+    "urlAlias": "subj",
+    "search": {
+      "searchTerm": "math",
+      "filter": "Mathematical logic"
+    },
+    "bookCards": {
+      "filters": [ "Sociology", "Chemistry" ],
+      "include": true,
+      "titles": [
+        "Exploring the Physical World: Introductory Chemistry and Physics",
+        "Consent & Sexual Violence: Training and Facilitation Guide",
+        "CHEM:1110 Lab Manual Spring 2020",
+        "Accountability and Repairing Relationships: Training and Facilitation Guide",
+        "Active Bystander Intervention: Training and Facilitation Guide",
+        "Consent & Sexual Violence: Training and Facilitation Guide",
+        "Supporting Survivors: Training and Facilitation Guide",
+        "Accountability and Repairing Relationships: Training and Facilitation Guide",
+        "Supporting Survivors: Training and Facilitation Guide",
+        "Active Bystander Intervention: Training and Facilitation Guide"
+      ],
+      "count": 47
+    }
+  },
+  "Network": {
+    "includes": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
+    "excludes": [ "eCampusOntario Open Authoring Platform", "British Columbia/Yukon Open Authoring Platform" ],
+    "field": "networkName",
+    "urlAlias": "net",
+    "search": {
+      "searchTerm": "publ",
+      "filter": "Milne Publishing"
+    },
+    "bookCards": {
+      "filters": [ "Science et Bien Commun", "University of Minnesota Libraries Publishing" ],
+      "include": true,
+      "titles": [
+        "Un dictionnaire décolonial",
+        "Large Animal Surgery - Supplemental Notes",
+        "La gravité des choses",
+        "\"The Death of Ivan Ilich\": An Electronic Study Edition of the Russian Text",
+        "Prendre la parole",
+        "Developing Change Agents",
+        "Apples",
+        "Vet Med: Applied GI Physiology- Supplemental Notes",
+        "La révolution des Communs et le droit",
+        "Human Biology 2nd edition"
+      ],
+      "count": 107
+    }
+  },
+  "Language": {
+    "includes": [ "Turkish", "Hindi" ],
+    "excludes": [ "English", "English (Canada)" ],
+    "field": "languageName",
+    "urlAlias": "lang",
+    "bookCards": {
+      "filters": [ "English", "English (Canada)", "English (United States)" ],
+      "include": false,
+      "titles": [
+        "Para vivir con salud",
+        "Un dictionnaire décolonial",
+        "Programmes d'étude et ressources autorisées",
+        "La gravité des choses",
+        "Violence Domestique dans les Communautés d’Immigrants: Études de Cas",
+        "Prendre la parole",
+        "A parar bien la oreja: cuaderno de comprensión auditiva",
+        "La révolution des Communs et le droit",
+        "Taali fulɓe gaawooɓe, durooɓe egga hoɗaaɓe gorgal Niijer - Contes des Peuls Gaawooɓe, pasteurs nomades de l’ouest du Niger",
+        "Guide décolonisé et pluriversel de formation à la recherche en sciences sociales et humaines"
+      ],
+      "count": 89
+    }
+  },
+  "Publisher": {
+    "includes": [ "Rebus Community", "The Ohio State University" ],
+    "excludes": [ "BCcampus", "OpenStax" ],
+    "field": "publisherName",
+    "urlAlias": "pub",
+    "search": {
+      "searchTerm": "reb",
+      "filter": "Rebus Foundation"
+    },
+    "bookCards": {
+      "filters": [ "BCcampus" ],
+      "include": false,
+      "titles": [
+        "Prior Learning Portfolio Development",
+        "Para vivir con salud",
+        "SPAN 463: Los gitanos en la cultura hispana",
+        "Significant Statistics",
+        "Journal of Research in Progress Vol. 4",
+        "Teaching in Desire2Learn",
+        "Pressbooks 101",
+        "Academic Reading & Vocabulary Skills",
+        "Dini Afrika ya Mashariki",
+        "Jinsia na Mapenzi Afrika ya Mashariki"
+      ],
+      "count": 2182
+    }
+  },
+  "Collection": {
+    "includes": [ "Dual/High Enrollment", "Interactive OER" ],
+    "excludes": [ "Nursing/Healthcare", "Student Authored" ],
+    "field": "collections",
+    "urlAlias": "collec",
+    "search": {
+      "searchTerm": "open",
+      "filter": "OpenStax"
+    },
+    "bookCards": {
+      "filters": [ "Open Pedagogy", "Dual/High Enrollment" ],
+      "include": true,
+      "titles": [
+        "Facilitating online learning with the 5R's",
+        "Environmental Biology",
+        "Inclusive Spectrums",
+        "Open at the Margins",
+        "Open Anthology of Earlier American Literature"
+      ],
+      "count": 5
+    }
+  }
+}

@@ -3,7 +3,7 @@ node_modules
 /dist
 
 # local env files
-.env.local
+.env
 .env.*.local
 
 # Log files
@@ -20,8 +20,9 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+.env
 
-# Nightwatch
-/e2e_tests/output
-/e2e_tests/screenshots
-/e2e_tests/log
+# Cypress
+local.log
+log/
+results/

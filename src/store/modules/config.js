@@ -1,8 +1,19 @@
 let config = {
   imagesPath: 'assets/images/',
   logo: 'pressbooks-logo.jpeg',
-  twitterUrl: 'https://twitter.com/intent/follow?screen_name=pressbooks',
-  guideUrl: 'https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory/',
+  urls: {
+    guide: 'https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory',
+    linkedin: 'https://www.linkedin.com/company/pressbooks',
+    pressbooks: 'https://pressbooks.com',
+    twitter: 'https://twitter.com/pressbooks',
+    youtube: 'https://www.youtube.com/channel/UCyMeJ5C4p6AxF9QXg6Bgzjg',
+    blog: 'https://pressbooks.com/blog',
+    opensource: 'https://pressbooks.org',
+    contact: 'https://pressbooks.com/contact-pressbooks/',
+    jobs: 'https://pressbooks.com/about/#work-with-us',
+    accessibility: 'https://pressbooks.com/accessibility/',
+    procurement: 'https://pressbooks.com/edu-procurement-helpers/'
+  },
   h5pLogo: 'h5p.png',
   basedOnImg: 'is-child.png',
   originalImg: 'is-base.png',

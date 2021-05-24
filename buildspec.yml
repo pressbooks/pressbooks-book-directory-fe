@@ -1,48 +1,26 @@
 version: 0.2
-
-  #env:
-  #variables:
-  # key: "value"
-  # key: "value"
-  #parameter-store:
-  # key: "value"
-  # key: "value"
-  #secrets-manager:
-  # key: secret-id:json-key:version-stage:version-id
-  # key: secret-id:json-key:version-stage:version-id
-  #exported-variables:
-  # - variable
-  # - variable
-  #git-credential-helper: yes
-
+env:
+  shell: bash
 phases:
-  #install:
-  #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
-  #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
-  #runtime-versions:
-  # name: version
-  # name: version
-  #commands:
-  # - command
-  # - command
+  install:
+    commands:
+      - rm -rf /etc/apt/sources.list.d/google-chrome.list
+      - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+      - curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
+      - apt-get update
+      - apt-get install nodejs -y -q
+      - mv /usr/local/bin/node /usr/local/bin/node14
+      - mv /usr/local/bin/npm /usr/local/bin/npm6
+      - mv /usr/bin/node /usr/local/bin/node
+      - npm install -g npm
+      - node -v
+      - npm -v
   pre_build:
     commands:
       - npm install
-      - npm run lint
   build:
     commands:
-      - VUE_APP_ALGOLIA_APP_ID=${VUE_APP_ALGOLIA_APP_ID} VUE_APP_ALGOLIA_API_READ_KEY=${VUE_APP_ALGOLIA_API_READ_KEY} VUE_APP_ALGOLIA_INDEX=${VUE_APP_ALGOLIA_INDEX} VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA=${VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA} VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA=${VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA} npm run build
-  #post_build:
-    #commands:
-      # - command
-      # - command
-#reports:
-  #browserstack-reports:
-    #files:
-      #- '**/*'
-    #base-directory: ./e2e_tests/output
-    #discard-paths: yes
-    #file-format: JunitXml
+      - npm run build
 artifacts:
   files:
     - '**/*'

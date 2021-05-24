@@ -3,28 +3,28 @@ import helpers from '../helpers';
 
 let sClient = {
   searchClient: algoliasearch(
-    process.env.VUE_APP_ALGOLIA_APP_ID,
-    process.env.VUE_APP_ALGOLIA_API_READ_KEY,
+    import.meta.env.VITE_ALGOLIA_APP_ID,
+    import.meta.env.VITE_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
   availableIndexes: [
     {
-      value: process.env.VUE_APP_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      value: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
       default: true,
       orderedBy: 'updated',
       isReplica: true,
       label: 'Recently updated'
     },
     {
-      value: process.env.VUE_APP_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
+      value: import.meta.env.VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
       default: false,
       orderedBy: 'wordCount',
       isReplica: true,
       label: 'Word count ↓'
     },
     {
-      value: process.env.VUE_APP_ALGOLIA_INDEX,
+      value: import.meta.env.VITE_ALGOLIA_INDEX,
       default: false,
       orderedBy: 'name',
       isReplica: false,
@@ -111,10 +111,11 @@ let sClient = {
   searchFilters: '',
   searchParameters: {
     hitsPerPage: 10,
+    sortedBy: '',
     facetFilters: [],
     page: 0,
     searchQuery: ''
-  }
+  },
 };
 
 export default {
@@ -154,11 +155,7 @@ export default {
         }
       }
       state.filtersExcluded = { ...filters  };
-      let nf = helpers.functions.setFilters(filters, state.allowedFilters);
-      state.notFilters = nf[0];
-      state.hasNumeric = (nf[1].length > 0);
-      state.numericFilters = nf[1];
-      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
+      helpers.functions.setNumericFilters(filters,state);
     },
     setFiltersExcluded(state, filter) {
       let oldFilters = { ...state.filtersExcluded };
@@ -167,11 +164,7 @@ export default {
       }
       oldFilters[filter.attribute].push(filter);
       state.filtersExcluded = { ...oldFilters  };
-      let nf = helpers.functions.setFilters(oldFilters, state.allowedFilters);
-      state.notFilters = nf[0];
-      state.hasNumeric = (nf[1].length > 0);
-      state.numericFilters = nf[1];
-      state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
+      helpers.functions.setNumericFilters(oldFilters,state);
     },
     deleteExcluded(state, field) {
       let fe = { ...state.filtersExcluded };
@@ -194,11 +187,7 @@ export default {
           }
         }
         state.filtersExcluded = fe;
-        let nf = helpers.functions.setFilters(fe, state.allowedFilters);
-        state.notFilters = nf[0];
-        state.hasNumeric = (nf[1].length > 0);
-        state.numericFilters = nf[1];
-        state.filtersParams = helpers.functions.setParamsFilters(state.numericFilters, state.searchFilters);
+        helpers.functions.setNumericFilters(fe,state);
       }
     },
     // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}
