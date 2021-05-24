@@ -1,19 +1,14 @@
+import {clickAccordionHeader, clickFilter} from '../../support/common';
+
 describe('Clear Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
 
-      cy.get('article[data-cy=license-filter]').as('licenseAccordion');
+      clickAccordionHeader('licenseCode');
 
-      cy.get('@licenseAccordion').click();
-
-      cy.get('[data-cy=filter-licenseCode-cc-by-include-button]')
-        .click()
-        .get('[data-cy=filter-licenseCode-cc-by-nc-sa-include-button]')
-        .click()
-        .get('[data-cy=filter-licenseCode-all-rights-reserved-include-button]')
-        .click();
-
-      cy.algoliaQueryRequest('algoliaRequest');
+      clickFilter('licenseCode','cc-by', 'include');
+      clickFilter('licenseCode','cc-by-nc-sa', 'include');
+      clickFilter('licenseCode','all-rights-reserved', 'include');
 
     });
 

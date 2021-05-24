@@ -1,16 +1,23 @@
 version: 0.2
-
+env:
+  shell: bash
 phases:
   install:
-    runtime-versions:
-      nodejs: 15.14.0
     commands:
-      - npm install npm@7.7.6 -g
-      - npm set progress=false
+      - rm -rf /etc/apt/sources.list.d/google-chrome.list
+      - echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+      - curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
+      - apt-get update
+      - apt-get install nodejs -y -q
+      - mv /usr/local/bin/node /usr/local/bin/node14
+      - mv /usr/local/bin/npm /usr/local/bin/npm6
+      - mv /usr/bin/node /usr/local/bin/node
+      - npm install -g npm
+      - node -v
+      - npm -v
   pre_build:
     commands:
       - npm install
-      - npm run lint
   build:
     commands:
       - npm run build
