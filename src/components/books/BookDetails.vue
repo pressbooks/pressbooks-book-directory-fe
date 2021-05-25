@@ -6,36 +6,36 @@
     >
       <meta-info
         v-if="hasAuthors"
-        title="Author(s):"
+        title="Author(s): "
         :text="authors"
         data-cy="book-authors"
       />
       <meta-info
         v-if="item.hasEditor"
-        title="Editor(s):"
+        title="Editor(s): "
         :text="editors"
         data-cy="book-editors"
       />
       <meta-info
         v-if="hasSubjects"
-        title="Subject(s):"
+        title="Subject(s): "
         :text="subjects"
         data-cy="book-subjects"
       />
       <meta-info
         v-if="hasLastUpdated"
-        title="Updated:"
+        title="Updated: "
         data-cy="book-last-updated"
         :text="lastUpdated"
       />
       <meta-info
         v-if="hasPublisher"
-        title="Publisher:"
+        title="Publisher: "
         :text="item.publisherName"
         data-cy="book-publisher"
       />
       <meta-info
-        title="Language:"
+        title="Language: "
         :text="item.languageName"
         data-cy="book-language"
       />
