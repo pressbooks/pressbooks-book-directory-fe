@@ -1,5 +1,6 @@
 <template>
   <section
+    v-if="$store.state[storeName][storeProperty].length >= 5"
     class="bg-pb-blue"
     data-cy="collection-section"
   >
