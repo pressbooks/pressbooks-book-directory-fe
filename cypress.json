@@ -1,0 +1,14 @@
+{
+  "baseUrl": "http://localhost:3001",
+  "video": false,
+  "fixturesFolder": "e2e/fixtures",
+  "integrationFolder": "e2e/integration",
+  "pluginsFile": "e2e/plugins/index.js",
+  "screenshotsFolder": "e2e/screenshots",
+  "videosFolder": "e2e/videos",
+  "supportFile": "e2e/support/index.js",
+  "defaultCommandTimeout": 10000,
+  "requestTimeout": 10000,
+  "pageLoadTimeout": 10000,
+  "modifyObstructiveCode": false
+}

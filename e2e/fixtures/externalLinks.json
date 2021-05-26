@@ -1,0 +1,46 @@
+{
+  "learn-about-pressbooks": {
+    "url": "https://pressbooks.com",
+    "navigate": true
+  },
+  "pressbooks-homepage": {
+    "url": "https://pressbooks.com",
+    "navigate": true
+  },
+  "pressbooks-blog": {
+    "url": "https://pressbooks.com/blog",
+    "navigate": true
+  },
+  "pressbooks-opensource": {
+    "url": "https://pressbooks.org",
+    "navigate": true
+  },
+  "pressbooks-contact": {
+    "url": "https://pressbooks.com/contact-pressbooks/",
+    "navigate": true
+  },
+  "pressbooks-jobs": {
+    "url": "https://pressbooks.com/about/#work-with-us",
+    "navigate": true
+  },
+  "pressbooks-accessibility": {
+    "url": "https://pressbooks.com/accessibility/",
+    "navigate": true
+  },
+  "pressbooks-procurement": {
+    "url": "https://pressbooks.com/edu-procurement-helpers/",
+    "navigate": true
+  },
+  "twitter-social-link": {
+    "url": "https://twitter.com/pressbooks",
+    "navigate": false
+  },
+  "linkedin-social-link": {
+    "url": "https://www.linkedin.com/company/pressbooks",
+    "navigate": false
+  },
+  "youtube-social-link": {
+    "url": "https://www.youtube.com/channel/UCyMeJ5C4p6AxF9QXg6Bgzjg",
+    "navigate": false
+  }
+}

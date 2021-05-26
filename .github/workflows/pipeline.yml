@@ -1,0 +1,79 @@
+name: Tests
+
+on:
+  push:
+    branches: [ dev, master, v2 ]
+  pull_request:
+    branches: [ dev, v2 ]
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node12.18.3-chrome87-ff82
+    name: Testing
+    env:
+      VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
+      VITE_ALGOLIA_API_READ_KEY: ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
+      VITE_ALGOLIA_INDEX: ${{ secrets.VITE_ALGOLIA_INDEX }}
+      VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA }}
+      VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA }}
+      VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
+      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '15'
+
+      - name: Debug Env
+        run: |
+          echo ${{ secrets.VITE_ALGOLIA_APP_ID }}
+          echo ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
+          echo ${{ secrets.VITE_ALGOLIA_INDEX }}
+
+      - name: Install dependencies
+        run: |
+          node -v
+          npm i
+
+      - name: Lint
+        run: npm run lint
+
+      - name: e2e Tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run dev
+          wait-on: http://localhost:3001
+          browser: chrome
+          headless: true
+
+      - name: Deploy to AWS Testing
+        uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+        if: github.ref == 'refs/heads/v2'
+        with:
+          aws-region: "ca-central-1"
+          aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
+          aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
+          pipeline-name: "v2_pressbooks_directory"
+
+      - name: Deploy to AWS Dev / Staging
+        uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+        if: github.ref == 'refs/heads/dev'
+        with:
+          aws-region: "ca-central-1"
+          aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
+          aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
+          pipeline-name: "pressbooks-directory-front-end"
+
+      - name: Deploy to AWS Production
+        uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+        if: github.ref == 'refs/heads/master'
+        with:
+          aws-region: "ca-central-1"
+          aws-access-key: ${{ secrets.AWS_PIPELINE_PROD_ACCESS_KEY }}
+          aws-secret-key: ${{ secrets.AWS_PIPELINE_PROD_SECRET_KEY }}
+          pipeline-name: "pressbooks-directory"
+

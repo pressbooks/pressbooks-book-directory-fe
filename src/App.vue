@@ -1,102 +1,66 @@
 <template>
-  <v-app>
-    <header-bar />
-    <main role="main">
-      <v-container id="v-application__main_content">
-        <ais-instant-search
-          :search-client="$store.state.SClient.searchClient"
-          :index-name="$store.state.SClient.indexName"
-          :stalled-search-delay="200"
-          :search-function="paginationHook"
-        >
-          <ais-configure
-            :facet-filters.camel="$store.state.SClient.notFilters"
-            :filters.camel="($store.state.SClient.filtersParams.length > 0) ? $store.state.SClient.filtersParams : ''"
-            :query="$store.state.SClient.searchParameters.searchQuery"
-          />
-          <welcome-header />
-          <current-filters />
-          <v-row>
-            <v-col
-              id="filters"
-              cols="12"
-              md="4"
-              lg="3"
-            >
-              <filters />
-            </v-col>
-            <v-col
-              id="book-list"
-              cols="12"
-              md="8"
-              lg="9"
-            >
-              <div v-if="$store.state.config.canFilter">
-                <books />
-              </div>
-            </v-col>
-          </v-row>
-          <pagination />
-        </ais-instant-search>
-        <a
-          href="https://www.algolia.com/"
-          aria-label="Search by Algolia"
-          target="_blank"
-          class="filters__stats-algolia-logo"
-        />
-      </v-container>
-      <press-tour
-        v-if="$store.state.config.showTour"
-        :overlay="0.5"
-        :auto-scroll="true"
-        :typing-speed="17"
-      />
-    </main>
-  </v-app>
+  <ais-instant-search
+    :index-name="$store.state.SClient.indexName"
+    :search-client="$store.state.SClient.searchClient"
+    :search-function="paginationHook"
+    :middlewares="middlewares"
+  >
+    <ais-configure
+      :facet-filters.camel="$store.state.SClient.notFilters"
+      :filters.camel="($store.state.SClient.filtersParams.length > 0) ? $store.state.SClient.filtersParams : ''"
+      :query="$store.state.SClient.searchParameters.searchQuery"
+    />
+    <pb-navbar />
+    <pb-welcome-header />
+    <pb-collections />
+    <section>
+      <div class="content container mx-auto px-8">
+        <div class="py-8 border-b border-grey-300">
+          <pb-search-and-sort-box />
+        </div>
+        <div class="flex flex-col mt-8 md:flex-row space-y-10 md:space-y-0 md:space-x-10">
+          <pb-filters />
+          <pb-paginated-books />
+        </div>
+      </div>
+    </section>
+    <pb-footer />
+    <pb-tour
+      v-if="$store.state.config.showTour"
+      :overlay="0.5"
+      :auto-scroll="true"
+      :typing-speed="17"
+    />
+  </ais-instant-search>
 </template>
 
 <script>
-import 'instantsearch.css/themes/algolia-min.css';
-import Filters from './components/filters/Filters';
-import Pagination from './components/commons/Pagination';
-import HeaderBar from './components/commons/HeaderBar';
-import CurrentFilters from './components/filters/CurrentFilters';
-import Books from './components/Books';
-import WelcomeHeader from './components/WelcomeHeader';
-import PressTour from './components/tour/PressTour';
+import PbWelcomeHeader from './components/PbWelcomeHeader.vue';
+import PbFooter from './components/PbFooter.vue';
+import PbCollections from './components/collections/PbCollections.vue';
+import PbNavbar from './components/PbNavbar.vue';
+import PbFilters from './components/filters/PbFilters.vue';
+import PbSearchAndSortBox from './components/PbSearchAndSortBox.vue';
+import PbPaginatedBooks from './components/books/PbPaginatedBooks.vue';
+import PbTour from './components/PbTour.vue';
+import NProgress from 'nprogress/nprogress';
 
 export default {
   components: {
-    WelcomeHeader,
-    CurrentFilters,
-    Filters,
-    Pagination,
-    HeaderBar,
-    Books,
-    PressTour
+    PbTour,
+    PbPaginatedBooks,
+    PbSearchAndSortBox,
+    PbFilters,
+    PbWelcomeHeader,
+    PbFooter,
+    PbCollections,
+    PbNavbar,
   },
-  data(){
+  data() {
     return {
       currentQuery: '',
       currentPage: 0,
-      metaTags: [
-        {
-          'http-equiv': 'Content-Type',
-          content: 'text/html; charset=utf-8'
-        },
-        {
-          'http-equiv': 'X-UA-Compatible',
-          content: 'IE=edge'
-        },
-        {
-          name: 'description',
-          content: 'A searchable library of free textbooks and other open educational resources (OER) published using the Pressbooks Authoring & Editing Platform'
-        },
-        {
-          name: 'viewport',
-          content: 'width=device-width,initial-scale=1'
-        }
-      ],
+      middlewares: [this.middleware]
     };
   },
   watch: {
@@ -105,39 +69,46 @@ export default {
       handler(){
         this.currentQuery = null;
       }
+    },
+    '$store.state.SClient' : {
+      deep: true,
+      handler(){
+        NProgress.start();
+      }
     }
   },
-  mounted() {
-    let index = this.$store.state.SClient.searchClient.initIndex(this.$store.state.SClient.indexName);
-    this.$store.dispatch('getStats', index);
-    if (
-      typeof process.env.VUE_APP_ENVIRONMENT === 'undefined' ||
-      process.env.VUE_APP_ENVIRONMENT.toLowerCase() !== 'production'
-    ) {
-      this.metaTags.push({
-        name: 'robots',
-        content: 'noindex'
-      });
-    }
+  beforeMount() {
+    NProgress.configure({ showSpinner: false });
+    NProgress.start();
+  },
+  updated() {
+    this.hideLoader();
   },
   methods: {
     paginationHook(helper) {
+
       if(helper.getPage() === 0) {
         this.currentQuery = helper.state.query;
       }
       if(this.currentQuery !== helper.state.query) {
         helper.setPage(0); // reset the pagination when the query changes
       }
+
       helper.search();
+
+    },
+    middleware() {
+      return {
+        onStateChange: ({ uiState }) => {
+          this.hideLoader();
+        }
+      };
+    },
+    hideLoader() {
+      setTimeout(()=>{
+        NProgress.done();
+      },window.Cypress ? 3000 : 250);
     }
-  },
-  metaInfo() {
-    return {
-      meta: this.metaTags
-    };
   }
 };
 </script>
-<style lang="sass">
-  @import 'styles/styles'
-</style>

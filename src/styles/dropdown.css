@@ -1,0 +1,27 @@
+.v-select {
+    @apply w-full;
+}
+
+.vs__dropdown-toggle {
+    @apply flex items-center justify-between w-full py-3 px-2 rounded-none border border-gray-300;
+}
+
+.vs__selected {
+    @apply absolute block;
+}
+
+.vs__selected, .vs__search, .vs__search:focus {
+    @apply w-11/12 border-0 text-sm truncate;
+}
+
+.vs__search, .vs__search:focus {
+    @apply placeholder-gray-800;
+}
+
+.vs__dropdown-option {
+    @apply pointer-events-auto;
+}
+
+.vs__dropdown-option--highlight {
+    @apply bg-gray-100 text-gray-900;
+}
