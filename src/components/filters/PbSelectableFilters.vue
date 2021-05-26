@@ -60,6 +60,16 @@
           Show less
         </button>
       </div>
+      <div class="flex items-center justify-center py-2 px-4">
+        <button
+          class="p-1 font-bold text-pb-red text-right text-xs uppercase"
+          type="reset"
+          :data-cy="`clear-filter-${field}`"
+          @click.prevent="reset"
+        >
+          Clear filter
+        </button>
+      </div>
     </template>
   </pb-accordion>
 </template>
@@ -99,6 +109,9 @@ export default {
     };
   },
   computed: {
+    alias() {
+      return this.$store.state.SClient.allowedFilters[this.field].alias;
+    },
     items() {
       const items = this.$store.state.stats.filters[this.field] || [];
 
@@ -138,6 +151,17 @@ export default {
     },
     resetDisplayAmount() {
       this.displayAmount = this.minDisplayAmount;
+    },
+    reset() {
+      const {[this.alias]: toBeRemoved, ...query} = this.$route.query;
+
+      if (!toBeRemoved) {
+        return;
+      }
+
+      this.search = '';
+
+      this.$router.replace({ query });
     },
     searchIsEmpty() {
       return this.search === '';
