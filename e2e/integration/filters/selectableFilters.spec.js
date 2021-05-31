@@ -2,6 +2,7 @@ import Elements from '../../support/elements';
 import {
   encodeFacetFilterForURL,
   clickAccordionHeader,
+  clickAccordionClearFilter,
   clickFilter,
   searchFacet,
   removeChipFilter
@@ -101,6 +102,33 @@ for (const facet in facetFilters) {
             });
         });
       }
+
+      it(`Clear applied ${facet} when clicking 'clear filter' button`, () => {
+        clickAccordionHeader(field);
+
+        let expectedParams = null;
+
+        includes.forEach(filter => {
+          clickFilter(field, filter, true);
+          cy.log(filter);
+
+          expectedParams = expectedParams
+            ? `${expectedParams}%26%26${encodeFacetFilterForURL(filter)}`
+            : encodeFacetFilterForURL(filter);
+        });
+
+        cy.get(Elements.filterChips)
+          .should(($filtersApplied) => expect($filtersApplied).to.have.length(2))
+          .url()
+          .should('include', `${urlAlias}=${expectedParams}`);
+
+        clickAccordionClearFilter(field);
+
+        cy.get(Elements.filterChips)
+          .should('not.exist')
+          .url()
+          .should('not.include', `${urlAlias}=${expectedParams}`);
+      });
 
       it(`Apply include/exclude ${facet} filters and review the book cards`, () => {
         clickAccordionHeader(field);

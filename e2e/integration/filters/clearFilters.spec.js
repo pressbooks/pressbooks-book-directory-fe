@@ -1,4 +1,9 @@
-import {clickAccordionHeader, clickFilter} from '../../support/common';
+import {
+  clickAccordionClearFilter,
+  clickAccordionHeader,
+  clickFilter
+} from '../../support/common';
+import Elements from '../../support/elements';
 
 describe('Clear Filters',() => {
   context('Desktop Resolution', () => {
@@ -45,6 +50,24 @@ describe('Clear Filters',() => {
 
       cy.url()
         .should('not.contain','?');
+    });
+
+    it('Clear applied filters for specific facet when clicking "Clear filter" button inside the facet', () => {
+      clickAccordionHeader('about');
+
+      cy.get(Elements.filterChips)
+        .should(($filtersApplied) => expect($filtersApplied).to.have.length(3));
+
+      clickFilter('about','education', 'include');
+      clickFilter('about','open-learning-distance-education', 'include');
+
+      cy.get(Elements.filterChips)
+        .should(($filtersApplied) => expect($filtersApplied).to.have.length(5));
+
+      clickAccordionClearFilter('licenseCode');
+
+      cy.get(Elements.filterChips)
+        .should(($filtersApplied) => expect($filtersApplied).to.have.length(2));
     });
   });
 });

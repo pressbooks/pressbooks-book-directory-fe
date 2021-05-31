@@ -31,6 +31,18 @@ function clickAccordionHeader(facet) {
 }
 
 /**
+ * Click in the accordion clear filter button.
+ *
+ * @param facet - string. Algolia'' facet, examples: licenseCode, about.
+ * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
+ */
+function clickAccordionClearFilter(facet) {
+  return cy.get(Elements.clearFilter(facet))
+    .click();
+}
+
+
+/**
  * Click submit button for Numeric Filters.
  *
  * @param facet - string. Algolia's facet, examples: licenseCode, publisherName.
@@ -109,6 +121,7 @@ export {
   search,
   encodeFacetFilterForURL,
   clickAccordionHeader,
+  clickAccordionClearFilter,
   clickFilter,
   searchFacet,
   removeChipFilter,
