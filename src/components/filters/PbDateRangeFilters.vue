@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { format, fromUnixTime, getUnixTime, isBefore, isValid, parse } from 'date-fns';
+import dayjs from 'dayjs';
 import PbAccordion from '../PbAccordion.vue';
 
 export default {
@@ -95,18 +95,18 @@ export default {
 
         if (startRegex.test(queryString)) {
           [, start] = queryString.match(startRegex);
-          start = fromUnixTime(start);
+          start = dayjs.unix(start);
         }
 
         if (toRegex.test(queryString)) {
           [, to] = queryString.match(toRegex);
-          to = fromUnixTime(to);
+          to = dayjs.unix(to);
         }
 
         this.opened = true;
         this.dates = {
-          start: isValid(start) ? format(start, 'yyyy-MM-dd'): null,
-          to: isValid(to) ? format(to, 'yyyy-MM-dd') : null,
+          start: start && start.isValid() ? start.utc().format('YYYY-MM-DD'): null,
+          to: to && to.isValid() ? to.utc().format('YYYY-MM-DD') : null,
         };
       }
     }
@@ -121,24 +121,20 @@ export default {
     },
     buildQueryString() {
       let queryString = null;
-      let start = parse(`${this.dates.start} 00:00:00`, 'yyyy-MM-dd H:m:s', new Date);
-      let to = parse(`${this.dates.to} 23:59:59`, 'yyyy-MM-dd H:m:s', new Date);
 
-      let timestamps = {
-        start: getUnixTime(start),
-        to: getUnixTime(to) - to.getTimezoneOffset() * 60
-      };
+      let start = dayjs.utc(this.dates.start).startOf('day');
+      let to = dayjs.utc(this.dates.to).endOf('day');
 
-      if (isBefore(to, start)) {
+      if (to.isBefore(start)) {
         return;
       }
 
-      if (isValid(start)) {
-        queryString = `>=${timestamps.start}`;
+      if (start.isValid()) {
+        queryString = `>=${start.unix()}`;
       }
 
-      if (isValid(to)) {
-        queryString = queryString ? `${queryString}&&<=${timestamps.to}` : `<=${timestamps.to}`;
+      if (to.isValid()) {
+        queryString = queryString ? `${queryString}&&<=${to.unix()}` : `<=${to.unix()}`;
       }
 
       return queryString;
@@ -148,6 +144,10 @@ export default {
       let queryString = this.buildQueryString();
 
       if (! queryString) {
+        return;
+      }
+
+      if (query[this.alias] === queryString) {
         return;
       }
 
