@@ -58,18 +58,10 @@ export default {
   },
   data() {
     return {
-      currentQuery: '',
-      currentPage: 0,
       middlewares: [this.middleware]
     };
   },
   watch: {
-    '$store.state.SClient.notFilters' : {
-      deep: true,
-      handler(){
-        this.currentQuery = null;
-      }
-    },
     '$store.state.SClient' : {
       deep: true,
       handler(){
@@ -86,16 +78,8 @@ export default {
   },
   methods: {
     paginationHook(helper) {
-
-      if(helper.getPage() === 0) {
-        this.currentQuery = helper.state.query;
-      }
-      if(this.currentQuery !== helper.state.query) {
-        helper.setPage(0); // reset the pagination when the query changes
-      }
-
+      helper.setPage(this.$store.state.SClient.searchParameters.page - 1);
       helper.search();
-
     },
     middleware() {
       return {

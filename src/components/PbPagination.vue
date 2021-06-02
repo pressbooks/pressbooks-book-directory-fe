@@ -9,9 +9,7 @@
             currentRefinement,
             pages,
             isFirstPage,
-            isLastPage,
-            refine,
-            createURL
+            isLastPage
           }"
           class="flex flex-row w-full items-center justify-center"
           data-cy="paginator"
@@ -23,9 +21,9 @@
           >
             <a
               class="block"
-              :href="createURL(0)"
               data-cy="paginator-prev"
-              @click.prevent="refine(0)"
+              href="#"
+              @click.prevent="changePage(1)"
             >
               <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-pb-red" />
             </a>
@@ -38,9 +36,9 @@
           >
             <a
               class="block px-2"
+              href="#"
               :class="currentRefinement === page ? 'font-bold font-gray-900' : ''"
-              :href="createURL(page)"
-              @click.prevent="refine(page)"
+              @click.prevent="changePage(page + 1)"
             >
               {{ page + 1 }}
             </a>
@@ -48,9 +46,9 @@
           <li v-if="!isLastPage">
             <a
               class="block"
-              :href="createURL(currentRefinement + 1)"
+              href="#"
               data-cy="paginator-next"
-              @click.prevent="refine(currentRefinement + 1)"
+              @click.prevent="changePage(currentRefinement)"
             >
               <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-pb-red" />
             </a>
@@ -74,6 +72,11 @@ export default {
   methods: {
     scrollToBooksList() {
       scrollTo('#books');
+    },
+    changePage(page) {
+      let routeQuery = {...this.$route.query};
+      routeQuery.p = page;
+      this.$router.replace({ query: routeQuery });
     }
   }
 };

@@ -113,7 +113,7 @@ let sClient = {
     hitsPerPage: 10,
     sortedBy: '',
     facetFilters: [],
-    page: 0,
+    page: 1,
     searchQuery: ''
   },
 };
@@ -197,6 +197,9 @@ export default {
           state.mappedFilters[state.allowedFilters[realAttribute].alias] = realAttribute;
         }
       }
+    },
+    setPage(state, page) {
+      state.searchParameters.page = page;
     }
   }
 };

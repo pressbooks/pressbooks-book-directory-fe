@@ -25,6 +25,10 @@ router.beforeEach((to, from, next) => {
     let containsQ = false;
     let aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
       .map(function(key){return store.state.SClient.allowedFilters[key].alias;});
+
+    if (to.query.p) {
+      store.commit('setPage', to.query.p);
+    }
     for (let attr in to.query) {
       if (aliasAllowed.indexOf(attr) >= 0) {
         if (attr === store.state.SClient.allowedFilters.search.alias) {
