@@ -34,7 +34,7 @@ export default {
                   'setCollectionHeaderCards',
                   coverImagesResponse.hits.map((book) => {
                     return {
-                      image: book.image,
+                      image: book.thumbnailUrl ? book.thumbnailUrl : book.image ,
                       name: book[context.state.coverImageFacetName][0],
                       url: false,
                       facet: context.state.collectionsFacetName
