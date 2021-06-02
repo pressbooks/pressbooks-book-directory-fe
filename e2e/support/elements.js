@@ -24,6 +24,10 @@ const Elements = {
     notOriginal: '[data-cy=book-not-original]',
     recommended: '[data-cy=book-recommended]'
   },
+  paginator: '[data-cy=paginator]',
+  paginatorLink(page) {
+    return `[data-cy=paginator-link-${page}`;
+  },
   filterAccordion(facet) {
     return `[data-cy=filter-${facet}-header-button]`;
   },

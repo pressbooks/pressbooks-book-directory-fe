@@ -58,7 +58,8 @@ export default {
   },
   data() {
     return {
-      middlewares: [this.middleware]
+      middlewares: [this.middleware],
+      currentQuery: null
     };
   },
   watch: {
@@ -66,6 +67,12 @@ export default {
       deep: true,
       handler(){
         NProgress.start();
+      }
+    },
+    '$store.state.SClient.notFilters' : {
+      deep: true,
+      handler(){
+        this.currentQuery = null;
       }
     }
   },
@@ -78,7 +85,17 @@ export default {
   },
   methods: {
     paginationHook(helper) {
-      helper.setPage(this.$store.state.SClient.searchParameters.page - 1);
+      if(helper.getPage() === 0) {
+        this.currentQuery = helper.state.query;
+      }
+      if(this.currentQuery !== helper.state.query) {
+        helper.setPage(0); // reset the pagination when the query changes
+        let routeQuery = {...this.$route.query};
+        routeQuery.p = 1;
+        this.$router.replace({ query: routeQuery });
+      } else {
+        helper.setPage(this.$store.state.SClient.searchParameters.page - 1);
+      }
       helper.search();
     },
     middleware() {

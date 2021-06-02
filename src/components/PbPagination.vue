@@ -32,7 +32,7 @@
             v-for="page in pages"
             :key="page"
             class="page"
-            data-cy="paginator-link"
+            :data-cy="`paginator-link-${page+1}`"
           >
             <a
               class="block px-2"
