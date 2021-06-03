@@ -5,6 +5,7 @@
       :placeholder="placeholder"
       :searchable="searchable"
       :clearable="clearable"
+      v-model="itemSelected"
       @input="select"
     />
   </div>
@@ -31,6 +32,18 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  mounted() {
+    this.itemSelected = this.options.filter((item) => {
+      if (item.default) {
+        return item.value;
+      }
+    });
+  },
+  data() {
+    return {
+      itemSelected: ''
+    };
   },
   emits: ['input'],
   methods: {

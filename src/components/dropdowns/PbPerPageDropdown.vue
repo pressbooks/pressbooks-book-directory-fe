@@ -1,15 +1,15 @@
 <template>
   <ais-hits-per-page
-    :items="options"
+    :items="itemsOptions"
     class="w-full md:w-1/2"
   >
-    <template #default="{ items, refine }">
+    <template #default="{ items }">
       <pb-dropdown
         placeholder="Books per page"
         :options="items"
         data-cy="books-per-page"
         @input="(data)=>{
-          onInput(data,refine)
+          onInput(data)
         }"
       />
     </template>
@@ -27,10 +27,30 @@ export default {
       default() { return []; }
     }
   },
+  data() {
+    return {
+      itemsOptions: this.options,
+      alias: this.$store.state.SClient.searchParameters.aliases.hitsPerPage
+    };
+  },
+  watch: {
+    options(opts) {
+      this.itemsOptions = opts;
+    }
+  },
   methods: {
-    onInput(data, refine) {
-      refine(data);
-      this.$store.state.SClient.searchParameters.hitsPerPage = data;
+    onInput(data) {
+      let routeQuery = {...this.$route.query};
+      if (
+        !routeQuery[this.alias] ||
+        (
+          routeQuery[this.alias] &&
+          data != routeQuery[this.alias]
+        )
+      ) {
+        routeQuery[this.alias] = data;
+        this.$router.replace({query: routeQuery});
+      }
     }
   }
 };

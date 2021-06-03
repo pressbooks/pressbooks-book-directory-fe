@@ -27,10 +27,32 @@ export default {
       default() { return []; }
     }
   },
+  data() {
+    return {
+      alias: this.$store.state.SClient.searchParameters.aliases.sortedBy
+    };
+  },
   methods: {
     onInput(data, refine) {
       refine(data);
-      this.$store.state.SClient.searchParameters.sortedBy = data;
+      let routeQuery = {...this.$route.query};
+      const indexesOrderedByMap = this.$store.state.SClient.availableIndexes.reduce((index, item) => {
+        return {
+          ...index,
+          [item.value]: item.orderedBy
+        };
+      }, {});
+      this.$store.commit('setSortedBy', indexesOrderedByMap[data]);
+      if (
+        !routeQuery[this.alias] ||
+        (
+          routeQuery[this.alias] &&
+          routeQuery[this.alias] != indexesOrderedByMap[data]
+        )
+      ) {
+        routeQuery[this.alias] = indexesOrderedByMap[data];
+        this.$router.replace({ query: routeQuery });
+      }
     }
   }
 };

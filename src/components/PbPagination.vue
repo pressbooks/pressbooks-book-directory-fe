@@ -6,7 +6,6 @@
       <ais-pagination :total-pages="500">
         <ul
           slot-scope="{
-            currentRefinement,
             pages,
             isFirstPage,
             isLastPage
@@ -23,7 +22,7 @@
               class="block"
               data-cy="paginator-prev"
               href="#"
-              @click.prevent="changePage(1)"
+              @click.prevent="changePage($store.state.SClient.searchParameters.page - 1)"
             >
               <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-pb-red" />
             </a>
@@ -37,7 +36,7 @@
             <a
               class="block px-2"
               href="#"
-              :class="currentRefinement === page ? 'font-bold font-gray-900' : ''"
+              :class="$store.state.SClient.searchParameters.page == page+1 ? 'font-bold font-gray-900' : ''"
               @click.prevent="changePage(page + 1)"
             >
               {{ page + 1 }}
@@ -48,7 +47,7 @@
               class="block"
               href="#"
               data-cy="paginator-next"
-              @click.prevent="changePage(currentRefinement)"
+              @click.prevent="changePage(parseInt($store.state.SClient.searchParameters.page) + 1)"
             >
               <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-pb-red" />
             </a>
@@ -69,14 +68,27 @@ export default {
     ArrowNarrowLeftIcon,
     ArrowNarrowRightIcon
   },
+  data() {
+    return {
+      alias: this.$store.state.SClient.searchParameters.aliases.page
+    };
+  },
   methods: {
     scrollToBooksList() {
       scrollTo('#books');
     },
     changePage(page) {
       let routeQuery = {...this.$route.query};
-      routeQuery.p = page;
-      this.$router.replace({ query: routeQuery });
+      if (
+        !routeQuery[this.alias] ||
+        (
+          routeQuery[this.alias] &&
+          routeQuery[this.alias] != page
+        )
+      ) {
+        routeQuery[this.alias] = page;
+        this.$router.replace({ query: routeQuery });
+      }
     }
   }
 };

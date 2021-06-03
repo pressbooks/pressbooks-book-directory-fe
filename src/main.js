@@ -26,8 +26,11 @@ router.beforeEach((to, from, next) => {
     let aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
       .map(function(key){return store.state.SClient.allowedFilters[key].alias;});
 
-    if (to.query.p) {
-      store.commit('setPage', to.query.p);
+    if (to.query[store.state.SClient.searchParameters.aliases.page]) {
+      store.commit('setPage', to.query[store.state.SClient.searchParameters.aliases.page]);
+    }
+    if (to.query[store.state.SClient.searchParameters.aliases.hitsPerPage]) {
+      store.commit('setHitsPerPage', to.query[store.state.SClient.searchParameters.aliases.hitsPerPage]);
     }
     for (let attr in to.query) {
       if (aliasAllowed.indexOf(attr) >= 0) {

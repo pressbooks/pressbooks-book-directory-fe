@@ -44,6 +44,7 @@ import PbSearchAndSortBox from './components/PbSearchAndSortBox.vue';
 import PbPaginatedBooks from './components/books/PbPaginatedBooks.vue';
 import PbTour from './components/PbTour.vue';
 import NProgress from 'nprogress/nprogress';
+import helpers from './store/helpers';
 
 export default {
   components: {
@@ -59,7 +60,9 @@ export default {
   data() {
     return {
       middlewares: [this.middleware],
-      currentQuery: null
+      resetPage: false,
+      routeQuery: {},
+      sortByAlias: this.$store.state.SClient.searchParameters.aliases.sortedBy
     };
   },
   watch: {
@@ -69,10 +72,26 @@ export default {
         NProgress.start();
       }
     },
-    '$store.state.SClient.notFilters' : {
+    '$route.query': {
       deep: true,
-      handler(){
-        this.currentQuery = null;
+      handler(query) {
+        this.resetPage = false;
+        const copyOfQuery = {...query};
+        if (copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
+          delete copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page];
+        }
+        if (this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
+          delete this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page];
+        }
+        for (let attribute in copyOfQuery) {
+          if (
+            typeof this.routeQuery[attribute] === 'undefined' ||
+            this.routeQuery[attribute] !== copyOfQuery[attribute]
+          ) {
+            this.resetPage = true;
+          }
+        }
+        this.routeQuery = query;
       }
     }
   },
@@ -82,20 +101,24 @@ export default {
   },
   updated() {
     this.hideLoader();
+    this.updateDefaultIndex();
   },
   methods: {
+    getCurrentIndex() {
+      return this.$store.state.SClient.availableIndexes.filter(index => index.default).value;
+    },
     paginationHook(helper) {
-      if(helper.getPage() === 0) {
-        this.currentQuery = helper.state.query;
-      }
-      if(this.currentQuery !== helper.state.query) {
+      helper.setQueryParameter('hitsPerPage', this.$store.state.SClient.searchParameters.hitsPerPage);
+      if(this.resetPage && parseInt(this.$store.state.SClient.searchParameters.page) > 1) {
         helper.setPage(0); // reset the pagination when the query changes
         let routeQuery = {...this.$route.query};
-        routeQuery.p = 1;
+        routeQuery[this.$store.state.SClient.searchParameters.aliases.page] = 1;
         this.$router.replace({ query: routeQuery });
       } else {
         helper.setPage(this.$store.state.SClient.searchParameters.page - 1);
       }
+      this.resetPage = false;
+      this.helperState = helper.state;
       helper.search();
     },
     middleware() {
@@ -109,6 +132,15 @@ export default {
       setTimeout(()=>{
         NProgress.done();
       },window.Cypress ? 3000 : 250);
+    },
+    updateDefaultIndex() {
+      let routeQuery = {...this.$route.query};
+      if (routeQuery[this.sortByAlias]) {
+        this.$store.state.SClient.availableIndexes = this.$store.state.SClient.availableIndexes.map((index) => {
+          index.default = index.orderedBy === routeQuery[this.sortByAlias];
+          return index;
+        });
+      }
     }
   }
 };

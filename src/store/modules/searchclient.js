@@ -114,8 +114,14 @@ let sClient = {
     sortedBy: '',
     facetFilters: [],
     page: 1,
-    searchQuery: ''
-  },
+    searchQuery: '',
+    hitsPerPageAllowed: [10, 20, 50],
+    aliases: {
+      hitsPerPage: 'per_page',
+      page: 'p',
+      sortedBy: 'sort'
+    }
+  }
 };
 
 export default {
@@ -199,7 +205,22 @@ export default {
       }
     },
     setPage(state, page) {
-      state.searchParameters.page = page;
+      if (parseInt(page) > 0) {
+        state.searchParameters.page = page;
+      }
+    },
+    setHitsPerPage(state, hitsPerPage) {
+      if (state.searchParameters.hitsPerPageAllowed.includes(parseInt(hitsPerPage))) {
+        state.searchParameters.hitsPerPage = hitsPerPage;
+      }
+    },
+    setSortedBy(state, sortedBy) {
+      const allowedSorts = state.availableIndexes.map((index) => {
+        return index.orderedBy;
+      });
+      if (allowedSorts.includes(sortedBy)) {
+        state.searchParameters.sortedBy = sortedBy;
+      }
     }
   }
 };

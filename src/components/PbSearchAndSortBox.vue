@@ -10,7 +10,7 @@
         class="right w-full flex flex-col space-y-4 md:w-2/5 md:flex-row md:space-y-0 md:space-x-4"
         data-cy="top-filters"
       >
-        <pb-per-page-dropdown :options="perPageOptions" />
+        <pb-per-page-dropdown :options="perPageOptions" v-if="perPageOptions.length > 0" />
         <pb-sort-by-dropdown :options="sortByOptions" />
       </div>
     </div>
@@ -29,13 +29,28 @@ export default {
     PbSortByDropdown,
     PbSearchBox
   },
+  watch: {
+    '$store.state.SClient.searchParameters.hitsPerPage'(hitsPerPage) {
+      this.perPageOptions = this.perPageOptions.map((option) => {
+        option.default = hitsPerPage == option.value;
+        return option;
+      });
+    }
+  },
+  mounted() {
+    let vm = this;
+    this.perPageOptions = this.$store.state.SClient.searchParameters.hitsPerPageAllowed.map((allowed) => {
+      return {
+        label: `${allowed} books`,
+        value: allowed,
+        default: (allowed === vm.defaultHitsPerPage)
+      };
+    });
+  },
   data() {
     return {
-      perPageOptions: [
-        { label: '10 books', value: 10, default: true },
-        { label: '20 books', value: 20 },
-        { label: '50 books', value: 50 },
-      ],
+      defaultHitsPerPage: 10,
+      perPageOptions: [],
       sortByOptions: this.$store.state.SClient.availableIndexes
     };
   }
