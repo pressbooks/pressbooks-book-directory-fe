@@ -1,6 +1,6 @@
 <template>
   <ais-sort-by
-    :items="options"
+    :items="itemsOptions"
     class="w-ful md:w-1/2"
   >
     <template #default="{ items, refine }">
@@ -29,7 +29,8 @@ export default {
   },
   data() {
     return {
-      alias: this.$store.state.SClient.searchParameters.aliases.sortedBy
+      alias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
+      itemsOptions: this.options
     };
   },
   methods: {

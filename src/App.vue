@@ -104,9 +104,6 @@ export default {
     this.updateDefaultIndex();
   },
   methods: {
-    getCurrentIndex() {
-      return this.$store.state.SClient.availableIndexes.filter(index => index.default).value;
-    },
     paginationHook(helper) {
       helper.setQueryParameter('hitsPerPage', this.$store.state.SClient.searchParameters.hitsPerPage);
       if(this.resetPage && parseInt(this.$store.state.SClient.searchParameters.page) > 1) {
@@ -118,7 +115,6 @@ export default {
         helper.setPage(this.$store.state.SClient.searchParameters.page - 1);
       }
       this.resetPage = false;
-      this.helperState = helper.state;
       helper.search();
     },
     middleware() {
@@ -140,6 +136,7 @@ export default {
           index.default = index.orderedBy === routeQuery[this.sortByAlias];
           return index;
         });
+        this.$store.state.SClient.indexName = this.$store.state.SClient.availableIndexes.filter(index => index.default)[0].value;
       }
     }
   }
