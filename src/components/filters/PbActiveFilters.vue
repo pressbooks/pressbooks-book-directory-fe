@@ -39,7 +39,9 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import PbSelectedFilter from './PbSelectedFilter.vue';
+
 export default {
   name: 'PbActiveFilters',
   components: {
@@ -62,11 +64,6 @@ export default {
     });
   },
   methods: {
-    inputFormatDate(d) {
-      let month = (d.getUTCMonth()+1) < 10 ? '0' + (d.getUTCMonth()+1) : (d.getUTCMonth()+1);
-      let day = d.getUTCDate() < 10 ? '0' + d.getUTCDate() : d.getUTCDate();
-      return month + '/' + day + '/' + d.getUTCFullYear();
-    },
     removeFilters() {
       if (Object.keys(this.$route.query).length !== 0) {
         this.$router.replace({ query: {} });
@@ -86,9 +83,8 @@ export default {
         label = 'Words ' + value.operator + ' ' + value.value;
         break;
       case 'lastUpdated':
-        let dateObj = new Date(parseInt(value.value) * 1000);
-        let date = this.inputFormatDate(dateObj);
-        label = 'Updated ' + value.operator + ' ' + date;
+        let date = dayjs.unix(value.value).utc().format('MM/DD/YYYY');
+        label = `Updated ${value.operator} ${date}`;
         break;
       case 'storageSize':
         label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
