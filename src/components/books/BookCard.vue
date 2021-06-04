@@ -4,8 +4,15 @@
     class="flex flex-row flex-wrap items-start border border-gray-300 px-8 py-8 shadow-md"
   >
     <div class="w-full md:w-2/3 md:pr-4">
-      <recommended v-if="item.isRecommended" :enabled="false"/>
-      <collection-tag v-for="(item,index) in item.collections" :collection="item" :key="index"/>
+      <recommended
+        v-if="item.isRecommended"
+        :enabled="isRecommendedFilterEnabled"
+      />
+      <collection-tag
+        v-for="(item,index) in item.collections"
+        :key="index"
+        :collection="item"
+      />
       <book-info :item="item" />
       <book-details :item="item" />
     </div>
@@ -33,6 +40,11 @@ export default {
       type: Object,
       default() { return {}; }
     },
+  },
+  computed: {
+    isRecommendedFilterEnabled() {
+      return !!this.$store.state.SClient.filtersExcluded.isRecommended;
+    }
   }
 };
 </script>
