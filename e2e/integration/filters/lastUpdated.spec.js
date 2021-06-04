@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import {navigateToMonthYear} from '../../support/common';
 
 dayjs.extend(utc);
 
@@ -24,12 +25,11 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "start date" using the datepicker filters books that were modified since then', () => {
-      cy.get('@fromLastUpdated').click();
+      navigateToMonthYear('@fromLastUpdated', '04-2021');
 
       const startDate = '2021-04-27';
       const startTimestamp = dayjs.utc(startDate).startOf('day').unix();
 
-      cy.get('button[aria-label="Prev Year"]').click();
       cy.get(`button[data-date=${startDate}]`).click();
 
       cy.get('@applyFilterButton').click();
@@ -56,10 +56,12 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "to date" using the datepicker filters books that were modified until then', () => {
-      cy.get('@toLastUpdated').click();
+      navigateToMonthYear('@toLastUpdated', '04-2021');
 
-      cy.get('button[aria-label="Prev Year"]').click();
-      cy.get('button[data-date=2021-04-27]').click();
+      const toDate = '2021-04-27';
+      const toTimestamp = dayjs.utc(toDate).endOf('day').unix();
+
+      cy.get(`button[data-date=${toDate}]`).click();
 
       cy.get('@applyFilterButton').click();
 
@@ -68,7 +70,7 @@ describe('Filter last updated', () => {
         .should('have.length', 1)
         .find('.text-sm')
         .contains('Updated <= 04/27/2021').should('be.visible')
-        .url().should('include', 'updated=%3C%3D1619567999');
+        .url().should('include', `updated=%3C%3D${toTimestamp}`);
 
       cy.get('[data-cy=book-last-updated]')
         .first()
@@ -77,20 +79,18 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "start date" and "to date" using the datepicker filters books that were modified in between', () => {
-      cy.get('@fromLastUpdated').click();
-
       const startDate = '2021-04-01';
       const startTimestamp = dayjs.utc(startDate).startOf('day').unix();
 
       const toDate = '2021-04-02';
       const toTimestamp = dayjs.utc(toDate).endOf('day').unix();
 
-      cy.get('button[aria-label="Prev Year"]').click();
+      navigateToMonthYear('@fromLastUpdated', '04-2021');
+
       cy.get(`button[data-date=${startDate}]`).click();
 
-      cy.get('@toLastUpdated').click();
+      navigateToMonthYear('@toLastUpdated', '04-2021');
 
-      cy.get('button[aria-label="Prev Year"]').click();
       cy.get(`button[data-date=${toDate}]`).click();
 
       cy.get('@applyFilterButton').click();
