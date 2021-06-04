@@ -2,7 +2,7 @@
   <button
     type="button"
     data-cy="book-collection-tag"
-    class="inline-block leading-none border border-pb-red py-2 px-3 uppercase text-sm tracking-widest font-bold rounded mb-5 mr-2"
+    class="inline-block leading-none border border-pb-red py-2 px-3 text-sm font-bold rounded mb-5 mr-2"
     :class="enabled ? 'bg-red-700 text-white': 'text-pb-red border-pb-red'"
     @click.prevent="toggle(collection)"
   >
