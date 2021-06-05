@@ -9,9 +9,9 @@
         :enabled="isRecommendedFilterEnabled"
       />
       <collection-tag
-        v-for="(item,index) in item.collections"
+        v-for="(tag,index) in item.collections"
         :key="index"
-        :collection="item"
+        :collection="tag"
       />
       <book-info :item="item" />
       <book-details :item="item" />
