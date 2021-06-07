@@ -61,7 +61,7 @@ export default {
     return {
       middlewares: [this.middleware],
       resetPage: false,
-      routeQuery: {},
+      routeQuery: undefined,
       sortByAlias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
       restartIndex: false
     };
@@ -76,20 +76,23 @@ export default {
     '$route.query': {
       deep: true,
       handler(query) {
-        this.resetPage = false;
-        const copyOfQuery = {...query};
-        if (copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
-          delete copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page];
-        }
-        if (this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
-          delete this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page];
-        }
-        for (let attribute in copyOfQuery) {
-          if (
-            typeof this.routeQuery[attribute] === 'undefined' ||
-            this.routeQuery[attribute].toString() !== copyOfQuery[attribute].toString()
-          ) {
-            this.resetPage = true;
+        if (typeof this.routeQuery !== 'undefined') {
+          this.resetPage = false;
+          const copyOfQuery = {...query};
+          if (copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
+            delete copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page];
+          }
+          if (this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
+            delete this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page];
+          }
+
+          for (let attribute in copyOfQuery) {
+            if (
+              typeof this.routeQuery[attribute] === 'undefined' ||
+              this.routeQuery[attribute].toString() !== copyOfQuery[attribute].toString()
+            ) {
+              this.resetPage = true;
+            }
           }
         }
         this.routeQuery = query;
