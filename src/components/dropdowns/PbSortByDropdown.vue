@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     onInput(data, refine) {
-      refine(data);
+      this.$store.commit('setResetMainIndex', false);
       let routeQuery = {...this.$route.query};
       const indexesOrderedByMap = this.$store.state.SClient.availableIndexes.reduce((index, item) => {
         return {
@@ -43,7 +43,6 @@ export default {
           [item.value]: item.orderedBy
         };
       }, {});
-      this.$store.commit('setSortedBy', indexesOrderedByMap[data]);
       if (
         !routeQuery[this.alias] ||
         (
@@ -53,6 +52,7 @@ export default {
       ) {
         routeQuery[this.alias] = indexesOrderedByMap[data];
         this.$router.replace({ query: routeQuery });
+        refine(data);
       }
     }
   }

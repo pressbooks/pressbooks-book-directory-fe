@@ -121,7 +121,8 @@ let sClient = {
       page: 'p',
       sortedBy: 'sort'
     }
-  }
+  },
+  resetMainIndex: true
 };
 
 export default {
@@ -221,6 +222,21 @@ export default {
       if (allowedSorts.includes(sortedBy)) {
         state.searchParameters.sortedBy = sortedBy;
       }
+    },
+    setMainIndex(state, index) {
+      const allowedIndexes = state.availableIndexes.map((index) => {
+        return index.value;
+      });
+      if (allowedIndexes.includes(index)) {
+        state.indexName = index;
+        state.availableIndexes = state.availableIndexes.map((indexObj) => {
+          indexObj.default = indexObj.value === index;
+          return indexObj;
+        });
+      }
+    },
+    setResetMainIndex(state, reset) {
+      state.resetMainIndex = reset;
     }
   }
 };

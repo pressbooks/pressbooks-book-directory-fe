@@ -4,6 +4,7 @@
     :search-client="$store.state.SClient.searchClient"
     :search-function="paginationHook"
     :middlewares="middlewares"
+    v-if="!restartIndex"
   >
     <ais-configure
       :facet-filters.camel="$store.state.SClient.notFilters"
@@ -44,7 +45,6 @@ import PbSearchAndSortBox from './components/PbSearchAndSortBox.vue';
 import PbPaginatedBooks from './components/books/PbPaginatedBooks.vue';
 import PbTour from './components/PbTour.vue';
 import NProgress from 'nprogress/nprogress';
-import helpers from './store/helpers';
 
 export default {
   components: {
@@ -62,7 +62,8 @@ export default {
       middlewares: [this.middleware],
       resetPage: false,
       routeQuery: {},
-      sortByAlias: this.$store.state.SClient.searchParameters.aliases.sortedBy
+      sortByAlias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
+      restartIndex: false
     };
   },
   watch: {
@@ -86,7 +87,7 @@ export default {
         for (let attribute in copyOfQuery) {
           if (
             typeof this.routeQuery[attribute] === 'undefined' ||
-            this.routeQuery[attribute] !== copyOfQuery[attribute]
+            this.routeQuery[attribute].toString() !== copyOfQuery[attribute].toString()
           ) {
             this.resetPage = true;
           }
@@ -101,7 +102,6 @@ export default {
   },
   updated() {
     this.hideLoader();
-    this.updateDefaultIndex();
   },
   methods: {
     paginationHook(helper) {
@@ -128,16 +128,6 @@ export default {
       setTimeout(()=>{
         NProgress.done();
       },window.Cypress ? 3000 : 250);
-    },
-    updateDefaultIndex() {
-      let routeQuery = {...this.$route.query};
-      if (routeQuery[this.sortByAlias]) {
-        this.$store.state.SClient.availableIndexes = this.$store.state.SClient.availableIndexes.map((index) => {
-          index.default = index.orderedBy === routeQuery[this.sortByAlias];
-          return index;
-        });
-        this.$store.state.SClient.indexName = this.$store.state.SClient.availableIndexes.filter(index => index.default)[0].value;
-      }
     }
   }
 };

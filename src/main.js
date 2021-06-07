@@ -16,10 +16,17 @@ Vue.use(InstantSearch);
 Vue.use(VueTailwind, VueTailwindConfig);
 
 router.beforeEach((to, from, next) => {
-  let indexName = store.state.SClient.availableIndexes.filter((index) => {
-    return ! index.isReplica;
-  });
-  let index = store.state.SClient.searchClient.initIndex(indexName[0].value);
+  if (to.query[store.state.SClient.searchParameters.aliases.sortedBy] && store.state.SClient.resetMainIndex) {
+    const indexesOrderedByMap = store.state.SClient.availableIndexes.reduce((index, item) => {
+      return {
+        ...index,
+        [item.orderedBy]: item.value
+      };
+    }, {});
+    store.commit('setSortedBy', to.query[store.state.SClient.searchParameters.aliases.sortedBy]);
+    store.commit('setMainIndex', indexesOrderedByMap[to.query[store.state.SClient.searchParameters.aliases.sortedBy]]);
+  }
+  let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
   store.dispatch('getStats', index).then(() => {
     let query = {};
     let containsQ = false;
