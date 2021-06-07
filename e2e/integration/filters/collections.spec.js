@@ -8,7 +8,7 @@ describe('Filter collections', () => {
     it('Check for collections section and review the title section', () => {
       cy.get('@collectionSection')
         .find('.section-title')
-        .contains('Featured Collections');
+        .contains('Curated Collections');
     });
 
     it('Filter by OpenStax collection clicking in the image collection card', () => {

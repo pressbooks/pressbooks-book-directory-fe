@@ -40,9 +40,9 @@ export default {
             item.has_editor && typeof item.editor === 'object'
               ? helpers.functions.unescapeHTML(item.editor.join(', '))
               : helpers.functions.unescapeHTML(item.editor),
-        image: item.image
-          ? item.image
-          : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
+        image: item.thumbnailUrl
+          ? item.thumbnailUrl
+          : item.image ? item.image : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
         publisherName: item.publisherName ? helpers.functions.unescapeHTML(item.publisherName) : false,
         lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
         description: vm.getBookDescription(item),

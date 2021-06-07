@@ -27,6 +27,9 @@ const Elements = {
   filterAccordion(facet) {
     return `[data-cy=filter-${facet}-header-button]`;
   },
+  clearFilter(facet) {
+    return `[data-cy=clear-filter-${facet}]`;
+  },
   filterOptions(facet) {
     return `[data-cy=filter-${facet}-option]`;
   },

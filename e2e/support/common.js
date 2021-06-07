@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import helpers from '../../src/store/helpers';
 import Elements from './elements';
 
@@ -29,6 +30,18 @@ function clickAccordionHeader(facet) {
   return cy.get(Elements.filterAccordion(facet))
     .click();
 }
+
+/**
+ * Click in the accordion clear filter button.
+ *
+ * @param facet - string. Algolia'' facet, examples: licenseCode, about.
+ * @returns {Cypress.Chainable<JQuery<HTMLElement>>}
+ */
+function clickAccordionClearFilter(facet) {
+  return cy.get(Elements.clearFilter(facet))
+    .click();
+}
+
 
 /**
  * Click submit button for Numeric Filters.
@@ -105,15 +118,31 @@ function removeChipFilter(facet, facetItem) {
     .algoliaQueryRequest('removeFilter');
 }
 
+function navigateToMonthYear(element, toMonthYear, backwards = true) {
+  let date = dayjs();
+
+  cy.get(element).click();
+
+  while(date.format('MM-YYYY') !== toMonthYear) {
+    cy.get(`button[aria-label="${backwards ? 'Prev Year' : 'Next Year'}"]`).click();
+
+    date = backwards
+      ? date.subtract(1, 'month')
+      : date.add(1, 'month');
+  }
+}
+
 export {
   search,
   encodeFacetFilterForURL,
   clickAccordionHeader,
+  clickAccordionClearFilter,
   clickFilter,
   searchFacet,
   removeChipFilter,
   fillNumericValue,
   getNumericInput,
-  submitNumericFilter
+  submitNumericFilter,
+  navigateToMonthYear
 };
 

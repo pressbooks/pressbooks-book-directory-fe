@@ -81,8 +81,8 @@ export default {
     count() {
       let filter = this.$store.state.stats.filters[this.field];
 
-      if (!filter) {
-        return;
+      if (!filter || filter.length <= 1) {
+        return 0;
       }
 
       return filter[1].count;
