@@ -152,7 +152,7 @@ describe('Book cards', function () {
         },
       ];
 
-      search('Significant Statistics')
+      search('Significant Statistics');
       cy.fixture('bookCard').then((bookCard) => {
         for(const attribute of attributesToCheck) {
           if ('image' in attribute) {

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import helpers from '../../src/store/helpers';
 import Elements from './elements';
 
@@ -117,6 +118,20 @@ function removeChipFilter(facet, facetItem) {
     .algoliaQueryRequest('removeFilter');
 }
 
+function navigateToMonthYear(element, toMonthYear, backwards = true) {
+  let date = dayjs();
+
+  cy.get(element).click();
+
+  while(date.format('MM-YYYY') !== toMonthYear) {
+    cy.get(`button[aria-label="${backwards ? 'Prev Year' : 'Next Year'}"]`).click();
+
+    date = backwards
+      ? date.subtract(1, 'month')
+      : date.add(1, 'month');
+  }
+}
+
 export {
   search,
   encodeFacetFilterForURL,
@@ -127,6 +142,7 @@ export {
   removeChipFilter,
   fillNumericValue,
   getNumericInput,
-  submitNumericFilter
+  submitNumericFilter,
+  navigateToMonthYear
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-2 mb-2">
+  <div class="space-y-2 my-2">
     <h2
       class="tracking-widest uppercase text-sm font-medium"
       data-cy="book-network"

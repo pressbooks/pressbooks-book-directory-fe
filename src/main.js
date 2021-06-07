@@ -6,6 +6,8 @@ import VueSelect from 'vue-select';
 import VueTailwind from 'vue-tailwind';
 import router from './router';
 import VueTailwindConfig from './vuetailwind.config';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
 import './index.css';
 import {store} from './store';
@@ -14,6 +16,8 @@ Vue.use(VueMeta);
 Vue.component('VueSelect', VueSelect);
 Vue.use(InstantSearch);
 Vue.use(VueTailwind, VueTailwindConfig);
+
+dayjs.extend(utc);
 
 router.beforeEach((to, from, next) => {
   if (to.query[store.state.SClient.searchParameters.aliases.sortedBy] && store.state.SClient.resetMainIndex) {
