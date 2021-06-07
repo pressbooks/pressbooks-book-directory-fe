@@ -10,7 +10,8 @@ This Project is a Vue 3 vite project based on https://vitejs.dev/ is backwards c
 
 ### Requirements
 
-- Node.js version >=12.0.0.
+- Node.js version >=15.14.0.
+- NPM version >=7.0.0
 
 ### Install dependencies
 ```
