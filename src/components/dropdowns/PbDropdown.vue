@@ -1,11 +1,11 @@
 <template>
   <div>
     <vue-select
+      v-model="itemSelected"
       :options="options"
       :placeholder="placeholder"
       :searchable="searchable"
       :clearable="clearable"
-      v-model="itemSelected"
       @input="select"
     />
   </div>
@@ -33,6 +33,12 @@ export default {
       default: false,
     },
   },
+  emits: ['input'],
+  data() {
+    return {
+      itemSelected: ''
+    };
+  },
   mounted() {
     this.itemSelected = this.options.filter((item) => {
       if (item.default) {
@@ -40,12 +46,6 @@ export default {
       }
     });
   },
-  data() {
-    return {
-      itemSelected: ''
-    };
-  },
-  emits: ['input'],
   methods: {
     select({ value }) {
       this.$emit('input', value);

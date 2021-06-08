@@ -1,5 +1,8 @@
 <template>
-  <pb-accordion :open="opened">
+  <pb-accordion
+    :open="opened"
+    :data-cy-button="`${field}`"
+  >
     <template #title>
       <span class="title font-headings font-semibold">
         {{ title }}

@@ -5,9 +5,9 @@
   >
     <pb-stats />
     <pb-active-filters />
-    <pb-pagination />
+    <pb-pagination data-cy-subfix="top" />
     <books />
-    <pb-pagination />
+    <pb-pagination data-cy-subfix="bottom" />
   </div>
 </template>
 

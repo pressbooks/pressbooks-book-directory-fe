@@ -1,10 +1,10 @@
 <template>
   <ais-instant-search
+    v-if="!restartIndex"
     :index-name="$store.state.SClient.indexName"
     :search-client="$store.state.SClient.searchClient"
     :search-function="paginationHook"
     :middlewares="middlewares"
-    v-if="!restartIndex"
   >
     <ais-configure
       :facet-filters.camel="$store.state.SClient.notFilters"

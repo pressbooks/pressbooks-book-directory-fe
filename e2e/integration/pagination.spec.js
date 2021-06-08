@@ -1,5 +1,5 @@
 import Elements from '../support/elements';
-import {clickAccordionHeader, clickFilter, search} from "../support/common";
+import {clickAccordionHeader, clickFilter, clickPage, search} from "../support/common";
 
 describe('Pagination', () => {
   context('Desktop Resolution', () => {
@@ -10,24 +10,24 @@ describe('Pagination', () => {
 
       cy.get(Elements.booksCards.title).first().as('firstBookTitle');
       cy.get(Elements.paginatorLink(1)).as('firstPageLink');
-      cy.get('[data-cy=paginator-next]').as('nextPaginatorArrow');
+      cy.get('[data-cy=paginator-next-top]').as('nextPaginatorArrow');
 
     });
 
     it('Render next page books after clicking a page', () => {
       cy.get('@firstBookTitle').contains('Prior Learning Portfolio Development');
-      cy.get('@firstPageLink').find('a').should('have.class','font-bold');
+      cy.get('@firstPageLink').should('have.class','font-bold');
 
-      cy.get(Elements.paginatorLink(2)).click({multiple:true});
+      clickPage(2);
 
       cy.algoliaQueryRequest('algoliaRequest');
       cy.url()
         .should('include', 'p=2');
 
       cy.get('@firstBookTitle').contains('Physics 103 and 104 Teaching Guide');
-      cy.get(Elements.paginatorLink(2)).find('a').should('have.class','font-bold');
+      cy.get(Elements.paginatorLink(2)).should('have.class','font-bold');
 
-      cy.get('[data-cy=paginator-prev]').should('be.visible');
+      cy.get('[data-cy=paginator-prev-top]').should('be.visible');
     });
 
     it('Paginate on facet search',() => {
@@ -41,23 +41,23 @@ describe('Pagination', () => {
 
       cy.get('@firstBookTitle').contains('Fundamentals of Plant Genebanking');
 
-      cy.get('ul[data-cy=paginator]').eq(0).find('.page').should('have.length', 3);
+      cy.get('ul[data-cy=paginator-top]').eq(0).find('.page').should('have.length', 3);
     });
 
     it('Reset current pagination when a new search is performed',() => {
-      cy.get(Elements.paginatorLink(3)).click({multiple:true});
+      clickPage(3);
 
       cy.algoliaQueryRequest('algoliaRequest');
       cy.url()
         .should('include', 'p=3');
 
-      cy.get(Elements.paginatorLink(3)).find('a').should('have.class','font-bold');
+      cy.get(Elements.paginatorLink(3)).should('have.class','font-bold');
 
       search('Music');
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get('@firstPageLink').find('a').should('have.class','font-bold')
+      cy.get('@firstPageLink').should('have.class','font-bold')
         .url()
         .should('include', 'p=1');
     });
@@ -65,14 +65,14 @@ describe('Pagination', () => {
     it('Set page using URL',() => {
       cy.visit('/?p=4');
       cy.algoliaQueryRequest('algoliaRequest')
-        .get(Elements.paginatorLink(4)).find('a').should('have.class','font-bold');
+        .get(Elements.paginatorLink(4)).should('have.class','font-bold');
       cy.get('@firstBookTitle').contains('Anatomy 337 eReader');
     });
 
     it('Set page and search term using URL',() => {
       cy.visit('/?p=4&q=biology');
-      cy.algoliaQueryRequest('algoliaRequest')
-        .get(Elements.paginatorLink(4)).find('a').should('have.class','font-bold');
+      cy.algoliaQueryRequest('algoliaRequest');
+      cy.get(Elements.paginatorLink(4)).should('have.class','font-bold');
       cy.get('@firstBookTitle').contains('Microbiology: A Laboratory Experience');
     });
   });

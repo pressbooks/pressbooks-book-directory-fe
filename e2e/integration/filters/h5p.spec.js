@@ -1,4 +1,10 @@
-import {clickAccordionHeader, fillNumericValue, getNumericInput, submitNumericFilter} from '../../support/common';
+import {
+  clickAccordionHeader,
+  encodeFacetFilterForURL,
+  fillNumericValue,
+  getNumericInput,
+  submitNumericFilter
+} from '../../support/common';
 import Elements from '../../support/elements';
 
 describe('H5p Count Filters',() => {
@@ -123,11 +129,12 @@ describe('H5p Count Filters',() => {
 
       submitNumericFilter('h5pActivities');
 
+      submitNumericFilter('h5pActivities');
+
       const min = getNumericInput('h5pActivities','min');
 
-      min.invoke('prop', 'validationMessage')
-        .should('equal', 'Value must be greater than or equal to 0.');
-
+      cy.url()
+        .should('not.include', 'h5p=');
 
       fillNumericValue('h5pActivities','max',-10);
 
@@ -135,8 +142,10 @@ describe('H5p Count Filters',() => {
 
       const max = getNumericInput('h5pActivities','max');
 
-      max.invoke('prop', 'validationMessage')
-        .should('equal', 'Value must be greater than or equal to 0.');
+      submitNumericFilter('h5pActivities');
+
+      cy.url()
+        .should('not.include', 'h5p=');
 
       fillNumericValue('h5pActivities','min',100);
       fillNumericValue('h5pActivities','max',6);

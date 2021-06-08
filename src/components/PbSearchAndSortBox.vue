@@ -10,7 +10,10 @@
         class="right w-full flex flex-col space-y-4 md:w-2/5 md:flex-row md:space-y-0 md:space-x-4"
         data-cy="top-filters"
       >
-        <pb-per-page-dropdown :options="perPageOptions" v-if="perPageOptions.length > 0" />
+        <pb-per-page-dropdown
+          v-if="perPageOptions.length > 0"
+          :options="perPageOptions"
+        />
         <pb-sort-by-dropdown :options="sortByOptions" />
       </div>
     </div>
@@ -29,6 +32,13 @@ export default {
     PbSortByDropdown,
     PbSearchBox
   },
+  data() {
+    return {
+      defaultHitsPerPage: 10,
+      perPageOptions: [],
+      sortByOptions: this.$store.state.SClient.availableIndexes
+    };
+  },
   watch: {
     '$store.state.SClient.searchParameters.hitsPerPage'(hitsPerPage) {
       this.perPageOptions = this.perPageOptions.map((option) => {
@@ -46,13 +56,6 @@ export default {
         default: (allowed === vm.defaultHitsPerPage)
       };
     });
-  },
-  data() {
-    return {
-      defaultHitsPerPage: 10,
-      perPageOptions: [],
-      sortByOptions: this.$store.state.SClient.availableIndexes
-    };
   }
 };
 </script>

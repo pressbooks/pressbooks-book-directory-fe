@@ -1,23 +1,18 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import {navigateToMonthYear} from '../../support/common';
+import {clickAccordionHeader, clickPage, navigateToMonthYear} from '../../support/common';
 
 dayjs.extend(utc);
 
 describe('Filter last updated', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
-      cy.get('article[data-cy=last-updated-filter]').as('lastUpdatedAccordion');
-
-      cy.get('@lastUpdatedAccordion')
-        .click()
-        .get('div[data-cy=from-date-lastUpdated] input')
+      clickAccordionHeader('lastUpdated');
+      cy.get('div[data-cy=from-date-lastUpdated] input')
         .first()
         .as('fromLastUpdated');
 
-      cy.get('@lastUpdatedAccordion')
-        .click()
-        .get('div[data-cy=to-date-lastUpdated] input')
+      cy.get('div[data-cy=to-date-lastUpdated] input')
         .first()
         .as('toLastUpdated');
 
@@ -32,7 +27,9 @@ describe('Filter last updated', () => {
 
       cy.get(`button[data-date=${startDate}]`).click();
 
-      cy.get('@applyFilterButton').click();
+      cy.algoliaQueryRequest()
+        .get('@applyFilterButton')
+        .click();
 
       cy.algoliaQueryRequest()
         .get('[data-cy=chip-filter]')
@@ -41,11 +38,7 @@ describe('Filter last updated', () => {
         .contains('Updated >= 04/27/2021').should('be.visible')
         .url().should('include', `updated=%3E%3D${startTimestamp}`);
 
-      cy.get('[data-cy=paginator]')
-        .first()
-        .find('[data-cy=paginator-link]')
-        .last()
-        .click();
+      clickPage(5);
 
       cy.algoliaQueryRequest();
 
@@ -106,11 +99,7 @@ describe('Filter last updated', () => {
         .find('span')
         .should('contain.text', '04-2-2021');
 
-      cy.get('[data-cy=paginator]')
-        .first()
-        .find('[data-cy=paginator-link]')
-        .last()
-        .click();
+      clickPage(2);
 
       cy.algoliaQueryRequest();
 
@@ -130,11 +119,7 @@ describe('Filter last updated', () => {
         .contains('Updated >= 04/27/2021').should('be.visible')
         .url().should('include', 'updated=%3E%3D1619481600');
 
-      cy.get('[data-cy=paginator]')
-        .first()
-        .find('[data-cy=paginator-link]')
-        .last()
-        .click();
+      clickPage(5);
 
       cy.algoliaQueryRequest();
 
@@ -174,11 +159,7 @@ describe('Filter last updated', () => {
         .find('span')
         .should('contain.text', '04-2-2021');
 
-      cy.get('[data-cy=paginator]')
-        .first()
-        .find('[data-cy=paginator-link]')
-        .last()
-        .click();
+      clickPage(2);
 
       cy.algoliaQueryRequest();
 

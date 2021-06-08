@@ -26,7 +26,6 @@ describe('Word Count Filters',() => {
 
     it('Filter is applied & URL is updated by entering MAX value',()=>{
 
-
       fillNumericValue('wordCount','max',10000);
 
       submitNumericFilter('wordCount');
@@ -87,7 +86,6 @@ describe('Word Count Filters',() => {
 
     it('Clicking a filter chip removes value from filter input and updates the URL',()=>{
 
-
       fillNumericValue('wordCount','min',10000);
 
       fillNumericValue('wordCount','max',20000);
@@ -118,25 +116,13 @@ describe('Word Count Filters',() => {
 
     it('Make sure that min does not exceed max and max does not exceed min and no negative numbers are accepted',()=>{
 
-
       fillNumericValue('wordCount','min',-10);
 
       submitNumericFilter('wordCount');
 
-      const min = getNumericInput('wordCount','min');
-
-      min.invoke('prop', 'validationMessage')
-        .should('equal', 'Value must be greater than or equal to 0.');
-
-
       fillNumericValue('wordCount','max',-10);
 
       submitNumericFilter('wordCount');
-
-      const max = getNumericInput('wordCount','max');
-
-      max.invoke('prop', 'validationMessage')
-        .should('equal', 'Value must be greater than or equal to 0.');
 
       fillNumericValue('wordCount','min',100);
       fillNumericValue('wordCount','max',6);
