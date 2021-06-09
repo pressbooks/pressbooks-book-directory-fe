@@ -159,6 +159,31 @@ function getLicenseIconAndAltByLicenseName(licenseName) {
   };
 }
 
+/**
+ * This function return true if 2 objects contains the same properties and values.
+ * Otherwise, it will return false.
+ *
+ * @param a
+ * @param b
+ * @returns {boolean}
+ */
+function isEquivalent(a, b) {
+  var aProps = Object.getOwnPropertyNames(a);
+  var bProps = Object.getOwnPropertyNames(b);
+
+  if (aProps.length != bProps.length) {
+    return false;
+  }
+
+  for (var i = 0; i < aProps.length; i++) {
+    var propName = aProps[i];
+    if (a[propName] !== b[propName]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export default {
   functions: {
     setFilters,
@@ -167,5 +192,6 @@ export default {
     setNumericFilters,
     getLowerCaseAlphanumericAndHyphen,
     getLicenseIconAndAltByLicenseName,
+    isEquivalent
   }
 };

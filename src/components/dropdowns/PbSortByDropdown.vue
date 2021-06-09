@@ -1,6 +1,6 @@
 <template>
   <ais-sort-by
-    :items="options"
+    :items="itemsOptions"
     class="w-ful md:w-1/2"
   >
     <template #default="{ items, refine }">
@@ -27,10 +27,33 @@ export default {
       default() { return []; }
     }
   },
+  data() {
+    return {
+      alias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
+      itemsOptions: this.options
+    };
+  },
   methods: {
     onInput(data, refine) {
-      refine(data);
-      this.$store.state.SClient.searchParameters.sortedBy = data;
+      this.$store.commit('setResetMainIndex', false);
+      let routeQuery = {...this.$route.query};
+      const indexesOrderedByMap = this.$store.state.SClient.availableIndexes.reduce((index, item) => {
+        return {
+          ...index,
+          [item.value]: item.orderedBy
+        };
+      }, {});
+      if (
+        !routeQuery[this.alias] ||
+        (
+          routeQuery[this.alias] &&
+          routeQuery[this.alias] != indexesOrderedByMap[data]
+        )
+      ) {
+        routeQuery[this.alias] = indexesOrderedByMap[data];
+        this.$router.replace({ query: routeQuery });
+        refine(data);
+      }
     }
   }
 };

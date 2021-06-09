@@ -20,15 +20,29 @@ Vue.use(VueTailwind, VueTailwindConfig);
 dayjs.extend(utc);
 
 router.beforeEach((to, from, next) => {
-  let indexName = store.state.SClient.availableIndexes.filter((index) => {
-    return ! index.isReplica;
-  });
-  let index = store.state.SClient.searchClient.initIndex(indexName[0].value);
+  if (to.query[store.state.SClient.searchParameters.aliases.sortedBy] && store.state.SClient.resetMainIndex) {
+    const indexesOrderedByMap = store.state.SClient.availableIndexes.reduce((index, item) => {
+      return {
+        ...index,
+        [item.orderedBy]: item.value
+      };
+    }, {});
+    store.commit('setSortedBy', to.query[store.state.SClient.searchParameters.aliases.sortedBy]);
+    store.commit('setMainIndex', indexesOrderedByMap[to.query[store.state.SClient.searchParameters.aliases.sortedBy]]);
+  }
+  let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
   store.dispatch('getStats', index).then(() => {
     let query = {};
     let containsQ = false;
     let aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
       .map(function(key){return store.state.SClient.allowedFilters[key].alias;});
+
+    if (to.query[store.state.SClient.searchParameters.aliases.page]) {
+      store.commit('setPage', to.query[store.state.SClient.searchParameters.aliases.page]);
+    }
+    if (to.query[store.state.SClient.searchParameters.aliases.hitsPerPage]) {
+      store.commit('setHitsPerPage', to.query[store.state.SClient.searchParameters.aliases.hitsPerPage]);
+    }
     for (let attr in to.query) {
       if (aliasAllowed.indexOf(attr) >= 0) {
         if (attr === store.state.SClient.allowedFilters.search.alias) {

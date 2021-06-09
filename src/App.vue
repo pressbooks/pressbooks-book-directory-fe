@@ -1,5 +1,6 @@
 <template>
   <ais-instant-search
+    v-if="!restartIndex"
     :index-name="$store.state.SClient.indexName"
     :search-client="$store.state.SClient.searchClient"
     :search-function="paginationHook"
@@ -58,22 +59,43 @@ export default {
   },
   data() {
     return {
-      currentQuery: '',
-      currentPage: 0,
-      middlewares: [this.middleware]
+      middlewares: [this.middleware],
+      resetPage: false,
+      routeQuery: undefined,
+      sortByAlias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
+      restartIndex: false
     };
   },
   watch: {
-    '$store.state.SClient.notFilters' : {
-      deep: true,
-      handler(){
-        this.currentQuery = null;
-      }
-    },
     '$store.state.SClient' : {
       deep: true,
       handler(){
         NProgress.start();
+      }
+    },
+    '$route.query': {
+      deep: true,
+      handler(query) {
+        if (typeof this.routeQuery !== 'undefined') {
+          this.resetPage = false;
+          const copyOfQuery = {...query};
+          if (copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
+            delete copyOfQuery[this.$store.state.SClient.searchParameters.aliases.page];
+          }
+          if (this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page]) {
+            delete this.routeQuery[this.$store.state.SClient.searchParameters.aliases.page];
+          }
+
+          for (let attribute in copyOfQuery) {
+            if (
+              typeof this.routeQuery[attribute] === 'undefined' ||
+              this.routeQuery[attribute].toString() !== copyOfQuery[attribute].toString()
+            ) {
+              this.resetPage = true;
+            }
+          }
+        }
+        this.routeQuery = query;
       }
     }
   },
@@ -86,16 +108,17 @@ export default {
   },
   methods: {
     paginationHook(helper) {
-
-      if(helper.getPage() === 0) {
-        this.currentQuery = helper.state.query;
-      }
-      if(this.currentQuery !== helper.state.query) {
+      helper.setQueryParameter('hitsPerPage', this.$store.state.SClient.searchParameters.hitsPerPage);
+      if(this.resetPage && parseInt(this.$store.state.SClient.searchParameters.page) > 1) {
         helper.setPage(0); // reset the pagination when the query changes
+        let routeQuery = {...this.$route.query};
+        routeQuery[this.$store.state.SClient.searchParameters.aliases.page] = 1;
+        this.$router.replace({ query: routeQuery });
+      } else {
+        helper.setPage(this.$store.state.SClient.searchParameters.page - 1);
       }
-
+      this.resetPage = false;
       helper.search();
-
     },
     middleware() {
       return {
