@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8" />
-      <link rel="icon" href="/favicon.ico" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="Pressbooks Directory is more powerful when paired with a PressbooksEDU Authoring & Editing Platform, which allows you to clone, revise, remix, and redistribute all of the openly licensed content found through this Directory"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <% if (import.meta.env.PROD) { %>
+      <meta name="robots" content="index, follow" />
+      <%  } else  { %>
+      <meta name="robots" content="noindex, nofollow" />
+      <% } %>
+      <link rel="icon" href="/favicon.png" />
       <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
       <title>Pressbooks Directory</title>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script>
+          const VITE_APP_GA_MEASUREMENT_ID = import.meta.env.VITE_APP_GA_MEASUREMENT_ID;
+          const gaMeasurementID = VITE_APP_GA_MEASUREMENT_ID !== 'undefined'? VITE_APP_GA_MEASUREMENT_ID : false;
+          if (gaMeasurementID !== 'false') {
+              const scriptTag = unescape("%3Cscript async src='https://www.googletagmanager.com/gtag/js?id=" + gaMeasurementID + "'%3E%3C/script%3E");
+              document.write(scriptTag);
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                  dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+              gtag('config', gaMeasurementID, {'send_page_view': true});
+          }
+      </script>
   </head>
   <body class="antialiased font-sans bg-white text-gray-900">
       <div id="app"></div>
