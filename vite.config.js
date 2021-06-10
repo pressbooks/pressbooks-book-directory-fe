@@ -7,5 +7,14 @@ module.exports = {
   plugins: [createVuePlugin(/*options*/),injectHtml(), cleanup],
   server: {
     port: 3001
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
+      }
+    }
   }
 };
