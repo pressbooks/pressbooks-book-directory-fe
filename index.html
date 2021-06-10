@@ -7,6 +7,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <% if (process.env.NODE_ENV === 'production') { %>
       <meta name="robots" content="index, follow" />
+      <%  } else  { %>
+      <meta name="robots" content="noindex, nofollow" />
+      <% } %>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script>
           const VITE_APP_GA_MEASUREMENT_ID = import.meta.env.VITE_APP_GA_MEASUREMENT_ID;
@@ -22,9 +25,6 @@
               gtag('config', gaMeasurementID, {'send_page_view': true});
           }
       </script>
-      <%  } else  { %>
-      <meta name="robots" content="noindex, nofollow" />
-      <% } %>
       <link rel="icon" href="/favicon.png" />
       <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
       <title>Pressbooks Directory</title>
