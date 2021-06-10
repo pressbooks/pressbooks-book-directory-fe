@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
 import InstantSearch from 'vue-instantsearch';
-import VueMeta from 'vue-meta';
 import VueSelect from 'vue-select';
 import VueTailwind from 'vue-tailwind';
 import router from './router';
@@ -12,7 +11,6 @@ import utc from 'dayjs/plugin/utc';
 import './index.css';
 import {store} from './store';
 
-Vue.use(VueMeta);
 Vue.component('VueSelect', VueSelect);
 Vue.use(InstantSearch);
 Vue.use(VueTailwind, VueTailwindConfig);
