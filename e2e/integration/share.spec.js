@@ -22,7 +22,7 @@ describe('Share Query', () => {
         cy.url().should('include', val);
       });
 
-      cy.wait(3000);
+      cy.wait(3000); //We need to wait for the auto-close
 
       cy.get('div[data-cy=share-box]').should('not.exist');
 
