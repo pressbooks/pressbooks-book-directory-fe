@@ -3,7 +3,7 @@
     id="books"
     class="w-full flex-1"
   >
-    <div class="flex flex-row justify-between">
+    <div class="flex flex-col lg:flex-row lg:justify-between">
       <pb-stats />
       <pb-share-button />
     </div>
@@ -19,7 +19,7 @@ import PbStats from '../PbStats.vue';
 import PbActiveFilters from '../filters/PbActiveFilters.vue';
 import Books from './Books.vue';
 import PbPagination from '../PbPagination.vue';
-import PbShareButton from '../forms/PbShareButton.vue';
+import PbShareButton from '../forms/PbShare.vue';
 export default {
   name: 'PbPaginatedBooks',
   components: {PbShareButton, PbPagination, Books, PbActiveFilters, PbStats},
