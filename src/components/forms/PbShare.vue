@@ -82,7 +82,6 @@ export default {
     return {
       isOpen: false,
       isCopied: false,
-      btnText: 'Copy'
     };
   },
   computed: {
