@@ -22,10 +22,9 @@ describe('Share Query', () => {
         cy.url().should('include', val);
       });
 
-      cy.wait(3000); //We need to wait for the auto-close
-
-      cy.get('div[data-cy=share-box]').should('not.exist');
-
+      cy.wait(3000).then(()=>{
+        cy.get('div[data-cy=share-box]').should('not.exist');
+      }); //We need to wait for the auto-close with a callback is more reliable
 
       search('health');
 
