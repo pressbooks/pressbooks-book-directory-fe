@@ -22,7 +22,7 @@ describe('Share Query', () => {
         cy.url().should('include', val);
       });
 
-      cy.wait(2000);
+      cy.wait(3000);
 
       cy.get('div[data-cy=share-box]').should('not.exist');
 
