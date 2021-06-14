@@ -44,7 +44,7 @@ export default {
           ? item.thumbnailUrl
           : item.hasImage ? item.image : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
         publisherName: item.hasPublisher ? helpers.functions.unescapeHTML(item.publisherName) : false,
-        lang: item.hasLanguageName ? item.inLanguage.toUpperCase() : false,
+        lang: item.hasLanguageName ? item.inLanguage : false,
         description: vm.getBookDescription(item),
         licenseIcon: item.hasLicense
           ? vm.getLicenseIcon(item).image
