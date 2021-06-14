@@ -1,11 +1,12 @@
 <template>
-  <article>
+  <div>
     <button
       :data-cy="`filter-${dataCyButton}-header-button`"
       :class="[
         'w-full flex items-center justify-between py-3 px-4',
         opened && 'border-b'
       ]"
+      :aria-expanded="opened ? 'true' : 'false'"
       @click.prevent="opened = !opened"
     >
       <slot name="title" />
@@ -31,7 +32,7 @@
         <slot name="content" />
       </div>
     </transition>
-  </article>
+  </div>
 </template>
 
 <script>

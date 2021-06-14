@@ -1,22 +1,23 @@
 <template>
-  <div class="w-full h-full">
+  <li class="w-full h-full">
     <a
       href="#"
       class="p-1 cursor-pointer h-full flex flex-col"
-      @click.prevent="filter(card)"
+      @click.prevent="filter"
     >
       <div class="aspect-w-3 aspect-h-4 overflow-hidden rounded">
         <img
           :src="card.image"
-          :alt="card.name"
+          alt=""
           class="h-full w-full object-cover"
+          role="presentation"
         >
       </div>
       <div class="text mt-4 px-2 font-semibold">
         {{ truncateTitle(card.name) }}
       </div>
     </a>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -42,10 +43,10 @@ export default {
     truncateTitle(title) {
       return title.length > this.truncateLimit ? title.substr(0, this.truncateLimit - 1) + '...' : title;
     },
-    filter(card) {
+    filter() {
       scrollTo('#books');
       let query = {...this.$route.query};
-      query[this.$store.state.SClient.allowedFilters[card.facet].alias] = card.name;
+      query[this.$store.state.SClient.allowedFilters[card.facet].alias] = this.card.name;
       this.$router.replace({ query });
     }
   }

@@ -10,13 +10,13 @@
           <h2 class="section-title font-bold text-4xl mb-12">
             Curated Collections
           </h2>
-          <div class="grid grid-cols-1 gap-y-3 md:grid-cols-5 md:gap-x-3">
+          <ul class="grid grid-cols-1 gap-y-3 md:grid-cols-5 md:gap-x-3">
             <pb-collection-card
               v-for="(card, n) in $store.state[storeName][storeProperty].slice(0, collectionCardsLimit)"
               :key="n"
               :card="card"
             />
-          </div>
+          </ul>
         </div>
       </div>
     </div>
