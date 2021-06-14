@@ -22,6 +22,8 @@ describe('Share Query', () => {
         cy.url().should('include', val);
       });
 
+      cy.get('button[data-cy=share-close-box]').click();
+
       search('health');
 
       cy.get('button[data-cy=share-button]').click();

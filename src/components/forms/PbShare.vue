@@ -29,6 +29,7 @@
     >
       <button
         class="absolute right-0 top-0"
+        data-cy="share-close-box"
         @click="close"
       >
         <svg
