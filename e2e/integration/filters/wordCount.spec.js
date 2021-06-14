@@ -7,7 +7,7 @@ describe('Word Count Filters',() => {
       clickAccordionHeader('wordCount');
     });
 
-    it('Filtyeagher is applied & URL is updated by entering MIN value',()=>{
+    it('Filter is applied & URL is updated by entering MIN value',()=>{
 
       fillNumericValue('wordCount','min',10000);
 
