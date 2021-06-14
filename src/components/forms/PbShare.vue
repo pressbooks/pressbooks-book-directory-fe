@@ -25,7 +25,7 @@
     <div
       v-if="isOpen"
       data-cy="share-box"
-      class="bg-pb-dark-blue absolute block z-30 right-0 w-full right-0 p-6 -top-4 shadow-lg"
+      class="bg-pb-dark-blue absolute block z-30 right-0 w-full p-1 pr-6 -top-4 shadow-lg"
     >
       <button
         class="absolute right-0 top-0"
@@ -48,13 +48,13 @@
       <div class="flex flex-row border-2 w-full">
         <input
           data-cy="share-input"
-          class="w-full border-0 text-sm py-3 px-4 focus:outline-none focus:ring-0"
+          class="w-full border-0 text-sm p-2 focus:outline-none focus:ring-0"
           name="share-query"
           :value="currentUrl"
         >
         <button
           data-cy="share-copy-button"
-          class="border-1 border-pb-dark-blue px-3 inline-flex items-center"
+          class="border-1 border-pb-dark-blue px-2 inline-flex items-center"
           @click="copyToClipboard"
         >
           <svg
