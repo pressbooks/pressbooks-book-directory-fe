@@ -20,11 +20,8 @@ describe('Share Query', () => {
 
       cy.get('@share-input').invoke('val').then(val=>{
         cy.url().should('include', val);
+        cy.get('div[data-cy=share-box]',{timeout: 3000}).should('not.exist'); //We need to wait for the auto-close with a callback is more reliable
       });
-
-      cy.wait(5000).then(()=>{
-        cy.get('div[data-cy=share-box]').should('not.exist');
-      }); //We need to wait for the auto-close with a callback is more reliable
 
       search('health');
 
