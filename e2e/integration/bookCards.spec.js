@@ -108,6 +108,10 @@ describe('Book cards', function () {
           fixtureProperty: 'size'
         },
         {
+          element: Elements.booksCards.h5pActivities,
+          fixtureProperty: 'h5pActivities'
+        },
+        {
           element: Elements.booksCards.authors,
           fixtureProperty: 'authors'
         },
