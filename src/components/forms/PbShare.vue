@@ -108,6 +108,7 @@ export default {
         },2000);
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
+        this.close();
       });
     }
   }
