@@ -53,7 +53,7 @@
           <div :data-cy-button="`${field}`">
             <t-button
               type="submit"
-              :disabled="number.min === 0 && number.max === 0"
+              :disabled="!number.min && !number.max"
             >
               <span class="sr-only">{{ `Apply ${title}` }}</span>
               <span aria-hidden="true">Go</span>
@@ -86,8 +86,8 @@ export default {
   data() {
     return {
       number: {
-        min: 0,
-        max: 0,
+        min: null,
+        max: null,
         alias: ''
       },
       itemsFiltered: false

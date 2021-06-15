@@ -17,7 +17,7 @@
           <button
             class="include"
             data-cy="filter-include-button"
-            :aria-selected="wasFiltered('true', false) ? 'true' : 'false'"
+            :aria-pressed="wasFiltered('true', false) ? 'true' : 'false'"
             @click="applyFilter(true, false)"
           >
             <span class="sr-only">{{ `Include ${title}` }}</span>
@@ -33,7 +33,7 @@
           <button
             class="exclude"
             data-cy="filter-exclude-button"
-            :aria-selected="wasFiltered('false', true) ? 'true' : 'false'"
+            :aria-pressed="wasFiltered('false', true) ? 'true' : 'false'"
             @click="applyFilter(true, true)"
           >
             <span class="sr-only">{{ `Exclude ${title}` }}</span>

@@ -3,7 +3,7 @@
     <button
       class="include"
       :data-cy="`filter-${field}-${getAlphanumericFacet(item.facet)}-include-button`"
-      :aria-selected="wasFiltered(item.facet, false) ? 'true' : 'false'"
+      :aria-pressed="wasFiltered(item.facet, false) ? 'true' : 'false'"
       @click="applyFilter(item, false)"
     >
       <span class="sr-only">{{ `Include ${item.facet}` }}</span>
@@ -19,7 +19,7 @@
     <button
       class="exclude"
       :data-cy="`filter-${field}-${getAlphanumericFacet(item.facet)}-exclude-button`"
-      :aria-selected="wasFiltered(item, true) ? 'true': 'false'"
+      :aria-pressed="wasFiltered(item, true) ? 'true': 'false'"
       @click="applyFilter(item, true)"
     >
       <span class="sr-only">{{ `Exclude ${item.facet}` }}</span>
