@@ -25,7 +25,10 @@
           :placeholder="`Search ${title}`"
         >
       </div>
-      <ul>
+      <ul
+        class="divide-y"
+        :aria-label="`${title} filter options`"
+      >
         <li
           v-for="(item, key) in displayItems"
           :key="key"

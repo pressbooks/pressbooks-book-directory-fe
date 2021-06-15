@@ -1,7 +1,10 @@
 <template>
-  <section>
+  <section aria-labelledby="welcome-section-title">
     <div class="container mx-auto w-full md:w-2/3 p-8">
-      <h1 class="section-title text-5xl mb-8 font-bold text-center">
+      <h1
+        id="welcome-section-title"
+        class="section-title text-5xl mb-8 font-bold text-center"
+      >
         Welcome to Pressbooks Directory
       </h1>
 

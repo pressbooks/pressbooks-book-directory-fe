@@ -16,6 +16,7 @@
     >
       <li v-if="!isFirstPage">
         <a
+          class="block py-1 px-2"
           :data-cy="`paginator-prev-${dataCySubfix}`"
           href="#"
           @click.prevent="changePage($store.state.SClient.searchParameters.page - 1)"
@@ -29,7 +30,7 @@
         :key="page"
       >
         <a
-          class="py-1 px-2"
+          class="block py-1 px-2"
           href="#"
           :data-cy="`paginator-link-${page+1}-${dataCySubfix}`"
           :class="$store.state.SClient.searchParameters.page == page+1 ? 'font-bold font-gray-900' : ''"
@@ -41,6 +42,7 @@
       </li>
       <li v-if="!isLastPage">
         <a
+          class="block py-1 px-2"
           href="#"
           :data-cy="`paginator-next-${dataCySubfix}`"
           @click.prevent="changePage(parseInt($store.state.SClient.searchParameters.page) + 1)"

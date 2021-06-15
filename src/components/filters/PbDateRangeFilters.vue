@@ -35,7 +35,8 @@
           :data-cy="`apply-filter-${field}`"
           @click="filterByDateRange"
         >
-          Go
+          <span class="sr-only">{{ `Apply ${title} filter` }}</span>
+          <span aria-hidden="true">Go</span>
         </t-button>
       </div>
     </template>

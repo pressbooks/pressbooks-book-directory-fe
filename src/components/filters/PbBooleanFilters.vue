@@ -1,5 +1,8 @@
 <template>
-  <pb-accordion :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'">
+  <pb-accordion 
+    :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'"
+    :data-cy-button="`${field}`"
+  >
     <template #title>
       <span class="title font-semibold">
         {{ title }}

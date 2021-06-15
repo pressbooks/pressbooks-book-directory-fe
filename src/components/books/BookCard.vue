@@ -1,5 +1,5 @@
 <template>
-  <div
+  <article
     data-cy="book-card"
     class="flex flex-row flex-wrap items-start border border-gray-300 px-8 py-8 shadow-md"
   >
@@ -17,7 +17,7 @@
       <book-details :item="item" />
     </div>
     <book-media :item="item" />
-  </div>
+  </article>
 </template>
 <script>
 import BookInfo from './BookInfo.vue';

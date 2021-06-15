@@ -46,7 +46,7 @@ export default {
     filter() {
       scrollTo('#books');
       let query = {...this.$route.query};
-      query[this.$store.state.SClient.allowedFilters[card.facet].alias] = this.card.name;
+      query[this.$store.state.SClient.allowedFilters[this.card.facet].alias] = this.card.name;
       this.$router.replace({ query });
     }
   }

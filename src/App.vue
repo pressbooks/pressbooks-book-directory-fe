@@ -15,7 +15,7 @@
     <main>
       <pb-welcome-header />
       <pb-collections />
-      <section>
+      <section aria-label="Find a book">
         <div class="content container mx-auto px-8">
           <div class="py-8 border-b border-grey-300">
             <pb-search-and-sort-box />
