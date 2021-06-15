@@ -37,19 +37,19 @@ export default {
               ? helpers.functions.unescapeHTML(item.author.join(', '))
               : helpers.functions.unescapeHTML(item.author),
         editorNames:
-            item.has_editor && typeof item.editor === 'object'
+            item.hasEditor && typeof item.editor === 'object'
               ? helpers.functions.unescapeHTML(item.editor.join(', '))
               : helpers.functions.unescapeHTML(item.editor),
-        image: item.thumbnailUrl
+        image: item.hasThumbnailUrl
           ? item.thumbnailUrl
-          : item.image ? item.image : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
-        publisherName: item.publisherName ? helpers.functions.unescapeHTML(item.publisherName) : false,
-        lang: item.inLanguage ? item.inLanguage.toUpperCase() : false,
+          : item.hasImage ? item.image : vm.$store.state.config.imagesPath + vm.$store.state.config.defaultBookCover,
+        publisherName: item.hasPublisher ? helpers.functions.unescapeHTML(item.publisherName) : false,
+        lang: item.hasLanguageName ? item.inLanguage : false,
         description: vm.getBookDescription(item),
-        licenseIcon: item.licenseName
+        licenseIcon: item.hasLicense
           ? vm.getLicenseIcon(item).image
           : false,
-        licenseAlt: item.licenseName
+        licenseAlt: item.hasLicense
           ? vm.getLicenseIcon(item).alt
           : false,
         isBasedOn: item.isBasedOn !== undefined,
