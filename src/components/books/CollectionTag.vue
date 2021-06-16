@@ -1,13 +1,16 @@
 <template>
-  <button
-    type="button"
-    data-cy="book-collection-tag"
-    class="inline-block leading-none border border-pb-red py-2 px-3 text-sm font-bold rounded mb-2 mr-2"
-    :class="enabled ? 'bg-red-700 text-white': 'text-pb-red border-pb-red'"
-    @click.prevent="toggle(collection)"
-  >
-    {{ collection }}
-  </button>
+  <li class="mb-2 mr-2">
+    <button
+      type="button"
+      data-cy="book-collection-tag"
+      class="inline-block leading-none border border-pb-red py-2 px-3 text-sm font-bold rounded"
+      :class="enabled ? 'bg-red-700 text-white': 'text-pb-red border-pb-red'"
+      :aria-pressed="enabled ? 'true' : 'false'"
+      @click.prevent="toggle"
+    >
+      {{ collection }}
+    </button>
+  </li>
 </template>
 
 <script>
@@ -31,16 +34,16 @@ export default {
     }
   },
   methods: {
-    toggle(selectedFacet) {
+    toggle() {
       scrollTo('#books');
       let query = {...this.$route.query};
       let currentCollections = query.collec? query.collec.split('&&') : [];
-      if (currentCollections.includes(selectedFacet)) {
+      if (currentCollections.includes(this.collection)) {
         currentCollections = currentCollections.filter(added => {
-          return selectedFacet !== added;
+          return this.collection !== added;
         });
       } else {
-        currentCollections.push(selectedFacet);
+        currentCollections.push(this.collection);
       }
       query.collec = currentCollections.join('&&');
       if (currentCollections.length === 0) {

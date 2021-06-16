@@ -6,7 +6,7 @@
     >
       <pb-book-cover
         :image="item.image"
-        :alt="item.name"
+        :alt="`${item.name} cover`"
       />
     </div>
     <ul

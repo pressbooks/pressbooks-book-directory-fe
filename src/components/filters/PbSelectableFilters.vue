@@ -27,6 +27,7 @@
       </div>
       <ul
         class="divide-y"
+        role="list"
         :aria-label="`${title} filter options`"
       >
         <li

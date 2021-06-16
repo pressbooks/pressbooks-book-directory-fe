@@ -12,6 +12,7 @@
     >
       <ul
         class="active-filters flex flex-col flex-wrap flex-1 md:flex-row"
+        role="list"
         aria-labelledby="active-filters"
       >
         <template

@@ -14,7 +14,7 @@
         >
       </div>
       <div class="text mt-4 px-2 font-semibold">
-        {{ truncateTitle(card.name) }}
+        {{ truncatedTitle }}
       </div>
     </a>
   </li>
@@ -39,15 +39,34 @@ export default {
       }
     };
   },
-  methods: {
-    truncateTitle(title) {
-      return title.length > this.truncateLimit ? title.substr(0, this.truncateLimit - 1) + '...' : title;
+  computed: {
+    alias() {
+      return this.$store.state.SClient.allowedFilters[this.card.facet].alias;
     },
+    truncatedTitle() {
+      let title = this.card.name;
+
+      return title.length > this.truncateLimit
+        ? `${title.substr(0, this.truncateLimit - 1)}...`
+        : title;
+    }
+  },
+  methods: {
     filter() {
-      scrollTo('#books');
       let query = {...this.$route.query};
-      query[this.$store.state.SClient.allowedFilters[this.card.facet].alias] = this.card.name;
-      this.$router.replace({ query });
+
+      if (query[this.alias] === this.card.name) {
+        return;
+      }
+
+      scrollTo('#books');
+
+      this.$router.replace({
+        query: {
+          ...query,
+          [this.alias]: this.card.name
+        }
+      });
     }
   }
 };

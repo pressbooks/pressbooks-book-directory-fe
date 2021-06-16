@@ -4,15 +4,21 @@
     class="flex flex-row flex-wrap items-start border border-gray-300 px-8 py-8 shadow-md"
   >
     <div class="w-full md:w-2/3 md:pr-4">
-      <recommended
-        v-if="item.isRecommended"
-        :enabled="isRecommendedFilterEnabled"
-      />
-      <collection-tag
-        v-for="(tag,index) in item.collections"
-        :key="index"
-        :collection="tag"
-      />
+      <ul
+        role="list"
+        aria-label="Book tags"
+        class="flex"
+      >
+        <recommended
+          v-if="item.isRecommended"
+          :enabled="isRecommendedFilterEnabled"
+        />
+        <collection-tag
+          v-for="(tag,index) in item.collections"
+          :key="index"
+          :collection="tag"
+        />
+      </ul>
       <book-info :item="item" />
       <book-details :item="item" />
     </div>

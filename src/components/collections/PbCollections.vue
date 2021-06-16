@@ -14,7 +14,11 @@
           >
             Curated Collections
           </h2>
-          <ul class="grid grid-cols-1 gap-y-3 md:grid-cols-5 md:gap-x-3">
+          <ul 
+            role="list"
+            aria-labelledby="collections-section-title"
+            class="grid grid-cols-1 gap-y-3 md:grid-cols-5 md:gap-x-3"
+          >
             <pb-collection-card
               v-for="(card, n) in $store.state[storeName][storeProperty].slice(0, collectionCardsLimit)"
               :key="n"

@@ -16,7 +16,12 @@
             placeholder="From date"
             :max-date="dates.to"
             :data-cy="`from-date-${field}`"
-          />
+          >
+            <template slot="clearButton">
+              <span class="sr-only">Clear from date value</span>
+              <pb-clear-button-icon />
+            </template>
+          </t-datepicker>
         </div>
         <div class="p-2">
           <t-datepicker
@@ -24,7 +29,12 @@
             placeholder="To date"
             :min-date="dates.start"
             :data-cy="`to-date-${field}`"
-          />
+          >
+            <template slot="clearButton">
+              <span class="sr-only">Clear to date value</span>
+              <pb-clear-button-icon />
+            </template>
+          </t-datepicker>
         </div>
       </div>
 
@@ -46,11 +56,13 @@
 <script>
 import dayjs from 'dayjs';
 import PbAccordion from '../PbAccordion.vue';
+import PbClearButtonIcon from '../PbClearButtonIcon.vue';
 
 export default {
   name: 'DateRangeFilters',
   components: {
-    PbAccordion
+    PbAccordion,
+    PbClearButtonIcon,
   },
   props: {
     field: {
