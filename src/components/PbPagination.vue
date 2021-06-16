@@ -28,6 +28,7 @@
       <li
         v-for="page in pages"
         :key="page"
+        class="page"
       >
         <a
           class="block py-1 px-2"
