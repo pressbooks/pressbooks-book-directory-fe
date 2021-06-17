@@ -8,9 +8,15 @@
       <pb-share-button />
     </div>
     <pb-active-filters />
-    <pb-pagination data-cy-subfix="top" />
+    <pb-pagination
+      aria-label="top pagination"
+      data-cy-subfix="top"
+    />
     <books />
-    <pb-pagination data-cy-subfix="bottom" />
+    <pb-pagination
+      aria-label="bottom pagination"
+      data-cy-subfix="bottom"
+    />
   </div>
 </template>
 

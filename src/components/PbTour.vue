@@ -65,7 +65,7 @@ export default {
       this.searchInput.value = '';
     };
 
-    const filterUsedForTour = document.querySelector('article[data-cy="license-filter"] button');
+    const filterUsedForTour = document.querySelector('div[data-cy="license-filter"] button');
 
     const typing = (text, current = 0) => {
       this.searchInput.value += text[current];
@@ -164,7 +164,7 @@ export default {
               intro: `
         <p>Filters allow you to perform faceted search to narrow down your results by license, subject, word count, and more. Faceted searching can be combined with text search or used separately.</p>
          `,
-              element: document.querySelector('article[data-cy="license-filter"]'),
+              element: document.querySelector('div[data-cy="license-filter"]'),
               position: 'right'
             },
             {
@@ -173,7 +173,7 @@ export default {
         <p>Click the checkmark to apply that filter and see only those results, or click the X to omit those results. Click the same option again to remove that filter.</p>
         <p>You can apply multiple inclusion or exclusion filters for each facet. If multiple filters are selected within a facet, your results will include books that satisfy any of the active filter conditions.</p>
          `,
-              element: document.querySelector('article[data-cy="license-filter"]'),
+              element: document.querySelector('div[data-cy="license-filter"]'),
               position: 'right'
             },
             {
@@ -199,14 +199,14 @@ export default {
         <p>Each book card displays available information about the book, including title, word count, storage size, author(s), subject(s), date last updated, publisher, and language.</p>
         <p>Clicking a book's title or cover will take you to the book’s home page.</p>
          `,
-              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]'),
+              element: document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]'),
             },
             {
               title: 'Visual icons',
               intro: `
         <p>Beneath the cover image, you will see a set of icons that convey additional information about the book.</p>
          `,
-              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
+              element: document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
               position: 'left'
             },
             {
@@ -214,7 +214,7 @@ export default {
               intro: `
         <p>This icon indicates the copyright license selected for the work (All Rights Reserved or one of the Creative Commons licenses). Hovering over the icon will display the license name.</p>
          `,
-              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
+              element: document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
               position: 'left'
             },
             {
@@ -223,7 +223,7 @@ export default {
         <img src="${this.h5pActivitiesImage}" alt="H5P Logo" width="${this.h5pLogoWidth}" />
         <p>The H5P logo is displayed when a book contains interactive H5P elements (like quizzes or flashcards). Hovering over the icon will display the number of H5P activities present in that book.</p>
          `,
-              element: document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
+              element: document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]'),
               position: 'left'
             },
             {
@@ -276,7 +276,7 @@ export default {
 
           [1,2,3].forEach(function(item, index){
             setTimeout(()=>{
-              const filter = document.querySelector('article[data-cy="license-filter"] [data-cy="filter-licenseCode-option"]:nth-of-type('+item+') button:nth-of-type(1)');
+              const filter = document.querySelector('div[data-cy="license-filter"] [data-cy="filter-licenseCode-option"]:nth-of-type('+item+') button:nth-of-type(1)');
               filter.click();
             }, index * 1000);
           });
@@ -287,10 +287,10 @@ export default {
 
           // Rebind DOM for remaining steps on the book card
 
-          this.intro._introItems[12].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
-          this.intro._introItems[13].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
-          this.intro._introItems[14].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-license"]');
-          this.intro._introItems[15].element = document.querySelector('.ais-Hits div[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
+          this.intro._introItems[12].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
+          this.intro._introItems[13].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
+          this.intro._introItems[14].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-license"]');
+          this.intro._introItems[15].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
 
           setTimeout(()=> {
             const clear = document.querySelector('button[data-cy="clear-all-filters"]');

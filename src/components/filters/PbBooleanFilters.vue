@@ -1,5 +1,8 @@
 <template>
-  <pb-accordion :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'">
+  <pb-accordion 
+    :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'"
+    :data-cy-button="`${field}`"
+  >
     <template #title>
       <span class="title font-semibold">
         {{ title }}
@@ -17,8 +20,10 @@
           <button
             class="include"
             data-cy="filter-include-button"
+            :aria-pressed="wasFiltered('true', false) ? 'true' : 'false'"
             @click="applyFilter(true, false)"
           >
+            <span class="sr-only">{{ `Include ${title}` }}</span>
             <CheckCircleIconSolid
               v-if="wasFiltered('true', false)"
               class="h-6 w-6"
@@ -31,8 +36,10 @@
           <button
             class="exclude"
             data-cy="filter-exclude-button"
+            :aria-pressed="wasFiltered('false', true) ? 'true' : 'false'"
             @click="applyFilter(true, true)"
           >
+            <span class="sr-only">{{ `Exclude ${title}` }}</span>
             <XCircleIconSolid
               v-if="wasFiltered('false', true)"
               class="h-6 w-6"

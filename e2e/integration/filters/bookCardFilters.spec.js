@@ -1,9 +1,9 @@
 import Elements from '../../support/elements';
 
-describe('BookCard Collections Filters',() => {
+describe('BookCard Collections Filters', () => {
   context('Desktop Resolution', () => {
 
-    it('Recommended filter toggle',()=>{
+    it('Recommended filter toggle', () => {
 
       cy.get(Elements.booksCards.recommended).should('have.class','text-pb-red');
 
@@ -26,26 +26,51 @@ describe('BookCard Collections Filters',() => {
 
     });
 
-    it('Collection filter toggle',()=>{
+    it('Collection filter toggle', () => {
 
       cy.visit('/?collec=OpenStax');
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get(Elements.booksCards.recommended+':nth-of-type(1)').next().should('have.class','text-pb-red');
-      cy.get(Elements.booksCards.recommended+':nth-of-type(1)').next().next().should('have.class','text-white');
+      cy.get(Elements.booksCards.recommended+':nth-of-type(1)')
+        .parent()
+        .next()
+        .find('button')
+        .should('have.class', 'text-pb-red');
+      cy.get(Elements.booksCards.recommended+':nth-of-type(1)')
+        .parent()
+        .next()
+        .next()
+        .find('button')
+        .should('have.class', 'text-white');
 
-      cy.get(Elements.booksCards.recommended+':nth-of-type(1)').next().click();
+      cy.get(Elements.booksCards.recommended+':nth-of-type(1)')
+        .parent()
+        .next()
+        .find('button')
+        .click();
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get(Elements.booksCards.recommended+':nth-of-type(1)').next().should('have.class','text-white');
+      cy.get(Elements.booksCards.recommended+':nth-of-type(1)')
+        .parent()
+        .next()
+        .find('button')
+        .should('have.class', 'text-white');
 
-      cy.get(Elements.booksCards.recommended+':nth-of-type(1)').next().click();
+      cy.get(Elements.booksCards.recommended+':nth-of-type(1)')
+        .parent()
+        .next()
+        .find('button')
+        .click();
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get(Elements.booksCards.recommended+':nth-of-type(1)').next().should('have.class','text-pb-red');
+      cy.get(Elements.booksCards.recommended+':nth-of-type(1)')
+        .parent()
+        .next()
+        .find('button')
+        .should('have.class', 'text-pb-red');
 
       cy.url().should('include','?collec=OpenStax');
 

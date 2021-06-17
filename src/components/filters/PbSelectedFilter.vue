@@ -1,5 +1,5 @@
 <template>
-  <div
+  <li
     class="flex items-center bg-gray-200 py-1 px-2 rounded-full space-x-2 mr-2 mb-2"
     data-cy="chip-filter"
   >
@@ -11,9 +11,10 @@
       :data-cy="`chip-filter-${value.attribute}-${getAlphanumericFacet(value.value)}-button`"
       @click.prevent="closeExcludeFilter(value)"
     >
+      <span class="sr-only">{{ `Remove ${name} filter` }}</span>
       <XCircleIcon class="h-4 w-4" />
     </button>
-  </div>
+  </li>
 </template>
 
 <script>

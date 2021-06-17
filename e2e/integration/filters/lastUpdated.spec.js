@@ -35,7 +35,7 @@ describe('Filter last updated', () => {
         .get('[data-cy=chip-filter]')
         .should('have.length', 1)
         .find('.text-sm')
-        .contains('Updated >= 04/27/2021').should('be.visible')
+        .contains('Updated >= 04-27-2021').should('be.visible')
         .url().should('include', `updated=%3E%3D${startTimestamp}`);
 
       clickPage(5);
@@ -62,7 +62,7 @@ describe('Filter last updated', () => {
         .get('[data-cy=chip-filter]')
         .should('have.length', 1)
         .find('.text-sm')
-        .contains('Updated <= 04/27/2021').should('be.visible')
+        .contains('Updated <= 04-27-2021').should('be.visible')
         .url().should('include', `updated=%3C%3D${toTimestamp}`);
 
       cy.get('[data-cy=book-last-updated]')
@@ -116,7 +116,7 @@ describe('Filter last updated', () => {
         .get('[data-cy=chip-filter]')
         .should('have.length', 1)
         .find('.text-sm')
-        .contains('Updated >= 04/27/2021').should('be.visible')
+        .contains('Updated >= 04-27-2021').should('be.visible')
         .url().should('include', 'updated=%3E%3D1619481600');
 
       clickPage(5);
@@ -136,7 +136,7 @@ describe('Filter last updated', () => {
         .get('[data-cy=chip-filter]')
         .should('have.length', 1)
         .find('.text-sm')
-        .contains('Updated <= 04/27/2021').should('be.visible')
+        .contains('Updated <= 04-27-2021').should('be.visible')
         .url().should('include', 'updated=%3C%3D1619567999');
 
       cy.get('[data-cy=book-last-updated]')

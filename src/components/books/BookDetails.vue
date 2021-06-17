@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul
+    <div
       class="py-4 space-y-1"
       data-cy="book-meta"
     >
@@ -39,9 +39,8 @@
         :text="item.languageName"
         data-cy="book-language"
       />
-    </ul>
+    </div>
     <div data-cy="book-description">
-      <!-- eslint-disable vue/no-v-html -->
       <v-clamp
         v-if="hasDescription"
         autoresize
@@ -57,11 +56,11 @@
             data-cy="book-read-more-description"
             @click.prevent="toggle"
           >
-            Read more
+            <span class="sr-only">{{ `Read more about ${item.name}` }}</span>
+            <span aria-hidden="true">Read more</span>
           </button>
         </template>
       </v-clamp>
-      <!-- eslint-enable vue/no-v-html -->
     </div>
   </div>
 </template>

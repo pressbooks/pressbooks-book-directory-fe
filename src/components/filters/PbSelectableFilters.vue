@@ -20,25 +20,31 @@
           :id="`search-filter-${field}`"
           v-model="search"
           :data-cy="`search-filter-${field}`"
-          type="text"
+          type="search"
           class="w-full border-0 text-sm py-2 px-3 focus:outline-none focus:ring-0"
           :placeholder="`Search ${title}`"
         >
       </div>
-      <div
-        v-for="(item, key) in displayItems"
-        :key="key"
-        :data-cy="`filter-${field}-option`"
-        class="body py-2 px-4 flex items-center justify-between space-x-1"
+      <ul
+        class="divide-y"
+        role="list"
+        :aria-label="`${title} filter options`"
       >
-        <span class="title text-sm text-gray-900 w-full">
-          {{ `${item.facet} (${item.count})` }}
-        </span>
-        <pb-filter-buttons
-          :item="item"
-          :field="field"
-        />
-      </div>
+        <li
+          v-for="(item, key) in displayItems"
+          :key="key"
+          :data-cy="`filter-${field}-option`"
+          class="body py-2 px-4 flex items-center justify-between space-x-1"
+        >
+          <span class="title text-sm text-gray-900 w-full">
+            {{ `${item.facet} (${item.count})` }}
+          </span>
+          <pb-filter-buttons
+            :item="item"
+            :field="field"
+          />
+        </li>
+      </ul>
       <div
         v-if="showMoreVisible || showLessVisible"
         class="flex items-center justify-center py-2 px-4"
@@ -49,7 +55,8 @@
           :data-cy="`show-more-${field}`"
           @click="incrementDisplayAmount"
         >
-          Show more ({{ amountLeft }})
+          <span class="sr-only">{{ `Show more from ${title}. ${amountLeft} items left` }}</span>
+          <span aria-hidden="true">Show more ({{ amountLeft }})</span>
         </button>
         <button
           v-if="showLessVisible"
@@ -57,7 +64,8 @@
           :data-cy="`show-less-${field}`"
           @click="resetDisplayAmount"
         >
-          Show less
+          <span class="sr-only">{{ `Show less from ${title}` }}</span>
+          <span aria-hidden="true">Show less</span>
         </button>
       </div>
       <div class="flex items-center justify-center py-2 px-4">
@@ -67,7 +75,8 @@
           :data-cy="`clear-filter-${field}`"
           @click.prevent="reset"
         >
-          Clear filter
+          <span class="sr-only">{{ `Clear ${title} filter` }}</span>
+          <span aria-hidden="true">Clear filter</span>
         </button>
       </div>
     </template>

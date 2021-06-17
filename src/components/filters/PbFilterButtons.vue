@@ -3,8 +3,10 @@
     <button
       class="include"
       :data-cy="`filter-${field}-${getAlphanumericFacet(item.facet)}-include-button`"
+      :aria-pressed="wasFiltered(item.facet, false) ? 'true' : 'false'"
       @click="applyFilter(item, false)"
     >
+      <span class="sr-only">{{ `Include ${item.facet}` }}</span>
       <CheckCircleIconSolid
         v-if="wasFiltered(item.facet, false)"
         class="h-6 w-6"
@@ -17,8 +19,10 @@
     <button
       class="exclude"
       :data-cy="`filter-${field}-${getAlphanumericFacet(item.facet)}-exclude-button`"
+      :aria-pressed="wasFiltered(item, true) ? 'true': 'false'"
       @click="applyFilter(item, true)"
     >
+      <span class="sr-only">{{ `Exclude ${item.facet}` }}</span>
       <XCircleIconSolid
         v-if="wasFiltered(item.facet, true)"
         class="h-6 w-6"

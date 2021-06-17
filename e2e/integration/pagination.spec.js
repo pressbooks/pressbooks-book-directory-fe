@@ -1,5 +1,5 @@
 import Elements from '../support/elements';
-import {clickAccordionHeader, clickFilter, clickPage, search} from "../support/common";
+import {clickAccordionHeader, clickFilter, clickPage, search} from '../support/common';
 
 describe('Pagination', () => {
   context('Desktop Resolution', () => {
@@ -30,7 +30,7 @@ describe('Pagination', () => {
       cy.get('[data-cy=paginator-prev-top]').should('be.visible');
     });
 
-    it('Paginate on facet search',() => {
+    it('Paginate on facet search', () => {
 
       cy.algoliaQueryRequest('algoliaRequest');
 
