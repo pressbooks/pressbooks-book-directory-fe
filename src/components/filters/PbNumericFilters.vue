@@ -16,7 +16,8 @@
               class="block text-sm"
               :for="`${field}-min`"
             >
-              Min
+              <span class="sr-only">{{ `Minimum ${title} value` }}</span>
+              <span aria-hidden="true">Min</span>  
             </label>
             <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
               <input
@@ -34,7 +35,8 @@
               class="block text-sm"
               :for="`${field}-max`"
             >
-              Max
+              <span class="sr-only">{{ `Maximum ${title} value` }}</span>
+              <span aria-hidden="true">Max</span>  
             </label>
             <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
               <input
@@ -51,9 +53,10 @@
           <div :data-cy-button="`${field}`">
             <t-button
               type="submit"
-              :disabled="number.min === 0 && number.max === 0"
+              :disabled="!number.min && !number.max"
             >
-              Go
+              <span class="sr-only">{{ `Apply ${title}` }}</span>
+              <span aria-hidden="true">Go</span>
             </t-button>
           </div>
         </div>
@@ -83,8 +86,8 @@ export default {
   data() {
     return {
       number: {
-        min: 0,
-        max: 0,
+        min: null,
+        max: null,
         alias: ''
       },
       itemsFiltered: false

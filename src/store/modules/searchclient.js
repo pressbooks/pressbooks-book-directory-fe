@@ -113,9 +113,16 @@ let sClient = {
     hitsPerPage: 10,
     sortedBy: '',
     facetFilters: [],
-    page: 0,
-    searchQuery: ''
+    page: 1,
+    searchQuery: '',
+    hitsPerPageAllowed: [10, 20, 50],
+    aliases: {
+      hitsPerPage: 'per_page',
+      page: 'p',
+      sortedBy: 'sort'
+    }
   },
+  resetMainIndex: true
 };
 
 export default {
@@ -197,6 +204,39 @@ export default {
           state.mappedFilters[state.allowedFilters[realAttribute].alias] = realAttribute;
         }
       }
+    },
+    setPage(state, page) {
+      if (parseInt(page) > 0) {
+        state.searchParameters.page = page;
+      }
+    },
+    setHitsPerPage(state, hitsPerPage) {
+      if (state.searchParameters.hitsPerPageAllowed.includes(parseInt(hitsPerPage))) {
+        state.searchParameters.hitsPerPage = hitsPerPage;
+      }
+    },
+    setSortedBy(state, sortedBy) {
+      const allowedSorts = state.availableIndexes.map((index) => {
+        return index.orderedBy;
+      });
+      if (allowedSorts.includes(sortedBy)) {
+        state.searchParameters.sortedBy = sortedBy;
+      }
+    },
+    setMainIndex(state, index) {
+      const allowedIndexes = state.availableIndexes.map((index) => {
+        return index.value;
+      });
+      if (allowedIndexes.includes(index)) {
+        state.indexName = index;
+        state.availableIndexes = state.availableIndexes.map((indexObj) => {
+          indexObj.default = indexObj.value === index;
+          return indexObj;
+        });
+      }
+    },
+    setResetMainIndex(state, reset) {
+      state.resetMainIndex = reset;
     }
   }
 };

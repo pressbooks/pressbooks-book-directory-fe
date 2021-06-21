@@ -1,8 +1,8 @@
 <template>
-  <li>
+  <p>
     <strong>{{ title }}</strong>
     <span>{{ text }}</span>
-  </li>
+  </p>
 </template>
 
 <script>

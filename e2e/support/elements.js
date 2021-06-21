@@ -10,6 +10,7 @@ const Elements = {
     network: '[data-cy=book-network]',
     cover: '[data-cy=book-cover]',
     h5p: '[data-cy=book-h5p]',
+    h5pActivities: '[data-cy=h5p-count]',
     wordCount: '[data-cy=book-word-count]',
     size: '[data-cy=book-size]',
     authors: '[data-cy=book-authors]',
@@ -23,6 +24,10 @@ const Elements = {
     original: '[data-cy=book-original]',
     notOriginal: '[data-cy=book-not-original]',
     recommended: '[data-cy=book-recommended]'
+  },
+  paginator: '[data-cy=paginator-top]',
+  paginatorLink(page) {
+    return `[data-cy=paginator-link-${page}-top]`;
   },
   filterAccordion(facet) {
     return `[data-cy=filter-${facet}-header-button]`;

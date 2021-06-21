@@ -4,8 +4,8 @@ describe('Filters',() => {
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get('article[data-cy=license-filter]').as('licenseAccordion')
-        .get('article[data-cy=subject-filter]').as('subjectAccordion');
+      cy.get('div[data-cy=license-filter]').as('licenseAccordion')
+        .get('div[data-cy=subject-filter]').as('subjectAccordion');
 
       cy.get('@licenseAccordion').click()
         .get('@subjectAccordion').click();
@@ -21,7 +21,7 @@ describe('Filters',() => {
         .as('subjectSearch');
 
       cy.get('@subjectAccordion')
-        .find('[data-cy=filter-about-option]:nth-child(2)') // It's the second one because we have the search as a child
+        .find('[data-cy=filter-about-option]:first-child')
         .as('subjectFirstItem')
         .find('span')
         .should('contain.text', 'Education (97)');

@@ -1,21 +1,24 @@
 <template>
-  <article>
-    <button
-      :data-cy="`filter-${dataCyButton}-header-button`"
-      :class="[
-        'w-full flex items-center justify-between py-3 px-4',
-        opened && 'border-b'
-      ]"
-      @click.prevent="opened = !opened"
-    >
-      <slot name="title" />
-      <chevron-down-icon
+  <div>
+    <h3>
+      <button
+        :data-cy="`filter-${dataCyButton}-header-button`"
         :class="[
-          'h-6 w-6 text-red-800 transform duration-150',
-          opened && 'rotate-180'
+          'w-full flex items-center justify-between py-3 px-4',
+          opened && 'border-b'
         ]"
-      />
-    </button>
+        :aria-expanded="opened ? 'true' : 'false'"
+        @click.prevent="opened = !opened"
+      >
+        <slot name="title" />
+        <chevron-down-icon
+          :class="[
+            'h-6 w-6 text-red-800 transform duration-150',
+            opened && 'rotate-180'
+          ]"
+        />
+      </button>
+    </h3>
     <transition
       enter-active-class="transform transition-all ease-out duration-150"
       enter-from-class="opacity-0 translate-y-full"
@@ -31,7 +34,7 @@
         <slot name="content" />
       </div>
     </transition>
-  </article>
+  </div>
 </template>
 
 <script>

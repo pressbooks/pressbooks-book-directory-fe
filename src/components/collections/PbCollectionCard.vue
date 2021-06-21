@@ -1,22 +1,23 @@
 <template>
-  <div class="w-full h-full">
+  <li class="w-full h-full">
     <a
       href="#"
       class="p-1 cursor-pointer h-full flex flex-col"
-      @click.prevent="filter(card)"
+      @click.prevent="filter"
     >
       <div class="aspect-w-3 aspect-h-4 overflow-hidden rounded">
         <img
           :src="card.image"
-          :alt="card.name"
+          alt=""
           class="h-full w-full object-cover"
+          role="presentation"
         >
       </div>
       <div class="text mt-4 px-2 font-semibold">
-        {{ truncateTitle(card.name) }}
+        {{ truncatedTitle }}
       </div>
     </a>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -38,15 +39,34 @@ export default {
       }
     };
   },
-  methods: {
-    truncateTitle(title) {
-      return title.length > this.truncateLimit ? title.substr(0, this.truncateLimit - 1) + '...' : title;
+  computed: {
+    alias() {
+      return this.$store.state.SClient.allowedFilters[this.card.facet].alias;
     },
-    filter(card) {
-      scrollTo('#books');
+    truncatedTitle() {
+      let title = this.card.name;
+
+      return title.length > this.truncateLimit
+        ? `${title.substr(0, this.truncateLimit - 1)}...`
+        : title;
+    }
+  },
+  methods: {
+    filter() {
       let query = {...this.$route.query};
-      query[this.$store.state.SClient.allowedFilters[card.facet].alias] = card.name;
-      this.$router.replace({ query });
+
+      if (query[this.alias] === this.card.name) {
+        return;
+      }
+
+      scrollTo('#books');
+
+      this.$router.replace({
+        query: {
+          ...query,
+          [this.alias]: this.card.name
+        }
+      });
     }
   }
 };

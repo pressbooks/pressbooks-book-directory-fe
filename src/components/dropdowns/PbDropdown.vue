@@ -1,6 +1,7 @@
 <template>
   <div>
     <vue-select
+      v-model="itemSelected"
       :options="options"
       :placeholder="placeholder"
       :searchable="searchable"
@@ -33,6 +34,18 @@ export default {
     },
   },
   emits: ['input'],
+  data() {
+    return {
+      itemSelected: ''
+    };
+  },
+  mounted() {
+    this.itemSelected = this.options.filter((item) => {
+      if (item.default) {
+        return item.value;
+      }
+    });
+  },
   methods: {
     select({ value }) {
       this.$emit('input', value);

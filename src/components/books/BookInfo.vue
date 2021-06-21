@@ -1,11 +1,12 @@
 <template>
   <div class="space-y-2 my-2">
-    <h2
+    <h3
       class="tracking-widest uppercase text-sm font-medium"
       data-cy="book-network"
     >
+      <span class="sr-only">Network</span>
       {{ `${item.networkHost} | ${item.networkName}` }}
-    </h2>
+    </h3>
     <h2 class="leading-tight text-xl font-semibold mb-1">
       <a
         class="text-red-700"
@@ -18,7 +19,7 @@
       </a>
     </h2>
     <p class="leading-tight">
-      <span data-cy="book-word-count">{{ item.wordCount }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB
+      <span data-cy="book-word-count">{{ item.wordCount }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <span data-cy="h5p-count">{{ item.h5pActivities }}</span> H5P activities
     </p>
   </div>
 </template>

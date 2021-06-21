@@ -132,6 +132,20 @@ function navigateToMonthYear(element, toMonthYear, backwards = true) {
   }
 }
 
+function clickPage(page) {
+  cy.get(Elements.paginatorLink(page)).click();
+}
+
+function sortBy(textIndex) {
+  cy.get('[data-cy=sort-books-by]')
+    .find('.vs__dropdown-toggle')
+    .click()
+    .get('[data-cy=sort-books-by]')
+    .find('.vs__dropdown-option')
+    .contains(textIndex)
+    .click();
+}
+
 export {
   search,
   encodeFacetFilterForURL,
@@ -143,6 +157,8 @@ export {
   fillNumericValue,
   getNumericInput,
   submitNumericFilter,
-  navigateToMonthYear
+  navigateToMonthYear,
+  clickPage,
+  sortBy
 };
 

@@ -1,3 +1,5 @@
+import {sortBy} from "../support/common";
+
 const { _ } = Cypress;
 describe('Sort books by', () => {
   context('Desktop resolution', () => {
@@ -13,10 +15,7 @@ describe('Sort books by', () => {
     });
 
     it('Sorts by word count in descending order', () => {
-      cy.get('@sortBooksBy')
-        .find('.vs__dropdown-option')
-        .contains('Word count')
-        .click();
+      sortBy('Word count');
 
       cy.algoliaQueryRequest('sorting');
 
@@ -30,17 +29,31 @@ describe('Sort books by', () => {
           const sorted = _.sortBy(wordCounts).reverse();
 
           expect(wordCounts).to.deep.equal(sorted);
-        });
+        }).url().should('include', '?sort=wordCount');;
 
     });
 
     it('Sorts by title in ascending order', () => {
-      cy.get('@sortBooksBy')
-        .find('.vs__dropdown-option')
-        .contains('Title (A-Z)')
-        .click();
+      sortBy('Title (A-Z)');
 
       cy.algoliaQueryRequest('sorting');
+
+      const toStrings = titles$ => _.map(titles$, 'textContent');
+      const cleanup = titles => _.filter(titles, title => title.trim()[0].match(/[a-z]/i));
+
+      cy.get('[data-cy=book-card] [data-cy=book-title]')
+        .then(toStrings)
+        .then(cleanup)
+        .then(titles => {
+          const sorted = _.sortBy(titles);
+
+          expect(titles).to.deep.equal(sorted);
+        }).url().should('include', '?sort=name');
+    });
+
+    it('Sorts by title in ascending order by URL', () => {
+      cy.visit('/?sort=name')
+        .algoliaQueryRequest('sorting');
 
       const toStrings = titles$ => _.map(titles$, 'textContent');
       const cleanup = titles => _.filter(titles, title => title.trim()[0].match(/[a-z]/i));
@@ -56,20 +69,10 @@ describe('Sort books by', () => {
     });
 
     it('Sorts by recently updated in descending order', () => {
-      cy.get('@sortBooksBy')
-        .find('.vs__dropdown-option')
-        .contains('Title (A-Z)')
-        .click();
+      sortBy('Title (A-Z)');
+      cy.algoliaQueryRequest('sorting');
 
-      cy.get('@sortBooksBy')
-        .find('.vs__dropdown-toggle')
-        .click();
-
-      cy.get('@sortBooksBy')
-        .find('.vs__dropdown-option')
-        .contains('Recently updated')
-        .click();
-
+      sortBy('Recently updated');
       cy.algoliaQueryRequest('sorting');
 
       // Waiting for 2 seconds since it does not trigger another request
@@ -85,7 +88,7 @@ describe('Sort books by', () => {
 
             expect(dates).to.deep.equal(sorted);
           });
-      });
+      }).url().should('include', '?sort=updated');
     });
   });
 });

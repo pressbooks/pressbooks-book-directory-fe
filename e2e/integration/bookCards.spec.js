@@ -12,6 +12,7 @@ describe('Book cards', function () {
         Elements.booksCards.cover,
         Elements.booksCards.wordCount,
         Elements.booksCards.size,
+        Elements.booksCards.h5pActivities,
         Elements.booksCards.authors,
         Elements.booksCards.lastUpdated,
         Elements.booksCards.language,
@@ -82,7 +83,6 @@ describe('Book cards', function () {
       search('Open Music Theory');
       cy.get(Elements.booksCards.recommended)
         .should('include.text', 'Recommended');
-
     });
     it('Check all book cards attributes from a particular book', () => {
       const attributesToCheck =  [
@@ -106,6 +106,10 @@ describe('Book cards', function () {
         {
           element: Elements.booksCards.size,
           fixtureProperty: 'size'
+        },
+        {
+          element: Elements.booksCards.h5pActivities,
+          fixtureProperty: 'h5pActivities'
         },
         {
           element: Elements.booksCards.authors,

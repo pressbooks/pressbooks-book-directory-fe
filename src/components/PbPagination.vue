@@ -1,64 +1,59 @@
 <template>
-  <div class="pagination">
-    <div
-      class="container mx-auto my-4"
+  <ais-pagination
+    :total-pages="500"
+    role="navigation"
+    class="container mx-auto my-4"
+  >
+    <ul
+      slot-scope="{
+        pages,
+        isFirstPage,
+        isLastPage
+      }"
+      class="flex flex-row w-full items-center justify-center space-x-2"
+      :data-cy="`paginator-${dataCySubfix}`"
+      @click="scrollToBooksList"
     >
-      <ais-pagination :total-pages="500">
-        <ul
-          slot-scope="{
-            currentRefinement,
-            pages,
-            isFirstPage,
-            isLastPage,
-            refine,
-            createURL
-          }"
-          class="flex flex-row w-full items-center justify-center"
-          data-cy="paginator"
-          @click="scrollToBooksList"
+      <li v-if="!isFirstPage">
+        <a
+          class="block py-1 px-2"
+          :data-cy="`paginator-prev-${dataCySubfix}`"
+          href="#"
+          @click.prevent="changePage($store.state.SClient.searchParameters.page - 1)"
         >
-          <li
-            v-if="!isFirstPage"
-            class="action"
-          >
-            <a
-              class="block"
-              :href="createURL(0)"
-              data-cy="paginator-prev"
-              @click.prevent="refine(0)"
-            >
-              <ArrowNarrowLeftIcon class="h-6 w-6 mr-3 text-pb-red" />
-            </a>
-          </li>
-          <li
-            v-for="page in pages"
-            :key="page"
-            class="page"
-            data-cy="paginator-link"
-          >
-            <a
-              class="block px-2"
-              :class="currentRefinement === page ? 'font-bold font-gray-900' : ''"
-              :href="createURL(page)"
-              @click.prevent="refine(page)"
-            >
-              {{ page + 1 }}
-            </a>
-          </li>
-          <li v-if="!isLastPage">
-            <a
-              class="block"
-              :href="createURL(currentRefinement + 1)"
-              data-cy="paginator-next"
-              @click.prevent="refine(currentRefinement + 1)"
-            >
-              <ArrowNarrowRightIcon class="h-6 w-6 ml-3 text-pb-red" />
-            </a>
-          </li>
-        </ul>
-      </ais-pagination>
-    </div>
-  </div>
+          <span class="sr-only">Previous page</span>
+          <ArrowNarrowLeftIcon class="h-6 w-6 text-pb-red" />
+        </a>
+      </li>
+      <li
+        v-for="page in pages"
+        :key="page"
+        class="page"
+      >
+        <a
+          class="block py-1 px-2"
+          href="#"
+          :data-cy="`paginator-link-${page+1}-${dataCySubfix}`"
+          :class="$store.state.SClient.searchParameters.page == page+1 ? 'font-bold font-gray-900' : ''"
+          @click.prevent="changePage(page + 1)"
+        >
+          <span class="sr-only">Page</span>
+          {{ page + 1 }}
+        </a>
+      </li>
+      <li v-if="!isLastPage">
+        <a
+          class="block py-1 px-2"
+          href="#"
+          :data-cy="`paginator-next-${dataCySubfix}`"
+          @click.prevent="changePage(parseInt($store.state.SClient.searchParameters.page) + 1)"
+        >
+          <span class="sr-only">Next page</span>
+          <ArrowNarrowRightIcon class="h-6 w-6 text-pb-red" />
+        </a>
+      </li>
+    </ul>
+  </ais-pagination>
 </template>
 
 <script>
@@ -71,14 +66,34 @@ export default {
     ArrowNarrowLeftIcon,
     ArrowNarrowRightIcon
   },
+  props: {
+    dataCySubfix: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      alias: this.$store.state.SClient.searchParameters.aliases.page
+    };
+  },
   methods: {
     scrollToBooksList() {
       scrollTo('#books');
+    },
+    changePage(page) {
+      let routeQuery = {...this.$route.query};
+      if (
+        !routeQuery[this.alias] ||
+        (
+          routeQuery[this.alias] &&
+          routeQuery[this.alias] != page
+        )
+      ) {
+        routeQuery[this.alias] = page;
+        this.$router.replace({ query: routeQuery });
+      }
     }
   }
 };
 </script>
-
-<style>
-
-</style>
