@@ -42,7 +42,13 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-src
+        with:
+          paths: src
+
       - name: e2e Tests
+        if: steps.changed-src.outputs.changed == 'true'
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev
