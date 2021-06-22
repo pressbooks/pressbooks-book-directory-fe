@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-node@v2
         with:
@@ -46,7 +48,6 @@ jobs:
         id: changed-src
         with:
           paths: src
-          fetch-depth: 100
 
       - name: e2e Tests
         if: steps.changed-src.outputs.changed == 'true'
