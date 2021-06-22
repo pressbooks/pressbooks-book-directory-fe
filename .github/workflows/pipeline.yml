@@ -46,6 +46,7 @@ jobs:
         id: changed-src
         with:
           paths: src
+          fetch-depth: 100
 
       - name: e2e Tests
         if: steps.changed-src.outputs.changed == 'true'
