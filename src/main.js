@@ -16,7 +16,7 @@ Vue.use(InstantSearch);
 Vue.use(VueTailwind, VueTailwindConfig);
 
 dayjs.extend(utc);
-// init router
+
 router.beforeEach((to, from, next) => {
   if (to.query[store.state.SClient.searchParameters.aliases.sortedBy] && store.state.SClient.resetMainIndex) {
     const indexesOrderedByMap = store.state.SClient.availableIndexes.reduce((index, item) => {
