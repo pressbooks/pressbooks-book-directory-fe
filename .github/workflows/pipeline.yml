@@ -47,7 +47,7 @@ jobs:
       - uses: marceloprado/has-changed-path@v1
         id: changed-src
         with:
-          paths: src
+          paths: src e2e
 
       - name: e2e Tests
         if: steps.changed-src.outputs.changed == 'true'
