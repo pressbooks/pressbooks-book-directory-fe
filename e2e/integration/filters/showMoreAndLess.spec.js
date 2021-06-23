@@ -31,9 +31,9 @@ describe('Show more/less facet filters',() => {
 
       cy.get('@subjectAccordion')
         .find('button[data-cy=show-more-about]')
-        .should('contain.text', 'Show more (90)')
+        .should('contain.text', 'Show more (746)')
         .click()
-        .should('contain.text', 'Show more (80)');
+        .should('contain.text', 'Show more (736)');
 
       cy.get('@subjectAccordion')
         .find('[data-cy=filter-about-option]')
