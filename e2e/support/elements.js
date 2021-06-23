@@ -23,7 +23,7 @@ const Elements = {
     publisher: '[data-cy=book-publisher]',
     original: '[data-cy=book-original]',
     notOriginal: '[data-cy=book-not-original]',
-    recommended: '[data-cy=book-recommended]'
+    bookTags: '[data-cy=book-tags]',
   },
   paginator: '[data-cy=paginator-top]',
   paginatorLink(page) {
