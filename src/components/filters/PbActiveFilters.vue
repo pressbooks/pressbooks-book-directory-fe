@@ -84,9 +84,6 @@ export default {
       case 'hasIsBasedOn':
         label = (value.value) ? 'Based on another book' : 'Original';
         break;
-      case 'isRecommended':
-        label = (value.value) ? 'Recommended' : 'Not recommended';
-        break;
       case 'wordCount':
         label = 'Words ' + value.operator + ' ' + value.value;
         break;
