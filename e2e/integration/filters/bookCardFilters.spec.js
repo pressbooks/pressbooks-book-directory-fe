@@ -8,24 +8,24 @@ describe('BookCard Collections Filters', () => {
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get(`${Elements.booksCards.bookTags}`)
+      cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .should('have.class', 'text-pb-red');
 
-      cy.get(`${Elements.booksCards.bookTags}`)
+      cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:nth-of-type(2) button')
         .should('have.class', 'text-white');
 
-      cy.get(`${Elements.booksCards.bookTags}`)
+      cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .click();
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get(`${Elements.booksCards.bookTags}`)
+      cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .should('have.class', 'text-white')
@@ -33,7 +33,7 @@ describe('BookCard Collections Filters', () => {
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get(`${Elements.booksCards.bookTags}`)
+      cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .should('have.class', 'text-pb-red');
