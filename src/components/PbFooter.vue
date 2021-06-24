@@ -35,6 +35,7 @@
             v-for="(socialLink, key) in socialLinks"
             :key="key"
             v-bind="socialLink"
+            @social-clicked="sendClickEvent(socialLink)"
           />
         </div>
       </div>
@@ -71,7 +72,7 @@ export default {
       this.sendAlgoliaEvent({
         insightsMethod: 'convertedObjectIDs', 
         payload: {
-          eventName: link.text,
+          eventName: link.text || link.name,
           objectIDs: [
             `external:${link.href}`
           ]
