@@ -88,12 +88,14 @@ export default {
       number: {
         min: null,
         max: null,
-        alias: ''
       },
       itemsFiltered: false
     };
   },
   computed: {
+    alias() {
+      return this.$store.state.SClient.allowedFilters[this.field].alias;
+    },
     min() {
       return this.number.min.length === 0 ? 0 : this.number.min;
     },
@@ -127,9 +129,6 @@ export default {
       }
     }
   },
-  mounted() {
-    this.alias = this.$store.state.SClient.allowedFilters[this.field].alias;
-  },
   methods: {
     clearFilters() {
       this.number.min = 0;
@@ -139,19 +138,49 @@ export default {
       this.$router.replace({ query });
     },
     applyFilter() {
+      let queryString = null;
       let query = {...this.$route.query};
-      let attribute = this.$store.state.SClient.allowedFilters[this.field].alias;
       let min = parseInt(this.min);
       let max = parseInt(this.max);
+
       if (min > max) {
         this.number.max = 0;
-        query[attribute] = '>=' + min;
-        this.$router.replace({ query });
+        queryString = `>=${min}`;
+      } else {
+        queryString = `>=${min}&&<=${max}`;
+      }
+
+      if (!queryString) {
         return;
       }
-      query[attribute] = '>=' + min + '&&' + '<=' + max;
-      this.$router.replace({ query });
-    }
+
+      if (query[this.alias] === queryString) {
+        return;
+      }
+
+      this.sendClickEvent();
+
+      return this.$router.replace({
+        query: {
+          ...query,
+          [this.alias]: queryString
+        }
+      });
+    },
+    sendClickEvent() {
+      let values = [
+        this.min ? `${this.alias}:>=${this.min}` : null,
+        this.max ? `${this.alias}:<=${this.max}` : null
+      ];
+
+      this.sendAlgoliaEvent({
+        insightsMethod: 'clickedFilters', 
+        payload: {
+          eventName: 'Filter Applied',
+          filters: values.filter(v => v),
+        }, 
+      });
+    },
   }
 };
 </script>

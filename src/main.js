@@ -7,13 +7,14 @@ import router from './router';
 import VueTailwindConfig from './vuetailwind.config';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-
+import AlgoliaMixin from './mixins/AlgoliaMixin.vue';
 import './index.css';
 import {store} from './store';
 
 Vue.component('VueSelect', VueSelect);
 Vue.use(InstantSearch);
 Vue.use(VueTailwind, VueTailwindConfig);
+Vue.mixin(AlgoliaMixin);
 
 dayjs.extend(utc);
 

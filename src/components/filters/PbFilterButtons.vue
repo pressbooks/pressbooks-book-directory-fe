@@ -125,16 +125,22 @@ export default {
     },
     applyFilter(itemValue, exclude) {
       const itemFacet = itemValue.facet;
+
       if (this.wasFiltered(itemFacet, exclude)) {
         return this.removeFilter(itemFacet);
       }
+
       this.filterApplied = true;
       let query = {...this.$route.query}, value;
       value = exclude ? '-' + itemFacet : itemFacet;
+
+      this.sendClickEvent(itemValue, exclude);
+
       if (typeof(query[this.alias]) === 'undefined') {
         query[this.alias] = value.toString();
       } else {
         let filters = query[this.alias].split('&&');
+
         for (let i = 0; i < filters.length; i++) {
           if (
             (exclude && filters[i][0] !== '-') ||
@@ -144,9 +150,22 @@ export default {
             return this.$router.replace({ query });
           }
         }
+
         query[this.alias] += '&&' + value.toString();
       }
+
       this.$router.replace({ query });
+    },
+    sendClickEvent(item, exclude = false) {
+      this.sendAlgoliaEvent({
+        insightsMethod: 'clickedFilters', 
+        payload: {
+          eventName: 'Filter Applied',
+          filters: [
+            `${exclude ? 'NOT ' : ''}${this.alias}:${item.facet}`,
+          ]
+        }, 
+      });
     },
     getAlphanumericFacet(facet) {
       return helpers.functions.getLowerCaseAlphanumericAndHyphen(facet);

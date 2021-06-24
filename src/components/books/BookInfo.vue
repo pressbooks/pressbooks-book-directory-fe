@@ -14,6 +14,7 @@
         target="_blank"
         rel="noopener"
         data-cy="book-title"
+        @click="$emit('book-title-click')"
       >
         {{ item.name }}
       </a>
@@ -33,6 +34,7 @@ export default {
       default() { return {}; }
     },
   },
+  emits: ['title-clicked'],
   computed: {
     sizeInMb() {
       const size = (parseInt(this.item.storageSize) / 1024) / 1024;

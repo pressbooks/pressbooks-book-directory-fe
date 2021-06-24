@@ -54,7 +54,10 @@
             v-if="clamped"
             class="block text-pb-red underline"
             data-cy="book-read-more-description"
-            @click.prevent="toggle"
+            @click.prevent="() => {
+              toggle();
+              sendClickEvent();
+            }"
           >
             <span class="sr-only">{{ `Read more about ${item.name}` }}</span>
             <span aria-hidden="true">Read more</span>
@@ -116,6 +119,19 @@ export default {
     },
     editors() {
       return this.item.editor.join(', ');
+    }
+  },
+  methods: {
+    sendClickEvent() {
+      this.sendAlgoliaEvent({
+        insightsMethod: 'clickedObjectIDsAfterSearch', 
+        payload: {
+          eventName: 'Read More Clicked',
+          objectIDs: [this.item.objectID],
+          positions: [this.item.__position],
+          queryID: this.item.__queryID,
+        }, 
+      });
     }
   }
 };

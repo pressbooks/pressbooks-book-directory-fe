@@ -36,6 +36,7 @@
           rel="noopener"
           class="inline-block text-center text-lg py-3 px-6 border-2 border-red-700 text-white bg-red-700 font-semibold rounded-full"
           data-cy="learn-about-pressbooks"
+          @click="sendClickEvent"
         >
           Learn more about Pressbooks
         </a>
@@ -60,6 +61,19 @@ export default {
     },
     totalNetworksIndexed() {
       return this.$store.state.stats.numberOfNetworksIndexed;
+    },
+  },
+  methods: {
+    sendClickEvent() {
+      this.sendAlgoliaEvent({
+        insightsMethod: 'convertedObjectIDs', 
+        payload: {
+          eventName: 'Learn more about Pressbooks',
+          objectIDs: [
+            `external:${this.site}`
+          ]
+        }, 
+      });
     },
   }
 };

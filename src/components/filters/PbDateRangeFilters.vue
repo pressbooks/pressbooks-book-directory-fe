@@ -167,11 +167,27 @@ export default {
         return;
       }
 
+      this.sendClickEvent();
+
       return this.$router.replace({
         query: {
           ...query,
           [this.alias]: queryString
         }
+      });
+    },
+    sendClickEvent() {
+      let dates = [
+        this.dates.start ? `${this.alias}:>=${this.dates.start}` : null,
+        this.dates.to ? `${this.alias}:<=${this.dates.to}` : null
+      ];
+
+      this.sendAlgoliaEvent({
+        insightsMethod: 'clickedFilters', 
+        payload: {
+          eventName: 'Filter Applied',
+          filters: dates.filter(d => d),
+        }, 
       });
     },
   }

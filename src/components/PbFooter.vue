@@ -16,6 +16,7 @@
               v-bind="link"
               target="_blank"
               rel="noopener"
+              @click="sendClickEvent(link)"
             >
               {{ link.text }}
             </a>
@@ -65,5 +66,18 @@ export default {
       ]
     };
   },
+  methods: {
+    sendClickEvent(link) {
+      this.sendAlgoliaEvent({
+        insightsMethod: 'convertedObjectIDs', 
+        payload: {
+          eventName: link.text,
+          objectIDs: [
+            `external:${link.href}`
+          ]
+        }, 
+      });
+    }
+  }
 };
 </script>

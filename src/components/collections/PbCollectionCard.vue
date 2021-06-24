@@ -61,17 +61,25 @@ export default {
 
       scrollTo('#books');
 
+      this.sendClickEvent();
       this.$router.replace({
         query: {
           ...query,
           [this.alias]: this.card.name
         }
       });
-    }
+    },
+    sendClickEvent() {
+      this.sendAlgoliaEvent({
+        insightsMethod: 'clickedFilters', 
+        payload: {
+          eventName: 'Filter Applied',
+          filters: [
+            `${this.alias}:${this.card.name}`,
+          ]
+        }, 
+      });
+    },
   }
 };
 </script>
-
-<style scoped>
-
-</style>
