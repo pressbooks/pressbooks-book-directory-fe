@@ -7,6 +7,15 @@ export default {
     searchInsights('setUserToken', 'pressbooks-directory');
   },
   methods: {
+    sendFilterAppliedEvent(payload) {
+      this.sendAlgoliaEvent({
+        insightsMethod: 'clickedFilters', 
+        payload: {
+          ...payload, 
+          eventName: 'Filter Applied'
+        },
+      });
+    },
     sendAlgoliaEvent(event) {
       const { insightsMethod, payload } = event;
       

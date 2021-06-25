@@ -173,12 +173,8 @@ export default {
         this.max ? `${this.alias}:<=${this.max}` : null
       ];
 
-      this.sendAlgoliaEvent({
-        insightsMethod: 'clickedFilters', 
-        payload: {
-          eventName: 'Filter Applied',
-          filters: values.filter(v => v),
-        }, 
+      this.sendFilterAppliedEvent({
+        filters: values.filter(v => v)
       });
     },
   }

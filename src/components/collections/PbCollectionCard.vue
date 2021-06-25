@@ -70,14 +70,10 @@ export default {
       });
     },
     sendClickEvent() {
-      this.sendAlgoliaEvent({
-        insightsMethod: 'clickedFilters', 
-        payload: {
-          eventName: 'Filter Applied',
-          filters: [
-            `${this.alias}:${this.card.name}`,
-          ]
-        }, 
+      this.sendFilterAppliedEvent({
+        filters: [
+          `${this.alias}:${this.card.name}`,
+        ]
       });
     },
   }

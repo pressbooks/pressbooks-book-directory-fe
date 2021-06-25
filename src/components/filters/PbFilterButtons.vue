@@ -157,14 +157,10 @@ export default {
       this.$router.replace({ query });
     },
     sendClickEvent(item, exclude = false) {
-      this.sendAlgoliaEvent({
-        insightsMethod: 'clickedFilters', 
-        payload: {
-          eventName: 'Filter Applied',
-          filters: [
-            `${exclude ? 'NOT ' : ''}${this.alias}:${item.facet}`,
-          ]
-        }, 
+      this.sendFilterAppliedEvent({
+        filters: [
+          `${exclude ? 'NOT ' : ''}${this.alias}:${item.facet}`,
+        ]
       });
     },
     getAlphanumericFacet(facet) {

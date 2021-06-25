@@ -182,12 +182,8 @@ export default {
         this.dates.to ? `${this.alias}:<=${this.dates.to}` : null
       ];
 
-      this.sendAlgoliaEvent({
-        insightsMethod: 'clickedFilters', 
-        payload: {
-          eventName: 'Filter Applied',
-          filters: dates.filter(d => d),
-        }, 
+      this.sendFilterAppliedEvent({
+        filters: dates.filter(d => d)
       });
     },
   }
