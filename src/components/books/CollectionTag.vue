@@ -43,7 +43,7 @@ export default {
           return this.collection !== added;
         });
       } else {
-        this.sendClickEvent();
+        this.sendClickInsight();
         currentCollections.push(this.collection);
       }
       query.collec = currentCollections.join('&&');
@@ -52,12 +52,11 @@ export default {
       }
       this.$router.replace({ query });
     },
-    sendClickEvent() {
-      this.sendFilterAppliedEvent({
-        filters: [
-          `collec:${this.collection}`,
-        ]
-      });
+    sendClickInsight() {
+      this.sendFilterAppliedInsight(
+        [`collec:${this.collection}`],
+        'Card Collection Activated'
+      );
     },
   }
 };

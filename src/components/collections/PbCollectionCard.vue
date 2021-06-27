@@ -61,7 +61,7 @@ export default {
 
       scrollTo('#books');
 
-      this.sendClickEvent();
+      this.sendClickInsight();
       this.$router.replace({
         query: {
           ...query,
@@ -69,12 +69,11 @@ export default {
         }
       });
     },
-    sendClickEvent() {
-      this.sendFilterAppliedEvent({
-        filters: [
-          `${this.alias}:${this.card.name}`,
-        ]
-      });
+    sendClickInsight() {
+      this.sendFilterAppliedInsight(
+        [`${this.alias}:${this.card.name}`],
+        'Collection visited'
+      );
     },
   }
 };

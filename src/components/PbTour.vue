@@ -60,7 +60,6 @@ export default {
     };
   },
   mounted() {
-
     const blurInput = () => {
       this.searchInput.value = '';
     };
@@ -85,9 +84,7 @@ export default {
     //TODO: Remove the timeout using an observer event or something like that
 
     setTimeout(() => {
-
       const searchInputContainer = document.querySelector('div[data-cy="search-container"]');
-
       const searchButton = document.querySelector('button[data-cy="book-button-search"]');
 
       this.intro = introJs()
@@ -235,6 +232,13 @@ export default {
           ]
         }).start();
 
+      this.intro.oncomplete(() => {
+        this.sendFilterAppliedInsight(
+          ['tour:complete'],
+          'Finished Tour'
+        );
+      });
+
       this.intro.onexit(() => {
         this.searchInput.value = '';
         this.$store.commit('showTour');
@@ -242,8 +246,9 @@ export default {
       });
 
       this.intro.onafterchange((targetElement) => {
-
         blurInput();
+
+        this.sendProgressInsight();
 
         if ((targetElement.classList.contains('input-wrapper') || targetElement.tagName === 'FORM') && this.intro._currentStep > 1) {
 
@@ -271,20 +276,16 @@ export default {
           }
 
         } else if(this.intro._currentStep === 9) {
-
           // Facets filter click
-
-          [1,2,3].forEach(function(item, index){
-            setTimeout(()=>{
+          [1, 2, 3].forEach(function(item, index){
+            setTimeout(() => {
               const filter = document.querySelector('div[data-cy="license-filter"] [data-cy="filter-licenseCode-option"]:nth-of-type('+item+') button:nth-of-type(1)');
               filter.click();
             }, index * 1000);
           });
 
           this.intro._introItems[10].element = document.querySelector('div[data-cy="active-filters"]');
-
         } else if(this.intro._currentStep === 11) {
-
           // Rebind DOM for remaining steps on the book card
 
           this.intro._introItems[12].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
@@ -295,21 +296,25 @@ export default {
           setTimeout(()=> {
             const clear = document.querySelector('button[data-cy="clear-all-filters"]');
             clear.click();
-          },2000);
-
+          }, 2000);
         } else {
-
           this.searchInput.value = '';
-
         }
 
         scrollHelper(this.intro._currentStep);
-
       });
-
     }, this.waitForFilter);
+  },
+  methods: {
+    sendProgressInsight() {
+      const { _currentStep, _direction, _introItems } = this.intro;
+      const { title } = _introItems[_currentStep];
 
-
+      this.sendFilterAppliedInsight(
+        [`tour:${_currentStep}-${title}`],
+        _direction === 'backward' ? 'Tour Retreat' : 'Tour Advance'
+      );
+    }
   }
 };
 </script>

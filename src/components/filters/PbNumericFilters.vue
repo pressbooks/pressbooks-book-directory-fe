@@ -158,7 +158,7 @@ export default {
         return;
       }
 
-      this.sendClickEvent();
+      this.sendClickInsight();
 
       return this.$router.replace({
         query: {
@@ -167,15 +167,15 @@ export default {
         }
       });
     },
-    sendClickEvent() {
+    sendClickInsight() {
       let values = [
         this.min ? `${this.alias}:>=${this.min}` : null,
         this.max ? `${this.alias}:<=${this.max}` : null
       ];
 
-      this.sendFilterAppliedEvent({
-        filters: values.filter(v => v)
-      });
+      this.sendFilterAppliedInsight(
+        values.filter(v => v)
+      );
     },
   }
 };

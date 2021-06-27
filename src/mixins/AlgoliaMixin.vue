@@ -7,16 +7,16 @@ export default {
     searchInsights('setUserToken', 'pressbooks-directory');
   },
   methods: {
-    sendFilterAppliedEvent(payload) {
-      this.sendAlgoliaEvent({
+    sendFilterAppliedInsight(filters, eventName) {
+      this.sendInsight({
         insightsMethod: 'clickedFilters', 
         payload: {
-          ...payload, 
-          eventName: 'Filter Applied'
+          eventName: eventName || 'Filter Applied',
+          filters
         },
       });
     },
-    sendAlgoliaEvent(event) {
+    sendInsight(event) {
       const { insightsMethod, payload } = event;
       
       // Send event to algolia

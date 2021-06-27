@@ -13,7 +13,7 @@
         networks. Learn to use the Directory by taking a
         <button
           class="text-pb-red underline"
-          @click="$store.commit('showTour')"
+          @click="startTour"
         >
           self-guided tour
         </button> or reading
@@ -22,7 +22,10 @@
           class="text-pb-red underline"
           target="_blank"
           rel="noopener"
-        >our guide</a>.
+          @click="sendGuideInsight"
+        >
+          our guide
+        </a>.
       </p>
 
       <p class="mt-4 font-serif leading-7 text-lg">
@@ -36,7 +39,7 @@
           rel="noopener"
           class="inline-block text-center text-lg py-3 px-6 border-2 border-red-700 text-white bg-red-700 font-semibold rounded-full"
           data-cy="learn-about-pressbooks"
-          @click="sendClickEvent"
+          @click="sendWelcomeCTAInsight"
         >
           Learn more about Pressbooks
         </a>
@@ -64,13 +67,26 @@ export default {
     },
   },
   methods: {
-    sendClickEvent() {
-      this.sendAlgoliaEvent({
+    startTour() {
+      this.sendFilterAppliedInsight(
+        ['tour:opened'],
+        'Start Tour Link Clicked'
+      );
+      this.$store.commit('showTour');
+    },
+    sendGuideInsight() {
+      this.sendFilterAppliedInsight(
+        ['guide:opened'],
+        'Our Guide Link Clicked'
+      );
+    },
+    sendWelcomeCTAInsight() {
+      this.sendInsight({
         insightsMethod: 'convertedObjectIDs', 
         payload: {
-          eventName: 'Learn more about Pressbooks',
+          eventName: 'Welcome CTA Clicked',
           objectIDs: [
-            `external:${this.site}`
+            `link:${this.site}`
           ]
         }, 
       });

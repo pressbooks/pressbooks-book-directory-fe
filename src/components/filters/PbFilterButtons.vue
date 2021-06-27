@@ -134,7 +134,7 @@ export default {
       let query = {...this.$route.query}, value;
       value = exclude ? '-' + itemFacet : itemFacet;
 
-      this.sendClickEvent(itemValue, exclude);
+      this.sendClickInsight(itemValue, exclude);
 
       if (typeof(query[this.alias]) === 'undefined') {
         query[this.alias] = value.toString();
@@ -156,12 +156,10 @@ export default {
 
       this.$router.replace({ query });
     },
-    sendClickEvent(item, exclude = false) {
-      this.sendFilterAppliedEvent({
-        filters: [
-          `${exclude ? 'NOT ' : ''}${this.alias}:${item.facet}`,
-        ]
-      });
+    sendClickInsight(item, exclude = false) {
+      this.sendFilterAppliedInsight([
+        `${exclude ? 'NOT ' : ''}${this.alias}:${item.facet}`,
+      ]);
     },
     getAlphanumericFacet(facet) {
       return helpers.functions.getLowerCaseAlphanumericAndHyphen(facet);

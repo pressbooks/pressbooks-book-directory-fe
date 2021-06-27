@@ -167,7 +167,7 @@ export default {
         return;
       }
 
-      this.sendClickEvent();
+      this.sendClickInsight();
 
       return this.$router.replace({
         query: {
@@ -176,15 +176,15 @@ export default {
         }
       });
     },
-    sendClickEvent() {
+    sendClickInsight() {
       let dates = [
         this.dates.start ? `${this.alias}:>=${this.dates.start}` : null,
         this.dates.to ? `${this.alias}:<=${this.dates.to}` : null
       ];
 
-      this.sendFilterAppliedEvent({
-        filters: dates.filter(d => d)
-      });
+      this.sendFilterAppliedInsight(
+        dates.filter(d => d)
+      );
     },
   }
 };

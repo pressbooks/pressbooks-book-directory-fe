@@ -16,7 +16,7 @@
               v-bind="link"
               target="_blank"
               rel="noopener"
-              @click="sendClickEvent(link)"
+              @click="sendClickInsight(link)"
             >
               {{ link.text }}
             </a>
@@ -35,7 +35,7 @@
             v-for="(socialLink, key) in socialLinks"
             :key="key"
             v-bind="socialLink"
-            @social-clicked="sendClickEvent(socialLink)"
+            @social-clicked="sendClickInsight(socialLink)"
           />
         </div>
       </div>
@@ -68,13 +68,13 @@ export default {
     };
   },
   methods: {
-    sendClickEvent(link) {
-      this.sendAlgoliaEvent({
+    sendClickInsight(link) {
+      this.sendInsight({
         insightsMethod: 'convertedObjectIDs', 
         payload: {
-          eventName: link.text || link.name,
+          eventName: 'Footer Link Clicked',
           objectIDs: [
-            `external:${link.href}`
+            `link:${link.href}`
           ]
         }, 
       });

@@ -56,7 +56,7 @@
             data-cy="book-read-more-description"
             @click.prevent="() => {
               toggle();
-              sendClickEvent();
+              sendClickInsight();
             }"
           >
             <span class="sr-only">{{ `Read more about ${item.name}` }}</span>
@@ -122,8 +122,8 @@ export default {
     }
   },
   methods: {
-    sendClickEvent() {
-      this.sendAlgoliaEvent({
+    sendClickInsight() {
+      this.sendInsight({
         insightsMethod: 'clickedObjectIDsAfterSearch', 
         payload: {
           eventName: 'Read More Clicked',
