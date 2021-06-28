@@ -3,6 +3,7 @@ import {
   clickAccordionHeader,
   clickFilter,
   perPage,
+  search,
   sortBy
 } from '../../support/common';
 import Elements from '../../support/elements';
@@ -49,11 +50,13 @@ describe('Clear Filters',() => {
         .should('not.contain','?');
     });
 
-    it('Clear all refinements should not reset per page and sorting', () => {
+    it('Clear all refinements should not reset search, per page, and sorting', () => {
       perPage(20);
       sortBy('Word count');
+      search('education');
 
       cy.url()
+        .should('contain', 'q=')
         .should('contain', 'per_page=')
         .should('contain', 'sort=')
         .should('contain', 'license=');
@@ -65,6 +68,7 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 0);
 
       cy.url()
+        .should('contain', 'q=')
         .should('contain', 'per_page=')
         .should('contain', 'sort=')
         .should('not.contain', 'license=');

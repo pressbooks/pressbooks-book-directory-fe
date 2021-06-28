@@ -23,9 +23,7 @@
           target="_blank"
           rel="noopener"
           @click="sendGuideInsight"
-        >
-          our guide
-        </a>.
+        >our guide</a>.
       </p>
 
       <p class="mt-4 font-serif leading-7 text-lg">
