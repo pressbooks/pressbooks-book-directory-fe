@@ -1,24 +1,23 @@
 import {
   clickAccordionClearFilter,
   clickAccordionHeader,
-  clickFilter
+  clickFilter,
+  perPage,
+  sortBy
 } from '../../support/common';
 import Elements from '../../support/elements';
 
 describe('Clear Filters',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
-
       clickAccordionHeader('licenseCode');
 
       clickFilter('licenseCode','cc-by', 'include');
       clickFilter('licenseCode','cc-by-nc-sa', 'include');
       clickFilter('licenseCode','all-rights-reserved', 'include');
-
     });
 
     it('Clear chip refinement', () => {
-
       cy.url()
         .should('include','?license=CC%20BY');
 
@@ -32,11 +31,9 @@ describe('Clear Filters',() => {
 
       cy.url()
         .should('include','?license=CC%20BY-NC-SA%26%26All%20Rights%20Reserved');
-
     });
 
     it('Clear all refinements', () => {
-
       cy.url()
         .should('include','?license=CC%20BY');
 
@@ -50,6 +47,20 @@ describe('Clear Filters',() => {
 
       cy.url()
         .should('not.contain','?');
+    });
+
+    it('Clear all refinements should not reset per page and sorting', () => {
+      perPage(20);
+      sortBy('Word count');
+
+      cy.get('[data-cy=clear-all-filters]').click();
+
+      cy.algoliaQueryRequest('algoliaRequest');
+
+      cy.get('[data-cy=chip-filter]').should('have.length', 0);
+
+      cy.url()
+        .should('not.contain', 'license=');
     });
 
     it('Clear applied filters for specific facet when clicking "Clear filter" button inside the facet', () => {

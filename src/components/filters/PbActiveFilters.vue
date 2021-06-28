@@ -74,7 +74,12 @@ export default {
   methods: {
     removeFilters() {
       if (Object.keys(this.$route.query).length !== 0) {
-        this.$router.replace({ query: {} });
+        const { per_page, sort } = this.$route.query;
+
+        this.$router.replace({query: {
+          per_page,
+          sort
+        }});
       }
     },
     getLabel(value) {
