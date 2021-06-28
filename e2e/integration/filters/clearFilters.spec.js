@@ -53,6 +53,11 @@ describe('Clear Filters',() => {
       perPage(20);
       sortBy('Word count');
 
+      cy.url()
+        .should('contain', 'per_page=')
+        .should('contain', 'sort=')
+        .should('contain', 'license=');
+
       cy.get('[data-cy=clear-all-filters]').click();
 
       cy.algoliaQueryRequest('algoliaRequest');
@@ -60,6 +65,8 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 0);
 
       cy.url()
+        .should('contain', 'per_page=')
+        .should('contain', 'sort=')
         .should('not.contain', 'license=');
     });
 
