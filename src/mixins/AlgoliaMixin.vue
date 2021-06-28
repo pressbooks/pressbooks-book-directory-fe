@@ -17,12 +17,17 @@ export default {
       });
     },
     sendInsight(event) {
+      const { sort } = this.$route.query;
       const { insightsMethod, payload } = event;
+
+      const index = this.$store.state.SClient.availableIndexes.find(
+        ({orderedBy}) => orderedBy === sort
+      );
       
       // Send event to algolia
       searchInsights(insightsMethod, {
         ...payload,
-        index: this.$store.state.SClient.indexName, // This does not seem to be updated when changing the dropdown option
+        index: index ? index.value : this.$store.state.SClient.indexName,
       });
     },
   }
