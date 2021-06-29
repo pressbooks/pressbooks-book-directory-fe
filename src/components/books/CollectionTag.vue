@@ -43,6 +43,7 @@ export default {
           return this.collection !== added;
         });
       } else {
+        this.sendClickInsight();
         currentCollections.push(this.collection);
       }
       query.collec = currentCollections.join('&&');
@@ -50,7 +51,13 @@ export default {
         delete query['collec'];
       }
       this.$router.replace({ query });
-    }
+    },
+    sendClickInsight() {
+      this.sendFilterAppliedInsight(
+        [`collec:${this.collection}`],
+        'Card Collection Activated'
+      );
+    },
   }
 };
 </script>

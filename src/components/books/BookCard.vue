@@ -17,7 +17,10 @@
           :collection="tag"
         />
       </ul>
-      <book-info :item="item" />
+      <book-info
+        :item="item"
+        @book-title-click="$emit('book-clicked')"
+      />
       <book-details :item="item" />
     </div>
     <book-media :item="item" />
@@ -40,8 +43,11 @@ export default {
   props: {
     item: {
       type: Object,
-      default() { return {}; }
+      default() { 
+        return {}; 
+      }
     },
   },
+  emits: ['book-clicked'],
 };
 </script>

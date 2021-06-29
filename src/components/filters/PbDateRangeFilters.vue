@@ -167,12 +167,24 @@ export default {
         return;
       }
 
+      this.sendClickInsight();
+
       return this.$router.replace({
         query: {
           ...query,
           [this.alias]: queryString
         }
       });
+    },
+    sendClickInsight() {
+      let dates = [
+        this.dates.start ? `${this.alias}:>=${this.dates.start}` : null,
+        this.dates.to ? `${this.alias}:<=${this.dates.to}` : null
+      ];
+
+      this.sendFilterAppliedInsight(
+        dates.filter(d => d)
+      );
     },
   }
 };

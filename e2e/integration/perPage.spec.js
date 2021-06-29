@@ -1,3 +1,5 @@
+import { perPage } from '../support/common';
+
 describe('Books per page', () => {
   context('Desktop resolution', () => {
 
@@ -11,9 +13,7 @@ describe('Books per page', () => {
 
         cy.algoliaQueryRequest('listing');
 
-        cy.get('[data-cy=books-per-page] .vs__dropdown-toggle').click();
-
-        cy.get('[data-cy=books-per-page] .vs__dropdown-option').contains(`${length} books`).click();
+        perPage(length);
 
         cy.wait(`@listing${length}`).then(() => {
           cy.get('[data-cy=book-card]').should('have.length', length);

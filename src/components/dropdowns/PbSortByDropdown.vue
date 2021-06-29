@@ -8,8 +8,8 @@
         placeholder="Sort books by"
         :options="items"
         data-cy="sort-books-by"
-        @input="(data)=>{
-          onInput(data,refine)
+        @input="(data) => {
+          onInput(data, refine)
         }"
       />
     </template>

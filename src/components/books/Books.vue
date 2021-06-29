@@ -3,7 +3,7 @@
     :transform-items="transformItems"
     class="mt-4 space-y-4"
   >
-    <template #default="{ items }">
+    <template #default="{ items, sendEvent }">
       <p
         v-if="items.length === 0"
         class="ais-Hits__books__noresults"
@@ -15,6 +15,7 @@
         v-for="item in items"
         :key="item.objectID"
         :item="item"
+        @book-clicked="sendEvent('conversion', item, 'Book Opened')"
       />
     </template>
   </ais-hits>
