@@ -50,6 +50,10 @@ export default {
           routeQuery[this.alias] != indexesOrderedByMap[data]
         )
       ) {
+        this.sendFilterAppliedInsight(
+          [`value:${data}`],
+          'Sort By Changed'
+        );
         routeQuery[this.alias] = indexesOrderedByMap[data];
         this.$router.replace({ query: routeQuery });
         refine(data);

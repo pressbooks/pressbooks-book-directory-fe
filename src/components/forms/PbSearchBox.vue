@@ -211,11 +211,16 @@ export default {
           stringSearch.length === 0 // Remove search case
       ) {
         scrollTo('#books');
-        NProgress.start();
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
         query[attribute] = stringSearch;
         if(this.$router.history.current.query.q !== query.q){
+          if (query.q !== '') {
+            this.sendFilterAppliedInsight(
+              [`search:${query.q}`],
+              'Search Applied'
+            );
+          }
           this.$router.replace({ query });
         }
       }
