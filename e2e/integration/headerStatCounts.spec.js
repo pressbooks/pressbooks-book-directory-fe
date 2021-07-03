@@ -10,13 +10,13 @@ describe('Welcome header book and network counts', () => {
 
     it('Shows the amount of books and networks indexed', function () {
       cy.get('@totalBooksIndexed').should('have.text', '2,329');
-      cy.get('@totalNetworksIndexed').should('have.text', 89);
+      cy.get('@totalNetworksIndexed').should('have.text', 96);
     });
 
     it('Does not change indexed amount after performing a search', function() {
       search('math science').then(() => {
         cy.get('@totalBooksIndexed').should('have.text', '2,329');
-        cy.get('@totalNetworksIndexed').should('have.text', 89);
+        cy.get('@totalNetworksIndexed').should('have.text', 96);
       });
     });
   });
