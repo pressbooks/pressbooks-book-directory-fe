@@ -1,4 +1,3 @@
-<script>
 import searchInsights from 'search-insights';
 
 export default {
@@ -32,5 +31,3 @@ export default {
     },
   }
 };
-</script>
-
