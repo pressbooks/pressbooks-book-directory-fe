@@ -15,6 +15,7 @@ Vue.component('VueSelect', VueSelect);
 Vue.use(InstantSearch);
 Vue.use(VueTailwind, VueTailwindConfig);
 Vue.mixin(AlgoliaMixin);
+Vue.filter('numberFormat', (value, locale) => value.toLocaleString(locale || 'en'));
 
 dayjs.extend(utc);
 

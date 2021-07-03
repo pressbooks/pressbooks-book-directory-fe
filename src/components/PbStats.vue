@@ -7,7 +7,7 @@
         class="font-semibold text-2xl mb-6"
         data-cy="number-of-books"
       >
-        Results:  {{ nbHits }} books
+        Results:  {{ nbHits | numberFormat }} books
       </div>
     </template>
   </ais-stats>

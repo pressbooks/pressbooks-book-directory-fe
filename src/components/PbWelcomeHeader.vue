@@ -9,7 +9,7 @@
       </h1>
 
       <p class="font-serif leading-7 text-lg">
-        This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed }}</strong> Pressbooks
+        This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed | numberFormat }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed | numberFormat }}</strong> Pressbooks
         networks. Learn to use the Directory by taking a
         <button
           class="text-pb-red underline"
