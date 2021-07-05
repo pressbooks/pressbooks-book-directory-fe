@@ -213,16 +213,32 @@ export default {
         scrollTo('#books');
         let query = {...this.$route.query};
         let attribute = this.$store.state.SClient.allowedFilters.search.alias;
-        query[attribute] = stringSearch;
-        if(this.$router.history.current.query.q !== query.q){
-          if (query.q !== '') {
-            this.sendFilterAppliedInsight(
-              [`search:${query.q}`],
-              'Search Applied'
-            );
-          }
-          this.$router.replace({ query });
+
+        if (query[attribute] === stringSearch) {
+          return;
         }
+
+        if (stringSearch === '') {
+          if (!query[attribute]) {
+            return;
+          }
+
+          delete query[attribute];
+
+          return this.$router.replace({query});
+        }
+
+        this.sendFilterAppliedInsight(
+          [`search:${stringSearch}`],
+          'Search Applied'
+        );
+
+        this.$router.replace({
+          query: {
+            ...query,
+            [attribute]: stringSearch
+          }
+        });
       }
     }
   }
