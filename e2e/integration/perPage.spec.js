@@ -33,6 +33,5 @@ describe('Books per page', () => {
         cy.url().should('include', `per_page=${length}`);
       });
     });
-
   });
 });
