@@ -34,6 +34,21 @@ describe('Search', () => {
 
     });
 
+
+    it('Return to home button clear all filters', () => {
+
+      search('math science');
+
+      cy.get('[data-cy=book-card]').should('have.length', 2);
+      cy.url()
+        .should('include','?q=math%20science');
+
+      cy.get(Elements.returnHomeButton).click();
+
+      cy.url().should('equal','http://localhost:3001/');
+
+    });
+
   });
 
 });
