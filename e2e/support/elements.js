@@ -44,7 +44,8 @@ const Elements = {
     }
     return `[data-cy-button=${facet}]`;
   },
-  numberOfBooks: '[data-cy=number-of-books]'
+  numberOfBooks: '[data-cy=number-of-books]',
+  returnHomeButton: '[data-cy=return-home-button]'
 };
 
 

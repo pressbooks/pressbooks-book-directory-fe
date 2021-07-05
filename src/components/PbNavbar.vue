@@ -2,7 +2,11 @@
   <header class="shadow">
     <div class="container mx-auto px-4 sm:px-8">
       <nav class="py-4 flex justify-between items-center space-x-4">
-        <a href="#">
+        <a
+          href="/"
+          title="Home Page"
+          data-cy="return-home-button"
+        >
           <img
             src="/assets/logo-pressbooks-directory.svg"
             alt="Pressbooks Directory"
