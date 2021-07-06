@@ -8,7 +8,7 @@
         placeholder="Books per page"
         :options="items"
         data-cy="books-per-page"
-        @input="(data)=>{
+        @input="(data) => {
           onInput(data)
         }"
       />
@@ -48,6 +48,10 @@ export default {
           data != routeQuery[this.alias]
         )
       ) {
+        this.sendFilterAppliedInsight(
+          [`value:${data}`],
+          'Per Page Changed'
+        );
         routeQuery[this.alias] = data;
         this.$router.replace({query: routeQuery});
       }
