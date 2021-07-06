@@ -20,12 +20,10 @@
 import PbDateRangeFilters from './PbDateRangeFilters.vue';
 import PbSelectableFilters from './PbSelectableFilters.vue';
 import PbNumericFilters from './PbNumericFilters.vue';
-import PbBooleanFilters from './PbBooleanFilters.vue';
 
 export default {
   name: 'PbFilters',
   components: {
-    PbBooleanFilters,
     PbNumericFilters,
     PbDateRangeFilters,
     PbSelectableFilters
@@ -33,10 +31,6 @@ export default {
   data() {
     return {
       filters: [
-        {
-          component: 'pb-boolean-filters',
-          props: { title: 'Recommended', field: 'isRecommended', 'data-cy': 'recommended-filter' }
-        },
         {
           component: 'pb-selectable-filters',
           props: { title: 'License', field: 'licenseCode', 'data-cy': 'license-filter' }

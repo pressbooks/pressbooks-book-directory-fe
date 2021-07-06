@@ -95,11 +95,6 @@ let sClient = {
       alias: 'updated',
       search: false
     },
-    isRecommended: {
-      type: 'boolean',
-      alias: 'recommended',
-      search: false
-    },
     collections: {
       type: 'string',
       alias: 'collec',

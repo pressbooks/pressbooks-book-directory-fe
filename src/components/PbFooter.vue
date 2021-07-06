@@ -16,6 +16,7 @@
               v-bind="link"
               target="_blank"
               rel="noopener"
+              @click="sendClickInsight(link)"
             >
               {{ link.text }}
             </a>
@@ -34,6 +35,7 @@
             v-for="(socialLink, key) in socialLinks"
             :key="key"
             v-bind="socialLink"
+            @social-clicked="sendClickInsight(socialLink)"
           />
         </div>
       </div>
@@ -65,5 +67,18 @@ export default {
       ]
     };
   },
+  methods: {
+    sendClickInsight(link) {
+      this.sendInsight({
+        insightsMethod: 'convertedObjectIDs', 
+        payload: {
+          eventName: 'Footer Link Clicked',
+          objectIDs: [
+            `link:${link.href}`
+          ]
+        }, 
+      });
+    }
+  }
 };
 </script>

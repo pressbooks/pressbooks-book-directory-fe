@@ -61,17 +61,20 @@ export default {
 
       scrollTo('#books');
 
+      this.sendClickInsight();
       this.$router.replace({
         query: {
           ...query,
           [this.alias]: this.card.name
         }
       });
-    }
+    },
+    sendClickInsight() {
+      this.sendFilterAppliedInsight(
+        [`${this.alias}:${this.card.name}`],
+        'Collection visited'
+      );
+    },
   }
 };
 </script>
-
-<style scoped>
-
-</style>

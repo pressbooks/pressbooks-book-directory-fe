@@ -1,19 +1,8 @@
-import {sortBy} from "../support/common";
+import {sortBy} from '../support/common';
 
 const { _ } = Cypress;
 describe('Sort books by', () => {
   context('Desktop resolution', () => {
-    beforeEach(() => {
-      cy.get('[data-cy=sort-books-by]').as('sortBooksBy');
-
-      cy.get('@sortBooksBy')
-        .find('.vs__dropdown-toggle')
-        .click();
-
-      cy.algoliaQueryRequest('sorting');
-
-    });
-
     it('Sorts by word count in descending order', () => {
       sortBy('Word count');
 

@@ -19,7 +19,7 @@ describe('Word Count Filters',() => {
         .should('include','words=%3E%3D1000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 1734');
+        .contains( 'Results: 1,734');
 
     });
 
@@ -110,7 +110,7 @@ describe('Word Count Filters',() => {
         .should('not.include','20000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 1734');
+        .contains( 'Results: 1,734');
 
     });
 

@@ -74,7 +74,11 @@ export default {
   methods: {
     removeFilters() {
       if (Object.keys(this.$route.query).length !== 0) {
-        this.$router.replace({ query: {} });
+        const { q, per_page, sort } = this.$route.query;
+
+        this.$router.replace({
+          query: { q, per_page, sort}
+        });
       }
     },
     getLabel(value) {
@@ -83,9 +87,6 @@ export default {
       switch (value.attribute) {
       case 'hasIsBasedOn':
         label = (value.value) ? 'Based on another book' : 'Original';
-        break;
-      case 'isRecommended':
-        label = (value.value) ? 'Recommended' : 'Not recommended';
         break;
       case 'wordCount':
         label = 'Words ' + value.operator + ' ' + value.value;

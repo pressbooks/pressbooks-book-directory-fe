@@ -14,12 +14,13 @@
         target="_blank"
         rel="noopener"
         data-cy="book-title"
+        @click="$emit('book-title-click')"
       >
         {{ item.name }}
       </a>
     </h2>
     <p class="leading-tight">
-      <span data-cy="book-word-count">{{ item.wordCount }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <span data-cy="h5p-count">{{ item.h5pActivities }}</span> H5P activities
+      <span data-cy="book-word-count">{{ item.wordCount | numberFormat }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <span data-cy="h5p-count">{{ item.h5pActivities | numberFormat }}</span> H5P activities
     </p>
   </div>
 </template>
@@ -33,6 +34,7 @@ export default {
       default() { return {}; }
     },
   },
+  emits: ['title-clicked'],
   computed: {
     sizeInMb() {
       const size = (parseInt(this.item.storageSize) / 1024) / 1024;

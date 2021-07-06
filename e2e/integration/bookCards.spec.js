@@ -79,11 +79,6 @@ describe('Book cards', function () {
         .first()
         .should('include.text','Written specifically for students in Boise State University’s Bachelor of Applied Science');
     });
-    it('Check recommended attribute in the book cards', () => {
-      search('Open Music Theory');
-      cy.get(Elements.booksCards.recommended)
-        .should('include.text', 'Recommended');
-    });
     it('Check all book cards attributes from a particular book', () => {
       const attributesToCheck =  [
         {

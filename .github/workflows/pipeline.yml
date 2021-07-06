@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       - uses: actions/setup-node@v2
         with:
@@ -42,7 +44,13 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - uses: marceloprado/has-changed-path@v1
+        id: code-changes
+        with:
+          paths: src e2e
+
       - name: e2e Tests
+        if: steps.code-changes.outputs.changed == 'true'
         uses: cypress-io/github-action@v2
         with:
           start: npm run dev

@@ -146,6 +146,16 @@ function sortBy(textIndex) {
     .click();
 }
 
+function perPage(amount) {
+  cy.get('[data-cy=books-per-page]')
+    .find('.vs__dropdown-toggle')
+    .click()
+    .get('[data-cy=books-per-page]')
+    .find('.vs__dropdown-option')
+    .contains(`${amount} books`)
+    .click();
+}
+
 export {
   search,
   encodeFacetFilterForURL,
@@ -159,6 +169,7 @@ export {
   submitNumericFilter,
   navigateToMonthYear,
   clickPage,
-  sortBy
+  sortBy,
+  perPage
 };
 

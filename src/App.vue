@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import searchInsights from 'search-insights';
+import {createInsightsMiddleware} from 'instantsearch.js/es/middlewares';
 import PbWelcomeHeader from './components/PbWelcomeHeader.vue';
 import PbFooter from './components/PbFooter.vue';
 import PbCollections from './components/collections/PbCollections.vue';
@@ -47,6 +49,19 @@ import PbSearchAndSortBox from './components/PbSearchAndSortBox.vue';
 import PbPaginatedBooks from './components/books/PbPaginatedBooks.vue';
 import PbTour from './components/PbTour.vue';
 import NProgress from 'nprogress/nprogress';
+
+const insightMiddleware = createInsightsMiddleware({
+  insightsClient: searchInsights,
+  onEvent(event, insights) {
+    const { insightsMethod, payload, widgetType, eventType } = event;
+
+    if (widgetType === 'ais.hits' && eventType === 'view') {
+      return;
+    }
+
+    insights(insightsMethod, payload);
+  }
+});
 
 export default {
   components: {
@@ -61,10 +76,12 @@ export default {
   },
   data() {
     return {
-      middlewares: [this.middleware],
+      middlewares: [
+        this.middleware, 
+        insightMiddleware
+      ],
       resetPage: false,
       routeQuery: undefined,
-      sortByAlias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
       restartIndex: false
     };
   },

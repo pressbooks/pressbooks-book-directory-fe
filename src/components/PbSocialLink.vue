@@ -5,6 +5,7 @@
     target="_blank"
     rel="noopener"
     :data-cy="id"
+    @click="$emit('social-clicked')"
   >
     <img
       :src="`/assets/icons/${icon}`"
@@ -27,6 +28,7 @@ export default {
       default: ''
     },
   },
+  emits: ['social-clicked'],
   computed: {
     id() {
       return `${this.name.toLowerCase()}-social-link`;

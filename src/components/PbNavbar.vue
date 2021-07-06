@@ -2,17 +2,20 @@
   <header class="shadow">
     <div class="container mx-auto px-4 sm:px-8">
       <nav class="py-4 flex justify-between items-center space-x-4">
-        <a href="#">
+        <a
+          href="/"
+          title="Home Page"
+          data-cy="return-home-button"
+        >
           <img
             src="/assets/logo-pressbooks-directory.svg"
             alt="Pressbooks Directory"
             class="h-full w-auto"
           >
         </a>
-        <!-- focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:ring-opacity-75 -->
         <button
-          class="border border-pb-red rounded-full px-8 py-3 text-pb-red text-sm border-2 font-bold"
-          @click="$store.commit('showTour')"
+          class="border-pb-red rounded-full px-8 py-3 text-pb-red text-sm border-2 font-bold"
+          @click="startTour"
         >
           Take the tour
         </button>
@@ -23,6 +26,15 @@
 
 <script>
 export default {
-  name: 'PbNavbar'
+  name: 'PbNavbar',
+  methods: {
+    startTour() {
+      this.sendFilterAppliedInsight(
+        ['tour:opened'],
+        'Start Tour Button Clicked'
+      );
+      this.$store.commit('showTour');
+    },
+  }
 };
 </script>

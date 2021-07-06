@@ -5,21 +5,22 @@
   >
     <div class="w-full md:w-2/3 md:pr-4">
       <ul
+        v-if="item.collections.length > 0"
         role="list"
         aria-label="Book tags"
         class="flex"
+        data-cy="book-tags"
       >
-        <recommended
-          v-if="item.isRecommended"
-          :enabled="isRecommendedFilterEnabled"
-        />
         <collection-tag
           v-for="(tag,index) in item.collections"
           :key="index"
           :collection="tag"
         />
       </ul>
-      <book-info :item="item" />
+      <book-info
+        :item="item"
+        @book-title-click="$emit('book-clicked')"
+      />
       <book-details :item="item" />
     </div>
     <book-media :item="item" />
@@ -29,7 +30,6 @@
 import BookInfo from './BookInfo.vue';
 import BookDetails from './BookDetails.vue';
 import BookMedia from './BookMedia.vue';
-import Recommended from './Recommended.vue';
 import CollectionTag from './CollectionTag.vue';
 
 export default {
@@ -39,18 +39,15 @@ export default {
     BookInfo,
     BookDetails,
     BookMedia,
-    Recommended,
   },
   props: {
     item: {
       type: Object,
-      default() { return {}; }
+      default() { 
+        return {}; 
+      }
     },
   },
-  computed: {
-    isRecommendedFilterEnabled() {
-      return !!this.$store.state.SClient.filtersExcluded.isRecommended;
-    }
-  }
+  emits: ['book-clicked'],
 };
 </script>

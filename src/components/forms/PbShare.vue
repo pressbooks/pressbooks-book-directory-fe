@@ -102,6 +102,10 @@ export default {
       this.isCopied = false;
     },
     copyToClipboard() {
+      this.sendFilterAppliedInsight(
+        [`url:${this.currentUrl}`],
+        'Share This Query'
+      );
       navigator.clipboard.writeText(this.currentUrl).then(()=> {
         this.isCopied = true;
         setTimeout(()=>{
