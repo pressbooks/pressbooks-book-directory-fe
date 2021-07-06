@@ -180,7 +180,7 @@ describe('Book cards', function () {
         .should('contain', 'Seventeen countries are represented, including the United States.');
     });
 
-    it.only('Fallback to cover image if image is not available', ()=> {
+    it('Fallback to cover image if image is not available', ()=> {
       search('math');
 
       cy.get(Elements.booksCards.cover)
