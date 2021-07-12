@@ -1,8 +1,11 @@
 import fs from 'fs';
-export default {
+
+const cleanup = ()=>({
   name: 'cleanup',
-  generateBundle() {
+  buildStart() {
     if( process.env.NODE_ENV === 'production' )
-      fs.unlinkSync('./dist/robots.txt');
+      fs.unlinkSync('public/robots.txt');
   }
-};
+});
+
+export default cleanup;
