@@ -2,9 +2,9 @@ import fs from 'fs';
 
 const cleanup = ()=>({
   name: 'cleanup',
-  buildStart() {
+  generateBundle() {
     if( process.env.NODE_ENV === 'production' )
-      fs.unlinkSync('public/robots.txt');
+      fs.unlinkSync('dist/robots.txt');
   }
 });
 
