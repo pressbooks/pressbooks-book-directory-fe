@@ -4,7 +4,6 @@ import {
   clickFilter,
   perPage,
   search,
-  sortBy
 } from '../../support/common';
 import Elements from '../../support/elements';
 
@@ -52,7 +51,6 @@ describe('Clear Filters',() => {
 
     it('Clear all refinements should not reset search, per page, and sorting', () => {
       perPage(20);
-      sortBy('Title (A-Z)');
       search('education');
 
       cy.url()
