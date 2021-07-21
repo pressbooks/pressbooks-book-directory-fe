@@ -110,7 +110,7 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "start date" using the URL filters books that were modified since then', () => {
-      cy.visit('/?updated=%3E%3D1619481600');
+      cy.visit('/?sort=updated&updated=%3E%3D1619481600');
 
       cy.algoliaQueryRequest()
         .get('[data-cy=chip-filter]')
@@ -130,7 +130,7 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "to date" using the URL filters books that were modified until then', () => {
-      cy.visit('/?updated=%3C%3D1619567999');
+      cy.visit('/?sort=updated&updated=%3C%3D1619567999');
 
       cy.algoliaQueryRequest()
         .get('[data-cy=chip-filter]')
@@ -146,7 +146,7 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "start date" and "to date" using the URL filters books that were modified in between', () => {
-      cy.visit('/?updated=%3E%3D1617235200%26%26%3C%3D1617407999');
+      cy.visit('/?sort=updated&updated=%3E%3D1617235200%26%26%3C%3D1617407999');
 
       cy.algoliaQueryRequest()
         .get('[data-cy=chip-filter]')
@@ -170,7 +170,7 @@ describe('Filter last updated', () => {
     });
 
     it('Removing chip will remove the date filter', () => {
-      cy.visit('/?updated=%3C%3D1619567999');
+      cy.visit('/?sort=updated&updated=%3C%3D1619567999');
 
       cy.get('@toLastUpdated').should('contain.value', 'April 27, 2021');
 

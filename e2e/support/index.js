@@ -19,7 +19,7 @@ import './commands';
 beforeEach(() => {
   cy.viewport(1280, 720);
   cy.intercept('**/indexes/*/query?*').as('fetching');
-  cy.visit('/');
+  cy.visit('/?sort=updated');
 });
 
 

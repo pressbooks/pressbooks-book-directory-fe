@@ -20,7 +20,7 @@ describe('Clear Filters',() => {
 
     it('Clear chip refinement', () => {
       cy.url()
-        .should('include','?license=CC%20BY');
+        .should('include','license=CC%20BY');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 3);
 
@@ -31,12 +31,12 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 2);
 
       cy.url()
-        .should('include','?license=CC%20BY-NC-SA%26%26All%20Rights%20Reserved');
+        .should('include','license=CC%20BY-NC-SA%26%26All%20Rights%20Reserved');
     });
 
     it('Clear all refinements', () => {
       cy.url()
-        .should('include','?license=CC%20BY');
+        .should('include','license=CC%20BY');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 3);
 
@@ -47,12 +47,12 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 0);
 
       cy.url()
-        .should('not.contain','?');
+        .should('not.contain','&');
     });
 
     it('Clear all refinements should not reset search, per page, and sorting', () => {
       perPage(20);
-      sortBy('Word count');
+      sortBy('Title (A-Z)');
       search('education');
 
       cy.url()
