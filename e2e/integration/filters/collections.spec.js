@@ -27,7 +27,7 @@ describe('Filter collections', () => {
     });
 
     it('Filter by Interactive OER collection using URL', () => {
-      cy.visit('http://localhost:3001/?collec=Interactive%20OER')
+      cy.visit('/?sort=updated&collec=Interactive%20OER')
         .algoliaQueryRequest()
         .get('[data-cy=chip-filter]')
         .find('.text-sm')

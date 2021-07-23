@@ -25,7 +25,7 @@ describe('Books per page', () => {
     it('Changes the amount of books displayed when requested by URL', () => {
       [20, 50].forEach(length => {
         cy.intercept('**/indexes/*/queries?*').as(`listing${length}`);
-        cy.visit(`/?per_page=${length}`);
+        cy.visit(`/?sort=updated&per_page=${length}`);
         cy.algoliaQueryRequest('listing');
         cy.wait(`@listing${length}`).then(() => {
           cy.get('[data-cy=book-card]').should('have.length', length);
