@@ -4,7 +4,7 @@ describe('BookCard Collections Filters', () => {
   context('Desktop Resolution', () => {
     it('Collection filter toggle', () => {
 
-      cy.visit('/?collec=OpenStax');
+      cy.visit('/?sort=updated&collec=OpenStax');
 
       cy.algoliaQueryRequest('algoliaRequest');
 
@@ -38,7 +38,7 @@ describe('BookCard Collections Filters', () => {
         .find('li:first-child button')
         .should('have.class', 'text-pb-red');
 
-      cy.url().should('include','?collec=OpenStax');
+      cy.url().should('include','collec=OpenStax');
 
     });
 

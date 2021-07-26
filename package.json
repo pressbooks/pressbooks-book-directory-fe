@@ -1,6 +1,6 @@
 {
   "name": "pressbooks-directory",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "engines": {
     "node": ">=15.14.0",
     "npm": ">=7.0.0"
@@ -28,6 +28,7 @@
     "intro.js": "^3.4.0",
     "nprogress": "^0.2.0",
     "search-insights": "^2.0.0",
+    "v-img-fallback": "^0.1.5",
     "vue": "^2.6.12",
     "vue-clamp": "^0.3.2",
     "vue-instantsearch": "^3.6.0",

@@ -7,27 +7,27 @@ let sClient = {
     import.meta.env.VITE_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX,
   availableIndexes: [
     {
-      value: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      value: import.meta.env.VITE_ALGOLIA_INDEX,
       default: true,
+      orderedBy: 'relevance',
+      isReplica: false,
+      label: 'Relevance'
+    },
+    {
+      value: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+      default: false,
       orderedBy: 'updated',
       isReplica: true,
       label: 'Recently updated'
     },
     {
-      value: import.meta.env.VITE_ALGOLIA_INDEX_WORD_COUNT_REPLICA,
-      default: false,
-      orderedBy: 'wordCount',
-      isReplica: true,
-      label: 'Word count ↓'
-    },
-    {
-      value: import.meta.env.VITE_ALGOLIA_INDEX,
+      value: import.meta.env.VITE_ALGOLIA_INDEX_ALPHABETICAL_REPLICA,
       default: false,
       orderedBy: 'name',
-      isReplica: false,
+      isReplica: true,
       label: 'Title (A-Z)'
     }
   ],

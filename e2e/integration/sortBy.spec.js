@@ -3,25 +3,6 @@ import {sortBy} from '../support/common';
 const { _ } = Cypress;
 describe('Sort books by', () => {
   context('Desktop resolution', () => {
-    it('Sorts by word count in descending order', () => {
-      sortBy('Word count');
-
-      cy.algoliaQueryRequest('sorting');
-
-      const toStrings = counts$ => _.map(counts$, 'textContent');
-      const toNumbers = counts => _.map(counts, Number);
-
-      cy.get('[data-cy=book-card] [data-cy=book-word-count]')
-        .then(toStrings)
-        .then(toNumbers)
-        .then(wordCounts => {
-          const sorted = _.sortBy(wordCounts).reverse();
-
-          expect(wordCounts).to.deep.equal(sorted);
-        }).url().should('include', '?sort=wordCount');;
-
-    });
-
     it('Sorts by title in ascending order', () => {
       sortBy('Title (A-Z)');
 

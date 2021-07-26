@@ -179,5 +179,13 @@ describe('Book cards', function () {
         .should('not.contain', 'Read more')
         .should('contain', 'Seventeen countries are represented, including the United States.');
     });
+    it('Fallback to cover image if image is not available', () => {
+      search('math');
+
+      cy.get(Elements.booksCards.cover)
+        .eq(1).find('img')
+        .should('have.attr', 'src')
+        .should('include', '/assets/images/default-book-cover.jpg');
+    });
   });
 });

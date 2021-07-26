@@ -63,14 +63,14 @@ describe('Pagination', () => {
     });
 
     it('Set page using URL',() => {
-      cy.visit('/?p=2');
+      cy.visit('/?sort=updated&p=2');
       cy.algoliaQueryRequest('algoliaRequest')
         .get(Elements.paginatorLink(2)).should('have.class','font-bold');
       cy.get('@firstBookTitle').contains('Physics 103 and 104 Teaching Guide');
     });
 
     it('Set page and search term using URL',() => {
-      cy.visit('/?p=2&q=biology');
+      cy.visit('/?sort=updated&p=2&q=biology');
       cy.algoliaQueryRequest('algoliaRequest');
       cy.get(Elements.paginatorLink(2)).should('have.class','font-bold');
       cy.get('@firstBookTitle').contains('A Mixed Course-Based Research Approach to Human Physiology');
