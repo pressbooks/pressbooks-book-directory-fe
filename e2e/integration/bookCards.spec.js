@@ -1,5 +1,5 @@
 import Elements from '../support/elements';
-import {clickAccordionHeader, clickFilter, search} from '../support/common';
+import {clickAccordionHeader, clickFilter, clickPage, search} from '../support/common';
 import helpers from '../../src/store/helpers';
 
 describe('Book cards', function () {
@@ -186,6 +186,21 @@ describe('Book cards', function () {
         .eq(1).find('img')
         .should('have.attr', 'src')
         .should('include', '/assets/images/default-book-cover.jpg');
+    });
+    it('Lazy loading cover images', () => {
+      clickPage(3);
+
+      cy.get(Elements.booksCards.cover)
+        .eq(2).find('img')
+        .should('have.attr', 'src')
+        .should('include', '/assets/images/default-book-cover.jpg');
+
+      cy.get('[data-cy=storage-filter]').scrollTo(0, 5);
+      cy.get(Elements.booksCards.cover)
+        .eq(3).find('img')
+        .should('have.attr', 'src')
+        .should('include', '/assets/images/default-book-cover.jpg');
+
     });
   });
 });

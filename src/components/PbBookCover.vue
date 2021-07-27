@@ -1,9 +1,12 @@
 <template>
-  <img
-    v-img-fallback="'/assets/images/default-book-cover.jpg'"
-    class="w-full"
-    :src="image"
+  <div
+    v-lazy-container="{ selector: 'img', error: defaulImg, loading: defaulImg }"
   >
+    <img
+      class="w-full"
+      :data-src="image"
+    >
+  </div>
 </template>
 
 <script>
@@ -20,5 +23,10 @@ export default {
       default: ''
     },
   },
+  data() {
+    return {
+      defaulImg: '/assets/images/default-book-cover.jpg'
+    };
+  }
 };
 </script>
