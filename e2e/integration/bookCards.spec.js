@@ -1,5 +1,5 @@
 import Elements from '../support/elements';
-import {clickAccordionHeader, clickFilter, search} from '../support/common';
+import {clickAccordionHeader, clickFilter, clickPage, search} from '../support/common';
 import helpers from '../../src/store/helpers';
 
 describe('Book cards', function () {
@@ -70,7 +70,7 @@ describe('Book cards', function () {
       search('Nursing Pharmacology').then(()=>{
         cy.get(Elements.booksCards.editors)
           .first()
-          .contains('Elizabeth Christman, MSN, RN, CNE and Kimberly Ernstmeyer, CNE, CHSE, APNP-BC');
+          .should('include.text', 'Elizabeth Christman, MSN, RN, CNE and Kimberly Ernstmeyer');
       });
     });
     it('Search a book with description and check it is present in the book cards', () => {
@@ -183,9 +183,24 @@ describe('Book cards', function () {
       search('math');
 
       cy.get(Elements.booksCards.cover)
-        .eq(1).find('img')
+        .eq(3).find('img')
         .should('have.attr', 'src')
         .should('include', '/assets/images/default-book-cover.jpg');
+    });
+    it('Lazy loading cover images', () => {
+      clickPage(3);
+
+      cy.get(Elements.booksCards.cover)
+        .eq(2).find('img')
+        .should('have.attr', 'src')
+        .should('include', '/assets/images/default-book-cover.jpg');
+
+      cy.get('[data-cy=storage-filter]').scrollIntoView()
+        .wait(200);
+      cy.get(Elements.booksCards.cover)
+        .eq(2).find('img')
+        .should('have.attr', 'src')
+        .should('include', 'monarch.jpg');
     });
   });
 });
