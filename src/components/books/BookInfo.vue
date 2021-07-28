@@ -14,7 +14,7 @@
         target="_blank"
         rel="noopener"
         data-cy="book-title"
-        @click="clickBook(item)"
+        @click="clickBook"
       >
         {{ item.name }}
       </a>
@@ -43,17 +43,17 @@ export default {
     }
   },
   methods: {
-    clickBook(book) {
+    clickBook() {
       this.$emit('book-title-click');
       const clickEndpoint = import.meta.env.VITE_CLICK_COUNT_ENDPOINT;
       if (clickEndpoint) {
-        fetch(clickEndpoint, {
+        fetch(clickEndpoint,{
           mode: 'no-cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({book_id:book.objectID}),
+          body: JSON.stringify({book_id:this.item.objectID}),
         });
       }
     }
