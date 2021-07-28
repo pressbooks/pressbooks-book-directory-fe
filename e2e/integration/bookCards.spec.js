@@ -200,7 +200,7 @@ describe('Book cards', function () {
       cy.get(Elements.booksCards.cover)
         .eq(2).find('img')
         .should('have.attr', 'src')
-        .should('include', '/361/2019/07/bookcover1.jpg');
+        .should('include', 'monarch.jpg');
     });
   });
 });
