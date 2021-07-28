@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { ImgFallback } from 'v-img-fallback';
 
 export default {
   name: 'PbBookCover',
