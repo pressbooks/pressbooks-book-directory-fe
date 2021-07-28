@@ -13,9 +13,6 @@
 
 export default {
   name: 'PbBookCover',
-  directives: {
-    ImgFallback
-  },
   props: {
     image: {
       type: String,
