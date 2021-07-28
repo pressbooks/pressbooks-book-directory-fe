@@ -70,7 +70,7 @@ describe('Book cards', function () {
       search('Nursing Pharmacology').then(()=>{
         cy.get(Elements.booksCards.editors)
           .first()
-          .contains('Elizabeth Christman, MSN, RN, CNE and Kimberly Ernstmeyer, CNE, CHSE, APNP-BC');
+          .should('include.text', 'Elizabeth Christman, MSN, RN, CNE and Kimberly Ernstmeyer');
       });
     });
     it('Search a book with description and check it is present in the book cards', () => {
@@ -183,7 +183,7 @@ describe('Book cards', function () {
       search('math');
 
       cy.get(Elements.booksCards.cover)
-        .eq(1).find('img')
+        .eq(3).find('img')
         .should('have.attr', 'src')
         .should('include', '/assets/images/default-book-cover.jpg');
     });
@@ -195,12 +195,12 @@ describe('Book cards', function () {
         .should('have.attr', 'src')
         .should('include', '/assets/images/default-book-cover.jpg');
 
-      cy.get('[data-cy=storage-filter]').scrollTo(0, 5);
+      cy.get('[data-cy=storage-filter]').scrollIntoView()
+        .wait(200);
       cy.get(Elements.booksCards.cover)
-        .eq(3).find('img')
+        .eq(2).find('img')
         .should('have.attr', 'src')
-        .should('include', '/assets/images/default-book-cover.jpg');
-
+        .should('include', '/361/2019/07/bookcover1.jpg');
     });
   });
 });
