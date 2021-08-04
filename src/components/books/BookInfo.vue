@@ -20,7 +20,18 @@
       </a>
     </h2>
     <p class="leading-tight">
-      <span data-cy="book-word-count">{{ item.wordCount | numberFormat }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <span data-cy="h5p-count">{{ item.h5pActivities | numberFormat }}</span> H5P activities
+      <span data-cy="book-word-count">{{ item.wordCount | numberFormat }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <template v-if="hasH5PActivities">
+        <a
+          :href="item.url + 'h5p-listing'"
+          class="text-pb-red underline"
+          target="_blank"
+        ><span data-cy="h5p-count">{{ item.h5pActivities | numberFormat }}</span> H5P activities</a>
+      </template>
+      <template v-else>
+        <span
+          data-cy="h5p-count"
+        >{{ item.h5pActivities | numberFormat }}</span> H5P activities
+      </template>
     </p>
   </div>
 </template>
@@ -40,6 +51,9 @@ export default {
       const size = (parseInt(this.item.storageSize) / 1024) / 1024;
 
       return size.toFixed(2);
+    },
+    hasH5PActivities() {
+      return this.item.hasH5pActivities && this.item.h5pActivities > 0;
     }
   },
   methods: {

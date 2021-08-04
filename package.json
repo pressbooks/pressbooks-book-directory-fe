@@ -11,6 +11,7 @@
     "build:staging": "TAILWIND_MODE=build vite build --mode staging",
     "serve": "vite preview",
     "lint": "eslint ./src --ext .js --ext .vue",
+    "lint:fix": "eslint ./src --ext .js --ext .vue --fix",
     "start": "npm run dev & wait-on tcp:3001 -v",
     "test": "cypress open",
     "test:ci": "cypress run --headless",
