@@ -1,20 +1,15 @@
-# 
-
 version: 2
 updates:
-  # Enable version updates for npm
+  # Maintain dependencies for npm
   - package-ecosystem: "npm"
     # Look for `package.json` and `lock` files in the `root` directory
     directory: "/"
-    # Check the npm registry for updates every weekday
+    # Check for updates monthly
     schedule:
-      interval: "daily"
-    # Add dev team as reviewers  
-    reviewers: "pressbooks/developers"
-    # Assign PR to Ho Man
-    assignees: "ho-man-chan"
-    commit-message:
-    # Prefix all commit mesages with "npm"
-    # include a list of all updated dependencies
-      prefix: "npm"
-      include: "scope"
+      interval: "monthly"
+    allow:
+      # Allow direct updates only (for packages named in package.json)
+      - dependency-type: "direct"
+    # Add dev team as reviewers
+    reviewers:
+      - "pressbooks/developers"
