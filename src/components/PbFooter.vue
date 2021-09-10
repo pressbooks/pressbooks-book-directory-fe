@@ -53,11 +53,11 @@ export default {
     return {
       links: [
         { href: this.$store.state.config.urls.pressbooks, text: 'Pressbooks', 'aria-label': 'Pressbooks Homepage', 'data-cy': 'pressbooks-homepage' },
+        { href: this.$store.state.config.urls.collections, text: 'OER Collections Hub', 'aria-label': 'OER Collections Hub', 'data-cy': 'pressbooks-collections' },
         { href: this.$store.state.config.urls.blog, text: 'Blog', 'aria-label': 'Pressbooks Blog', 'data-cy': 'pressbooks-blog' },
         { href: this.$store.state.config.urls.opensource, text: 'Pressbooks Open Source', 'aria-label': 'Pressbooks Open Source', 'data-cy': 'pressbooks-opensource' },
         { href: this.$store.state.config.urls.contact, text: 'Contact', 'aria-label': 'Contact', 'data-cy': 'pressbooks-contact' },
         { href: this.$store.state.config.urls.jobs, text: 'Work with us', 'aria-label': 'Work with us', 'data-cy': 'pressbooks-jobs' },
-        { href: this.$store.state.config.urls.accessibility, text: 'Accessibility', 'aria-label': 'Accessibility', 'data-cy': 'pressbooks-accessibility' },
         { href: this.$store.state.config.urls.procurement, text: 'EDU Procurement Helpers', 'aria-label': 'EDU Procurement Helpers', 'data-cy': 'pressbooks-procurement' },
       ],
       socialLinks: [
@@ -70,13 +70,13 @@ export default {
   methods: {
     sendClickInsight(link) {
       this.sendInsight({
-        insightsMethod: 'convertedObjectIDs', 
+        insightsMethod: 'convertedObjectIDs',
         payload: {
           eventName: 'Footer Link Clicked',
           objectIDs: [
             `link:${link.href}`
           ]
-        }, 
+        },
       });
     }
   }
