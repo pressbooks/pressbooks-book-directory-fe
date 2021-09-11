@@ -8,10 +8,10 @@ let config = {
     twitter: 'https://twitter.com/pressbooks',
     youtube: 'https://www.youtube.com/channel/UCyMeJ5C4p6AxF9QXg6Bgzjg',
     blog: 'https://pressbooks.com/blog',
+    collections: 'https://pressbooks.com/collections-hub/',
     opensource: 'https://pressbooks.org',
     contact: 'https://pressbooks.com/contact-pressbooks/',
     jobs: 'https://pressbooks.com/about/#work-with-us',
-    accessibility: 'https://pressbooks.com/accessibility/',
     procurement: 'https://pressbooks.com/edu-procurement-helpers/'
   },
   h5pLogo: 'h5p.png',
