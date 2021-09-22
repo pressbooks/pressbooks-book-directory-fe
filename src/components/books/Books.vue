@@ -15,7 +15,7 @@
         v-for="item in items"
         :key="item.objectID"
         :item="item"
-        @book-clicked="sendEvent('conversion', item, 'Book Opened')"
+        @book-clicked="handleBookClicked(item, sendEvent)"
       />
     </template>
   </ais-hits>
@@ -70,6 +70,22 @@ export default {
         return this.removeXMLTags(helpers.functions.unescapeHTML(item.disambiguatingDescription));
       }
       return item.hasDescription ? this.removeXMLTags(helpers.functions.unescapeHTML(item.description)) : '';
+    },
+    handleBookClicked(item, sendEvent) {
+      sendEvent('conversion', item, 'Book Opened');
+ 
+      const clickEndpoint = import.meta.env.VITE_CLICK_COUNT_ENDPOINT;
+
+      if (clickEndpoint) {
+        fetch(clickEndpoint,{
+          mode: 'no-cors',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({book_id: item.objectID}),
+        });
+      }
     }
   }
 };
