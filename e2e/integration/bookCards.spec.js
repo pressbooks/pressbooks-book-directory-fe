@@ -200,7 +200,7 @@ describe('Book cards', function () {
       cy.get(Elements.booksCards.cover)
         .eq(2).find('img')
         .should('have.attr', 'src')
-        .should('include', 'monarch.jpg');
+        .should('include', 'TPM-cover-third-edition.png');
     });
   });
 });
