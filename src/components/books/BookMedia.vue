@@ -6,7 +6,9 @@
     >
       <pb-book-cover
         :image="item.image"
+        :url="item.url"
         :alt="`${item.name} cover`"
+        @book-cover-click="$emit('book-title-click')"
       />
     </div>
     <ul
@@ -55,6 +57,7 @@ export default {
       default() { return {}; }
     },
   },
+  emits: ['book-title-click'],
   computed: {
     hasH5PActivities() {
       return this.item.hasH5pActivities && this.item.h5pActivities > 0;

@@ -23,7 +23,10 @@
       />
       <book-details :item="item" />
     </div>
-    <book-media :item="item" />
+    <book-media
+      :item="item"
+      @book-title-click="$emit('book-clicked')"
+    />
   </article>
 </template>
 <script>

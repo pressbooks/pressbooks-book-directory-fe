@@ -14,7 +14,7 @@
         target="_blank"
         rel="noopener"
         data-cy="book-title"
-        @click="clickBook"
+        @click="$emit('book-title-click')"
       >
         {{ item.name }}
       </a>
@@ -45,7 +45,7 @@ export default {
       default() { return {}; }
     },
   },
-  emits: ['title-clicked'],
+  emits: ['book-title-click'],
   computed: {
     sizeInMb() {
       const size = (parseInt(this.item.storageSize) / 1024) / 1024;
@@ -54,22 +54,6 @@ export default {
     },
     hasH5PActivities() {
       return this.item.hasH5pActivities && this.item.h5pActivities > 0;
-    }
-  },
-  methods: {
-    clickBook() {
-      this.$emit('book-title-click');
-      const clickEndpoint = import.meta.env.VITE_CLICK_COUNT_ENDPOINT;
-      if (clickEndpoint) {
-        fetch(clickEndpoint,{
-          mode: 'no-cors',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({book_id:this.item.objectID}),
-        });
-      }
     }
   }
 };
