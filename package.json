@@ -18,7 +18,7 @@
     "test:stack": "BROWSERSTACK_LOCAL=true BROWSERSTACK_USERNAME=$(grep BROWSERSTACK_USERNAME .env | cut -d '=' -f2) BROWSERSTACK_ACCESS_KEY=$(grep BROWSERSTACK_ACCESS_KEY .env | cut -d '=' -f2) browserstack-cypress run --sync --specs $npm_config_specs"
   },
   "dependencies": {
-    "@sentry/vue": "^6.2.5",
+    "@sentry/vue": "^6.13.2",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@vue-hero-icons/outline": "^1.7.2",
