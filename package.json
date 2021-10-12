@@ -2,8 +2,8 @@
   "name": "pressbooks-directory",
   "version": "2.4.0",
   "engines": {
-    "node": ">=15.14.0",
-    "npm": ">=7.0.0"
+    "node": ">=14.0.0 <15.0.0",
+    "npm": ">=6.0.0 <7.0.0"
   },
   "scripts": {
     "dev": "vite",
