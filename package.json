@@ -18,7 +18,6 @@
     "test:stack": "BROWSERSTACK_LOCAL=true BROWSERSTACK_USERNAME=$(grep BROWSERSTACK_USERNAME .env | cut -d '=' -f2) BROWSERSTACK_ACCESS_KEY=$(grep BROWSERSTACK_ACCESS_KEY .env | cut -d '=' -f2) browserstack-cypress run --sync --specs $npm_config_specs"
   },
   "dependencies": {
-    "@sentry/vue": "^6.2.5",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@vue-hero-icons/outline": "^1.7.2",
@@ -39,16 +38,17 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@sentry/vue": "^6.13.3",
     "autoprefixer": "^10.2.5",
     "browserstack-cypress-cli": "^1.8.1",
-    "cypress": "^7.1.0",
+    "cypress": "^8.6.0",
     "cypress-wait-until": "^1.7.1",
-    "eslint": "^7.24.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.9.0",
-    "postcss": "^8.2.13",
+    "postcss": "^8.3.9",
     "postcss-nested": "^5.0.5",
-    "tailwindcss": "^2.1.1",
-    "vite": "^2.2.0",
+    "tailwindcss": "^2.2.16",
+    "vite": "^2.6.7",
     "vite-plugin-html": "^2.0.7",
     "vite-plugin-vue2": "^1.4.4"
   }
