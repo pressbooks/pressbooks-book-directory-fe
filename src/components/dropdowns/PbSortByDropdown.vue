@@ -8,6 +8,7 @@
         placeholder="Sort books by"
         :options="items"
         data-cy="sort-books-by"
+        :disabled="disabled"
         @input="(data) => {
           onInput(data, refine)
         }"
@@ -30,8 +31,19 @@ export default {
   data() {
     return {
       alias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
-      itemsOptions: this.options
+      itemsOptions: this.options,
+      disabled: true
     };
+  },
+  watch: {
+    '$route.query': {
+      deep: true,
+      handler(query) {
+        this.disabled = typeof query === 'undefined' ||
+            Object.keys(query).length === 0 ||
+            (Object.keys(query).length === 1 && query[this.alias]);
+      }
+    }
   },
   methods: {
     onInput(data, refine) {

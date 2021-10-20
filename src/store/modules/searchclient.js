@@ -7,18 +7,18 @@ let sClient = {
     import.meta.env.VITE_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: import.meta.env.VITE_ALGOLIA_INDEX,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
   availableIndexes: [
     {
       value: import.meta.env.VITE_ALGOLIA_INDEX,
-      default: true,
+      default: false,
       orderedBy: 'relevance',
       isReplica: false,
       label: 'Relevance'
     },
     {
       value: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
-      default: false,
+      default: true,
       orderedBy: 'updated',
       isReplica: true,
       label: 'Recently updated'
@@ -156,43 +156,24 @@ export default {
           filters[attribute].push(toInsert);
         }
       }
+      // console.log('filters');
+      // if ( Object.keys(query).length === 0) {
+      //   state.searchParameters.sortedBy = 'updated';
+      //   state.availableIndexes[0].default = false;
+      //   state.availableIndexes[1].default = true;
+      //   state.indexName = import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA;
+      // } else {
+      //   state.searchParameters.sortedBy = 'relevance';
+      //   state.availableIndexes[1].default = false;
+      //   state.availableIndexes[0].default = true;
+      //   state.indexName = import.meta.env.VITE_ALGOLIA_INDEX;
+      // }
       state.filtersExcluded = { ...filters  };
       helpers.functions.setNumericFilters(filters,state);
     },
-    setFiltersExcluded(state, filter) {
-      let oldFilters = { ...state.filtersExcluded };
-      if(typeof(oldFilters[filter.attribute]) === 'undefined') {
-        oldFilters[filter.attribute] = [];
-      }
-      oldFilters[filter.attribute].push(filter);
-      state.filtersExcluded = { ...oldFilters  };
-      helpers.functions.setNumericFilters(oldFilters,state);
+    refreshMainAlgoliaComponent(state) {
+      state.searchClient
     },
-    deleteExcluded(state, field) {
-      let fe = { ...state.filtersExcluded };
-      delete fe[field];
-      let nf = helpers.functions.setFilters(fe, state.allowedFilters);
-      state.notFilters = nf[0];
-      state.filtersParams = nf[1];
-      state.filtersExcluded = fe;
-    },
-    deleteItemExcluded(state, f) {
-      let fe = { ...state.filtersExcluded };
-      if (fe[f.attribute] !== undefined) {
-        for (let i = 0; i < fe[f.attribute].length; i++) {
-          if (fe[f.attribute][i].value === f.value) {
-            fe[f.attribute].splice(i, 1);
-            if (fe[f.attribute].length === 0) {
-              delete fe[f.attribute];
-              break;
-            }
-          }
-        }
-        state.filtersExcluded = fe;
-        helpers.functions.setNumericFilters(fe,state);
-      }
-    },
-    // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}
     getRealAttributesMapped(state) {
       if (Object.keys(state.mappedFilters).length === 0) {
         for (const realAttribute in state.allowedFilters) {

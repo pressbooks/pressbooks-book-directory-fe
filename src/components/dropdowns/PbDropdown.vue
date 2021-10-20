@@ -6,6 +6,7 @@
       :placeholder="placeholder"
       :searchable="searchable"
       :clearable="clearable"
+      :disabled="disabled"
       @input="select"
     />
   </div>
@@ -29,6 +30,10 @@ export default {
       default: 'Options'
     },
     searchable: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
