@@ -12,17 +12,22 @@
       <% } %>
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script>
-          const VITE_APP_GA_MEASUREMENT_ID = import.meta.env.VITE_APP_GA_MEASUREMENT_ID;
-          const gaMeasurementID = VITE_APP_GA_MEASUREMENT_ID !== 'undefined'? VITE_APP_GA_MEASUREMENT_ID : false;
-          if (gaMeasurementID !== 'false') {
-              const scriptTag = unescape("%3Cscript async src='https://www.googletagmanager.com/gtag/js?id=" + gaMeasurementID + "'%3E%3C/script%3E");
-              document.write(scriptTag);
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                  dataLayer.push(arguments);
+          const gaMeasurementIDs = [
+              import.meta.env.VITE_APP_GA_MEASUREMENT_ID,
+              import.meta.env.VITE_APP_GUA_MEASUREMENT_ID,
+          ];
+
+          for (const gaMeasurementID of gaMeasurementIDs) {
+              if (gaMeasurementID) {
+                  const scriptTag = unescape("%3Cscript async src='https://www.googletagmanager.com/gtag/js?id=" + gaMeasurementID + "'%3E%3C/script%3E");
+                  document.write(scriptTag);
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag() {
+                      dataLayer.push(arguments);
+                  }
+                  gtag('js', new Date());
+                  gtag('config', gaMeasurementID, { 'send_page_view': true });
               }
-              gtag('js', new Date());
-              gtag('config', gaMeasurementID, {'send_page_view': true});
           }
       </script>
       <link rel="icon" href="/favicon.png" />
