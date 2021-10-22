@@ -32,30 +32,18 @@ router.beforeEach((to, from, next) => {
     }, {});
     store.commit('setSortedBy', to.query[store.state.SClient.searchParameters.aliases.sortedBy]);
     store.commit('setMainIndex', indexesOrderedByMap[to.query[store.state.SClient.searchParameters.aliases.sortedBy]]);
-  }
-  if (
-    Object.keys(to.query).length === 0 ||
-    (
-      Object.keys(to.query).length === 1 &&
-      typeof to.query[store.state.SClient.searchParameters.aliases.sortedBy] !== 'undefined'
-    )
-  ) {
-    store.state.SClient.searchParameters.sortedBy = 'updated';
-    store.state.SClient.availableIndexes[0].default = false;
-    store.state.SClient.availableIndexes[1].default = true;
-    store.state.SClient.indexName = import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA;
   } else {
-    store.state.SClient.searchParameters.sortedBy = 'relevance';
-    store.state.SClient.availableIndexes[1].default = false;
-    store.state.SClient.availableIndexes[0].default = true;
-    store.state.SClient.indexName = import.meta.env.VITE_ALGOLIA_INDEX;
+    store.commit('setIndexFromQuery', to.query);
   }
-  store.commit('refreshMainAlgoliaComponent');
+  if (Object.keys(to.query).length === 1 && to.query[store.state.SClient.searchParameters.aliases.sortedBy]) {
+    delete to.query[store.state.SClient.searchParameters.aliases.sortedBy];
+  }
+
   let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
   store.dispatch('getStats', index).then(() => {
     let query = {};
     let containsQ = false;
-    let aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
+    const aliasAllowed =  Object.keys(store.state.SClient.allowedFilters)
       .map(function(key){return store.state.SClient.allowedFilters[key].alias;});
 
     if (to.query[store.state.SClient.searchParameters.aliases.page]) {

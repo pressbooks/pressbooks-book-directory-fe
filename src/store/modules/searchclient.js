@@ -156,23 +156,8 @@ export default {
           filters[attribute].push(toInsert);
         }
       }
-      // console.log('filters');
-      // if ( Object.keys(query).length === 0) {
-      //   state.searchParameters.sortedBy = 'updated';
-      //   state.availableIndexes[0].default = false;
-      //   state.availableIndexes[1].default = true;
-      //   state.indexName = import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA;
-      // } else {
-      //   state.searchParameters.sortedBy = 'relevance';
-      //   state.availableIndexes[1].default = false;
-      //   state.availableIndexes[0].default = true;
-      //   state.indexName = import.meta.env.VITE_ALGOLIA_INDEX;
-      // }
       state.filtersExcluded = { ...filters  };
       helpers.functions.setNumericFilters(filters,state);
-    },
-    refreshMainAlgoliaComponent(state) {
-      state.searchClient
     },
     getRealAttributesMapped(state) {
       if (Object.keys(state.mappedFilters).length === 0) {
@@ -213,6 +198,31 @@ export default {
     },
     setResetMainIndex(state, reset) {
       state.resetMainIndex = reset;
+    },
+    setIndexFromQuery(state, query) {
+      Object.keys(query).forEach(key => {
+        if (query[key] === undefined) {
+          delete query[key];
+        }
+      });
+      const queryKeys = Object.keys(query);
+      let setDefaultIndex = false;
+      const aliasAllowed =  Object.keys(state.allowedFilters)
+        .map(function(key){return state.allowedFilters[key].alias;});
+      const keysDiff = aliasAllowed.filter(key => queryKeys.includes(key));
+      if ( keysDiff.length === 0) {
+        state.searchParameters.sortedBy = 'updated';
+        state.availableIndexes[0].default = false;
+        state.availableIndexes[1].default = true;
+        state.indexName = import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA;
+        setDefaultIndex = true;
+      }
+      if (!setDefaultIndex) {
+        state.searchParameters.sortedBy = 'relevance';
+        state.availableIndexes[1].default = false;
+        state.availableIndexes[0].default = true;
+        state.indexName = import.meta.env.VITE_ALGOLIA_INDEX;
+      }
     }
   }
 };

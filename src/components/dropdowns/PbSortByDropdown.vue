@@ -39,9 +39,20 @@ export default {
     '$route.query': {
       deep: true,
       handler(query) {
-        this.disabled = typeof query === 'undefined' ||
-            Object.keys(query).length === 0 ||
-            (Object.keys(query).length === 1 && query[this.alias]);
+        Object.keys(query).forEach(key => {
+          if (query[key] === undefined) {
+            delete query[key];
+          }
+        });
+        if (query === undefined || Object.keys(query).length === 0) {
+          this.disabled = true;
+          return;
+        }
+        let queryKeys = Object.keys(query);
+        let allowedFilters = this.$store.state.SClient.allowedFilters;
+        const filtersKeys = Object.keys(allowedFilters).map(function(key){return allowedFilters[key].alias;});
+        const keysDiff = filtersKeys.filter(key => queryKeys.includes(key));
+        this.disabled = keysDiff.length === 0;
       }
     }
   },

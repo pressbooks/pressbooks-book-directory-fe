@@ -15,30 +15,28 @@ describe('BookCard Collections Filters', () => {
 
       cy.get(Elements.booksCards.bookTags)
         .eq(1)
-        .find('li:nth-of-type(2) button')
-        .should('have.class', 'text-white');
-
-      cy.get(Elements.booksCards.bookTags)
-        .eq(1)
-        .find('li:first-child button')
-        .click();
-
-      cy.algoliaQueryRequest('algoliaRequest');
-
-      cy.get(Elements.booksCards.bookTags)
-        .eq(1)
-        .find('li:first-child button')
-        .should('have.class', 'text-white')
-        .click();
-
-      cy.algoliaQueryRequest('algoliaRequest');
-
-      cy.get(Elements.booksCards.bookTags)
-        .eq(1)
-        .find('li:first-child button')
+        .find('li:nth-of-type(1) button')
         .should('have.class', 'text-pb-red');
 
-      cy.url().should('include','collec=OpenStax');
+      cy.get(Elements.booksCards.bookTags)
+        .eq(1)
+        .find('li:first-child button')
+        .click();
+
+      cy.visit('/?license=CC%20BY');
+
+      cy.get(Elements.booksCards.bookTags)
+        .eq(1)
+        .find('li:first-child button')
+        .should('have.class', 'text-pb-red')
+        .click();
+
+      cy.visit('/?collec=Nursing%2FHealthcare');
+
+      cy.get(Elements.booksCards.bookTags)
+        .eq(0)
+        .find('li:first-child button')
+        .should('have.class', 'text-white');
 
     });
 

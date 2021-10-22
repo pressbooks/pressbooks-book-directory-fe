@@ -56,7 +56,6 @@ describe('Clear Filters',() => {
       cy.url()
         .should('contain', 'q=')
         .should('contain', 'per_page=')
-        .should('contain', 'sort=')
         .should('contain', 'license=');
 
       cy.get('[data-cy=clear-all-filters]').click();
@@ -68,7 +67,6 @@ describe('Clear Filters',() => {
       cy.url()
         .should('contain', 'q=')
         .should('contain', 'per_page=')
-        .should('contain', 'sort=')
         .should('not.contain', 'license=');
     });
 
