@@ -6,10 +6,12 @@ updates:
     directory: "/"
     # Check for updates monthly
     schedule:
-      interval: "monthly"
+      interval: "daily"
     allow:
       # Allow direct updates only (for packages named in package.json)
       - dependency-type: "direct"
+    # Allow up to 10 open pull requests for npm dependencies
+    open-pull-requests-limit: 10
     # Add dev team as reviewers
     reviewers:
       - "pressbooks/developers"
