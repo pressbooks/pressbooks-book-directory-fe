@@ -87,6 +87,10 @@ export default {
               } else {
                 currentQuery[attr] = currentQuery[attr].join('&&');
               }
+              if (Object.keys(currentQuery).length === 1 && currentQuery[this.$store.state.SClient.searchParameters.aliases.sortedBy]) {
+                delete currentQuery[this.$store.state.SClient.searchParameters.aliases.sortedBy];
+              }
+              this.$store.commit('setIndexFromQuery', currentQuery);
               return this.$router.replace({ query: currentQuery });
             }
           }

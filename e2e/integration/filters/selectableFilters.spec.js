@@ -5,7 +5,7 @@ import {
   clickAccordionClearFilter,
   clickFilter,
   searchFacet,
-  removeChipFilter
+  removeChipFilter, sortBy
 } from '../../support/common';
 
 
@@ -19,6 +19,7 @@ for (const facet in facetFilters) {
         it(`Include ${facet} ${includeFacet} filter action. Check URL and chip. Remove filter by clicking twice and check URL.`, () => {
           clickAccordionHeader(field);
           clickFilter(field, includeFacet, true);
+          sortBy('updated');
           cy.get(Elements.filterChips)
             .should(($filtersApplied) => {
               expect($filtersApplied).to.have.length(1);
@@ -52,6 +53,7 @@ for (const facet in facetFilters) {
         it(`Exclude ${facet} ${excludeFacet} filter action. Check URL and chip.  Remove filter by clicking twice and check URL.`, () => {
           clickAccordionHeader(field);
           clickFilter(field, excludeFacet, false);
+          sortBy('updated');
 
           cy.get(Elements.filterChips)
             .should(($filtersApplied) => {
@@ -70,6 +72,7 @@ for (const facet in facetFilters) {
         it(`Exclude ${excludeFacet} filter action and remove it by clicking in the chip`, () => {
           clickAccordionHeader(field);
           clickFilter(field, excludeFacet, false);
+          sortBy('updated');
 
           // Remove filter by clicking in the active filter chip
           removeChipFilter(field, excludeFacet);
@@ -86,12 +89,14 @@ for (const facet in facetFilters) {
         it(`Search in ${facet} facet and check it keeps after apply filter`, () => {
           clickAccordionHeader(field);
           searchFacet(field, facetFilters[facet].search.searchTerm);
+
           let facetsListBefore = [], facetsListAfter = [];
           cy.get(Elements.filterOptions(field))
             .each(($filterOptions) => {
               facetsListBefore.push($filterOptions.innerText);
             });
           clickFilter(field, facetFilters[facet].search.filter, true);
+          sortBy('updated');
 
           // Check the facet list after filter was applied
           cy.get(Elements.filterOptions(field))
@@ -110,6 +115,7 @@ for (const facet in facetFilters) {
 
         includes.forEach(filter => {
           clickFilter(field, filter, true);
+          sortBy('updated');
           cy.log(filter);
 
           expectedParams = expectedParams
@@ -136,6 +142,8 @@ for (const facet in facetFilters) {
         for (const filter of bookCards.filters) {
           clickFilter(field, filter, isInclude);
         }
+        sortBy('updated');
+        cy.wait(1500);
         cy.get(Elements.booksCards.title)
           .each(($title) => {
             cy.get(Elements.booksCards.title).should(() => {

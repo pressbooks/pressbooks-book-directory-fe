@@ -185,7 +185,7 @@ describe('Book cards', function () {
       cy.get(Elements.booksCards.cover)
         .eq(3).find('img')
         .should('have.attr', 'src')
-        .should('include', '/assets/images/default-book-cover.jpg');
+        .should('include', 'Math-for-Trades-Volume-1-COVER-STORE.jpg');
     });
     it('Lazy loading cover images', () => {
       clickPage(3);

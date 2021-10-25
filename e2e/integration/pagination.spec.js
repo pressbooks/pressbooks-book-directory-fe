@@ -39,7 +39,7 @@ describe('Pagination', () => {
 
       cy.algoliaQueryRequest('algoliaRequest');
 
-      cy.get('@firstBookTitle').contains('Fundamentals of Plant Genebanking');
+      cy.get('@firstBookTitle').contains('Women in the World Today, extended version');
 
       cy.get('ul[data-cy=paginator-top]').eq(0).find('.page').should('have.length', 3);
     });
@@ -63,17 +63,17 @@ describe('Pagination', () => {
     });
 
     it('Set page using URL',() => {
-      cy.visit('/?sort=updated&p=2');
+      cy.visit('/?p=2');
       cy.algoliaQueryRequest('algoliaRequest')
         .get(Elements.paginatorLink(2)).should('have.class','font-bold');
       cy.get('@firstBookTitle').contains('Physics 103 and 104 Teaching Guide');
     });
 
     it('Set page and search term using URL',() => {
-      cy.visit('/?sort=updated&p=2&q=biology');
+      cy.visit('/?p=2&q=biology');
       cy.algoliaQueryRequest('algoliaRequest');
       cy.get(Elements.paginatorLink(2)).should('have.class','font-bold');
-      cy.get('@firstBookTitle').contains('A Mixed Course-Based Research Approach to Human Physiology');
+      cy.get('@firstBookTitle').contains('Concepts of Biology: 1st Canadian Edition');
     });
   });
 });

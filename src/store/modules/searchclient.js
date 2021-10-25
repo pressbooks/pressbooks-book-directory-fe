@@ -7,18 +7,18 @@ let sClient = {
     import.meta.env.VITE_ALGOLIA_API_READ_KEY,
     { _useRequestCache: true }
   ),
-  indexName: import.meta.env.VITE_ALGOLIA_INDEX,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
   availableIndexes: [
     {
       value: import.meta.env.VITE_ALGOLIA_INDEX,
-      default: true,
+      default: false,
       orderedBy: 'relevance',
       isReplica: false,
       label: 'Relevance'
     },
     {
       value: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
-      default: false,
+      default: true,
       orderedBy: 'updated',
       isReplica: true,
       label: 'Recently updated'
@@ -159,40 +159,6 @@ export default {
       state.filtersExcluded = { ...filters  };
       helpers.functions.setNumericFilters(filters,state);
     },
-    setFiltersExcluded(state, filter) {
-      let oldFilters = { ...state.filtersExcluded };
-      if(typeof(oldFilters[filter.attribute]) === 'undefined') {
-        oldFilters[filter.attribute] = [];
-      }
-      oldFilters[filter.attribute].push(filter);
-      state.filtersExcluded = { ...oldFilters  };
-      helpers.functions.setNumericFilters(oldFilters,state);
-    },
-    deleteExcluded(state, field) {
-      let fe = { ...state.filtersExcluded };
-      delete fe[field];
-      let nf = helpers.functions.setFilters(fe, state.allowedFilters);
-      state.notFilters = nf[0];
-      state.filtersParams = nf[1];
-      state.filtersExcluded = fe;
-    },
-    deleteItemExcluded(state, f) {
-      let fe = { ...state.filtersExcluded };
-      if (fe[f.attribute] !== undefined) {
-        for (let i = 0; i < fe[f.attribute].length; i++) {
-          if (fe[f.attribute][i].value === f.value) {
-            fe[f.attribute].splice(i, 1);
-            if (fe[f.attribute].length === 0) {
-              delete fe[f.attribute];
-              break;
-            }
-          }
-        }
-        state.filtersExcluded = fe;
-        helpers.functions.setNumericFilters(fe,state);
-      }
-    },
-    // get mapped object {realAttribute1: alias1, realAttribute2:alias2, ...}
     getRealAttributesMapped(state) {
       if (Object.keys(state.mappedFilters).length === 0) {
         for (const realAttribute in state.allowedFilters) {
@@ -232,6 +198,31 @@ export default {
     },
     setResetMainIndex(state, reset) {
       state.resetMainIndex = reset;
+    },
+    setIndexFromQuery(state, query) {
+      Object.keys(query).forEach(key => {
+        if (query[key] === undefined) {
+          delete query[key];
+        }
+      });
+      const queryKeys = Object.keys(query);
+      let setDefaultIndex = false;
+      const aliasAllowed =  Object.keys(state.allowedFilters)
+        .map(function(key){return state.allowedFilters[key].alias;});
+      const keysDiff = aliasAllowed.filter(key => queryKeys.includes(key));
+      if ( keysDiff.length === 0) {
+        state.searchParameters.sortedBy = 'updated';
+        state.availableIndexes[0].default = false;
+        state.availableIndexes[1].default = true;
+        state.indexName = import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA;
+        setDefaultIndex = true;
+      }
+      if (!setDefaultIndex) {
+        state.searchParameters.sortedBy = 'relevance';
+        state.availableIndexes[1].default = false;
+        state.availableIndexes[0].default = true;
+        state.indexName = import.meta.env.VITE_ALGOLIA_INDEX;
+      }
     }
   }
 };

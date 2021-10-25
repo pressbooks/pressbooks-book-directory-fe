@@ -4,18 +4,19 @@ describe('BookCard Collections Filters', () => {
   context('Desktop Resolution', () => {
     it('Collection filter toggle', () => {
 
-      cy.visit('/?sort=updated&collec=OpenStax');
+      cy.visit('/?collec=OpenStax');
 
       cy.algoliaQueryRequest('algoliaRequest');
+      cy.wait(1500);
 
       cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:first-child button')
-        .should('have.class', 'text-pb-red');
+        .should('have.class', 'text-white');
 
       cy.get(Elements.booksCards.bookTags)
         .eq(1)
-        .find('li:nth-of-type(2) button')
+        .find('li:nth-of-type(1) button')
         .should('have.class', 'text-white');
 
       cy.get(Elements.booksCards.bookTags)
@@ -23,22 +24,22 @@ describe('BookCard Collections Filters', () => {
         .find('li:first-child button')
         .click();
 
-      cy.algoliaQueryRequest('algoliaRequest');
+      cy.visit('/?license=CC%20BY');
+      cy.wait(1500);
 
       cy.get(Elements.booksCards.bookTags)
         .eq(1)
         .find('li:first-child button')
-        .should('have.class', 'text-white')
+        .should('have.class', 'text-pb-red')
         .click();
 
-      cy.algoliaQueryRequest('algoliaRequest');
+      cy.visit('/?collec=Nursing%2FHealthcare');
+      cy.wait(1500);
 
       cy.get(Elements.booksCards.bookTags)
-        .eq(1)
+        .eq(0)
         .find('li:first-child button')
-        .should('have.class', 'text-pb-red');
-
-      cy.url().should('include','collec=OpenStax');
+        .should('have.class', 'text-white');
 
     });
 

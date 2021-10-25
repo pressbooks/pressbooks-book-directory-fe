@@ -1,7 +1,7 @@
 <template>
   <ais-instant-search
     v-if="!restartIndex"
-    :index-name="$store.state.SClient.indexName"
+    :index-name="currentIndex"
     :search-client="$store.state.SClient.searchClient"
     :search-function="paginationHook"
     :middlewares="middlewares"
@@ -82,7 +82,8 @@ export default {
       ],
       resetPage: false,
       routeQuery: undefined,
-      restartIndex: false
+      restartIndex: false,
+      currentIndex: this.$store.state.SClient.indexName
     };
   },
   watch: {
@@ -115,6 +116,9 @@ export default {
           }
         }
         this.routeQuery = query;
+        if (this.currentIndex !== this.$store.state.SClient.indexName) {
+          this.currentIndex = this.$store.state.SClient.indexName;
+        }
       }
     }
   },

@@ -23,6 +23,7 @@ dayjs.extend(utc);
 
 router.beforeEach((to, from, next) => {
   if (to.query[store.state.SClient.searchParameters.aliases.sortedBy] && store.state.SClient.resetMainIndex) {
+    // Sort By feature using URL
     const indexesOrderedByMap = store.state.SClient.availableIndexes.reduce((index, item) => {
       return {
         ...index,
@@ -31,12 +32,18 @@ router.beforeEach((to, from, next) => {
     }, {});
     store.commit('setSortedBy', to.query[store.state.SClient.searchParameters.aliases.sortedBy]);
     store.commit('setMainIndex', indexesOrderedByMap[to.query[store.state.SClient.searchParameters.aliases.sortedBy]]);
+  } else {
+    store.commit('setIndexFromQuery', to.query);
   }
+  if (Object.keys(to.query).length === 1 && to.query[store.state.SClient.searchParameters.aliases.sortedBy]) {
+    delete to.query[store.state.SClient.searchParameters.aliases.sortedBy];
+  }
+
   let index = store.state.SClient.searchClient.initIndex(store.state.SClient.indexName);
   store.dispatch('getStats', index).then(() => {
     let query = {};
     let containsQ = false;
-    let aliasAllowed = Object.keys(store.state.SClient.allowedFilters)
+    const aliasAllowed =  Object.keys(store.state.SClient.allowedFilters)
       .map(function(key){return store.state.SClient.allowedFilters[key].alias;});
 
     if (to.query[store.state.SClient.searchParameters.aliases.page]) {
