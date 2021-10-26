@@ -3,7 +3,7 @@ This Project is a Vue 3 vite project based on https://vitejs.dev/ and is backwar
 
 ## Requirements
 
-- Node.js version >=14.0 & <15.0.0.
+- Node.js version >=14.0.0 & <15.0.0
 - NPM version >=6.0.0 & <7.0.0
 
 ## Setup environment variables
@@ -34,7 +34,7 @@ npm run lint
 ```
 
 ## Deployment
-Deployment of this application is automatic once the dev or master branch is updated. The pipeline uses AWS's CodePipeline to check periodically for changes in the GitHub repository, build assets using `npm run build`, and puts the content in the 'dist' folder to the S3 bucket where it is hosted as a static website.
+Deployment of this application is automatic once the dev or master branch is updated. The pipeline uses AWS's CodePipeline to check periodically for changes in the GitHub repository, build assets using `npm run build`, and put the content in the 'dist' folder to the S3 bucket where it is hosted as a static website.
 
 ### Environment Variables
 All environment variables needed are set in the CodeBuild's environment variables. To update an environment variable, go to the AWS console in CodePipeline, select the pipeline, and edit the 'Build' stage. Then update the buildspec of the CodeBuild Project configuration in AWS.
