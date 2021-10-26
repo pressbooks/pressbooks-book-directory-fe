@@ -11,6 +11,10 @@
     "url": "https://pressbooks.com/blog",
     "navigate": true
   },
+  "pressbooks-collections": {
+    "url": "https://pressbooks.com/collections-hub/",
+    "navigate": true
+  },
   "pressbooks-opensource": {
     "url": "https://pressbooks.org",
     "navigate": true
@@ -21,10 +25,6 @@
   },
   "pressbooks-jobs": {
     "url": "https://pressbooks.com/about/#work-with-us",
-    "navigate": true
-  },
-  "pressbooks-accessibility": {
-    "url": "https://pressbooks.com/accessibility/",
     "navigate": true
   },
   "pressbooks-procurement": {

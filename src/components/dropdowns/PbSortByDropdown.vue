@@ -8,6 +8,7 @@
         placeholder="Sort books by"
         :options="items"
         data-cy="sort-books-by"
+        :disabled="disabled"
         @input="(data) => {
           onInput(data, refine)
         }"
@@ -30,8 +31,30 @@ export default {
   data() {
     return {
       alias: this.$store.state.SClient.searchParameters.aliases.sortedBy,
-      itemsOptions: this.options
+      itemsOptions: this.options,
+      disabled: true
     };
+  },
+  watch: {
+    '$route.query': {
+      deep: true,
+      handler(query) {
+        Object.keys(query).forEach(key => {
+          if (query[key] === undefined) {
+            delete query[key];
+          }
+        });
+        if (query === undefined || Object.keys(query).length === 0) {
+          this.disabled = true;
+          return;
+        }
+        let queryKeys = Object.keys(query);
+        let allowedFilters = this.$store.state.SClient.allowedFilters;
+        const filtersKeys = Object.keys(allowedFilters).map(function(key){return allowedFilters[key].alias;});
+        const keysDiff = filtersKeys.filter(key => queryKeys.includes(key));
+        this.disabled = keysDiff.length === 0;
+      }
+    }
   },
   methods: {
     onInput(data, refine) {

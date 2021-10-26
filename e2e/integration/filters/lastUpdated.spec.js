@@ -68,7 +68,7 @@ describe('Filter last updated', () => {
       cy.get('[data-cy=book-last-updated]')
         .first()
         .find('span')
-        .should('contain.text', '04-27-2021');
+        .should('contain.text', '01-13-2021');
     });
 
     it('Applying "start date" and "to date" using the datepicker filters books that were modified in between', () => {
@@ -93,11 +93,12 @@ describe('Filter last updated', () => {
         .should('have.length', 2)
         .find('.text-sm')
         .url().should('include', `updated=%3E%3D${startTimestamp}%26%26%3C%3D${toTimestamp}`);
+      cy.wait(1500);
 
       cy.get('[data-cy=book-last-updated]')
         .first()
         .find('span')
-        .should('contain.text', '04-2-2021');
+        .should('contain.text', '04-1-2021');
 
       clickPage(2);
 
@@ -169,7 +170,7 @@ describe('Filter last updated', () => {
         .should('contain.text', '04-1-2021');
     });
 
-    it('Removing chip will remove the date filter', () => {
+    it.only('Removing chip will remove the date filter', () => {
       cy.visit('/?sort=updated&updated=%3C%3D1619567999');
 
       cy.get('@toLastUpdated').should('contain.value', 'April 27, 2021');
