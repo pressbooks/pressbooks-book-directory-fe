@@ -3,8 +3,8 @@ This Project is a Vue 3 vite project based on https://vitejs.dev/ and is backwar
 
 ## Requirements
 
-- Node.js version >=15.14.0.
-- NPM version >=7.0.0
+- Node.js version >=14.0 & <15.0.0.
+- NPM version >=6.0.0 & <7.0.0
 
 ## Setup environment variables
 Create an `.env.local` file using the `.env.example` file: `cp .env.example .env.local` and set appropriate values for those variables for your local environments.
