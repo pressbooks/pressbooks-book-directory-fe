@@ -11,7 +11,7 @@
         data-cy="book-authors"
       />
       <meta-info
-        v-if="item.hasEditor"
+        v-if="hasEditor"
         title="Editor(s): "
         :text="editors"
         data-cy="book-editors"
@@ -104,6 +104,9 @@ export default {
     },
     hasSubjects() {
       return this.item.about && this.item.about.length > 0;
+    },
+    hasEditor(){
+      return this.item.editor && this.item.editor.length > 0;
     },
     authors() {
       return this.item.author.join(', ');
