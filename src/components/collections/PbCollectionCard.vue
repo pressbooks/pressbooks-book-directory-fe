@@ -64,7 +64,6 @@ export default {
       this.sendClickInsight();
       this.$router.replace({
         query: {
-          ...query,
           [this.alias]: this.card.name
         }
       });
