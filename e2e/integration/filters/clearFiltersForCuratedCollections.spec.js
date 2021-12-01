@@ -2,6 +2,8 @@ import {
   clickAccordionHeader,
   clickFilter,
 } from '../../support/common';
+import {search} from '../../support/common';
+import Elements from '../../support/elements';
 
 describe('Clear Filters When Click On a Curated Collection',() => {
   context('Desktop Resolution', () => {
@@ -79,6 +81,38 @@ describe('Clear Filters When Click On a Curated Collection',() => {
       cy.algoliaQueryRequest('algoliaRequest');
 
     });
-    
+
+    it.only('Make a query search and then click on a curated collenction', () => {
+
+      cy.get(Elements.search.input).as('inputSearch').clear();
+      cy.get(Elements.search.button).as('buttonSearch');
+
+      search('math');
+
+      cy.url()
+      .should('include','q=math');
+
+      cy.get('[data-cy=book-card]').its('length').should('be.gte', 0);
+
+      cy.get('[data-cy=collection-section] li').first().click();
+
+      cy.get('[data-cy=chip-filter]').should('have.length', 1);
+      
+      cy.algoliaQueryRequest('algoliaRequest');
+
+      cy.get(Elements.search.input).invoke('val').should('be.empty');
+
+      search('math');
+
+      cy.get('[data-cy=collection-section] li').last().click();
+
+      cy.get('[data-cy=chip-filter]').should('have.length', 1);
+      
+      cy.algoliaQueryRequest('algoliaRequest');
+
+      cy.get(Elements.search.input).invoke('val').should('be.empty');
+
+    });
+
   });
 });
