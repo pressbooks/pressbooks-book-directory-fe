@@ -170,7 +170,7 @@ describe('Filter last updated', () => {
         .should('contain.text', '04-1-2021');
     });
 
-    it.only('Removing chip will remove the date filter', () => {
+    it('Removing chip will remove the date filter', () => {
       cy.visit('/?sort=updated&updated=%3C%3D1619567999');
 
       cy.get('@toLastUpdated').should('contain.value', 'April 27, 2021');

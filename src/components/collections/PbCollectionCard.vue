@@ -55,17 +55,22 @@ export default {
     filter() {
       let query = {...this.$route.query};
 
-      if (query[this.alias] === this.card.name) {
+      scrollTo('#books');
+
+      const keysAmount = ('per_page' in query) ? 2 : 1;
+
+      if (query[this.alias] === this.card.name && Object.entries(query).length ===keysAmount) {
         return;
       }
-
-      scrollTo('#books');
+      
+      const { per_page } = this.$route.query;
 
       this.sendClickInsight();
       this.$router.replace({
         query: {
-          ...query,
-          [this.alias]: this.card.name
+          [this.alias]: this.card.name,
+          per_page,
+          q:[]
         }
       });
     },
