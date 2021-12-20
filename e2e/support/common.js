@@ -143,7 +143,8 @@ function sortBy(textIndex) {
     .get('[data-cy=sort-books-by]')
     .find('.vs__dropdown-option')
     .contains(textIndex)
-    .click();
+    .click()
+    .wait(1000);
 }
 
 function perPage(amount) {

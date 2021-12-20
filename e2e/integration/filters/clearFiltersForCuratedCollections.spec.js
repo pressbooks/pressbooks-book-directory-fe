@@ -9,8 +9,8 @@ describe('Clear Filters When Click On a Curated Collection',() => {
   context('Desktop Resolution', () => {
     beforeEach(() => {
 
-      cy.get("[data-cy=active-filters]").then($activeFilter => {
-        if ($activeFilter.find("[data-cy=clear-all-filters]").length > 0) {
+      cy.get('[data-cy=active-filters]').then($activeFilter => {
+        if ($activeFilter.find('[data-cy=clear-all-filters]').length > 0) {
           cy.get('[data-cy=clear-all-filters]').click();
           cy.algoliaQueryRequest('algoliaRequest');
          
@@ -82,7 +82,7 @@ describe('Clear Filters When Click On a Curated Collection',() => {
 
     });
 
-    it.only('Make a query search and then click on a curated collenction', () => {
+    it('Make a query search and then click on a curated collenction', () => {
 
       cy.get(Elements.search.input).as('inputSearch').clear();
       cy.get(Elements.search.button).as('buttonSearch');
@@ -90,7 +90,7 @@ describe('Clear Filters When Click On a Curated Collection',() => {
       search('math');
 
       cy.url()
-      .should('include','q=math');
+        .should('include','q=math');
 
       cy.get('[data-cy=book-card]').its('length').should('be.gte', 0);
 

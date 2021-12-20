@@ -52,7 +52,7 @@ export default {
     setFilters(state, response) {
       let filters = Object.keys(response.facets).reduce((filters, facetName) => {
         if (state.keepFacets.includes(facetName)) {
-          filters[facetName] = [...state.filters[facetName]];
+          filters[facetName] = [...state.filters[facetName] || []];
 
           return filters;
         }
