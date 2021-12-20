@@ -52,6 +52,7 @@ export default {
   name: 'PbWelcomeHeader',
   computed: {
     guide() {
+      console.log('guide', this.$store.state.guide);
       return this.$store.state.config.urls.guide;
     },
     site() {
