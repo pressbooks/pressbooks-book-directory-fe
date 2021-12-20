@@ -20,7 +20,9 @@ for (const facet in facetFilters) {
           clickAccordionHeader(field);
           clickFilter(field, includeFacet, true);
           sortBy('updated');
-          cy.get(Elements.filterChips)
+          cy
+            .wait(1500)
+            .get(Elements.filterChips)
             .should(($filtersApplied) => {
               expect($filtersApplied).to.have.length(1);
             })
@@ -55,7 +57,9 @@ for (const facet in facetFilters) {
           clickFilter(field, excludeFacet, false);
           sortBy('updated');
 
-          cy.get(Elements.filterChips)
+          cy
+            .wait(1500)
+            .get(Elements.filterChips)
             .should(($filtersApplied) => {
               expect($filtersApplied).to.have.length(1);
             })
@@ -73,6 +77,7 @@ for (const facet in facetFilters) {
           clickAccordionHeader(field);
           clickFilter(field, excludeFacet, false);
           sortBy('updated');
+          cy.wait(1500);
 
           // Remove filter by clicking in the active filter chip
           removeChipFilter(field, excludeFacet);
@@ -99,7 +104,9 @@ for (const facet in facetFilters) {
           sortBy('updated');
 
           // Check the facet list after filter was applied
-          cy.get(Elements.filterOptions(field))
+          cy
+            .wait(1500)
+            .get(Elements.filterOptions(field))
             .each(($filterOptions) => {
               facetsListAfter.push($filterOptions.innerText);
             }).should(() => {
@@ -116,7 +123,7 @@ for (const facet in facetFilters) {
         includes.forEach(filter => {
           clickFilter(field, filter, true);
           sortBy('updated');
-          cy.log(filter);
+          cy.wait(1500);
 
           expectedParams = expectedParams
             ? `${expectedParams}%26%26${encodeFacetFilterForURL(filter)}`
@@ -143,8 +150,10 @@ for (const facet in facetFilters) {
           clickFilter(field, filter, isInclude);
         }
         sortBy('updated');
-        cy.wait(1500);
-        cy.get(Elements.booksCards.title)
+
+        cy
+          .wait(1500)
+          .get(Elements.booksCards.title)
           .each(($title) => {
             cy.get(Elements.booksCards.title).should(() => {
               expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
