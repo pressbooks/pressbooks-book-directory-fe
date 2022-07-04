@@ -38,7 +38,7 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@sentry/vue": "^6.13.3",
+    "@sentry/vue": "^7.4.1",
     "autoprefixer": "^10.4.7",
     "browserstack-cypress-cli": "^1.15.0",
     "cypress": "^10.3.0",
