@@ -6,7 +6,7 @@ let sClient = {
     import.meta.env.VITE_ALGOLIA_APP_ID,
     import.meta.env.VITE_ALGOLIA_API_READ_KEY
   ),
-  indexName: import.meta.env.VITE_ALGOLIA_INDEX,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
   availableIndexes: [
     {
       value: import.meta.env.VITE_ALGOLIA_INDEX,
