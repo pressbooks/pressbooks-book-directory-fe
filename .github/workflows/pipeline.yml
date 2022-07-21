@@ -49,12 +49,11 @@ jobs:
 
       - name: e2e Tests
         if: steps.code-changes.outputs.changed == 'true'
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           start: npm run dev
           wait-on: http://localhost:3001
           browser: chrome
-          headless: true
 
       - name: Deploy to AWS Testing
         uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
