@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import { CheckCircleIcon, XCircleIcon } from '@vue-hero-icons/outline';
-import { CheckCircleIcon as CheckCircleIconSolid, XCircleIcon as XCircleIconSolid } from '@vue-hero-icons/solid';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/outline';
+import { CheckCircleIcon as CheckCircleIconSolid, XCircleIcon as XCircleIconSolid } from '@heroicons/vue/solid';
 import helpers from '../../store/helpers';
 
 export default {

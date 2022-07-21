@@ -11,35 +11,25 @@
     <template #content>
       <div>
         <div class="p-2">
-          <t-datepicker
+          <Datepicker
             v-model="dates.start"
             placeholder="From date"
             :max-date="dates.to"
-            :data-cy="`from-date-${field}`"
-          >
-            <template slot="clearButton">
-              <span class="sr-only">Clear from date value</span>
-              <pb-clear-button-icon />
-            </template>
-          </t-datepicker>
+            data-cy="`from-date-${field}`"
+          />
         </div>
         <div class="p-2">
-          <t-datepicker
+          <Datepicker
             v-model="dates.to"
-            placeholder="To date"
+            placeholder="From date"
             :min-date="dates.start"
-            :data-cy="`to-date-${field}`"
-          >
-            <template slot="clearButton">
-              <span class="sr-only">Clear to date value</span>
-              <pb-clear-button-icon />
-            </template>
-          </t-datepicker>
+            data-cy="`to-date-${field}`"
+          />
         </div>
       </div>
 
       <div class="p-2">
-        <t-button
+        <button
           class="w-full"
           :disabled="disabled"
           :data-cy="`apply-filter-${field}`"
@@ -47,7 +37,7 @@
         >
           <span class="sr-only">{{ `Apply ${title} filter` }}</span>
           <span aria-hidden="true">Go</span>
-        </t-button>
+        </button>
       </div>
     </template>
   </pb-accordion>
@@ -56,13 +46,14 @@
 <script>
 import dayjs from 'dayjs';
 import PbAccordion from '../PbAccordion.vue';
-import PbClearButtonIcon from '../PbClearButtonIcon.vue';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   name: 'DateRangeFilters',
   components: {
     PbAccordion,
-    PbClearButtonIcon,
+    Datepicker,
   },
   props: {
     field: {

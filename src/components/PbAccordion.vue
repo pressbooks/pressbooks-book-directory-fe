@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { ChevronDownIcon } from '@vue-hero-icons/outline';
+import { ChevronDownIcon } from '@heroicons/vue/outline';
 
 export default {
   name: 'PbAccordion',

@@ -2,12 +2,11 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   mode: 'jit',
-  purge: [
+  content: [
     './**/*.html',
     './public/**/*.html',
     './src/**/*.{js,vue}',
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
@@ -21,11 +20,8 @@ module.exports = {
       }
     },
   },
-  variants: {
-    extend: {}
-  },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
-  ],
+  ]
 };

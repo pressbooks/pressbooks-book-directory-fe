@@ -4,10 +4,9 @@ import helpers from '../helpers';
 let sClient = {
   searchClient: algoliasearch(
     import.meta.env.VITE_ALGOLIA_APP_ID,
-    import.meta.env.VITE_ALGOLIA_API_READ_KEY,
-    { _useRequestCache: true }
+    import.meta.env.VITE_ALGOLIA_API_READ_KEY
   ),
-  indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
+  indexName: import.meta.env.VITE_ALGOLIA_INDEX,
   availableIndexes: [
     {
       value: import.meta.env.VITE_ALGOLIA_INDEX,

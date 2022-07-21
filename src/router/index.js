@@ -1,16 +1,12 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import App from './../App.vue';
+import {createRouter, createWebHistory} from 'vue-router';
+// there is also createWebHashHistory and createMemoryHistory
 
-Vue.use(Router);
-
-export default new Router({
-  mode: 'history',
+export const router = createRouter({
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: App
+      name: 'Home'
     }
-  ]
+  ],
 });

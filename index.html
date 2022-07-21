@@ -1,41 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="description" content="Pressbooks Directory is the best place to find open educational resources (OER). Search over 2500 open textbooks and other free educational books."/>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <% if (process.env.NODE_ENV === 'production') { %>
-      <meta name="robots" content="index, follow" />
-      <%  } else  { %>
-      <meta name="robots" content="noindex, nofollow" />
-      <% } %>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script>
-          const gaMeasurementIDs = [
-              import.meta.env.VITE_APP_GA_MEASUREMENT_ID,
-              import.meta.env.VITE_APP_GUA_MEASUREMENT_ID,
-          ];
-
-          for (const gaMeasurementID of gaMeasurementIDs) {
-              if (gaMeasurementID) {
-                  const scriptTag = unescape("%3Cscript async src='https://www.googletagmanager.com/gtag/js?id=" + gaMeasurementID + "'%3E%3C/script%3E");
-                  document.write(scriptTag);
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag() {
-                      dataLayer.push(arguments);
-                  }
-                  gtag('js', new Date());
-                  gtag('config', gaMeasurementID, { 'send_page_view': true });
-              }
-          }
-      </script>
-      <link rel="icon" href="/favicon.png" />
-      <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
-      <title>Pressbooks Directory</title>
-  </head>
-  <body class="antialiased font-sans bg-white text-gray-900">
-      <div id="app"></div>
-      <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Pressbooks Directory is the best place to find open educational resources (OER). Search over 2500 open textbooks and other free educational books."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if (process.env.NODE_ENV === 'production') { %>
+    <meta name="robots" content="index, follow" />
+    <%  } else  { %>
+    <meta name="robots" content="noindex, nofollow" />
+    <% } %>
+    <link rel="icon" href="/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
+    <title>Pressbooks Directory</title>
+</head>
+<body class="antialiased font-sans bg-white text-gray-900" id="app">
+<script type="module" src="/src/main.js"></script>
+</body>
 </html>

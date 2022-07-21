@@ -1,6 +1,7 @@
 <template>
   <ais-instant-search
     v-if="!restartIndex"
+    class="w-full"
     :index-name="currentIndex"
     :search-client="$store.state.SClient.searchClient"
     :search-function="paginationHook"
@@ -77,7 +78,7 @@ export default {
   data() {
     return {
       middlewares: [
-        this.middleware, 
+        this.middleware,
         insightMiddleware
       ],
       resetPage: false,
@@ -109,7 +110,7 @@ export default {
           for (let attribute in copyOfQuery) {
             if (
               typeof this.routeQuery[attribute] === 'undefined' ||
-              this.routeQuery[attribute].toString() !== copyOfQuery[attribute].toString()
+                this.routeQuery[attribute].toString() !== copyOfQuery[attribute].toString()
             ) {
               this.resetPage = true;
             }
