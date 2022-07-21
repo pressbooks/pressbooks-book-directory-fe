@@ -18,8 +18,6 @@ jobs:
       VITE_ALGOLIA_INDEX_ALPHABETICAL_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_ALPHABETICAL_REPLICA }}
       VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA }}
       VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
-      BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-      BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,7 +26,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Debug Env
         run: |
