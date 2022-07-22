@@ -24,7 +24,7 @@
     "@vue-hero-icons/solid": "^1.7.2",
     "@vue/cli-plugin-babel": "^5.0.8",
     "algoliasearch": "^4.13.1",
-    "dayjs": "^1.11.3",
+    "dayjs": "^1.11.4",
     "intro.js": "^3.4.0",
     "nprogress": "^0.2.0",
     "search-insights": "^2.2.1",
