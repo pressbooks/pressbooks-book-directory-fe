@@ -9,9 +9,7 @@
         :options="items"
         data-cy="sort-books-by"
         :disabled="disabled"
-        @input="(data) => {
-          onInput(data, refine)
-        }"
+        @update:modelValue="onInput"
       />
     </template>
   </ais-sort-by>

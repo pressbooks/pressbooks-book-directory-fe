@@ -13,9 +13,13 @@
         <div class="p-2">
           <Datepicker
             v-model="dates.start"
+            locale="en"
             placeholder="From date"
             :max-date="dates.to"
             data-cy="`from-date-${field}`"
+            format="MMM dd, yyyy"
+            :enable-time-picker="false"
+            :auto-apply="true"
           />
         </div>
         <div class="p-2">
@@ -24,13 +28,16 @@
             placeholder="From date"
             :min-date="dates.start"
             data-cy="`to-date-${field}`"
+            format="MMM dd, yyyy"
+            :enable-time-picker="false"
+            :auto-apply="true"
           />
         </div>
       </div>
 
       <div class="p-2">
         <button
-          class="w-full"
+          class="w-full rounded-full bg-pb-red text-white p-2"
           :disabled="disabled"
           :data-cy="`apply-filter-${field}`"
           @click="filterByDateRange"
