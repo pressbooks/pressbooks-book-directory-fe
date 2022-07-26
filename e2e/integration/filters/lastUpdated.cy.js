@@ -172,7 +172,7 @@ describe('Filter last updated', () => {
     it('Removing chip will remove the date filter', () => {
       cy.visit('/?sort=updated&updated=%3C%3D1619567999');
 
-      cy.get('@toLastUpdated').should('contain.value', 'Apr 26, 2021');
+      cy.get('@toLastUpdated').should('contain.value', 'Apr 27, 2021');
 
       cy.get('[data-cy=chip-filter]')
         .should('have.length', 1)
