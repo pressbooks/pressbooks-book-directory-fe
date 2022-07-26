@@ -60,6 +60,7 @@ export default {
   },
   methods: {
     select(event)  {
+      this.itemSelected = event;
       this.$emit('update:modelValue', event.value);
     }
   },

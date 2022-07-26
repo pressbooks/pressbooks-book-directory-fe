@@ -15,9 +15,7 @@ function search(term) {
 }
 
 function encodeFacetFilterForURL(str) {
-  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-    return '%' + c.charCodeAt(0).toString(16);
-  }).replace('%2C', ',');
+  return encodeURI(str).replace(/%20/g, '+');
 }
 
 /**
@@ -118,20 +116,6 @@ function removeChipFilter(facet, facetItem) {
     .algoliaQueryRequest('removeFilter');
 }
 
-function navigateToMonthYear(element, toMonthYear, backwards = true) {
-  let date = dayjs();
-
-  cy.get(element).click();
-
-  while(date.format('MM-YYYY') !== toMonthYear) {
-    cy.get(`button[aria-label="${backwards ? 'Prev Year' : 'Next Year'}"]`).click();
-
-    date = backwards
-      ? date.subtract(1, 'month')
-      : date.add(1, 'month');
-  }
-}
-
 function clickPage(page) {
   cy.get(Elements.paginatorLink(page)).click();
 }
@@ -168,7 +152,6 @@ export {
   fillNumericValue,
   getNumericInput,
   submitNumericFilter,
-  navigateToMonthYear,
   clickPage,
   sortBy,
   perPage

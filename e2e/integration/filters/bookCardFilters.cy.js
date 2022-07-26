@@ -24,7 +24,7 @@ describe('BookCard Collections Filters', () => {
         .find('li:first-child button')
         .click();
 
-      cy.visit('/?license=CC%20BY');
+      cy.visit('/?license=CC+BY');
       cy.wait(1500);
 
       cy.get(Elements.booksCards.bookTags)
@@ -33,7 +33,7 @@ describe('BookCard Collections Filters', () => {
         .should('have.class', 'text-pb-red')
         .click();
 
-      cy.visit('/?collec=Nursing%2FHealthcare');
+      cy.visit('/?collec=Nursing/Healthcare');
       cy.wait(1500);
 
       cy.get(Elements.booksCards.bookTags)

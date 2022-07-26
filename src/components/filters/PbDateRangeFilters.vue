@@ -13,25 +13,44 @@
         <div class="p-2">
           <Datepicker
             v-model="dates.start"
+            :text-input="true"
+            :text-input-options="{
+              enterSubmit: true,
+              tabSubmit: true,
+            }"
             locale="en"
             placeholder="From date"
             :max-date="dates.to"
-            data-cy="`from-date-${field}`"
+            :data-cy="`from-date-${field}`"
             format="MMM dd, yyyy"
             :enable-time-picker="false"
             :auto-apply="true"
-          />
+          >
+            <template #day="{ date, day }">
+              <span :data-date="formatDate(date)">
+                {{ day }}
+              </span>
+            </template>
+            >
+          </Datepicker>
         </div>
         <div class="p-2">
           <Datepicker
             v-model="dates.to"
-            placeholder="From date"
+            :text-input="true"
+            placeholder="To date"
             :min-date="dates.start"
-            data-cy="`to-date-${field}`"
+            :data-cy="`to-date-${field}`"
             format="MMM dd, yyyy"
             :enable-time-picker="false"
             :auto-apply="true"
-          />
+          >
+            <template #day="{ date, day }">
+              <span :data-date="formatDate(date)">
+                {{ day }}
+              </span>
+            </template>
+          </Datepicker>
         </div>
       </div>
 
@@ -132,6 +151,9 @@ export default {
         start: null,
         to: null,
       };
+    },
+    formatDate(date) {
+      return dayjs(date).format('YYYY-MM-DD');
     },
     buildQueryString() {
       let queryString = null;

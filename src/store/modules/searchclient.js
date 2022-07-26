@@ -4,7 +4,7 @@ import helpers from '../helpers';
 let sClient = {
   searchClient: algoliasearch(
     import.meta.env.VITE_ALGOLIA_APP_ID,
-    import.meta.env.VITE_ALGOLIA_API_READ_KEY
+    import.meta.env.VITE_ALGOLIA_API_READ_KEY,
   ),
   indexName: import.meta.env.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA,
   availableIndexes: [
@@ -150,7 +150,7 @@ export default {
           };
           if (state.allowedFilters[attribute].type === 'numeric') {
             toInsert.operator = (query[attribute][i].search('>=') >= 0) ? '>=' : '<=';
-            toInsert.value = toInsert.value.substr(2);
+            toInsert.value = toInsert.value.substr  (2);
           }
           filters[attribute].push(toInsert);
         }

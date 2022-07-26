@@ -9,7 +9,9 @@
         :options="items"
         data-cy="sort-books-by"
         :disabled="disabled"
-        @update:modelValue="(itemSelected) => onInput(itemSelected,refine)"
+        @update:modelValue="(data) => {
+          onInput(data, refine);
+        }"
       />
     </template>
   </ais-sort-by>
@@ -59,7 +61,7 @@ export default {
     }
   },
   methods: {
-    onInput(data, refine) {
+    onInput(data,refine) {
       this.$store.commit('setResetMainIndex', false);
       let routeQuery = {...this.$route.query};
       const indexesOrderedByMap = this.$store.state.SClient.availableIndexes.reduce((index, item) => {
@@ -72,7 +74,7 @@ export default {
         !routeQuery[this.alias] ||
           (
             routeQuery[this.alias] &&
-              routeQuery[this.alias] != indexesOrderedByMap[data]
+              routeQuery[this.alias] !== indexesOrderedByMap[data]
           )
       ) {
         this.sendFilterAppliedInsight(
