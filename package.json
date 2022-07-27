@@ -20,7 +20,7 @@
     "@tailwindcss/forms": "^0.5.2",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vuepic/vue-datepicker": "^3.3.1",
-    "algoliasearch": "^4.13.1",
+    "algoliasearch": "^4.14.2",
     "dayjs": "^1.11.3",
     "instantsearch.js": "^4.43.1",
     "intro.js": "^3.4.0",
