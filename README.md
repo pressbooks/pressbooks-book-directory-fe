@@ -4,7 +4,7 @@ This Project is a Vue 3 vite project based on https://vitejs.dev/ and is backwar
 ## Requirements
 
 - Node.js version >=14.0.0 & <15.0.0
-- NPM version >=6.0.0 & <7.0.0
+- NPM version >=6.0.0 & <9.0.0
 
 ## Setup environment variables
 Create an `.env.local` file using the `.env.example` file: `cp .env.example .env.local` and set appropriate values for those variables for your local environments.
@@ -63,10 +63,10 @@ Example: `npm run test:stack --specs=e2e/integration/pagination.spec.js`.
 
 The browser matrix can be configured locally in: `browserstack.json`
 
-BrowserStack reports can be accessed in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/). 
+BrowserStack reports can be accessed in [App Live BrowserStack Dashboard](https://automate.browserstack.com/dashboard/v2/).
 
 ### Run E2E tests locally
-Tests can also be run locally as well using the instructions below: 
+Tests can also be run locally as well using the instructions below:
 1. You can run local tests on **Chrome**, **Firefox** and **Edge**. Make sure you have at least one of those browsers installed on your local machine.
 1. Make sure that you have properly configured the Algolia indices to be used by your application. The Pressbooks internal team can find details [here](https://docs.google.com/document/d/1F82PSJKeufpKp8bGrDifjPxGo2x6tKD-HJpTsuadCeg/edit#heading=h.3j6ezaup0nca)
 1. The local server should already be running: `npm run dev` before tests are run locally.

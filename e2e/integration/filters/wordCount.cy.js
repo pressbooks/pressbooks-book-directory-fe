@@ -16,7 +16,7 @@ describe('Word Count Filters',() => {
       cy.algoliaQueryRequest();
 
       cy.url()
-        .should('include','words=%3E%3D1000');
+        .should('include','words=%3E=1000');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 1,734');
@@ -33,7 +33,7 @@ describe('Word Count Filters',() => {
       cy.algoliaQueryRequest();
 
       cy.url()
-        .should('include','words=%3E%3D0%26%26%3C%3D10000');
+        .should('include','words=%3E=0%26%26%3C=10000');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 595');
@@ -51,7 +51,7 @@ describe('Word Count Filters',() => {
       cy.algoliaQueryRequest();
 
       cy.url()
-        .should('include','words=%3E%3D10000%26%26%3C%3D20000');
+        .should('include','words=%3E=10000%26%26%3C=20000');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 322');
@@ -93,7 +93,7 @@ describe('Word Count Filters',() => {
       submitNumericFilter('wordCount');
 
       cy.url()
-        .should('include','words=%3E%3D10000%26%26%3C%3D20000');
+        .should('include','words=%3E=10000%26%26%3C=20000');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 322');
@@ -132,7 +132,7 @@ describe('Word Count Filters',() => {
       cy.algoliaQueryRequest('algoliaRequest');
 
       cy.url()
-        .should('include','words=%3E%3D100');
+        .should('include','words=%3E=100');
 
       getNumericInput('wordCount','max').invoke('text').should('eq','');
 

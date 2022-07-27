@@ -9,7 +9,7 @@
       </h1>
 
       <p class="font-serif leading-7 text-lg">
-        This directory provides an index of <strong data-cy="total-books-indexed">{{ totalBooksIndexed | numberFormat }}</strong> books published across <strong data-cy="total-networks-indexed">{{ totalNetworksIndexed | numberFormat }}</strong> Pressbooks
+        This directory provides an index of <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> books published across <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> Pressbooks
         networks. Learn to use the Directory by taking a
         <button
           class="text-pb-red underline"
@@ -50,6 +50,11 @@
 
 export default {
   name: 'PbWelcomeHeader',
+  data() {
+    return {
+      numberFormat: this.$filters.numberFormat,
+    };
+  },
   computed: {
     guide() {
       return this.$store.state.config.urls.guide;
@@ -80,13 +85,13 @@ export default {
     },
     sendWelcomeCTAInsight() {
       this.sendInsight({
-        insightsMethod: 'convertedObjectIDs', 
+        insightsMethod: 'convertedObjectIDs',
         payload: {
           eventName: 'Welcome CTA Clicked',
           objectIDs: [
             `link:${this.site}`
           ]
-        }, 
+        },
       });
     },
   }

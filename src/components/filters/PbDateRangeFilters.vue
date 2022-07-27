@@ -11,43 +11,59 @@
     <template #content>
       <div>
         <div class="p-2">
-          <t-datepicker
+          <Datepicker
             v-model="dates.start"
+            :text-input="true"
+            :text-input-options="{
+              enterSubmit: true,
+              tabSubmit: true,
+            }"
+            locale="en"
             placeholder="From date"
             :max-date="dates.to"
             :data-cy="`from-date-${field}`"
+            format="MMM dd, yyyy"
+            :enable-time-picker="false"
+            :auto-apply="true"
           >
-            <template slot="clearButton">
-              <span class="sr-only">Clear from date value</span>
-              <pb-clear-button-icon />
+            <template #day="{ date, day }">
+              <span :data-date="formatDate(date)">
+                {{ day }}
+              </span>
             </template>
-          </t-datepicker>
+            >
+          </Datepicker>
         </div>
         <div class="p-2">
-          <t-datepicker
+          <Datepicker
             v-model="dates.to"
+            :text-input="true"
             placeholder="To date"
             :min-date="dates.start"
             :data-cy="`to-date-${field}`"
+            format="MMM dd, yyyy"
+            :enable-time-picker="false"
+            :auto-apply="true"
           >
-            <template slot="clearButton">
-              <span class="sr-only">Clear to date value</span>
-              <pb-clear-button-icon />
+            <template #day="{ date, day }">
+              <span :data-date="formatDate(date)">
+                {{ day }}
+              </span>
             </template>
-          </t-datepicker>
+          </Datepicker>
         </div>
       </div>
 
       <div class="p-2">
-        <t-button
-          class="w-full"
+        <button
+          class="w-full rounded-full bg-pb-red text-white p-2"
           :disabled="disabled"
           :data-cy="`apply-filter-${field}`"
           @click="filterByDateRange"
         >
           <span class="sr-only">{{ `Apply ${title} filter` }}</span>
           <span aria-hidden="true">Go</span>
-        </t-button>
+        </button>
       </div>
     </template>
   </pb-accordion>
@@ -56,13 +72,14 @@
 <script>
 import dayjs from 'dayjs';
 import PbAccordion from '../PbAccordion.vue';
-import PbClearButtonIcon from '../PbClearButtonIcon.vue';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   name: 'DateRangeFilters',
   components: {
     PbAccordion,
-    PbClearButtonIcon,
+    Datepicker,
   },
   props: {
     field: {
@@ -134,6 +151,9 @@ export default {
         start: null,
         to: null,
       };
+    },
+    formatDate(date) {
+      return dayjs(date).format('YYYY-MM-DD');
     },
     buildQueryString() {
       let queryString = null;

@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import {SearchIcon} from '@vue-hero-icons/outline';
+import {SearchIcon} from '@heroicons/vue/outline';
 import PbAccordion from '../PbAccordion.vue';
 import PbFilterButtons from './PbFilterButtons.vue';
 

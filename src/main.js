@@ -1,23 +1,29 @@
-import Vue from 'vue';
+import {createApp} from 'vue';
 import App from './App.vue';
-import InstantSearch from 'vue-instantsearch';
+import {store} from './store/index.js';
+import InstantSearch from 'vue-instantsearch/vue3/es/index.js';
 import VueSelect from 'vue-select';
-import VueTailwind from 'vue-tailwind';
 import VueLazyload from 'vue-lazyload';
-import router from './router';
-import VueTailwindConfig from './vuetailwind.config';
 import dayjs from 'dayjs';
+import {router} from './router/index.js';
+import AlgoliaMixin from './mixins/AlgoliaMixin.js';
 import utc from 'dayjs/plugin/utc';
-import AlgoliaMixin from './mixins/AlgoliaMixin';
 import './index.css';
-import {store} from './store';
 
-Vue.component('VueSelect', VueSelect);
-Vue.use(InstantSearch);
-Vue.use(VueTailwind, VueTailwindConfig);
-Vue.use(VueLazyload);
-Vue.mixin(AlgoliaMixin);
-Vue.filter('numberFormat', (value, locale) => value.toLocaleString(locale || 'en'));
+const app = createApp(App);
+
+app.use(store);
+app.component('VueSelect', VueSelect);
+app.use(InstantSearch);
+app.use(router);
+app.use(VueLazyload);
+app.mixin(AlgoliaMixin);
+
+app.config.globalProperties.$filters = {
+  numberFormat(value) {
+    return value.toLocaleString();
+  }
+};
 
 dayjs.extend(utc);
 
@@ -84,8 +90,4 @@ router.beforeEach((to, from, next) => {
   });
 });
 
-new Vue({
-  render: h => h(App),
-  store,
-  router
-}).$mount('#app');
+app.mount('#app');

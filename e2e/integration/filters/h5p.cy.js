@@ -20,7 +20,7 @@ describe('H5p Count Filters',() => {
       cy.algoliaQueryRequest();
 
       cy.url()
-        .should('include','h5p=%3E%3D100');
+        .should('include','h5p=%3E=100');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 52');
@@ -35,7 +35,7 @@ describe('H5p Count Filters',() => {
       cy.algoliaQueryRequest();
 
       cy.url()
-        .should('include','h5p=%3E%3D0%26%26%3C%3D10');
+        .should('include','h5p=%3E=0%26%26%3C=10');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 2,038');
@@ -51,7 +51,7 @@ describe('H5p Count Filters',() => {
       cy.algoliaQueryRequest();
 
       cy.url()
-        .should('include','h5p=%3E%3D10%26%26%3C%3D20');
+        .should('include','h5p=%3E=10%26%26%3C=20');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 91');
@@ -89,7 +89,7 @@ describe('H5p Count Filters',() => {
       submitNumericFilter('h5pActivities');
 
       cy.url()
-        .should('include','h5p=%3E%3D10%26%26%3C%3D20');
+        .should('include','h5p=%3E=10%26%26%3C=20');
 
       cy.get(Elements.numberOfBooks)
         .contains( 'Results: 91');
@@ -140,7 +140,7 @@ describe('H5p Count Filters',() => {
       cy.algoliaQueryRequest('algoliaRequest');
 
       cy.url()
-        .should('include','h5p=%3E%3D100');
+        .should('include','h5p=%3E=100');
 
       getNumericInput('h5pActivities','max').invoke('text').should('eq','');
     });

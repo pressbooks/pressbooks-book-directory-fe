@@ -25,7 +25,7 @@
       </div>
       <div class="flex w-full items-center justify-between">
         <div class="mt-1 text-sm">
-          © Pressbooks 2021
+          © Pressbooks 2022
           <br>
           <ais-powered-by class="inline-block" />
         </div>

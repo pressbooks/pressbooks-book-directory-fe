@@ -26,7 +26,7 @@
 import BookCard from './BookCard.vue';
 import helpers from '../../store/helpers';
 export default {
-  name: 'Books',
+  name: 'PbBooks',
   components: {BookCard},
   methods: {
     transformItems(items) {
@@ -73,7 +73,7 @@ export default {
     },
     handleBookClicked(item, sendEvent) {
       sendEvent('conversion', item, 'Book Opened');
- 
+
       const clickEndpoint = import.meta.env.VITE_CLICK_COUNT_ENDPOINT;
 
       if (clickEndpoint) {

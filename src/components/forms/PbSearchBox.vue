@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import {SearchIcon} from '@vue-hero-icons/outline';
+import {SearchIcon} from '@heroicons/vue/outline';
 import helpers from '../../store/helpers';
 import {scrollTo} from '../../utils/helpers';
 import NProgress from 'nprogress/nprogress';

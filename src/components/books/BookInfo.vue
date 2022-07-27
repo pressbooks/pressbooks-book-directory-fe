@@ -20,17 +20,17 @@
       </a>
     </h2>
     <p class="leading-tight">
-      <span data-cy="book-word-count">{{ item.wordCount | numberFormat }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <template v-if="hasH5PActivities">
+      <span data-cy="book-word-count">{{ $filters.numberFormat(item.wordCount) }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <template v-if="hasH5PActivities">
         <a
           :href="item.url + 'h5p-listing'"
           class="text-pb-red underline"
           target="_blank"
-        ><span data-cy="h5p-count">{{ item.h5pActivities | numberFormat }}</span> H5P activities</a>
+        ><span data-cy="h5p-count">{{ $filters.numberFormat(item.h5pActivities) }}</span> H5P activities</a>
       </template>
       <template v-else>
         <span
           data-cy="h5p-count"
-        >{{ item.h5pActivities | numberFormat }}</span> H5P activities
+        >{{ $filters.numberFormat(item.h5pActivities) }}</span> H5P activities
       </template>
     </p>
   </div>

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import {clickAccordionHeader, clickPage, navigateToMonthYear} from '../../support/common';
+import {clickAccordionHeader, clickPage} from '../../support/common';
 
 dayjs.extend(utc);
 
@@ -8,24 +8,22 @@ describe('Filter last updated', () => {
   context('Desktop resolution', () => {
     beforeEach(() => {
       clickAccordionHeader('lastUpdated');
-      cy.get('div[data-cy=from-date-lastUpdated] input')
-        .first()
-        .as('fromLastUpdated');
+      cy.get('div[data-cy=from-date-lastUpdated] input').as('fromLastUpdated');
 
-      cy.get('div[data-cy=to-date-lastUpdated] input')
-        .first()
-        .as('toLastUpdated');
+      cy.get('div[data-cy=to-date-lastUpdated] input').as('toLastUpdated');
 
       cy.get('button[data-cy=apply-filter-lastUpdated]').as('applyFilterButton');
     });
 
     it('Applying "start date" using the datepicker filters books that were modified since then', () => {
-      navigateToMonthYear('@fromLastUpdated', '04-2021');
 
       const startDate = '2021-04-27';
-      const startTimestamp = dayjs.utc(startDate).startOf('day').unix();
 
-      cy.get(`button[data-date=${startDate}]`).click();
+      const formattedDate = dayjs(startDate).format('MMM DD, YYYY');
+
+      cy.get('@fromLastUpdated').type(formattedDate+'{enter}');
+
+      const startTimestamp = dayjs.utc(startDate).startOf('day').unix();
 
       cy.algoliaQueryRequest()
         .get('@applyFilterButton')
@@ -36,7 +34,7 @@ describe('Filter last updated', () => {
         .should('have.length', 1)
         .find('.text-sm')
         .contains('Updated >= 04-27-2021').should('be.visible')
-        .url().should('include', `updated=%3E%3D${startTimestamp}`);
+        .url().should('include', `updated=%3E=${startTimestamp}`);
 
       clickPage(5);
 
@@ -49,12 +47,13 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "to date" using the datepicker filters books that were modified until then', () => {
-      navigateToMonthYear('@toLastUpdated', '04-2021');
 
       const toDate = '2021-04-27';
       const toTimestamp = dayjs.utc(toDate).endOf('day').unix();
 
-      cy.get(`button[data-date=${toDate}]`).click();
+      const formattedDate = dayjs(toDate).format('MMM DD, YYYY');
+
+      cy.get('@toLastUpdated').type(formattedDate+'{enter}');
 
       cy.get('@applyFilterButton').click();
 
@@ -63,7 +62,7 @@ describe('Filter last updated', () => {
         .should('have.length', 1)
         .find('.text-sm')
         .contains('Updated <= 04-27-2021').should('be.visible')
-        .url().should('include', `updated=%3C%3D${toTimestamp}`);
+        .url().should('include', `updated=%3C=${toTimestamp}`);
 
       cy.get('[data-cy=book-last-updated]')
         .first()
@@ -75,16 +74,16 @@ describe('Filter last updated', () => {
       const startDate = '2021-04-01';
       const startTimestamp = dayjs.utc(startDate).startOf('day').unix();
 
+      const formattedDate = dayjs(startDate).format('MMM DD, YYYY');
+
+      cy.get('@fromLastUpdated').type(formattedDate+'{enter}');
+
       const toDate = '2021-04-02';
       const toTimestamp = dayjs.utc(toDate).endOf('day').unix();
 
-      navigateToMonthYear('@fromLastUpdated', '04-2021');
+      const formattedToDate = dayjs(toDate).format('MMM DD, YYYY');
 
-      cy.get(`button[data-date=${startDate}]`).click();
-
-      navigateToMonthYear('@toLastUpdated', '04-2021');
-
-      cy.get(`button[data-date=${toDate}]`).click();
+      cy.get('@toLastUpdated').type(formattedToDate+'{enter}');
 
       cy.get('@applyFilterButton').click();
 
@@ -92,7 +91,7 @@ describe('Filter last updated', () => {
         .get('[data-cy=chip-filter]')
         .should('have.length', 2)
         .find('.text-sm')
-        .url().should('include', `updated=%3E%3D${startTimestamp}%26%26%3C%3D${toTimestamp}`);
+        .url().should('include', `updated=%3E=${startTimestamp}%26%26%3C=${toTimestamp}`);
       cy.wait(1500);
 
       cy.get('[data-cy=book-last-updated]')
@@ -147,13 +146,13 @@ describe('Filter last updated', () => {
     });
 
     it('Applying "start date" and "to date" using the URL filters books that were modified in between', () => {
-      cy.visit('/?sort=updated&updated=%3E%3D1617235200%26%26%3C%3D1617407999');
+      cy.visit('/?sort=updated&updated=%3E=1617235200%26%26%3C=1617407999');
 
       cy.algoliaQueryRequest()
         .get('[data-cy=chip-filter]')
         .should('have.length', 2)
         .find('.text-sm')
-        .url().should('include', 'updated=%3E%3D1617235200%26%26%3C%3D1617407999');
+        .url().should('include', 'updated=%3E=1617235200%26%26%3C=1617407999');
 
       cy.get('[data-cy=book-last-updated]')
         .first()
@@ -173,7 +172,7 @@ describe('Filter last updated', () => {
     it('Removing chip will remove the date filter', () => {
       cy.visit('/?sort=updated&updated=%3C%3D1619567999');
 
-      cy.get('@toLastUpdated').should('contain.value', 'April 27, 2021');
+      cy.get('@toLastUpdated').should('contain.value', 'Apr 27, 2021');
 
       cy.get('[data-cy=chip-filter]')
         .should('have.length', 1)
@@ -184,7 +183,7 @@ describe('Filter last updated', () => {
 
       cy.get('[data-cy=chip-filter]')
         .should('not.exist')
-        .url().should('not.include', 'updated=%3C%3D1619567999');
+        .url().should('not.include', 'updated=%3C=1619567999');
 
       cy.get('@toLastUpdated').should('have.value', '');
     });
