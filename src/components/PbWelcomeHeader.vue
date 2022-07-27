@@ -27,7 +27,7 @@
       </p>
 
       <p class="mt-4 font-serif leading-7 text-lg">
-        Pressbooks Directory is more powerful when paired with a Pressbooks Create, which allows you to clone, revise, remix, and redistribute all of the openly licensed content found through this Directory.
+        Pressbooks Directory is more powerful when paired with Pressbooks Create, which allows you to clone, revise, remix, and redistribute all of the openly licensed content found through this Directory.
       </p>
 
       <div class="flex items-center justify-center mt-4 mx-auto">
