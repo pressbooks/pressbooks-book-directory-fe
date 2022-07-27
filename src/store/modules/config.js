@@ -2,7 +2,7 @@ let config = {
   imagesPath: 'assets/images/',
   logo: 'pressbooks-logo.jpeg',
   urls: {
-    guide: 'https://networkmanagerguide.pressbooks.com/chapter/how-to-use-the-pressbooks-directory',
+    guide: 'https://guide.pressbooks.com/chapter/find-books-on-the-pressbooks-directory/',
     linkedin: 'https://www.linkedin.com/company/pressbooks',
     pressbooks: 'https://pressbooks.com',
     twitter: 'https://twitter.com/pressbooks',
