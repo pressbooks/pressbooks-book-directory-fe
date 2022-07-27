@@ -23,7 +23,7 @@
     "algoliasearch": "^4.13.1",
     "dayjs": "^1.11.3",
     "instantsearch.js": "^4.43.1",
-    "intro.js": "^3.4.0",
+    "intro.js": "^6.0.0",
     "nprogress": "^0.2.0",
     "resize-detector": "^0.3.0",
     "search-insights": "^2.2.1",
