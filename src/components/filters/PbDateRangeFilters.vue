@@ -18,7 +18,7 @@
               enterSubmit: true,
               tabSubmit: true,
             }"
-            locale="en"
+            utc="preserve"
             placeholder="From date"
             :max-date="dates.to"
             :data-cy="`from-date-${field}`"
@@ -40,6 +40,7 @@
             :text-input="true"
             placeholder="To date"
             :min-date="dates.start"
+            utc="preserve"
             :data-cy="`to-date-${field}`"
             format="MMM dd, yyyy"
             :enable-time-picker="false"
@@ -74,6 +75,8 @@ import dayjs from 'dayjs';
 import PbAccordion from '../PbAccordion.vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(timezone);
 
 export default {
   name: 'DateRangeFilters',
@@ -138,8 +141,8 @@ export default {
 
         this.opened = true;
         this.dates = {
-          start: start && start.isValid() ? start.utc().format('YYYY-MM-DD'): null,
-          to: to && to.isValid() ? to.utc().format('YYYY-MM-DD') : null,
+          start: start && start.isValid() ? dayjs.tz(start, 'UTC').format('YYYY-MM-DD') : null,
+          to: to && to.isValid() ? dayjs.tz(to, 'UTC').format('YYYY-MM-DD') : null,
         };
       }
     }
@@ -153,13 +156,13 @@ export default {
       };
     },
     formatDate(date) {
-      return dayjs(date).format('YYYY-MM-DD');
+      return dayjs.tz(date, 'UTC').format('YYYY-MM-DD');
     },
     buildQueryString() {
       let queryString = null;
 
-      let start = dayjs.utc(this.dates.start).startOf('day');
-      let to = dayjs.utc(this.dates.to).endOf('day');
+      let start = dayjs.tz(this.dates.start, 'UTC').startOf('day');
+      let to = dayjs.tz(this.dates.to, 'UTC').endOf('day');
 
       if (to.isBefore(start)) {
         return;
