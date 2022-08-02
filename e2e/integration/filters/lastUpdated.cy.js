@@ -83,7 +83,7 @@ describe('Filter last updated', () => {
 
       const formattedToDate = dayjs(toDate).format('MMM DD, YYYY');
 
-      cy.get('@toLastUpdated').type(formattedToDate+'{enter}');
+      cy.get('@toLastUpdated').type(formattedToDate+'{enter}', {force: true});
 
       cy.get('@applyFilterButton').click();
 
