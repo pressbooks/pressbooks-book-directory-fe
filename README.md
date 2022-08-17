@@ -3,7 +3,7 @@ This Project is a Vue 3 vite project based on https://vitejs.dev/ and is backwar
 
 ## Requirements
 
-- Node.js version >=14.0.0 & <15.0.0
+- Node.js version >=16.0.0
 - NPM version >=6.0.0 & <9.0.0
 
 ## Setup environment variables
