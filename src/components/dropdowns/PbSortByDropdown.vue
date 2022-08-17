@@ -9,8 +9,8 @@
         :options="items"
         data-cy="sort-books-by"
         :disabled="disabled"
-        @input="(data) => {
-          onInput(data, refine)
+        @update:modelValue="(data) => {
+          onInput(data, refine);
         }"
       />
     </template>
@@ -21,11 +21,13 @@ import PbDropdown from './PbDropdown.vue';
 
 export default {
   name: 'PbSortByDropdown',
-  components: { PbDropdown },
+  components: {PbDropdown},
   props: {
     options: {
       type: Array,
-      default() { return []; }
+      default() {
+        return [];
+      }
     }
   },
   data() {
@@ -50,14 +52,16 @@ export default {
         }
         let queryKeys = Object.keys(query);
         let allowedFilters = this.$store.state.SClient.allowedFilters;
-        const filtersKeys = Object.keys(allowedFilters).map(function(key){return allowedFilters[key].alias;});
+        const filtersKeys = Object.keys(allowedFilters).map(function (key) {
+          return allowedFilters[key].alias;
+        });
         const keysDiff = filtersKeys.filter(key => queryKeys.includes(key));
         this.disabled = keysDiff.length === 0;
       }
     }
   },
   methods: {
-    onInput(data, refine) {
+    onInput(data,refine) {
       this.$store.commit('setResetMainIndex', false);
       let routeQuery = {...this.$route.query};
       const indexesOrderedByMap = this.$store.state.SClient.availableIndexes.reduce((index, item) => {
@@ -68,17 +72,17 @@ export default {
       }, {});
       if (
         !routeQuery[this.alias] ||
-        (
-          routeQuery[this.alias] &&
-          routeQuery[this.alias] != indexesOrderedByMap[data]
-        )
+          (
+            routeQuery[this.alias] &&
+              routeQuery[this.alias] !== indexesOrderedByMap[data]
+          )
       ) {
         this.sendFilterAppliedInsight(
           [`value:${data}`],
           'Sort By Changed'
         );
         routeQuery[this.alias] = indexesOrderedByMap[data];
-        this.$router.replace({ query: routeQuery });
+        this.$router.replace({query: routeQuery});
         refine(data);
       }
     }

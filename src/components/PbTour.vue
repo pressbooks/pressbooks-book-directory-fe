@@ -281,22 +281,22 @@ export default {
             setTimeout(() => {
               const filter = document.querySelector('div[data-cy="license-filter"] [data-cy="filter-licenseCode-option"]:nth-of-type('+item+') button:nth-of-type(1)');
               filter.click();
-            }, index * 1000);
+            }, index * 600);
           });
 
           this.intro._introItems[10].element = document.querySelector('div[data-cy="active-filters"]');
-        } else if(this.intro._currentStep === 11) {
-          // Rebind DOM for remaining steps on the book card
-
-          this.intro._introItems[12].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
-          this.intro._introItems[13].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
-          this.intro._introItems[14].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-license"]');
-          this.intro._introItems[15].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
-
+        } else if(this.intro._currentStep === 10) {
           setTimeout(()=> {
             const clear = document.querySelector('button[data-cy="clear-all-filters"]');
             clear.click();
-          }, 2000);
+            setTimeout(()=> {
+              // Rebind DOM for remaining steps on the book card
+              this.intro._introItems[12].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
+              this.intro._introItems[13].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
+              this.intro._introItems[14].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-license"]');
+              this.intro._introItems[15].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
+            }, 1000);
+          }, 1000);
         } else {
           this.searchInput.value = '';
         }

@@ -17,7 +17,7 @@
               :for="`${field}-min`"
             >
               <span class="sr-only">{{ `Minimum ${title} value` }}</span>
-              <span aria-hidden="true">Min</span>  
+              <span aria-hidden="true">Min</span>
             </label>
             <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
               <input
@@ -36,7 +36,7 @@
               :for="`${field}-max`"
             >
               <span class="sr-only">{{ `Maximum ${title} value` }}</span>
-              <span aria-hidden="true">Max</span>  
+              <span aria-hidden="true">Max</span>
             </label>
             <div class="border-b border-gray-300 flex flex-row w-full items-center focus-within:border-red-700">
               <input
@@ -51,13 +51,13 @@
           </div>
 
           <div :data-cy-button="`${field}`">
-            <t-button
+            <button
               type="submit"
               :disabled="!number.min && !number.max"
             >
               <span class="sr-only">{{ `Apply ${title}` }}</span>
               <span aria-hidden="true">Go</span>
-            </t-button>
+            </button>
           </div>
         </div>
       </form>

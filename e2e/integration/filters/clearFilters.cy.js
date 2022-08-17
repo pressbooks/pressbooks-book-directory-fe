@@ -19,7 +19,7 @@ describe('Clear Filters',() => {
 
     it('Clear chip refinement', () => {
       cy.url()
-        .should('include','license=CC%20BY');
+        .should('include','license=CC+BY');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 3);
 
@@ -30,12 +30,12 @@ describe('Clear Filters',() => {
       cy.get('[data-cy=chip-filter]').should('have.length', 2);
 
       cy.url()
-        .should('include','license=CC%20BY-NC-SA%26%26All%20Rights%20Reserved');
+        .should('include','license=CC+BY-NC-SA%26%26All+Rights+Reserved');
     });
 
     it('Clear all refinements', () => {
       cy.url()
-        .should('include','license=CC%20BY');
+        .should('include','license=CC+BY');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 3);
 

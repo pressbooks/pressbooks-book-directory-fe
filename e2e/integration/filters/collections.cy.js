@@ -50,7 +50,7 @@ describe('Filter collections', () => {
         })
         .find('.text-sm')
         .contains('Nursing/Healthcare').should('be.visible')
-        .url().should('include', 'collec=Nursing%2FHealthcare')
+        .url().should('include', 'collec=Nursing/Healthcare')
         .get('[data-cy=book-title]')
         .contains('Nursing Pharmacology')
         .get('[data-cy=book-title]')

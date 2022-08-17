@@ -1,5 +1,5 @@
 <template>
-  <pb-accordion 
+  <pb-accordion
     :open="typeof($store.state.SClient.filtersExcluded[field]) !== 'undefined'"
     :data-cy-button="`${field}`"
   >
@@ -57,8 +57,8 @@
 
 <script>
 import PbAccordion from '../PbAccordion.vue';
-import { CheckCircleIcon, XCircleIcon } from '@vue-hero-icons/outline';
-import { CheckCircleIcon as CheckCircleIconSolid, XCircleIcon as XCircleIconSolid } from '@vue-hero-icons/solid';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/vue/outline';
+import { CheckCircleIcon as CheckCircleIconSolid, XCircleIcon as XCircleIconSolid } from '@heroicons/vue/solid';
 
 export default {
   name: 'PbBooleanFilters',

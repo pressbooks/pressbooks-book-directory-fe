@@ -8,9 +8,7 @@
         placeholder="Books per page"
         :options="items"
         data-cy="books-per-page"
-        @input="(data) => {
-          onInput(data)
-        }"
+        @update:modelValue="onInput"
       />
     </template>
   </ais-hits-per-page>
@@ -33,11 +31,6 @@ export default {
       alias: this.$store.state.SClient.searchParameters.aliases.hitsPerPage
     };
   },
-  watch: {
-    options(opts) {
-      this.itemsOptions = opts;
-    }
-  },
   methods: {
     onInput(data) {
       let routeQuery = {...this.$route.query};
@@ -45,7 +38,7 @@ export default {
         !routeQuery[this.alias] ||
         (
           routeQuery[this.alias] &&
-          data != routeQuery[this.alias]
+          data !== routeQuery[this.alias]
         )
       ) {
         this.sendFilterAppliedInsight(

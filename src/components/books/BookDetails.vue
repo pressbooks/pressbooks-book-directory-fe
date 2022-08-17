@@ -41,7 +41,7 @@
       />
     </div>
     <div data-cy="book-description">
-      <v-clamp
+      <vue-clamp
         v-if="hasDescription"
         autoresize
         :max-lines="maxLinesDescription"
@@ -63,20 +63,20 @@
             <span aria-hidden="true">Read more</span>
           </button>
         </template>
-      </v-clamp>
+      </vue-clamp>
     </div>
   </div>
 </template>
 
 <script>
 import MetaInfo from './MetaInfo.vue';
-import VClamp from 'vue-clamp';
+import VueClamp from '../VueClamp.vue';
 
 export default {
   name: 'BookDetails',
   components: {
     MetaInfo,
-    VClamp
+    VueClamp
   },
   props: {
     item: {
@@ -127,13 +127,13 @@ export default {
   methods: {
     sendClickInsight() {
       this.sendInsight({
-        insightsMethod: 'clickedObjectIDsAfterSearch', 
+        insightsMethod: 'clickedObjectIDsAfterSearch',
         payload: {
           eventName: 'Read More Clicked',
           objectIDs: [this.item.objectID],
           positions: [this.item.__position],
           queryID: this.item.__queryID,
-        }, 
+        },
       });
     }
   }

@@ -12,7 +12,7 @@
       aria-label="top pagination"
       data-cy-subfix="top"
     />
-    <books />
+    <pb-books />
     <pb-pagination
       aria-label="bottom pagination"
       data-cy-subfix="bottom"
@@ -23,11 +23,11 @@
 <script>
 import PbStats from '../PbStats.vue';
 import PbActiveFilters from '../filters/PbActiveFilters.vue';
-import Books from './Books.vue';
+import PbBooks from './PbBooks.vue';
 import PbPagination from '../PbPagination.vue';
 import PbShareButton from '../forms/PbShare.vue';
 export default {
   name: 'PbPaginatedBooks',
-  components: {PbShareButton, PbPagination, Books, PbActiveFilters, PbStats},
+  components: {PbBooks, PbShareButton, PbPagination, PbActiveFilters, PbStats},
 };
 </script>

@@ -16,7 +16,7 @@ describe('Search', () => {
 
       cy.get('[data-cy=book-card]').should('have.length', 2);
       cy.url()
-        .should('include','q=math%20science');
+        .should('include','q=math+science');
 
     });
 
@@ -41,11 +41,11 @@ describe('Search', () => {
 
       cy.get('[data-cy=book-card]').should('have.length', 2);
       cy.url()
-        .should('include','q=math%20science');
+        .should('include','q=math+science');
 
       cy.get(Elements.returnHomeButton).click();
 
-      cy.url().should('equal','http://localhost:3001/');
+      cy.url().should('not.contain','q=');
 
     });
 

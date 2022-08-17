@@ -1,6 +1,6 @@
 <template>
   <a
-    v-lazy-container="{ selector: 'img', error: defaulImg, loading: defaulImg }"
+    v-lazy-container="{ selector: 'img', error: defaultImg, loading: defaultImg }"
     :href="url"
     target="_blank"
     rel="noopener"
@@ -31,7 +31,7 @@ export default {
   emits: ['book-cover-click'],
   data() {
     return {
-      defaulImg: '/assets/images/default-book-cover.jpg'
+      defaultImg: '/assets/images/default-book-cover.jpg'
     };
   }
 };

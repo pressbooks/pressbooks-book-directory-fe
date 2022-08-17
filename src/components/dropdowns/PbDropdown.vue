@@ -1,21 +1,26 @@
 <template>
   <div>
-    <vue-select
-      v-model="itemSelected"
+    <v-select
+      :model-value="itemSelected"
       :options="options"
       :placeholder="placeholder"
       :searchable="searchable"
       :clearable="clearable"
       :disabled="disabled"
-      @input="select"
+      @update:modelValue="select"
     />
   </div>
 </template>
 
 <script>
 
+import vSelect from 'vue-select';
+
 export default {
   name: 'PbDropdown',
+  components: {
+    vSelect
+  },
   props: {
     clearable: {
       type: Boolean,
@@ -23,7 +28,9 @@ export default {
     },
     options: {
       type: Array,
-      default() { return []; }
+      default() {
+        return [];
+      }
     },
     placeholder: {
       type: String,
@@ -38,7 +45,7 @@ export default {
       default: false,
     },
   },
-  emits: ['input'],
+  emits: ['update:modelValue'],
   data() {
     return {
       itemSelected: ''
@@ -52,9 +59,10 @@ export default {
     });
   },
   methods: {
-    select({ value }) {
-      this.$emit('input', value);
+    select(event)  {
+      this.itemSelected = event;
+      this.$emit('update:modelValue', event.value);
     }
-  }
+  },
 };
 </script>
