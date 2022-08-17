@@ -1,6 +1,5 @@
 {
   "name": "pressbooks-directory",
-  "private": true,
   "version": "2.6.0",
   "type": "module",
   "scripts": {
