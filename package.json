@@ -40,7 +40,7 @@
   "devDependencies": {
     "@sentry/vue": "^7.11.1",
     "@vitejs/plugin-vue": "^3.0.3",
-    "@vue/compiler-sfc": "^3.2.37",
+    "@vue/compiler-sfc": "^3.2.38",
     "autoprefixer": "^10.4.8",
     "cypress": "^10.6.0",
     "cypress-wait-until": "^1.7.2",
