@@ -41,7 +41,7 @@
     "@sentry/vue": "^7.12.1",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/compiler-sfc": "^3.2.39",
-    "autoprefixer": "^10.4.8",
+    "autoprefixer": "^10.4.9",
     "cypress": "^10.7.0",
     "cypress-wait-until": "^1.7.2",
     "eslint": "^8.23.0",
