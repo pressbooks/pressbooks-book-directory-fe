@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { XCircleIcon } from '@heroicons/vue/outline';
+import { XCircleIcon } from '@heroicons/vue/24/outline';
 import helpers from '../../store/helpers';
 
 export default {
