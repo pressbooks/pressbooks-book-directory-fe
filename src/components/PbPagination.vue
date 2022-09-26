@@ -24,7 +24,7 @@
             @click.prevent="changePage($store.state.SClient.searchParameters.page - 1)"
           >
             <span class="sr-only">Previous page</span>
-            <ArrowNarrowLeftIcon class="h-6 w-6 text-pb-red" />
+            <ArrowLongLeftIcon class="h-6 w-6 text-pb-red" />
           </a>
         </li>
         <li
@@ -51,7 +51,7 @@
             @click.prevent="changePage(parseInt($store.state.SClient.searchParameters.page) + 1)"
           >
             <span class="sr-only">Next page</span>
-            <ArrowNarrowRightIcon class="h-6 w-6 text-pb-red" />
+            <ArrowLongRightIcon class="h-6 w-6 text-pb-red" />
           </a>
         </li>
       </ul>
@@ -60,14 +60,14 @@
 </template>
 
 <script>
-import { ArrowNarrowLeftIcon, ArrowNarrowRightIcon } from '@heroicons/vue/outline';
+import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/24/outline';
 import {scrollTo} from '../utils/helpers';
 
 export default {
   name: 'PbPagination',
   components: {
-    ArrowNarrowLeftIcon,
-    ArrowNarrowRightIcon
+    ArrowLongLeftIcon,
+    ArrowLongRightIcon
   },
   props: {
     dataCySubfix: {

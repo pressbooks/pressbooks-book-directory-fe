@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import {SearchIcon} from '@heroicons/vue/outline';
+import {MagnifyingGlassIcon as SearchIcon} from '@heroicons/vue/24/outline';
 import PbAccordion from '../PbAccordion.vue';
 import PbFilterButtons from './PbFilterButtons.vue';
 
