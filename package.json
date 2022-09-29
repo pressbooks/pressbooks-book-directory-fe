@@ -38,7 +38,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@sentry/vue": "^7.13.0",
+    "@sentry/vue": "^7.14.0",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/compiler-sfc": "^3.2.39",
     "autoprefixer": "^10.4.12",
