@@ -24,7 +24,7 @@
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vuepic/vue-datepicker": "^3.5.2",
     "algoliasearch": "^4.14.2",
-    "dayjs": "^1.11.5",
+    "dayjs": "^1.11.6",
     "instantsearch.js": "^4.48.1",
     "intro.js": "^3.4.0",
     "nprogress": "^0.2.0",
