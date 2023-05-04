@@ -21,7 +21,8 @@
                             <li id="menu-item-1" class="menu-item menu-item-1 mr-[25px]"><a href="https://pressbooks.com/our-products/">Products</a></li>
                             <li id="menu-item-2" class="menu-item menu-item-2 mx-[25px]"><a href="https://pressbooks.com/plans-pricing/">Plans &amp; pricing</a></li>
                             <li id="menu-item-3" class="menu-item menu-item-3 mx-[25px]"><a href="#">Pressbooks Directory</a></li>
-                            <li id="menu-item-4" class="menu-item menu-item-4 mx-[25px] inline-block text-center py-3 px-6 border-2 border-red-700 text-white bg-red-700 rounded-full leading-[17px]"><a class="py-[10px]" href="https://pressbooks.com/request-a-pressbooks-demo/">Get a demo</a></li>
+                            <li id="menu-item-4" class="menu-item menu-item-4 mx-[25px]"><a href="https://pressbooks.com/about/">About</a></li>
+                            <li id="menu-item-5" class="menu-item menu-item-5 mx-[25px] inline-block text-center py-3 px-6 border-2 border-red-700 text-white bg-red-700 rounded-full leading-[17px]"><a class="py-[10px]" href="https://pressbooks.com/request-a-pressbooks-demo/">Get a demo</a></li>
                         </ul></div>			</nav>
             </div>
         </div>
