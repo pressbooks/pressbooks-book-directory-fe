@@ -1,4 +1,4 @@
-name: Run e2e Tests on Chrome
+name: Run e2e Tests
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     branches: [dev]
 
 jobs:
-  chrome:
+  Cypress E2E tests:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
@@ -25,6 +25,8 @@ jobs:
           VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA }}
           VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
         with:
+          start: npm run dev
+          wait-on: http://localhost:3001
           browser: chrome
 
       #     - name: Deploy to AWS Testing
