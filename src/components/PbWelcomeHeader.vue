@@ -14,13 +14,13 @@
       </p>
 
       <div class="flex items-center justify-center mt-4 mx-auto">
-          <button
-                  class="border-pb-red rounded-full text-lg py-3 px-6 text-pb-red border-2 font-semibold mr-6"
-                  @click="startTour"
-          >
-              Tour the Directory
-          </button>
-          <a
+        <button
+          class="border-pb-red rounded-full text-lg py-3 px-6 text-pb-red border-2 font-semibold mr-6"
+          @click="startTour"
+        >
+          Tour the Directory
+        </button>
+        <a
           :href="site"
           target="_blank"
           rel="noopener"
@@ -30,7 +30,6 @@
         >
           Learn more about Pressbooks
         </a>
-
       </div>
     </div>
   </section>
