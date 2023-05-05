@@ -9,7 +9,7 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
+    container: cypress/base:16.16.0
     name: Testing
     env:
       VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
