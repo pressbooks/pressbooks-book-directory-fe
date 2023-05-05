@@ -7,7 +7,7 @@ on:
     branches: [ dev, production ]
 
 jobs:
-  testing:
+  lint-and-build:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
