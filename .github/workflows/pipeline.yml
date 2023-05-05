@@ -2,14 +2,14 @@ name: Tests
 
 on:
   push:
-    branches: [ dev, master, v2 ]
+    branches: [ dev, production ]
   pull_request:
-    branches: [ dev, v2 ]
+    branches: [ dev, production ]
 
 jobs:
   testing:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node12.18.3-chrome87-ff82
+    container: cypress/browsers:node16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1
     name: Testing
     env:
       VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
@@ -24,9 +24,9 @@ jobs:
         with:
           fetch-depth: 2
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '16, 18'
 
       - name: Debug Env
         run: |
@@ -37,19 +37,19 @@ jobs:
       - name: Install dependencies
         run: |
           node -v
-          npm i
+          npm ci
 
       - name: Lint
         run: npm run lint
 
-      - uses: marceloprado/has-changed-path@v1
+      - uses: marceloprado/has-changed-path@v1.0.1
         id: code-changes
         with:
           paths: src e2e
 
       - name: e2e Tests
         if: steps.code-changes.outputs.changed == 'true'
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5.7.1
         with:
           start: npm run dev
           wait-on: http://localhost:3001
@@ -81,4 +81,3 @@ jobs:
           aws-access-key: ${{ secrets.AWS_PIPELINE_PROD_ACCESS_KEY }}
           aws-secret-key: ${{ secrets.AWS_PIPELINE_PROD_SECRET_KEY }}
           pipeline-name: "pressbooks-directory"
-
