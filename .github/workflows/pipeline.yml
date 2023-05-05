@@ -9,8 +9,11 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '16', '18' ]
     container: cypress/base:16.16.0
-    name: Testing
+    name: Node ${{ matrix.node }}
     env:
       VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
       VITE_ALGOLIA_API_READ_KEY: ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
@@ -19,14 +22,19 @@ jobs:
       VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA }}
       VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
+          node-version: ${{ matrix.node }}
           fetch-depth: 2
 
-      - uses: actions/setup-node@v3
+      - name: Cache node modules
+        uses: actions/cache@v3
         with:
-          node-version: 16
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
 
       - name: Debug Env
         run: |
@@ -42,12 +50,15 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Build assets
+        run: npm run build --if-present
+
       - uses: marceloprado/has-changed-path@v1.0.1
         id: code-changes
         with:
           paths: src e2e
 
-      - name: e2e Tests
+      - name: Run e2e Tests
         if: steps.code-changes.outputs.changed == 'true'
         uses: cypress-io/github-action@v5.7.1
         with:
