@@ -54,7 +54,7 @@ jobs:
       - name: Build assets
         run: npm run build --if-present
 
-      - uses: marceloprado/has-changed-path@v1
+      - uses: marceloprado/has-changed-path@v1.0.1
         id: code-changes
         with:
           paths: src e2e
