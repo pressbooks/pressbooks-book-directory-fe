@@ -23,12 +23,13 @@ jobs:
       VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          fetch-depth: 2
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -53,7 +54,7 @@ jobs:
       - name: Build assets
         run: npm run build --if-present
 
-      - uses: marceloprado/has-changed-path@v1.0.1
+      - uses: marceloprado/has-changed-path@v1
         id: code-changes
         with:
           paths: src e2e
