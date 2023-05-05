@@ -1,0 +1,63 @@
+name: Run e2e Tests on Chrome
+
+on:
+  push:
+    branches: [dev, production]
+    tags:
+      - '*.*.*'
+  pull_request:
+    branches: [dev]
+
+jobs:
+  chrome:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cypress-io/github-action@v5.7.1
+      with:
+        browser: chrome
+        env:
+          VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
+          VITE_ALGOLIA_API_READ_KEY: ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
+          VITE_ALGOLIA_INDEX: ${{ secrets.VITE_ALGOLIA_INDEX }}
+          VITE_ALGOLIA_INDEX_ALPHABETICAL_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_ALPHABETICAL_REPLICA }}
+          VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA: ${{ secrets.VITE_ALGOLIA_INDEX_LAST_UPDATED_REPLICA }}
+          VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
+
+    - name: Debug Env
+      run: |
+        echo ${{ secrets.VITE_ALGOLIA_APP_ID }}
+        echo ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
+        echo ${{ secrets.VITE_ALGOLIA_INDEX }}
+
+#      - uses: marceloprado/has-changed-path@v1.0.1
+#        id: code-changes
+#        with:
+#          paths: src e2e
+
+#     - name: Deploy to AWS Testing
+#       uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+#       if: github.ref == 'refs/heads/v2'
+#       with:
+#         aws-region: "ca-central-1"
+#         aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
+#         aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
+#         pipeline-name: "v2_pressbooks_directory"
+
+    - name: Deploy to AWS Dev
+      uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+      if: github.ref == 'refs/heads/dev'
+      with:
+        aws-region: "ca-central-1"
+        aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
+        aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
+        pipeline-name: "pressbooks-directory-front-end"
+
+    - name: Deploy to AWS Production
+      uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+      if: github.ref == 'refs/heads/production'
+      with:
+        aws-region: "ca-central-1"
+        aws-access-key: ${{ secrets.AWS_PIPELINE_PROD_ACCESS_KEY }}
+        aws-secret-key: ${{ secrets.AWS_PIPELINE_PROD_SECRET_KEY }}
+        pipeline-name: "pressbooks-directory"

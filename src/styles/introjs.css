@@ -227,12 +227,11 @@ tr.introjs-showElement > th {
     box-sizing: content-box;
     position: relative;
     overflow: visible;
-    display: inline-block;
     text-decoration: none;
     cursor: pointer;
     outline: none;
     zoom: 1;
-    *display: inline;
+    display: inline;
 }
 
 .introjs-skipbutton {
@@ -257,6 +256,7 @@ tr.introjs-showElement > th {
     background-color: #f4f4f4;
     background-image: none;
     text-decoration: none; }
+
 .introjs-disabled:hover, .introjs-disabled:focus {
     color: #9e9e9e;
     border-color: #bdbdbd;
@@ -274,6 +274,7 @@ tr.introjs-showElement > th {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px; }
+
 .introjs-bullets ul {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
@@ -281,12 +282,14 @@ tr.introjs-showElement > th {
     margin: 0 auto 0;
     padding: 0;
     display: inline-block; }
+
 .introjs-bullets ul li {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
     list-style: none;
     float: left;
     margin: 0 2px; }
+
 .introjs-bullets ul li a {
     -webkit-transition: width 0.1s ease-in;
     -o-transition: width 0.1s ease-in;
@@ -300,11 +303,13 @@ tr.introjs-showElement > th {
     border-radius: 10px;
     text-decoration: none;
     cursor: pointer; }
+
 .introjs-bullets ul li a:hover, .introjs-bullets ul li a:focus {
     width: 15px;
     background: #999;
     text-decoration: none;
     outline: none; }
+
 .introjs-bullets ul li a.active {
     width: 15px;
     background: #999; }
@@ -346,9 +351,11 @@ tr.introjs-showElement > th {
     width: 20px;
     height: 15px;
     cursor: pointer; }
+
 .introjs-hint:focus {
     border: 0;
     outline: 0; }
+
 .introjs-hint:hover > .introjs-hint-pulse {
     border: 5px solid rgba(60, 60, 60, 0.57); }
 
