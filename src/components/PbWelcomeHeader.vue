@@ -3,34 +3,23 @@
     <div class="container mx-auto w-full md:w-2/3 p-8">
       <h1
         id="welcome-section-title"
-        class="section-title text-5xl mb-8 font-bold text-center"
+        class="section-title text-4xl mb-8 font-bold text-center"
       >
         Welcome to Pressbooks Directory
       </h1>
 
       <p class="font-serif leading-7 text-lg">
-        Pressbooks Directory provides an index of <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> books published across <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> Pressbooks
-        networks. Learn to use the Directory by taking a
-        <button
-          class="text-pb-red underline"
-          @click="startTour"
-        >
-          self-guided tour
-        </button> or reading
-        <a
-          :href="guide"
-          class="text-pb-red underline"
-          target="_blank"
-          rel="noopener"
-          @click="sendGuideInsight"
-        >our guide</a>.
-      </p>
-
-      <p class="mt-4 font-serif leading-7 text-lg">
-        Pressbooks Directory is more powerful when paired with Pressbooks Create, which allows you to clone, revise, remix, and redistribute all of the openly licensed content found through this Directory.
+        Pressbooks Directory provides a free index of <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published across <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> Pressbooks
+        networks. Pressbooks users can easily clone, revise, remix, and redistribute all of the openly licensed content found here.
       </p>
 
       <div class="flex items-center justify-center mt-4 mx-auto">
+        <button
+          class="border-pb-red rounded-full text-lg py-3 px-6 text-pb-red border-2 font-semibold mr-6"
+          @click="startTour"
+        >
+          Tour the Directory
+        </button>
         <a
           :href="site"
           target="_blank"
@@ -71,17 +60,11 @@ export default {
   },
   methods: {
     startTour() {
-      this.sendFilterAppliedInsight(
+      this.sendInsight(
         ['tour:opened'],
-        'Start Tour Link Clicked'
+        'Start Tour Button Clicked'
       );
       this.$store.commit('showTour');
-    },
-    sendGuideInsight() {
-      this.sendFilterAppliedInsight(
-        ['guide:opened'],
-        'Our Guide Link Clicked'
-      );
     },
     sendWelcomeCTAInsight() {
       this.sendInsight({

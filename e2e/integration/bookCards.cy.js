@@ -29,15 +29,20 @@ describe('Book cards', function () {
         });
     });
     it('Filter by subject and check the subject attribute is present in the book cards', () => {
-      const subjectFilter = 'Chemistry', facet = 'about';
+      const subjectFilter = 'Chemistry';
+      const facet = 'about';
       clickAccordionHeader(facet);
       clickFilter(facet, subjectFilter, true);
-      cy.get(Elements.booksCards.subjects)
-        .each(($subjectElement) => {
-          cy.wrap($subjectElement)
-            .should('exist')
-            .contains(subjectFilter);
-        });
+      // Wait for the subject elements to appear
+      cy.get(Elements.booksCards.subjects).should('exist');
+      // Iterate over each subject element and validate the subject attribute
+      cy.get(Elements.booksCards.subjects).each(($subjectElement) => {
+        cy.wrap($subjectElement)
+          .invoke('text')
+          .then((subjectText) => {
+            expect(subjectText).to.contain(subjectFilter);
+          });
+      });
     });
     it('Filter by publisher and check the publisher attribute is present in the book cards', () => {
       const publisherFilter = 'Open SUNY Textbooks', facet = 'publisherName';
@@ -184,7 +189,7 @@ describe('Book cards', function () {
 
       cy.get(Elements.booksCards.cover)
         .eq(3).find('img')
-        .should('have.attr', 'src')
+        .should('have.attr', 'data-src')
         .should('include', 'Math-for-Trades-Volume-1-COVER-STORE.jpg');
     });
     it('Lazy loading cover images', () => {

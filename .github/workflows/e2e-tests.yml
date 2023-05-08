@@ -1,16 +1,17 @@
-name: Tests
+name: Run e2e Tests
 
 on:
   push:
-    branches: [ dev, master, v2 ]
+    branches: [dev, production]
+    tags:
+      - '*.*.*'
   pull_request:
-    branches: [ dev, v2 ]
+    branches: [dev]
 
 jobs:
-  testing:
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node12.18.3-chrome87-ff82
-    name: Testing
+  e2e-tests:
+    runs-on: ubuntu-20.04
+    container: cypress/browsers:node16.16.0-chrome107-ff107
     env:
       VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
       VITE_ALGOLIA_API_READ_KEY: ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
@@ -20,13 +21,7 @@ jobs:
       VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+        uses: actions/checkout@v3
 
       - name: Debug Env
         run: |
@@ -34,37 +29,24 @@ jobs:
           echo ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
           echo ${{ secrets.VITE_ALGOLIA_INDEX }}
 
-      - name: Install dependencies
-        run: |
-          node -v
-          npm i
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v5.7.1
 
-      - name: Lint
-        run: npm run lint
-
-      - uses: marceloprado/has-changed-path@v1
-        id: code-changes
-        with:
-          paths: src e2e
-
-      - name: e2e Tests
-        if: steps.code-changes.outputs.changed == 'true'
-        uses: cypress-io/github-action@v4
         with:
           start: npm run dev
           wait-on: http://localhost:3001
           browser: chrome
 
-      - name: Deploy to AWS Testing
-        uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
-        if: github.ref == 'refs/heads/v2'
-        with:
-          aws-region: "ca-central-1"
-          aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
-          aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
-          pipeline-name: "v2_pressbooks_directory"
+      #     - name: Deploy to AWS Testing
+      #       uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
+      #       if: github.ref == 'refs/heads/v2'
+      #       with:
+      #         aws-region: "ca-central-1"
+      #         aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
+      #         aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
+      #         pipeline-name: "v2_pressbooks_directory"
 
-      - name: Deploy to AWS Dev / Staging
+      - name: Deploy to AWS Dev
         uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
         if: github.ref == 'refs/heads/dev'
         with:
@@ -75,10 +57,9 @@ jobs:
 
       - name: Deploy to AWS Production
         uses: zulhfreelancer/aws-codepipeline-action@v1.0.7
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/production'
         with:
           aws-region: "ca-central-1"
           aws-access-key: ${{ secrets.AWS_PIPELINE_PROD_ACCESS_KEY }}
           aws-secret-key: ${{ secrets.AWS_PIPELINE_PROD_SECRET_KEY }}
           pipeline-name: "pressbooks-directory"
-

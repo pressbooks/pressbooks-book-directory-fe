@@ -6,6 +6,7 @@
 @import "styles/dropdown.css";
 @import "styles/tour.scss";
 @import "nprogress/nprogress.css";
+
 .dp__theme_light {
     --dp-primary-color: theme('colors.pb-red');
 }

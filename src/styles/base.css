@@ -1,1 +1,24 @@
 @tailwind base;
+
+ul#footer-menu > li {
+    margin-bottom: 20px;
+    break-inside: avoid;
+}
+
+.footer__upper nav ul>li:first-child {
+    margin-top: 0;
+}
+
+.footer__upper a {
+    font-weight: 700;
+}
+
+.footer__upper ul.sub-menu a {
+    font-weight: normal;
+}
+
+.footer__form input::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    color: black;
+}
