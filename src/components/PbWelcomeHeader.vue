@@ -9,8 +9,8 @@
       </h1>
 
       <p class="font-serif leading-7 text-lg">
-        Pressbooks Directory provides a free index of <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published across <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> Pressbooks
-        networks. Pressbooks users can easily clone, revise, remix, and redistribute all of the openly licensed content found here.
+        Pressbooks Directory provides a free, searchable index of <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published across <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> Pressbooks
+        networks. It's easy to copy, revise, remix, and redistribute any openly licensed content found here using Pressbooks' publishing platform.
       </p>
 
       <div class="flex items-center justify-center mt-4 mx-auto">
