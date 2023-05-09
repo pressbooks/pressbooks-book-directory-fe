@@ -3,68 +3,45 @@
     id="header"
     class="header shadow"
   >
-    <div class="header__wrap flex items-center justify-between mx-auto w-[calc(100%-160px)] max-w-[1180px] lg:max-w-[1440px] py-[30px]">
-      <div class="header__logo">
-        <a
-          href="https://pressbooks.com/"
-          title="Pressbooks Home Page"
-          data-cy="return-home-button"
-        >
-          <img
-            src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/svg/logos/pressbooks_logo.svg"
-            alt="Pressbooks logo"
-            class="logo h-[27px] w-auto"
-          >
-        </a>
-      </div>
-      <div class="header__nav block">
-        <nav
-          class="flex justify-between items-center space-x-4"
-          aria-labelledby="menu-main"
-        >
-          <div class="menu-primary-container">
-            <ul
-              id="menu-main"
-              class="header-nav items-center flex font-bold text-[17px]"
-            >
-              <li
-                id="menu-item-1"
-                class="menu-item menu-item-1 mr-[25px]"
-              >
-                <a href="https://pressbooks.com/our-products/">Products</a>
-              </li>
-              <li
-                id="menu-item-2"
-                class="menu-item menu-item-2 mx-[25px]"
-              >
-                <a href="https://pressbooks.com/plans-pricing/">Plans &amp; pricing</a>
-              </li>
-              <li
-                id="menu-item-3"
-                class="menu-item menu-item-3 mx-[25px]"
-              >
-                <a href="#">Pressbooks Directory</a>
-              </li>
-              <li
-                id="menu-item-4"
-                class="menu-item menu-item-4 mx-[25px]"
-              >
-                <a href="https://pressbooks.com/about/">About</a>
-              </li>
-              <li
-                id="menu-item-5"
-                class="menu-item menu-item-5 mx-[25px] inline-block text-center py-3 px-6 border-2 border-red-700 text-white bg-red-700 rounded-full leading-[17px]"
-              >
+   <nav class="bg-white border-gray-200">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto items-center w-[calc(100%-160px)] max-w-[1180px] lg:max-w-[1440px] py-[30px]">
                 <a
-                  class="py-[10px]"
-                  href="https://pressbooks.com/request-a-pressbooks-demo/"
-                >Get a demo</a>
-              </li>
-            </ul>
-          </div>
+                            href="https://pressbooks.com/"
+                            title="Pressbooks Home Page"
+                            data-cy="return-home-button"
+                            class="flex items-center"
+                    >
+                        <img
+                                src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/svg/logos/pressbooks_logo.svg"
+                                alt="Pressbooks logo"
+                                class="logo h-[27px] w-auto mr-3"
+                        >
+                </a>
+                <button data-collapse-toggle="navbar-top" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                </button>
+                <div class="hidden w-full lg:block lg:w-auto" id="navbar-top">
+                    <ul class="font-medium flex items-center flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-white">
+                        <li>
+                            <a href="https://pressbooks.com/our-products" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]">Products</a>
+                        </li>
+                        <li>
+                            <a href="https://pressbooks.com/plans-pricing/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]">Plans & Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]">Pressbooks Directory</a>
+                        </li>
+                        <li>
+                            <a href="https://pressbooks.com/about/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]">About</a>
+                        </li>
+                        <li class="lg:inline-block lg:text-center lg:border-2 lg:border-red-700 lg:text-white lg:bg-red-700 lg:rounded-full leading-[17px] lg:hover:bg-red-900 lg:hover:border-red-900">
+                            <a href="https://pressbooks.com/request-a-pressbooks-demo/" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:py-3 lg:px-6 font-bold text-[17px]">Get a demo</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-      </div>
-    </div>
   </header>
 </template>
 <script setup>
