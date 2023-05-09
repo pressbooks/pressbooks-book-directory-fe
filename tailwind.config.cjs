@@ -6,6 +6,7 @@ module.exports = {
     './**/*.html',
     './public/**/*.html',
     './src/**/*.{js,vue}',
+    './node_modules/flowbite/**/*.js'
   ],
   theme: {
     extend: {
@@ -23,5 +24,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
+    require('flowbite/plugin')
   ]
 };
