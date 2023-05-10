@@ -29,9 +29,14 @@ jobs:
           echo ${{ secrets.VITE_ALGOLIA_API_READ_KEY }}
           echo ${{ secrets.VITE_ALGOLIA_INDEX }}
 
-      - name: Run e2e tests
-        uses: cypress-io/github-action@v5.7.1
+      - uses: marceloprado/has-changed-path@v1.0.1
+        id: code-changes
+        with:
+          paths: src e2e
 
+      - name: Run e2e tests
+        if: steps.code-changes.outputs.changed == 'true'
+        uses: cypress-io/github-action@v5.7.1
         with:
           start: npm run dev
           wait-on: http://localhost:3001
