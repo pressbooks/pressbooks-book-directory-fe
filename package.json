@@ -29,7 +29,7 @@
     "intro.js": "6.0.0",
     "nprogress": "^0.2.0",
     "resize-detector": "^0.3.0",
-    "search-insights": "2.6.0",
+    "search-insights": "2.5.0",
     "vue": "^3.2.37",
     "vue-instantsearch": "^4.9.0",
     "vue-lazyload": "^3.0.0",
