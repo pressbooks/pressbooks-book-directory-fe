@@ -9,17 +9,17 @@ describe('BookCard Collections Filters', () => {
       cy.algoliaQueryRequest('algoliaRequest');
       cy.wait(1500);
 
-      cy.get(Elements.booksCards.bookTags)
+      cy.get(Elements.bookCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .should('have.class', 'text-white');
 
-      cy.get(Elements.booksCards.bookTags)
+      cy.get(Elements.bookCards.bookTags)
         .eq(1)
         .find('li:nth-of-type(1) button')
         .should('have.class', 'text-white');
 
-      cy.get(Elements.booksCards.bookTags)
+      cy.get(Elements.bookCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .click();
@@ -27,7 +27,7 @@ describe('BookCard Collections Filters', () => {
       cy.visit('/?license=CC+BY');
       cy.wait(1500);
 
-      cy.get(Elements.booksCards.bookTags)
+      cy.get(Elements.bookCards.bookTags)
         .eq(1)
         .find('li:first-child button')
         .should('have.class', 'text-pb-red')
@@ -36,7 +36,7 @@ describe('BookCard Collections Filters', () => {
       cy.visit('/?collec=Nursing/Healthcare');
       cy.wait(1500);
 
-      cy.get(Elements.booksCards.bookTags)
+      cy.get(Elements.bookCards.bookTags)
         .eq(0)
         .find('li:first-child button')
         .should('have.class', 'text-white');

@@ -3,7 +3,7 @@
     data-cy="book-card"
     class="flex flex-col md:flex-row gap-8 items-start border border-gray-300 px-8 py-8 shadow-md"
   >
-    <book-media
+    <book-cover
       :item="item"
       @book-title-click="$emit('book-clicked')"
     />
@@ -32,7 +32,7 @@
 <script>
 import BookInfo from './BookInfo.vue';
 import BookDetails from './BookDetails.vue';
-import BookMedia from './BookMedia.vue';
+import BookCover from './BookCover.vue';
 import CollectionTag from './CollectionTag.vue';
 
 export default {
@@ -41,7 +41,7 @@ export default {
     CollectionTag,
     BookInfo,
     BookDetails,
-    BookMedia,
+    BookCover,
   },
   props: {
     item: {

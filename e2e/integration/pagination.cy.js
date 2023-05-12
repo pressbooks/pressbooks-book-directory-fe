@@ -8,7 +8,7 @@ describe('Pagination', () => {
       cy.get(Elements.search.input).as('inputSearch').clear();
       cy.get(Elements.search.button).as('buttonSearch');
 
-      cy.get(Elements.booksCards.title).first().as('firstBookTitle');
+      cy.get(Elements.bookCards.title).first().as('firstBookTitle');
       cy.get(Elements.paginatorLink(1)).as('firstPageLink');
       cy.get('[data-cy=paginator-next-top]').as('nextPaginatorArrow');
 

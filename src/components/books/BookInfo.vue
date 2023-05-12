@@ -20,7 +20,7 @@
       </a>
     </h2>
     <p class="leading-tight">
-      <span data-cy="book-license">{{ bookLicense }}</span> | <template v-if="hasH5PActivities">
+      <span data-cy="book-copyright-license">{{ bookLicense }}</span> | <template v-if="hasH5PActivities">
         <a
           :href="item.url + 'h5p-listing'"
           class="text-pb-red underline"

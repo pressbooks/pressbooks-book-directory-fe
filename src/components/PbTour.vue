@@ -293,7 +293,7 @@ export default {
               // Rebind DOM for remaining steps on the book card
               this.intro._introItems[12].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]');
               this.intro._introItems[13].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
-              this.intro._introItems[14].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-license"]');
+              this.intro._introItems[14].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-copyright-license"]');
               this.intro._introItems[15].element = document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-icons"]');
             }, 1000);
           }, 1000);

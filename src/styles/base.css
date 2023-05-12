@@ -1,5 +1,13 @@
 @tailwind base;
 
+b, strong {
+    font-weight: 700;
+}
+
+em, i {
+    font-style: italic;
+}
+
 ul#footer-menu > li {
     margin-bottom: 20px;
     break-inside: avoid;

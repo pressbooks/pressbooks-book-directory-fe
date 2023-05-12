@@ -144,9 +144,9 @@ for (const facet in facetFilters) {
         }
         sortBy('updated');
         cy.wait(1500);
-        cy.get(Elements.booksCards.title)
+        cy.get(Elements.bookCards.title)
           .each(($title) => {
-            cy.get(Elements.booksCards.title).should(() => {
+            cy.get(Elements.bookCards.title).should(() => {
               expect($title.text().replace(/(\r\n|\n|\r)/gm, '').trim())
                 .to.contain.oneOf(bookCards.titles);
             });

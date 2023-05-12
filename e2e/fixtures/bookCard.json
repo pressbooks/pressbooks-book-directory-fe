@@ -2,7 +2,6 @@
   "network": "pressbooks.lib.vt.edu | Pressbooks at Virginia Tech",
   "title": "Significant Statistics",
   "wordCount": "275,135",
-  "size": "233.53",
   "h5pActivities": "191",
   "authors": "Adapted by John Morgan Russell, from Barbara Illowsky and Susan Dean, David Diez, Mine Cetinkaya-Rundel and Christopher D. Barr, Julie Vu and David Harrington",
   "editors": "Anita Walz",
@@ -11,8 +10,6 @@
   "publisher": "Department of Statistics in affiliation with the University Libraries at Virginia Tech",
   "language": "English",
   "description": "Significant Statistics: An Introduction to Statistics is intended for the one-semester",
-  "license": "assets/images/licenses/by-sa.png",
-  "h5p": "/assets/images/h5p.png",
-  "notOriginal": "/assets/images/is-child.png",
+  "license": "CC BY-SA",
   "cover": "https://pressbooks.lib.vt.edu/app/uploads/sites/12/2021/01/Option-2.png"
 }
