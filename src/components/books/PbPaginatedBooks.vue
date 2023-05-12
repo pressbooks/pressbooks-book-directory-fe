@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="books"
-    class="w-full flex-1"
-  >
+  <section id="books" class="w-full flex-1" aria-labelledby="results">
     <div class="flex flex-col lg:flex-row lg:justify-between">
       <pb-stats />
       <pb-share-button />
@@ -17,7 +14,7 @@
       aria-label="bottom pagination"
       data-cy-subfix="bottom"
     />
-  </div>
+  </section>
 </template>
 
 <script>

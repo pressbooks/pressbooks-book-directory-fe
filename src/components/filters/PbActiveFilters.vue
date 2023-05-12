@@ -1,11 +1,11 @@
 <template>
   <div data-cy="active-filters">
-    <h2
+    <span
       id="active-filters"
       class="font-semibold text-lg mb-1"
     >
       Active Filters
-    </h2>
+    </span>
     <div
       v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0 || $store.state.config.showTour === true"
       class="flex flex-col md:flex-row justify-between items-start"

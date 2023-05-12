@@ -3,7 +3,7 @@
     id="header"
     class="header shadow"
   >
-    <nav class="bg-white border-gray-200">
+    <nav aria-label="primary-nav" class="bg-white border-gray-200">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto items-center w-[calc(100%-160px)] max-w-[1180px] lg:max-w-[1440px] py-[30px]">
         <a
           href="https://pressbooks.com/"

@@ -1,15 +1,15 @@
 <template>
   <div class="space-y-2">
-    <h3
+    <span
       class="tracking-widest uppercase text-sm font-medium"
       data-cy="book-network"
     >
       <span class="sr-only">Network</span>
       {{ `${item.networkHost} | ${item.networkName}` }}
-    </h3>
-    <h2 class="leading-tight text-xl font-semibold mb-1">
+    </span>
+    <h4 class="leading-tight text-xl font-semibold mb-1">
       <a
-        class="text-red-700"
+        class="text-red-700 underline hover:text-red-900"
         :href="item.url"
         target="_blank"
         rel="noopener"
@@ -18,7 +18,7 @@
       >
         {{ item.name }}
       </a>
-    </h2>
+    </h4>
     <p class="leading-tight">
       <span data-cy="book-copyright-license">{{ bookLicense }}</span> | <template v-if="hasH5PActivities">
         <a

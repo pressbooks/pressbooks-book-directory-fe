@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>
+    <h4>
       <button
         :data-cy="`filter-${dataCyButton}-header-button`"
         :class="[
@@ -18,7 +18,7 @@
           ]"
         />
       </button>
-    </h3>
+    </h4>
     <transition
       enter-active-class="transform transition-all ease-out duration-150"
       enter-from-class="opacity-0 translate-y-full"

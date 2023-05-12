@@ -3,12 +3,13 @@
     <template
       #default="{ nbHits }"
     >
-      <div
+      <h3
         class="font-semibold text-2xl mb-6"
         data-cy="number-of-books"
+        id="results"
       >
         Results:  {{ $filters.numberFormat(nbHits) }} books
-      </div>
+      </h3>
     </template>
   </ais-stats>
 </template>

@@ -1,8 +1,6 @@
 <template>
-  <div class="w-full md:w-60 lg:w-72">
-    <h2 class="font-semibold text-2xl mb-4">
-      Filters
-    </h2>
+  <section class="w-full md:w-60 lg:w-72" aria-labelledby="filters">
+    <h3 id="filters" class="font-semibold text-2xl mb-4">Filters</h3>
     <div
       class="w-full border border-gray-200 shadow divide-y divide-gray-200"
       data-cy="facet-filters"
@@ -14,7 +12,7 @@
         v-bind="{...filter.props}"
       />
     </div>
-  </div>
+  </section>
 </template>
 <script>
 import PbDateRangeFilters from './PbDateRangeFilters.vue';
