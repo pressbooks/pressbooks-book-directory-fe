@@ -12,7 +12,7 @@
           class="flex items-center"
         >
           <img
-            src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/svg/logos/pressbooks_logo.svg"
+            src="/assets/images/logo-color.svg"
             alt="Pressbooks logo"
             class="logo h-[27px] w-auto mr-3"
           >
