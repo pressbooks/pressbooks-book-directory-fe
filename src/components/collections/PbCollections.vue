@@ -1,11 +1,11 @@
 <template>
   <section
     v-if="$store.state[storeName][storeProperty].length >= 5"
-    class="bg-pb-blue"
+    class="bg-pb-blue hidden md:block"
     data-cy="collection-section"
     aria-labelledby="collections-section-title"
   >
-    <div class="container mx-auto py-10 px-8">
+    <div class="mx-auto py-10 px-8 max-w-screen-2xl">
       <div class="border-gray-300">
         <div class="w-full mx-auto text-center">
           <h2
@@ -14,7 +14,7 @@
           >
             Curated Collections
           </h2>
-          <ul 
+          <ul
             role="list"
             aria-labelledby="collections-section-title"
             class="grid grid-cols-1 gap-y-3 md:grid-cols-5 md:gap-x-3"

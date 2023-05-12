@@ -193,7 +193,7 @@ export default {
             {
               title: 'Interpreting book cards',
               intro: `
-        <p>Each book card displays available information about the book, including title, word count, storage size, author(s), subject(s), date last updated, publisher, and language.</p>
+        <p>Each book card displays available information about the book, including title, copyright license, word count, author(s), subject(s), date last updated, publisher, and language.</p>
         <p>Clicking a book's title or cover will take you to the book’s home page.</p>
          `,
               element: document.querySelector('.ais-Hits article[data-cy="book-card"]:nth-of-type(1) [data-cy="book-meta"]'),

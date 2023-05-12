@@ -67,10 +67,6 @@ export default {
           component: 'pb-numeric-filters',
           props: { title: 'H5P Activities', field: 'h5pActivities', 'data-cy': 'h5p-filter' }
         },
-        {
-          component: 'pb-numeric-filters',
-          props: { title: 'Storage', field: 'storageSize', 'data-cy': 'storage-filter' }
-        },
       ]
     };
   }

@@ -2,7 +2,7 @@
   <ais-pagination
     :total-pages="500"
     role="navigation"
-    class="container mx-auto my-4"
+    class="mx-auto my-4"
   >
     <template
       #default="{

@@ -9,11 +9,11 @@
       </h1>
 
       <p class="font-serif leading-7 text-lg">
-        Pressbooks Directory provides a free, searchable catalog that provides access <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published by <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> Pressbooks organizations and
+        Pressbooks Directory is a free, searchable catalog that includes <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published by <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> organizations and
         networks using Pressbooks. It's easy to copy, revise, remix, and redistribute any openly licensed content found here using Pressbooks' publishing platform. Nearly all books are highly accessible, and many include interactive H5P learning activities to engage learners.
       </p>
 
-      <div class="flex items-center justify-center mt-4 mx-auto">
+      <div class="flex items-center justify-center mt-8 mx-auto">
         <button
           class="border-pb-red rounded-full text-lg py-3 px-6 text-pb-red border-2 font-semibold mr-6"
           @click="startTour"

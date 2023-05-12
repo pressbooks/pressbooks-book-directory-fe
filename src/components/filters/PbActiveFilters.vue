@@ -83,7 +83,6 @@ export default {
     },
     getLabel(value) {
       let label;
-      let mb = (value.attribute === 'storageSize') ? parseInt(value.value) : 0;
       switch (value.attribute) {
       case 'hasIsBasedOn':
         label = (value.value) ? 'Based on another book' : 'Original';
@@ -94,9 +93,6 @@ export default {
       case 'lastUpdated':
         let date = dayjs.unix(value.value).utc().format('MM-DD-YYYY');
         label = `Updated ${value.operator} ${date}`;
-        break;
-      case 'storageSize':
-        label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
         break;
       case 'h5pActivities':
         label = 'H5P Activities ' + value.operator + ' ' + value.value;

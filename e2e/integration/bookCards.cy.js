@@ -200,7 +200,7 @@ describe('Book cards', function () {
         .should('have.attr', 'src')
         .should('include', '/assets/images/default-book-cover.jpg');
 
-      cy.get('[data-cy=storage-filter]').scrollIntoView()
+      cy.get('[data-cy=book-license]').scrollIntoView()
         .wait(200);
       cy.get(Elements.booksCards.cover)
         .eq(2).find('img')

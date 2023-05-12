@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-2 my-2">
+  <div class="space-y-2">
     <h3
       class="tracking-widest uppercase text-sm font-medium"
       data-cy="book-network"
@@ -20,7 +20,7 @@
       </a>
     </h2>
     <p class="leading-tight">
-      <span data-cy="book-word-count">{{ $filters.numberFormat(item.wordCount) }}</span> words | <span data-cy="book-size">{{ sizeInMb }}</span> MB | <template v-if="hasH5PActivities">
+      <span data-cy="book-license">{{ bookLicense }}</span> | <template v-if="hasH5PActivities">
         <a
           :href="item.url + 'h5p-listing'"
           class="text-pb-red underline"
@@ -31,7 +31,7 @@
         <span
           data-cy="h5p-count"
         >{{ $filters.numberFormat(item.h5pActivities) }}</span> H5P activities
-      </template>
+      </template> | <span data-cy="book-word-count">{{ $filters.numberFormat(item.wordCount) }}</span> words
     </p>
   </div>
 </template>
@@ -47,13 +47,11 @@ export default {
   },
   emits: ['book-title-click'],
   computed: {
-    sizeInMb() {
-      const size = (parseInt(this.item.storageSize) / 1024) / 1024;
-
-      return size.toFixed(2);
-    },
     hasH5PActivities() {
       return this.item.hasH5pActivities && this.item.h5pActivities > 0;
+    },
+    bookLicense() {
+      return this.item.licenseCode;
     }
   }
 };

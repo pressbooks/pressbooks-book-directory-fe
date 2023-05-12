@@ -47,16 +47,9 @@ function setFilters(oldFilters, allowedFilters) {
     if (numerics[attr].length > 1) {
       let v1 = numerics[attr][0].value;
       let v2 = numerics[attr][1].value;
-      if (attr === 'storageSize') {
-        v1 = numerics[attr][0].value * 1024 * 1024;
-        v2 = numerics[attr][1].value * 1024 * 1024;
-      }
       ns.push(attr + ':' + v1 + ' TO ' + v2);
     } else {
       let v3 = numerics[attr][0].value;
-      if (attr === 'storageSize') {
-        v3 = numerics[attr][0].value * 1024*1024;
-      }
       strQuery = numerics[attr][0].operator;
       ns.push(attr + strQuery + v3);
     }
