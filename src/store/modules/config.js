@@ -1,6 +1,5 @@
 let config = {
   imagesPath: 'assets/images/',
-  logo: 'pressbooks-logo.jpeg',
   urls: {
     guide: 'https://guide.pressbooks.com/chapter/find-books-on-the-pressbooks-directory/',
     linkedin: 'https://www.linkedin.com/company/pressbooks',

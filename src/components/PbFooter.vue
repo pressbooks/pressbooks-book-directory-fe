@@ -225,7 +225,7 @@
               rel="noopener noreferrer"
             >
               <img
-                src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/svg/icons/icon_twitter.svg"
+                src="/assets/images/icon_twitter.svg"
                 alt="twitter icon"
               >
             </a>
@@ -237,7 +237,7 @@
               rel="noopener noreferrer"
             >
               <img
-                src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/svg/icons/icon_linkedin.svg"
+                src="/assets/images/icon_linkedin.svg"
                 alt="linkedin icon"
               >
             </a>
@@ -249,7 +249,7 @@
               rel="noopener noreferrer"
             >
               <img
-                src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/svg/icons/icon_youtube.svg"
+                src="/assets/images/icon_youtube.svg"
                 alt="youtube icon"
               >
             </a>
@@ -263,7 +263,7 @@
             >
               <div class="footer-logo__wrap">
                 <img
-                  src="https://pressbooks.com/wp-content/themes/pressbooks/dist/images/png/logos/ims-logo@2x.png"
+                  src="/assets/images/ims-logo@2x.png"
                   alt="IMS global logo"
                   class="w-[65px]"
                 >
