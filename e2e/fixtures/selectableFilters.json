@@ -99,6 +99,16 @@
       "count": 89
     }
   },
+  "Institution": {
+    "includes": [ "University of Wisconsin-Madison", "Queens College" ],
+    "excludes": [ "University of Oregon", "University of Newcastle" ],
+    "field": "institutionName",
+    "urlAlias": "inst",
+    "search": {
+      "searchTerm": "Oreg",
+      "filter": "University of Oregon"
+    }
+},
   "Publisher": {
     "includes": [ "Rebus Community", "The Ohio State University" ],
     "excludes": [ "BCcampus", "OpenStax" ],

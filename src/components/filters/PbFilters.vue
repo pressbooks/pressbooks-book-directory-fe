@@ -63,6 +63,10 @@ export default {
         },
         {
           component: 'pb-selectable-filters',
+          props: { title: 'Institution', field: 'institutionName', 'data-cy': 'institutions-filter', searchable: true }
+        },
+        {
+          component: 'pb-selectable-filters',
           props: { title: 'Publisher', field: 'publisherName', 'data-cy': 'publisher-filter', searchable: true }
         },
         {

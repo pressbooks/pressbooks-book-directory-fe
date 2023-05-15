@@ -29,6 +29,12 @@
         :text="lastUpdated"
       />
       <meta-info
+        v-if="hasInstitutions"
+        title="Institution(s): "
+        :text="institutions"
+        data-cy="book-institutions"
+      />
+      <meta-info
         v-if="hasPublisher"
         title="Publisher: "
         :text="item.publisherName"
@@ -99,6 +105,9 @@ export default {
     hasLastUpdated() {
       return this.item.hasLastUpdated;
     },
+    hasInstitutions() {
+      return this.item.institutions && this.item.author.length > 0;
+    },
     hasPublisher() {
       return this.item.publisherName;
     },
@@ -113,6 +122,9 @@ export default {
     },
     subjects() {
       return this.item.about.join(', ');
+    },
+    institutions() {
+      return this.item.institutions.join(', ');
     },
     lastUpdated() {
       const date = new Date(this.item.lastUpdated * 1000);

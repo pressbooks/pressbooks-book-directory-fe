@@ -53,6 +53,17 @@ describe('Book cards', function () {
             .contains(publisherFilter);
         });
     });
+    it('Filter by institution and check the institution attribute is present in the book cards', () => {
+      const institutionFilter = 'University of Wisconsin-Madison', facet = 'institutionName';
+      clickAccordionHeader(facet);
+      clickFilter(facet, institutionFilter, true);
+      cy.get(Elements.bookCards.institutions)
+        .each(($institutionElement) => {
+          cy.wrap($institutionElement)
+            .should('exist')
+            .contains(institutionFilter);
+        });
+    });
     it('Filter by license and check that the license description is present in the book cards', () => {
       const licenseFilter = {
         name: 'CC BY-NC',
@@ -122,6 +133,10 @@ describe('Book cards', function () {
         {
           element: Elements.bookCards.editors,
           fixtureProperty: 'editors'
+        },
+        {
+          element: Elements.bookCards.institutions,
+          fixtureProperty: 'institutions'
         },
         {
           element: Elements.bookCards.publisher,
