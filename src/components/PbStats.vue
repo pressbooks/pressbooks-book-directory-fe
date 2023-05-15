@@ -4,9 +4,9 @@
       #default="{ nbHits }"
     >
       <h3
+        id="results"
         class="font-semibold text-2xl mb-6"
         data-cy="number-of-books"
-        id="results"
       >
         Results:  {{ $filters.numberFormat(nbHits) }} books
       </h3>

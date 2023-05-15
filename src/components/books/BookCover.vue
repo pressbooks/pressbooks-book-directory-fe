@@ -10,7 +10,7 @@
         target="_blank"
         rel="noopener"
         data-cy="book-cover"
-        @click="$emit('book-cover-click')"
+        @click="$emit('book-title-click')"
       >
         <img
           v-if="item.hasThumbnailUrl"

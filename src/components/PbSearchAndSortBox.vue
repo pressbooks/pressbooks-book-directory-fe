@@ -1,6 +1,11 @@
 <template>
   <div class="space-y-10">
-    <h2 id="find-book" class="section-title text-4xl font-bold text-center">Find a book</h2>
+    <h2
+      id="find-book"
+      class="section-title text-4xl font-bold text-center"
+    >
+      Find a book
+    </h2>
     <div class="flex flex-col items-center space-y-10 md:flex-row md:space-y-0 md:space-x-10">
       <pb-search-box />
 

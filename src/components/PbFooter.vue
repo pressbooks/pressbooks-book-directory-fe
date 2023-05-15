@@ -2,7 +2,10 @@
   <footer class="bg-pb-blue py-[70px]">
     <div class="footer-container w-[calc(100%-80px)] lg:max-w-[1268px] mx-auto footer__wrap">
       <div class="footer__upper flex pb-[30px] border-b border-gray">
-        <nav aria-label="footer-nav" class="footer__nav--main w-full">
+        <nav
+          aria-label="footer-nav"
+          class="footer__nav--main w-full"
+        >
           <div class="menu-footer-new-container break-inside-avoid">
             <ul
               id="footer-menu"

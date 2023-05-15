@@ -1,5 +1,9 @@
 <template>
-  <section id="books" class="w-full flex-1" aria-labelledby="results">
+  <section
+    id="books"
+    class="w-full flex-1"
+    aria-labelledby="results"
+  >
     <div class="flex flex-col lg:flex-row lg:justify-between">
       <pb-stats />
       <pb-share-button />
