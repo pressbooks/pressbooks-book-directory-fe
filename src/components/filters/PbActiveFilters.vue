@@ -1,11 +1,11 @@
 <template>
   <div data-cy="active-filters">
-    <h2
+    <span
       id="active-filters"
       class="font-semibold text-lg mb-1"
     >
       Active Filters
-    </h2>
+    </span>
     <div
       v-if="Object.keys($store.state.SClient.filtersExcluded).length > 0 || $store.state.config.showTour === true"
       class="flex flex-col md:flex-row justify-between items-start"
@@ -83,7 +83,6 @@ export default {
     },
     getLabel(value) {
       let label;
-      let mb = (value.attribute === 'storageSize') ? parseInt(value.value) : 0;
       switch (value.attribute) {
       case 'hasIsBasedOn':
         label = (value.value) ? 'Based on another book' : 'Original';
@@ -94,9 +93,6 @@ export default {
       case 'lastUpdated':
         let date = dayjs.unix(value.value).utc().format('MM-DD-YYYY');
         label = `Updated ${value.operator} ${date}`;
-        break;
-      case 'storageSize':
-        label = 'Storage ' + value.operator + ' ' + parseFloat(mb).toFixed(2) + ' MB';
         break;
       case 'h5pActivities':
         label = 'H5P Activities ' + value.operator + ' ' + value.value;

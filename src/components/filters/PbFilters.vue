@@ -1,8 +1,14 @@
 <template>
-  <div class="w-full md:w-60 lg:w-72">
-    <h2 class="font-semibold text-2xl mb-4">
+  <section
+    class="w-full md:w-60 lg:w-72"
+    aria-labelledby="filters"
+  >
+    <h3
+      id="filters"
+      class="font-semibold text-2xl mb-4"
+    >
       Filters
-    </h2>
+    </h3>
     <div
       class="w-full border border-gray-200 shadow divide-y divide-gray-200"
       data-cy="facet-filters"
@@ -14,7 +20,7 @@
         v-bind="{...filter.props}"
       />
     </div>
-  </div>
+  </section>
 </template>
 <script>
 import PbDateRangeFilters from './PbDateRangeFilters.vue';
@@ -66,10 +72,6 @@ export default {
         {
           component: 'pb-numeric-filters',
           props: { title: 'H5P Activities', field: 'h5pActivities', 'data-cy': 'h5p-filter' }
-        },
-        {
-          component: 'pb-numeric-filters',
-          props: { title: 'Storage', field: 'storageSize', 'data-cy': 'storage-filter' }
         },
       ]
     };

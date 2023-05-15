@@ -69,11 +69,6 @@ let sClient = {
       empty: 'hasPublisher',
       search: true
     },
-    storageSize: {
-      type: 'numeric',
-      alias: 'storage',
-      search: false
-    },
     h5pActivities: {
       type: 'numeric',
       alias: 'h5p',
