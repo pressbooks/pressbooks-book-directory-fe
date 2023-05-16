@@ -91,7 +91,7 @@ describe('Book cards', function () {
         .first()
         .should('include.text','Written specifically for students in Boise State University’s Bachelor of Applied Science');
     });
-    it('Check all book cards attributes from a particular book', () => {
+    it('Check all book card attributes from a particular book', () => {
       const attributesToCheck =  [
         {
           element: Elements.bookCards.network,

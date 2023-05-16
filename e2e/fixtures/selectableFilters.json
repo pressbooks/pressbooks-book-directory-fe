@@ -107,6 +107,15 @@
     "search": {
       "searchTerm": "Oreg",
       "filter": "University of Oregon"
+    },
+    "bookCards": {
+      "filters": [ "University of Oregon" ],
+      "include": true,
+      "titles": [
+        "Example Webinar Book",
+        "Prior Learning Portfolio Development"
+      ],
+      "count": 2
     }
 },
   "Publisher": {
