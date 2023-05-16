@@ -99,6 +99,25 @@
       "count": 89
     }
   },
+  "Institution": {
+    "includes": [ "University of Wisconsin-Madison", "Queens College" ],
+    "excludes": [ "University of Oregon", "University of Newcastle" ],
+    "field": "institutions",
+    "urlAlias": "inst",
+    "search": {
+      "searchTerm": "Oreg",
+      "filter": "University of Oregon"
+    },
+    "bookCards": {
+      "filters": [ "University of Oregon" ],
+      "include": true,
+      "titles": [
+        "Example Webinar Book",
+        "Prior Learning Portfolio Development"
+      ],
+      "count": 2
+    }
+},
   "Publisher": {
     "includes": [ "Rebus Community", "The Ohio State University" ],
     "excludes": [ "BCcampus", "OpenStax" ],

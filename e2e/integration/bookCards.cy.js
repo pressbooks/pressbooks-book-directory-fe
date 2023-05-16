@@ -53,6 +53,17 @@ describe('Book cards', function () {
             .contains(publisherFilter);
         });
     });
+    it('Filter by institution and check the institution attribute is present in the book cards', () => {
+      const institutionFilter = 'University of Wisconsin-Madison', facet = 'institutions';
+      clickAccordionHeader(facet);
+      clickFilter(facet, institutionFilter, true);
+      cy.get(Elements.bookCards.institutions)
+        .each(($institutionElement) => {
+          cy.wrap($institutionElement)
+            .should('exist')
+            .contains(institutionFilter);
+        });
+    });
     it('Filter by license and check that the license description is present in the book cards', () => {
       const licenseFilter = {
         name: 'CC BY-NC',
@@ -80,7 +91,7 @@ describe('Book cards', function () {
         .first()
         .should('include.text','Written specifically for students in Boise State University’s Bachelor of Applied Science');
     });
-    it('Check all book cards attributes from a particular book', () => {
+    it('Check all book card attributes from a particular book', () => {
       const attributesToCheck =  [
         {
           element: Elements.bookCards.network,
@@ -122,6 +133,10 @@ describe('Book cards', function () {
         {
           element: Elements.bookCards.editors,
           fixtureProperty: 'editors'
+        },
+        {
+          element: Elements.bookCards.institutions,
+          fixtureProperty: 'institutions'
         },
         {
           element: Elements.bookCards.publisher,

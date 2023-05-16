@@ -18,6 +18,7 @@ const Elements = {
     license: '[data-cy=book-copyright-license]',
     subjects: '[data-cy=book-subjects]',
     description: '[data-cy=book-description]',
+    institutions: '[data-cy=book-institutions]',
     publisher: '[data-cy=book-publisher]',
     original: '[data-cy=book-original]',
     notOriginal: '[data-cy=book-not-original]',
