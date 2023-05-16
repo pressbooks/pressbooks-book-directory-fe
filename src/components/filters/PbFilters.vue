@@ -63,7 +63,7 @@ export default {
         },
         {
           component: 'pb-selectable-filters',
-          props: { title: 'Institution', field: 'institutionName', 'data-cy': 'institutions-filter', searchable: true }
+          props: { title: 'Institution', field: 'institutionName', 'data-cy': 'institution-filter', searchable: true }
         },
         {
           component: 'pb-selectable-filters',
@@ -76,7 +76,7 @@ export default {
         {
           component: 'pb-numeric-filters',
           props: { title: 'H5P Activities', field: 'h5pActivities', 'data-cy': 'h5p-filter' }
-        },
+        }
       ]
     };
   }
