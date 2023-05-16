@@ -106,7 +106,7 @@ export default {
       return this.item.hasLastUpdated;
     },
     hasInstitutions() {
-      return this.item.institutions && this.item.author.length > 0;
+      return this.item.institutions && this.item.institutions.length > 0;
     },
     hasPublisher() {
       return this.item.publisherName;
