@@ -54,7 +54,7 @@ describe('Book cards', function () {
         });
     });
     it('Filter by institution and check the institution attribute is present in the book cards', () => {
-      const institutionFilter = 'University of Wisconsin-Madison', facet = 'institutionName';
+      const institutionFilter = 'University of Wisconsin-Madison', facet = 'institutions';
       clickAccordionHeader(facet);
       clickFilter(facet, institutionFilter, true);
       cy.get(Elements.bookCards.institutions)

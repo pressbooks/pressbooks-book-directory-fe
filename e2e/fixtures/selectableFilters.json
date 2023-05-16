@@ -102,7 +102,7 @@
   "Institution": {
     "includes": [ "University of Wisconsin-Madison", "Queens College" ],
     "excludes": [ "University of Oregon", "University of Newcastle" ],
-    "field": "institutionName",
+    "field": "institutions",
     "urlAlias": "inst",
     "search": {
       "searchTerm": "Oreg",
