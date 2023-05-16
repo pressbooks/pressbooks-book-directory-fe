@@ -63,7 +63,7 @@ let sClient = {
       empty: 'hasLanguageName',
       search: true
     },
-    institutionName: {
+    institutions: {
       type: 'string',
       alias: 'inst',
       empty: 'hasInstitutions',

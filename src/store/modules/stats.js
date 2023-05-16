@@ -17,6 +17,8 @@ let stats = {
     'hasLanguageName',
     'hasPublisher',
     'hasNetworkName',
+    'hasInstitutions',
+    'institutions',
     'collections'
   ],
   filters: {},
