@@ -152,7 +152,7 @@ for (const facet in facetFilters) {
             });
           });
         cy.get(Elements.numberOfBooks)
-          .contains( `Results: ${bookCards.count}`);
+          .contains( `${bookCards.count} results`);
       });
     });
   });
