@@ -60,14 +60,18 @@ export default {
   },
   watch: {
     '$route.query.q' (q) {
+      this.stringSearch = '';
+
       if (typeof q === 'undefined') {
         this.$store.state.SClient.searchFilters = '';
         this.$store.state.SClient.searchParameters.searchQuery = '';
-        this.$store.state.SClient.filtersParams = (this.$store.state.SClient.hasNumeric) ?
-          this.$store.state.SClient.numericFilters : '';
-        return true;
+        this.$store.state.SClient.filtersParams = this.$store.state.SClient.hasNumeric 
+          ? this.$store.state.SClient.numericFilters 
+          : '';
+
+        return;
       }
-      this.stringSearch = '';
+
       if (q.length > 0) {
         this.stringSearch = q;
         let stringToSearch = this.filterSearch(q);
@@ -88,13 +92,13 @@ export default {
 
         this.$store.state.SClient.searchFilters = stringToSearch.facetFilters;
         this.$store.state.SClient.searchParameters.searchQuery = stringToSearch.stringSearch;
-        return true;
+
+        return;
       }
-      if (q.length === 0) {
-        let query = {...this.$route.query};
-        delete query.q;
-        this.$router.replace({ query });
-      }
+
+      let query = {...this.$route.query};
+      delete query.q;
+      this.$router.replace({ query });
     }
   },
   mounted() {

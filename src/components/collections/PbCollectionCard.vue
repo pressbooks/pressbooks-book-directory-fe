@@ -63,14 +63,14 @@ export default {
         return;
       }
       
-      const { per_page } = this.$route.query;
+      const {per_page} = query;
 
       this.sendClickInsight();
+
       this.$router.replace({
         query: {
           [this.alias]: this.card.name,
           per_page,
-          q:[]
         }
       });
     },
