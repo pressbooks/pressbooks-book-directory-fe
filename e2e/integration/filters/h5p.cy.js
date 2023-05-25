@@ -23,7 +23,7 @@ describe('H5p Count Filters',() => {
         .should('include','h5p=%3E=100');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 52');
+        .contains( '52 results');
     });
 
 
@@ -38,7 +38,7 @@ describe('H5p Count Filters',() => {
         .should('include','h5p=%3E=0%26%26%3C=10');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 2,038');
+        .contains( '2,038 results');
     });
 
     it('Filter is applied & URL is updated by entering MIN and MAX values',() => {
@@ -54,7 +54,7 @@ describe('H5p Count Filters',() => {
         .should('include','h5p=%3E=10%26%26%3C=20');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 91');
+        .contains( '91 results');
     });
 
     it('Filter chips is applied/removed when include/exclude filter is applied/removed',() => {
@@ -92,7 +92,7 @@ describe('H5p Count Filters',() => {
         .should('include','h5p=%3E=10%26%26%3C=20');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 91');
+        .contains( '91 results');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 2);
 
@@ -106,7 +106,7 @@ describe('H5p Count Filters',() => {
         .should('not.include','20');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 297');
+        .contains( '297 results');
     });
 
     it('Make sure that min does not exceed max and max does not exceed min and no negative numbers are accepted',() => {

@@ -19,7 +19,7 @@ describe('Word Count Filters',() => {
         .should('include','words=%3E=1000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 1,734');
+        .contains( '1,734 results');
 
     });
 
@@ -36,7 +36,7 @@ describe('Word Count Filters',() => {
         .should('include','words=%3E=0%26%26%3C=10000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 595');
+        .contains( '595 results');
 
     });
 
@@ -54,7 +54,7 @@ describe('Word Count Filters',() => {
         .should('include','words=%3E=10000%26%26%3C=20000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 322');
+        .contains( '322 results');
 
     });
 
@@ -96,7 +96,7 @@ describe('Word Count Filters',() => {
         .should('include','words=%3E=10000%26%26%3C=20000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 322');
+        .contains( '322 results');
 
       cy.get('[data-cy=chip-filter]').should('have.length', 2);
 
@@ -110,7 +110,7 @@ describe('Word Count Filters',() => {
         .should('not.include','20000');
 
       cy.get(Elements.numberOfBooks)
-        .contains( 'Results: 1,734');
+        .contains( '1,734 results');
 
     });
 
