@@ -63,7 +63,7 @@ export default {
       return helpers.functions.getLicenseIconAndAltByLicenseName(item.licenseName);
     },
     removeXMLTags(string) {
-      return string.replace(/(<\/?(a)[^>]*>)|<[^>]+>/ig, '$1');
+      return string.replace(/(<\/?(?:a|p|em|strong|ul|ol|li|u|span)[^>]*>)|<[^>]+>/ig, '$1');
     },
     getBookDescription(item) {
       if (!item.hasDescription && item.hasDisambiguatingDescription) {
