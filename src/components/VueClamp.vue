@@ -153,17 +153,10 @@ export default defineComponent({
       this.localExpanded = !this.localExpanded;
     },
     getLines() {
-      return Object.keys(
-        Array.prototype.slice
-          .call(this.$refs.content.getClientRects())
-          .reduce((prev, { top, bottom }) => {
-            const key = `${top}/${bottom}`;
-            if (!prev[key]) {
-              prev[key] = true;
-            }
-            return prev;
-          }, {})
-      ).length;
+      const lineHeight = parseInt(getComputedStyle(this.$refs.content).lineHeight);
+      const contentHeight = this.$refs.content.offsetHeight;
+      const lineCount = Math.round(contentHeight / lineHeight);
+      return lineCount;
     },
     isOverflow() {
       if (!this.maxLines && !this.maxHeight) {
