@@ -30,3 +30,7 @@ ul#footer-menu > li {
     font-size: 14px;
     color: black;
 }
+
+.book-description a {
+    @apply text-pb-red underline;
+}
