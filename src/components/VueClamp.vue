@@ -155,8 +155,7 @@ export default defineComponent({
     getLines() {
       const lineHeight = parseInt(getComputedStyle(this.$refs.content).lineHeight);
       const contentHeight = this.$refs.content.offsetHeight;
-      const lineCount = Math.round(contentHeight / lineHeight);
-      return lineCount;
+      return Math.round(contentHeight / lineHeight);
     },
     isOverflow() {
       if (!this.maxLines && !this.maxHeight) {
@@ -237,7 +236,6 @@ export default defineComponent({
     },
   },
   render() {
-    // apply pb-red text color if it contains a link
     const contents = [
       h(
         'span',
