@@ -48,7 +48,7 @@
     </div>
     <div data-cy="book-description">
       <vue-clamp
-        v-if="hasDescription && item.description"
+        v-if="hasDescription"
         autoresize
         :max-lines="maxLinesDescription"
         class="leading-relaxed font-serif"
