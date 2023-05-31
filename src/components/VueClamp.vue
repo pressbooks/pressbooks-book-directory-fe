@@ -153,17 +153,9 @@ export default defineComponent({
       this.localExpanded = !this.localExpanded;
     },
     getLines() {
-      return Object.keys(
-        Array.prototype.slice
-          .call(this.$refs.content.getClientRects())
-          .reduce((prev, { top, bottom }) => {
-            const key = `${top}/${bottom}`;
-            if (!prev[key]) {
-              prev[key] = true;
-            }
-            return prev;
-          }, {})
-      ).length;
+      const lineHeight = parseInt(getComputedStyle(this.$refs.content).lineHeight);
+      const contentHeight = this.$refs.content.offsetHeight;
+      return Math.round(contentHeight / lineHeight);
     },
     isOverflow() {
       if (!this.maxLines && !this.maxHeight) {
@@ -184,11 +176,17 @@ export default defineComponent({
       return false;
     },
     getText() {
-      // Look for the first non-empty text node
-      const [content] = (this.$slots.default() || []).filter(
-        (node) => !node.tag && !node.isComment
-      );
-      return content ? content.children : '';
+      const contents = this.$slots.default ? this.$slots.default() : [];
+      let text = '';
+      for (let i = 0; i < contents.length; i++) {
+        const node = contents[i];
+        if (!node.tag && !node.isComment && node.children) {
+          text += Array.isArray(node.children)
+            ? node.children.join('')
+            : [...node.children].join('');
+        }
+      }
+      return text;
     },
     moveEdge(steps) {
       this.clampAt(this.offset + steps);
@@ -198,7 +196,7 @@ export default defineComponent({
       this.applyChange();
     },
     applyChange() {
-      this.$refs.text.textContent = this.realText;
+      this.$refs.text.innerHTML = this.realText;
     },
     stepToFit() {
       this.fill();
@@ -246,8 +244,10 @@ export default defineComponent({
           attrs: {
             'aria-label': this.text?.trim(),
           },
+          class: 'book-description',
+          innerHTML: this.realText,
         },
-        this.realText
+        []
       ),
     ];
 
