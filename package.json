@@ -23,7 +23,7 @@
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vuepic/vue-datepicker": "^5.1.2",
     "algoliasearch": "^4.17.1",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "flowbite": "^1.6.5",
     "instantsearch.js": "^4.56.1",
     "intro.js": "6.0.0",
