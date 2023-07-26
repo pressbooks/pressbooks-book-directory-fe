@@ -25,7 +25,7 @@
     "algoliasearch": "^4.18.0",
     "dayjs": "^1.11.9",
     "flowbite": "^1.7.0",
-    "instantsearch.js": "^4.56.5",
+    "instantsearch.js": "^4.56.7",
     "intro.js": "6.0.0",
     "nprogress": "^0.2.0",
     "resize-detector": "^0.3.0",
