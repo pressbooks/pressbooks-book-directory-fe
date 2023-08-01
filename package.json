@@ -24,7 +24,7 @@
     "@vuepic/vue-datepicker": "^5.4.0",
     "algoliasearch": "^4.19.1",
     "dayjs": "^1.11.9",
-    "flowbite": "^1.7.0",
+    "flowbite": "^1.8.0",
     "instantsearch.js": "^4.56.7",
     "intro.js": "6.0.0",
     "nprogress": "^0.2.0",
