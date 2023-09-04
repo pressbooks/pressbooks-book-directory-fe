@@ -21,7 +21,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.4",
     "@vue/cli-plugin-babel": "^5.0.8",
-    "@vuepic/vue-datepicker": "^5.4.0",
+    "@vuepic/vue-datepicker": "^6.0.3",
     "algoliasearch": "^4.19.1",
     "dayjs": "^1.11.9",
     "flowbite": "^1.8.1",
