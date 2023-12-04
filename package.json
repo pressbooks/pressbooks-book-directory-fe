@@ -44,7 +44,7 @@
     "autoprefixer": "^10.4.16",
     "cypress": "^13.3.2",
     "cypress-wait-until": "^2.0.1",
-    "eslint": "^8.52.0",
+    "eslint": "^8.55.0",
     "eslint-plugin-vue": "^9.17.0",
     "postcss": "^8.4.31",
     "postcss-nested": "^6.0.1",
