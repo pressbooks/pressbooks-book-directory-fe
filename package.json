@@ -31,7 +31,7 @@
     "resize-detector": "^0.3.0",
     "search-insights": "^2.9.0",
     "vue": "^3.3.4",
-    "vue-instantsearch": "^4.11.0",
+    "vue-instantsearch": "^4.13.8",
     "vue-lazyload": "^3.0.0",
     "vue-router": "^4.2.5",
     "vue-select": "^4.0.0-beta.6",
