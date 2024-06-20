@@ -21,7 +21,7 @@ jobs:
       VITE_USER_NODE_ENV: ${{ secrets.VITE_USER_NODE_ENV }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
             fetch-depth: 2
 
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run e2e tests
         if: steps.code-changes.outputs.changed == 'true'
-        uses: cypress-io/github-action@v5.8.0
+        uses: cypress-io/github-action@v6.5.0
         with:
           start: npm run dev
           wait-on: http://localhost:3001
