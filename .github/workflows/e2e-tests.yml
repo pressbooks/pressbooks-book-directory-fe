@@ -41,7 +41,7 @@ jobs:
         uses: cypress-io/github-action@v6.6.1
         with:
           start: npm run dev
-          wait-on: http://localhost:3001
+          wait-on: http://127.0.0.1:3001
           browser: chrome
 
       #     - name: Deploy to AWS Testing
