@@ -21,7 +21,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       return require('./e2e/plugins/index.cjs')(on, config)
     },
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'http://127.0.0.1:3001',
     specPattern: 'e2e/integration/**/*.cy.{js,jsx,ts,tsx}',
     supportFile: 'e2e/support/index.js',
   },
