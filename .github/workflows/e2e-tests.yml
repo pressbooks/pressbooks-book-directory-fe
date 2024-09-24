@@ -37,7 +37,7 @@ jobs:
           paths: src e2e
 
       - name: Run e2e tests
-#        if: steps.code-changes.outputs.changed == 'true'
+        if: steps.code-changes.outputs.changed == 'true'
         uses: cypress-io/github-action@v6.6.1
         with:
           start: npm run dev
