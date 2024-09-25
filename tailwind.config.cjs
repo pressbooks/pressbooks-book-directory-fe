@@ -3,7 +3,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   mode: 'jit',
   content: [
-    './**/*.html',
+    './index.html',
     './public/**/*.html',
     './src/**/*.{js,vue}',
     './node_modules/flowbite/**/*.js'

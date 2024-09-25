@@ -94,10 +94,10 @@ describe('Book cards', function () {
     it('Search a book with a link within the description and check if it is rendered', () => {
       search('Advanced Professional Communication');
       cy.get(Elements.bookCards.description)
-          .first()
-          .should('include.text','supports the learning outcomes')
-          .contains('a', 'open textbook')
-          .should('have.attr', 'href', 'https://google.com#anchor1');
+        .first()
+        .should('include.text','supports the learning outcomes')
+        .contains('a', 'open textbook')
+        .should('have.attr', 'href', 'https://google.com#anchor1');
     });
     it('Check all book card attributes from a particular book', () => {
       const attributesToCheck =  [
