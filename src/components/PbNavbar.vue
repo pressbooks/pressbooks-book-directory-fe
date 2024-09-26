@@ -5,7 +5,7 @@
   >
     <nav
       aria-label="primary-nav"
-      class="bg-white border-gray-200 max-w-[1140px] m-auto"
+      class="bg-white border-gray-200 max-w-[1140px] m-auto px-8"
     >
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-[30px]">
         <a
@@ -47,7 +47,7 @@
           id="navbar-top"
           class="hidden w-full lg:block lg:w-auto"
         >
-          <ul class="font-medium flex items-center gap-4 flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
+          <ul class="font-medium flex items-start lg:items-center gap-4 flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
             <li class="group relative">
               <a
                 href="#"

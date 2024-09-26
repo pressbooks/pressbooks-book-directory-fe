@@ -5,7 +5,7 @@
     data-cy="collection-section"
     aria-labelledby="collections-section-title"
   >
-    <div class="mx-auto py-10 px-8 max-w-screen-2xl">
+    <div class="mx-auto py-10 px-8 lg:max-w-[1140px]">
       <div class="border-gray-300">
         <div class="w-full mx-auto text-center">
           <h2
