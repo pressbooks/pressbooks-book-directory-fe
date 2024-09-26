@@ -5,9 +5,9 @@
   >
     <nav
       aria-label="primary-nav"
-      class="bg-white border-gray-200"
+      class="bg-white border-gray-200 max-w-[1140px] m-auto"
     >
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto items-center w-[calc(100%-160px)] max-w-[1180px] lg:max-w-[1440px] py-[30px]">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-[30px]">
         <a
           href="https://pressbooks.com/"
           title="Pressbooks Home Page"
@@ -17,7 +17,7 @@
           <img
             src="/assets/images/logo-color.svg"
             alt="Pressbooks logo"
-            class="logo h-[27px] w-auto mr-3"
+            class="logo h-[29px] w-auto mr-3"
           >
         </a>
         <button
@@ -35,46 +35,209 @@
             fill="black"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
-          ><path
-            fill-rule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clip-rule="evenodd"
-          /></svg>
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
         </button>
         <div
           id="navbar-top"
           class="hidden w-full lg:block lg:w-auto"
         >
-          <ul class="font-medium flex items-center flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-white">
-            <li>
-              <a
-                href="https://pressbooks.com/our-products"
-                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]"
-              >Products</a>
-            </li>
-            <li>
-              <a
-                href="https://pressbooks.com/plans-pricing/"
-                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]"
-              >Plans & Pricing</a>
-            </li>
-            <li>
+          <ul class="font-medium flex items-center gap-4 flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
+            <li class="group relative">
               <a
                 href="#"
-                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]"
-              >Pressbooks Directory</a>
+                class="flex gap-0.5 items-center py-2 pl-3 pr-4 text-pb-dark-blue rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-pb-red lg:p-0 font-semibold text-[18px]"
+              >
+                Products
+                <span class="ml-1">
+                  <svg
+                    class="size-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    viewBox="0 0 17 17"
+                  >
+                    <g />
+                    <path
+                      d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z"
+                      fill="#000000"
+                    />
+                  </svg>
+                </span>
+              </a>
+              <!-- Dropdown menu -->
+              <ul class="absolute hidden group-hover:block bg-white shadow-lg -mt-1 rounded-lg p-4 space-y-2 z-50 min-w-60">
+                <li>
+                  <a
+                    href="https://pressbooks.com/enterprise/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Enterprise</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/self-publisher/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Self-Publisher</a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Pressbooks Directory</a>
+                </li>
+              </ul>
             </li>
-            <li>
+            <li class="group relative">
+              <a
+                href="https://pressbooks.com/plans-pricing/"
+                class="flex gap-0.5 items-center py-2 pl-3 pr-4 text-pb-dark-blue rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-pb-red lg:p-0 font-semibold text-[18px]"
+              >
+                Plans & Pricing
+                <span class="ml-1">
+                  <svg
+                    class="size-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    viewBox="0 0 17 17"
+                  >
+                    <g />
+                    <path
+                      d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z"
+                      fill="#000000"
+                    />
+                  </svg>
+                </span>
+              </a>
+              <ul class="absolute hidden group-hover:block bg-white shadow-lg -mt-1 rounded-lg p-4 space-y-2 z-50 min-w-60">
+                <li>
+                  <a
+                    href="https://pressbooks.com/educational-institutions-plans-and-pricing/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Enterprise Networks</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/self-publisher-plans-and-pricing/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Self-Publisher Plans</a>
+                </li>
+              </ul>
+            </li>
+            <li class="group relative">
+              <a
+                href="#"
+                class="flex gap-0.5 items-center py-2 pl-3 pr-4 text-pb-dark-blue rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-pb-red lg:p-0 font-semibold text-[18px]"
+              >
+                Resources
+                <span class="ml-1">
+                  <svg
+                    class="size-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    viewBox="0 0 17 17"
+                  >
+                    <g />
+                    <path
+                      d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z"
+                      fill="#000000"
+                    />
+                  </svg>
+                </span>
+              </a>
+              <ul class="absolute hidden group-hover:block bg-white shadow-lg -mt-1 rounded-lg p-4 space-y-2 z-50 min-w-60">
+                <li>
+                  <a
+                    href="https://pressbooks.com/collections-hub/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Collections Hub</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/category/success-stories/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Success Stories</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/pressbooks-blog/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Blog</a>
+                </li>
+                <li>
+                  <a
+                    href="/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Pressbooks Directory</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/support/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Support Guides</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/webinars/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Events & Webinars</a>
+                </li>
+              </ul>
+            </li>
+            <li class="group relative">
               <a
                 href="https://pressbooks.com/about/"
-                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:p-0 font-bold text-[17px]"
-              >About</a>
+                class="flex gap-0.5 items-center py-2 pl-3 pr-4 text-pb-dark-blue rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-pb-red lg:p-0 font-semibold text-[18px]"
+              >
+                About
+                <span class="ml-1">
+                  <svg
+                    class="size-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="17"
+                    viewBox="0 0 17 17"
+                  >
+                    <g />
+                    <path
+                      d="M16.354 5.075l-7.855 7.854-7.853-7.854 0.707-0.707 7.145 7.146 7.148-7.147 0.708 0.708z"
+                      fill="#000000"
+                    />
+                  </svg>
+                </span>
+              </a>
+              <ul class="absolute hidden group-hover:block bg-white shadow-lg -mt-1 rounded-lg p-4 space-y-2 z-50 min-w-60">
+                <li>
+                  <a
+                    href="https://pressbooks.com/about/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >About Pressbooks</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/pressbooks-team/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Our Team</a>
+                </li>
+                <li>
+                  <a
+                    href="https://pressbooks.com/category/inside-pressbooks/"
+                    class="text-gray-500 font-semibold text-[18px]"
+                  >Inside Pressbooks</a>
+                </li>
+              </ul>
             </li>
-            <li class="lg:inline-block lg:text-center lg:border-2 lg:border-red-700 lg:text-white lg:bg-red-700 lg:rounded-full lg:leading-[17px] lg:hover:bg-red-900 lg:hover:border-red-900">
+            <li class="lg:inline-block lg:text-center lg:border-2 lg:border-red-700 lg:text-white lg:bg-red-700 lg:rounded-full lg:leading-[20px] lg:ml-24">
               <a
                 href="https://pressbooks.com/request-a-pressbooks-demo/"
-                class="block py-2 pl-3 pr-4 lg:text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:underline lg:py-3 lg:px-6 font-bold text-[17px]"
-              >Get a demo</a>
+                class="block py-2 pl-3 pr-4 lg:text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:py-3 lg:px-6 font-semibold"
+              >Request a Demo</a>
             </li>
           </ul>
         </div>
@@ -82,10 +245,11 @@
     </nav>
   </header>
 </template>
+
 <script>
-import { Collapse } from 'flowbite';
+import {Collapse} from 'flowbite';
 
 const $targetEl = document.getElementById('navbar-top');
 const $triggerEl = document.getElementById('toggle-navbar-top');
-const collapse = new Collapse($targetEl, $triggerEl);
+new Collapse($targetEl, $triggerEl);
 </script>
