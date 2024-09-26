@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-pb-blue py-[70px]">
-    <div class="footer-container w-[calc(100%-80px)] lg:max-w-[1268px] mx-auto footer__wrap">
+    <div class="footer-container w-[calc(100%-80px)] lg:max-w-[1140px] mx-auto footer__wrap">
       <div class="footer__upper flex pb-[30px] border-b border-gray">
         <nav
           aria-label="footer-nav"
