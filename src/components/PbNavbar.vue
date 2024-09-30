@@ -9,6 +9,7 @@
     >
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-[30px]">
         <a
+          id="logo"
           href="https://pressbooks.com/"
           title="Pressbooks Home Page"
           data-cy="return-home-button"
@@ -50,7 +51,7 @@
           <ul class="font-medium flex items-start lg:items-center gap-4 flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
             <li
               class="group relative"
-              role="menu"
+              role="menuitem"
               @mouseleave="hideSubmenu('products')"
             >
               <a
@@ -61,7 +62,9 @@
                 @keydown.enter.prevent="toggleSubmenu('products')"
                 @keydown.space.prevent="toggleSubmenu('products')"
                 @focus="showSubmenu('products')"
-                @mouseover="showSubmenu('products')"
+                @mouseover="!isTouchDevice.value && showSubmenu('products')"
+                @keydown.shift.tab.prevent="closeAndFocusPrev('products')"
+                @click.prevent="isTouchDevice.value && toggleSubmenu('products')"
               >
                 Products
                 <span class="ml-1">
@@ -91,6 +94,7 @@
                   <a
                     href="https://pressbooks.com/enterprise/"
                     class="text-gray-500 font-semibold text-[18px]"
+                    @keydown.shift.tab.prevent="focusParent('products')"
                   >Enterprise</a>
                 </li>
                 <li role="menuitem">
@@ -115,12 +119,14 @@
               <a
                 aria-haspopup="true"
                 aria-expanded="false"
-                href="https://pressbooks.com/plans-pricing/"
+                href="#"
                 class="flex gap-0.5 items-center py-2 pl-3 pr-4 text-pb-dark-blue rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-pb-red lg:p-0 font-semibold text-[18px]"
                 @keydown.enter.prevent="toggleSubmenu('plans')"
                 @keydown.space.prevent="toggleSubmenu('plans')"
                 @focus="showSubmenu('plans')"
-                @mouseover="showSubmenu('plans')"
+                @mouseover="!isTouchDevice.value && showSubmenu('plans')"
+                @keydown.shift.tab.prevent="closeAndFocusPrev('plans')"
+                @click.prevent="isTouchDevice.value && toggleSubmenu('plans')"
               >
                 Plans & Pricing
                 <span class="ml-1">
@@ -150,6 +156,7 @@
                   <a
                     href="https://pressbooks.com/educational-institutions-plans-and-pricing/"
                     class="text-gray-500 font-semibold text-[18px]"
+                    @keydown.shift.tab.prevent="focusParent('plans')"
                   >Enterprise Networks</a>
                 </li>
                 <li role="menuitem">
@@ -173,7 +180,9 @@
                 @keydown.enter.prevent="toggleSubmenu('resources')"
                 @keydown.space.prevent="toggleSubmenu('resources')"
                 @focus="showSubmenu('resources')"
-                @mouseover="showSubmenu('resources')"
+                @mouseover="!isTouchDevice.value && showSubmenu('resources')"
+                @keydown.shift.tab.prevent="closeAndFocusPrev('resources')"
+                @click.prevent="isTouchDevice.value && toggleSubmenu('resources')"
               >
                 Resources
                 <span class="ml-1">
@@ -203,6 +212,7 @@
                   <a
                     href="https://pressbooks.com/collections-hub/"
                     class="text-gray-500 font-semibold text-[18px]"
+                    @keydown.shift.tab.prevent="focusParent('resources')"
                   >Collections Hub</a>
                 </li>
                 <li role="menuitem">
@@ -245,12 +255,14 @@
               <a
                 aria-haspopup="true"
                 aria-expanded="false"
-                href="https://pressbooks.com/about/"
+                href="#"
                 class="flex gap-0.5 items-center py-2 pl-3 pr-4 text-pb-dark-blue rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-pb-red lg:p-0 font-semibold text-[18px]"
                 @keydown.enter.prevent="toggleSubmenu('about')"
                 @keydown.space.prevent="toggleSubmenu('about')"
                 @focus="showSubmenu('about')"
-                @mouseover="showSubmenu('about')"
+                @mouseover="!isTouchDevice.value && showSubmenu('about')"
+                @keydown.shift.tab.prevent="closeAndFocusPrev('about')"
+                @click.prevent="isTouchDevice.value && toggleSubmenu('about')"
               >
                 About
                 <span class="ml-1">
@@ -280,6 +292,7 @@
                   <a
                     href="https://pressbooks.com/about/"
                     class="text-gray-500 font-semibold text-[18px]"
+                    @keydown.shift.tab.prevent="focusParent('about')"
                   >About Pressbooks</a>
                 </li>
                 <li role="menuitem">
@@ -312,7 +325,18 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
+
+const isTouchDevice = ref(false);
+
+onMounted(() => {
+  isTouchDevice.value = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
 
 const submenus = ref({
   products: false,
@@ -320,6 +344,18 @@ const submenus = ref({
   resources: false,
   about: false
 });
+
+const closeAllSubmenus = () => {
+  Object.keys(submenus.value).forEach((key) => {
+    submenus.value[key] = false;
+  });
+};
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    closeAllSubmenus();
+  }
+};
 
 const isSubmenuVisible = (id) => {
   return submenus.value[id];
@@ -337,7 +373,27 @@ const toggleSubmenu = (id) => {
   submenus.value[id] = !submenus.value[id];
 };
 
+const focusParent = (id) => {
+  const parentMenu = document.querySelector(`#${id}`).previousElementSibling;
+  if (parentMenu) {
+    parentMenu.focus();
+  }
+  hideSubmenu(id);
+};
+
+const closeAndFocusPrev = (id) => {
+  if (id === 'products') {
+    document.getElementById('logo').focus();
+  }
+  hideSubmenu(id);
+  const prevMenu = document.querySelector(`#${id}`).closest('li').previousElementSibling?.querySelector('a');
+  if (prevMenu) {
+    prevMenu.focus();
+  }
+};
+
 import {Collapse} from 'flowbite';
+
 const $targetEl = document.getElementById('navbar-top');
 const $triggerEl = document.getElementById('toggle-navbar-top');
 new Collapse($targetEl, $triggerEl);
