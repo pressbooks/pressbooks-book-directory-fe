@@ -25,7 +25,7 @@
           id="toggle-navbar-top"
           data-collapse-toggle="navbar-top"
           type="button"
-          class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+          class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 "
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -93,20 +93,20 @@
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/enterprise/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @keydown.shift.tab.prevent="focusParent('products')"
                   >Enterprise</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/self-publisher/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                   >Self-Publisher</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @blur="hideSubmenu('products')"
                   >Pressbooks Directory</a>
                 </li>
@@ -155,14 +155,14 @@
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/educational-institutions-plans-and-pricing/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @keydown.shift.tab.prevent="focusParent('plans')"
                   >Enterprise Networks</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/self-publisher-plans-and-pricing/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @blur="hideSubmenu('plans')"
                   >Self-Publisher Plans</a>
                 </li>
@@ -211,38 +211,38 @@
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/collections-hub/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @keydown.shift.tab.prevent="focusParent('resources')"
                   >Collections Hub</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/category/success-stories/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                   >Success Stories</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/pressbooks-blog/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                   >Blog</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                   >Pressbooks Directory</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/support/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                   >Support Guides</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/webinars/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @blur="hideSubmenu('resources')"
                   >Events & Webinars</a>
                 </li>
@@ -291,20 +291,20 @@
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/about/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @keydown.shift.tab.prevent="focusParent('about')"
                   >About Pressbooks</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/pressbooks-team/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                   >Our Team</a>
                 </li>
                 <li role="menuitem">
                   <a
                     href="https://pressbooks.com/category/inside-pressbooks/"
-                    class="text-gray-500 font-semibold text-[18px]"
+                    class="text-gray-500 font-semibold text-[18px] lg:hover:text-pb-red"
                     @blur="hideSubmenu('about')"
                   >Inside Pressbooks</a>
                 </li>

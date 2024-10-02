@@ -34,3 +34,7 @@ ul#footer-menu > li {
 .book-description a {
     @apply text-pb-red underline;
 }
+
+*:focus {
+    @apply outline-pb-red;
+}
