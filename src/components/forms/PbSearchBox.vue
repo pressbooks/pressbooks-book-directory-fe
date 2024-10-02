@@ -18,9 +18,9 @@
             placeholder="Find a book"
             data-cy="book-input-search"
             autocomplete="off"
-            autocorrect="off"
             autocapitalize="none"
             spellcheck="false"
+            aria-label="Search a book"
           >
         </div>
       </div>
