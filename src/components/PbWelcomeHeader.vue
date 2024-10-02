@@ -1,6 +1,6 @@
 <template>
   <section aria-labelledby="welcome-section-title">
-    <div class="container mx-auto w-full md:w-2/3 p-8">
+    <div class="container mx-auto w-full lg:w-2/3 p-8">
       <h1
         id="welcome-section-title"
         class="section-title text-4xl mb-8 font-bold text-center"
