@@ -187,13 +187,13 @@
                 type="email"
                 value=""
                 name="EMAIL"
-                class="email bg-transparent border-black text-[15px] leading-[17px] w-full font-black py-[18px] px-[16px]"
+                class="email bg-transparent border-black text-[15px] leading-[17px] w-full font-black py-[20px] px-[16px]"
                 placeholder="Email address"
                 required=""
               >
               <button
                 type="submit"
-                class="bg-transparent border border-black border-l-0 text-[15px] leading-[17px] px-[16px] py-[18px] font-bold uppercase tracking-[2px] hover:bg-black hover:text-white"
+                class="bg-transparent border border-black border-l-0 text-[15px] leading-[17px] px-[16px] py-[20px] font-bold uppercase tracking-[2px] hover:bg-black hover:text-white"
                 form="mc-embedded-form"
                 value="subscribe"
               >
