@@ -115,6 +115,7 @@
                       href="https://pressbooks.com/product-showcase/"
                       class="block w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                       @keydown.shift.tab.prevent="focusParent('enterprise')"
+                      @blur="hideSubmenu('enterprise')"
                   >Product Showcase</a>
                 </li>
               </ul>
@@ -168,7 +169,7 @@
                   <a
                     href="https://pressbooks.com/pressbooks-self-publisher/self-publisher-plans-and-pricing/"
                     class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
-                    @blur="hideSubmenu('self-publisher')"
+                    @blur="hideSubmenu('selfpublisher')"
                   >Plans and Pricing</a>
                 </li>
               </ul>
@@ -249,6 +250,7 @@
                       href="https://pressbooks.com/adapt-open-textbooks/"
                       class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                       @keydown.shift.tab.prevent="focusParent('resources')"
+                      @blur="hideSubmenu('resources')"
                   >Adapt Open Textbooks</a>
                 </li>
               </ul>
@@ -358,6 +360,7 @@
                   <a
                     href="https://pressbooks.com/partnerships/"
                     class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
+                    @blur="hideSubmenu('about')"
                   >Partnerships</a>
                 </li>
               </ul>
