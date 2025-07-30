@@ -7,7 +7,7 @@ let config = {
     twitter: 'https://twitter.com/pressbooks',
     youtube: 'https://www.youtube.com/channel/UCyMeJ5C4p6AxF9QXg6Bgzjg',
     blog: 'https://pressbooks.com/blog',
-    collections: 'https://pressbooks.com/collections-hub/',
+    collections: 'https://pressbooks.com/featured-collections/',
     opensource: 'https://pressbooks.org',
     contact: 'https://pressbooks.com/contact-pressbooks/',
     jobs: 'https://pressbooks.com/about/#work-with-us',

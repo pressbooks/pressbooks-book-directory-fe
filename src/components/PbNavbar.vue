@@ -98,7 +98,7 @@
                 </li>
                 <li role="menuitem" class="lg:hover:bg-pb-light-blue lg:active:bg-pb-light-blue">
                   <a
-                      href="https://pressbooks.com/enterprise/pressbooks-enterprise-networks-plans-and-pricing/"
+                      href="https://pressbooks.com/enterprise-plans/"
                       class="block w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                       @keydown.shift.tab.prevent="focusParent('enterprise')"
                   >Plans and Pricing</a>
@@ -161,13 +161,13 @@
               >
                 <li role="menuitem" class="lg:hover:bg-pb-light-blue lg:active:bg-pb-light-blue">
                   <a
-                      href="https://pressbooks.com/pressbooks-self-publisher/"
+                      href="https://pressbooks.com/self-publisher/"
                       class="block w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                   >Pressbooks Self-Publisher</a>
                 </li>
                 <li role="menuitem" class="lg:hover:bg-pb-light-blue lg:active:bg-pb-light-blue">
                   <a
-                    href="https://pressbooks.com/pressbooks-self-publisher/self-publisher-plans-and-pricing/"
+                    href="https://pressbooks.com/self-publisher-plans/"
                     class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                     @blur="hideSubmenu('selfpublisher')"
                   >Plans and Pricing</a>
@@ -221,7 +221,7 @@
                 </li>
                 <li role="menuitem" class="lg:hover:bg-pb-light-blue lg:active:bg-pb-light-blue">
                   <a
-                    href="https://pressbooks.com/pressbooks-blog/"
+                    href="https://pressbooks.com/blog/"
                     class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                   >Blog</a>
                 </li>
@@ -233,7 +233,7 @@
                 </li>
                 <li role="menuitem" class="lg:hover:bg-pb-light-blue lg:active:bg-pb-light-blue">
                   <a
-                      href="https://pressbooks.com/collections-hub/"
+                      href="https://pressbooks.com/featured-collections/"
                       class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                       @keydown.shift.tab.prevent="focusParent('resources')"
                   >Featured Collections</a>

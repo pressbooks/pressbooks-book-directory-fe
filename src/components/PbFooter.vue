@@ -75,7 +75,7 @@
                     id="menu-item-3"
                     class="menu-item my-[14px]"
                   >
-                    <a href="https://pressbooks.com/enterprise/pressbooks-enterprise-networks-plans-and-pricing/">Plans and pricing</a>
+                    <a href="https://pressbooks.com/enterprise-plans/">Plans and pricing</a>
                   </li>
                   <li
                     id="menu-item-4"
@@ -101,13 +101,13 @@
                     id="menu-item-7"
                     class="menu-item my-[14px]"
                   >
-                    <a href="https://pressbooks.com/pressbooks-self-publisher/">Pressbooks Self-Publisher</a>
+                    <a href="https://pressbooks.com/self-publisher/">Pressbooks Self-Publisher</a>
                   </li>
                   <li
                       id="menu-item-8"
                       class="menu-item my-[14px]"
                   >
-                    <a href="https://pressbooks.com/pressbooks-self-publisher/self-publisher-plans-and-pricing/">Plans and Pricing</a>
+                    <a href="https://pressbooks.com/self-publisher-plans/">Plans and Pricing</a>
                   </li>
                 </ul>
               </li>
@@ -139,7 +139,7 @@
                       id="menu-item-13"
                       class="menu-item my-[14px]"
                   >
-                    <a href="https://pressbooks.com/collections-hub/">Featured Collections</a>
+                    <a href="https://pressbooks.com/featured-collections/">Featured Collections</a>
                   </li>
                   <li
                       id="menu-item-14"
