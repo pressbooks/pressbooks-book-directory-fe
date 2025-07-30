@@ -1,7 +1,7 @@
 <template>
   <header
     id="header"
-    class="header border-b border-[#ddd]"
+    class="header border-b border-[#ddd] antialiased"
   >
     <nav
       aria-label="primary-nav"
@@ -249,7 +249,7 @@
                       href="https://pressbooks.com/adapt-open-textbooks/"
                       class="block box-border w-[210px] p-[15px] pb-deep-blue text-[15px] lg:hover:text-pb-dark-red"
                       @keydown.shift.tab.prevent="focusParent('resources')"
-                  >Adapt Open Textbooks with Pressbooks</a>
+                  >Adapt Open Textbooks</a>
                 </li>
               </ul>
             </li>
