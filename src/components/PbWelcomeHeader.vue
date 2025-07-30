@@ -5,12 +5,12 @@
         id="welcome-section-title"
         class="section-title text-4xl mb-8 font-bold text-center"
       >
-        Welcome to Pressbooks Directory
+        Welcome to the Pressbooks Directory
       </h1>
 
       <p class="font-serif leading-7 text-lg">
-        Pressbooks Directory is a free, searchable catalog that includes <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published by <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong> organizations and
-        networks using Pressbooks. It's easy to copy, revise, remix, and redistribute any openly licensed content found here using Pressbooks' publishing platform. Nearly all books are highly accessible, and many include interactive H5P learning activities to engage learners.
+        The Pressbooks Directory is a free, searchable catalog that includes <strong data-cy="total-books-indexed">{{ numberFormat(totalBooksIndexed) }}</strong> open access books published across <strong data-cy="total-networks-indexed">{{ numberFormat(totalNetworksIndexed) }}</strong>
+        unique networks using Pressbooks. It's easy to copy, revise, remix, and redistribute any openly licensed content found here using Pressbooks' publishing platform. Nearly all books are highly accessible, and many include interactive H5P learning activities to engage learners.
       </p>
 
       <div class="flex items-center justify-center mt-8 mx-auto">
