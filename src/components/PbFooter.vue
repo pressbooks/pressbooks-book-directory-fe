@@ -46,7 +46,7 @@
       </div>
       <div class="newsletter_subscription">
         <p class="text-[20px] font-bold pt-8 pb-4">Subscribe to our newsletter</p>
-          <a href="" target="_blank" class="inline-block leading-[1.6] text-[18px] py-3 px-11 text-center bg-pb-red rounded-[3px] hover:bg-pb-dark-red w-auto">Subscribe</a>
+          <a href="https://share.hsforms.com/1S9AV3-V2QtafgEuZ-V376Qnvuho" target="_blank" class="inline-block leading-[1.6] text-[18px] py-3 px-11 text-center bg-pb-red rounded-[3px] hover:bg-pb-dark-red w-auto">Subscribe</a>
       </div>
         </div>
       <div class="footer__upper flex">
