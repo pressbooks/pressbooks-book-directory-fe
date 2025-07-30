@@ -10,7 +10,7 @@ on:
 
 jobs:
   e2e-tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: cypress/browsers:node-20.17.0-chrome-128.0.6613.137-1-ff-130.0.1-edge-128.0.2739.67-1
     env:
       VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
