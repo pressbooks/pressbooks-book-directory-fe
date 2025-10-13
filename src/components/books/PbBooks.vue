@@ -56,7 +56,8 @@ export default {
         isBasedOn: item.isBasedOn !== undefined,
         subject: item.subject !== undefined ? item.subject : false,
         wordCount: item.wordCount !== undefined ? item.wordCount : false,
-        name: helpers.functions.unescapeHTML(item.name)
+        name: helpers.functions.unescapeHTML(item.name),
+        datePublished: item.hasDatePublished ? helpers.functions.unescapeHTML(item.datePublished) : false,
       }));
     },
     getLicenseIcon(item) {

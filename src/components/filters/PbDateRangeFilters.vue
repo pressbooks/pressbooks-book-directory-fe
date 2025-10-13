@@ -22,7 +22,7 @@
             placeholder="From date"
             :max-date="dates.to"
             :data-cy="`from-date-${field}`"
-            format="MMM dd, yyyy"
+            format="yyyy-MM-dd"
             :enable-time-picker="false"
             :auto-apply="true"
           >
@@ -42,7 +42,7 @@
             :min-date="dates.start"
             utc="preserve"
             :data-cy="`to-date-${field}`"
-            format="MMM dd, yyyy"
+            format="yyyy-MM-dd"
             :enable-time-picker="false"
             :auto-apply="true"
           >
@@ -121,28 +121,29 @@ export default {
 
         let queryString = query[this.alias];
 
+        let start = null;
+        let to = null;
+
+        // Both datePublished and lastUpdated now use Unix timestamps
         let toRegex = new RegExp(/\<=(.*)/); // grab anything after <=
         let startRegex = queryString.includes('&&')
           ? new RegExp(/\>=(.*)\&&/) // grab anything between >= and &&
           : new RegExp(/\>=(.*)/); // grab anything after >=;
 
-        let start = null;
-        let to = null;
-
         if (startRegex.test(queryString)) {
           [, start] = queryString.match(startRegex);
-          start = dayjs.unix(start);
+          start = dayjs.unix(start); // Parse Unix timestamp
         }
 
         if (toRegex.test(queryString)) {
           [, to] = queryString.match(toRegex);
-          to = dayjs.unix(to);
+          to = dayjs.unix(to); // Parse Unix timestamp
         }
 
         this.opened = true;
         this.dates = {
-          start: start && start.isValid() ? dayjs.tz(start, 'UTC').format('YYYY-MM-DD') : null,
-          to: to && to.isValid() ? dayjs.tz(to, 'UTC').format('YYYY-MM-DD') : null,
+          start: start && start.isValid() ? start.format('YYYY-MM-DD') : null,
+          to: to && to.isValid() ? to.format('YYYY-MM-DD') : null,
         };
       }
     }
@@ -161,19 +162,23 @@ export default {
     buildQueryString() {
       let queryString = null;
 
-      let start = dayjs.tz(this.dates.start, 'UTC').startOf('day');
-      let to = dayjs.tz(this.dates.to, 'UTC').endOf('day');
-
-      if (to.isBefore(start)) {
-        return;
+      if (this.dates.start) {
+        let start = dayjs.tz(this.dates.start, 'UTC').startOf('day');
+        if (start.isValid()) {
+          queryString = `>=${start.unix()}`;
+        }
       }
 
-      if (start.isValid()) {
-        queryString = `>=${start.unix()}`;
-      }
-
-      if (to.isValid()) {
-        queryString = queryString ? `${queryString}&&<=${to.unix()}` : `<=${to.unix()}`;
+      if (this.dates.to) {
+        let to = dayjs.tz(this.dates.to, 'UTC').endOf('day');
+        if (to.isValid()) {
+          // Check if end date is before start date
+          if (this.dates.start && to.isBefore(dayjs.tz(this.dates.start, 'UTC').startOf('day'))) {
+            return null; // Invalid range
+          }
+          
+          queryString = queryString ? `${queryString}&&<=${to.unix()}` : `<=${to.unix()}`;
+        }
       }
 
       return queryString;
@@ -182,21 +187,18 @@ export default {
       let query = { ... this.$route.query };
       let queryString = this.buildQueryString();
 
-      if (! queryString) {
-        return;
-      }
-
-      if (query[this.alias] === queryString) {
-        return;
+      if (!queryString) {
+        // Remove the filter if no dates are selected
+        delete query[this.alias];
+      } else {
+        // Set the filter with the query string
+        query[this.alias] = queryString;
       }
 
       this.sendClickInsight();
 
       return this.$router.replace({
-        query: {
-          ...query,
-          [this.alias]: queryString
-        }
+        query: query
       });
     },
     sendClickInsight() {

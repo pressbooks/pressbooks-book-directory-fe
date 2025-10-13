@@ -28,6 +28,13 @@ let sClient = {
       orderedBy: 'name',
       isReplica: true,
       label: 'Title (A-Z)'
+    },
+    {
+      value: import.meta.env.VITE_ALGOLIA_INDEX_PUBLICATION_DATE_REPLICA,
+      default: false,
+      orderedBy: 'published',
+      isReplica: true,
+      label: 'Publication date'
     }
   ],
   filtersExcluded: [],
@@ -100,6 +107,11 @@ let sClient = {
       alias: 'collec',
       search: false,
       default: []
+    },
+    datePublishedUnix: {
+      type: 'numeric',
+      alias: 'published',
+      search: false
     }
   },
   mappedFilters: {},

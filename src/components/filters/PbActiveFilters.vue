@@ -91,8 +91,13 @@ export default {
         label = 'Words ' + value.operator + ' ' + value.value;
         break;
       case 'lastUpdated':
-        let date = dayjs.unix(value.value).utc().format('MM-DD-YYYY');
+        let date = dayjs.unix(value.value).utc().format('YYYY-MM-DD');
         label = `Updated ${value.operator} ${date}`;
+        break;
+      case 'datePublishedUnix':
+        // Convert Unix timestamp back to readable date for display
+        let pubDate = dayjs.unix(value.value).utc().format('YYYY-MM-DD');
+        label = `Published ${value.operator} ${pubDate}`;
         break;
       case 'h5pActivities':
         label = 'H5P Activities ' + value.operator + ' ' + value.value;

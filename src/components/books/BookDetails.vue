@@ -23,6 +23,12 @@
         data-cy="book-subjects"
       />
       <meta-info
+        v-if="hasDatePublished"
+        title="Publication Date: "
+        data-cy="book-date-published"
+        :text="item.datePublished"
+      />
+      <meta-info
         v-if="hasLastUpdated"
         title="Last updated: "
         data-cy="book-last-updated"
@@ -117,6 +123,9 @@ export default {
     hasEditor(){
       return this.item.editor && this.item.editor.length > 0;
     },
+    hasDatePublished() {
+      return this.item.hasDatePublished;
+    },
     authors() {
       return this.item.author.join(', ');
     },
@@ -128,13 +137,13 @@ export default {
     },
     lastUpdated() {
       const date = new Date(this.item.lastUpdated * 1000);
-      const month = date.getUTCMonth() +1, day = date.getUTCDate();
-
-      return `${month < 10 ? '0' + month : month}-${day}-${date.getUTCFullYear()}`;
+      return date.getUTCFullYear() + '-' + 
+             String(date.getUTCMonth() + 1).padStart(2, '0') + '-' + 
+             String(date.getUTCDate()).padStart(2, '0');
     },
     editors() {
       return this.item.editor.join(', ');
-    }
+    },
   },
   methods: {
     sendClickInsight() {

@@ -55,6 +55,10 @@ export default {
         },
         {
           component: 'pb-date-range-filters',
+          props: { title: 'Publication Date', field: 'datePublished', 'data-cy': 'publication-date-filter' }
+        },
+        {
+          component: 'pb-date-range-filters',
           props: { title: 'Last Updated', field: 'lastUpdated', 'data-cy': 'last-updated-filter' }
         },
         {
