@@ -38,7 +38,7 @@ jobs:
 
       - name: Run e2e tests
         if: steps.code-changes.outputs.changed == 'true'
-        uses: cypress-io/github-action@v6.6.1
+        uses: cypress-io/github-action@v7.1.9
         with:
           start: npm run dev
           wait-on: http://127.0.0.1:3001
